@@ -4,7 +4,12 @@ Ny innsynsløsning for AAP.
 
 # Komme i gang
 
-Hvordan bygge, teste og kjøre koden viss aktuelt.
+Appen kan kjøres lokalt med å kjøre følgende kommandoer
+
+`yarn` - installere avhengigheter
+`yarn dev` - starte appen
+
+Appen kjører på port 3000 som default
 
 ---
 
