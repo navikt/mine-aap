@@ -1,6 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  basePath: "aap/innsyn",
+  trailingSlash: true,
   reactStrictMode: true,
-}
 
-module.exports = nextConfig
+  experimental: {
+    outputStandalone: true,
+  },
+};
+
+module.exports = nextConfig;
