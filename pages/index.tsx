@@ -1,5 +1,6 @@
-import type { NextPage } from "next";
-import Head from "next/head";
+import { Heading } from '@navikt/ds-react';
+import type { NextPage } from 'next';
+import Head from 'next/head';
 
 const Home: NextPage = () => {
   return (
@@ -11,7 +12,9 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
-        <h1>Innsynsløsning</h1>
+        <Heading level="1" size="xlarge">
+          Innsynsløsning
+        </Heading>
       </main>
     </>
   );
