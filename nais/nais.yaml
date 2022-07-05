@@ -1,0 +1,51 @@
+apiVersion: "nais.io/v1alpha1"
+kind: "Application"
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "50M"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "90"
+  name: "innsyn"
+  namespace: "aap"
+  labels:
+    "team": "aap"
+spec:
+  image: {{image}}
+  port: 3000
+  liveness:
+    path: "/aap/api/internal/isAlive"
+    initialDelay: 20
+    timeout: 60
+  readiness:
+    path: "/aap/api/internal/isReady"
+    initialDelay: 20
+    timeout: 60
+  replicas:
+    min: 2
+    max: 2
+#  prometheus:
+#    enabled: true
+#    path: "/aap/internal/metrics"
+  idporten:
+    enabled: true
+    sidecar:
+      enabled: true
+      level: Level4
+  ingresses:
+  {{#each ingresses as |url|}}
+    - {{url}}
+  {{/each}}
+  env:
+  {{#each env}}
+    - name: {{this.name }}
+      value: {{this.value}}
+  {{/each}}
+  tokenx:
+    enabled: true
+#  accessPolicy:
+#    outbound:
+#      rules:
+#        - application: aap-soknad-api
+#      external:
+#        {{#each externals as |host|}}
+#        - host: {{host}}
+#        {{/each}}
