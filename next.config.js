@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  basePath: "aap/innsyn",
+  basePath: "/aap/innsyn",
   trailingSlash: true,
   reactStrictMode: true,
 
