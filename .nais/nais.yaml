@@ -12,11 +12,11 @@ spec:
   image: {{image}}
   port: 3000
   liveness:
-    path: "/aap/api/internal/isAlive"
+    path: "/aap/innsyn/api/internal/isAlive"
     initialDelay: 20
     timeout: 60
   readiness:
-    path: "/aap/api/internal/isReady"
+    path: "/aap/innsyn/api/internal/isReady"
     initialDelay: 20
     timeout: 60
   replicas:
