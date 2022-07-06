@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@navikt/ds-css": "^0.18.26",
+    "@navikt/ds-icons": "^1.0.0-rc.2",
     "@navikt/ds-react": "^0.19.19",
     "@navikt/nav-dekoratoren-moduler": "^1.6.9",
     "@sentry/nextjs": "^7.5.0",

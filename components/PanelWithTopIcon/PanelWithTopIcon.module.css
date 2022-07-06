@@ -1,0 +1,29 @@
+.panelContainer {
+  display: flex;
+  flex-direction: column;
+  line-break: strict;
+}
+
+.icon {
+  margin-top: -2.5rem;
+  margin-bottom: 2rem;
+  align-self: center;
+  height: 24px;
+  width: 48px;
+  padding: 0.25rem;
+
+  border: 1px solid var(--navds-panel-color-border);
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+
+  border-bottom: 0px;
+
+  background-color: var(--navds-semantic-color-canvas-background-light);
+
+  box-sizing: border-box;
+}
+
+.icon svg {
+  width: 2rem;
+  height: 2rem;
+}

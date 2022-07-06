@@ -4,6 +4,6 @@ export interface SectionProps {
   children: React.ReactNode;
 }
 
-export const Section = ({ children }: SectionProps) => {
-  <section className={styles.section}>{children}</section>;
-};
+export const Section = ({ children }: SectionProps) => (
+  <section className={styles.section}>{children}</section>
+);

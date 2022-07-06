@@ -242,6 +242,11 @@
   dependencies:
     uuid "^8.3.2"
 
+"@navikt/ds-icons@^1.0.0-rc.2":
+  version "1.0.0-rc.2"
+  resolved "https://registry.yarnpkg.com/@navikt/ds-icons/-/ds-icons-1.0.0-rc.2.tgz#ce0e55c9075fcbaa468469e66dbfc058d328895b"
+  integrity sha512-dywiMdicYYdHnl8OO9ObUpQ37s5qLGJV9fElKSyLJzLgO0VR5VYmV7xplP4keq4m+FUyLw50q9/+T+mHz7Unbg==
+
 "@navikt/ds-react@^0.19.19":
   version "0.19.19"
   resolved "https://registry.yarnpkg.com/@navikt/ds-react/-/ds-react-0.19.19.tgz#642bfae05ce3cd1f3b6cbe023f63b05b172bd7ef"
