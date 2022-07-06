@@ -1,7 +1,11 @@
 import { AppHeader } from '../AppHeader/AppHeader';
 import styles from './Layout.module.css';
 
-export const Layout = ({ children }: { children: React.ReactNode }) => {
+export interface LayoutProps {
+  children: React.ReactNode;
+}
+
+export const Layout = ({ children }: LayoutProps) => {
   return (
     <div className={styles.layout}>
       <AppHeader />
