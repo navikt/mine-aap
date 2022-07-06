@@ -1,9 +1,21 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  basePath: "/aap/innsyn",
-  trailingSlash: true,
-  reactStrictMode: true,
-  output: "standalone",
+
+const { withSentryConfig } = require('@sentry/nextjs');
+
+const sentryWebpackPluginOptions = {
+  silent: true,
 };
 
-module.exports = nextConfig;
+const nextConfig = {
+  basePath: '/aap/innsyn',
+  trailingSlash: true,
+  reactStrictMode: true,
+  output: 'standalone',
+};
+
+if (process.env.ENABLE_SENTRY === 'true') {
+  console.log('sentry enabled', process.env.ENABLE_SENTRY);
+  module.exports = withSentryConfig(nextConfig, sentryWebpackPluginOptions);
+} else {
+  module.exports = nextConfig;
+}

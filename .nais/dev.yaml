@@ -1,10 +1,6 @@
 ingresses:
 - "https://aap-innsyn.dev.nav.no"
 env:
-- name: DECORATOR_URL
-  value: "https://dekoratoren.dev.nav.no"
-- name: DECORATOR_ENV
-  value: "dev"
 - name: APP_URL
   value: "https://aap-innsyn.dev.nav.no"
 externals:
