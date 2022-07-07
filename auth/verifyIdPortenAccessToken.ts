@@ -1,9 +1,6 @@
 import { createRemoteJWKSet, FlattenedJWSInput, JWSHeaderParameters, jwtVerify } from 'jose';
 import { GetKeyFunction } from 'jose/dist/types/types';
-import getConfig from 'next/config';
 import { Client, Issuer } from 'openid-client';
-
-const { serverRuntimeConfig } = getConfig();
 
 let _issuer: Issuer<Client>;
 let _remoteJWKSet: GetKeyFunction<JWSHeaderParameters, FlattenedJWSInput>;
@@ -25,9 +22,9 @@ async function jwks() {
 
 async function issuer() {
   if (typeof _issuer === 'undefined') {
-    if (!serverRuntimeConfig.idportenWellKnownUrl)
+    if (!process.env.IDPORTEN_WELL_KNOWN_URL)
       throw new Error('Miljøvariabelen "IDPORTEN_WELL_KNOWN_URL" må være satt');
-    _issuer = await Issuer.discover(serverRuntimeConfig.idportenWellKnownUrl);
+    _issuer = await Issuer.discover(process.env.IDPORTEN_WELL_KNOWN_URL);
   }
   return _issuer;
 }
@@ -37,7 +34,7 @@ export async function verifyIdportenAccessToken(bearerToken: string) {
 
   const verified = await validerToken(token);
 
-  if (verified.payload.client_id !== serverRuntimeConfig.idportenClientId) {
+  if (verified.payload.client_id !== process.env.IDPORTEN_CLIENT_ID) {
     throw new Error('client_id matcher ikke min client ID');
   }
 
