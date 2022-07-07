@@ -4,8 +4,13 @@ import type { AppProps } from 'next/app';
 import { Layout } from '../components/Layout/Layout';
 import { useEffect } from 'react';
 import { initAmplitude } from '../utils/amplitude';
+import messagesNb from '../translations/nb.json';
+import { IntlProvider } from 'react-intl';
+import { useRouter } from 'next/router';
+import { Locale } from '@navikt/nav-dekoratoren-moduler';
+import { SUPPORTED_LOCALE } from '../translations/locales';
 
-function flattenMessages(nestedMessages: object, prefix = '') {
+function flattenMessages(nestedMessages: object, prefix = ''): Record<string, string> {
   return Object.keys(nestedMessages).reduce((messages, key) => {
     // @ts-ignore
     let value = nestedMessages[key];
@@ -22,9 +27,13 @@ function flattenMessages(nestedMessages: object, prefix = '') {
   }, {});
 }
 
-import messagesNb from '../translations/nb.json';
-import { IntlProvider } from 'react-intl';
-import { useRouter } from 'next/router';
+const getLocaleOrFallback = (locale?: string) => {
+  if (locale && SUPPORTED_LOCALE.includes(locale)) {
+    return locale;
+  }
+
+  return 'nb';
+};
 
 type Messages = {
   [K in Locale]?: { [name: string]: string };
@@ -36,17 +45,21 @@ export const messages: Messages = {
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
+  const locale = getLocaleOrFallback(router.locale);
 
   useEffect(() => {
     initAmplitude();
   }, []);
 
   return (
-    <IntlProvider locale={router.locale ?? 'nb'} messages={messages[router.locale ?? 'nb']}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </IntlProvider>
+    <>
+      {/* @ts-ignore */}
+      <IntlProvider locale={locale} messages={messages[locale]}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </IntlProvider>
+    </>
   );
 }
 
