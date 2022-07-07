@@ -20,15 +20,7 @@ export const useFeatureToggleIntl = () => {
     isShowKeys
       ? `${id}:${intl.formatMessage({ id: id }, values)}`
       : intl.formatMessage({ id: id }, values);
-  const formatElement = (
-    id: string,
-    values?:
-      | Record<
-          string,
-          string | number | boolean | {} | Date | React.ReactElement<any, any> | undefined
-        >
-      | undefined
-  ) =>
+  const formatElement = (id: string, values?: Record<string, string | undefined> | undefined) =>
     isShowKeys ? (
       <>
         {id}:{intl.formatMessage({ id: id }, values)}
