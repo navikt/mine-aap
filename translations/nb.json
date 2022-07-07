@@ -1,6 +1,14 @@
 {
   "appTittel": "Dine arbeidsavklaringspenger",
+  "dineOppgaver": {
+    "tittel": "Dine oppgaver etter at du har sendt en søknad"
+  },
+  "hvaGjorVi": {
+    "tittel": "Hva gjør vi?"
+  },
   "dokumentoversikt": {
-    "tittel": "Dokumentoversikt"
+    "tittel": "Dokumentoversikt",
+    "ikkeSynligDokumentLink": "Har du sendt en søknad eller et dokument som ikke vises her?",
+    "mottatt": "Mottatt"
   }
 }
