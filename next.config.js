@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 
 const { withSentryConfig } = require('@sentry/nextjs');
-const { SUPPORTED_LOCALE } = require('./translations/locales');
 
 const sentryWebpackPluginOptions = {
   silent: true,
@@ -14,7 +13,7 @@ const nextConfig = {
   output: 'standalone',
 
   i18n: {
-    locales: SUPPORTED_LOCALE,
+    locales: ['nb'],
     defaultLocale: 'nb',
   },
 };
