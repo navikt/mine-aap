@@ -16,6 +16,11 @@ const nextConfig = {
     locales: ['nb'],
     defaultLocale: 'nb',
   },
+
+  serverRuntimeConfig: {
+    idportenClientId: process.env.IDPORTEN_CLIENT_ID,
+    idportenWellKnownUrl: process.env.IDPORTEN_WELL_KNOWN_URL,
+  },
 };
 
 if (process.env.ENABLE_SENTRY === 'true') {
