@@ -1,0 +1,7 @@
+ingresses:
+- "https://aap-innsyn.labs.nais.io/"
+env:
+- name: APP_URL
+  value: "https://aap-innsyn.labs.nais.io/"
+externals:
+  - "dekoratoren.dev.nav.no"
