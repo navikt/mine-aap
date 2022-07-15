@@ -11,7 +11,7 @@ const wonderwallRedirect = {
   },
 };
 
-function beskyttetSide(handler: PageHandler) {
+export function beskyttetSide(handler: PageHandler) {
   return async function withBearerTokenHandler(
     context: NextPageContext
   ): Promise<ReturnType<typeof handler>> {

@@ -8,6 +8,12 @@ export interface Dokument {
 }
 
 const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) => {
+  const dokumenter = await getDocuments();
+
+  res.status(200).json(dokumenter);
+});
+
+export const getDocuments = async () => {
   const dokumenter: Dokument[] = [
     {
       tittel: 'Ettersendt dokumentasjon om studiested',
@@ -19,7 +25,7 @@ const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) =
     },
   ];
 
-  res.status(200).json(dokumenter);
-});
+  return dokumenter;
+};
 
 export default handler;

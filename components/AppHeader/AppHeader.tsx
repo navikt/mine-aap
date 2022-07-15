@@ -7,9 +7,11 @@ export const AppHeader = () => {
 
   return (
     <header className={styles.appHeader}>
-      <Heading level="1" size="xlarge">
-        {intl.formatMessage('appTittel')}
-      </Heading>
+      <div className={styles.container}>
+        <Heading level="1" size="xlarge">
+          {intl.formatMessage('appTittel')}
+        </Heading>
+      </div>
     </header>
   );
 };

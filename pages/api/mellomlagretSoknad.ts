@@ -6,10 +6,16 @@ export interface MellomlagretSøknad {
 }
 
 const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) => {
+  const mellomlagretSøknad = await getMellomlagretSøknad();
+  res.status(200).json(mellomlagretSøknad);
+});
+
+export const getMellomlagretSøknad = async () => {
   const mellomlagretSøknad: MellomlagretSøknad = {
     timestamp: new Date().toISOString(),
   };
-  res.status(200).json(mellomlagretSøknad);
-});
+
+  return mellomlagretSøknad;
+};
 
 export default handler;

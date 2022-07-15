@@ -1,5 +1,19 @@
 .section {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+}
+
+.container {
+  width: 100%;
+  max-width: 600px;
+
+  display: flex;
+  flex-direction: column;
   gap: 4rem;
+}
+
+.lightBlueBackground {
+  background-color: var(--navds-semantic-color-interaction-primary-hover-subtle);
 }
