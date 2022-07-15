@@ -15,12 +15,6 @@ export function beskyttetApi(handler: ApiHandler): ApiHandler {
       return handler(req, res);
     }
 
-    /*const cookies = cookie.parse(req?.headers.cookie || '');
-    const selvbetjeningIdtoken = cookies['selvbetjening-idtoken'];
-    if (!selvbetjeningIdtoken) {
-      console.log('ingen selvbetjening-token');
-      return send401();
-    }*/
     const bearerToken: string | null | undefined = req.headers['authorization'];
     if (!bearerToken) {
       console.log('ingen bearer token');

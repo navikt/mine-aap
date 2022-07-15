@@ -1,11 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { beskyttetApi } from '../../auth/beskyttetApi';
-
-export interface Dokument {
-  tittel: string;
-  timestamp: string;
-  url?: string;
-}
+import { Dokument } from '../../types/types';
 
 const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) => {
   const dokumenter = await getDocuments();
@@ -18,10 +13,14 @@ export const getDocuments = async () => {
     {
       tittel: 'Ettersendt dokumentasjon om studiested',
       timestamp: new Date().toISOString(),
+      url: '#',
+      type: 'pdf',
     },
     {
       tittel: 'Søknad om arbeidsavklaringspenger',
       timestamp: new Date().toISOString(),
+      url: '#',
+      type: 'pdf',
     },
   ];
 

@@ -1,27 +1,15 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { getAccessTokenFromRequest } from '../../auth/accessToken';
 import { beskyttetApi } from '../../auth/beskyttetApi';
-
-export interface Søknad {
-  timestamp: string;
-  applicationPdf: {
-    url: string;
-    timestamp: string;
-  };
-  documents: Array<{
-    url: string;
-    title: string;
-    timestamp: string;
-    type: string;
-  }>;
-  missingDocuments: Array<'FOSTERFORELDER' | 'STUDIESTED'>;
-}
+import { Søknad } from '../../types/types';
 
 const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) => {
-  const søknader = await getSøknader();
+  const accessToken = getAccessTokenFromRequest(req);
+  const søknader = await getSøknader(accessToken);
   res.status(200).json(søknader);
 });
 
-export const getSøknader = async () => {
+export const getSøknader = async (accessToken?: string) => {
   const søknader: Søknad[] = [
     {
       timestamp: new Date().toISOString(),
@@ -32,7 +20,7 @@ export const getSøknader = async () => {
       documents: [
         {
           url: '#',
-          title: 'Ettersendt dokumentasjon om studiested',
+          tittel: 'Ettersendt dokumentasjon om studiested',
           timestamp: new Date().toISOString(),
           type: 'pdf',
         },

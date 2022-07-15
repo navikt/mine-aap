@@ -1,5 +1,6 @@
 import { NextPageContext, GetServerSidePropsResult } from 'next';
 import { isMock } from '../utils/environments';
+import { getAccessToken } from './accessToken';
 import { verifyIdportenAccessToken } from './verifyIdPortenAccessToken';
 
 type PageHandler = (context: NextPageContext) => void | Promise<GetServerSidePropsResult<{}>>;
@@ -19,12 +20,8 @@ export function beskyttetSide(handler: PageHandler) {
       return handler(context);
     }
 
-    const request = context.req;
-    if (request == null) {
-      throw new Error('Context is missing request. This should not happen');
-    }
+    const bearerToken = getAccessToken(context);
 
-    const bearerToken: string | null | undefined = request.headers['authorization'];
     if (!bearerToken) {
       return wonderwallRedirect;
     }

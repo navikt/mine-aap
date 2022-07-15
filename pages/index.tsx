@@ -2,32 +2,39 @@ import { Attachment, Information } from '@navikt/ds-icons';
 import { Alert, BodyShort, Button, Heading, Link, LinkPanel, Panel } from '@navikt/ds-react';
 import { format } from 'date-fns';
 import { nb } from 'date-fns/locale';
-import type { GetServerSidePropsResult } from 'next';
+import type { GetServerSidePropsResult, NextPageContext } from 'next';
 import { useMemo } from 'react';
+import { getAccessToken } from '../auth/accessToken';
 import { beskyttetSide } from '../auth/beskyttetSide';
 import { PanelWithTopIcon } from '../components/PanelWithTopIcon/PanelWithTopIcon';
 import { Section } from '../components/Section/Section';
 import { useFeatureToggleIntl } from '../hooks/useFeatureToggleIntl';
-import { Dokument, getDocuments } from './api/dokumentoversikt';
-import { getMellomlagretSøknad, MellomlagretSøknad } from './api/mellomlagretSoknad';
-import { getSøknader, Søknad } from './api/soknader';
+import { Dokument, MellomlagretSøknad, Søknad } from '../types/types';
+import { formatFullDate } from '../utils/date';
+import { getDocuments } from './api/dokumentoversikt';
+import { getMellomlagredeSøknader } from './api/mellomlagredeSoknader';
+import { getSøknader } from './api/soknader';
 
 interface PageProps {
   søknader: Søknad[];
   dokumenter: Dokument[];
-  mellomlagretSøknad?: MellomlagretSøknad;
+  mellomlagredeSøknader: MellomlagretSøknad[];
 }
 
-const Index = ({ søknader, dokumenter, mellomlagretSøknad }: PageProps) => {
+const Index = ({ søknader, dokumenter, mellomlagredeSøknader }: PageProps) => {
   const intl = useFeatureToggleIntl();
 
   const sisteSøknad = useMemo(() => {
     return søknader[0];
   }, [søknader]);
 
+  const sisteMellomlagredeSøknad = useMemo(() => {
+    return mellomlagredeSøknader[0];
+  }, [mellomlagredeSøknader]);
+
   return (
     <>
-      {mellomlagretSøknad && (
+      {sisteMellomlagredeSøknad && (
         <Section>
           <div>
             <Heading level="2" size="medium" spacing>
@@ -37,7 +44,7 @@ const Index = ({ søknader, dokumenter, mellomlagretSøknad }: PageProps) => {
               <LinkPanel.Title>Søknad om arbeidsavklaringspenger</LinkPanel.Title>
               <LinkPanel.Description>
                 Lagres til og med{' '}
-                {format(new Date(mellomlagretSøknad.timestamp), 'EEEE dd.MM yy', {
+                {format(new Date(sisteMellomlagredeSøknad.timestamp), 'EEEE dd.MM yy', {
                   locale: nb,
                 })}
               </LinkPanel.Description>
@@ -56,10 +63,7 @@ const Index = ({ søknader, dokumenter, mellomlagretSøknad }: PageProps) => {
               <Heading level="3" size="small">
                 Søknad om arbeidsavklaringspenger (AAP)
               </Heading>
-              <BodyShort spacing>
-                Mottatt{' '}
-                {format(new Date(sisteSøknad.timestamp), 'dd.MM.yyyy hh:mm', { locale: nb })}
-              </BodyShort>
+              <BodyShort spacing>Mottatt {formatFullDate(sisteSøknad.timestamp)}</BodyShort>
               <BodyShort spacing>
                 <Link href="#">Se forventet saksbehandlingstid</Link>
               </BodyShort>
@@ -78,20 +82,14 @@ const Index = ({ søknader, dokumenter, mellomlagretSøknad }: PageProps) => {
                 <li>
                   <Link href={sisteSøknad.applicationPdf.url}>
                     Søknad om arbeidsavklaringspenger (AAP) mottatt{' '}
-                    {format(new Date(sisteSøknad.applicationPdf.timestamp), 'dd.MM.yyyy hh:mm', {
-                      locale: nb,
-                    })}{' '}
-                    (pdf)
+                    {formatFullDate(sisteSøknad.applicationPdf.timestamp)} (pdf)
                   </Link>
                 </li>
                 {sisteSøknad.documents.map((document) => (
-                  <li key={document.title}>
+                  <li key={document.tittel}>
                     <Link href={document.url}>
-                      Vedlegg: {document.title} mottatt{' '}
-                      {format(new Date(document.timestamp), 'dd.MM.yyyy hh:mm', {
-                        locale: nb,
-                      })}{' '}
-                      ({document.type})
+                      Vedlegg: {document.tittel} mottatt {formatFullDate(document.timestamp)} (
+                      {document.type})
                     </Link>
                   </li>
                 ))}
@@ -116,11 +114,11 @@ const Index = ({ søknader, dokumenter, mellomlagretSøknad }: PageProps) => {
             <Link href="#">{intl.formatMessage('dokumentoversikt.ikkeSynligDokumentLink')}</Link>
           </BodyShort>
           {dokumenter.map((dokument) => (
-            <LinkPanel href="#" border key={dokument.tittel}>
+            <LinkPanel href={dokument.url} border key={dokument.tittel}>
               <LinkPanel.Title>{dokument.tittel}</LinkPanel.Title>
               <LinkPanel.Description>
                 {intl.formatMessage('dokumentoversikt.mottatt')}{' '}
-                {format(new Date(dokument.timestamp), 'dd.MM.yyyy hh:mm')}
+                {formatFullDate(dokument.timestamp)}
               </LinkPanel.Description>
             </LinkPanel>
           ))}
@@ -131,13 +129,14 @@ const Index = ({ søknader, dokumenter, mellomlagretSøknad }: PageProps) => {
 };
 
 export const getServerSideProps = beskyttetSide(
-  async (ctx): Promise<GetServerSidePropsResult<{}>> => {
-    const søknader = await getSøknader();
+  async (ctx: NextPageContext): Promise<GetServerSidePropsResult<{}>> => {
+    const bearerToken = getAccessToken(ctx);
+    const søknader = await getSøknader(bearerToken);
     const dokumenter = await getDocuments();
-    const mellomlagretSøknad = await getMellomlagretSøknad();
+    const mellomlagredeSøknader = await getMellomlagredeSøknader();
 
     return {
-      props: { søknader, dokumenter, mellomlagretSøknad: mellomlagretSøknad ?? null },
+      props: { søknader, dokumenter, mellomlagredeSøknader },
     };
   }
 );
