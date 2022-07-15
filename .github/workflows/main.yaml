@@ -1,4 +1,4 @@
-name: "Build and deploy aap-innsyn"
+name: "Build and deploy aap-innsyn to dev"
 on:
   workflow_dispatch:
   push:
