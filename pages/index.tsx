@@ -6,6 +6,7 @@ import type { GetServerSidePropsResult, NextPageContext } from 'next';
 import { useMemo } from 'react';
 import { getAccessToken } from '../auth/accessToken';
 import { beskyttetSide } from '../auth/beskyttetSide';
+import { Layout } from '../components/Layout/Layout';
 import { PanelWithTopIcon } from '../components/PanelWithTopIcon/PanelWithTopIcon';
 import { Section } from '../components/Section/Section';
 import { useFeatureToggleIntl } from '../hooks/useFeatureToggleIntl';
@@ -33,7 +34,7 @@ const Index = ({ søknader, dokumenter, mellomlagredeSøknader }: PageProps) => 
   }, [mellomlagredeSøknader]);
 
   return (
-    <>
+    <Layout>
       {sisteMellomlagredeSøknad && (
         <Section>
           <div>
@@ -124,7 +125,7 @@ const Index = ({ søknader, dokumenter, mellomlagredeSøknader }: PageProps) => 
           ))}
         </PanelWithTopIcon>
       </Section>
-    </>
+    </Layout>
   );
 };
 

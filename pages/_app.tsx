@@ -1,7 +1,6 @@
 import '@navikt/ds-css';
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
-import { Layout } from '../components/Layout/Layout';
 import { useEffect } from 'react';
 import { initAmplitude } from '../utils/amplitude';
 import messagesNb from '../translations/nb.json';
@@ -55,9 +54,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       {/* @ts-ignore */}
       <IntlProvider locale={locale} messages={messages[locale]}>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <Component {...pageProps} />
       </IntlProvider>
     </>
   );

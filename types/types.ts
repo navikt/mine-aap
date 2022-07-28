@@ -18,3 +18,8 @@ export interface Søknad {
 export interface MellomlagretSøknad {
   timestamp: string;
 }
+
+export interface Vedleggskrav {
+  dokumentasjonstype: string;
+  beskrivelse: string;
+}
