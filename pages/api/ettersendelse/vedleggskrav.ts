@@ -15,6 +15,10 @@ export const getVedleggskrav = async (accessToken?: string) => {
       dokumentasjonstype: 'Dokumentasjon om studiested',
       beskrivelse: 'Lorem ipsum dolor sit amet',
     },
+    {
+      dokumentasjonstype: 'Dokumentasjon om fosterforelder',
+      beskrivelse: 'Lorem ipsum dolor sit amet',
+    },
   ];
   return vedleggskrav;
 };

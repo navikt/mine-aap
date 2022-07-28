@@ -2,6 +2,7 @@ import { Alert, BodyShort, Heading, Label, PageHeader } from '@navikt/ds-react';
 import { GetServerSidePropsResult, NextPageContext } from 'next';
 import { getAccessToken } from '../../auth/accessToken';
 import { beskyttetSide } from '../../auth/beskyttetSide';
+import { FileInput } from '../../components/Inputs/FileInput';
 import { Section } from '../../components/Section/Section';
 import { Vedleggskrav } from '../../types/types';
 import { getVedleggskrav } from '../api/ettersendelse/vedleggskrav';
@@ -36,6 +37,12 @@ const Index = ({ vedleggskrav }: PageProps) => {
             )}
           </div>
         </Section>
+
+        {vedleggskrav.map((krav) => (
+          <Section key={krav.dokumentasjonstype}>
+            <FileInput heading={krav.dokumentasjonstype} description={krav.beskrivelse} />
+          </Section>
+        ))}
 
         <Section>
           <Alert variant="warning">
