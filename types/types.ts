@@ -23,3 +23,9 @@ export interface Vedleggskrav {
   dokumentasjonstype: string;
   beskrivelse: string;
 }
+
+export interface OpplastetVedlegg {
+  name: string;
+  size: number;
+  vedleggId: string;
+}

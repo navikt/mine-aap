@@ -1,5 +1,6 @@
-import { Alert, BodyShort, Heading, Label, PageHeader } from '@navikt/ds-react';
+import { Alert, BodyShort, Button, Heading, Label, PageHeader } from '@navikt/ds-react';
 import { GetServerSidePropsResult, NextPageContext } from 'next';
+import { FieldValues, useForm } from 'react-hook-form';
 import { getAccessToken } from '../../auth/accessToken';
 import { beskyttetSide } from '../../auth/beskyttetSide';
 import { FileInput } from '../../components/Inputs/FileInput';
@@ -13,6 +14,13 @@ interface PageProps {
 }
 
 const Index = ({ vedleggskrav }: PageProps) => {
+  const {
+    control,
+    handleSubmit,
+    setError,
+    clearErrors,
+    formState: { errors },
+  } = useForm<FieldValues>();
   return (
     <>
       <PageHeader align="center" variant="guide">
@@ -38,23 +46,64 @@ const Index = ({ vedleggskrav }: PageProps) => {
           </div>
         </Section>
 
-        {vedleggskrav.map((krav) => (
-          <Section key={krav.dokumentasjonstype}>
-            <FileInput heading={krav.dokumentasjonstype} description={krav.beskrivelse} />
-          </Section>
-        ))}
+        <form
+          onSubmit={handleSubmit((data) => {
+            console.log(data);
+          })}
+        >
+          {vedleggskrav.map((krav) => (
+            <Section key={krav.dokumentasjonstype}>
+              <FileInput
+                heading={krav.dokumentasjonstype}
+                description={krav.beskrivelse}
+                name={krav.dokumentasjonstype}
+                control={control}
+                setError={setError}
+                clearErrors={clearErrors}
+                errors={errors}
+              />
+            </Section>
+          ))}
 
-        <Section>
-          <Alert variant="warning">
-            <Label spacing>Har du ikke alle dokumentene tilgjengelig nå?</Label>
-            <BodyShort spacing>
-              Du kan gå videre uten å laste opp alle dokumenetene. Hvis du skal ettersende vedlegg,
-              må du sende disse innen 14 dager etter at søknaden er sendt inn. Trenger du mer tid,
-              kan du be om lenger frist. Dette kan du gjøre via nav.no eller ringe oss etter at
-              søknaden er sendt inn.
-            </BodyShort>
-          </Alert>
-        </Section>
+          <Section>
+            <FileInput
+              heading="Annen dokumentasjon"
+              description="Hvis du har noe annet du ønsker å legge ved kan du laste det opp her"
+              name={'ANNET'}
+              control={control}
+              setError={setError}
+              clearErrors={clearErrors}
+              errors={errors}
+            />
+          </Section>
+
+          <Section>
+            <Alert variant="warning">
+              <Label spacing>Har du ikke alle dokumentene tilgjengelig nå?</Label>
+              <BodyShort spacing>
+                Du kan gå videre uten å laste opp alle dokumenetene. Hvis du skal ettersende
+                vedlegg, må du sende disse innen 14 dager etter at søknaden er sendt inn. Trenger du
+                mer tid, kan du be om lenger frist. Dette kan du gjøre via nav.no eller ringe oss
+                etter at søknaden er sendt inn.
+              </BodyShort>
+            </Alert>
+          </Section>
+          <div className={styles.buttonRow}>
+            <div className={styles.buttonContainer}>
+              <Button
+                variant="secondary"
+                onChange={() => {
+                  console.log('avbryt');
+                }}
+              >
+                Avbryt
+              </Button>
+              <Button variant="primary" type="submit">
+                Gå til oppsummering
+              </Button>
+            </div>
+          </div>
+        </form>
       </main>
     </>
   );

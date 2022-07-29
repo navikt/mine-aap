@@ -2,4 +2,20 @@
   display: flex;
   flex-direction: column;
   gap: 4rem;
+  margin-bottom: 4rem;
+}
+
+.buttonRow {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.buttonContainer {
+  width: 100%;
+  max-width: 600px;
+
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
 }
