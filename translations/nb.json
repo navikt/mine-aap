@@ -10,5 +10,32 @@
     "tittel": "Dokumentoversikt",
     "ikkeSynligDokumentLink": "Har du sendt en søknad eller et dokument som ikke vises her?",
     "mottatt": "Mottatt"
+  },
+  "filopplasting": {
+    "vedlegg": {
+      "slett": "Slett",
+      "avbryt": "Avbryt",
+      "lastOppFil": "Last opp fil",
+      "velgDineFiler": "Velg dine filer",
+      "draOgSlipp": "Dra og slipp",
+      "eller": "eller"
+    }
+  },
+  "ettersendelse": {
+    "appTittel": "Ettersending til arbeidsavklaringspenger (AAP)",
+    "heading": "Ettersend dokumentasjon",
+    "manglerDokumentasjon": "Ut fra det du har svart i søknaden, mangler du følgende dokumentasjon for at vi kan ferdigbehandle søknaden din",
+    "annenDokumentasjon": {
+      "heading": "Annen dokumentasjon",
+      "description": "Hvis du har noe annet du ønsker å legge ved kan du laste det opp her"
+    },
+    "warning": {
+      "heading": "Har du ikke alle dokumentene tilgjengelig nå?",
+      "description": "Du kan gå videre uten å laste opp alle dokumenetene. Hvis du skal ettersende vedlegg, må du sende disse innen 14 dager etter at søknaden er sendt inn. Trenger du mer tid, kan du be om lenger frist. Dette kan du gjøre via nav.no eller ringe oss etter at søknaden er sendt inn."
+    },
+    "buttons": {
+      "primary": "Gå til oppsummering",
+      "secondary": "Avbryt"
+    }
   }
 }

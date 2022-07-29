@@ -10,6 +10,7 @@ import {
   UseFormSetError,
   UseFormClearErrors,
 } from 'react-hook-form';
+import { useFeatureToggleIntl } from '../../hooks/useFeatureToggleIntl';
 import * as styles from './FileInput.module.css';
 
 const fileSizeString = (size: number) => {
@@ -53,6 +54,8 @@ export const FileInput = ({
   clearErrors,
   errors,
 }: Props) => {
+  const { formatMessage } = useFeatureToggleIntl();
+
   const [inputId] = useState<string>(`file-upload-input-${Math.floor(Math.random() * 100000)}`);
   const [filesWithErrors, setFilesWithErrors] = useState<File[]>([]);
 
@@ -146,8 +149,8 @@ export const FileInput = ({
             }}
             className={styles?.deleteAttachment}
           >
-            <Delete title={'Slett'} />
-            <BodyShort>{'Slett'}</BodyShort>
+            <Delete title={formatMessage('filopplasting.vedlegg.slett')} />
+            <BodyShort>{formatMessage('filopplasting.vedlegg.slett')}</BodyShort>
           </button>
         </Panel>
       ))}
@@ -178,8 +181,8 @@ export const FileInput = ({
               }}
               className={styles?.deleteAttachment}
             >
-              <Cancel title={'Avbryt'} />
-              <BodyShort>{'Avbryt'}</BodyShort>
+              <Cancel title={formatMessage('filopplasting.vedlegg.avbryt')} />
+              <BodyShort>{formatMessage('filopplasting.vedlegg.avbryt')}</BodyShort>
             </button>
           </Panel>
           <div className={'navds-error-message navds-error-message--medium navds-label'}>
@@ -206,8 +209,8 @@ export const FileInput = ({
             onChange={(event) => uploadFiles(event.target.files)}
             accept="image/*,.pdf"
           />
-          <BodyShort>Dra og slipp</BodyShort>
-          <BodyShort>eller</BodyShort>
+          <BodyShort>{formatMessage('filopplasting.vedlegg.draOgSlipp')}</BodyShort>
+          <BodyShort>{formatMessage('filopplasting.vedlegg.eller')}</BodyShort>
           <label htmlFor={inputId}>
             <span
               /* eslint-disable-next-line max-len */
@@ -221,8 +224,8 @@ export const FileInput = ({
                 }
               }}
             >
-              <SvgUpload title={'Last opp fil'} />
-              {'Velg dine filer'}
+              <SvgUpload title={formatMessage('filopplasting.vedlegg.lastOppFil')} />
+              {formatMessage('filopplasting.vedlegg.velgDineFiler')}
             </span>
           </label>
         </>

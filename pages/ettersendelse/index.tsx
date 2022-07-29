@@ -5,6 +5,7 @@ import { getAccessToken } from '../../auth/accessToken';
 import { beskyttetSide } from '../../auth/beskyttetSide';
 import { FileInput } from '../../components/Inputs/FileInput';
 import { Section } from '../../components/Section/Section';
+import { useFeatureToggleIntl } from '../../hooks/useFeatureToggleIntl';
 import { Vedleggskrav } from '../../types/types';
 import { getVedleggskrav } from '../api/ettersendelse/vedleggskrav';
 import * as styles from './Ettersendelse.module.css';
@@ -14,6 +15,8 @@ interface PageProps {
 }
 
 const Index = ({ vedleggskrav }: PageProps) => {
+  const { formatMessage } = useFeatureToggleIntl();
+
   const {
     control,
     handleSubmit,
@@ -24,18 +27,15 @@ const Index = ({ vedleggskrav }: PageProps) => {
   return (
     <>
       <PageHeader align="center" variant="guide">
-        Ettersending til arbeidsavklaringspenger (AAP)
+        {formatMessage('ettersendelse.appTittel')}
       </PageHeader>
       <main className={styles.main}>
         <Section>
           <Heading level="2" size="medium" spacing>
-            Ettersend dokumentasjon
+            {formatMessage('ettersendelse.heading')}
           </Heading>
           <div>
-            <Label spacing>
-              Ut fra det du har svart i søknaden, mangler du følgende dokumentasjon for at vi kan
-              ferdigbehandle søknaden din
-            </Label>
+            <Label spacing>{formatMessage('ettersendelse.manglerDokumentasjon')}</Label>
             {vedleggskrav.length > 0 && (
               <ul>
                 {vedleggskrav.map((krav) => (
@@ -67,8 +67,8 @@ const Index = ({ vedleggskrav }: PageProps) => {
 
           <Section>
             <FileInput
-              heading="Annen dokumentasjon"
-              description="Hvis du har noe annet du ønsker å legge ved kan du laste det opp her"
+              heading={formatMessage('ettersendelse.annenDokumentasjon.heading')}
+              description={formatMessage('ettersendelse.annenDokumentasjon.description')}
               name={'ANNET'}
               control={control}
               setError={setError}
@@ -79,13 +79,8 @@ const Index = ({ vedleggskrav }: PageProps) => {
 
           <Section>
             <Alert variant="warning">
-              <Label spacing>Har du ikke alle dokumentene tilgjengelig nå?</Label>
-              <BodyShort spacing>
-                Du kan gå videre uten å laste opp alle dokumenetene. Hvis du skal ettersende
-                vedlegg, må du sende disse innen 14 dager etter at søknaden er sendt inn. Trenger du
-                mer tid, kan du be om lenger frist. Dette kan du gjøre via nav.no eller ringe oss
-                etter at søknaden er sendt inn.
-              </BodyShort>
+              <Label spacing>{formatMessage('ettersendelse.warning.heading')}</Label>
+              <BodyShort spacing>{formatMessage('ettersendelse.warning.description')}</BodyShort>
             </Alert>
           </Section>
           <div className={styles.buttonRow}>
@@ -96,10 +91,10 @@ const Index = ({ vedleggskrav }: PageProps) => {
                   console.log('avbryt');
                 }}
               >
-                Avbryt
+                {formatMessage('ettersendelse.buttons.secondary')}
               </Button>
               <Button variant="primary" type="submit">
-                Gå til oppsummering
+                {formatMessage('ettersendelse.buttons.primary')}
               </Button>
             </div>
           </div>
