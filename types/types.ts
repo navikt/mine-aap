@@ -20,6 +20,7 @@ export interface MellomlagretSøknad {
 }
 
 export interface Vedleggskrav {
+  type: 'STUDIESTED' | 'FOSTERFORELDER';
   dokumentasjonstype: string;
   beskrivelse: string;
 }
@@ -27,5 +28,6 @@ export interface Vedleggskrav {
 export interface OpplastetVedlegg {
   name: string;
   size: number;
-  vedleggId: string;
+  vedleggId?: string;
+  file: File;
 }

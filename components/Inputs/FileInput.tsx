@@ -1,16 +1,16 @@
 import { Cancel, Delete, FileError, FileSuccess, Upload as SvgUpload } from '@navikt/ds-icons';
 import { BodyShort, Detail, Heading, Label, Link, Panel } from '@navikt/ds-react';
-import { randomUUID } from 'crypto';
-import { DragEventHandler, useRef, useState } from 'react';
+import { DragEventHandler, useEffect, useRef, useState } from 'react';
 import {
-  FieldValues,
   useFieldArray,
   Control,
   FieldErrors,
   UseFormSetError,
   UseFormClearErrors,
+  FieldArrayWithId,
 } from 'react-hook-form';
 import { useFeatureToggleIntl } from '../../hooks/useFeatureToggleIntl';
+import { FormValues } from '../../pages/ettersendelse';
 import * as styles from './FileInput.module.css';
 
 const fileSizeString = (size: number) => {
@@ -38,11 +38,11 @@ export const validateFile = (file: File) => {
 interface Props {
   heading?: string;
   description?: string;
-  name: string;
-  control: Control<FieldValues, any>;
-  setError: UseFormSetError<FieldValues>;
-  clearErrors: UseFormClearErrors<FieldValues>;
-  errors?: FieldErrors<FieldValues>;
+  name: 'FORELDER' | 'FOSTERFORELDER' | 'STUDIESTED' | 'ANNET';
+  control: Control<FormValues>;
+  setError: UseFormSetError<FormValues>;
+  clearErrors: UseFormClearErrors<FormValues>;
+  errors?: FieldErrors<FormValues>;
 }
 
 export const FileInput = ({
@@ -57,14 +57,53 @@ export const FileInput = ({
   const { formatMessage } = useFeatureToggleIntl();
 
   const [inputId] = useState<string>(`file-upload-input-${Math.floor(Math.random() * 100000)}`);
-  const [filesWithErrors, setFilesWithErrors] = useState<File[]>([]);
 
   const [dragOver, setDragOver] = useState<boolean>(false);
 
-  const { append, remove, fields } = useFieldArray({
+  const { append, update, remove, fields } = useFieldArray({
     name: name,
     control,
   });
+
+  useEffect(() => {
+    const iterateOverFiles = async (fields: FieldArrayWithId<FormValues>[]) => {
+      for await (const [index, field] of fields.entries()) {
+        await validateAndUploadFile(field, index);
+      }
+    };
+
+    const validateAndUploadFile = async (field: FieldArrayWithId<FormValues>, index: number) => {
+      if (field.vedleggId) {
+        return;
+      }
+      const validationResult = validateFile(field.file);
+      if (validationResult) {
+        setError(`${name}.${index}`, {
+          type: 'custom',
+          message: `${field.name} ${fileErrorTexts[validationResult]}`,
+        });
+        return;
+      }
+      const data = new FormData();
+      data.append('vedlegg', field.file);
+      const vedlegg = await fetch('/aap/innsyn/api/ettersendelse/lagre/', {
+        method: 'POST',
+        body: data,
+      });
+      if (vedlegg.ok) {
+        const id = await vedlegg.json();
+        update(index, { ...field, vedleggId: id });
+      } else {
+        setError(`${name}.${index}`, {
+          type: 'custom',
+          // @ts-ignore-line
+          message: `${field.name} ${fileErrorTexts[vedlegg.status.toString()]}`,
+        });
+        return;
+      }
+    };
+    iterateOverFiles(fields);
+  }, [fields, name, update, setError]);
 
   const fileUploadInputElement = useRef<HTMLInputElement>(null);
 
@@ -82,48 +121,18 @@ export const FileInput = ({
   const handleDrop: DragEventHandler<HTMLDivElement> = (e) => {
     e.preventDefault();
     const files = e.dataTransfer.files;
-    uploadFiles(files);
+    addFiles(files);
   };
 
-  const uploadFiles = async (files: FileList | null) => {
-    console.log('files', files);
-
-    const errorFiles: File[] = [];
-
-    for await (const file of Array.from(files || [])) {
-      setDragOver(false);
-      const validationResult = validateFile(file);
-      if (validationResult) {
-        setError(`${name}.${replaceDotWithUnderscore(file.name)}`, {
-          type: 'custon',
-          message: `${file.name} ${fileErrorTexts[validationResult]}`,
-        });
-        errorFiles.push(file);
-      } else {
-        const data = new FormData();
-        data.append('vedlegg', file);
-        const vedlegg = await fetch('/aap/innsyn/api/ettersendelse/lagre/', {
-          method: 'POST',
-          body: data,
-        });
-        if (vedlegg.ok) {
-          const id = await vedlegg.json();
-          append({
-            name: file.name,
-            size: file.size,
-            vedleggId: id,
-          });
-        } else {
-          errorFiles.push(file);
-          setError(`${name}.${replaceDotWithUnderscore(file.name)}`, {
-            type: 'custon',
-            // @ts-ignore-line
-            message: `${file.name} ${fileErrorTexts[vedlegg.status.toString()]}`,
-          });
-        }
-      }
-      setFilesWithErrors(errorFiles);
-    }
+  const addFiles = async (files: FileList | null) => {
+    setDragOver(false);
+    Array.from(files || []).forEach((file) => {
+      append({
+        name: file.name,
+        size: file.size,
+        file: file,
+      });
+    });
   };
 
   return (
@@ -135,75 +144,87 @@ export const FileInput = ({
       )}
       {description && <BodyShort spacing>{description}</BodyShort>}
 
-      {fields.map((attachment, index) => (
-        <Panel className={styles.fileCard} key={attachment.id}>
-          <div className={styles.fileCardLeftContent}>
-            <div className={styles?.fileSuccess}>
-              <FileSuccess color={'var(--navds-semantic-color-feedback-success-icon)'} />
-            </div>
-            <div>
-              <Link target={'_blank'} href={`/aap/innsyn/vedleggvisning/${attachment?.vedleggId}`}>
-                {attachment?.name}
-              </Link>
-              <Detail>{fileSizeString(attachment?.size)}</Detail>
-            </div>
-          </div>
-          <button
-            type={'button'}
-            onClick={() =>
-              fetch(`/aap/innsyn/api/ettersendelse/slett/?uuid=${attachment?.vedleggId}`, {
-                method: 'DELETE',
-              }).then(() => remove(index))
-            }
-            tabIndex={0}
-            onKeyPress={(event) => {
-              if (event.key === 'Enter') {
-                remove(index);
-              }
-            }}
-            className={styles?.deleteAttachment}
-          >
-            <Delete title={formatMessage('filopplasting.vedlegg.slett')} />
-            <BodyShort>{formatMessage('filopplasting.vedlegg.slett')}</BodyShort>
-          </button>
-        </Panel>
-      ))}
-
-      {filesWithErrors.map((file) => (
-        <>
-          <Panel className={`${styles?.fileCard} ${styles?.error}`} id={name} tabIndex={0}>
-            <div className={styles?.fileCardLeftContent}>
-              <div className={styles?.fileError}>
-                <FileError color={'var(--navds-semantic-color-interaction-danger-hover)'} />
-              </div>
-              <div>
-                <Label>{file.name}</Label>
-              </div>
-            </div>
-            <button
-              type={'button'}
-              onClick={() => {
-                clearErrors(`${name}.${replaceDotWithUnderscore(file.name)}`);
-                setFilesWithErrors(filesWithErrors.filter((f) => f !== file));
-              }}
-              tabIndex={0}
-              onKeyPress={(event) => {
-                if (event.key === 'Enter') {
-                  clearErrors(`${name}.${replaceDotWithUnderscore(file.name)}`);
-                  setFilesWithErrors(filesWithErrors.filter((f) => f !== file));
-                }
-              }}
-              className={styles?.deleteAttachment}
+      {fields.map((attachment, index) => {
+        const fieldHasError = errors?.[name]?.[index]?.message !== undefined;
+        return (
+          <div key={attachment.id}>
+            <Panel
+              className={`${styles.fileCard} ${fieldHasError ?? styles?.error}`}
+              key={attachment.id}
             >
-              <Cancel title={formatMessage('filopplasting.vedlegg.avbryt')} />
-              <BodyShort>{formatMessage('filopplasting.vedlegg.avbryt')}</BodyShort>
-            </button>
-          </Panel>
-          <div className={'navds-error-message navds-error-message--medium navds-label'}>
-            {errors?.[name]?.[replaceDotWithUnderscore(file.name)]?.message as unknown as string}
+              <div className={styles.fileCardLeftContent}>
+                {fieldHasError ? (
+                  <>
+                    <div className={styles?.fileError}>
+                      <FileError color={'var(--navds-semantic-color-interaction-danger-hover)'} />
+                    </div>
+                    <div>
+                      <Label id={`${name}.${index}`}>{attachment.name}</Label>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className={styles?.fileSuccess}>
+                      <FileSuccess color={'var(--navds-semantic-color-feedback-success-icon)'} />
+                    </div>
+                    <div>
+                      <Link
+                        target={'_blank'}
+                        href={`/aap/innsyn/vedleggvisning/${attachment?.vedleggId}`}
+                      >
+                        {attachment?.name}
+                      </Link>
+                      <Detail>{fileSizeString(attachment?.size)}</Detail>
+                    </div>
+                  </>
+                )}
+              </div>
+              {fieldHasError ? (
+                <button
+                  type={'button'}
+                  onClick={() => {
+                    remove(index);
+                  }}
+                  tabIndex={0}
+                  onKeyPress={(event) => {
+                    if (event.key === 'Enter') {
+                      remove(index);
+                    }
+                  }}
+                  className={styles?.deleteAttachment}
+                >
+                  <Cancel title={formatMessage('filopplasting.vedlegg.avbryt')} />
+                  <BodyShort>{formatMessage('filopplasting.vedlegg.avbryt')}</BodyShort>
+                </button>
+              ) : (
+                <button
+                  type={'button'}
+                  onClick={() =>
+                    fetch(`/aap/innsyn/api/ettersendelse/slett/?uuid=${attachment?.vedleggId}`, {
+                      method: 'DELETE',
+                    }).then(() => remove(index))
+                  }
+                  tabIndex={0}
+                  onKeyPress={(event) => {
+                    if (event.key === 'Enter') {
+                      remove(index);
+                    }
+                  }}
+                  className={styles?.deleteAttachment}
+                >
+                  <Delete title={formatMessage('filopplasting.vedlegg.slett')} />
+                  <BodyShort>{formatMessage('filopplasting.vedlegg.slett')}</BodyShort>
+                </button>
+              )}
+            </Panel>
+            {fieldHasError && (
+              <div className={'navds-error-message navds-error-message--medium navds-label'}>
+                {errors?.[name]?.[index]?.message}
+              </div>
+            )}
           </div>
-        </>
-      ))}
+        );
+      })}
 
       <div
         className={`${styles.dropZone} ${dragOver ? styles.dragOver : ''}`}
@@ -220,7 +241,7 @@ export const FileInput = ({
             className={styles.visuallyHidden}
             tabIndex={-1}
             ref={fileUploadInputElement}
-            onChange={(event) => uploadFiles(event.target.files)}
+            onChange={(event) => addFiles(event.target.files)}
             accept="image/*,.pdf"
           />
           <BodyShort>{formatMessage('filopplasting.vedlegg.draOgSlipp')}</BodyShort>

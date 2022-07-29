@@ -37,5 +37,8 @@
       "primary": "Gå til oppsummering",
       "secondary": "Avbryt"
     }
+  },
+  "errorSummary": {
+    "title": "Du må fikse disse feilene før du kan fortsette:"
   }
 }

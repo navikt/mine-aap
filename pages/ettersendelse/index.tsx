@@ -1,17 +1,29 @@
 import { Alert, BodyShort, Button, Heading, Label, PageHeader } from '@navikt/ds-react';
 import { GetServerSidePropsResult, NextPageContext } from 'next';
-import { FieldValues, useForm } from 'react-hook-form';
+import { FieldErrors, useForm } from 'react-hook-form';
 import { getAccessToken } from '../../auth/accessToken';
 import { beskyttetSide } from '../../auth/beskyttetSide';
+import { FormErrorSummary } from '../../components/FormErrorSummary/FormErrorSummary';
 import { FileInput } from '../../components/Inputs/FileInput';
 import { Section } from '../../components/Section/Section';
 import { useFeatureToggleIntl } from '../../hooks/useFeatureToggleIntl';
-import { Vedleggskrav } from '../../types/types';
+import { OpplastetVedlegg, Vedleggskrav } from '../../types/types';
 import { getVedleggskrav } from '../api/ettersendelse/vedleggskrav';
 import * as styles from './Ettersendelse.module.css';
 
+export const setErrorSummaryFocus = () => {
+  const errorSummaryElement = document && document.getElementById('skjema-feil-liste');
+  if (errorSummaryElement) errorSummaryElement.focus();
+};
 interface PageProps {
   vedleggskrav: Vedleggskrav[];
+}
+
+export interface FormValues {
+  FORELDER: OpplastetVedlegg[];
+  FOSTERFORELDER: OpplastetVedlegg[];
+  STUDIESTED: OpplastetVedlegg[];
+  ANNET: OpplastetVedlegg[];
 }
 
 const Index = ({ vedleggskrav }: PageProps) => {
@@ -23,7 +35,8 @@ const Index = ({ vedleggskrav }: PageProps) => {
     setError,
     clearErrors,
     formState: { errors },
-  } = useForm<FieldValues>();
+  } = useForm<FormValues>();
+
   return (
     <>
       <PageHeader align="center" variant="guide">
@@ -47,16 +60,26 @@ const Index = ({ vedleggskrav }: PageProps) => {
         </Section>
 
         <form
-          onSubmit={handleSubmit((data) => {
-            console.log(data);
-          })}
+          onSubmit={handleSubmit(
+            (data) => {
+              console.log(data);
+            },
+            (error) => {
+              setErrorSummaryFocus();
+            }
+          )}
         >
+          <FormErrorSummary
+            id="skjema-feil-liste"
+            errors={errors as FieldErrors}
+            data-testid={'error-summary'}
+          />
           {vedleggskrav.map((krav) => (
             <Section key={krav.dokumentasjonstype}>
               <FileInput
                 heading={krav.dokumentasjonstype}
                 description={krav.beskrivelse}
-                name={krav.dokumentasjonstype}
+                name={krav.type}
                 control={control}
                 setError={setError}
                 clearErrors={clearErrors}
@@ -69,7 +92,7 @@ const Index = ({ vedleggskrav }: PageProps) => {
             <FileInput
               heading={formatMessage('ettersendelse.annenDokumentasjon.heading')}
               description={formatMessage('ettersendelse.annenDokumentasjon.description')}
-              name={'ANNET'}
+              name="ANNET"
               control={control}
               setError={setError}
               clearErrors={clearErrors}

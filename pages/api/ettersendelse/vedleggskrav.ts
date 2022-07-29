@@ -12,10 +12,12 @@ const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) =
 export const getVedleggskrav = async (accessToken?: string) => {
   const vedleggskrav: Vedleggskrav[] = [
     {
+      type: 'STUDIESTED',
       dokumentasjonstype: 'Dokumentasjon om studiested',
       beskrivelse: 'Lorem ipsum dolor sit amet',
     },
     {
+      type: 'FOSTERFORELDER',
       dokumentasjonstype: 'Dokumentasjon om fosterforelder',
       beskrivelse: 'Lorem ipsum dolor sit amet',
     },
