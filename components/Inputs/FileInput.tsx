@@ -88,11 +88,9 @@ export const FileInput = ({
   const uploadFiles = async (files: FileList | null) => {
     console.log('files', files);
 
-    // TODO: Upload files
-
     const errorFiles: File[] = [];
 
-    Array.from(files || []).forEach((file, index) => {
+    for await (const file of Array.from(files || [])) {
       setDragOver(false);
       const validationResult = validateFile(file);
       if (validationResult) {
@@ -102,14 +100,30 @@ export const FileInput = ({
         });
         errorFiles.push(file);
       } else {
-        append({
-          name: file.name,
-          size: file.size,
-          vedleggId: randomUUID,
+        const data = new FormData();
+        data.append('vedlegg', file);
+        const vedlegg = await fetch('/aap/innsyn/api/ettersendelse/lagre/', {
+          method: 'POST',
+          body: data,
         });
+        if (vedlegg.ok) {
+          const id = await vedlegg.json();
+          append({
+            name: file.name,
+            size: file.size,
+            vedleggId: id,
+          });
+        } else {
+          errorFiles.push(file);
+          setError(`${name}.${replaceDotWithUnderscore(file.name)}`, {
+            type: 'custon',
+            // @ts-ignore-line
+            message: `${file.name} ${fileErrorTexts[vedlegg.status.toString()]}`,
+          });
+        }
       }
       setFilesWithErrors(errorFiles);
-    });
+    }
   };
 
   return (
