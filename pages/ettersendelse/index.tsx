@@ -1,10 +1,11 @@
-import { Alert, BodyShort, Button, Heading, Label, PageHeader } from '@navikt/ds-react';
+import { Alert, BodyShort, Button, Heading, Label } from '@navikt/ds-react';
 import { GetServerSidePropsResult, NextPageContext } from 'next';
 import { FieldErrors, useForm } from 'react-hook-form';
 import { getAccessToken } from '../../auth/accessToken';
 import { beskyttetSide } from '../../auth/beskyttetSide';
 import { FormErrorSummary } from '../../components/FormErrorSummary/FormErrorSummary';
 import { FileInput } from '../../components/Inputs/FileInput';
+import PageHeader from '../../components/PageHeader';
 import { Section } from '../../components/Section/Section';
 import { useFeatureToggleIntl } from '../../hooks/useFeatureToggleIntl';
 import { OpplastetVedlegg, Vedleggskrav } from '../../types/types';

@@ -3,6 +3,7 @@ import { Alert, BodyShort, Button, Heading, Link, LinkPanel, Panel } from '@navi
 import { format } from 'date-fns';
 import { nb } from 'date-fns/locale';
 import type { GetServerSidePropsResult, NextPageContext } from 'next';
+import { useRouter } from 'next/router';
 import { useMemo } from 'react';
 import { getAccessToken } from '../auth/accessToken';
 import { beskyttetSide } from '../auth/beskyttetSide';
@@ -24,6 +25,8 @@ interface PageProps {
 
 const Index = ({ søknader, dokumenter, mellomlagredeSøknader }: PageProps) => {
   const intl = useFeatureToggleIntl();
+
+  const router = useRouter();
 
   const sisteSøknad = useMemo(() => {
     return søknader[0];
@@ -73,7 +76,9 @@ const Index = ({ søknader, dokumenter, mellomlagredeSøknader }: PageProps) => 
                   <Alert variant="warning">
                     Vi mangler dokumentasjon på {sisteSøknad.missingDocuments.join(', ')}
                   </Alert>
-                  <Button variant="primary">Ettersend dokumentasjon</Button>
+                  <Button variant="primary" onClick={() => router.push('/ettersendelse/')}>
+                    Ettersend dokumentasjon
+                  </Button>
                 </>
               )}
               <Heading level="3" size="small">
