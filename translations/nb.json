@@ -1,5 +1,23 @@
 {
   "appTittel": "Dine arbeidsavklaringspenger",
+  "sisteSøknad": {
+    "heading": "Din siste søknad om arbeidsavklaringspenger",
+    "søknad": {
+      "heading": "Søknad om arbeidsavklaringspenger (AAP)",
+      "mottatt": "Mottatt {date}",
+      "saksbehandlingstid": "Se forventet saksbehandlingstid",
+      "alert": {
+        "message": "Vi mangler dokumentasjon på {missingDocuments}"
+      },
+      "button": {
+        "text": "Ettersend dokumentasjon"
+      }
+    },
+    "dokumentasjon": {
+      "heading": "Dokumentasjon vi har mottatt fra deg",
+      "vedlegg": "Vedlegg: {title} mottatt {date} {type}"
+    }
+  },
   "dineOppgaver": {
     "tittel": "Dine oppgaver etter at du har sendt en søknad"
   },

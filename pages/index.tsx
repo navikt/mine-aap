@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import { useMemo } from 'react';
 import { getAccessToken } from '../auth/accessToken';
 import { beskyttetSide } from '../auth/beskyttetSide';
+import { VerticalFlexContainer } from '../components/FlexContainer/VerticalFlexContainer';
 import { Layout } from '../components/Layout/Layout';
 import { PanelWithTopIcon } from '../components/PanelWithTopIcon/PanelWithTopIcon';
 import { Section } from '../components/Section/Section';
@@ -24,7 +25,7 @@ interface PageProps {
 }
 
 const Index = ({ søknader, dokumenter, mellomlagredeSøknader }: PageProps) => {
-  const intl = useFeatureToggleIntl();
+  const { formatMessage } = useFeatureToggleIntl();
 
   const router = useRouter();
 
@@ -61,28 +62,34 @@ const Index = ({ søknader, dokumenter, mellomlagredeSøknader }: PageProps) => 
         <Section lightBlue>
           <div>
             <Heading level="2" size="medium" spacing>
-              Din siste søknad om arbeidsavklaringspenger
+              {formatMessage('sisteSøknad.heading')}
             </Heading>
             <Panel border>
               <Heading level="3" size="small">
-                Søknad om arbeidsavklaringspenger (AAP)
+                {formatMessage('sisteSøknad.søknad.heading')}
               </Heading>
-              <BodyShort spacing>Mottatt {formatFullDate(sisteSøknad.timestamp)}</BodyShort>
               <BodyShort spacing>
-                <Link href="#">Se forventet saksbehandlingstid</Link>
+                {formatMessage('sisteSøknad.søknad.mottatt', {
+                  date: formatFullDate(sisteSøknad.timestamp),
+                })}
+              </BodyShort>
+              <BodyShort spacing>
+                <Link href="#">{formatMessage('sisteSøknad.søknad.saksbehandlingstid')}</Link>
               </BodyShort>
               {sisteSøknad.missingDocuments.length > 0 && (
                 <>
                   <Alert variant="warning">
-                    Vi mangler dokumentasjon på {sisteSøknad.missingDocuments.join(', ')}
+                    {formatMessage('sisteSøknad.søknad.alert.message', {
+                      missingDocuments: sisteSøknad.missingDocuments.join(', '),
+                    })}
                   </Alert>
                   <Button variant="primary" onClick={() => router.push('/ettersendelse/')}>
-                    Ettersend dokumentasjon
+                    {formatMessage('sisteSøknad.søknad.button.text')}
                   </Button>
                 </>
               )}
               <Heading level="3" size="small">
-                Dokumentasjon vi har mottatt fra deg
+                {formatMessage('sisteSøknad.dokumentasjon.heading')}
               </Heading>
               <ul>
                 <li>
@@ -94,8 +101,11 @@ const Index = ({ søknader, dokumenter, mellomlagredeSøknader }: PageProps) => 
                 {sisteSøknad.documents.map((document) => (
                   <li key={document.tittel}>
                     <Link href={document.url}>
-                      Vedlegg: {document.tittel} mottatt {formatFullDate(document.timestamp)} (
-                      {document.type})
+                      {formatMessage('sisteSøknad.dokumentasjon.vedlegg', {
+                        title: document.tittel,
+                        date: formatFullDate(document.timestamp),
+                        type: document.type,
+                      })}
                     </Link>
                   </li>
                 ))}
@@ -106,28 +116,26 @@ const Index = ({ søknader, dokumenter, mellomlagredeSøknader }: PageProps) => 
       )}
 
       <Section>
-        <PanelWithTopIcon title={intl.formatMessage('dineOppgaver.tittel')} icon={<Information />}>
+        <PanelWithTopIcon title={formatMessage('dineOppgaver.tittel')} icon={<Information />}>
           <BodyShort spacing>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</BodyShort>
         </PanelWithTopIcon>
-        <PanelWithTopIcon title={intl.formatMessage('hvaGjorVi.tittel')} icon={<Information />}>
+        <PanelWithTopIcon title={formatMessage('hvaGjorVi.tittel')} icon={<Information />}>
           <BodyShort spacing>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</BodyShort>
         </PanelWithTopIcon>
-        <PanelWithTopIcon
-          title={intl.formatMessage('dokumentoversikt.tittel')}
-          icon={<Attachment />}
-        >
+        <PanelWithTopIcon title={formatMessage('dokumentoversikt.tittel')} icon={<Attachment />}>
           <BodyShort spacing>
-            <Link href="#">{intl.formatMessage('dokumentoversikt.ikkeSynligDokumentLink')}</Link>
+            <Link href="#">{formatMessage('dokumentoversikt.ikkeSynligDokumentLink')}</Link>
           </BodyShort>
-          {dokumenter.map((dokument) => (
-            <LinkPanel href={dokument.url} border key={dokument.tittel}>
-              <LinkPanel.Title>{dokument.tittel}</LinkPanel.Title>
-              <LinkPanel.Description>
-                {intl.formatMessage('dokumentoversikt.mottatt')}{' '}
-                {formatFullDate(dokument.timestamp)}
-              </LinkPanel.Description>
-            </LinkPanel>
-          ))}
+          <VerticalFlexContainer>
+            {dokumenter.map((dokument) => (
+              <LinkPanel href={dokument.url} border key={dokument.tittel}>
+                <LinkPanel.Title>{dokument.tittel}</LinkPanel.Title>
+                <LinkPanel.Description>
+                  {formatMessage('dokumentoversikt.mottatt')} {formatFullDate(dokument.timestamp)}
+                </LinkPanel.Description>
+              </LinkPanel>
+            ))}
+          </VerticalFlexContainer>
         </PanelWithTopIcon>
       </Section>
     </Layout>
