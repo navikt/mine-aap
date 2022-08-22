@@ -5,6 +5,7 @@ import { getAccessToken } from '../../auth/accessToken';
 import { beskyttetSide } from '../../auth/beskyttetSide';
 import { FormErrorSummary } from '../../components/FormErrorSummary/FormErrorSummary';
 import { FileInput } from '../../components/Inputs/FileInput';
+import { FileUpload } from '../../components/Inputs/FileUpload';
 import PageHeader from '../../components/PageHeader';
 import { Section } from '../../components/Section/Section';
 import { useFeatureToggleIntl } from '../../hooks/useFeatureToggleIntl';
@@ -60,69 +61,33 @@ const Index = ({ vedleggskrav }: PageProps) => {
           </div>
         </Section>
 
-        <form
-          onSubmit={handleSubmit(
-            (data) => {
-              console.log(data);
-            },
-            (error) => {
-              setErrorSummaryFocus();
-            }
-          )}
-        >
-          <FormErrorSummary
-            id="skjema-feil-liste"
-            errors={errors as FieldErrors}
-            data-testid={'error-summary'}
+        <FormErrorSummary
+          id="skjema-feil-liste"
+          errors={errors as FieldErrors}
+          data-testid={'error-summary'}
+        />
+        {vedleggskrav.map((krav) => (
+          <FileUpload krav={krav} key={krav.dokumentasjonstype} />
+        ))}
+
+        <Section>
+          <FileInput
+            heading={formatMessage('ettersendelse.annenDokumentasjon.heading')}
+            description={formatMessage('ettersendelse.annenDokumentasjon.description')}
+            name="ANNET"
+            control={control}
+            setError={setError}
+            clearErrors={clearErrors}
+            errors={errors}
           />
-          {vedleggskrav.map((krav) => (
-            <Section key={krav.dokumentasjonstype}>
-              <FileInput
-                heading={krav.dokumentasjonstype}
-                description={krav.beskrivelse}
-                name={krav.type}
-                control={control}
-                setError={setError}
-                clearErrors={clearErrors}
-                errors={errors}
-              />
-            </Section>
-          ))}
+        </Section>
 
-          <Section>
-            <FileInput
-              heading={formatMessage('ettersendelse.annenDokumentasjon.heading')}
-              description={formatMessage('ettersendelse.annenDokumentasjon.description')}
-              name="ANNET"
-              control={control}
-              setError={setError}
-              clearErrors={clearErrors}
-              errors={errors}
-            />
-          </Section>
-
-          <Section>
-            <Alert variant="warning">
-              <Label spacing>{formatMessage('ettersendelse.warning.heading')}</Label>
-              <BodyShort spacing>{formatMessage('ettersendelse.warning.description')}</BodyShort>
-            </Alert>
-          </Section>
-          <div className={styles.buttonRow}>
-            <div className={styles.buttonContainer}>
-              <Button
-                variant="secondary"
-                onChange={() => {
-                  console.log('avbryt');
-                }}
-              >
-                {formatMessage('ettersendelse.buttons.secondary')}
-              </Button>
-              <Button variant="primary" type="submit">
-                {formatMessage('ettersendelse.buttons.primary')}
-              </Button>
-            </div>
-          </div>
-        </form>
+        <Section>
+          <Alert variant="warning">
+            <Label spacing>{formatMessage('ettersendelse.warning.heading')}</Label>
+            <BodyShort spacing>{formatMessage('ettersendelse.warning.description')}</BodyShort>
+          </Alert>
+        </Section>
       </main>
     </>
   );

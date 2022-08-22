@@ -1,5 +1,5 @@
 import { Cancel, Delete, FileError, FileSuccess, Upload as SvgUpload } from '@navikt/ds-icons';
-import { BodyShort, Detail, Heading, Label, Link, Panel } from '@navikt/ds-react';
+import { BodyShort, Button, Detail, Heading, Label, Link, Panel } from '@navikt/ds-react';
 import { DragEventHandler, useEffect, useRef, useState } from 'react';
 import {
   useFieldArray,
@@ -225,6 +225,14 @@ export const FileInput = ({
           </div>
         );
       })}
+
+      {fields.length > 0 && (
+        <div>
+          <Button variant="primary" type="submit">
+            {formatMessage('ettersendelse.buttons.primary')}
+          </Button>
+        </div>
+      )}
 
       <div
         className={`${styles.dropZone} ${dragOver ? styles.dragOver : ''}`}
