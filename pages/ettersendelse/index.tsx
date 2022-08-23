@@ -71,14 +71,12 @@ const Index = ({ vedleggskrav }: PageProps) => {
         ))}
 
         <Section>
-          <FileInput
-            heading={formatMessage('ettersendelse.annenDokumentasjon.heading')}
-            description={formatMessage('ettersendelse.annenDokumentasjon.description')}
-            name="ANNET"
-            control={control}
-            setError={setError}
-            clearErrors={clearErrors}
-            errors={errors}
+          <FileUpload
+            krav={{
+              type: 'ANNET',
+              dokumentasjonstype: formatMessage('ettersendelse.annenDokumentasjon.heading'),
+              beskrivelse: formatMessage('ettersendelse.annenDokumentasjon.description'),
+            }}
           />
         </Section>
 

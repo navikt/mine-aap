@@ -20,7 +20,7 @@ export interface MellomlagretSøknad {
 }
 
 export interface Vedleggskrav {
-  type: 'STUDIESTED' | 'FOSTERFORELDER';
+  type: 'STUDIESTED' | 'FOSTERFORELDER' | 'ANNET';
   dokumentasjonstype: string;
   beskrivelse: string;
 }
