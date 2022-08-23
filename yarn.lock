@@ -963,19 +963,19 @@
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
 "@navikt/ds-css@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@navikt/ds-css/-/ds-css-1.0.2.tgz#411b1e6f149b0833f4c5247f1aec89f88ebf00ec"
-  integrity sha512-BCD8lj5XKPyIlQXd4071Wl+/LpCiMkofPbFSgV+ewp2sfEDhPTYkupMbArn4kC0k5iJ3ksj0AXCk3QKquUIS6w==
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@navikt/ds-css/-/ds-css-1.1.0.tgz#3b068297fe449da40d6c500eaadfb791fe5c89d4"
+  integrity sha512-T8sVlRQQzWxlx+1BqO42rXpgns4F+cYOe/RFlF8rEoNuW6DjrPXDpSNZ7XHp7iolpKtnLvj2VOMvFlJ4IBAw/Q==
 
 "@navikt/ds-icons@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@navikt/ds-icons/-/ds-icons-1.0.2.tgz#4ca74e4f1a687f35fd67d2d7e70ef0762f3edace"
-  integrity sha512-WdmEfgZ32bhnLBiKUOnKysgU4aDYrPAa29DqSxlZqZ9cgYGdd/Wbmmr3ZGsLjxlrhY6qX5s9S22x0mwmHr7kvA==
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@navikt/ds-icons/-/ds-icons-1.1.0.tgz#0acd58e3e0c42f44d02ed705eb66f4fa71e6c3a5"
+  integrity sha512-OooAPGAtgpfo+TQLVGNf2doVEmD8G9iVRlwW4dz5qYal48gArLAxM45oNuJP/rVXe5Y1VrWybSJhi3pZcw/iig==
 
 "@navikt/ds-react@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@navikt/ds-react/-/ds-react-1.0.2.tgz#3a497dd44b0d6544980bdfc8558e1589ef63d40c"
-  integrity sha512-0Sl+QJ8OE2ttEvT0fHZTiBlI8bF9z3dSjawkHSmlxuhZZltX+Cy2hdlrnqysIxcjYmnffScYV36d9TMJKDnU5Q==
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@navikt/ds-react/-/ds-react-1.1.0.tgz#eae9280e85ecf1ad15ebb145171fb80d55388b4e"
+  integrity sha512-gkL2S5gFVvoUehp2c1VMzTm+W3vGqE9HpKFPV2Mp0m3J4BAP3u/j36huBotPYqoApYMMDjq2QIwsP84BRdPgrA==
   dependencies:
     "@floating-ui/react-dom-interactions" "0.9.2"
     "@navikt/ds-icons" "^1.0.2"
@@ -1834,11 +1834,11 @@ argparse@^2.0.1:
   integrity sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==
 
 aria-hidden@^1.1.3:
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/aria-hidden/-/aria-hidden-1.1.3.tgz#bb48de18dc84787a3c6eee113709c473c64ec254"
-  integrity sha512-RhVWFtKH5BiGMycI72q2RAFMLQi8JP9bLuQXgR5a8Znp7P5KOIADSJeyfI8PCVxLEp067B2HbP5JIiI/PXIZeA==
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/aria-hidden/-/aria-hidden-1.2.1.tgz#ad8c1edbde360b454eb2bf717ea02da00bfee0f8"
+  integrity sha512-PN344VAf9j1EAi+jyVHOJ8XidQdPVssGco39eNcsGdM4wcsILtxrKLkbuiMfLWYROK1FjRQasMWCBttrhjnr6A==
   dependencies:
-    tslib "^1.0.0"
+    tslib "^2.0.0"
 
 aria-query@^4.2.2:
   version "4.2.2"
@@ -6153,12 +6153,12 @@ tsconfig-paths@^3.14.1:
     minimist "^1.2.6"
     strip-bom "^3.0.0"
 
-tslib@2.4.0, tslib@^2.0.1, tslib@^2.1.0, tslib@^2.4.0:
+tslib@2.4.0, tslib@^2.0.0, tslib@^2.0.1, tslib@^2.1.0, tslib@^2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.4.0.tgz#7cecaa7f073ce680a05847aa77be941098f36dc3"
   integrity sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==
 
-tslib@^1.0.0, tslib@^1.8.1, tslib@^1.9.3:
+tslib@^1.8.1, tslib@^1.9.3:
   version "1.14.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
