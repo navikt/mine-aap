@@ -23,15 +23,11 @@ jobs:
         with:
           path: "node_modules"
           key: "${{ runner.os }}-modules-${{ hashFiles('yarn.lock') }}"
-      - name: "Cache server node_modules"
-        id: "cache-server-node-modules"
-        uses: "actions/cache@v2"
-        with:
-          path: "server/node_modules"
-          key: "${{ runner.os }}-modules-${{ hashFiles('server/yarn.lock') }}"
       - name: "install dependencies Yarn"
         if: "steps.cache-node-modules.outputs.cache-hit != 'true'"
         run: "yarn install --frozen-lockfile"
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
       - name: Copy env-file for labs
         run: cp .nais/labs.env .env.local
       - name: "client tests"
