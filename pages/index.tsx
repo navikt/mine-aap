@@ -70,20 +70,23 @@ const Index = ({ søknader, dokumenter, mellomlagredeSøknader }: PageProps) => 
               </Heading>
               <BodyShort spacing>
                 {formatMessage('sisteSøknad.søknad.mottatt', {
-                  date: formatFullDate(sisteSøknad.timestamp),
+                  date: formatFullDate(sisteSøknad.opprettet),
                 })}
               </BodyShort>
               <BodyShort spacing>
                 <Link href="#">{formatMessage('sisteSøknad.søknad.saksbehandlingstid')}</Link>
               </BodyShort>
-              {sisteSøknad.missingDocuments.length > 0 && (
+              {sisteSøknad.mangler.length > 0 && (
                 <>
                   <Alert variant="warning">
                     {formatMessage('sisteSøknad.søknad.alert.message', {
-                      missingDocuments: sisteSøknad.missingDocuments.join(', '),
+                      missingDocuments: sisteSøknad.mangler.join(', '),
                     })}
                   </Alert>
-                  <Button variant="primary" onClick={() => router.push('/ettersendelse/')}>
+                  <Button
+                    variant="primary"
+                    onClick={() => router.push(`/${sisteSøknad.søknadId}/ettersendelse/`)}
+                  >
                     {formatMessage('sisteSøknad.søknad.button.text')}
                   </Button>
                 </>
@@ -92,13 +95,7 @@ const Index = ({ søknader, dokumenter, mellomlagredeSøknader }: PageProps) => 
                 {formatMessage('sisteSøknad.dokumentasjon.heading')}
               </Heading>
               <ul>
-                <li>
-                  <Link href={sisteSøknad.applicationPdf.url}>
-                    Søknad om arbeidsavklaringspenger (AAP) mottatt{' '}
-                    {formatFullDate(sisteSøknad.applicationPdf.timestamp)} (pdf)
-                  </Link>
-                </li>
-                {sisteSøknad.documents.map((document) => (
+                {/*sisteSøknad.documents.map((document) => (
                   <li key={document.tittel}>
                     <Link href={document.url}>
                       {formatMessage('sisteSøknad.dokumentasjon.vedlegg', {
@@ -108,7 +105,7 @@ const Index = ({ søknader, dokumenter, mellomlagredeSøknader }: PageProps) => 
                       })}
                     </Link>
                   </li>
-                ))}
+                    ))*/}
               </ul>
             </Panel>
           </div>

@@ -6,13 +6,10 @@ export interface Dokument {
 }
 
 export interface Søknad {
-  timestamp: string;
-  applicationPdf: {
-    url: string;
-    timestamp: string;
-  };
-  documents: Array<Dokument>;
-  missingDocuments: Array<'FOSTERFORELDER' | 'STUDIESTED'>;
+  fnr: string;
+  opprettet: string;
+  søknadId: string;
+  mangler: Array<'ARBEIDSGIVER' | 'STUDIER' | 'ANDREBARN' | 'OMSORG' | 'UTLAND' | 'ANNET'>;
 }
 
 export interface MellomlagretSøknad {

@@ -1,16 +1,16 @@
 import { Alert, BodyShort, Button, Heading, Label } from '@navikt/ds-react';
 import { GetServerSidePropsResult, NextPageContext } from 'next';
 import { FieldErrors, useForm } from 'react-hook-form';
-import { getAccessToken } from '../../auth/accessToken';
-import { beskyttetSide } from '../../auth/beskyttetSide';
-import { FormErrorSummary } from '../../components/FormErrorSummary/FormErrorSummary';
-import { FileInput } from '../../components/Inputs/FileInput';
-import { FileUpload } from '../../components/Inputs/FileUpload';
-import PageHeader from '../../components/PageHeader';
-import { Section } from '../../components/Section/Section';
-import { useFeatureToggleIntl } from '../../hooks/useFeatureToggleIntl';
-import { OpplastetVedlegg, Vedleggskrav } from '../../types/types';
-import { getVedleggskrav } from '../api/ettersendelse/vedleggskrav';
+import { getAccessToken } from '../../../auth/accessToken';
+import { beskyttetSide } from '../../../auth/beskyttetSide';
+import { FormErrorSummary } from '../../../components/FormErrorSummary/FormErrorSummary';
+import { FileInput } from '../../../components/Inputs/FileInput';
+import { FileUpload } from '../../../components/Inputs/FileUpload';
+import PageHeader from '../../../components/PageHeader';
+import { Section } from '../../../components/Section/Section';
+import { useFeatureToggleIntl } from '../../../hooks/useFeatureToggleIntl';
+import { OpplastetVedlegg, Vedleggskrav } from '../../../types/types';
+import { getVedleggskrav } from '../../api/ettersendelse/vedleggskrav';
 import * as styles from './Ettersendelse.module.css';
 
 export const setErrorSummaryFocus = () => {

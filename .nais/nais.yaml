@@ -48,10 +48,10 @@ spec:
   {{/each}}
   tokenx:
     enabled: true
-#  accessPolicy:
-#    outbound:
-#      rules:
-#        - application: aap-soknad-api
+  accessPolicy:
+    outbound:
+      rules:
+        - application: aap-soknad-api
 #      external:
 #        {{#each externals as |host|}}
 #        - host: {{host}}

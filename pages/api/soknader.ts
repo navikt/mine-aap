@@ -1,7 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getAccessTokenFromRequest } from '../../auth/accessToken';
 import { beskyttetApi } from '../../auth/beskyttetApi';
-import { Søknad } from '../../types/types';
+import { mockSøknader } from '../../mock/mockSoknad';
+import { isMock } from '../../utils/environments';
 
 const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) => {
   const accessToken = getAccessTokenFromRequest(req);
@@ -10,26 +11,11 @@ const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) =
 });
 
 export const getSøknader = async (accessToken?: string) => {
-  const søknader: Søknad[] = [
-    {
-      timestamp: new Date().toISOString(),
-      applicationPdf: {
-        url: '#',
-        timestamp: new Date().toISOString(),
-      },
-      documents: [
-        {
-          url: '#',
-          tittel: 'Ettersendt dokumentasjon om studiested',
-          timestamp: new Date().toISOString(),
-          type: 'pdf',
-        },
-      ],
-      missingDocuments: ['FOSTERFORELDER'],
-    },
-  ];
+  if (isMock()) {
+    return mockSøknader;
+  }
 
-  return søknader;
+  return [];
 };
 
 export default handler;
