@@ -39,7 +39,7 @@ const Index = ({ søknader, dokumenter, mellomlagredeSøknader }: PageProps) => 
 
   return (
     <Layout>
-      {sisteMellomlagredeSøknad && (
+      {/*sisteMellomlagredeSøknad && (
         <Section>
           <div>
             <Heading level="2" size="medium" spacing>
@@ -56,7 +56,7 @@ const Index = ({ søknader, dokumenter, mellomlagredeSøknader }: PageProps) => 
             </LinkPanel>
           </div>
         </Section>
-      )}
+              )*/}
 
       {sisteSøknad && (
         <Section lightBlue>
@@ -91,11 +91,11 @@ const Index = ({ søknader, dokumenter, mellomlagredeSøknader }: PageProps) => 
                   </Button>
                 </>
               )}
-              <Heading level="3" size="small">
+              {/*<Heading level="3" size="small">
                 {formatMessage('sisteSøknad.dokumentasjon.heading')}
               </Heading>
               <ul>
-                {/*sisteSøknad.documents.map((document) => (
+                {sisteSøknad.documents.map((document) => (
                   <li key={document.tittel}>
                     <Link href={document.url}>
                       {formatMessage('sisteSøknad.dokumentasjon.vedlegg', {
@@ -105,8 +105,8 @@ const Index = ({ søknader, dokumenter, mellomlagredeSøknader }: PageProps) => 
                       })}
                     </Link>
                   </li>
-                    ))*/}
-              </ul>
+                    ))}
+              </ul>*/}
             </Panel>
           </div>
         </Section>
