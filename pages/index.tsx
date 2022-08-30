@@ -1,7 +1,5 @@
 import { Attachment, Information } from '@navikt/ds-icons';
 import { Alert, BodyShort, Button, Heading, Link, LinkPanel, Panel } from '@navikt/ds-react';
-import { format } from 'date-fns';
-import { nb } from 'date-fns/locale';
 import type { GetServerSidePropsResult, NextPageContext } from 'next';
 import { useRouter } from 'next/router';
 import { useMemo } from 'react';
@@ -17,6 +15,7 @@ import { formatFullDate } from '../utils/date';
 import { getDocuments } from './api/dokumentoversikt';
 import { getMellomlagredeSøknader } from './api/mellomlagredeSoknader';
 import { getSøknader } from './api/soknader';
+import logger from '../utils/logger';
 
 interface PageProps {
   søknader: Søknad[];
@@ -145,6 +144,8 @@ export const getServerSideProps = beskyttetSide(
     const søknader = await getSøknader(bearerToken);
     const dokumenter = await getDocuments();
     const mellomlagredeSøknader = await getMellomlagredeSøknader();
+
+    logger.info(`søknader: ${JSON.stringify(søknader)}`);
 
     return {
       props: { søknader, dokumenter, mellomlagredeSøknader },
