@@ -15,7 +15,7 @@
     },
     "dokumentasjon": {
       "heading": "Dokumentasjon vi har mottatt fra deg",
-      "vedlegg": "Vedlegg: {title} mottatt {date} {type}"
+      "vedlegg": "Vedlegg: {type} mottatt {date}"
     }
   },
   "dineOppgaver": {

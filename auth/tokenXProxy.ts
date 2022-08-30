@@ -17,7 +17,6 @@ interface Opts {
 
 export const tokenXProxy = async (opts: Opts) => {
   logger.info('starter request mot ' + opts.url);
-  logger.info(`request mot ${opts.url} opts ${JSON.stringify(opts)}`);
   const idportenToken = opts.bearerToken!.split(' ')[1];
   const tokenxToken = await getTokenXToken(idportenToken, opts.audience);
   const response = await fetch(opts.url, {

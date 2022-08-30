@@ -7,13 +7,15 @@ export interface Dokument {
 
 export interface Søknad {
   fnr?: string;
-  opprettet: string;
+  innsendtDato: string;
   søknadId: string;
   innsendteVedlegg?: Array<{
     innsendtDato: string;
     vedleggType: 'ARBEIDSGIVER' | 'STUDIER' | 'ANDREBARN' | 'OMSORG' | 'UTLAND' | 'ANNET';
   }>;
-  mangler?: Array<'ARBEIDSGIVER' | 'STUDIER' | 'ANDREBARN' | 'OMSORG' | 'UTLAND' | 'ANNET'>;
+  manglendeVedlegg?: Array<
+    'ARBEIDSGIVER' | 'STUDIER' | 'ANDREBARN' | 'OMSORG' | 'UTLAND' | 'ANNET'
+  >;
 }
 
 export interface MellomlagretSøknad {

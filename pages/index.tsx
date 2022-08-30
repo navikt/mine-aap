@@ -69,43 +69,38 @@ const Index = ({ søknader, dokumenter, mellomlagredeSøknader }: PageProps) => 
               </Heading>
               <BodyShort spacing>
                 {formatMessage('sisteSøknad.søknad.mottatt', {
-                  date: formatFullDate(sisteSøknad.opprettet),
+                  date: formatFullDate(sisteSøknad.innsendtDato),
                 })}
               </BodyShort>
               <BodyShort spacing>
                 <Link href="#">{formatMessage('sisteSøknad.søknad.saksbehandlingstid')}</Link>
               </BodyShort>
-              {(sisteSøknad.mangler?.length ?? 0) > 0 && (
-                <>
-                  <Alert variant="warning">
-                    {formatMessage('sisteSøknad.søknad.alert.message', {
-                      missingDocuments: sisteSøknad.mangler?.join(', '),
-                    })}
-                  </Alert>
-                  <Button
-                    variant="primary"
-                    onClick={() => router.push(`/${sisteSøknad.søknadId}/ettersendelse/`)}
-                  >
-                    {formatMessage('sisteSøknad.søknad.button.text')}
-                  </Button>
-                </>
+              {(sisteSøknad.manglendeVedlegg?.length ?? 0) > 0 && (
+                <Alert variant="warning">
+                  {formatMessage('sisteSøknad.søknad.alert.message', {
+                    missingDocuments: sisteSøknad.manglendeVedlegg?.join(', '),
+                  })}
+                </Alert>
               )}
-              {/*<Heading level="3" size="small">
+              <Button
+                variant="primary"
+                onClick={() => router.push(`/${sisteSøknad.søknadId}/ettersendelse/`)}
+              >
+                {formatMessage('sisteSøknad.søknad.button.text')}
+              </Button>
+              <Heading level="3" size="small">
                 {formatMessage('sisteSøknad.dokumentasjon.heading')}
               </Heading>
               <ul>
-                {sisteSøknad.documents.map((document) => (
-                  <li key={document.tittel}>
-                    <Link href={document.url}>
-                      {formatMessage('sisteSøknad.dokumentasjon.vedlegg', {
-                        title: document.tittel,
-                        date: formatFullDate(document.timestamp),
-                        type: document.type,
-                      })}
-                    </Link>
+                {sisteSøknad.innsendteVedlegg?.map((document) => (
+                  <li key={`${document.vedleggType}-${document.innsendtDato}`}>
+                    {formatMessage('sisteSøknad.dokumentasjon.vedlegg', {
+                      date: formatFullDate(document.innsendtDato),
+                      type: document.vedleggType,
+                    })}
                   </li>
-                    ))}
-              </ul>*/}
+                ))}
+              </ul>
             </Panel>
           </div>
         </Section>
