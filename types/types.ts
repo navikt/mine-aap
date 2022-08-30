@@ -6,10 +6,14 @@ export interface Dokument {
 }
 
 export interface Søknad {
-  fnr: string;
+  fnr?: string;
   opprettet: string;
   søknadId: string;
-  mangler: Array<'ARBEIDSGIVER' | 'STUDIER' | 'ANDREBARN' | 'OMSORG' | 'UTLAND' | 'ANNET'>;
+  innsendteVedlegg?: Array<{
+    innsendtDato: string;
+    vedleggType: 'ARBEIDSGIVER' | 'STUDIER' | 'ANDREBARN' | 'OMSORG' | 'UTLAND' | 'ANNET';
+  }>;
+  mangler?: Array<'ARBEIDSGIVER' | 'STUDIER' | 'ANDREBARN' | 'OMSORG' | 'UTLAND' | 'ANNET'>;
 }
 
 export interface MellomlagretSøknad {

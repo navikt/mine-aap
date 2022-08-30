@@ -75,11 +75,11 @@ const Index = ({ søknader, dokumenter, mellomlagredeSøknader }: PageProps) => 
               <BodyShort spacing>
                 <Link href="#">{formatMessage('sisteSøknad.søknad.saksbehandlingstid')}</Link>
               </BodyShort>
-              {sisteSøknad.mangler.length > 0 && (
+              {(sisteSøknad.mangler?.length ?? 0) > 0 && (
                 <>
                   <Alert variant="warning">
                     {formatMessage('sisteSøknad.søknad.alert.message', {
-                      missingDocuments: sisteSøknad.mangler.join(', '),
+                      missingDocuments: sisteSøknad.mangler?.join(', '),
                     })}
                   </Alert>
                   <Button
