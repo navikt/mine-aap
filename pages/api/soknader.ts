@@ -16,7 +16,7 @@ export const getSøknader = async (accessToken?: string) => {
   const søknader = await tokenXProxy({
     url: `${process.env.SOKNAD_API_URL}/oppslag/soeknader`,
     method: 'GET',
-    audience: process.env.SOKNAD_API_AUDIENCE!,
+    audience: process.env.SOKNAD_API_AUDIENCE ?? '',
     bearerToken: accessToken,
   });
   return søknader;
