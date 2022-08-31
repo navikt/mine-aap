@@ -12,6 +12,7 @@ import {
 } from '@navikt/ds-react';
 import type { GetServerSidePropsResult, NextPageContext } from 'next';
 import { useRouter } from 'next/router';
+import NextLink from 'next/link';
 import { useMemo } from 'react';
 import { getAccessToken } from '../auth/accessToken';
 import { beskyttetSide } from '../auth/beskyttetSide';
@@ -113,6 +114,11 @@ const Index = ({ søknader, dokumenter, mellomlagredeSøknader }: PageProps) => 
               </ul>
             </Panel>
           </div>
+          {søknader.length > 0 && (
+            <NextLink href="/soknader" passHref>
+              <Link>Se alle dine innsendte søknader</Link>
+            </NextLink>
+          )}
         </Section>
       )}
 
