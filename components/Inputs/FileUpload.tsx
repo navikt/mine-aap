@@ -9,7 +9,7 @@ import * as styles from './FileUpload.module.css';
 import { FileUploadFields } from './FileUploadFields';
 
 interface Props {
-  krav: Vedleggskrav;
+  krav: string;
 }
 
 export interface VedleggFormValues {
@@ -83,7 +83,7 @@ export const FileUpload = ({ krav }: Props) => {
 
   const onSubmit = (data: VedleggFormValues) => {
     const ettersendelse = {
-      dokumentkrav: krav.type,
+      dokumentkrav: krav,
       uuids: data.vedlegg.map((vedlegg) => vedlegg.vedleggId),
     };
     fetch('/aap/innsyn/api/ettersendelse/send/', {
@@ -108,12 +108,11 @@ export const FileUpload = ({ krav }: Props) => {
         )}
       >
         <div className={styles.fileUpload}>
-          {krav.dokumentasjonstype && (
-            <Heading level="3" size="small" spacing>
-              {krav.dokumentasjonstype}
-            </Heading>
-          )}
-          {krav.beskrivelse && <BodyShort spacing>{krav.beskrivelse}</BodyShort>}
+          <Heading level="3" size="small" spacing>
+            {krav}
+          </Heading>
+
+          <BodyShort spacing>{krav}</BodyShort>
           {uploadFinished ? (
             <Alert variant="success">
               Takk! Dokumentasjonen er nå sendt inn! Har du flere dokumenter du ønsker å sende, kan

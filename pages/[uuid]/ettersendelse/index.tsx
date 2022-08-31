@@ -1,5 +1,7 @@
 import { Alert, BodyShort, Button, Heading, Label } from '@navikt/ds-react';
 import { GetServerSidePropsResult, NextPageContext } from 'next';
+import { useRouter } from 'next/router';
+import { useMemo } from 'react';
 import { FieldErrors, useForm } from 'react-hook-form';
 import { getAccessToken } from '../../../auth/accessToken';
 import { beskyttetSide } from '../../../auth/beskyttetSide';
@@ -9,8 +11,9 @@ import { FileUpload } from '../../../components/Inputs/FileUpload';
 import PageHeader from '../../../components/PageHeader';
 import { Section } from '../../../components/Section/Section';
 import { useFeatureToggleIntl } from '../../../hooks/useFeatureToggleIntl';
-import { OpplastetVedlegg, Vedleggskrav } from '../../../types/types';
+import { OpplastetVedlegg, Søknad, Vedleggskrav } from '../../../types/types';
 import { getVedleggskrav } from '../../api/ettersendelse/vedleggskrav';
+import { getSøknader } from '../../api/soknader';
 import * as styles from './Ettersendelse.module.css';
 
 export const setErrorSummaryFocus = () => {
@@ -18,7 +21,7 @@ export const setErrorSummaryFocus = () => {
   if (errorSummaryElement) errorSummaryElement.focus();
 };
 interface PageProps {
-  vedleggskrav: Vedleggskrav[];
+  søknad: Søknad;
 }
 
 export interface FormValues {
@@ -28,7 +31,7 @@ export interface FormValues {
   ANNET: OpplastetVedlegg[];
 }
 
-const Index = ({ vedleggskrav }: PageProps) => {
+const Index = ({ søknad }: PageProps) => {
   const { formatMessage } = useFeatureToggleIntl();
 
   const {
@@ -51,10 +54,10 @@ const Index = ({ vedleggskrav }: PageProps) => {
           </Heading>
           <div>
             <Label spacing>{formatMessage('ettersendelse.manglerDokumentasjon')}</Label>
-            {vedleggskrav.length > 0 && (
+            {(søknad.manglendeVedlegg?.length ?? 0) > 0 && (
               <ul>
-                {vedleggskrav.map((krav) => (
-                  <li key={krav.dokumentasjonstype}>{krav.dokumentasjonstype}</li>
+                {søknad.manglendeVedlegg?.map((krav) => (
+                  <li key={krav}>{krav}</li>
                 ))}
               </ul>
             )}
@@ -66,18 +69,12 @@ const Index = ({ vedleggskrav }: PageProps) => {
           errors={errors as FieldErrors}
           data-testid={'error-summary'}
         />
-        {vedleggskrav.map((krav) => (
-          <FileUpload krav={krav} key={krav.dokumentasjonstype} />
+        {søknad.manglendeVedlegg?.map((krav) => (
+          <FileUpload krav={krav} key={krav} />
         ))}
 
         <Section>
-          <FileUpload
-            krav={{
-              type: 'ANNET',
-              dokumentasjonstype: formatMessage('ettersendelse.annenDokumentasjon.heading'),
-              beskrivelse: formatMessage('ettersendelse.annenDokumentasjon.description'),
-            }}
-          />
+          <FileUpload krav="ANNET" />
         </Section>
 
         <Section>
@@ -94,9 +91,19 @@ const Index = ({ vedleggskrav }: PageProps) => {
 export const getServerSideProps = beskyttetSide(
   async (ctx: NextPageContext): Promise<GetServerSidePropsResult<{}>> => {
     const bearerToken = getAccessToken(ctx);
-    const vedleggskrav = await getVedleggskrav(bearerToken);
+    const søknader = await getSøknader(bearerToken);
+
+    const uuid = ctx.query.uuid;
+    const søknad = søknader.find((søknad: Søknad) => søknad.søknadId === uuid);
+
+    if (!søknad) {
+      return {
+        notFound: true,
+      };
+    }
+
     return {
-      props: { vedleggskrav },
+      props: { søknad },
     };
   }
 );
