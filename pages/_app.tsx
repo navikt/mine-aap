@@ -4,6 +4,7 @@ import type { AppProps } from 'next/app';
 import { useEffect } from 'react';
 import { initAmplitude } from '../utils/amplitude';
 import messagesNb from '../translations/nb.json';
+import messagesNn from '../translations/nn.json';
 import { IntlProvider } from 'react-intl';
 import { useRouter } from 'next/router';
 import { Locale } from '@navikt/nav-dekoratoren-moduler';
@@ -27,6 +28,7 @@ function flattenMessages(nestedMessages: object, prefix = ''): Record<string, st
 }
 
 const getLocaleOrFallback = (locale?: string) => {
+  console.log('locale', locale);
   if (locale && SUPPORTED_LOCALE.includes(locale)) {
     return locale;
   }
@@ -40,6 +42,7 @@ type Messages = {
 
 export const messages: Messages = {
   nb: flattenMessages(messagesNb),
+  nn: flattenMessages(messagesNn),
 };
 
 function MyApp({ Component, pageProps }: AppProps) {
