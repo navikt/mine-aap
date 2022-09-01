@@ -7,7 +7,7 @@ import messagesNb from '../translations/nb.json';
 import messagesNn from '../translations/nn.json';
 import { IntlProvider } from 'react-intl';
 import { useRouter } from 'next/router';
-import { Locale } from '@navikt/nav-dekoratoren-moduler';
+import { Locale, onLanguageSelect, setAvailableLanguages } from '@navikt/nav-dekoratoren-moduler';
 import { SUPPORTED_LOCALE } from '../translations/locales';
 
 function flattenMessages(nestedMessages: object, prefix = ''): Record<string, string> {
@@ -48,10 +48,28 @@ export const messages: Messages = {
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const locale = getLocaleOrFallback(router.locale);
+  const { pathname, asPath, query } = router;
 
   useEffect(() => {
     initAmplitude();
   }, []);
+
+  useEffect(() => {
+    setAvailableLanguages([
+      {
+        locale: 'nb',
+        handleInApp: true,
+      },
+      {
+        locale: 'nn',
+        handleInApp: true,
+      },
+    ]);
+  });
+
+  onLanguageSelect((language) => {
+    router.push({ pathname, query }, asPath, { locale: language.locale });
+  });
 
   return (
     <>

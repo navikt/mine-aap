@@ -1,4 +1,3 @@
-import { Attachment, Information } from '@navikt/ds-icons';
 import {
   Alert,
   BodyLong,
@@ -18,7 +17,6 @@ import { getAccessToken } from '../auth/accessToken';
 import { beskyttetSide } from '../auth/beskyttetSide';
 import { VerticalFlexContainer } from '../components/FlexContainer/VerticalFlexContainer';
 import { Layout } from '../components/Layout/Layout';
-import { PanelWithTopIcon } from '../components/PanelWithTopIcon/PanelWithTopIcon';
 import { Section } from '../components/Section/Section';
 import { useFeatureToggleIntl } from '../hooks/useFeatureToggleIntl';
 import { Dokument, MellomlagretSøknad, Søknad } from '../types/types';
