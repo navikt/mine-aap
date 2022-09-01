@@ -14,7 +14,7 @@ export const sendEttersendelse = async (data: string, accessToken?: string) => {
     return {};
   }
   const ettersendelse = await tokenXProxy({
-    url: `${process.env.SOKNAD_API_URL}/innsending/ettesend`,
+    url: `${process.env.SOKNAD_API_URL}/innsending/ettersend`,
     method: 'POST',
     data: JSON.stringify(data),
     audience: process.env.SOKNAD_API_AUDIENCE!,
