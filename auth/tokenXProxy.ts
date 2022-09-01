@@ -21,6 +21,7 @@ export const tokenXProxy = async (opts: Opts) => {
   const idportenToken = opts.bearerToken!.split(' ')[1];
   const tokenxToken = await getTokenXToken(idportenToken, opts.audience);
   logger.info('tokenxToken: ' + tokenxToken);
+  logger.info('data: ' + opts.data);
   const response = await fetch(opts.url, {
     method: opts.method,
     body: opts.data,
