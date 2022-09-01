@@ -52,5 +52,10 @@
   },
   "errorSummary": {
     "title": "Du må fikse disse feilene før du kan fortsette:"
+  },
+  "breadcrumbs": {
+    "mineAAP": "Mine AAP",
+    "ettersending": "Ettersending til søknad",
+    "mineAAPSoknader": "Mine AAP søknader"
   }
 }
