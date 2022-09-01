@@ -6,10 +6,8 @@ import { isMock } from '../../../utils/environments';
 
 const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) => {
   const accessToken = getAccessTokenFromRequest(req);
-  console.log('body', req.body);
-  console.log('stringify', JSON.stringify(req.body));
-  console.log('typeof', typeof req.body);
-  res.status(201).json(await sendEttersendelse(req.body, accessToken));
+  await sendEttersendelse(req.body, accessToken);
+  res.status(201).json({});
 });
 
 export const sendEttersendelse = async (data: string, accessToken?: string) => {
@@ -22,6 +20,7 @@ export const sendEttersendelse = async (data: string, accessToken?: string) => {
     data: data,
     audience: process.env.SOKNAD_API_AUDIENCE!,
     bearerToken: accessToken,
+    noResponse: true,
   });
   return ettersendelse;
 };
