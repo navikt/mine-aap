@@ -6,6 +6,9 @@ import { isMock } from '../../../utils/environments';
 
 const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) => {
   const accessToken = getAccessTokenFromRequest(req);
+  console.log('body', req.body);
+  console.log('stringify', JSON.stringify(req.body));
+  console.log('typeof', typeof req.body);
   res.status(201).json(await sendEttersendelse(req.body, accessToken));
 });
 
@@ -16,7 +19,7 @@ export const sendEttersendelse = async (data: string, accessToken?: string) => {
   const ettersendelse = await tokenXProxy({
     url: `${process.env.SOKNAD_API_URL}/innsending/ettersend`,
     method: 'POST',
-    data: JSON.stringify(data),
+    data: data,
     audience: process.env.SOKNAD_API_AUDIENCE!,
     bearerToken: accessToken,
   });
