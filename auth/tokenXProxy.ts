@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next/dist/shared/lib/utils';
-// import axios from 'axios';
+import axios from 'axios';
 
 import { getTokenXToken } from './getTokenXToken';
 import logger from '../utils/logger';
@@ -11,6 +11,7 @@ interface Opts {
   method: 'GET' | 'POST' | 'DELETE';
   data?: string;
   req?: NextApiRequest;
+  noResponse?: boolean;
   contentType?: string;
   bearerToken?: string;
 }
@@ -36,5 +37,40 @@ export const tokenXProxy = async (opts: Opts) => {
     );
   }
 
+  logger.info(`Vellyket tokenXProxy-request mot ${opts.url}. Status: ${response.status}`);
+  if (opts.noResponse) {
+    return;
+  }
+
   return await response.json();
+};
+
+interface AxiosOpts {
+  url: string;
+  audience: string;
+  req: NextApiRequest;
+  res: NextApiResponse;
+  bearerToken?: string;
+}
+
+export const tokenXAxiosProxy = async (opts: AxiosOpts) => {
+  const idportenToken = opts.bearerToken!.split(' ')[1];
+  const tokenxToken = await getTokenXToken(idportenToken, opts.audience);
+
+  logger.info('Starter opplasting av fil til ' + opts.url);
+  try {
+    const { data } = await axios.post(opts.url, opts.req, {
+      responseType: 'stream',
+      headers: {
+        'Content-Type': opts.req?.headers['content-type'] ?? '', // which is multipart/form-data with boundary included
+        Authorization: `Bearer ${tokenxToken}`,
+      },
+    });
+    logger.info('Vellykket opplasting av fil til ' + opts.url);
+    return data.pipe(opts.res);
+  } catch (e: any) {
+    let msg = '';
+    logger.error({ e }, 'tokenXAxiosProxy oops ' + e.message);
+    return opts.res.status(500).json({ msg });
+  }
 };

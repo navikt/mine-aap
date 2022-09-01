@@ -2,21 +2,22 @@ import { Alert, BodyShort, Button, Heading } from '@navikt/ds-react';
 import { useEffect, useState } from 'react';
 import { useForm, useFieldArray, FieldArrayWithId } from 'react-hook-form';
 import { useFeatureToggleIntl } from '../../hooks/useFeatureToggleIntl';
-import { OpplastetVedlegg, Vedleggskrav } from '../../types/types';
+import { Ettersendelse, OpplastetVedlegg, VedleggType } from '../../types/types';
 import { Section } from '../Section/Section';
 import { fileErrorTexts, FileInput, validateFile } from './FileInput';
 import * as styles from './FileUpload.module.css';
 import { FileUploadFields } from './FileUploadFields';
 
 interface Props {
-  krav: string;
+  søknadId: string;
+  krav: VedleggType;
 }
 
 export interface VedleggFormValues {
   vedlegg: OpplastetVedlegg[];
 }
 
-export const FileUpload = ({ krav }: Props) => {
+export const FileUpload = ({ søknadId, krav }: Props) => {
   const { formatMessage } = useFeatureToggleIntl();
 
   const [uploadFinished, setUploadFinished] = useState(false);
@@ -62,7 +63,7 @@ export const FileUpload = ({ krav }: Props) => {
       }
       const data = new FormData();
       data.append('vedlegg', field.file);
-      const vedlegg = await fetch('/aap/innsyn/api/ettersendelse/lagre/', {
+      const vedlegg = await fetch('/aap/innsyn/api/vedlegg/lagre/', {
         method: 'POST',
         body: data,
       });
@@ -82,9 +83,16 @@ export const FileUpload = ({ krav }: Props) => {
   }, [fields, update, setError, clearErrors]);
 
   const onSubmit = (data: VedleggFormValues) => {
-    const ettersendelse = {
-      dokumentkrav: krav,
-      uuids: data.vedlegg.map((vedlegg) => vedlegg.vedleggId),
+    const ettersendelse: Ettersendelse = {
+      søknadId: søknadId,
+      ettersendteVedlegg: [
+        {
+          vedleggType: krav,
+          ettersending: data.vedlegg
+            .map((vedlegg) => vedlegg.vedleggId)
+            .filter((vedlegg): vedlegg is string => !!vedlegg),
+        },
+      ],
     };
     fetch('/aap/innsyn/api/ettersendelse/send/', {
       method: 'POST',

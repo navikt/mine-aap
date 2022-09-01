@@ -73,7 +73,7 @@ export const FileUploadFields = ({ fields, remove, errors }: Props) => {
                 <button
                   type={'button'}
                   onClick={() =>
-                    fetch(`/aap/innsyn/api/ettersendelse/slett/?uuid=${attachment?.vedleggId}`, {
+                    fetch(`/aap/innsyn/api/vedlegg/slett/?uuid=${attachment?.vedleggId}`, {
                       method: 'DELETE',
                     }).then(() => remove(index))
                   }

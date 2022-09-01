@@ -1,18 +1,12 @@
-import { Alert, BodyShort, Button, Heading, Label } from '@navikt/ds-react';
+import { Alert, BodyShort, Heading, Label } from '@navikt/ds-react';
 import { GetServerSidePropsResult, NextPageContext } from 'next';
-import { useRouter } from 'next/router';
-import { useMemo } from 'react';
-import { FieldErrors, useForm } from 'react-hook-form';
 import { getAccessToken } from '../../../auth/accessToken';
 import { beskyttetSide } from '../../../auth/beskyttetSide';
-import { FormErrorSummary } from '../../../components/FormErrorSummary/FormErrorSummary';
-import { FileInput } from '../../../components/Inputs/FileInput';
 import { FileUpload } from '../../../components/Inputs/FileUpload';
 import PageHeader from '../../../components/PageHeader';
 import { Section } from '../../../components/Section/Section';
 import { useFeatureToggleIntl } from '../../../hooks/useFeatureToggleIntl';
-import { OpplastetVedlegg, Søknad, Vedleggskrav } from '../../../types/types';
-import { getVedleggskrav } from '../../api/ettersendelse/vedleggskrav';
+import { OpplastetVedlegg, Søknad } from '../../../types/types';
 import { getSøknader } from '../../api/soknader';
 import * as styles from './Ettersendelse.module.css';
 
@@ -33,14 +27,6 @@ export interface FormValues {
 
 const Index = ({ søknad }: PageProps) => {
   const { formatMessage } = useFeatureToggleIntl();
-
-  const {
-    control,
-    handleSubmit,
-    setError,
-    clearErrors,
-    formState: { errors },
-  } = useForm<FormValues>();
 
   return (
     <>
@@ -64,17 +50,12 @@ const Index = ({ søknad }: PageProps) => {
           </div>
         </Section>
 
-        <FormErrorSummary
-          id="skjema-feil-liste"
-          errors={errors as FieldErrors}
-          data-testid={'error-summary'}
-        />
         {søknad.manglendeVedlegg?.map((krav) => (
-          <FileUpload krav={krav} key={krav} />
+          <FileUpload søknadId={søknad.søknadId} krav={krav} key={krav} />
         ))}
 
         <Section>
-          <FileUpload krav="ANNET" />
+          <FileUpload søknadId={søknad.søknadId} krav="ANNET" />
         </Section>
 
         <Section>

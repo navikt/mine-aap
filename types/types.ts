@@ -5,17 +5,17 @@ export interface Dokument {
   type: string;
 }
 
+export type VedleggType = 'ARBEIDSGIVER' | 'STUDIER' | 'ANDREBARN' | 'OMSORG' | 'UTLAND' | 'ANNET';
+
 export interface Søknad {
   fnr?: string;
   innsendtDato: string;
   søknadId: string;
   innsendteVedlegg?: Array<{
     innsendtDato: string;
-    vedleggType: 'ARBEIDSGIVER' | 'STUDIER' | 'ANDREBARN' | 'OMSORG' | 'UTLAND' | 'ANNET';
+    vedleggType: VedleggType;
   }>;
-  manglendeVedlegg?: Array<
-    'ARBEIDSGIVER' | 'STUDIER' | 'ANDREBARN' | 'OMSORG' | 'UTLAND' | 'ANNET'
-  >;
+  manglendeVedlegg?: Array<VedleggType>;
 }
 
 export interface MellomlagretSøknad {
@@ -33,4 +33,12 @@ export interface OpplastetVedlegg {
   size: number;
   vedleggId?: string;
   file: File;
+}
+
+export interface Ettersendelse {
+  søknadId: string;
+  ettersendteVedlegg: Array<{
+    ettersending: Array<string>;
+    vedleggType: VedleggType;
+  }>;
 }
