@@ -7,14 +7,15 @@
       "mottatt": "Mottatt {date}",
       "saksbehandlingstid": "Se forventet saksbehandlingstid",
       "alert": {
-        "message": "Vi mangler dokumentasjon på {missingDocuments}"
+        "message": "Vi mangler dokumentasjon fra deg for å kunne behandle søknaden. Ettersend dette til oss så raskt du kan."
       },
       "button": {
         "text": "Ettersend dokumentasjon"
       }
     },
     "dokumentasjon": {
-      "heading": "Dokumentasjon vi har mottatt fra deg",
+      "mottatt": "Dokumentasjon vi har mottatt fra deg",
+      "mangler": "Dokumentasjon du må sende oss",
       "vedlegg": "Vedlegg: {type} mottatt {date}"
     }
   },

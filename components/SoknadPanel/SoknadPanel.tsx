@@ -1,5 +1,5 @@
 import { formatMessage } from '@formatjs/intl';
-import { Heading, Panel, BodyShort, Alert, Button } from '@navikt/ds-react';
+import { Heading, Panel, BodyShort, Alert, Button, Label } from '@navikt/ds-react';
 import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { Søknad } from 'lib/types/types';
 import { formatFullDate } from 'lib/utils/date';
@@ -28,32 +28,37 @@ export const SoknadPanel = ({ søknad }: Props) => {
         <Link href="#">{formatMessage('sisteSøknad.søknad.saksbehandlingstid')}</Link>
       </BodyShort>
       {(søknad.manglendeVedlegg?.length ?? 0) > 0 && (
-        <Alert variant="warning">
-          {formatMessage('sisteSøknad.søknad.alert.message', {
-            missingDocuments: søknad.manglendeVedlegg
-              ?.map((type) => formatMessage(`ettersendelse.vedleggstyper.${type}.heading`))
-              .join(', '),
-          })}
-        </Alert>
+        <div className={styles.alert}>
+          <Alert variant="warning">{formatMessage('sisteSøknad.søknad.alert.message')}</Alert>
+        </div>
       )}
-      <div className={styles.ettersendButton}>
-        <Button variant="primary" onClick={() => router.push(`/${søknad.søknadId}/ettersendelse/`)}>
-          {formatMessage('sisteSøknad.søknad.button.text')}
-        </Button>
-      </div>
-      <Heading level="3" size="small">
-        {formatMessage('sisteSøknad.dokumentasjon.heading')}
-      </Heading>
-      <ul>
-        {søknad.innsendteVedlegg?.map((document) => (
-          <li key={`${document.vedleggType}-${document.innsendtDato}`}>
-            {formatMessage('sisteSøknad.dokumentasjon.vedlegg', {
-              date: formatFullDate(document.innsendtDato),
-              type: formatMessage(`ettersendelse.vedleggstyper.${document.vedleggType}.heading`),
-            })}
-          </li>
-        ))}
-      </ul>
+
+      {(søknad.innsendteVedlegg?.length ?? 0) > 0 && (
+        <>
+          <Label>{formatMessage('sisteSøknad.dokumentasjon.mottatt')}</Label>
+          <ul>
+            {søknad.innsendteVedlegg?.map((krav) => (
+              <li key={krav.vedleggType}>
+                {formatMessage(`ettersendelse.vedleggstyper.${krav.vedleggType}.heading`)}
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+      {(søknad.manglendeVedlegg?.length ?? 0) > 0 && (
+        <>
+          <Label>{formatMessage('sisteSøknad.dokumentasjon.mangler')}</Label>
+          <ul>
+            {søknad.manglendeVedlegg?.map((krav) => (
+              <li key={krav}>{formatMessage(`ettersendelse.vedleggstyper.${krav}.heading`)}</li>
+            ))}
+          </ul>
+        </>
+      )}
+
+      <Button variant="primary" onClick={() => router.push(`/${søknad.søknadId}/ettersendelse/`)}>
+        {formatMessage('sisteSøknad.søknad.button.text')}
+      </Button>
     </Panel>
   );
 };
