@@ -1,9 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next/dist/shared/lib/utils';
 import axios from 'axios';
 
-import { getTokenXToken } from './getTokenXToken';
-import logger from '../utils/logger';
-import { ErrorMedStatus } from './ErrorMedStatus';
+import { getTokenXToken } from 'lib/auth/getTokenXToken';
+import logger from 'lib/utils/logger';
+import { ErrorMedStatus } from 'lib/auth/ErrorMedStatus';
 
 interface Opts {
   url: string;

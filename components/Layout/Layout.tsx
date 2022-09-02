@@ -1,5 +1,5 @@
-import { AppHeader } from '../AppHeader/AppHeader';
-import styles from './Layout.module.css';
+import { AppHeader } from 'components/AppHeader/AppHeader';
+import styles from 'components/Layout/Layout.module.css';
 
 export interface LayoutProps {
   children: React.ReactNode;

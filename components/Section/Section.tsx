@@ -1,4 +1,4 @@
-import styles from './Section.module.css';
+import styles from 'components/Section/Section.module.css';
 
 export interface SectionProps {
   lightBlue?: boolean;

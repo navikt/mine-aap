@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { beskyttetApi } from '../../auth/beskyttetApi';
-import { Dokument } from '../../types/types';
+import { beskyttetApi } from 'lib/auth/beskyttetApi';
+import { Dokument } from 'lib/types/types';
 
 const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) => {
   const dokumenter = await getDocuments();

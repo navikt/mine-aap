@@ -1,5 +1,4 @@
-import { randomUUID } from 'crypto';
-import { Søknad } from '../types/types';
+import { Søknad } from 'lib/types/types';
 
 export const mockSøknader: Søknad[] = [
   {

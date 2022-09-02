@@ -1,10 +1,10 @@
 import { Cancel, Delete, FileError, FileSuccess } from '@navikt/ds-icons';
 import { BodyShort, Detail, Label, Link, Panel } from '@navikt/ds-react';
 import { FieldArrayWithId, FieldErrors, UseFieldArrayRemove } from 'react-hook-form';
-import { useFeatureToggleIntl } from '../../hooks/useFeatureToggleIntl';
-import { fileSizeString } from '../../utils/string';
-import { VedleggFormValues } from './FileUpload';
-import * as styles from './FileUploadFields.module.css';
+import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
+import { fileSizeString } from 'lib/utils/string';
+import { VedleggFormValues } from 'components/Inputs/FileUpload';
+import * as styles from 'components/Inputs/FileUploadFields.module.css';
 
 interface Props {
   fields: FieldArrayWithId<VedleggFormValues, 'vedlegg', 'id'>[] | undefined;

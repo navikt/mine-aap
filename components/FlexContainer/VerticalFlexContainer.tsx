@@ -1,4 +1,4 @@
-import * as style from './VerticalFlexContainer.module.css';
+import * as style from 'components/FlexContainer/VerticalFlexContainer.module.css';
 
 interface Props {
   children: React.ReactNode;

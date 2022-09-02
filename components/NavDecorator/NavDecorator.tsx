@@ -6,7 +6,7 @@ import {
 } from '@navikt/nav-dekoratoren-moduler';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
-import { useFeatureToggleIntl } from '../../hooks/useFeatureToggleIntl';
+import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 
 export const NavDecorator = ({ children }: { children: React.ReactElement }) => {
   const { formatMessage } = useFeatureToggleIntl();

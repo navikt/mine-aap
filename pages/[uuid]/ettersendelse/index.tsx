@@ -1,14 +1,14 @@
 import { Alert, BodyShort, Heading, Label } from '@navikt/ds-react';
 import { GetServerSidePropsResult, NextPageContext } from 'next';
-import { getAccessToken } from '../../../auth/accessToken';
-import { beskyttetSide } from '../../../auth/beskyttetSide';
-import { FileUpload } from '../../../components/Inputs/FileUpload';
-import PageHeader from '../../../components/PageHeader';
-import { Section } from '../../../components/Section/Section';
-import { useFeatureToggleIntl } from '../../../hooks/useFeatureToggleIntl';
-import { OpplastetVedlegg, Søknad } from '../../../types/types';
-import { getSøknader } from '../../api/soknader';
-import * as styles from './Ettersendelse.module.css';
+import { getAccessToken } from 'lib/auth/accessToken';
+import { beskyttetSide } from 'lib/auth/beskyttetSide';
+import { FileUpload } from 'components/Inputs/FileUpload';
+import PageHeader from 'components/PageHeader';
+import { Section } from 'components/Section/Section';
+import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
+import { OpplastetVedlegg, Søknad } from 'lib/types/types';
+import { getSøknader } from 'pages/api/soknader';
+import * as styles from 'pages/[uuid]/ettersendelse/Ettersendelse.module.css';
 
 export const setErrorSummaryFocus = () => {
   const errorSummaryElement = document && document.getElementById('skjema-feil-liste');

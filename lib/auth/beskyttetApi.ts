@@ -1,8 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { isMock } from '../utils/environments';
-import logger from '../utils/logger';
-import { ErrorMedStatus } from './ErrorMedStatus';
-import { verifyIdportenAccessToken } from './verifyIdPortenAccessToken';
+import { isMock } from 'lib/utils/environments';
+import logger from 'lib/utils/logger';
+import { ErrorMedStatus } from 'lib/auth/ErrorMedStatus';
+import { verifyIdportenAccessToken } from 'lib/auth/verifyIdPortenAccessToken';
 
 type ApiHandler = (req: NextApiRequest, res: NextApiResponse) => void | Promise<void>;
 

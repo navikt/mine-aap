@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { beskyttetApi } from '../../auth/beskyttetApi';
-import { MellomlagretSøknad } from '../../types/types';
+import { beskyttetApi } from 'lib/auth/beskyttetApi';
+import { MellomlagretSøknad } from 'lib/types/types';
 
 const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) => {
   const mellomlagredeSøknader = await getMellomlagredeSøknader();

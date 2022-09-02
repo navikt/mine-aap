@@ -1,6 +1,6 @@
 import React, { forwardRef, HTMLAttributes, useMemo } from 'react';
 import { BodyShort, Heading } from '@navikt/ds-react';
-import * as classes from './PageHeader.module.css';
+import * as classes from 'components/PageHeader/PageHeader.module.css';
 
 export interface PageHeaderProps extends HTMLAttributes<HTMLDivElement> {
   /**

@@ -1,4 +1,4 @@
-import { isMock } from '../environments';
+import { isMock } from 'lib/utils/environments';
 
 describe('Environments', () => {
   it('isMock should be true for localhost', () => {

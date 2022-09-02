@@ -1,12 +1,12 @@
 import { Alert, BodyShort, Button, Heading } from '@navikt/ds-react';
 import { useEffect, useState } from 'react';
 import { useForm, useFieldArray, FieldArrayWithId } from 'react-hook-form';
-import { useFeatureToggleIntl } from '../../hooks/useFeatureToggleIntl';
-import { Ettersendelse, OpplastetVedlegg, VedleggType } from '../../types/types';
-import { Section } from '../Section/Section';
-import { fileErrorTexts, FileInput, validateFile } from './FileInput';
-import * as styles from './FileUpload.module.css';
-import { FileUploadFields } from './FileUploadFields';
+import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
+import { Ettersendelse, OpplastetVedlegg, VedleggType } from 'lib/types/types';
+import { Section } from 'components/Section/Section';
+import { fileErrorTexts, FileInput, validateFile } from 'components/Inputs/FileInput';
+import * as styles from 'components/Inputs/FileUpload.module.css';
+import { FileUploadFields } from 'components/Inputs/FileUploadFields';
 
 interface Props {
   søknadId: string;

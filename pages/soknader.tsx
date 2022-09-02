@@ -1,16 +1,16 @@
 import { Alert, BodyShort, Button, Heading, Link, Panel } from '@navikt/ds-react';
 import { NextPageContext, GetServerSidePropsResult } from 'next';
 import router from 'next/router';
-import { getAccessToken } from '../auth/accessToken';
-import { beskyttetSide } from '../auth/beskyttetSide';
-import { VerticalFlexContainer } from '../components/FlexContainer/VerticalFlexContainer';
-import { Layout } from '../components/Layout/Layout';
-import { Section } from '../components/Section/Section';
-import { useFeatureToggleIntl } from '../hooks/useFeatureToggleIntl';
-import { Søknad } from '../types/types';
-import { formatFullDate } from '../utils/date';
-import logger from '../utils/logger';
-import { getSøknader } from './api/soknader';
+import { getAccessToken } from 'lib/auth/accessToken';
+import { beskyttetSide } from 'lib/auth/beskyttetSide';
+import { VerticalFlexContainer } from 'components/FlexContainer/VerticalFlexContainer';
+import { Layout } from 'components/Layout/Layout';
+import { Section } from 'components/Section/Section';
+import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
+import { Søknad } from '../lib/types/types';
+import { formatFullDate } from 'lib/utils/date';
+import logger from 'lib/utils/logger';
+import { getSøknader } from 'pages/api/soknader';
 
 interface PageProps {
   søknader: Søknad[];

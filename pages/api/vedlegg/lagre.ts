@@ -1,10 +1,10 @@
 import { randomUUID } from 'crypto';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { getAccessTokenFromRequest } from '../../../auth/accessToken';
-import { beskyttetApi } from '../../../auth/beskyttetApi';
-import { tokenXAxiosProxy } from '../../../auth/tokenXProxy';
-import { isMock } from '../../../utils/environments';
-import logger from '../../../utils/logger';
+import { getAccessTokenFromRequest } from 'lib/auth/accessToken';
+import { beskyttetApi } from 'lib/auth/beskyttetApi';
+import { tokenXAxiosProxy } from 'lib/auth/tokenXProxy';
+import { isMock } from 'lib/utils/environments';
+import logger from 'lib/utils/logger';
 
 const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) => {
   logger.info('Har mottatt request om filopplasting');

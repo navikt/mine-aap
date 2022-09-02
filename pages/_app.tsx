@@ -1,21 +1,15 @@
 import '@navikt/ds-css';
-import '../styles/globals.css';
+import 'styles/globals.css';
 import type { AppProps } from 'next/app';
 import { useEffect } from 'react';
-import { initAmplitude } from '../utils/amplitude';
-import messagesNb from '../translations/nb.json';
-import messagesNn from '../translations/nn.json';
+import { initAmplitude } from 'lib/utils/amplitude';
+import messagesNb from 'lib/translations/nb.json';
+import messagesNn from 'lib/translations/nn.json';
 import { IntlProvider } from 'react-intl';
 import { useRouter } from 'next/router';
-import {
-  Locale,
-  onBreadcrumbClick,
-  onLanguageSelect,
-  setAvailableLanguages,
-  setBreadcrumbs,
-} from '@navikt/nav-dekoratoren-moduler';
-import { SUPPORTED_LOCALE } from '../translations/locales';
-import { NavDecorator } from '../components/NavDecorator/NavDecorator';
+import { Locale } from '@navikt/nav-dekoratoren-moduler';
+import { SUPPORTED_LOCALE } from 'lib/translations/locales';
+import { NavDecorator } from 'components/NavDecorator/NavDecorator';
 
 function flattenMessages(nestedMessages: object, prefix = ''): Record<string, string> {
   return Object.keys(nestedMessages).reduce((messages, key) => {

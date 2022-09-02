@@ -1,10 +1,10 @@
 import { Upload as SvgUpload } from '@navikt/ds-icons';
-import { BodyShort, Button } from '@navikt/ds-react';
+import { BodyShort } from '@navikt/ds-react';
 import { DragEventHandler, useRef, useState } from 'react';
 import { FieldArrayWithId, UseFieldArrayAppend } from 'react-hook-form';
-import { useFeatureToggleIntl } from '../../hooks/useFeatureToggleIntl';
-import { VedleggFormValues } from './FileUpload';
-import * as styles from './FileInput.module.css';
+import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
+import { VedleggFormValues } from 'components/Inputs/FileUpload';
+import * as styles from 'components/Inputs/FileInput.module.css';
 
 const replaceDotWithUnderscore = (str: string) => str.replace(/\./g, '_');
 

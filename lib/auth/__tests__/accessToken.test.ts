@@ -1,5 +1,5 @@
 import { IncomingMessage } from 'http';
-import { getAccessTokenFromRequest } from '../accessToken';
+import { getAccessTokenFromRequest } from 'lib/auth/accessToken';
 
 describe('AccessToken', () => {
   it('getAccessToken should throw if request is not defined', () => {

@@ -1,4 +1,4 @@
-import { getStringFromPossiblyArrayQuery } from '../string';
+import { getStringFromPossiblyArrayQuery } from 'lib/utils/string';
 
 describe('getStringFromPossiblyArrayQuery', () => {
   it('should return the first element of an array', () => {

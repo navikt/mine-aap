@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
 import { FieldErrors } from 'react-hook-form';
 import { ErrorSummary } from '@navikt/ds-react';
-import * as classes from './FormErrorSummary.module.css';
-import { useFeatureToggleIntl } from '../../hooks/useFeatureToggleIntl';
+import * as classes from 'components/FormErrorSummary/FormErrorSummary.module.css';
+import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 
 const FormErrorSummary = (props: { id: string; errors: FieldErrors }) => {
   const { formatMessage } = useFeatureToggleIntl();
