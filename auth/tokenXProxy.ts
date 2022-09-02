@@ -69,6 +69,7 @@ export const tokenXAxiosProxy = async (opts: AxiosOpts) => {
       },
     });
     logger.info('Vellykket opplasting av fil til ' + opts.url);
+    logger.info('result from POST' + JSON.stringify(data));
     return data.pipe(opts.res);
   } catch (e: any) {
     let msg = '';
