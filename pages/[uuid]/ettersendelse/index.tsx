@@ -43,7 +43,7 @@ const Index = ({ søknad }: PageProps) => {
             {(søknad.manglendeVedlegg?.length ?? 0) > 0 && (
               <ul>
                 {søknad.manglendeVedlegg?.map((krav) => (
-                  <li key={krav}>{krav}</li>
+                  <li key={krav}>{formatMessage(`ettersendelse.vedleggstyper.${krav}.heading`)}</li>
                 ))}
               </ul>
             )}
@@ -54,9 +54,7 @@ const Index = ({ søknad }: PageProps) => {
           <FileUpload søknadId={søknad.søknadId} krav={krav} key={krav} />
         ))}
 
-        <Section>
-          <FileUpload søknadId={søknad.søknadId} krav="ANNET" />
-        </Section>
+        <FileUpload søknadId={søknad.søknadId} krav="ANNET" />
 
         <Section>
           <Alert variant="warning">

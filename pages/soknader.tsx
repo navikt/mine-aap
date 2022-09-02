@@ -1,24 +1,20 @@
-import { Alert, BodyShort, Button, Heading, Link, Panel } from '@navikt/ds-react';
+import { Heading } from '@navikt/ds-react';
 import { NextPageContext, GetServerSidePropsResult } from 'next';
-import router from 'next/router';
 import { getAccessToken } from 'lib/auth/accessToken';
 import { beskyttetSide } from 'lib/auth/beskyttetSide';
 import { VerticalFlexContainer } from 'components/FlexContainer/VerticalFlexContainer';
 import { Layout } from 'components/Layout/Layout';
 import { Section } from 'components/Section/Section';
-import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { Søknad } from '../lib/types/types';
-import { formatFullDate } from 'lib/utils/date';
 import logger from 'lib/utils/logger';
 import { getSøknader } from 'pages/api/soknader';
+import { SoknadPanel } from 'components/SoknadPanel/SoknadPanel';
 
 interface PageProps {
   søknader: Søknad[];
 }
 
 const Søknader = ({ søknader }: PageProps) => {
-  const { formatMessage } = useFeatureToggleIntl();
-
   return (
     <Layout>
       <Section lightBlue>
@@ -28,45 +24,7 @@ const Søknader = ({ søknader }: PageProps) => {
           </Heading>
           <VerticalFlexContainer>
             {søknader.map((søknad) => (
-              <Panel border key={søknad.søknadId}>
-                <Heading level="3" size="small">
-                  {formatMessage('sisteSøknad.søknad.heading')}
-                </Heading>
-                <BodyShort spacing>
-                  {formatMessage('sisteSøknad.søknad.mottatt', {
-                    date: formatFullDate(søknad.innsendtDato),
-                  })}
-                </BodyShort>
-                <BodyShort spacing>
-                  <Link href="#">{formatMessage('sisteSøknad.søknad.saksbehandlingstid')}</Link>
-                </BodyShort>
-                {(søknad.manglendeVedlegg?.length ?? 0) > 0 && (
-                  <Alert variant="warning">
-                    {formatMessage('sisteSøknad.søknad.alert.message', {
-                      missingDocuments: søknad.manglendeVedlegg?.join(', '),
-                    })}
-                  </Alert>
-                )}
-                <Button
-                  variant="primary"
-                  onClick={() => router.push(`/${søknad.søknadId}/ettersendelse/`)}
-                >
-                  {formatMessage('sisteSøknad.søknad.button.text')}
-                </Button>
-                <Heading level="3" size="small">
-                  {formatMessage('sisteSøknad.dokumentasjon.heading')}
-                </Heading>
-                <ul>
-                  {søknad.innsendteVedlegg?.map((document) => (
-                    <li key={`${document.vedleggType}-${document.innsendtDato}`}>
-                      {formatMessage('sisteSøknad.dokumentasjon.vedlegg', {
-                        date: formatFullDate(document.innsendtDato),
-                        type: document.vedleggType,
-                      })}
-                    </li>
-                  ))}
-                </ul>
-              </Panel>
+              <SoknadPanel key={søknad.søknadId} søknad={søknad} />
             ))}
           </VerticalFlexContainer>
         </div>

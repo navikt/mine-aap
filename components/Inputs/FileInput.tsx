@@ -5,6 +5,7 @@ import { FieldArrayWithId, UseFieldArrayAppend } from 'react-hook-form';
 import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { VedleggFormValues } from 'components/Inputs/FileUpload';
 import * as styles from 'components/Inputs/FileInput.module.css';
+import { VedleggType } from 'lib/types/types';
 
 const replaceDotWithUnderscore = (str: string) => str.replace(/\./g, '_');
 
@@ -24,14 +25,14 @@ export const validateFile = (file: File) => {
 };
 
 interface Props {
-  fields: FieldArrayWithId<VedleggFormValues, 'vedlegg', 'id'>[] | undefined;
+  krav: VedleggType;
   append: UseFieldArrayAppend<VedleggFormValues>;
 }
 
-export const FileInput = ({ fields, append }: Props) => {
+export const FileInput = ({ krav, append }: Props) => {
   const { formatMessage } = useFeatureToggleIntl();
 
-  const [inputId] = useState<string>(`file-upload-input-${Math.floor(Math.random() * 100000)}`);
+  const [inputId] = useState<string>(`file-upload-input-${krav}`);
 
   const [dragOver, setDragOver] = useState<boolean>(false);
 

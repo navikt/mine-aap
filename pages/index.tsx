@@ -1,16 +1,5 @@
-import {
-  Alert,
-  BodyLong,
-  BodyShort,
-  Button,
-  Heading,
-  Label,
-  Link,
-  LinkPanel,
-  Panel,
-} from '@navikt/ds-react';
+import { BodyLong, BodyShort, Heading, Label, Link, LinkPanel, Panel } from '@navikt/ds-react';
 import type { GetServerSidePropsResult, NextPageContext } from 'next';
-import { useRouter } from 'next/router';
 import NextLink from 'next/link';
 import { useMemo } from 'react';
 import { getAccessToken } from 'lib/auth/accessToken';
@@ -18,6 +7,7 @@ import { beskyttetSide } from 'lib/auth/beskyttetSide';
 import { VerticalFlexContainer } from 'components/FlexContainer/VerticalFlexContainer';
 import { Layout } from 'components/Layout/Layout';
 import { Section } from 'components/Section/Section';
+import { SoknadPanel } from 'components/SoknadPanel/SoknadPanel';
 import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { Dokument, MellomlagretSøknad, Søknad } from 'lib/types/types';
 import { formatFullDate } from 'lib/utils/date';
@@ -34,8 +24,6 @@ interface PageProps {
 
 const Index = ({ søknader, dokumenter, mellomlagredeSøknader }: PageProps) => {
   const { formatMessage } = useFeatureToggleIntl();
-
-  const router = useRouter();
 
   const sisteSøknad = useMemo(() => {
     return søknader[0];
@@ -72,50 +60,14 @@ const Index = ({ søknader, dokumenter, mellomlagredeSøknader }: PageProps) => 
             <Heading level="2" size="medium" spacing>
               {formatMessage('sisteSøknad.heading')}
             </Heading>
-            <Panel border>
-              <Heading level="3" size="small">
-                {formatMessage('sisteSøknad.søknad.heading')}
-              </Heading>
-              <BodyShort spacing>
-                {formatMessage('sisteSøknad.søknad.mottatt', {
-                  date: formatFullDate(sisteSøknad.innsendtDato),
-                })}
-              </BodyShort>
-              <BodyShort spacing>
-                <Link href="#">{formatMessage('sisteSøknad.søknad.saksbehandlingstid')}</Link>
-              </BodyShort>
-              {(sisteSøknad.manglendeVedlegg?.length ?? 0) > 0 && (
-                <Alert variant="warning">
-                  {formatMessage('sisteSøknad.søknad.alert.message', {
-                    missingDocuments: sisteSøknad.manglendeVedlegg?.join(', '),
-                  })}
-                </Alert>
-              )}
-              <Button
-                variant="primary"
-                onClick={() => router.push(`/${sisteSøknad.søknadId}/ettersendelse/`)}
-              >
-                {formatMessage('sisteSøknad.søknad.button.text')}
-              </Button>
-              <Heading level="3" size="small">
-                {formatMessage('sisteSøknad.dokumentasjon.heading')}
-              </Heading>
-              <ul>
-                {sisteSøknad.innsendteVedlegg?.map((document) => (
-                  <li key={`${document.vedleggType}-${document.innsendtDato}`}>
-                    {formatMessage('sisteSøknad.dokumentasjon.vedlegg', {
-                      date: formatFullDate(document.innsendtDato),
-                      type: document.vedleggType,
-                    })}
-                  </li>
-                ))}
-              </ul>
-            </Panel>
+            <SoknadPanel søknad={sisteSøknad} />
           </div>
           {søknader.length > 0 && (
-            <NextLink href="/soknader" passHref>
-              <Link>Se alle dine innsendte søknader</Link>
-            </NextLink>
+            <div>
+              <NextLink href="/soknader" passHref>
+                <Link>Se alle dine innsendte søknader</Link>
+              </NextLink>
+            </div>
           )}
         </Section>
       )}

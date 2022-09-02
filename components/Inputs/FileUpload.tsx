@@ -117,10 +117,12 @@ export const FileUpload = ({ søknadId, krav }: Props) => {
       >
         <div className={styles.fileUpload}>
           <Heading level="3" size="small" spacing>
-            {krav}
+            {formatMessage(`ettersendelse.vedleggstyper.${krav}.heading`)}
           </Heading>
 
-          <BodyShort spacing>{krav}</BodyShort>
+          <BodyShort spacing>
+            {formatMessage(`ettersendelse.vedleggstyper.${krav}.description`)}
+          </BodyShort>
           {uploadFinished ? (
             <Alert variant="success">
               Takk! Dokumentasjonen er nå sendt inn! Har du flere dokumenter du ønsker å sende, kan

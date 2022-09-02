@@ -35,7 +35,6 @@ export const NavDecorator = ({ children }: { children: React.ReactElement }) => 
     const breadcrumbs = [
       { title: formatMessage('breadcrumbs.mineAAP'), url: router.basePath, handleInApp: true },
     ];
-    console.log('asPath', router.asPath);
     if (router.asPath.endsWith('ettersendelse/')) {
       breadcrumbs.push({
         title: formatMessage('breadcrumbs.ettersending'),
@@ -51,10 +50,10 @@ export const NavDecorator = ({ children }: { children: React.ReactElement }) => 
       });
     }
     setBreadcrumbs(breadcrumbs);
-  }, [router]);
+  }, [router, formatMessage]);
 
   onBreadcrumbClick((breadcrumb) => {
-    console.log('breadcrumb', breadcrumb.url.replace(router.basePath, ''));
+    // TODO: Bedre logikk for breadcrumbs
     router.push(breadcrumb.url.replace(router.basePath, '/'));
   });
 

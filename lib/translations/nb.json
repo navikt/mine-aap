@@ -37,6 +37,32 @@
     "appTittel": "Ettersending til arbeidsavklaringspenger (AAP)",
     "heading": "Ettersend dokumentasjon",
     "manglerDokumentasjon": "Ut fra det du har svart i søknaden, mangler du følgende dokumentasjon for at vi kan ferdigbehandle søknaden din",
+    "vedleggstyper": {
+      "STUDIER": {
+        "heading": "Bekreftelse på avbrutt studie",
+        "description": "Bekreftelse fra studiested på hvilken dato studiet ble avbrutt fra."
+      },
+      "ARBEIDSGIVER": {
+        "heading": "Lønn og andre goder",
+        "description": "Dokumentasjon av ekstra utbetalinger fra arbeidsgiver, for eksempel kopi av inngått sluttpakke, avtale om etterlønn eller andre goder. Både beløpet på utbetalingen og perioden den gjelder for bør være dokumentert."
+      },
+      "OMSORG": {
+        "heading": "Omsorgsstønad (tidligere omsorgslønn)",
+        "description": "Kopi av avtalen om omsorgsstønad fra kommunen din."
+      },
+      "UTLAND": {
+        "heading": "Ytelser fra utenlandske trygdemyndigheter",
+        "description": "Dokumentasjon av ytelser fra utenlandske trygdemyndigheter."
+      },
+      "ANDREBARN": {
+        "heading": "Andre barn",
+        "description": "Dokumentasjon av andre barn."
+      },
+      "ANNET": {
+        "heading": "Annen dokumentasjon",
+        "description": "Hvis du har noe annet du ønsker å legge ved kan du laste det opp her."
+      }
+    },
     "annenDokumentasjon": {
       "heading": "Annen dokumentasjon",
       "description": "Hvis du har noe annet du ønsker å legge ved kan du laste det opp her"
