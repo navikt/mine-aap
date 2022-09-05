@@ -20,7 +20,7 @@ const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) =
 export const getSøknad = async (uuid: string, accessToken?: string) => {
   if (isMock()) return mockSøknader.find((s) => s.søknadId === uuid);
   const søknader = await tokenXProxy({
-    url: `${process.env.SOKNAD_API_URL}/oppslag/soeknader/${uuid}`,
+    url: `${process.env.SOKNAD_API_URL}/oppslag/soeknad/${uuid}`,
     method: 'GET',
     audience: process.env.SOKNAD_API_AUDIENCE ?? '',
     bearerToken: accessToken,
