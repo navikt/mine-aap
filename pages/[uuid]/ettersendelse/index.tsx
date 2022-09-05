@@ -7,8 +7,11 @@ import PageHeader from 'components/PageHeader';
 import { Section } from 'components/Section/Section';
 import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { OpplastetVedlegg, Søknad } from 'lib/types/types';
-import { getSøknader } from 'pages/api/soknader';
+import { getSøknader } from 'pages/api/soknader/soknader';
 import * as styles from 'pages/[uuid]/ettersendelse/Ettersendelse.module.css';
+import { getSøknad } from 'pages/api/soknader/[uuid]';
+import { getStringFromPossiblyArrayQuery } from 'lib/utils/string';
+import logger from 'lib/utils/logger';
 
 export const setErrorSummaryFocus = () => {
   const errorSummaryElement = document && document.getElementById('skjema-feil-liste');
@@ -70,11 +73,10 @@ const Index = ({ søknad }: PageProps) => {
 export const getServerSideProps = beskyttetSide(
   async (ctx: NextPageContext): Promise<GetServerSidePropsResult<{}>> => {
     const bearerToken = getAccessToken(ctx);
-    const søknader = await getSøknader(bearerToken);
+    const uuid = getStringFromPossiblyArrayQuery(ctx.query.uuid);
+    const søknad = await getSøknad(uuid as string, bearerToken);
 
-    const uuid = ctx.query.uuid;
-    const søknad = søknader.find((søknad: Søknad) => søknad.søknadId === uuid);
-
+    logger.info(`Søknad ${JSON.stringify(søknad)}`);
     if (!søknad) {
       return {
         notFound: true,

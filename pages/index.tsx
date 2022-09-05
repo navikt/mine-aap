@@ -13,7 +13,7 @@ import { Dokument, MellomlagretSøknad, Søknad } from 'lib/types/types';
 import { formatFullDate } from 'lib/utils/date';
 import { getDocuments } from 'pages/api/dokumentoversikt';
 import { getMellomlagredeSøknader } from 'pages/api/mellomlagredeSoknader';
-import { getSøknader } from 'pages/api/soknader';
+import { getSøknader } from 'pages/api/soknader/soknader';
 import logger from 'lib/utils/logger';
 
 interface PageProps {

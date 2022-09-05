@@ -7,7 +7,7 @@ import { Layout } from 'components/Layout/Layout';
 import { Section } from 'components/Section/Section';
 import { Søknad } from '../lib/types/types';
 import logger from 'lib/utils/logger';
-import { getSøknader } from 'pages/api/soknader';
+import { getSøknader } from 'pages/api/soknader/soknader';
 import { SoknadPanel } from 'components/SoknadPanel/SoknadPanel';
 
 interface PageProps {
