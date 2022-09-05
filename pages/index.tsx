@@ -151,7 +151,8 @@ const Index = ({ søknader, dokumenter, mellomlagredeSøknader }: PageProps) => 
 export const getServerSideProps = beskyttetSide(
   async (ctx: NextPageContext): Promise<GetServerSidePropsResult<{}>> => {
     const bearerToken = getAccessToken(ctx);
-    const søknader = await getSøknader(bearerToken);
+    const params = { page: '0', size: '1', sort: 'created,desc' };
+    const søknader = await getSøknader(params, bearerToken);
     const dokumenter = await getDocuments();
     const mellomlagredeSøknader = await getMellomlagredeSøknader();
 

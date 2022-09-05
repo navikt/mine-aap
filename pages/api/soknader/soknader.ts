@@ -7,14 +7,18 @@ import { isMock } from 'lib/utils/environments';
 
 const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) => {
   const accessToken = getAccessTokenFromRequest(req);
-  const søknader = await getSøknader(accessToken);
+  const params = {};
+  const søknader = await getSøknader(params, accessToken);
   res.status(200).json(søknader);
 });
 
-export const getSøknader = async (accessToken?: string) => {
+export const getSøknader = async (params: Record<string, string>, accessToken?: string) => {
   if (isMock()) return mockSøknader;
+  const urlParams = Object.entries(params)
+    .map(([key, value]) => `${key}=${value}`)
+    .join('&');
   const søknader = await tokenXProxy({
-    url: `${process.env.SOKNAD_API_URL}/oppslag/soeknader`,
+    url: `${process.env.SOKNAD_API_URL}/oppslag/soeknader${urlParams ? '?' + urlParams : ''}`,
     method: 'GET',
     audience: process.env.SOKNAD_API_AUDIENCE ?? '',
     bearerToken: accessToken,
