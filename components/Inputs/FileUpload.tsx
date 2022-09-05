@@ -138,7 +138,7 @@ export const FileUpload = ({ søknadId, krav }: Props) => {
               </Button>
             </div>
           )}
-          <FileInput fields={fields} append={append} />
+          <FileInput krav={krav} append={append} />
         </div>
       </form>
     </Section>
