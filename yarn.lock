@@ -14,23 +14,23 @@
   dependencies:
     "@amplitude/ua-parser-js" "0.7.31"
 
-"@amplitude/types@^1.10.0":
-  version "1.10.0"
-  resolved "https://registry.yarnpkg.com/@amplitude/types/-/types-1.10.0.tgz#dfaf7cc25f533a1e2b0ef0ad675371b396733c0f"
-  integrity sha512-xN0gnhutztv6kqHaZ2bre18anQV5GDmMXOeipTvI670g2VjNbPfOzMwu1LN4p1NadYq+GqYI223UcZrXR+R4Pw==
+"@amplitude/types@^1.10.1":
+  version "1.10.1"
+  resolved "https://registry.yarnpkg.com/@amplitude/types/-/types-1.10.1.tgz#961553549cb7fc9c6dd8c105a3b6a5a562d8d701"
+  integrity sha512-g0dp8j3E8pFK55kjZSBGQeYlO7ckc4I2HBCyLsfXmcQ4S1eJfOF4fjJtCog9Dp+fs9EKRzyvh8WFbek9n7eF0w==
 
 "@amplitude/ua-parser-js@0.7.31":
   version "0.7.31"
   resolved "https://registry.yarnpkg.com/@amplitude/ua-parser-js/-/ua-parser-js-0.7.31.tgz#749bf7cb633cfcc7ff3c10805bad7c5f6fbdbc61"
   integrity sha512-+z8UGRaj13Pt5NDzOnkTBy49HE2CX64jeL0ArB86HAtilpnfkPB7oqkigN7Lf2LxscMg4QhFD7mmCfedh3rqTg==
 
-"@amplitude/utils@^1.0.5":
-  version "1.10.0"
-  resolved "https://registry.yarnpkg.com/@amplitude/utils/-/utils-1.10.0.tgz#138b0ba4e5755540a9e4abf426b7a25d045418a9"
-  integrity sha512-/R8j8IzFH0GYfA6ehQDm5IEzt71gIeMdiYYFIzZp6grERQlgJcwNJMAiza0o2JwwTDIruzqdB3c/vLVjuakp+w==
+"@amplitude/utils@^1.10.1":
+  version "1.10.1"
+  resolved "https://registry.yarnpkg.com/@amplitude/utils/-/utils-1.10.1.tgz#57e3cb9d1127c74357eeb637595796bf8eb8864d"
+  integrity sha512-9i44OGG8M/KFz24ftxQrR5nAIWhZKVB1Ba9J6krBuaM54ejOSZH6W1IcNIBvxu54ZGWyhBJc6I18wVqSRs2IPA==
   dependencies:
-    "@amplitude/types" "^1.10.0"
-    tslib "^1.9.3"
+    "@amplitude/types" "^1.10.1"
+    tslib "^2.0.0"
 
 "@ampproject/remapping@^2.1.0":
   version "2.2.0"
@@ -1839,13 +1839,13 @@ ajv@^6.10.0, ajv@^6.11.0, ajv@^6.12.4:
     uri-js "^4.2.2"
 
 amplitude-js@^8.18.5:
-  version "8.19.0"
-  resolved "https://registry.yarnpkg.com/amplitude-js/-/amplitude-js-8.19.0.tgz#021c445f91a02af39e5fc9c437e0e77e069ab11e"
-  integrity sha512-uRmSkSS1+FITypgjRt6fP21B3Z1Fey2xeIjc5OQaOAgFZ/cXUu4B3XUN+qUDjbwbjalfBUpUAyDNptt6onurtA==
+  version "8.20.1"
+  resolved "https://registry.yarnpkg.com/amplitude-js/-/amplitude-js-8.20.1.tgz#24d224f3db65e2b8c15ede7a0f5850dcbacafc32"
+  integrity sha512-SWmUNgCd9HwqmnoLsMxgZrKDcj363H68/+rOgbnySpk+dfHPyDkmMTIh2qJAGVxrcFPbH5g6UeqYzk/+9fOFfg==
   dependencies:
     "@amplitude/analytics-connector" "1.4.4"
     "@amplitude/ua-parser-js" "0.7.31"
-    "@amplitude/utils" "^1.0.5"
+    "@amplitude/utils" "^1.10.1"
     "@babel/runtime" "^7.3.4"
     blueimp-md5 "^2.10.0"
     query-string "5"
