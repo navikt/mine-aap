@@ -7,6 +7,7 @@ import { Section } from 'components/Section/Section';
 import { fileErrorTexts, FileInput, validateFile } from 'components/Inputs/FileInput';
 import * as styles from 'components/Inputs/FileUpload.module.css';
 import { FileUploadFields } from 'components/Inputs/FileUploadFields';
+import { FormErrorSummary } from 'components/FormErrorSummary/FormErrorSummary';
 
 interface Props {
   søknadId: string;
@@ -34,8 +35,6 @@ export const FileUpload = ({ søknadId, krav }: Props) => {
     name: 'vedlegg',
     control,
   });
-
-  console.log('fields', fields);
 
   useEffect(() => {
     const iterateOverFiles = async (fields: FieldArrayWithId<VedleggFormValues>[]) => {
@@ -118,6 +117,7 @@ export const FileUpload = ({ søknadId, krav }: Props) => {
         )}
       >
         <div className={styles.fileUpload}>
+          <FormErrorSummary id={`error-summary-${krav}`} errors={errors} />
           <Heading level="3" size="small" spacing>
             {formatMessage(`ettersendelse.vedleggstyper.${krav}.heading`)}
           </Heading>
@@ -131,7 +131,7 @@ export const FileUpload = ({ søknadId, krav }: Props) => {
               du laste de opp under.
             </Alert>
           ) : (
-            <FileUploadFields fields={fields} remove={remove} />
+            <FileUploadFields fields={fields} errors={errors} remove={remove} />
           )}
           {fields.length > 0 && (
             <div>

@@ -9,7 +9,7 @@ import * as styles from 'components/Inputs/FileUploadFields.module.css';
 interface Props {
   fields: FieldArrayWithId<VedleggFormValues, 'vedlegg', 'id'>[] | undefined;
   remove: UseFieldArrayRemove;
-  errors?: FieldErrors<VedleggFormValues>;
+  errors: FieldErrors<VedleggFormValues>;
 }
 
 export const FileUploadFields = ({ fields, remove, errors }: Props) => {
