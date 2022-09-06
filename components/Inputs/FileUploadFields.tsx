@@ -3,22 +3,24 @@ import { BodyShort, Detail, Label, Link, Panel } from '@navikt/ds-react';
 import { FieldArrayWithId, FieldErrors, UseFieldArrayRemove } from 'react-hook-form';
 import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { fileSizeString } from 'lib/utils/string';
-import { VedleggFormValues } from 'components/Inputs/FileUpload';
+import { TOTAL_FILE_SIZE, VedleggFormValues } from 'components/Inputs/FileUpload';
 import * as styles from 'components/Inputs/FileUploadFields.module.css';
+import { VedleggType } from 'lib/types/types';
 
 interface Props {
-  fields: FieldArrayWithId<VedleggFormValues, 'vedlegg', 'id'>[] | undefined;
+  fields: FieldArrayWithId<VedleggFormValues>[] | undefined;
+  krav: VedleggType;
   remove: UseFieldArrayRemove;
   errors: FieldErrors<VedleggFormValues>;
 }
 
-export const FileUploadFields = ({ fields, remove, errors }: Props) => {
+export const FileUploadFields = ({ fields, krav, remove, errors }: Props) => {
   const { formatMessage } = useFeatureToggleIntl();
-
+  const totalFileSizeErrorMessage = errors?.[krav]?.[TOTAL_FILE_SIZE]?.message;
   return (
-    <>
+    <div className={totalFileSizeErrorMessage ? styles.containerError : undefined}>
       {fields?.map((attachment, index) => {
-        const fieldHasError = errors?.vedlegg?.[index]?.message !== undefined;
+        const fieldHasError: boolean = errors?.[krav]?.fields?.[index]?.message !== undefined;
         return (
           <div key={attachment.id}>
             <Panel
@@ -32,7 +34,7 @@ export const FileUploadFields = ({ fields, remove, errors }: Props) => {
                       <FileError color={'var(--navds-semantic-color-interaction-danger-hover)'} />
                     </div>
                     <div>
-                      <Label id={`vedlegg.${index}`}>{attachment.name}</Label>
+                      <Label id={`${krav}.fields.${index}`}>{attachment.name}</Label>
                     </div>
                   </>
                 ) : (
@@ -92,12 +94,17 @@ export const FileUploadFields = ({ fields, remove, errors }: Props) => {
             </Panel>
             {fieldHasError && (
               <div className={'navds-error-message navds-error-message--medium navds-label'}>
-                {errors?.vedlegg?.[index]?.message}
+                {errors?.[krav]?.fields?.[index]?.message}
               </div>
             )}
           </div>
         );
       })}
-    </>
+      {totalFileSizeErrorMessage && (
+        <div className={'navds-error-message navds-error-message--medium navds-label'}>
+          {totalFileSizeErrorMessage}
+        </div>
+      )}
+    </div>
   );
 };

@@ -1,6 +1,6 @@
 import { Alert, BodyShort, Button, Heading } from '@navikt/ds-react';
 import { useEffect, useState } from 'react';
-import { useForm, useFieldArray, FieldArrayWithId } from 'react-hook-form';
+import { useForm, useFieldArray, FieldArrayWithId, ErrorOption } from 'react-hook-form';
 import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { Ettersendelse, OpplastetVedlegg, VedleggType } from 'lib/types/types';
 import { Section } from 'components/Section/Section';
@@ -9,13 +9,16 @@ import * as styles from 'components/Inputs/FileUpload.module.css';
 import { FileUploadFields } from 'components/Inputs/FileUploadFields';
 import { FormErrorSummary } from 'components/FormErrorSummary/FormErrorSummary';
 
+const MAX_TOTAL_FILE_SIZE = 1024 * 1024 * 150; // 150 MB
+export const TOTAL_FILE_SIZE = 'totalFileSize';
+
 interface Props {
   søknadId: string;
   krav: VedleggType;
 }
 
 export interface VedleggFormValues {
-  vedlegg: OpplastetVedlegg[];
+  [key: string]: { fields: OpplastetVedlegg[]; totalFileSize: number };
 }
 
 export const FileUpload = ({ søknadId, krav }: Props) => {
@@ -27,14 +30,17 @@ export const FileUpload = ({ søknadId, krav }: Props) => {
     control,
     handleSubmit,
     setError,
+    setValue,
     clearErrors,
     formState: { errors },
   } = useForm<VedleggFormValues>();
 
   const { append, update, remove, fields } = useFieldArray({
-    name: 'vedlegg',
+    name: `${krav as string}.fields`,
     control,
   });
+
+  console.log('errors', errors);
 
   useEffect(() => {
     const iterateOverFiles = async (fields: FieldArrayWithId<VedleggFormValues>[]) => {
@@ -42,6 +48,14 @@ export const FileUpload = ({ søknadId, krav }: Props) => {
         setUploadFinished(false);
       }
       clearErrors();
+      const totalSize = fields.reduce((acc, curr) => acc + curr.size, 0);
+      setValue(`${krav as string}.${TOTAL_FILE_SIZE}`, totalSize);
+      if (totalSize > MAX_TOTAL_FILE_SIZE) {
+        setError(`${krav}.${TOTAL_FILE_SIZE}`, {
+          type: 'custom',
+          message: 'fileUpload.error.maxSize',
+        });
+      }
       for await (const [index, field] of fields.entries()) {
         await validateAndUploadFile(field, index);
       }
@@ -56,9 +70,9 @@ export const FileUpload = ({ søknadId, krav }: Props) => {
       }
       const validationResult = validateFile(field.file);
       if (validationResult) {
-        setError(`vedlegg.${index}`, {
+        setError(`${krav}.fields.${index}`, {
           type: 'custom',
-          message: `${field.name} ${fileErrorTexts[validationResult]}`,
+          message: `${fileErrorTexts[validationResult]}`,
         });
         return;
       }
@@ -72,7 +86,7 @@ export const FileUpload = ({ søknadId, krav }: Props) => {
         const id = await vedlegg.json();
         update(index, { ...field, vedleggId: id });
       } else {
-        setError(`vedlegg.${index}`, {
+        setError(`${krav}.fields.${index}`, {
           type: 'custom',
           // @ts-ignore-line
           message: `${field.name} ${fileErrorTexts[vedlegg.status.toString()]}`,
@@ -89,9 +103,10 @@ export const FileUpload = ({ søknadId, krav }: Props) => {
       ettersendteVedlegg: [
         {
           vedleggType: krav,
-          ettersending: data.vedlegg
-            .map((vedlegg) => vedlegg.vedleggId)
-            .filter((vedlegg): vedlegg is string => !!vedlegg),
+          ettersending:
+            data[krav]?.fields
+              ?.map((vedlegg: OpplastetVedlegg) => vedlegg.vedleggId)
+              .filter((vedlegg): vedlegg is string => !!vedlegg) ?? [],
         },
       ],
     };
@@ -131,7 +146,7 @@ export const FileUpload = ({ søknadId, krav }: Props) => {
               du laste de opp under.
             </Alert>
           ) : (
-            <FileUploadFields fields={fields} errors={errors} remove={remove} />
+            <FileUploadFields fields={fields} krav={krav} errors={errors} remove={remove} />
           )}
           {fields.length > 0 && (
             <div>
