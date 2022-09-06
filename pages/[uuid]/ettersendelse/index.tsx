@@ -7,7 +7,6 @@ import PageHeader from 'components/PageHeader';
 import { Section } from 'components/Section/Section';
 import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { OpplastetVedlegg, Søknad } from 'lib/types/types';
-import { getSøknader } from 'pages/api/soknader/soknader';
 import * as styles from 'pages/[uuid]/ettersendelse/Ettersendelse.module.css';
 import { getSøknad } from 'pages/api/soknader/[uuid]';
 import { getStringFromPossiblyArrayQuery } from 'lib/utils/string';
