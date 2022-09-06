@@ -12,48 +12,23 @@ import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { Dokument, MellomlagretSøknad, Søknad } from 'lib/types/types';
 import { formatFullDate } from 'lib/utils/date';
 import { getDocuments } from 'pages/api/dokumentoversikt';
-import { getMellomlagredeSøknader } from 'pages/api/mellomlagredeSoknader';
 import { getSøknader } from 'pages/api/soknader/soknader';
 import logger from 'lib/utils/logger';
 
 interface PageProps {
   søknader: Søknad[];
   dokumenter: Dokument[];
-  mellomlagredeSøknader: MellomlagretSøknad[];
 }
 
-const Index = ({ søknader, dokumenter, mellomlagredeSøknader }: PageProps) => {
+const Index = ({ søknader, dokumenter }: PageProps) => {
   const { formatMessage } = useFeatureToggleIntl();
 
   const sisteSøknad = useMemo(() => {
     return søknader[0];
   }, [søknader]);
 
-  const sisteMellomlagredeSøknad = useMemo(() => {
-    return mellomlagredeSøknader[0];
-  }, [mellomlagredeSøknader]);
-
   return (
     <Layout>
-      {/*sisteMellomlagredeSøknad && (
-        <Section>
-          <div>
-            <Heading level="2" size="medium" spacing>
-              Vil du fortsette der du slapp?
-            </Heading>
-            <LinkPanel href="/aap/soknad/standard" border>
-              <LinkPanel.Title>Søknad om arbeidsavklaringspenger</LinkPanel.Title>
-              <LinkPanel.Description>
-                Lagres til og med{' '}
-                {format(new Date(sisteMellomlagredeSøknad.timestamp), 'EEEE dd.MM yy', {
-                  locale: nb,
-                })}
-              </LinkPanel.Description>
-            </LinkPanel>
-          </div>
-        </Section>
-              )*/}
-
       {sisteSøknad && (
         <Section lightBlue>
           <div>
@@ -69,6 +44,14 @@ const Index = ({ søknader, dokumenter, mellomlagredeSøknader }: PageProps) => 
               </NextLink>
             </div>
           )}
+          <div>
+            <NextLink href="/ettersendelse" passHref>
+              <Link>
+                Skal du ettersende dokumenter til en søknad som ikke vises i listen? (trenger bedre
+                tekst)
+              </Link>
+            </NextLink>
+          </div>
         </Section>
       )}
 
@@ -154,12 +137,11 @@ export const getServerSideProps = beskyttetSide(
     const params = { page: '0', size: '1', sort: 'created,desc' };
     const søknader = await getSøknader(params, bearerToken);
     const dokumenter = await getDocuments();
-    const mellomlagredeSøknader = await getMellomlagredeSøknader();
 
     logger.info(`søknader: ${JSON.stringify(søknader)}`);
 
     return {
-      props: { søknader, dokumenter, mellomlagredeSøknader },
+      props: { søknader, dokumenter },
     };
   }
 );

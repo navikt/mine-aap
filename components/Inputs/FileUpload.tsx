@@ -13,7 +13,7 @@ const MAX_TOTAL_FILE_SIZE = 1024 * 1024 * 150; // 150 MB
 export const TOTAL_FILE_SIZE = 'totalFileSize';
 
 interface Props {
-  søknadId: string;
+  søknadId?: string;
   krav: VedleggType;
 }
 
@@ -39,8 +39,6 @@ export const FileUpload = ({ søknadId, krav }: Props) => {
     name: `${krav as string}.fields`,
     control,
   });
-
-  console.log('errors', errors);
 
   useEffect(() => {
     const iterateOverFiles = async (fields: FieldArrayWithId<VedleggFormValues>[]) => {
@@ -99,7 +97,7 @@ export const FileUpload = ({ søknadId, krav }: Props) => {
 
   const onSubmit = (data: VedleggFormValues) => {
     const ettersendelse: Ettersendelse = {
-      søknadId: søknadId,
+      ...(søknadId && { søknadId: søknadId }),
       ettersendteVedlegg: [
         {
           vedleggType: krav,
