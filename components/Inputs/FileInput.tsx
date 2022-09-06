@@ -1,6 +1,6 @@
 import { Upload as SvgUpload } from '@navikt/ds-icons';
 import { BodyShort } from '@navikt/ds-react';
-import { DragEventHandler, useRef, useState } from 'react';
+import React, { DragEventHandler, useRef, useState } from 'react';
 import { FieldArrayWithId, UseFieldArrayAppend } from 'react-hook-form';
 import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { VedleggFormValues } from 'components/Inputs/FileUpload';
@@ -56,6 +56,7 @@ export const FileInput = ({ krav, append }: Props) => {
   };
 
   const addFiles = async (files: FileList | null) => {
+    console.log('files', files);
     setDragOver(false);
     Array.from(files || []).forEach((file) => {
       append({
@@ -64,6 +65,10 @@ export const FileInput = ({ krav, append }: Props) => {
         file: file,
       });
     });
+  };
+
+  const resetInputValue = (event: any) => {
+    event.target.value = '';
   };
 
   return (
@@ -82,6 +87,7 @@ export const FileInput = ({ krav, append }: Props) => {
         tabIndex={-1}
         ref={fileUploadInputElement}
         onChange={(event) => addFiles(event.target.files)}
+        onClick={(event) => resetInputValue(event)}
         accept="image/*,.pdf"
       />
       <BodyShort>{formatMessage('filopplasting.vedlegg.draOgSlipp')}</BodyShort>

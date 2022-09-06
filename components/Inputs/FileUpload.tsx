@@ -35,6 +35,8 @@ export const FileUpload = ({ søknadId, krav }: Props) => {
     control,
   });
 
+  console.log('fields', fields);
+
   useEffect(() => {
     const iterateOverFiles = async (fields: FieldArrayWithId<VedleggFormValues>[]) => {
       if (fields.length > 0) {
