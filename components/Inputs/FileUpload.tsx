@@ -93,7 +93,7 @@ export const FileUpload = ({ søknadId, krav }: Props) => {
       }
     };
     iterateOverFiles(fields);
-  }, [fields, update, setError, clearErrors]);
+  }, [fields, update, setError, clearErrors, setValue, krav]);
 
   const onSubmit = (data: VedleggFormValues) => {
     const ettersendelse: Ettersendelse = {

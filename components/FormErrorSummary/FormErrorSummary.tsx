@@ -3,6 +3,7 @@ import { FieldErrors } from 'react-hook-form';
 import { ErrorSummary } from '@navikt/ds-react';
 import * as classes from 'components/FormErrorSummary/FormErrorSummary.module.css';
 import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
+import { flatObj } from 'lib/utils/object';
 
 const FormErrorSummary = (props: { id: string; errors: FieldErrors }) => {
   const { formatMessage } = useFeatureToggleIntl();
@@ -10,6 +11,7 @@ const FormErrorSummary = (props: { id: string; errors: FieldErrors }) => {
   const flatErrors = flatObj(props?.errors);
   const keyList = Object.keys(flatErrors).filter((e) => e);
   const errorSummaryElement = useRef(null);
+
   if (keyList?.length < 1) {
     return (
       <ErrorSummary
@@ -49,18 +51,4 @@ const FormErrorSummary = (props: { id: string; errors: FieldErrors }) => {
   );
 };
 
-const flatObj: any = (obj: any, prevKey = '') => {
-  return Object.entries(obj).reduce((flatted, [key, value]) => {
-    if (typeof value == 'object') {
-      // @ts-ignore
-      if (value?.message) {
-        // @ts-ignore
-        return { ...flatted, [`${prevKey ? prevKey + '.' : ''}${key}`]: value?.message };
-      } else {
-        return { ...flatted, ...flatObj(value, key) };
-      }
-    }
-    return flatted;
-  }, {});
-};
 export { FormErrorSummary };
