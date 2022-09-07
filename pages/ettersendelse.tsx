@@ -2,8 +2,9 @@ import { Heading } from '@navikt/ds-react';
 import { FileUpload } from 'components/Inputs/FileUpload';
 import PageHeader from 'components/PageHeader';
 import { Section } from 'components/Section/Section';
-import { beskyttetSideUtenProps } from 'lib/auth/beskyttetSide';
+import { beskyttetSide } from 'lib/auth/beskyttetSide';
 import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
+import { GetServerSidePropsResult, NextPageContext } from 'next';
 import * as styles from 'pages/[uuid]/ettersendelse/Ettersendelse.module.css';
 
 const Ettersendelse = () => {
@@ -27,6 +28,12 @@ const Ettersendelse = () => {
   );
 };
 
-export const getStaticProps = beskyttetSideUtenProps;
+export const getServerSideProps = beskyttetSide(
+  async (ctx: NextPageContext): Promise<GetServerSidePropsResult<{}>> => {
+    return {
+      props: {},
+    };
+  }
+);
 
 export default Ettersendelse;
