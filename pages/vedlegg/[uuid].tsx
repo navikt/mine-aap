@@ -1,17 +1,14 @@
-import { getAccessToken } from 'lib/auth/accessToken';
 import { beskyttetSide } from 'lib/auth/beskyttetSide';
 import { GetServerSidePropsResult, NextPageContext } from 'next';
-import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { getStringFromPossiblyArrayQuery } from 'lib/utils/string';
 
-interface PageProps {}
+interface PageProps {
+  uuid: string;
+}
 
-const Vedlegg = ({}: PageProps) => {
-  const router = useRouter();
+const Vedlegg = ({ uuid }: PageProps) => {
   const [file, setFile] = useState<Blob | undefined>(undefined);
-
-  const uuid = getStringFromPossiblyArrayQuery(router.query['uuid']);
 
   useEffect(() => {
     const getFile = async () => {
@@ -22,16 +19,27 @@ const Vedlegg = ({}: PageProps) => {
     };
     getFile();
   }, [uuid]);
+
   if (file === undefined) {
     return <h1>Loading...</h1>;
   }
-  return <embed src={URL.createObjectURL(file)} />;
+
+  return (
+    <div>
+      <object data={URL.createObjectURL(file)}>
+        <iframe src={URL.createObjectURL(file)}>
+          <p>This browser does not suppoert</p>
+        </iframe>
+      </object>
+    </div>
+  );
 };
 
 export const getServerSideProps = beskyttetSide(
   async (ctx: NextPageContext): Promise<GetServerSidePropsResult<{}>> => {
+    const uuid = getStringFromPossiblyArrayQuery(ctx.query['uuid']);
     return {
-      props: {},
+      props: { uuid },
     };
   }
 );
