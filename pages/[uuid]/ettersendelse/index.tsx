@@ -11,6 +11,9 @@ import * as styles from 'pages/[uuid]/ettersendelse/Ettersendelse.module.css';
 import { getSøknad } from 'pages/api/soknader/[uuid]';
 import { getStringFromPossiblyArrayQuery } from 'lib/utils/string';
 import logger from 'lib/utils/logger';
+import { useState } from 'react';
+import { FieldErrors } from 'react-hook-form';
+import { FormErrorSummary } from 'components/FormErrorSummary/FormErrorSummary';
 
 export const setErrorSummaryFocus = () => {
   const errorSummaryElement = document && document.getElementById('skjema-feil-liste');
@@ -29,6 +32,22 @@ export interface FormValues {
 
 const Index = ({ søknad }: PageProps) => {
   const { formatMessage } = useFeatureToggleIntl();
+
+  const [errors, setErrors] = useState<FieldErrors>({});
+
+  const updateErrorSummary = (errorsFromKrav: FieldErrors, krav: string) => {
+    if (!errorsFromKrav[krav]) {
+      const filteredErrors: FieldErrors = Object.keys(errors).reduce((object: FieldErrors, key) => {
+        if (key !== krav) {
+          object[key] = errors[key];
+        }
+        return object;
+      }, {});
+      setErrors({ ...filteredErrors });
+      return;
+    }
+    setErrors({ ...errors, [krav]: errorsFromKrav[krav] });
+  };
 
   return (
     <>
@@ -52,11 +71,22 @@ const Index = ({ søknad }: PageProps) => {
           </div>
         </Section>
 
+        <FormErrorSummary id="form-error-summary" errors={errors} />
+
         {søknad.manglendeVedlegg?.map((krav) => (
-          <FileUpload søknadId={søknad.søknadId} krav={krav} key={krav} />
+          <FileUpload
+            søknadId={søknad.søknadId}
+            krav={krav}
+            updateErrorSummary={updateErrorSummary}
+            key={krav}
+          />
         ))}
 
-        <FileUpload søknadId={søknad.søknadId} krav="ANNET" />
+        <FileUpload
+          søknadId={søknad.søknadId}
+          krav="ANNET"
+          updateErrorSummary={updateErrorSummary}
+        />
 
         <Section>
           <Alert variant="warning">

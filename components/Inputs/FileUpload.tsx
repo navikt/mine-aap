@@ -1,13 +1,12 @@
 import { Alert, BodyShort, Button, Heading } from '@navikt/ds-react';
 import { useEffect, useState } from 'react';
-import { useForm, useFieldArray, FieldArrayWithId, ErrorOption } from 'react-hook-form';
+import { useForm, useFieldArray, FieldArrayWithId, FieldErrors } from 'react-hook-form';
 import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { Ettersendelse, OpplastetVedlegg, VedleggType } from 'lib/types/types';
 import { Section } from 'components/Section/Section';
 import { fileErrorTexts, FileInput, validateFile } from 'components/Inputs/FileInput';
 import * as styles from 'components/Inputs/FileUpload.module.css';
 import { FileUploadFields } from 'components/Inputs/FileUploadFields';
-import { FormErrorSummary } from 'components/FormErrorSummary/FormErrorSummary';
 
 const MAX_TOTAL_FILE_SIZE = 1024 * 1024 * 150; // 150 MB
 export const TOTAL_FILE_SIZE = 'totalFileSize';
@@ -15,13 +14,14 @@ export const TOTAL_FILE_SIZE = 'totalFileSize';
 interface Props {
   søknadId?: string;
   krav: VedleggType;
+  updateErrorSummary: (errors: FieldErrors, krav: string) => void;
 }
 
 export interface VedleggFormValues {
   [key: string]: { fields: OpplastetVedlegg[]; totalFileSize: number };
 }
 
-export const FileUpload = ({ søknadId, krav }: Props) => {
+export const FileUpload = ({ søknadId, krav, updateErrorSummary }: Props) => {
   const { formatMessage } = useFeatureToggleIntl();
 
   const [uploadFinished, setUploadFinished] = useState(false);
@@ -95,6 +95,10 @@ export const FileUpload = ({ søknadId, krav }: Props) => {
     iterateOverFiles(fields);
   }, [fields, update, setError, clearErrors, setValue, krav]);
 
+  useEffect(() => {
+    updateErrorSummary(errors, krav);
+  }, [errors, krav]);
+
   const onSubmit = (data: VedleggFormValues) => {
     const ettersendelse: Ettersendelse = {
       ...(søknadId && { søknadId: søknadId }),
@@ -121,7 +125,6 @@ export const FileUpload = ({ søknadId, krav }: Props) => {
       <form
         onSubmit={handleSubmit(
           (data) => {
-            console.log(data);
             onSubmit(data);
           },
           (error) => {
@@ -130,7 +133,6 @@ export const FileUpload = ({ søknadId, krav }: Props) => {
         )}
       >
         <div className={styles.fileUpload}>
-          <FormErrorSummary id={`error-summary-${krav}`} errors={errors} />
           <Heading level="3" size="small" spacing>
             {formatMessage(`ettersendelse.vedleggstyper.${krav}.heading`)}
           </Heading>

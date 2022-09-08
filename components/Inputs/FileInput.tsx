@@ -56,7 +56,6 @@ export const FileInput = ({ krav, append }: Props) => {
   };
 
   const addFiles = async (files: FileList | null) => {
-    console.log('files', files);
     setDragOver(false);
     Array.from(files || []).forEach((file) => {
       append({

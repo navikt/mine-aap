@@ -9,7 +9,6 @@ export const flatObj: any = (obj: any, prevKey = '') => {
         return { ...flatted, ...flatObj(value, key) };
       }
     }
-    console.log('flatted', flatted);
     return flatted;
   }, {});
 };
