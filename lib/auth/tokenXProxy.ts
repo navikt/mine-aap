@@ -12,6 +12,7 @@ interface Opts {
   data?: string;
   req?: NextApiRequest;
   noResponse?: boolean;
+  rawResonse?: boolean;
   contentType?: string;
   bearerToken?: string;
 }
@@ -42,6 +43,9 @@ export const tokenXProxy = async (opts: Opts) => {
   logger.info(`Vellyket tokenXProxy-request mot ${opts.url}. Status: ${response.status}`);
   if (opts.noResponse) {
     return;
+  }
+  if (opts.rawResonse) {
+    return response;
   }
 
   return await response.json();

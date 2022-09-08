@@ -43,10 +43,7 @@ export const FileUploadFields = ({ fields, krav, remove, errors }: Props) => {
                       <FileSuccess color={'var(--navds-semantic-color-feedback-success-icon)'} />
                     </div>
                     <div>
-                      <Link
-                        target={'_blank'}
-                        href={`/aap/innsyn/vedleggvisning/${attachment?.vedleggId}`}
-                      >
+                      <Link target={'_blank'} href={`/aap/innsyn/vedlegg/${attachment?.vedleggId}`}>
                         {attachment?.name}
                       </Link>
                       <Detail>{fileSizeString(attachment?.size)}</Detail>
