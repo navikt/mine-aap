@@ -3,7 +3,7 @@ import { validateFile, validFileTypes } from '../FileInput';
 describe('FileInput validation', () => {
   it('should return 415 for wrong file type', () => {
     const file = new File([], 'test.txt', { type: 'text/plain' });
-    expect(validateFile(file)).toBe(415);
+    expect(validateFile(file)).toBe('filtype');
   });
 
   it('should return undefined for valid file', () => {

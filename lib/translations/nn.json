@@ -84,5 +84,12 @@
     "mineAAP": "Mine AAP",
     "ettersending": "Ettersending til søknad",
     "mineAAPSoknader": "Mine AAP søknader"
+  },
+  "validation": {
+    "filtype": "Filtypen {type} kan ikke lastes opp. Last opp dokumentet i et annet format (PDF, PNG eller JPG)",
+    "virus": "Det er oppdaget virus på filen du prøver å laste opp. Velg en annen fil å last opp.",
+    "feilet": "Opplastingen feilet. Prøv på nytt",
+    "storrelse": "Filen du lastet opp er for stor. Last opp en fil hvor størrelsen er under {size} MB",
+    "totalStorrelse": "Filene du lastet opp er for store. Du kan totalt laste opp filer på {size} MB. Samlet størrelese er {filesSize} MB"
   }
 }

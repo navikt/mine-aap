@@ -1,26 +1,17 @@
 import { Upload as SvgUpload } from '@navikt/ds-icons';
 import { BodyShort } from '@navikt/ds-react';
 import React, { DragEventHandler, useRef, useState } from 'react';
-import { FieldArrayWithId, UseFieldArrayAppend } from 'react-hook-form';
+import { UseFieldArrayAppend } from 'react-hook-form';
 import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { VedleggFormValues } from 'components/Inputs/FileUpload';
 import * as styles from 'components/Inputs/FileInput.module.css';
 import { VedleggType } from 'lib/types/types';
 
-const replaceDotWithUnderscore = (str: string) => str.replace(/\./g, '_');
-
 export const validFileTypes = ['image/png', 'image/jpg', 'image/jpeg', 'application/pdf'];
-
-export const fileErrorTexts = {
-  413: 'Filen er for stor',
-  415: 'Filen er ikke gyldig',
-  422: 'Inneholder virus',
-  500: 'Det oppstod en feil',
-};
 
 export const validateFile = (file: File) => {
   if (!validFileTypes.includes(file.type)) {
-    return 415;
+    return 'filtype';
   }
 };
 
@@ -62,6 +53,7 @@ export const FileInput = ({ krav, append }: Props) => {
         name: file.name,
         size: file.size,
         file: file,
+        isUploading: true,
       });
     });
   };

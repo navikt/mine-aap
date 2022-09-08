@@ -1,5 +1,5 @@
 import { Cancel, Delete, FileError, FileSuccess } from '@navikt/ds-icons';
-import { BodyShort, Detail, Label, Link, Panel } from '@navikt/ds-react';
+import { BodyShort, Detail, Label, Link, Loader, Panel } from '@navikt/ds-react';
 import { FieldArrayWithId, FieldErrors, UseFieldArrayRemove } from 'react-hook-form';
 import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { fileSizeString } from 'lib/utils/string';
@@ -29,10 +29,10 @@ export const FileUploadFields = ({ fields, krav, remove, errors }: Props) => {
                 key={attachment.id}
               >
                 <div className={styles.fileCardLeftContent}>
-                  {fieldHasError ? (
+                  {attachment.isUploading ? (
                     <>
-                      <div className={styles?.fileError}>
-                        <FileError color={'var(--navds-semantic-color-interaction-danger-hover)'} />
+                      <div>
+                        <Loader />
                       </div>
                       <div>
                         <Label id={`${krav}.fields.${index}`}>{attachment.name}</Label>
@@ -40,18 +40,35 @@ export const FileUploadFields = ({ fields, krav, remove, errors }: Props) => {
                     </>
                   ) : (
                     <>
-                      <div className={styles?.fileSuccess}>
-                        <FileSuccess color={'var(--navds-semantic-color-feedback-success-icon)'} />
-                      </div>
-                      <div>
-                        <Link
-                          target={'_blank'}
-                          href={`/aap/innsyn/vedlegg/${attachment?.vedleggId}`}
-                        >
-                          {attachment?.name}
-                        </Link>
-                        <Detail>{fileSizeString(attachment?.size)}</Detail>
-                      </div>
+                      {fieldHasError ? (
+                        <>
+                          <div className={styles?.fileError}>
+                            <FileError
+                              color={'var(--navds-semantic-color-interaction-danger-hover)'}
+                            />
+                          </div>
+                          <div>
+                            <Label id={`${krav}.fields.${index}`}>{attachment.name}</Label>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <div className={styles?.fileSuccess}>
+                            <FileSuccess
+                              color={'var(--navds-semantic-color-feedback-success-icon)'}
+                            />
+                          </div>
+                          <div>
+                            <Link
+                              target={'_blank'}
+                              href={`/aap/innsyn/vedlegg/${attachment?.vedleggId}`}
+                            >
+                              {attachment?.name}
+                            </Link>
+                            <Detail>{fileSizeString(attachment?.size)}</Detail>
+                          </div>
+                        </>
+                      )}
                     </>
                   )}
                 </div>

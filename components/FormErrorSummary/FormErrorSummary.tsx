@@ -9,7 +9,7 @@ const FormErrorSummary = (props: { id: string; errors: FieldErrors }) => {
   const { formatMessage } = useFeatureToggleIntl();
 
   const flatErrors = flattenObject(props?.errors);
-  const keyList = Object.keys(flatErrors).filter((e) => e);
+  const keyList = Object.keys(flatErrors).filter((key: string) => flatErrors[key] !== undefined);
   const errorSummaryElement = useRef(null);
 
   if (keyList?.length < 1) {

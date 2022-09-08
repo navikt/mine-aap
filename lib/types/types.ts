@@ -32,6 +32,7 @@ export interface OpplastetVedlegg {
   name: string;
   size: number;
   vedleggId?: string;
+  isUploading: boolean;
   file: File;
 }
 

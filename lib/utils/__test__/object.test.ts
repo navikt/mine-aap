@@ -74,4 +74,29 @@ describe('Object', () => {
     const result = flattenObject(obj);
     expect(result).toEqual({ 'a.0.b': '1', 'a.1.b': '2', 'a.2.b': '3' });
   });
+  it('should work on real world case', () => {
+    const obj = {
+      OMSORG: {
+        fields: [
+          {
+            type: 'custom',
+            message:
+              'Filtypen .svg kan ikke lastes opp. Last opp dokumentet i et annet format (PDF, PNG eller JPG)',
+          },
+          {
+            type: 'custom',
+            message:
+              'Det er oppdaget virus på filen du prøver å laste opp. Velg en annen fil å last opp.',
+          },
+        ],
+      },
+    };
+    const result = flattenObject(obj);
+    expect(result).toEqual({
+      'OMSORG.fields.0':
+        'Filtypen .svg kan ikke lastes opp. Last opp dokumentet i et annet format (PDF, PNG eller JPG)',
+      'OMSORG.fields.1':
+        'Det er oppdaget virus på filen du prøver å laste opp. Velg en annen fil å last opp.',
+    });
+  });
 });
