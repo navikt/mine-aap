@@ -1,14 +1,21 @@
-export const flatObj: any = (obj: any, prevKey = '') => {
-  return Object.entries(obj).reduce((flatted, [key, value]) => {
-    if (typeof value == 'object') {
+export const flattenObject = (
+  object: Record<string, unknown>,
+  prevKey = ''
+): Record<string, string> => {
+  return Object.entries(object).reduce((flattenedObject, [key, value]) => {
+    const keyWithPrefix = `${prevKey ? prevKey + '.' : ''}${key}`;
+    if (!value) {
+      return { ...flattenedObject, [keyWithPrefix]: value };
+    }
+    if (typeof value === 'object') {
       // @ts-ignore
       if (value?.message) {
         // @ts-ignore
-        return { ...flatted, [`${prevKey ? prevKey + '.' : ''}${key}`]: value?.message };
-      } else {
-        return { ...flatted, ...flatObj(value, key) };
+        return { ...flattenedObject, [keyWithPrefix]: value?.message };
       }
+      // @ts-ignore
+      return { ...flattenedObject, ...flattenObject(value, keyWithPrefix) };
     }
-    return flatted;
+    return flattenedObject;
   }, {});
 };

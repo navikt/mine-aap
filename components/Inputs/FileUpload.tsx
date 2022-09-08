@@ -8,20 +8,21 @@ import { fileErrorTexts, FileInput, validateFile } from 'components/Inputs/FileI
 import * as styles from 'components/Inputs/FileUpload.module.css';
 import { FileUploadFields } from 'components/Inputs/FileUploadFields';
 
-const MAX_TOTAL_FILE_SIZE = 1024 * 1024 * 150; // 150 MB
+const MAX_TOTAL_FILE_SIZE = 1024 * 1024 * 5; // 150 MB
 export const TOTAL_FILE_SIZE = 'totalFileSize';
 
 interface Props {
   søknadId?: string;
   krav: VedleggType;
   updateErrorSummary: (errors: FieldErrors, krav: string) => void;
+  setErrorSummaryFocus: () => void;
 }
 
 export interface VedleggFormValues {
   [key: string]: { fields: OpplastetVedlegg[]; totalFileSize: number };
 }
 
-export const FileUpload = ({ søknadId, krav, updateErrorSummary }: Props) => {
+export const FileUpload = ({ søknadId, krav, updateErrorSummary, setErrorSummaryFocus }: Props) => {
   const { formatMessage } = useFeatureToggleIntl();
 
   const [uploadFinished, setUploadFinished] = useState(false);
@@ -128,7 +129,7 @@ export const FileUpload = ({ søknadId, krav, updateErrorSummary }: Props) => {
             onSubmit(data);
           },
           (error) => {
-            //setErrorSummaryFocus();
+            setErrorSummaryFocus();
           }
         )}
       >

@@ -14,11 +14,8 @@ import logger from 'lib/utils/logger';
 import { useState } from 'react';
 import { FieldErrors } from 'react-hook-form';
 import { FormErrorSummary } from 'components/FormErrorSummary/FormErrorSummary';
+import { setFocus } from 'lib/utils/dom';
 
-export const setErrorSummaryFocus = () => {
-  const errorSummaryElement = document && document.getElementById('skjema-feil-liste');
-  if (errorSummaryElement) errorSummaryElement.focus();
-};
 interface PageProps {
   søknad: Søknad;
 }
@@ -34,6 +31,8 @@ const Index = ({ søknad }: PageProps) => {
   const { formatMessage } = useFeatureToggleIntl();
 
   const [errors, setErrors] = useState<FieldErrors>({});
+
+  const errorSummaryId = `form-error-summary-${søknad?.søknadId ?? 'generic'}`;
 
   const updateErrorSummary = (errorsFromKrav: FieldErrors, krav: string) => {
     if (!errorsFromKrav[krav]) {
@@ -71,13 +70,14 @@ const Index = ({ søknad }: PageProps) => {
           </div>
         </Section>
 
-        <FormErrorSummary id="form-error-summary" errors={errors} />
+        <FormErrorSummary id={errorSummaryId} errors={errors} />
 
         {søknad.manglendeVedlegg?.map((krav) => (
           <FileUpload
             søknadId={søknad.søknadId}
             krav={krav}
             updateErrorSummary={updateErrorSummary}
+            setErrorSummaryFocus={() => setFocus(errorSummaryId)}
             key={krav}
           />
         ))}
@@ -86,6 +86,7 @@ const Index = ({ søknad }: PageProps) => {
           søknadId={søknad.søknadId}
           krav="ANNET"
           updateErrorSummary={updateErrorSummary}
+          setErrorSummaryFocus={() => setFocus(errorSummaryId)}
         />
 
         <Section>
