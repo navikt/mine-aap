@@ -22,7 +22,7 @@ const Ettersendelse = () => {
           </Heading>
         </Section>
 
-        <FileUpload krav="ANNET" />
+        <FileUpload krav="ANNET" updateErrorSummary={() => {}} setErrorSummaryFocus={() => {}} />
       </main>
     </>
   );
