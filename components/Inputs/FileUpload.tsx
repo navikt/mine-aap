@@ -50,6 +50,8 @@ export const FileUpload = ({ søknadId, krav, updateErrorSummary, setErrorSummar
     control,
   });
 
+  console.log('fields', fields);
+
   useEffect(() => {
     const iterateOverFiles = async (fields: FieldArrayWithId<VedleggFormValues>[]) => {
       if (fields.length > 0) {
@@ -99,7 +101,8 @@ export const FileUpload = ({ søknadId, krav, updateErrorSummary, setErrorSummar
       });
       if (vedlegg.ok) {
         const id = await vedlegg.json();
-        update(index, { ...field, vedleggId: id });
+        console.log('id', id);
+        update(index, { ...field, vedleggId: id, isUploading: false });
       } else {
         setError(`${krav}.fields.${index}`, {
           type: 'custom',
@@ -108,8 +111,8 @@ export const FileUpload = ({ søknadId, krav, updateErrorSummary, setErrorSummar
             size: bytesToMB(MAX_TOTAL_FILE_SIZE),
           }),
         });
+        update(index, { ...field, isUploading: false });
       }
-      update(index, { ...field, isUploading: false });
     };
     iterateOverFiles(fields);
   }, [fields, update, setError, clearErrors, setValue, krav]);
@@ -119,6 +122,7 @@ export const FileUpload = ({ søknadId, krav, updateErrorSummary, setErrorSummar
   }, [JSON.stringify(formState.errors), krav]); // 👻 - Vi må gjøre en deepCompare på formState.errors for å unngå at errors i parent blir oppdatert feil
 
   const onSubmit = (data: VedleggFormValues) => {
+    console.log('data[krav].fields', data[krav].fields);
     const ettersendelse: Ettersendelse = {
       ...(søknadId && { søknadId: søknadId }),
       ettersendteVedlegg: [
