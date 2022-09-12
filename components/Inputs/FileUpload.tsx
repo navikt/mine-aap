@@ -1,5 +1,5 @@
 import { Alert, BodyShort, Button, Heading } from '@navikt/ds-react';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm, useFieldArray, FieldArrayWithId, FieldErrors } from 'react-hook-form';
 import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { Ettersendelse, OpplastetVedlegg, VedleggType } from 'lib/types/types';
@@ -50,8 +50,6 @@ export const FileUpload = ({ søknadId, krav, updateErrorSummary, setErrorSummar
     control,
   });
 
-  console.log('fields', fields);
-
   useEffect(() => {
     const iterateOverFiles = async (fields: FieldArrayWithId<VedleggFormValues>[]) => {
       if (fields.length > 0) {
@@ -91,6 +89,7 @@ export const FileUpload = ({ søknadId, krav, updateErrorSummary, setErrorSummar
             type: `.${getFileExtension(field.file.name)}`,
           }),
         });
+        update(index, { ...field, isUploading: false });
         return;
       }
       const data = new FormData();
@@ -115,10 +114,12 @@ export const FileUpload = ({ søknadId, krav, updateErrorSummary, setErrorSummar
       }
     };
     iterateOverFiles(fields);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fields, update, setError, clearErrors, setValue, krav]);
 
   useEffect(() => {
     updateErrorSummary(formState.errors, krav);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [JSON.stringify(formState.errors), krav]); // 👻 - Vi må gjøre en deepCompare på formState.errors for å unngå at errors i parent blir oppdatert feil
 
   const onSubmit = (data: VedleggFormValues) => {
