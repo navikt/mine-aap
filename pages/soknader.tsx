@@ -22,7 +22,7 @@ const Søknader = ({ søknader }: PageProps) => {
 
   return (
     <Layout>
-      <Section lightBlue>
+      <Section>
         <NextLink href="/" passHref>
           <Link>
             <Left />
