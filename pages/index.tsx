@@ -1,4 +1,13 @@
-import { BodyLong, BodyShort, Heading, Label, Link, LinkPanel, Panel } from '@navikt/ds-react';
+import {
+  BodyLong,
+  BodyShort,
+  Button,
+  Heading,
+  Label,
+  Link,
+  LinkPanel,
+  Panel,
+} from '@navikt/ds-react';
 import type { GetServerSidePropsResult, NextPageContext } from 'next';
 import NextLink from 'next/link';
 import { useMemo } from 'react';
@@ -14,6 +23,7 @@ import { formatFullDate } from 'lib/utils/date';
 import { getDocuments } from 'pages/api/dokumentoversikt';
 import { getSøknader } from 'pages/api/soknader/soknader';
 import logger from 'lib/utils/logger';
+import { useRouter } from 'next/router';
 
 interface PageProps {
   søknader: Søknad[];
@@ -22,6 +32,8 @@ interface PageProps {
 
 const Index = ({ søknader, dokumenter }: PageProps) => {
   const { formatMessage } = useFeatureToggleIntl();
+
+  const router = useRouter();
 
   const sisteSøknad = useMemo(() => {
     return søknader[0];
@@ -44,14 +56,6 @@ const Index = ({ søknader, dokumenter }: PageProps) => {
               </NextLink>
             </div>
           )}
-          <div>
-            <NextLink href="/ettersendelse" passHref>
-              <Link>
-                Skal du ettersende dokumenter til en søknad som ikke vises i listen? (trenger bedre
-                tekst)
-              </Link>
-            </NextLink>
-          </div>
         </Section>
       )}
 
@@ -106,6 +110,19 @@ const Index = ({ søknader, dokumenter }: PageProps) => {
               </BodyLong>
             </li>
           </ul>
+        </Panel>
+
+        <Heading level="2" size="medium">
+          Er det noe du vil melde fra om til oss?
+        </Heading>
+        <Panel border>
+          <Label spacing>Ettersending</Label>
+          <BodyShort spacing>
+            Er det noe du vil ettersende til oss om din AAP sak Da kan du gjøre det her.
+          </BodyShort>
+          <Button variant="secondary" onClick={() => router.push('/ettersendelse')}>
+            Ettersend dokumenter
+          </Button>
         </Panel>
 
         <Panel border>

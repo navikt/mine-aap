@@ -1,4 +1,4 @@
-import { Heading } from '@navikt/ds-react';
+import { Button, Heading, Link } from '@navikt/ds-react';
 import { NextPageContext, GetServerSidePropsResult } from 'next';
 import { getAccessToken } from 'lib/auth/accessToken';
 import { beskyttetSide } from 'lib/auth/beskyttetSide';
@@ -9,15 +9,26 @@ import { Søknad } from '../lib/types/types';
 import logger from 'lib/utils/logger';
 import { getSøknader } from 'pages/api/soknader/soknader';
 import { SoknadPanel } from 'components/SoknadPanel/SoknadPanel';
+import { Left } from '@navikt/ds-icons';
+import { useRouter } from 'next/router';
+import NextLink from 'next/link';
 
 interface PageProps {
   søknader: Søknad[];
 }
 
 const Søknader = ({ søknader }: PageProps) => {
+  const router = useRouter();
+
   return (
     <Layout>
       <Section lightBlue>
+        <NextLink href="/" passHref>
+          <Link>
+            <Left />
+            Tilbake til Mine Arbeidsavklaringspenger
+          </Link>
+        </NextLink>
         <div>
           <Heading level="2" size="medium" spacing>
             Dine innsendte søknader
@@ -27,6 +38,13 @@ const Søknader = ({ søknader }: PageProps) => {
               <SoknadPanel key={søknad.søknadId} søknad={søknad} />
             ))}
           </VerticalFlexContainer>
+        </div>
+      </Section>
+      <Section>
+        <div>
+          <Button icon={<Left />} variant="tertiary" onClick={() => router.push('/')}>
+            Tilbake til Mine Arbeidsavklaringspenger
+          </Button>
         </div>
       </Section>
     </Layout>
