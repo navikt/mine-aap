@@ -1,4 +1,4 @@
-import { Alert, BodyShort, Heading, Label } from '@navikt/ds-react';
+import { Alert, BodyShort, Button, Heading, Label, Link } from '@navikt/ds-react';
 import { GetServerSidePropsResult, NextPageContext } from 'next';
 import { getAccessToken } from 'lib/auth/accessToken';
 import { beskyttetSide } from 'lib/auth/beskyttetSide';
@@ -15,6 +15,9 @@ import { useEffect, useState } from 'react';
 import { FieldErrors } from 'react-hook-form';
 import { FormErrorSummary } from 'components/FormErrorSummary/FormErrorSummary';
 import { setFocus } from 'lib/utils/dom';
+import NextLink from 'next/link';
+import { Left } from '@navikt/ds-icons';
+import { useRouter } from 'next/router';
 
 interface PageProps {
   søknad: Søknad;
@@ -31,6 +34,8 @@ const Index = ({ søknad }: PageProps) => {
   const { formatMessage } = useFeatureToggleIntl();
 
   const [errors, setErrors] = useState<FieldErrors>({});
+
+  const router = useRouter();
 
   const errorSummaryId = `form-error-summary-${søknad?.søknadId ?? 'generic'}`;
 
@@ -54,6 +59,12 @@ const Index = ({ søknad }: PageProps) => {
       </PageHeader>
       <main className={styles.main}>
         <Section>
+          <NextLink href="/" passHref>
+            <Link>
+              <Left />
+              Tilbake til Mine Arbeidsavklaringspenger
+            </Link>
+          </NextLink>
           <Heading level="2" size="medium" spacing>
             {formatMessage('ettersendelse.heading')}
           </Heading>
@@ -89,11 +100,19 @@ const Index = ({ søknad }: PageProps) => {
         />
 
         <Section>
+          <div>
+            <Button icon={<Left />} variant="tertiary" onClick={() => router.push('/')}>
+              Tilbake til Mine Arbeidsavklaringspenger
+            </Button>
+          </div>
+        </Section>
+
+        {/*<Section>
           <Alert variant="warning">
             <Label spacing>{formatMessage('ettersendelse.warning.heading')}</Label>
             <BodyShort spacing>{formatMessage('ettersendelse.warning.description')}</BodyShort>
           </Alert>
-        </Section>
+        </Section>*/}
       </main>
     </>
   );
