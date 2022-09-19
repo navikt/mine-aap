@@ -24,6 +24,7 @@ import { getDocuments } from 'pages/api/dokumentoversikt';
 import { getSøknader } from 'pages/api/soknader/soknader';
 import logger from 'lib/utils/logger';
 import { useRouter } from 'next/router';
+import { Dokumentoversikt } from 'components/Dokumentoversikt/Dokumentoversikt';
 
 interface PageProps {
   søknader: Søknad[];
@@ -56,6 +57,21 @@ const Index = ({ søknader, dokumenter }: PageProps) => {
               </NextLink>
             </div>
           )}
+        </Section>
+      )}
+
+      {!sisteSøknad && (
+        <Section>
+          <Dokumentoversikt dokumenter={dokumenter} />
+          <Panel border>
+            <Label spacing>Ettersending</Label>
+            <BodyShort spacing>
+              Er det noe du vil ettersende til oss om din AAP sak Da kan du gjøre det her.
+            </BodyShort>
+            <Button variant="secondary" onClick={() => router.push('/ettersendelse')}>
+              Ettersend dokumenter
+            </Button>
+          </Panel>
         </Section>
       )}
 
@@ -116,33 +132,18 @@ const Index = ({ søknader, dokumenter }: PageProps) => {
           Er det noe du vil melde fra om til oss?
         </Heading>
         <Panel border>
-          <Label spacing>Ettersending</Label>
+          <Label spacing>Endring</Label>
           <BodyShort spacing>
-            Er det noe du vil ettersende til oss om din AAP sak Da kan du gjøre det her.
+            Vil du melde fra om en endring i din situasjon? Er du redd for at noe har blitt feil?
+            Hvis du har en aktivitetsplan, benytter du denne. Har du ikke aktivitetsplan kan du
+            skrive til oss.
           </BodyShort>
           <Button variant="secondary" onClick={() => router.push('/ettersendelse')}>
-            Ettersend dokumenter
+            Meld endring
           </Button>
         </Panel>
 
-        <Panel border>
-          <Heading level="2" size="medium" spacing>
-            {formatMessage('dokumentoversikt.tittel')}
-          </Heading>
-          <BodyShort spacing>
-            <Link href="#">{formatMessage('dokumentoversikt.ikkeSynligDokumentLink')}</Link>
-          </BodyShort>
-          <VerticalFlexContainer>
-            {dokumenter.map((dokument) => (
-              <LinkPanel href={dokument.url} border key={dokument.tittel}>
-                <LinkPanel.Title>{dokument.tittel}</LinkPanel.Title>
-                <LinkPanel.Description>
-                  {formatMessage('dokumentoversikt.mottatt')} {formatFullDate(dokument.timestamp)}
-                </LinkPanel.Description>
-              </LinkPanel>
-            ))}
-          </VerticalFlexContainer>
-        </Panel>
+        {sisteSøknad && <Dokumentoversikt dokumenter={dokumenter} />}
       </Section>
     </Layout>
   );
