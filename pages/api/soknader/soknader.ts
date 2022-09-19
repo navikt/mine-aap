@@ -18,7 +18,7 @@ export const getSøknader = async (params: Record<string, string>, accessToken?:
     .map(([key, value]) => `${key}=${value}`)
     .join('&');
   const søknader = await tokenXProxy({
-    url: `${process.env.SOKNAD_API_URL}/oppslag/soeknader${urlParams ? '?' + urlParams : ''}`,
+    url: `${process.env.SOKNAD_API_URL}/oppslag/soeknaderNy${urlParams ? '?' + urlParams : ''}`,
     method: 'GET',
     audience: process.env.SOKNAD_API_AUDIENCE ?? '',
     bearerToken: accessToken,

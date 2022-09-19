@@ -5,8 +5,20 @@ export const mockSøknader: Søknad[] = [
     innsendtDato: '2022-08-30T10:54:49.737467',
     søknadId: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
     innsendteVedlegg: [
-      { vedleggType: 'UTLAND', innsendtDato: '2022-08-30T10:54:51.034007' },
-      { vedleggType: 'ANNET', innsendtDato: '2022-08-30T10:54:51.047477' },
+      {
+        uri: 'http://localhost/someUri',
+        tittel: 'Dokumentasjon fra arbeidsgiver',
+        type: 'I',
+        innsendingsId: 'f3297977-618e-44e2-9ad4-9749b5790b35',
+        dato: '2022-08-30T10:54:51.034007',
+      },
+      {
+        uri: 'http://localhost/someUri',
+        tittel: 'Annen dokumentasjon',
+        type: 'I',
+        innsendingsId: 'ef4114c6-2308-445b-a5ff-1bac6b85873f',
+        dato: '2022-08-30T10:54:51.047477',
+      },
     ],
     manglendeVedlegg: ['ARBEIDSGIVER'],
   },

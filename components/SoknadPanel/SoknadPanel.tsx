@@ -1,5 +1,5 @@
 import { formatMessage } from '@formatjs/intl';
-import { Heading, Panel, BodyShort, Alert, Button, Label } from '@navikt/ds-react';
+import { Heading, Panel, BodyShort, Alert, Button, Label, LinkPanel } from '@navikt/ds-react';
 import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { Søknad } from 'lib/types/types';
 import { formatFullDate } from 'lib/utils/date';
@@ -40,8 +40,8 @@ export const SoknadPanel = ({ søknad }: Props) => {
           <Label>{formatMessage('sisteSøknad.dokumentasjon.mottatt')}</Label>
           <ul>
             {søknad.innsendteVedlegg?.map((krav) => (
-              <li key={krav.vedleggType}>
-                {formatMessage(`ettersendelse.vedleggstyper.${krav.vedleggType}.heading`)}
+              <li key={krav.innsendingsId}>
+                <Link href={krav.uri}>{krav.tittel}</Link>
               </li>
             ))}
           </ul>

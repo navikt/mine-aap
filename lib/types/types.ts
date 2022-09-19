@@ -12,8 +12,11 @@ export interface Søknad {
   innsendtDato: string;
   søknadId: string;
   innsendteVedlegg?: Array<{
-    innsendtDato: string;
-    vedleggType: VedleggType;
+    uri: string;
+    tittel: string;
+    type: 'I' | 'U' | 'N';
+    innsendingsId: string;
+    dato: string;
   }>;
   manglendeVedlegg?: Array<VedleggType>;
 }
