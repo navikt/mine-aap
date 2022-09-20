@@ -18,7 +18,7 @@
     "@navikt/ds-icons": "^1.0.2",
     "@navikt/ds-react": "^1.0.2",
     "@navikt/nav-dekoratoren-moduler": "^1.7.0",
-    "@sentry/nextjs": "^7.5.0",
+    "@sentry/nextjs": "^7.13.0",
     "amplitude-js": "^8.18.5",
     "axios": "^0.27.2",
     "cookie": "^0.5.0",
