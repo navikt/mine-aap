@@ -1,4 +1,3 @@
-import { formatMessage } from '@formatjs/intl';
 import { Heading, Panel, BodyShort, Alert, Button, Label, LinkPanel } from '@navikt/ds-react';
 import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { Søknad } from 'lib/types/types';
