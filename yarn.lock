@@ -1021,10 +1021,10 @@
     clsx "^1.1.1"
     react-modal "3.15.1"
 
-"@navikt/nav-dekoratoren-moduler@^1.6.9":
-  version "1.6.18"
-  resolved "https://npm.pkg.github.com/download/@navikt/nav-dekoratoren-moduler/1.6.18/0d0bdb286e023e0c31886d329ac7f069ac59352b#0d0bdb286e023e0c31886d329ac7f069ac59352b"
-  integrity sha512-mZV2Epn68h6yF7Sbw4gthe/KwT6SuDRGbZT9UxDTd/IA76D8LN73oX9eTzSs5qYosKIzXCWfQmIPy7ExpaRDsA==
+"@navikt/nav-dekoratoren-moduler@^1.7.0":
+  version "1.7.0"
+  resolved "https://npm.pkg.github.com/download/@navikt/nav-dekoratoren-moduler/1.7.0/8706aabc94259195ad94968a28bfd531ca28a4c2#8706aabc94259195ad94968a28bfd531ca28a4c2"
+  integrity sha512-w+dKTb95xgTUM/NPzU6Xv9/rFtg3qqXGElUfrswBqF8H2eaxZUK6bJtgp96Ck/gTbAKPg9N1ysardjReXzS1GQ==
   dependencies:
     html-react-parser "^1.2.7"
     jsdom "^16.6.0"
