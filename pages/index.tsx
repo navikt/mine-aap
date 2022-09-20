@@ -1,7 +1,9 @@
 import {
+  Alert,
   BodyLong,
   BodyShort,
   Button,
+  GuidePanel,
   Heading,
   Label,
   Link,
@@ -42,6 +44,9 @@ const Index = ({ søknader, dokumenter }: PageProps) => {
 
   return (
     <Layout>
+      <Section>
+        <GuidePanel>Hei, nå har du kommet til Mine AAP. Mer tekst kommer.</GuidePanel>
+      </Section>
       {sisteSøknad && (
         <Section lightBlue>
           <div>
@@ -76,7 +81,7 @@ const Index = ({ søknader, dokumenter }: PageProps) => {
       )}
 
       <Section>
-        <Panel border>
+        <Panel>
           <Heading level="2" size="medium" spacing>
             Vi har mottatt søknaden din, hva skjer nå?
           </Heading>
@@ -138,7 +143,12 @@ const Index = ({ søknader, dokumenter }: PageProps) => {
             Hvis du har en aktivitetsplan, benytter du denne. Har du ikke aktivitetsplan kan du
             skrive til oss.
           </BodyShort>
-          <Button variant="secondary" onClick={() => router.push('/ettersendelse')}>
+          <Button
+            variant="secondary"
+            onClick={() =>
+              (window.location.href = 'https://innboks.nav.no/s/skriv-til-oss?category=Arbeid')
+            }
+          >
             Meld endring
           </Button>
         </Panel>

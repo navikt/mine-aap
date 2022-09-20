@@ -106,13 +106,6 @@ const Index = ({ søknad }: PageProps) => {
             </Button>
           </div>
         </Section>
-
-        {/*<Section>
-          <Alert variant="warning">
-            <Label spacing>{formatMessage('ettersendelse.warning.heading')}</Label>
-            <BodyShort spacing>{formatMessage('ettersendelse.warning.description')}</BodyShort>
-          </Alert>
-        </Section>*/}
       </main>
     </>
   );
