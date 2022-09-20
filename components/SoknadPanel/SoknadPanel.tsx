@@ -41,7 +41,12 @@ export const SoknadPanel = ({ søknad }: Props) => {
           <ul>
             {søknad.innsendteVedlegg?.map((krav) => (
               <li key={krav.innsendingsId}>
-                <Link href={krav.uri}>{krav.tittel}</Link>
+                <Link
+                  href={`/api/dokument/?journalpostId=${krav.journalpostId}&dokumentId=${krav.dokumentId}`}
+                  target="_blank"
+                >
+                  {krav.tittel}
+                </Link>
               </li>
             ))}
           </ul>

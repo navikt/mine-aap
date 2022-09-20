@@ -12,7 +12,8 @@ export interface Søknad {
   innsendtDato: string;
   søknadId: string;
   innsendteVedlegg?: Array<{
-    uri: string;
+    journalpostId?: string;
+    dokumentId?: string;
     tittel: string;
     type: 'I' | 'U' | 'N';
     innsendingsId: string;
