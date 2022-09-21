@@ -45,7 +45,6 @@ export const tokenXProxy = async (opts: Opts) => {
     return;
   }
   if (opts.rawResonse) {
-    logger.info('response headers: ' + response.headers);
     return response;
   }
 

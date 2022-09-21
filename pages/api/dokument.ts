@@ -12,10 +12,14 @@ const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) =
     res.status(400).json({ error: 'journalpostId og dokumentId må være satt' });
   }
   const accessToken = getAccessTokenFromRequest(req);
-  const result = await lesDokument(journalpostId as string, dokumentId as string, accessToken);
-  //const filename = `${journalpostId}-${dokumentId}.pdf`;
-  //res.setHeader('Content-Type', 'application/pdf');
-  //res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+  const result: Response = await lesDokument(
+    journalpostId as string,
+    dokumentId as string,
+    accessToken
+  );
+
+  res.setHeader('Content-Type', result.headers.get('Content-Type') ?? '');
+  res.setHeader('Content-Disposition', result.headers.get('Content-Disposition') ?? '');
   res.status(200).send(result.body);
 });
 
