@@ -14,7 +14,7 @@ export const SoknadPanel = ({ søknad }: Props) => {
   const { formatMessage } = useFeatureToggleIntl();
 
   return (
-    <Panel border>
+    <Panel className={styles.panel} border>
       <Heading level="3" size="small">
         {formatMessage('sisteSøknad.søknad.heading')}
       </Heading>

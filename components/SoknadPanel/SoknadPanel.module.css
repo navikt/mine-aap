@@ -1,3 +1,7 @@
 .alert {
   margin: var(--navds-spacing-4) 0;
 }
+
+.panel {
+  padding: 2rem;
+}

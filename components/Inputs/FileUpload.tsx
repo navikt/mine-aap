@@ -183,7 +183,10 @@ export const FileUpload = ({
             {formatMessage(`ettersendelse.vedleggstyper.${krav}.description`)}
           </BodyShort>
           {hasEttersendingError && (
-            <Alert variant="error">Det oppstod en feil ved sending av dokumenter. :(</Alert>
+            <Alert variant="error">
+              Beklager, vi har litt rusk i NAVet. Du kan prøve på nytt om et par minutter, eller
+              sende inn dokumentasjonen på papir.
+            </Alert>
           )}
           {uploadFinished ? (
             <Alert variant="success">
@@ -195,7 +198,7 @@ export const FileUpload = ({
               ) : (
                 <>
                   Takk! Dokumentasjonen er nå sendt inn! Har du flere dokumenter du ønsker å sende,
-                  kan du laste de opp under Annen dokumentasjon lengre ned på siden.
+                  kan du laste de opp under &quot;Annen dokumentasjon&quot;.
                 </>
               )}
             </Alert>
