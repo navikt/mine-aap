@@ -46,17 +46,21 @@ const Index = ({ søknader, dokumenter }: PageProps) => {
     <Layout>
       <Section>
         <GuidePanel poster>
-          <Label as={'p'} spacing>
+          <Heading level="2" size="medium" spacing>
             Velkommen til Mine AAP!
-          </Label>
+          </Heading>
           <BodyShort spacing>
-            På denne siden finner du en oversikt over alle dine dokumenter som er knyttet til
-            arbeidsavklaringspenger.
-          </BodyShort>
-
-          <BodyShort spacing>
-            Her kan du også ettersende dokumenter til søknad og sak, eller gi oss beskjed om
-            eventuelle endringer.
+            På denne siden finner du:
+            <ul>
+              <li>Mulighet for å ettersende dokumenter til søknad og sak</li>
+              <li>
+                Mulighet for å gi beskjed om endringer og gi oss opplysninger du mener er viktig for
+                saken din
+              </li>
+              <li>
+                En oversikt over alle dine dokumenter som er knyttet til arbeidsavklaringspenger
+              </li>
+            </ul>
           </BodyShort>
 
           <BodyShort spacing>
@@ -104,44 +108,61 @@ const Index = ({ søknader, dokumenter }: PageProps) => {
           </Heading>
           <ul>
             <li>
-              <Label>Vi sjekker om vi har nok helseopplysninger</Label>
+              <Label as={'p'}>Vi sjekker om vi har nok helseopplysninger</Label>
               <BodyLong spacing>
                 Hvis vi har behov for flere helseopplysninger, vil vi bruke informasjonen du ga oss
-                i søknaden til å bestille dette fra lege eller annen behandler.
+                i søknaden til å bestille legeerklæring fra lege eller annen behandler.
               </BodyLong>
             </li>
             <li>
-              <Label>Vi vurderer mulighetene og begrensningene dine i møte med arbeidslivet</Label>
+              <Label as={'p'}>
+                Vi vurderer mulighetene og begrensningene dine i møte med arbeidslivet
+              </Label>
               <BodyLong spacing>
                 Du har krav på en vurdering av hvilken oppfølging du trenger fra NAV for å komme i
-                eller beholde arbeid (folketrygdloven §14a). Vi bruker da legeerklæringen og
-                opplysningene du har gitt oss til å se på mulighetene dine til å jobbe. Hvis vi
-                trenger det, tar vi kontakt med deg for å få mer informasjon om situasjonen din. Du
-                får et brev med vurderingen vår. Hvis du ikke er enig i den,{' '}
-                <Link href="#">bør du klage på oppfølgingsvedtaket</Link>.
+                eller beholde arbeid (folketrygdloven §14a). Vi bruker helseopplysninger og
+                opplysningene du har gitt oss til å se på mulighetene dine. Hvis vi trenger det, tar
+                vi kontakt med deg. Du får et brev med vurderingen vår. Hvis du har spørsmål kan du
+                ta kontakt med oss. Hvis du ikke er enig i vurderingen,{' '}
+                <Link href="https://www.nav.no/soknader/nb/person/arbeid/arbeidsavklaringspenger/NAV%2011-13.05/klage-eller-anke/brev">
+                  kan du klage på oppfølgingsvedtaket
+                </Link>
+                .
               </BodyLong>
             </li>
             <li>
-              <Label>Hva kan du gjøre?</Label>
+              <Label as={'p'}>Hva kan du gjøre?</Label>
               <BodyLong spacing>
-                Det er til hjelp for oss om du registrerer{' '}
-                <Link href="#">CV-en din på arbeidsplassen.no</Link>. Husk å laste opp vedlegg. Gi
-                beskjed hvis noe endrer seg.
+                Det er til hjelp for oss om du:
+                <ul>
+                  <li>
+                    Registrerer{' '}
+                    <Link href="https://arbeidsplassen.nav.no/">
+                      CV-en din på arbeidsplassen.no
+                    </Link>
+                  </li>
+                  <li>Husker å ettersende dokumenter som mangler</li>
+                  <li>Gir beskjed hvis situasjoen din endrer seg</li>
+                </ul>
               </BodyLong>
             </li>
             <li>
-              <Label>Vi sjekker om du har rett på AAP</Label>
+              <Label as={'p'}>Vi sjekker om du har rett på AAP</Label>
               <BodyLong spacing>
                 Til sist sjekker vi om du har rett på AAP etter folketrygdloven kapittel 11. Vi
                 bruker her opplysningene vi har fått i forbindelse med søknaden.
               </BodyLong>
             </li>
             <li>
-              <Label>Svar på AAP-søknaden</Label>
+              <Label as={'p'}>Svar på AAP-søknaden</Label>
               <BodyLong spacing>
-                Du får et vedtak med vurderingen vår av om du har rett på AAP eller ikke. Her står
-                det også hvor mye du vil få utbetalt. Hvis du ikke er enig,{' '}
-                <Link href="#">bør du klage på AAP-vedtaket</Link>.
+                Du får et vedtak med vurderingen vår av om du har rett på AAP eller ikke, og hvor
+                mye du vil få utbetalt. Hvis du har spørsmål til vurderingen, kan du ta kontakt med
+                oss. Hvis du ikke er enig,{' '}
+                <Link href="https://www.nav.no/soknader/nb/person/arbeid/arbeidsavklaringspenger/NAV%2011-13.05/klage-eller-anke/brev">
+                  kan du klage på AAP-vedtaket
+                </Link>
+                .
               </BodyLong>
               <BodyLong spacing>
                 Du har rett til oppfølgning fra NAV uansett om du får innvilget AAP eller ikke.
@@ -150,15 +171,14 @@ const Index = ({ søknader, dokumenter }: PageProps) => {
           </ul>
         </Panel>
 
-        <Heading level="2" size="medium">
-          Er det noe du vil melde fra om til oss?
-        </Heading>
         <Panel border>
-          <Label spacing>Endring</Label>
+          <Heading level="2" size="medium" spacing>
+            Vil du melde fra om en endring i din situasjon?
+          </Heading>
+
           <BodyShort spacing>
-            Vil du melde fra om en endring i din situasjon? Er du redd for at noe har blitt feil?
-            Hvis du har en aktivitetsplan, benytter du denne. Har du ikke aktivitetsplan kan du
-            skrive til oss.
+            Her kan du gi beskjed om endringer og gi oss opplysninger du mener er viktig for saken
+            din. Hvis du har en aktivitetsplan, benytter du denne.
           </BodyShort>
           <Button
             variant="secondary"
