@@ -13,9 +13,9 @@ const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) =
   }
   const accessToken = getAccessTokenFromRequest(req);
   const result = await lesDokument(journalpostId as string, dokumentId as string, accessToken);
-  const filename = `${journalpostId}-${dokumentId}.pdf`;
-  res.setHeader('Content-Type', 'application/pdf');
-  res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+  //const filename = `${journalpostId}-${dokumentId}.pdf`;
+  //res.setHeader('Content-Type', 'application/pdf');
+  //res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
   res.status(200).send(result.body);
 });
 
