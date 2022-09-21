@@ -45,7 +45,24 @@ const Index = ({ søknader, dokumenter }: PageProps) => {
   return (
     <Layout>
       <Section>
-        <GuidePanel>Hei, nå har du kommet til Mine AAP. Mer tekst kommer.</GuidePanel>
+        <GuidePanel poster>
+          <Label as={'p'} spacing>
+            Velkommen til Mine AAP!
+          </Label>
+          <BodyShort spacing>
+            På denne siden finner du en oversikt over alle dine dokumenter som er knyttet til
+            arbeidsavklaringspenger.
+          </BodyShort>
+
+          <BodyShort spacing>
+            Her kan du også ettersende dokumenter til søknad og sak, eller gi oss beskjed om
+            eventuelle endringer.
+          </BodyShort>
+
+          <BodyShort spacing>
+            Denne siden er under utvikling, og vil bli utvidet med flere funksjoner etter hvert.
+          </BodyShort>
+        </GuidePanel>
       </Section>
       {sisteSøknad && (
         <Section lightBlue>
