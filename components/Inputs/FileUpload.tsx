@@ -31,16 +31,24 @@ interface Props {
   krav: VedleggType;
   updateErrorSummary: (errors: FieldErrors, krav: string) => void;
   setErrorSummaryFocus: () => void;
+  onEttersendSuccess: (krav: VedleggType) => void;
 }
 
 export interface VedleggFormValues {
   [key: string]: { fields: OpplastetVedlegg[]; totalFileSize: number };
 }
 
-export const FileUpload = ({ søknadId, krav, updateErrorSummary, setErrorSummaryFocus }: Props) => {
+export const FileUpload = ({
+  søknadId,
+  krav,
+  updateErrorSummary,
+  setErrorSummaryFocus,
+  onEttersendSuccess,
+}: Props) => {
   const { formatMessage } = useFeatureToggleIntl();
 
   const [uploadFinished, setUploadFinished] = useState(false);
+  const [hasEttersendingError, setHasEttersendingError] = useState(false);
 
   const { control, handleSubmit, setError, setValue, clearErrors, formState } =
     useForm<VedleggFormValues>();
@@ -122,8 +130,8 @@ export const FileUpload = ({ søknadId, krav, updateErrorSummary, setErrorSummar
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [JSON.stringify(formState.errors), krav]); // 👻 - Vi må gjøre en deepCompare på formState.errors for å unngå at errors i parent blir oppdatert feil
 
-  const onSubmit = (data: VedleggFormValues) => {
-    console.log('data[krav].fields', data[krav].fields);
+  const onSubmit = async (data: VedleggFormValues) => {
+    setHasEttersendingError(false);
     const ettersendelse: Ettersendelse = {
       ...(søknadId && { søknadId: søknadId }),
       ettersendteVedlegg: [
@@ -136,12 +144,22 @@ export const FileUpload = ({ søknadId, krav, updateErrorSummary, setErrorSummar
         },
       ],
     };
-    fetch('/aap/innsyn/api/ettersendelse/send/', {
-      method: 'POST',
-      body: JSON.stringify(ettersendelse),
-    });
-    remove();
-    setUploadFinished(true);
+    try {
+      const response = await fetch('/aap/innsyn/api/ettersendelse/send/', {
+        method: 'POST',
+        body: JSON.stringify(ettersendelse),
+      });
+      if (response.ok) {
+        remove();
+        setUploadFinished(true);
+        onEttersendSuccess(krav);
+      } else {
+        setHasEttersendingError(true);
+      }
+    } catch (err) {
+      console.log(err);
+      setHasEttersendingError(true);
+    }
   };
 
   return (
@@ -164,10 +182,22 @@ export const FileUpload = ({ søknadId, krav, updateErrorSummary, setErrorSummar
           <BodyShort spacing>
             {formatMessage(`ettersendelse.vedleggstyper.${krav}.description`)}
           </BodyShort>
+          {hasEttersendingError && (
+            <Alert variant="error">Det oppstod en feil ved sending av dokumenter. :(</Alert>
+          )}
           {uploadFinished ? (
             <Alert variant="success">
-              Takk! Dokumentasjonen er nå sendt inn! Har du flere dokumenter du ønsker å sende, kan
-              du laste de opp under.
+              {krav === 'ANNET' ? (
+                <>
+                  Takk! Dokumentasjonen er nå sendt inn! Har du flere dokumenter du ønsker å sende,
+                  kan du laste de opp under.
+                </>
+              ) : (
+                <>
+                  Takk! Dokumentasjonen er nå sendt inn! Har du flere dokumenter du ønsker å sende,
+                  kan du laste de opp under Annen dokumentasjon lengre ned på siden.
+                </>
+              )}
             </Alert>
           ) : (
             <FileUploadFields
@@ -184,7 +214,7 @@ export const FileUpload = ({ søknadId, krav, updateErrorSummary, setErrorSummar
               </Button>
             </div>
           )}
-          <FileInput krav={krav} append={append} />
+          {(!uploadFinished || krav === 'ANNET') && <FileInput krav={krav} append={append} />}
         </div>
       </form>
     </Section>

@@ -33,7 +33,12 @@ const Ettersendelse = () => {
           </Heading>
         </Section>
 
-        <FileUpload krav="ANNET" updateErrorSummary={() => {}} setErrorSummaryFocus={() => {}} />
+        <FileUpload
+          krav="ANNET"
+          updateErrorSummary={() => {}}
+          setErrorSummaryFocus={() => {}}
+          onEttersendSuccess={() => {}}
+        />
 
         <Section>
           <div>
