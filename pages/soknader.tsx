@@ -12,6 +12,7 @@ import { SoknadPanel } from 'components/SoknadPanel/SoknadPanel';
 import { Left } from '@navikt/ds-icons';
 import { useRouter } from 'next/router';
 import NextLink from 'next/link';
+import metrics from 'lib/metrics';
 
 interface PageProps {
   søknader: Søknad[];
@@ -53,12 +54,14 @@ const Søknader = ({ søknader }: PageProps) => {
 
 export const getServerSideProps = beskyttetSide(
   async (ctx: NextPageContext): Promise<GetServerSidePropsResult<{}>> => {
+    const stopTimer = metrics.getServersidePropsDurationHistogram.startTimer({ path: '/soknader' });
     const bearerToken = getAccessToken(ctx);
     const params = { page: '0', size: '200', sort: 'created,desc' };
     const søknader = await getSøknader(params, bearerToken);
 
     logger.info(`søknader: ${JSON.stringify(søknader)}`);
 
+    stopTimer();
     return {
       props: { søknader },
     };

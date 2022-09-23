@@ -18,6 +18,7 @@ import { setFocus } from 'lib/utils/dom';
 import NextLink from 'next/link';
 import { Left } from '@navikt/ds-icons';
 import { useRouter } from 'next/router';
+import metrics from 'lib/metrics';
 
 interface PageProps {
   søknad: Søknad;
@@ -117,11 +118,15 @@ const Index = ({ søknad }: PageProps) => {
 
 export const getServerSideProps = beskyttetSide(
   async (ctx: NextPageContext): Promise<GetServerSidePropsResult<{}>> => {
+    const stopTimer = metrics.getServersidePropsDurationHistogram.startTimer({
+      path: '/{uuid}/ettersendelse',
+    });
     const bearerToken = getAccessToken(ctx);
     const uuid = getStringFromPossiblyArrayQuery(ctx.query.uuid);
     const søknad = await getSøknad(uuid as string, bearerToken);
 
     logger.info(`Søknad ${JSON.stringify(søknad)}`);
+    stopTimer();
     if (!søknad) {
       return {
         notFound: true,
