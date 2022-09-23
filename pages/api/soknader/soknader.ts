@@ -19,6 +19,7 @@ export const getSøknader = async (params: Record<string, string>, accessToken?:
     .join('&');
   const søknader = await tokenXProxy({
     url: `${process.env.SOKNAD_API_URL}/oppslag/soeknader${urlParams ? '?' + urlParams : ''}`,
+    prometheusPath: '/oppslag/soeknader',
     method: 'GET',
     audience: process.env.SOKNAD_API_AUDIENCE ?? '',
     bearerToken: accessToken,

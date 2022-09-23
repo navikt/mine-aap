@@ -31,6 +31,7 @@ export const lesDokument = async (
   if (isMock()) return await fetch('http://localhost:3000/aap/innsyn/Rød.png');
   return await tokenXProxy({
     url: `${process.env.SOKNAD_API_URL}/oppslag/dokument/${journalpostId}/${dokumentId}`,
+    prometheusPath: '/oppslag/dokument/{journalpostId}/{dokumentId}',
     method: 'GET',
     audience: process.env.SOKNAD_API_AUDIENCE!,
     bearerToken: accessToken,
