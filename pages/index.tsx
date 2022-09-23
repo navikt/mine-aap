@@ -27,6 +27,7 @@ import { getSøknader } from 'pages/api/soknader/soknader';
 import logger from 'lib/utils/logger';
 import { useRouter } from 'next/router';
 import { Dokumentoversikt } from 'components/Dokumentoversikt/Dokumentoversikt';
+import metrics from 'lib/metrics';
 
 interface PageProps {
   søknader: Søknad[];
@@ -198,6 +199,7 @@ const Index = ({ søknader, dokumenter }: PageProps) => {
 
 export const getServerSideProps = beskyttetSide(
   async (ctx: NextPageContext): Promise<GetServerSidePropsResult<{}>> => {
+    const stopTimer = metrics.getServersidePropsDurationHistogram.startTimer({ path: '/' });
     const bearerToken = getAccessToken(ctx);
     const params = { page: '0', size: '1', sort: 'created,desc' };
     const søknader = await getSøknader(params, bearerToken);
@@ -205,6 +207,7 @@ export const getServerSideProps = beskyttetSide(
 
     logger.info(`søknader: ${JSON.stringify(søknader)}`);
 
+    stopTimer();
     return {
       props: { søknader, dokumenter },
     };
