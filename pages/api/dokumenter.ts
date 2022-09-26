@@ -15,6 +15,7 @@ export const getDocuments = async (accessToken?: string) => {
   if (isMock()) return mockDokumenter;
   return await tokenXProxy({
     url: `${process.env.SOKNAD_API_URL}/oppslag/dokumenter`,
+    prometheusPath: '/oppslag/dokumenter',
     method: 'GET',
     audience: process.env.SOKNAD_API_AUDIENCE!,
     bearerToken: accessToken,
