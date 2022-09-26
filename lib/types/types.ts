@@ -1,8 +1,10 @@
 export interface Dokument {
+  journalpostId?: string;
+  dokumentId?: string;
   tittel: string;
-  timestamp: string;
-  url: string;
-  type: string;
+  type: 'I' | 'U' | 'N';
+  innsendingsId: string;
+  dato: string;
 }
 
 export type VedleggType = 'ARBEIDSGIVER' | 'STUDIER' | 'ANDREBARN' | 'OMSORG' | 'UTLAND' | 'ANNET';
@@ -11,14 +13,7 @@ export interface Søknad {
   fnr?: string;
   innsendtDato: string;
   søknadId: string;
-  innsendteVedlegg?: Array<{
-    journalpostId?: string;
-    dokumentId?: string;
-    tittel: string;
-    type: 'I' | 'U' | 'N';
-    innsendingsId: string;
-    dato: string;
-  }>;
+  innsendteVedlegg?: Array<Dokument>;
   manglendeVedlegg?: Array<VedleggType>;
 }
 

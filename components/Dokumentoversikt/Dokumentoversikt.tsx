@@ -1,4 +1,4 @@
-import { Panel, Heading, BodyShort, LinkPanel } from '@navikt/ds-react';
+import { Panel, Heading, BodyShort, LinkPanel, Accordion } from '@navikt/ds-react';
 import { VerticalFlexContainer } from 'components/FlexContainer/VerticalFlexContainer';
 import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { Dokument } from 'lib/types/types';
@@ -21,12 +21,22 @@ export const Dokumentoversikt = ({ dokumenter }: Props) => {
       </BodyShort>
       <VerticalFlexContainer>
         {dokumenter.map((dokument) => (
-          <LinkPanel href={dokument.url} border key={dokument.tittel}>
-            <LinkPanel.Title>{dokument.tittel}</LinkPanel.Title>
-            <LinkPanel.Description>
-              {formatMessage('dokumentoversikt.mottatt')} {formatFullDate(dokument.timestamp)}
-            </LinkPanel.Description>
-          </LinkPanel>
+          <Accordion key={dokument.dokumentId}>
+            <Accordion.Item>
+              <Accordion.Header>{dokument.tittel}</Accordion.Header>
+              <Accordion.Content>
+                <BodyShort spacing>Mottatt {formatFullDate(dokument.dato)}</BodyShort>
+                <BodyShort spacing>
+                  <Link
+                    href={`/api/dokument/?journalpostId=${dokument.journalpostId}&dokumentId=${dokument.dokumentId}`}
+                    target="_blank"
+                  >
+                    Last ned dokumentet
+                  </Link>
+                </BodyShort>
+              </Accordion.Content>
+            </Accordion.Item>
+          </Accordion>
         ))}
       </VerticalFlexContainer>
     </Panel>

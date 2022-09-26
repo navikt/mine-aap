@@ -22,7 +22,7 @@ import { SoknadPanel } from 'components/SoknadPanel/SoknadPanel';
 import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { Dokument, MellomlagretSøknad, Søknad } from 'lib/types/types';
 import { formatFullDate } from 'lib/utils/date';
-import { getDocuments } from 'pages/api/dokumentoversikt';
+import { getDocuments } from 'pages/api/dokumenter';
 import { getSøknader } from 'pages/api/soknader/soknader';
 import logger from 'lib/utils/logger';
 import { useRouter } from 'next/router';
