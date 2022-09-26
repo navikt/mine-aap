@@ -203,7 +203,7 @@ export const getServerSideProps = beskyttetSide(
     const bearerToken = getAccessToken(ctx);
     const params = { page: '0', size: '1', sort: 'created,desc' };
     const søknader = await getSøknader(params, bearerToken);
-    const dokumenter = await getDocuments();
+    const dokumenter = await getDocuments(bearerToken);
 
     logger.info(`søknader: ${JSON.stringify(søknader)}`);
 
