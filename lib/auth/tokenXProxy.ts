@@ -36,6 +36,7 @@ export const tokenXProxy = async (opts: Opts) => {
     },
   });
   stopTimer();
+  metrics.backendApiStatusCodeCounter.inc({ path: opts.prometheusPath, status: response.status });
 
   if (response.status < 200 || response.status > 300) {
     logger.error(`tokenXProxy: status for ${opts.url} er ${response.status}.`);
@@ -58,6 +59,7 @@ export const tokenXProxy = async (opts: Opts) => {
 
 interface AxiosOpts {
   url: string;
+  prometheusPath: string;
   audience: string;
   req: NextApiRequest;
   res: NextApiResponse;
@@ -69,19 +71,24 @@ export const tokenXAxiosProxy = async (opts: AxiosOpts) => {
   const tokenxToken = await getTokenXToken(idportenToken, opts.audience);
 
   logger.info('Starter opplasting av fil til ' + opts.url);
+
   try {
-    const { data } = await axios.post(opts.url, opts.req, {
+    const stopTimer = metrics.backendApiDurationHistogram.startTimer({ path: opts.prometheusPath });
+    const { data, status } = await axios.post(opts.url, opts.req, {
       responseType: 'stream',
       headers: {
         'Content-Type': opts.req?.headers['content-type'] ?? '', // which is multipart/form-data with boundary included
         Authorization: `Bearer ${tokenxToken}`,
       },
     });
+    stopTimer();
+    metrics.backendApiStatusCodeCounter.inc({ path: opts.prometheusPath, status: status });
     logger.info('Vellykket opplasting av fil til ' + opts.url);
     return data.pipe(opts.res);
   } catch (e: any) {
     let msg = '';
     logger.error({ e }, 'tokenXAxiosProxy oops ' + e.message);
+    metrics.backendApiStatusCodeCounter.inc({ path: opts.prometheusPath, status: e.code });
     return opts.res.status(500).json({ msg });
   }
 };
