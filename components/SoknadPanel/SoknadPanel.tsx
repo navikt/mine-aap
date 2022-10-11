@@ -1,5 +1,4 @@
-import { formatMessage } from '@formatjs/intl';
-import { Heading, Panel, BodyShort, Alert, Button, Label } from '@navikt/ds-react';
+import { Heading, Panel, BodyShort, Alert, Button, Label, LinkPanel } from '@navikt/ds-react';
 import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { Søknad } from 'lib/types/types';
 import { formatFullDate } from 'lib/utils/date';
@@ -15,7 +14,7 @@ export const SoknadPanel = ({ søknad }: Props) => {
   const { formatMessage } = useFeatureToggleIntl();
 
   return (
-    <Panel border>
+    <Panel className={styles.panel} border>
       <Heading level="3" size="small">
         {formatMessage('sisteSøknad.søknad.heading')}
       </Heading>
@@ -25,7 +24,10 @@ export const SoknadPanel = ({ søknad }: Props) => {
         })}
       </BodyShort>
       <BodyShort spacing>
-        <Link target="_blank" href="https://www.nav.no/saksbehandlingstid">
+        <Link
+          target="_blank"
+          href="https://www.nav.no/saksbehandlingstider#arbeidsavklaringspenger-aap"
+        >
           {formatMessage('sisteSøknad.søknad.saksbehandlingstid')}
         </Link>
       </BodyShort>
@@ -40,8 +42,13 @@ export const SoknadPanel = ({ søknad }: Props) => {
           <Label>{formatMessage('sisteSøknad.dokumentasjon.mottatt')}</Label>
           <ul>
             {søknad.innsendteVedlegg?.map((krav) => (
-              <li key={krav.vedleggType}>
-                {formatMessage(`ettersendelse.vedleggstyper.${krav.vedleggType}.heading`)}
+              <li key={krav.innsendingsId}>
+                <Link
+                  href={`/api/dokument/?journalpostId=${krav.journalpostId}&dokumentId=${krav.dokumentId}`}
+                  target="_blank"
+                >
+                  {krav.tittel}
+                </Link>
               </li>
             ))}
           </ul>

@@ -9,6 +9,9 @@ import * as styles from 'pages/[uuid]/ettersendelse/Ettersendelse.module.css';
 import NextLink from 'next/link';
 import { Left } from '@navikt/ds-icons';
 import { useRouter } from 'next/router';
+import metrics from 'lib/metrics';
+import { getSøknader } from './api/soknader/soknader';
+import { getAccessToken } from 'lib/auth/accessToken';
 
 const Ettersendelse = () => {
   const { formatMessage } = useFeatureToggleIntl();
@@ -33,7 +36,12 @@ const Ettersendelse = () => {
           </Heading>
         </Section>
 
-        <FileUpload krav="ANNET" updateErrorSummary={() => {}} setErrorSummaryFocus={() => {}} />
+        <FileUpload
+          krav="ANNET"
+          updateErrorSummary={() => {}}
+          setErrorSummaryFocus={() => {}}
+          onEttersendSuccess={() => {}}
+        />
 
         <Section>
           <div>
@@ -49,6 +57,23 @@ const Ettersendelse = () => {
 
 export const getServerSideProps = beskyttetSide(
   async (ctx: NextPageContext): Promise<GetServerSidePropsResult<{}>> => {
+    const stopTimer = metrics.getServersidePropsDurationHistogram.startTimer({
+      path: '/ettersendelse',
+    });
+    const bearerToken = getAccessToken(ctx);
+    const params = { page: '0', size: '1', sort: 'created,desc' };
+    const søknader = await getSøknader(params, bearerToken);
+    stopTimer();
+
+    if (søknader.length > 0) {
+      return {
+        redirect: {
+          destination: `/${søknader[0].søknadId}/ettersendelse/`,
+          permanent: false,
+        },
+      };
+    }
+
     return {
       props: {},
     };
