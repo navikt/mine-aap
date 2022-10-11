@@ -10,6 +10,8 @@ import NextLink from 'next/link';
 import { Left } from '@navikt/ds-icons';
 import { useRouter } from 'next/router';
 import metrics from 'lib/metrics';
+import { getSøknader } from './api/soknader/soknader';
+import { getAccessToken } from 'lib/auth/accessToken';
 
 const Ettersendelse = () => {
   const { formatMessage } = useFeatureToggleIntl();
@@ -58,7 +60,20 @@ export const getServerSideProps = beskyttetSide(
     const stopTimer = metrics.getServersidePropsDurationHistogram.startTimer({
       path: '/ettersendelse',
     });
+    const bearerToken = getAccessToken(ctx);
+    const params = { page: '0', size: '1', sort: 'created,desc' };
+    const søknader = await getSøknader(params, bearerToken);
     stopTimer();
+
+    if (søknader.length > 0) {
+      return {
+        redirect: {
+          destination: `/${søknader[0].søknadId}/ettersendelse/`,
+          permanent: false,
+        },
+      };
+    }
+
     return {
       props: {},
     };
