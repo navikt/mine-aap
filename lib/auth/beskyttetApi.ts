@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { isMock } from 'lib/utils/environments';
-import logger from 'lib/utils/logger';
+import { logger } from '@navikt/aap-felles-innbygger-utils';
 import { ErrorMedStatus } from 'lib/auth/ErrorMedStatus';
 import { verifyIdportenAccessToken } from 'lib/auth/verifyIdPortenAccessToken';
 

@@ -10,7 +10,7 @@ import { OpplastetVedlegg, Søknad } from 'lib/types/types';
 import * as styles from 'pages/[uuid]/ettersendelse/Ettersendelse.module.css';
 import { getSøknad } from 'pages/api/soknader/[uuid]';
 import { getStringFromPossiblyArrayQuery } from 'lib/utils/string';
-import logger from 'lib/utils/logger';
+import { logger } from '@navikt/aap-felles-innbygger-utils';
 import { useEffect, useState } from 'react';
 import { FieldErrors } from 'react-hook-form';
 import { FormErrorSummary } from 'components/FormErrorSummary/FormErrorSummary';

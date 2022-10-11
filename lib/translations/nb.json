@@ -5,7 +5,7 @@
     "søknad": {
       "heading": "Søknad om arbeidsavklaringspenger (AAP)",
       "mottatt": "Mottatt {date}",
-      "saksbehandlingstid": "Se forventet saksbehandlingstid",
+      "saksbehandlingstid": "Se forventet saksbehandlingstid (åpnes i ny fane)",
       "alert": {
         "message": "Vi mangler dokumentasjon fra deg for å kunne behandle søknaden. Ettersend dette til oss så raskt du kan."
       },

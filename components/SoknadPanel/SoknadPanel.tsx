@@ -25,7 +25,7 @@ export const SoknadPanel = ({ søknad }: Props) => {
         })}
       </BodyShort>
       <BodyShort spacing>
-        <Link href="https://www.nav.no/saksbehandlingstid">
+        <Link target="_blank" href="https://www.nav.no/saksbehandlingstid">
           {formatMessage('sisteSøknad.søknad.saksbehandlingstid')}
         </Link>
       </BodyShort>

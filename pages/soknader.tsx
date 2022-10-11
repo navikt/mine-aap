@@ -6,7 +6,7 @@ import { VerticalFlexContainer } from 'components/FlexContainer/VerticalFlexCont
 import { Layout } from 'components/Layout/Layout';
 import { Section } from 'components/Section/Section';
 import { Søknad } from '../lib/types/types';
-import logger from 'lib/utils/logger';
+import { logger } from '@navikt/aap-felles-innbygger-utils';
 import { getSøknader } from 'pages/api/soknader/soknader';
 import { SoknadPanel } from 'components/SoknadPanel/SoknadPanel';
 import { Left } from '@navikt/ds-icons';

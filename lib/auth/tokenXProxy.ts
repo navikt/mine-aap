@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next/dist/shared/lib/utils';
 import axios from 'axios';
 
 import { getTokenXToken } from 'lib/auth/getTokenXToken';
-import logger from 'lib/utils/logger';
+import { logger } from '@navikt/aap-felles-innbygger-utils';
 import { ErrorMedStatus } from 'lib/auth/ErrorMedStatus';
 
 interface Opts {

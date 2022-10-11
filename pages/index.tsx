@@ -22,7 +22,7 @@ import { Dokument, MellomlagretSøknad, Søknad } from 'lib/types/types';
 import { formatFullDate } from 'lib/utils/date';
 import { getDocuments } from 'pages/api/dokumentoversikt';
 import { getSøknader } from 'pages/api/soknader/soknader';
-import logger from 'lib/utils/logger';
+import { logger } from '@navikt/aap-felles-innbygger-utils';
 import { useRouter } from 'next/router';
 
 interface PageProps {
