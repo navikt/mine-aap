@@ -5,7 +5,7 @@ on:
     branches:
       - "main"
 env:
-  "IMAGE": "ghcr.io/${{ github.repository }}:${{ github.sha }}"
+  "IMAGE": "ghcr.io/${{ github.repository }}:${{ github.sha }}-dev"
   SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
 jobs:
   "build":
