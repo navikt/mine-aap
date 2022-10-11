@@ -1,4 +1,4 @@
-import { BodyShort, Button, GuidePanel, Heading, Label, Link, Panel } from '@navikt/ds-react';
+import { BodyShort, Button, Heading, Label, Link, Panel } from '@navikt/ds-react';
 import type { GetServerSidePropsResult, NextPageContext } from 'next';
 import NextLink from 'next/link';
 import { useMemo } from 'react';
@@ -9,7 +9,6 @@ import { Section } from 'components/Section/Section';
 import { SoknadPanel } from 'components/SoknadPanel/SoknadPanel';
 import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { Dokument, Søknad } from 'lib/types/types';
-import { formatFullDate } from 'lib/utils/date';
 import { getDocuments } from 'pages/api/dokumenter';
 import { getSøknader } from 'pages/api/soknader/soknader';
 import { logger } from '@navikt/aap-felles-innbygger-utils';
@@ -17,6 +16,7 @@ import { useRouter } from 'next/router';
 import { Dokumentoversikt } from 'components/Dokumentoversikt/Dokumentoversikt';
 import metrics from 'lib/metrics';
 import { HvaSkjerPanel } from 'components/HvaSkjerPanel/HvaSkjerPanel';
+import { LucaGuidePanel } from '@navikt/aap-felles-innbygger-react';
 
 interface PageProps {
   søknader: Søknad[];
@@ -35,7 +35,7 @@ const Index = ({ søknader, dokumenter }: PageProps) => {
   return (
     <Layout>
       <Section>
-        <GuidePanel poster>
+        <LucaGuidePanel>
           <Heading level="2" size="medium" spacing>
             Velkommen til Mine AAP!
           </Heading>
@@ -55,7 +55,7 @@ const Index = ({ søknader, dokumenter }: PageProps) => {
           <BodyShort spacing>
             Denne siden er under utvikling, og vil bli utvidet med flere funksjoner etter hvert.
           </BodyShort>
-        </GuidePanel>
+        </LucaGuidePanel>
       </Section>
       {sisteSøknad && (
         <Section lightBlue>

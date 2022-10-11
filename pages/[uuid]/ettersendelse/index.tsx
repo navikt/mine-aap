@@ -1,4 +1,5 @@
-import { BodyShort, Button, GuidePanel, Heading, Label, Link } from '@navikt/ds-react';
+import { BodyShort, Button, Heading, Label, Link } from '@navikt/ds-react';
+import { LucaGuidePanel } from '@navikt/aap-felles-innbygger-react';
 import { GetServerSidePropsResult, NextPageContext } from 'next';
 import { getAccessToken } from 'lib/auth/accessToken';
 import { beskyttetSide } from 'lib/auth/beskyttetSide';
@@ -68,13 +69,13 @@ const Index = ({ søknad }: PageProps) => {
               Tilbake til Mine Arbeidsavklaringspenger
             </Link>
           </NextLink>
-          <GuidePanel poster>
+          <LucaGuidePanel>
             <BodyShort spacing>
               Hvis du skal ettersende vedlegg, må du sende disse innen 14 dager. Du kan ettersende
               enten digitalt eller per post. Trenger du mer tid, kan du be om lenger frist. Dette
               kan du gjøre via nav.no eller ringe oss etter at søknaden er sendt inn.
             </BodyShort>
-          </GuidePanel>
+          </LucaGuidePanel>
           <Heading level="2" size="medium" spacing>
             {formatMessage('ettersendelse.heading')}
           </Heading>
