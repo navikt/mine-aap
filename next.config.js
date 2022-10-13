@@ -7,7 +7,7 @@ const sentryWebpackPluginOptions = {
 };
 
 const nextConfig = {
-  basePath: '/aap/innsyn',
+  basePath: '/aap/mine-aap',
   trailingSlash: true,
   reactStrictMode: true,
   output: 'standalone',

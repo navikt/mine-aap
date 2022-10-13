@@ -12,11 +12,11 @@ spec:
   image: {{image}}
   port: 3000
   liveness:
-    path: "/aap/innsyn/api/internal/isAlive"
+    path: "/aap/mine-aap/api/internal/isAlive"
     initialDelay: 20
     timeout: 60
   readiness:
-    path: "/aap/innsyn/api/internal/isReady"
+    path: "/aap/mine-aap/api/internal/isReady"
     initialDelay: 20
     timeout: 60
   replicas:
@@ -30,7 +30,7 @@ spec:
       memory: 256Mi
   prometheus:
     enabled: true
-    path: /aap/innsyn/api/internal/prometheus/
+    path: /aap/mine-aap/api/internal/prometheus/
   idporten:
     enabled: true
     sidecar:

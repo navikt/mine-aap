@@ -61,7 +61,7 @@ export const FileUploadFields = ({ fields, krav, remove, errors }: Props) => {
                           <div>
                             <Link
                               target={'_blank'}
-                              href={`/aap/innsyn/vedlegg/${attachment?.vedleggId}`}
+                              href={`/aap/mine-aap/vedlegg/${attachment?.vedleggId}`}
                             >
                               {attachment?.name}
                             </Link>
@@ -93,7 +93,7 @@ export const FileUploadFields = ({ fields, krav, remove, errors }: Props) => {
                   <button
                     type={'button'}
                     onClick={() =>
-                      fetch(`/aap/innsyn/api/vedlegg/slett/?uuid=${attachment?.vedleggId}`, {
+                      fetch(`/aap/mine-aap/api/vedlegg/slett/?uuid=${attachment?.vedleggId}`, {
                         method: 'DELETE',
                       }).then(() => remove(index))
                     }

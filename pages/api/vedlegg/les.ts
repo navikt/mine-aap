@@ -16,7 +16,7 @@ const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) =
 });
 
 export const lesVedlegg = async (uuid: string, accessToken?: string) => {
-  if (isMock()) return await fetch('http://localhost:3000/aap/innsyn/Rød.png');
+  if (isMock()) return await fetch('http://localhost:3000/aap/mine-aap/Rød.png');
   return await tokenXProxy({
     url: `${process.env.SOKNAD_API_URL}/vedlegg/les/${uuid}`,
     prometheusPath: '/vedlegg/les/{uuid}',

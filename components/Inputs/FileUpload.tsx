@@ -102,7 +102,7 @@ export const FileUpload = ({
       }
       const data = new FormData();
       data.append('vedlegg', field.file);
-      const vedlegg = await fetch('/aap/innsyn/api/vedlegg/lagre/', {
+      const vedlegg = await fetch('/aap/mine-aap/api/vedlegg/lagre/', {
         method: 'POST',
         body: data,
       });
@@ -145,7 +145,7 @@ export const FileUpload = ({
       ],
     };
     try {
-      const response = await fetch('/aap/innsyn/api/ettersendelse/send/', {
+      const response = await fetch('/aap/mine-aap/api/ettersendelse/send/', {
         method: 'POST',
         body: JSON.stringify(ettersendelse),
       });

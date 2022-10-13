@@ -12,7 +12,7 @@ const Vedlegg = ({ uuid }: PageProps) => {
 
   useEffect(() => {
     const getFile = async () => {
-      const file = await fetch(`/aap/innsyn/api/vedlegg/les/?uuid=${uuid}`).then((res) =>
+      const file = await fetch(`/aap/mine-aap/api/vedlegg/les/?uuid=${uuid}`).then((res) =>
         res.blob()
       );
       file && setFile(file);
