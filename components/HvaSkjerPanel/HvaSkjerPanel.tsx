@@ -18,11 +18,14 @@ export const HvaSkjerPanel = () => {
         <li>
           <Label as={'p'}>{formatMessage('hvaSkjerPanel.punkt2.label')}</Label>
           <BodyLong spacing>
-            {formatMessage('hvaSkjerPanel.punkt2.tekst')}
-            <Link href="https://www.nav.no/soknader/nb/person/arbeid/arbeidsavklaringspenger/NAV%2011-13.05/klage-eller-anke/brev">
-              {formatMessage('hvaSkjerPanel.punkt2.link')}
-            </Link>
-            .
+            {formatElement('hvaSkjerPanel.punkt2.tekst', {
+              // @ts-ignore-line
+              a: (chunks: string[]) => (
+                <Link href="https://www.nav.no/soknader/nb/person/arbeid/arbeidsavklaringspenger/NAV%2011-13.05/klage-eller-anke/brev">
+                  {chunks?.[0]}
+                </Link>
+              ),
+            })}
           </BodyLong>
         </li>
         <li>
@@ -30,9 +33,12 @@ export const HvaSkjerPanel = () => {
           <BodyShort spacing>{formatMessage('hvaSkjerPanel.punkt3.tekst')}</BodyShort>
           <ul>
             <li>
-              <Link href="https://arbeidsplassen.nav.no/">
-                {formatMessage('hvaSkjerPanel.punkt3.punkt1')}
-              </Link>
+              {formatElement('hvaSkjerPanel.punkt3.punkt1', {
+                // @ts-ignore-line
+                a: (chunks: string[]) => (
+                  <Link href="https://arbeidsplassen.nav.no/">{chunks?.[0]}</Link>
+                ),
+              })}
             </li>
             <li>{formatMessage('hvaSkjerPanel.punkt3.punkt2')}</li>
             <li>{formatMessage('hvaSkjerPanel.punkt3.punkt3')}</li>
@@ -47,18 +53,16 @@ export const HvaSkjerPanel = () => {
           <BodyLong spacing>
             {formatElement('hvaSkjerPanel.punkt5.tekst', {
               // @ts-ignore-line
-              a: (chunks: string[]) => {
-                return (
-                  <Link
-                    target="_blank"
-                    href={
-                      'https://www.nav.no/soknader/nb/person/arbeid/arbeidsavklaringspenger/NAV%2011-13.05/klage-eller-anke/brev'
-                    }
-                  >
-                    {chunks?.[0]}
-                  </Link>
-                );
-              },
+              a: (chunks: string[]) => (
+                <Link
+                  target="_blank"
+                  href={
+                    'https://www.nav.no/soknader/nb/person/arbeid/arbeidsavklaringspenger/NAV%2011-13.05/klage-eller-anke/brev'
+                  }
+                >
+                  {chunks?.[0]}
+                </Link>
+              ),
             })}
           </BodyLong>
           <BodyLong spacing>{formatMessage('hvaSkjerPanel.punkt5.tekst2')}</BodyLong>

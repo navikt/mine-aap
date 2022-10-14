@@ -125,15 +125,14 @@
     },
     "punkt2": {
       "label": "Vi vurderer mulighetene og begrensningene dine i møte med arbeidslivet",
-      "tekst": "Du har krav på en vurdering av hvilken oppfølging du trenger fra NAV for å komme i eller beholde arbeid (folketrygdloven §14a). Vi bruker helseopplysninger og opplysningene du har gitt oss til å se på mulighetene dine. Hvis vi trenger det, tar vi kontakt med deg. Du får et brev med vurderingen vår. Hvis du har spørsmål kan du ta kontakt med oss. Hvis du ikke er enig i vurderingen ",
-      "link": "kan du klage på oppfølgingsvedtaket"
+      "tekst": "Du har krav på en vurdering av hvilken oppfølging du trenger fra NAV for å komme i eller beholde arbeid (NAV-loven §14a). Vi tar utgangspunkt i de opplysningene du har gitt oss. Hvis vi trenger det, tar vi kontakt med deg. Du får et brev med vurderingen vår. Hvis du har spørsmål kan du ta kontakt med oss. Hvis du ikke er enig i den, <a>kan du klage på oppfølgingsvedtaket</a>."
     },
     "punkt3": {
       "label": "Hva kan du gjøre?",
       "tekst": "Det er til hjelp for oss om du:",
-      "punkt1": "Registrerer CV-en din på arbeidsplassen.no",
-      "punkt2": "Husker å ettersende dokumenter som mangler",
-      "punkt3": "Gir beskjed hvis situasjoen din endrer seg",
+      "punkt1": "Registrerer <a>CV-en din, gjerne på arbeidsplassen.no</a>.",
+      "punkt2": "Ettersender dokumenter som mangler.",
+      "punkt3": "Gir beskjed hvis situasjonen din endrer seg.",
       "link": "kan du klage på oppfølgingsvedtaket"
     },
     "punkt4": {
