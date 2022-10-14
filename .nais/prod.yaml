@@ -1,5 +1,4 @@
 ingresses:
-- "https://aap-innsyn.intern.nav.no/aap/mine-aap"
 - "https://www.nav.no/aap/mine-aap"
 env:
 - name: APP_URL
