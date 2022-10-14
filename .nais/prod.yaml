@@ -1,7 +1,8 @@
 ingresses:
-- "https://aap-innsyn.intern.nav.no"
+- "https://aap-innsyn.intern.nav.no/aap/mine-aap"
+- "https://www.nav.no/aap/mine-aap"
 env:
 - name: APP_URL
-  value: "https://aap-innsyn.intern.nav.no"
+  value: "https://www.nav.no/aap/mine-aap"
 externals:
   - "dekoratoren.nav.no"
