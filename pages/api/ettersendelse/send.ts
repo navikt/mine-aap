@@ -3,10 +3,18 @@ import { getAccessTokenFromRequest } from 'lib/auth/accessToken';
 import { beskyttetApi } from 'lib/auth/beskyttetApi';
 import { tokenXProxy } from 'lib/auth/tokenXProxy';
 import { isMock } from 'lib/utils/environments';
+import metrics from 'lib/metrics';
+import { Ettersendelse } from 'lib/types/types';
 
 const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) => {
   const accessToken = getAccessTokenFromRequest(req);
   await sendEttersendelse(req.body, accessToken);
+
+  const { ettersendteVedlegg }: Ettersendelse = JSON.parse(req.body);
+  ettersendteVedlegg.forEach((ettersendelse) => {
+    metrics.ettersendVedleggCounter.inc({ type: ettersendelse.vedleggType });
+  });
+
   res.status(201).json({});
 });
 

@@ -28,6 +28,12 @@ export class AppMetrics {
     help: 'Load time for getServerSideProps',
     labelNames: ['path'],
   });
+
+  public ettersendVedleggCounter = new Counter({
+    name: 'mine_aap_ettersend_vedlegg',
+    help: 'Ettersendte vedlegg til søknad gruppert på type',
+    labelNames: ['type'],
+  });
 }
 
 global._metrics = global._metrics || new AppMetrics();

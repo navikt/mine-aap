@@ -37,8 +37,10 @@ export interface OpplastetVedlegg {
 
 export interface Ettersendelse {
   søknadId?: string;
-  ettersendteVedlegg: Array<{
-    ettersending: Array<string>;
-    vedleggType: VedleggType;
-  }>;
+  ettersendteVedlegg: Array<EttersendteVedlegg>;
+}
+
+export interface EttersendteVedlegg {
+  ettersending: Array<string>;
+  vedleggType: VedleggType;
 }
