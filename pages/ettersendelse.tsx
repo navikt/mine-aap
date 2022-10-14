@@ -46,7 +46,7 @@ const Ettersendelse = () => {
         <Section>
           <div>
             <Button icon={<Left />} variant="tertiary" onClick={() => router.push('/')}>
-              Tilbake til Mine Arbeidsavklaringspenger
+              {formatMessage('tilbakeTilMineAAPKnapp')}
             </Button>
           </div>
         </Section>

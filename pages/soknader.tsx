@@ -5,7 +5,7 @@ import { beskyttetSide } from 'lib/auth/beskyttetSide';
 import { VerticalFlexContainer } from 'components/FlexContainer/VerticalFlexContainer';
 import { Layout } from 'components/Layout/Layout';
 import { Section } from 'components/Section/Section';
-import { Søknad } from '../lib/types/types';
+import { Søknad } from 'lib/types/types';
 import { logger } from '@navikt/aap-felles-innbygger-utils';
 import { getSøknader } from 'pages/api/soknader/soknader';
 import { SoknadPanel } from 'components/SoknadPanel/SoknadPanel';
@@ -13,6 +13,7 @@ import { Left } from '@navikt/ds-icons';
 import { useRouter } from 'next/router';
 import NextLink from 'next/link';
 import metrics from 'lib/metrics';
+import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 
 interface PageProps {
   søknader: Søknad[];
@@ -20,6 +21,7 @@ interface PageProps {
 
 const Søknader = ({ søknader }: PageProps) => {
   const router = useRouter();
+  const { formatMessage } = useFeatureToggleIntl();
 
   return (
     <Layout>
@@ -27,12 +29,12 @@ const Søknader = ({ søknader }: PageProps) => {
         <NextLink href="/" passHref>
           <Link>
             <Left />
-            Tilbake til Mine Arbeidsavklaringspenger
+            {formatMessage('tilbakeTilMineAAPKnapp')}
           </Link>
         </NextLink>
         <div>
           <Heading level="2" size="medium" spacing>
-            Dine innsendte søknader
+            {formatMessage('dineSøknader.heading')}
           </Heading>
           <VerticalFlexContainer>
             {søknader.map((søknad) => (
@@ -44,7 +46,7 @@ const Søknader = ({ søknader }: PageProps) => {
       <Section>
         <div>
           <Button icon={<Left />} variant="tertiary" onClick={() => router.push('/')}>
-            Tilbake til Mine Arbeidsavklaringspenger
+            {formatMessage('tilbakeTilMineAAPKnapp')}
           </Button>
         </div>
       </Section>

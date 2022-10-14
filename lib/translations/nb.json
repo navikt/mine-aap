@@ -1,5 +1,25 @@
 {
   "appTittel": "Mine arbeidsavklaringspenger",
+  "forside": {
+    "heading": "Velkommen til Mine AAP!",
+    "introListe": {
+      "tittel": "På denne siden finner du:",
+      "punkt1": "Mulighet for å ettersende dokumenter til søknad og sak",
+      "punkt2": "Mulighet for å gi beskjed om endringer og gi oss opplysninger du mener er viktig for saken din",
+      "punkt3": "En oversikt over alle dine dokumenter som er knyttet til arbeidsavklaringspenger"
+    },
+    "underUtvikling": "Denne siden er under utvikling, og vil bli utvidet med flere funksjoner etter hvert.",
+    "seInnsendteSøknaderLink": "Se alle dine innsendte søknader",
+    "ettersendelse": {
+      "tekst": "Er det noe du vil ettersende til oss om din AAP sak Da kan du gjøre det her.",
+      "knapp": "Ettersend dokumenter"
+    },
+    "endring": {
+      "heading": "Vil du melde fra om en endring i din situasjon?",
+      "tekst": "Her kan du gi beskjed om endringer og gi oss opplysninger du mener er viktig for saken din. Hvis du har en aktivitetsplan, benytter du denne.",
+      "knapp": "Meld endring"
+    }
+  },
   "sisteSøknad": {
     "heading": "Din siste søknad om arbeidsavklaringspenger",
     "søknad": {
@@ -19,6 +39,9 @@
       "vedlegg": "Vedlegg: {type} mottatt {date}"
     }
   },
+  "dineSøknader": {
+    "heading": "Dine innsendte søknader"
+  },
   "dokumentoversikt": {
     "tittel": "Dokumentoversikt",
     "ikkeSynligDokumentLink": "Har du sendt en søknad eller et dokument som ikke vises her?",
@@ -34,9 +57,11 @@
       "eller": "eller"
     }
   },
+  "tilbakeTilMineAAPKnapp": "Tilbake til Mine Arbeidsavklaringspenger",
   "ettersendelse": {
     "appTittel": "Ettersending til arbeidsavklaringspenger (AAP)",
     "heading": "Ettersend dokumentasjon",
+    "guide": "Hvis du skal ettersende vedlegg, må du sende disse innen 14 dager. Du kan ettersende enten digitalt eller per post. Trenger du mer tid, kan du be om lenger frist. Dette kan du gjøre via nav.no eller ringe oss etter at søknaden er sendt inn.",
     "manglerDokumentasjon": "Ut fra det du har svart i søknaden, mangler du følgende dokumentasjon for at vi kan ferdigbehandle søknaden din",
     "vedleggstyper": {
       "STUDIER": {
@@ -91,5 +116,34 @@
     "feilet": "Opplastingen feilet. Prøv på nytt",
     "storrelse": "Filen du lastet opp er for stor. Last opp en fil hvor størrelsen er under {size} MB",
     "totalStorrelse": "Filene du lastet opp er for store. Du kan totalt laste opp filer på {size} MB. Samlet størrelese er {filesSize} MB"
+  },
+  "hvaSkjerPanel": {
+    "heading": "Vi har mottatt søknaden din, hva skjer nå?",
+    "punkt1": {
+      "label": "Vi sjekker om vi har nok helseopplysninger",
+      "tekst": "Hvis vi har behov for flere helseopplysninger, vil vi bruke informasjonen du ga oss i søknaden til å bestille legeerklæring fra lege eller annen behandler."
+    },
+    "punkt2": {
+      "label": "Vi vurderer mulighetene og begrensningene dine i møte med arbeidslivet",
+      "tekst": "Du har krav på en vurdering av hvilken oppfølging du trenger fra NAV for å komme i eller beholde arbeid (folketrygdloven §14a). Vi bruker helseopplysninger og opplysningene du har gitt oss til å se på mulighetene dine. Hvis vi trenger det, tar vi kontakt med deg. Du får et brev med vurderingen vår. Hvis du har spørsmål kan du ta kontakt med oss. Hvis du ikke er enig i vurderingen ",
+      "link": "kan du klage på oppfølgingsvedtaket"
+    },
+    "punkt3": {
+      "label": "Hva kan du gjøre?",
+      "tekst": "Det er til hjelp for oss om du:",
+      "punkt1": "Registrerer CV-en din på arbeidsplassen.no",
+      "punkt2": "Husker å ettersende dokumenter som mangler",
+      "punkt3": "Gir beskjed hvis situasjoen din endrer seg",
+      "link": "kan du klage på oppfølgingsvedtaket"
+    },
+    "punkt4": {
+      "label": "Vi sjekker om du har rett på AAP",
+      "tekst": "Til sist sjekker vi om du har rett på AAP etter folketrygdloven kapittel 11. Vi bruker her opplysningene vi har fått i forbindelse med søknaden."
+    },
+    "punkt5": {
+      "label": "Svar på AAP-søknaden",
+      "tekst": "Du får et vedtak med vurderingen vår av om du har rett på AAP eller ikke, og hvor mye du vil få utbetalt. Hvis du har spørsmål til vurderingen, kan du ta kontakt med oss. Hvis du ikke er enig, <a>kan du klage på AAP-vedtaket</a>.",
+      "tekst2": "Du har rett til oppfølgning fra NAV uansett om du får innvilget AAP eller ikke."
+    }
   }
 }

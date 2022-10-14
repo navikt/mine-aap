@@ -70,11 +70,7 @@ const Index = ({ søknad }: PageProps) => {
             </Link>
           </NextLink>
           <LucaGuidePanel>
-            <BodyShort spacing>
-              Hvis du skal ettersende vedlegg, må du sende disse innen 14 dager. Du kan ettersende
-              enten digitalt eller per post. Trenger du mer tid, kan du be om lenger frist. Dette
-              kan du gjøre via nav.no eller ringe oss etter at søknaden er sendt inn.
-            </BodyShort>
+            <BodyShort spacing>{formatMessage('ettersendelse.guide')}</BodyShort>
           </LucaGuidePanel>
           <Heading level="2" size="medium" spacing>
             {formatMessage('ettersendelse.heading')}
@@ -115,7 +111,7 @@ const Index = ({ søknad }: PageProps) => {
         <Section>
           <div>
             <Button icon={<Left />} variant="tertiary" onClick={() => router.push('/')}>
-              Tilbake til Mine Arbeidsavklaringspenger
+              {formatMessage('tilbakeTilMineAAPKnapp')}
             </Button>
           </div>
         </Section>

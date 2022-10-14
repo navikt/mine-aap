@@ -37,24 +37,17 @@ const Index = ({ søknader, dokumenter }: PageProps) => {
       <Section>
         <LucaGuidePanel>
           <Heading level="2" size="medium" spacing>
-            Velkommen til Mine AAP!
+            {formatMessage('forside.heading')}
           </Heading>
-          <BodyShort spacing>På denne siden finner du:</BodyShort>
+          <BodyShort spacing>{formatMessage('forside.introListe.tittel')}</BodyShort>
 
           <ul>
-            <li>Mulighet for å ettersende dokumenter til søknad og sak</li>
-            <li>
-              Mulighet for å gi beskjed om endringer og gi oss opplysninger du mener er viktig for
-              saken din
-            </li>
-            <li>
-              En oversikt over alle dine dokumenter som er knyttet til arbeidsavklaringspenger
-            </li>
+            <li>{formatMessage('forside.introListe.punkt1')}</li>
+            <li>{formatMessage('forside.introListe.punkt2')}</li>
+            <li>{formatMessage('forside.introListe.punkt3')}</li>
           </ul>
 
-          <BodyShort spacing>
-            Denne siden er under utvikling, og vil bli utvidet med flere funksjoner etter hvert.
-          </BodyShort>
+          <BodyShort spacing>{formatMessage('forside.underUtvikling')}</BodyShort>
         </LucaGuidePanel>
       </Section>
       {sisteSøknad && (
@@ -68,7 +61,7 @@ const Index = ({ søknader, dokumenter }: PageProps) => {
           {søknader.length > 0 && (
             <div>
               <NextLink href="/soknader" passHref>
-                <Link>Se alle dine innsendte søknader</Link>
+                <Link>{formatMessage('forside.seInnsendteSøknaderLink')}</Link>
               </NextLink>
             </div>
           )}
@@ -80,11 +73,9 @@ const Index = ({ søknader, dokumenter }: PageProps) => {
           <Dokumentoversikt dokumenter={dokumenter} />
           <Panel border>
             <Label spacing>Ettersending</Label>
-            <BodyShort spacing>
-              Er det noe du vil ettersende til oss om din AAP sak Da kan du gjøre det her.
-            </BodyShort>
+            <BodyShort spacing>{formatMessage('forside.ettersendelse.tekst')}</BodyShort>
             <Button variant="secondary" onClick={() => router.push('/ettersendelse')}>
-              Ettersend dokumenter
+              {formatMessage('forside.ettersendelse.knapp')}
             </Button>
           </Panel>
         </Section>
@@ -95,20 +86,17 @@ const Index = ({ søknader, dokumenter }: PageProps) => {
 
         <Panel border>
           <Heading level="2" size="medium" spacing>
-            Vil du melde fra om en endring i din situasjon?
+            {formatMessage('forside.endring.heading')}
           </Heading>
 
-          <BodyShort spacing>
-            Her kan du gi beskjed om endringer og gi oss opplysninger du mener er viktig for saken
-            din. Hvis du har en aktivitetsplan, benytter du denne.
-          </BodyShort>
+          <BodyShort spacing>{formatMessage('forside.endring.tekst')}</BodyShort>
           <Button
             variant="secondary"
             onClick={() =>
               (window.location.href = 'https://innboks.nav.no/s/skriv-til-oss?category=Arbeid')
             }
           >
-            Meld endring
+            {formatMessage('forside.endring.knapp')}
           </Button>
         </Panel>
 

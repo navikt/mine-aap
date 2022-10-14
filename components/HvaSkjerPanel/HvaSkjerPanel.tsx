@@ -1,70 +1,66 @@
 import { Panel, Heading, Label, BodyLong, BodyShort } from '@navikt/ds-react';
 import Link from 'next/link';
 import styles from './HvaSkjerPanel.module.css';
+import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 
 export const HvaSkjerPanel = () => {
+  const { formatMessage, formatElement } = useFeatureToggleIntl();
   return (
     <Panel className={styles.panel}>
       <Heading level="2" size="medium" spacing>
-        Vi har mottatt søknaden din, hva skjer nå?
+        {formatMessage('hvaSkjerPanel.heading')}
       </Heading>
       <ul>
         <li>
-          <Label as={'p'}>Vi sjekker om vi har nok helseopplysninger</Label>
-          <BodyLong spacing>
-            Hvis vi har behov for flere helseopplysninger, vil vi bruke informasjonen du ga oss i
-            søknaden til å bestille legeerklæring fra lege eller annen behandler.
-          </BodyLong>
+          <Label as={'p'}>{formatMessage('hvaSkjerPanel.punkt1.label')}</Label>
+          <BodyLong spacing>{formatMessage('hvaSkjerPanel.punkt1.tekst')}</BodyLong>
         </li>
         <li>
-          <Label as={'p'}>
-            Vi vurderer mulighetene og begrensningene dine i møte med arbeidslivet
-          </Label>
+          <Label as={'p'}>{formatMessage('hvaSkjerPanel.punkt2.label')}</Label>
           <BodyLong spacing>
-            Du har krav på en vurdering av hvilken oppfølging du trenger fra NAV for å komme i eller
-            beholde arbeid (folketrygdloven §14a). Vi bruker helseopplysninger og opplysningene du
-            har gitt oss til å se på mulighetene dine. Hvis vi trenger det, tar vi kontakt med deg.
-            Du får et brev med vurderingen vår. Hvis du har spørsmål kan du ta kontakt med oss. Hvis
-            du ikke er enig i vurderingen,{' '}
+            {formatMessage('hvaSkjerPanel.punkt2.tekst')}
             <Link href="https://www.nav.no/soknader/nb/person/arbeid/arbeidsavklaringspenger/NAV%2011-13.05/klage-eller-anke/brev">
-              kan du klage på oppfølgingsvedtaket
+              {formatMessage('hvaSkjerPanel.punkt2.link')}
             </Link>
             .
           </BodyLong>
         </li>
         <li>
-          <Label as={'p'}>Hva kan du gjøre?</Label>
-          <BodyShort spacing>Det er til hjelp for oss om du:</BodyShort>
+          <Label as={'p'}>{formatMessage('hvaSkjerPanel.punkt3.label')}</Label>
+          <BodyShort spacing>{formatMessage('hvaSkjerPanel.punkt3.tekst')}</BodyShort>
           <ul>
             <li>
-              Registrerer{' '}
-              <Link href="https://arbeidsplassen.nav.no/">CV-en din på arbeidsplassen.no</Link>
+              <Link href="https://arbeidsplassen.nav.no/">
+                {formatMessage('hvaSkjerPanel.punkt3.punkt1')}
+              </Link>
             </li>
-            <li>Husker å ettersende dokumenter som mangler</li>
-            <li>Gir beskjed hvis situasjoen din endrer seg</li>
+            <li>{formatMessage('hvaSkjerPanel.punkt3.punkt2')}</li>
+            <li>{formatMessage('hvaSkjerPanel.punkt3.punkt3')}</li>
           </ul>
         </li>
         <li>
-          <Label as={'p'}>Vi sjekker om du har rett på AAP</Label>
-          <BodyLong spacing>
-            Til sist sjekker vi om du har rett på AAP etter folketrygdloven kapittel 11. Vi bruker
-            her opplysningene vi har fått i forbindelse med søknaden.
-          </BodyLong>
+          <Label as={'p'}>{formatMessage('hvaSkjerPanel.punkt4.label')}</Label>
+          <BodyLong spacing>{formatMessage('hvaSkjerPanel.punkt4.tekst')}</BodyLong>
         </li>
         <li>
-          <Label as={'p'}>Svar på AAP-søknaden</Label>
+          <Label as={'p'}>{formatMessage('hvaSkjerPanel.punkt5.label')}</Label>
           <BodyLong spacing>
-            Du får et vedtak med vurderingen vår av om du har rett på AAP eller ikke, og hvor mye du
-            vil få utbetalt. Hvis du har spørsmål til vurderingen, kan du ta kontakt med oss. Hvis
-            du ikke er enig,{' '}
-            <Link href="https://www.nav.no/soknader/nb/person/arbeid/arbeidsavklaringspenger/NAV%2011-13.05/klage-eller-anke/brev">
-              kan du klage på AAP-vedtaket
-            </Link>
-            .
+            {formatElement('hvaSkjerPanel.punkt5.tekst', {
+              a: (chunks: string[]) => {
+                return (
+                  <Link
+                    target="_blank"
+                    href={
+                      'https://www.nav.no/soknader/nb/person/arbeid/arbeidsavklaringspenger/NAV%2011-13.05/klage-eller-anke/brev'
+                    }
+                  >
+                    {chunks?.[0]}
+                  </Link>
+                );
+              },
+            })}
           </BodyLong>
-          <BodyLong spacing>
-            Du har rett til oppfølgning fra NAV uansett om du får innvilget AAP eller ikke.
-          </BodyLong>
+          <BodyLong spacing>{formatMessage('hvaSkjerPanel.punkt5.tekst2')}</BodyLong>
         </li>
       </ul>
     </Panel>
