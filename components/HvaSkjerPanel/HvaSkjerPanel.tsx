@@ -46,6 +46,7 @@ export const HvaSkjerPanel = () => {
           <Label as={'p'}>{formatMessage('hvaSkjerPanel.punkt5.label')}</Label>
           <BodyLong spacing>
             {formatElement('hvaSkjerPanel.punkt5.tekst', {
+              // @ts-ignore-line
               a: (chunks: string[]) => {
                 return (
                   <Link
