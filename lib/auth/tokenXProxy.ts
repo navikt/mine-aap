@@ -39,10 +39,24 @@ export const tokenXProxy = async (opts: Opts) => {
   metrics.backendApiStatusCodeCounter.inc({ path: opts.prometheusPath, status: response.status });
 
   if (response.status < 200 || response.status > 300) {
-    logger.error(`tokenXProxy: status for ${opts.url} er ${response.status}.`);
+    const headers = response.headers.get('content-type');
+    const isJson =
+      headers?.includes('application/json') || headers?.includes('application/problem+json');
+    let data;
+    try {
+      data = isJson ? await response.json() : response.text();
+    } catch (err: any) {
+      logger.error({ msg: `unable to parse data from ${opts.url}`, error: err.toString() });
+    }
+    logger.error({
+      msg: `tokenXProxy: status for ${opts.url} er ${response.status}: ${response.statusText}.`,
+      navCallId: data?.['Nav-CallId'],
+      data,
+    });
     throw new ErrorMedStatus(
       `tokenXProxy: status for ${opts.url} er ${response.status}.`,
-      response.status
+      response.status,
+      data?.['Nav-CallId'] || ''
     );
   }
 
