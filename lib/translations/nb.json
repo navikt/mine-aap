@@ -87,6 +87,18 @@
       "ANNET": {
         "heading": "Annen dokumentasjon",
         "description": "Hvis du har noe annet du ønsker å legge ved kan du laste det opp her."
+      },
+      "LÅNEKASSEN_STIPEND": {
+        "heading": "Sykestipend fra lånekassen",
+        "description": "Kopi av vedtaket eller søknaden om sykestipend fra Lånekassen"
+      },
+      "LÅNEKASSEN_LÅN": {
+        "heading": "Studielån fra lånekassen",
+        "description": "Dokumentasjon på studielån fra Lånekassen"
+      },
+      "UTENLANDSKE": {
+        "heading": "Utbetalinger fra utendlandske trygdemyndigheter",
+        "description": "Dokumentasjon av ytelser fra utenlandske trygdemyndigheter"
       }
     },
     "annenDokumentasjon": {
