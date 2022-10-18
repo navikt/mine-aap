@@ -49,6 +49,7 @@ export const FileUpload = ({
 
   const [uploadFinished, setUploadFinished] = useState(false);
   const [hasEttersendingError, setHasEttersendingError] = useState(false);
+  const [isSendingEttersendelse, setIsSendingEttersendelse] = useState(false);
 
   const { control, handleSubmit, setError, setValue, clearErrors, formState } =
     useForm<VedleggFormValues>();
@@ -131,6 +132,7 @@ export const FileUpload = ({
   }, [JSON.stringify(formState.errors), krav]); // 👻 - Vi må gjøre en deepCompare på formState.errors for å unngå at errors i parent blir oppdatert feil
 
   const onSubmit = async (data: VedleggFormValues) => {
+    setIsSendingEttersendelse(true);
     setHasEttersendingError(false);
     const ettersendelse: Ettersendelse = {
       ...(søknadId && { søknadId: søknadId }),
@@ -160,6 +162,7 @@ export const FileUpload = ({
       console.log(err);
       setHasEttersendingError(true);
     }
+    setIsSendingEttersendelse(false);
   };
 
   return (
@@ -212,7 +215,7 @@ export const FileUpload = ({
           )}
           {fields.length > 0 && (
             <div>
-              <Button variant="primary" type="submit">
+              <Button variant="primary" type="submit" loading={isSendingEttersendelse}>
                 {formatMessage('ettersendelse.buttons.primary')}
               </Button>
             </div>
