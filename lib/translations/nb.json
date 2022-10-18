@@ -133,7 +133,7 @@
     "heading": "Vi har mottatt søknaden din, hva skjer nå?",
     "punkt1": {
       "label": "Vi sjekker om vi har nok helseopplysninger",
-      "tekst": "Hvis vi har behov for flere helseopplysninger, vil vi bruke informasjonen du ga oss i søknaden til å bestille legeerklæring fra lege eller annen behandler."
+      "tekst": "Hvis vi trenger flere helseopplysninger, spør vi legen din om å sende en legeerklæring. Vi bruker da informasjonen du ga oss i søknaden om lege eller behandler. Dette gjør vi så fort vi kan, for vi vet at det kan ta tid å få legeerklæringen. "
     },
     "punkt2": {
       "label": "Vi vurderer mulighetene og begrensningene dine i møte med arbeidslivet",
