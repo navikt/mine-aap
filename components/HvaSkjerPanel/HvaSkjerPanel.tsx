@@ -1,5 +1,4 @@
-import { Panel, Heading, Label, BodyLong, BodyShort } from '@navikt/ds-react';
-import Link from 'next/link';
+import { Panel, Heading, Label, BodyLong, BodyShort, Link } from '@navikt/ds-react';
 import styles from './HvaSkjerPanel.module.css';
 import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 
@@ -21,7 +20,10 @@ export const HvaSkjerPanel = () => {
             {formatElement('hvaSkjerPanel.punkt2.tekst', {
               // @ts-ignore-line
               a: (chunks: string[]) => (
-                <Link href="https://www.nav.no/soknader/nb/person/arbeid/arbeidsavklaringspenger/NAV%2011-13.05/klage-eller-anke/brev">
+                <Link
+                  target="_blank"
+                  href="https://www.nav.no/soknader/nb/person/arbeid/arbeidsavklaringspenger/NAV%2011-13.05/klage-eller-anke/brev"
+                >
                   {chunks?.[0]}
                 </Link>
               ),
