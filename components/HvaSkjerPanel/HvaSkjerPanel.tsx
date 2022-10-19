@@ -38,7 +38,9 @@ export const HvaSkjerPanel = () => {
               {formatElement('hvaSkjerPanel.punkt3.punkt1', {
                 // @ts-ignore-line
                 a: (chunks: string[]) => (
-                  <Link href="https://arbeidsplassen.nav.no/">{chunks?.[0]}</Link>
+                  <Link target="_blank" href="https://arbeidsplassen.nav.no/">
+                    {chunks?.[0]}
+                  </Link>
                 ),
               })}
             </li>
