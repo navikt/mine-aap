@@ -90,6 +90,8 @@ export const tokenXAxiosProxy = async (opts: AxiosOpts) => {
     const stopTimer = metrics.backendApiDurationHistogram.startTimer({ path: opts.prometheusPath });
     const { data, status } = await axios.post(opts.url, opts.req, {
       responseType: 'stream',
+      maxContentLength: Infinity,
+      maxBodyLength: Infinity,
       headers: {
         'Content-Type': opts.req?.headers['content-type'] ?? '', // which is multipart/form-data with boundary included
         Authorization: `Bearer ${tokenxToken}`,
