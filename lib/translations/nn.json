@@ -1,92 +1,92 @@
 {
-  "appTittel": "Mine arbeidsavklaringspenger",
+  "appTittel": "Mine arbeidsavklaringspengar",
   "forside": {
     "heading": "Velkommen til Mine AAP!",
     "introListe": {
-      "tittel": "På denne siden finner du:",
-      "punkt1": "Mulighet for å ettersende dokumenter til søknad og sak",
-      "punkt2": "Mulighet for å gi beskjed om endringer og gi oss opplysninger du mener er viktig for saken din",
-      "punkt3": "En oversikt over alle dine dokumenter som er knyttet til arbeidsavklaringspenger"
+      "tittel": "På denne sida kan du",
+      "punkt1": "ettersende dokument til søknad og sak",
+      "punkt2": "seie frå om endringar og gi oss opplysningar du meiner er viktige for saka di",
+      "punkt3": "sjå alle dokumenta dine som er knytte til arbeidsavklaringspengar"
     },
-    "underUtvikling": "Denne siden er under utvikling, og vil bli utvidet med flere funksjoner etter hvert.",
-    "seInnsendteSøknaderLink": "Se alle dine innsendte søknader",
+    "underUtvikling": "Denne sida er under utvikling, og vil bli utvida med fleire funksjonar etter kvart.",
+    "seInnsendteSøknaderLink": "Sjå alle søknadene du har sendt inn",
     "ettersendelse": {
-      "tekst": "Er det noe du vil ettersende til oss om din AAP sak Da kan du gjøre det her.",
-      "knapp": "Ettersend dokumenter"
+      "tekst": "Dersom du ønskjer å ettersende noko til oss om AAP-saka di, kan du gjere det her.",
+      "knapp": "Ettersend dokument"
     },
     "endring": {
-      "heading": "Vil du melde fra om en endring i din situasjon?",
-      "tekst": "Her kan du gi beskjed om endringer og gi oss opplysninger du mener er viktig for saken din. Hvis du har en aktivitetsplan, benytter du denne.",
+      "heading": "Vil du melde frå om endring i situasjonen din?",
+      "tekst": "Her kan du seie frå om endringar og gi oss opplysningar du meiner er viktige for saka di. Dersom du har ein aktivitetsplan, nyttar du denne.",
       "knapp": "Meld endring"
     }
   },
   "sisteSøknad": {
-    "heading": "Din siste søknad om arbeidsavklaringspenger",
+    "heading": "Din siste søknad om arbeidsavklaringspengar",
     "søknad": {
-      "heading": "Søknad om arbeidsavklaringspenger (AAP)",
-      "mottatt": "Mottatt {date}",
-      "saksbehandlingstid": "Se forventet saksbehandlingstid (åpnes i ny fane)",
+      "heading": "Søknad om arbeidsavklaringspengar (AAP)",
+      "mottatt": "Motteke {date}",
+      "saksbehandlingstid": "Sjå forventa saksbehandlingstid (blir opna i ny fane)",
       "alert": {
-        "message": "Vi mangler dokumentasjon fra deg for å kunne behandle søknaden. Ettersend dette til oss så raskt du kan."
+        "message": "Vi manglar dokumentasjon frå deg for å kunne behandle søknaden. Ettersend dette til oss så raskt du kan."
       },
       "button": {
         "text": "Ettersend dokumentasjon"
       }
     },
     "dokumentasjon": {
-      "mottatt": "Dokumentasjon vi har mottatt fra deg",
+      "mottatt": "Dokumentasjon vi har fått frå deg",
       "mangler": "Dokumentasjon du må sende oss",
-      "vedlegg": "Vedlegg: {type} mottatt {date}"
+      "vedlegg": "Vedlegg: {type} motteke {date}"
     }
   },
   "dineSøknader": {
-    "heading": "Dine innsendte søknader"
+    "heading": "Søknader du har sendt inn"
   },
   "dokumentoversikt": {
     "tittel": "Dokumentoversikt",
-    "ikkeSynligDokumentLink": "Har du sendt en søknad eller et dokument som ikke vises her?",
-    "mottatt": "Mottatt"
+    "ikkeSynligDokumentLink": "Har du sendt ein søknad eller eit dokument som ikkje blir vist her?",
+    "mottatt": "Motteke"
   },
   "filopplasting": {
     "vedlegg": {
       "slett": "Slett",
       "avbryt": "Avbryt",
       "lastOppFil": "Last opp fil",
-      "velgDineFiler": "Velg dine filer",
-      "draOgSlipp": "Dra og slipp",
+      "velgDineFiler": "Vel filer",
+      "draOgSlipp": "Dra og slepp",
       "eller": "eller"
     }
   },
-  "tilbakeTilMineAAPKnapp": "Tilbake til Mine Arbeidsavklaringspenger",
+  "tilbakeTilMineAAPKnapp": "Tilbake til Mine arbeidsavklaringspengar",
   "ettersendelse": {
-    "appTittel": "Ettersending til arbeidsavklaringspenger (AAP)",
+    "appTittel": "Ettersending til arbeidsavklaringspengar (AAP)",
     "heading": "Ettersend dokumentasjon",
-    "guide": "Hvis du skal ettersende vedlegg, må du sende disse innen 14 dager. Du kan ettersende enten digitalt eller per post. Trenger du mer tid, kan du be om lenger frist. Dette kan du gjøre via nav.no eller ringe oss etter at søknaden er sendt inn.",
-    "manglerDokumentasjon": "Ut fra det du har svart i søknaden, mangler du følgende dokumentasjon for at vi kan ferdigbehandle søknaden din",
+    "guide": "Dersom du skal ettersende vedlegg, må du sende desse innan 14 dagar. Du kan ettersende anten digitalt eller per post. Treng du meir tid, kan du be om å få forlenga fristen. Dette kan du gjere via nav.no eller ved å ringje oss etter at søknaden er send inn.",
+    "manglerDokumentasjon": "Ut frå det du har svart i søknaden, treng vi følgjande dokumentasjon frå deg for å kunne ferdigbehandle søknaden din",
     "vedleggstyper": {
       "STUDIER": {
-        "heading": "Bekreftelse på avbrutt studie",
-        "description": "Bekreftelse fra studiested på hvilken dato studiet ble avbrutt fra."
+        "heading": "Stadfesting av avbrote studie",
+        "description": "Stadfesting frå studiestaden på kva dato studiet blei avbrote."
       },
       "ARBEIDSGIVER": {
-        "heading": "Lønn og andre goder",
-        "description": "Dokumentasjon av ekstra utbetalinger fra arbeidsgiver, for eksempel kopi av inngått sluttpakke, avtale om etterlønn eller andre goder. Både beløpet på utbetalingen og perioden den gjelder for bør være dokumentert."
+        "heading": "Løn og andre gode",
+        "description": "Dokumentasjon på ekstra utbetalingar frå arbeidsgivar (t.d. kopi av inngått sluttpakke, avtale om etterløn eller andre gode). Både det utbetalte beløpet og perioden det gjeld, bør vere dokumentert."
       },
       "OMSORG": {
-        "heading": "Omsorgsstønad (tidligere omsorgslønn)",
-        "description": "Kopi av avtalen om omsorgsstønad fra kommunen din."
+        "heading": "Omsorgsstønad (tidlegare omsorgsløn)",
+        "description": "Kopi av avtalen om omsorgsstønad frå kommunen din."
       },
       "UTLAND": {
-        "heading": "Ytelser fra utenlandske trygdemyndigheter",
-        "description": "Dokumentasjon av ytelser fra utenlandske trygdemyndigheter."
+        "heading": "Ytingar frå utanlandske trygdemakter",
+        "description": "Dokumentasjon på ytingar frå utanlandske trygdemakter."
       },
       "ANDREBARN": {
         "heading": "Andre barn",
         "description": "Dokumentasjon av andre barn."
       },
       "ANNET": {
-        "heading": "Annen dokumentasjon",
-        "description": "Hvis du har noe annet du ønsker å legge ved kan du laste det opp her."
+        "heading": "Annan dokumentasjon",
+        "description": "Dersom du har anna du ønskjer å leggje ved, kan du laste det opp her."
       },
       "LÅNEKASSEN_STIPEND": {
         "heading": "Sykestipend fra lånekassen",
@@ -102,12 +102,12 @@
       }
     },
     "annenDokumentasjon": {
-      "heading": "Annen dokumentasjon",
-      "description": "Hvis du har noe annet du ønsker å legge ved kan du laste det opp her"
+      "heading": "Annan dokumentasjon",
+      "description": "Dersom du har anna du ønskjer å leggje ved, kan du laste det opp her"
     },
     "warning": {
-      "heading": "Har du ikke alle dokumentene tilgjengelig nå?",
-      "description": "Du kan gå videre uten å laste opp alle dokumenetene. Hvis du skal ettersende vedlegg, må du sende disse innen 14 dager etter at søknaden er sendt inn. Trenger du mer tid, kan du be om lenger frist. Dette kan du gjøre via nav.no eller ringe oss etter at søknaden er sendt inn."
+      "heading": "Har du ikkje alle dokumenta tilgjengelege no?",
+      "description": "Du kan gå vidare utan å laste opp alle dokumenta. Dersom du skal ettersende vedlegg, må du gjere det innan 14 dagar etter at søknaden er send. Treng du meir tid, kan du be om å få forlenga fristen. Dette kan du gjere via nav.no eller ved å ringje oss etter at søknaden er send inn."
     },
     "buttons": {
       "primary": "Send inn",
@@ -115,47 +115,47 @@
     }
   },
   "errorSummary": {
-    "title": "Du må fikse disse feilene før du kan fortsette:"
+    "title": "Du må rette opp i desse feila før du kan halde fram:"
   },
   "breadcrumbs": {
     "mineAAP": "Mine AAP",
     "ettersending": "Ettersending til søknad",
-    "mineAAPSoknader": "Mine AAP søknader"
+    "mineAAPSoknader": "Mine AAP-søknader"
   },
   "validation": {
-    "filtype": "Filtypen {type} kan ikke lastes opp. Last opp dokumentet i et annet format (PDF, PNG eller JPG)",
-    "virus": "Det er oppdaget virus på filen du prøver å laste opp. Velg en annen fil å last opp.",
+    "filtype": "Filtypen {type} kan ikkje lastast opp. Last opp dokumentet i eit anna format (PDF, PNG eller JPG).",
+    "virus": "Det er oppdaga virus på fila du prøver å laste opp. Last opp ei anna fil.",
     "password_protected": "Filen er passord-beskyttet og vil ikke kunne leses av en saksbehandler, fjern beskyttelsen og prøv igjen",
-    "feilet": "Opplastingen feilet. Prøv på nytt",
-    "storrelse": "Filen du lastet opp er for stor. Last opp en fil hvor størrelsen er under {size} MB",
-    "totalStorrelse": "Filene du lastet opp er for store. Du kan totalt laste opp filer på {size} MB. Samlet størrelese er {filesSize} MB"
+    "feilet": "Opplastinga var mislukka. Prøv på nytt",
+    "storrelse": "Fila du lasta opp, er for stor. Last opp ei fil på under {size} MB",
+    "totalStorrelse": "Filene du lasta opp, er for store. Du kan laste opp til saman filer på {size} MB. Samla storleik er {filesSize} MB"
   },
   "hvaSkjerPanel": {
-    "heading": "Vi har mottatt søknaden din, hva skjer nå?",
+    "heading": "Vi har fått søknaden din. Kva skjer no?",
     "punkt1": {
-      "label": "Vi sjekker om vi har nok helseopplysninger",
-      "tekst": "Hvis vi har behov for flere helseopplysninger, vil vi bruke informasjonen du ga oss i søknaden til å bestille legeerklæring fra lege eller annen behandler."
+      "label": "Vi sjekkar om vi har nok helseopplysningar",
+      "tekst": "Dersom vi treng fleire helseopplysningar, vil vi bestille legeerklæring frå lege eller annan behandlar ut frå informasjonen du har gitt oss i søknaden."
     },
     "punkt2": {
-      "label": "Vi vurderer mulighetene og begrensningene dine i møte med arbeidslivet",
-      "tekst": "Du har krav på en vurdering av hvilken oppfølging du trenger fra NAV for å komme i eller beholde arbeid (NAV-loven §14a). Vi tar utgangspunkt i de opplysningene du har gitt oss. Hvis vi trenger det, tar vi kontakt med deg. Du får et brev med vurderingen vår. Hvis du har spørsmål kan du ta kontakt med oss. Hvis du ikke er enig i den, <a>kan du klage på oppfølgingsvedtaket</a>. (åpnes i ny fane)"
+      "label": "Vi vurderer moglegheitene og avgrensingane dine i møte med arbeidslivet",
+      "tekst": "Du har krav på ei vurdering av oppfølginga du treng frå NAV for å kome i arbeid eller halde på jobben du har (NAV-lova §14a). Vi tek utgangspunkt i opplysningane du har gitt oss. Vi kontaktar deg ved behov. Du får eit brev med vurderinga vår. Ta gjerne kontakt med oss dersom du har spørsmål. <a>Du kan klage på oppfølgingsvedtaket</a> dersom du meiner det er feil."
     },
     "punkt3": {
-      "label": "Hva kan du gjøre?",
+      "label": "Kva kan du gjere?",
       "tekst": "Det er til hjelp for oss om du:",
-      "punkt1": "Registrerer <a>CV-en din, gjerne på arbeidsplassen.no</a>.",
-      "punkt2": "Ettersender dokumenter som mangler.",
-      "punkt3": "Gir beskjed hvis situasjonen din endrer seg.",
+      "punkt1": "registrerer <a>CV-en din, gjerne på arbeidsplassen.no</a>.",
+      "punkt2": "ettersender manglande dokument",
+      "punkt3": "gir beskjed dersom situasjonen din endrar seg",
       "link": "kan du klage på oppfølgingsvedtaket"
     },
     "punkt4": {
-      "label": "Vi sjekker om du har rett på AAP",
-      "tekst": "Til sist sjekker vi om du har rett på AAP etter folketrygdloven kapittel 11. Vi bruker her opplysningene vi har fått i forbindelse med søknaden."
+      "label": "Vi sjekkar om du har rett på AAP",
+      "tekst": "Til sist sjekkar vi om du har rett på AAP etter folketrygdlova kapittel 11. Vi nyttar her opplysningane vi har fått i samband med søknaden."
     },
     "punkt5": {
       "label": "Svar på AAP-søknaden",
-      "tekst": "Du får et vedtak med vurderingen vår av om du har rett på AAP eller ikke, og hvor mye du vil få utbetalt. Hvis du har spørsmål til vurderingen, kan du ta kontakt med oss. Hvis du ikke er enig, <a>kan du klage på AAP-vedtaket</a>. (åpnes i ny fane)",
-      "tekst2": "Du har rett til oppfølgning fra NAV uansett om du får innvilget AAP eller ikke."
+      "tekst": "Du får eit vedtak med vurderinga vi har gjort av kor vidt du har rett på AAP eller ikkje, og kor mykje du vil få utbetalt. Ta gjerne kontakt med oss dersom du har spørsmål om vurderinga. <a>Du kan klage på AAP-vedtaket</a> dersom du meiner det er feil.",
+      "tekst2": "Du har rett til oppfølging frå NAV uavhengig av om du får innvilga AAP."
     }
   }
 }
