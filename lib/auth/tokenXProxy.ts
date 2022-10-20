@@ -102,9 +102,15 @@ export const tokenXAxiosProxy = async (opts: AxiosOpts) => {
     logger.info('Vellykket opplasting av fil til ' + opts.url);
     return data.pipe(opts.res);
   } catch (e: any) {
-    let msg = '';
-    logger.error({ e }, 'tokenXAxiosProxy oops ' + e.message);
-    metrics.backendApiStatusCodeCounter.inc({ path: opts.prometheusPath, status: e.code });
-    return opts.res.status(500).json({ msg });
+    if (e?.response?.status) {
+      e.response.data?.pipe(opts.res);
+      metrics.backendApiStatusCodeCounter.inc({
+        path: opts.prometheusPath,
+        status: e.response.status,
+      });
+      return opts.res.status(e.response.status);
+    }
+    logger.error(e);
+    return opts.res.status(500).json('tokenXAxiosProxy server error');
   }
 };
