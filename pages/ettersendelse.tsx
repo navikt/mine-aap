@@ -31,7 +31,7 @@ const Ettersendelse = () => {
               Tilbake til Mine Arbeidsavklaringspenger
             </Link>
           </NextLink>
-          <Heading level="2" size="medium" spacing>
+          <Heading level="2" size="large" spacing>
             {formatMessage('ettersendelse.heading')}
           </Heading>
         </Section>

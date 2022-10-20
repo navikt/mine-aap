@@ -20,6 +20,7 @@ import NextLink from 'next/link';
 import { Left } from '@navikt/ds-icons';
 import { useRouter } from 'next/router';
 import metrics from 'lib/metrics';
+import { formatFullDate } from 'lib/utils/date';
 
 interface PageProps {
   søknad: Søknad;
@@ -69,18 +70,25 @@ const Index = ({ søknad }: PageProps) => {
               Tilbake til Mine Arbeidsavklaringspenger
             </Link>
           </NextLink>
+          <Heading level="2" size="xlarge" spacing>
+            {formatMessage('ettersendelse.heading')}
+          </Heading>
           <LucaGuidePanel>
             <BodyShort spacing>{formatMessage('ettersendelse.guide')}</BodyShort>
           </LucaGuidePanel>
-          <Heading level="2" size="medium" spacing>
-            {formatMessage('ettersendelse.heading')}
-          </Heading>
+          <Label>
+            {formatMessage('ettersendelse.gjeldendeSøknad', {
+              dateTime: formatFullDate(søknad.innsendtDato),
+            })}
+          </Label>
           {(manglendeVedlegg.length ?? 0) > 0 && (
             <div>
-              <Label spacing>{formatMessage('ettersendelse.manglerDokumentasjon')}</Label>
+              <BodyShort spacing>{formatMessage('ettersendelse.manglerDokumentasjon')}</BodyShort>
               <ul>
                 {manglendeVedlegg.map((krav) => (
-                  <li key={krav}>{formatMessage(`ettersendelse.vedleggstyper.${krav}.heading`)}</li>
+                  <li key={krav}>
+                    <Label>{formatMessage(`ettersendelse.vedleggstyper.${krav}.heading`)}</Label>
+                  </li>
                 ))}
               </ul>
             </div>
