@@ -21,9 +21,9 @@ export const getFileExtension = (fileName: string) => {
   return fileName;
 };
 
-const getErrorKeyForStatusCode = (statusCode: number) => {
+const getErrorKeyForStatusCode = (statusCode: number, substatus?: string) => {
   if (statusCode === 413) return 'storrelse';
-  if (statusCode === 422) return 'virus';
+  if (statusCode === 422) return substatus?.toLowerCase() || 'virus';
   return 'feilet';
 };
 interface Props {
@@ -107,17 +107,19 @@ export const FileUpload = ({
         method: 'POST',
         body: data,
       });
+      const vedleggData = await vedlegg.json();
       if (vedlegg.ok) {
-        const id = await vedlegg.json();
-        console.log('id', id);
-        update(index, { ...field, vedleggId: id, isUploading: false });
+        update(index, { ...field, vedleggId: vedleggData, isUploading: false });
       } else {
         setError(`${krav}.fields.${index}`, {
           type: 'custom',
           // @ts-ignore-line
-          message: formatMessage(`validation.${getErrorKeyForStatusCode(vedlegg.status)}`, {
-            size: bytesToMB(MAX_TOTAL_FILE_SIZE),
-          }),
+          message: formatMessage(
+            `validation.${getErrorKeyForStatusCode(vedlegg.status, vedleggData?.substatus)}`,
+            {
+              size: bytesToMB(MAX_TOTAL_FILE_SIZE),
+            }
+          ),
         });
         update(index, { ...field, isUploading: false });
       }
