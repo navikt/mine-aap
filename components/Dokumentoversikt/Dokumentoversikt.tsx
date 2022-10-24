@@ -1,4 +1,11 @@
-import { Panel, Heading, BodyShort, LinkPanel, Accordion } from '@navikt/ds-react';
+import BodyLong, {
+  ReadMore,
+  Panel,
+  Heading,
+  BodyShort,
+  LinkPanel,
+  Accordion,
+} from '@navikt/ds-react';
 import { VerticalFlexContainer } from 'components/FlexContainer/VerticalFlexContainer';
 import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { Dokument } from 'lib/types/types';
@@ -16,9 +23,15 @@ export const Dokumentoversikt = ({ dokumenter }: Props) => {
       <Heading level="2" size="medium" spacing>
         {formatMessage('dokumentoversikt.tittel')}
       </Heading>
-      <BodyShort spacing>
-        <Link href="#">{formatMessage('dokumentoversikt.ikkeSynligDokumentLink')}</Link>
-      </BodyShort>
+      <ReadMore header={formatMessage('dokumentoversikt.manglendeDokument.header')}>
+        <BodyShort>{formatMessage('dokumentoversikt.manglendeDokument.tekst')}</BodyShort>
+        {formatMessage('dokumentoversikt.manglendeDokument.bulletsTekst')}
+        <ul>
+          <li>{formatMessage('dokumentoversikt.manglendeDokument.bullet1')}</li>
+          <li>{formatMessage('dokumentoversikt.manglendeDokument.bullet2')}</li>
+          <li>{formatMessage('dokumentoversikt.manglendeDokument.bullet3')}</li>
+        </ul>
+      </ReadMore>
       <VerticalFlexContainer>
         {dokumenter.map((dokument) => (
           <Accordion key={dokument.dokumentId}>

@@ -44,7 +44,14 @@
   },
   "dokumentoversikt": {
     "tittel": "Dokumentoversikt",
-    "ikkeSynligDokumentLink": "Har du sendt ein søknad eller eit dokument som ikkje blir vist her?",
+    "manglendeDokument": {
+      "header": "Har du sendt en søknad eller et dokument som ikke vises her?",
+      "tekst": "Det kan ta noen minutter fra du har sendt en digital søknad til den vises i oversikten. Hvis du har sendt en søknad i posten tar det som regel 2 uker fra den er postlagt til den vises i dokumentoversikten.",
+      "bulletsTekst": "Denne siden viser:",
+      "bullet1": "søknader om AAP vi har mottatt fra deg.",
+      "bullet2": "andre dokumenter du har sendt oss om AAP.",
+      "bullet3": "dokumenter du har mottatt fra oss om AAP."
+    },
     "mottatt": "Motteke"
   },
   "filopplasting": {
