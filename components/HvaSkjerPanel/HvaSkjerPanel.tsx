@@ -20,10 +20,7 @@ export const HvaSkjerPanel = () => {
             {formatElement('hvaSkjerPanel.punkt2.tekst', {
               // @ts-ignore-line
               a: (chunks: string[]) => (
-                <Link
-                  target="_blank"
-                  href="https://www.nav.no/soknader/nb/person/arbeid/arbeidsavklaringspenger/NAV%2011-13.05/klage-eller-anke/brev"
-                >
+                <Link target="_blank" href="https://klage.nav.no/nb/arbeid/nav-loven-14a">
                   {chunks?.[0]}
                 </Link>
               ),
