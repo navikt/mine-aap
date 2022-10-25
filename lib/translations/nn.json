@@ -43,14 +43,14 @@
     "heading": "Søknader du har sendt inn"
   },
   "dokumentoversikt": {
-    "tittel": "Dokumentoversikt",
+    "tittel": "Dokumentoversyn",
     "manglendeDokument": {
-      "header": "Har du sendt en søknad eller et dokument som ikke vises her?",
-      "tekst": "Det kan ta noen minutter fra du har sendt en digital søknad til den vises i oversikten. Hvis du har sendt en søknad i posten tar det som regel 2 uker fra den er postlagt til den vises i dokumentoversikten.",
-      "bulletsTekst": "Denne siden viser:",
-      "bullet1": "søknader om AAP vi har mottatt fra deg.",
-      "bullet2": "andre dokumenter du har sendt oss om AAP.",
-      "bullet3": "dokumenter du har mottatt fra oss om AAP."
+      "header": "Har du sendt ein søknad eller eit dokument som ikkje blir her vist?",
+      "tekst": "Det kan ta nokre minutt frå du har sendt ein digital søknad til han blir vist i oversyna. Viss du har sendt ein søknad i posten tar det som regel 2 veker frå han er postlagt til han blir vist i dokumentoversyna.",
+      "bulletsTekst": "Denne sida viser:",
+      "bullet1": "søknader om AAP vi har mottatt frå deg.",
+      "bullet2": "andre dokument du har sendt oss om AAP.",
+      "bullet3": "dokumenter du har mottatt frå oss om AAP."
     },
     "mottatt": "Motteke"
   },
