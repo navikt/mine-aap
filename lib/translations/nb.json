@@ -25,7 +25,7 @@
     "søknad": {
       "heading": "Søknad om arbeidsavklaringspenger (AAP)",
       "mottatt": "Mottatt {date}",
-      "saksbehandlingstid": "Se forventet saksbehandlingstid (åpnes i ny fane)",
+      "saksbehandlingstid": "Se forventet saksbehandlingstid (åpnes i ny fane).",
       "alert": {
         "message": "Vi mangler dokumentasjon fra deg for å kunne behandle søknaden. Ettersend dette til oss så raskt du kan."
       },
@@ -146,7 +146,7 @@
     },
     "punkt2": {
       "label": "Vi vurderer mulighetene og begrensningene dine i møte med arbeidslivet",
-      "tekst": "Du har krav på en vurdering av hvilken oppfølging du trenger fra NAV for å komme i eller beholde arbeid (NAV-loven §14a). Vi tar utgangspunkt i de opplysningene du har gitt oss. Hvis vi trenger det, tar vi kontakt med deg. Du får et brev med vurderingen vår. Hvis du har spørsmål kan du ta kontakt med oss. Hvis du ikke er enig i den, <a>kan du klage på oppfølgingsvedtaket (åpnes i ny fane)</a>."
+      "tekst": "Du har krav på en vurdering av hvilken oppfølging du trenger fra NAV for å komme i eller beholde arbeid (NAV-loven §14a). Vi tar utgangspunkt i de opplysningene du har gitt oss. Hvis vi trenger det, tar vi kontakt med deg. Du får et brev med vurderingen vår. Hvis du har spørsmål kan du ta kontakt med oss. Hvis du ikke er enig i den, <a>kan du klage på oppfølgingsvedtaket (åpnes i ny fane).</a>"
     },
     "punkt3": {
       "label": "Hva kan du gjøre?",
