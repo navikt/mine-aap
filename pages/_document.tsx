@@ -8,6 +8,7 @@ const decoratorParams: Props = {
   context: 'privatperson',
   chatbot: false,
   feedback: false,
+  urlLookupTable: false,
 };
 
 class _Document extends Document<{ decorator: Components }> {
