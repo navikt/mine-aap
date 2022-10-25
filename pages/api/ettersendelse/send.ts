@@ -5,6 +5,7 @@ import { tokenXProxy } from 'lib/auth/tokenXProxy';
 import { isMock } from 'lib/utils/environments';
 import metrics from 'lib/metrics';
 import { Ettersendelse } from 'lib/types/types';
+import { logger } from '@navikt/aap-felles-innbygger-utils';
 
 const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) => {
   const accessToken = getAccessTokenFromRequest(req);
@@ -12,6 +13,7 @@ const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) =
 
   const { ettersendteVedlegg }: Ettersendelse = JSON.parse(req.body);
   ettersendteVedlegg.forEach((ettersendelse) => {
+    logger.info(`lager metrics for ettersendelse.${ettersendelse.vedleggType}`);
     metrics.ettersendVedleggCounter.inc({ type: ettersendelse.vedleggType });
   });
 
