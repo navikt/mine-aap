@@ -3,10 +3,10 @@
   "forside": {
     "heading": "Velkommen til Mine AAP!",
     "introListe": {
-      "tittel": "På denne sida kan du",
-      "punkt1": "ettersende dokument til søknad og sak",
-      "punkt2": "seie frå om endringar og gi oss opplysningar du meiner er viktige for saka di",
-      "punkt3": "sjå alle dokumenta dine som er knytte til arbeidsavklaringspengar"
+      "tittel": "På denne sida kan du:",
+      "punkt1": "Ettersende dokument til søknad og sak.",
+      "punkt2": "Seie frå om endringar og gi oss opplysningar du meiner er viktige for saka di.",
+      "punkt3": "Sjå alle dokumenta dine som er knytte til arbeidsavklaringspengar."
     },
     "underUtvikling": "Denne sida er under utvikling, og vil bli utvida med fleire funksjonar etter kvart.",
     "seInnsendteSøknaderLink": "Sjå alle søknadene du har sendt inn",
@@ -49,9 +49,9 @@
       "header": "Har du sendt ein søknad eller eit dokument som ikkje blir her vist?",
       "tekst": "Det kan ta nokre minutt frå du har sendt ein digital søknad til han blir vist i oversyna. Viss du har sendt ein søknad i posten tar det som regel 2 veker frå han er postlagt til han blir vist i dokumentoversyna.",
       "bulletsTekst": "Denne sida viser:",
-      "bullet1": "søknader om AAP vi har mottatt frå deg.",
-      "bullet2": "andre dokument du har sendt oss om AAP.",
-      "bullet3": "dokumenter du har mottatt frå oss om AAP."
+      "bullet1": "Søknader om AAP vi har mottatt frå deg.",
+      "bullet2": "Andre dokument du har sendt oss om AAP.",
+      "bullet3": "Dokumenter du har mottatt frå oss om AAP."
     },
     "mottatt": "Motteke"
   },
@@ -152,7 +152,7 @@
     "punkt3": {
       "label": "Kva kan du gjere?",
       "tekst": "Det er til hjelp for oss om du:",
-      "punkt1": "registrerer <a>CV-en din, gjerne på arbeidsplassen.no (blir opna i ny fane)</a>.",
+      "punkt1": "registrerer <a>CV-en din, gjerne på arbeidsplassen.no (blir opna i ny fane).</a>",
       "punkt2": "ettersender manglande dokument",
       "punkt3": "gir beskjed dersom situasjonen din endrar seg",
       "link": "kan du klage på oppfølgingsvedtaket"

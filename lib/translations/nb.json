@@ -4,9 +4,9 @@
     "heading": "Velkommen til Mine AAP!",
     "introListe": {
       "tittel": "På denne siden finner du:",
-      "punkt1": "Mulighet for å ettersende dokumenter til søknad og sak",
-      "punkt2": "Mulighet for å gi beskjed om endringer og gi oss opplysninger du mener er viktig for saken din",
-      "punkt3": "En oversikt over alle dine dokumenter som er knyttet til arbeidsavklaringspenger"
+      "punkt1": "Mulighet for å ettersende dokumenter til søknad og sak.",
+      "punkt2": "Mulighet for å gi beskjed om endringer og gi oss opplysninger du mener er viktig for saken din.",
+      "punkt3": "En oversikt over alle dine dokumenter som er knyttet til arbeidsavklaringspenger."
     },
     "underUtvikling": "Denne siden er under utvikling, og vil bli utvidet med flere funksjoner etter hvert.",
     "seInnsendteSøknaderLink": "Se alle dine innsendte søknader",
@@ -49,9 +49,9 @@
       "header": "Har du sendt en søknad eller et dokument som ikke vises her?",
       "tekst": "Det kan ta noen minutter fra du har sendt en digital søknad til den vises i oversikten. Hvis du har sendt en søknad i posten tar det som regel 2 uker fra den er postlagt til den vises i dokumentoversikten.",
       "bulletsTekst": "Denne siden viser:",
-      "bullet1": "søknader om AAP vi har mottatt fra deg.",
-      "bullet2": "andre dokumenter du har sendt oss om AAP.",
-      "bullet3": "dokumenter du har mottatt fra oss om AAP."
+      "bullet1": "Søknader om AAP vi har mottatt fra deg.",
+      "bullet2": "Andre dokumenter du har sendt oss om AAP.",
+      "bullet3": "Dokumenter du har mottatt fra oss om AAP."
     },
 "mottatt": "Mottatt"
   },
@@ -95,7 +95,7 @@
       },
       "ANNET": {
         "heading": "Annen dokumentasjon",
-        "description": "Hvis du har noe annet du ønsker å legge ved kan du laste det opp her."
+        "description": "Hvis du har noe annet du ønsker å legge ved, kan du laste det opp her."
       },
       "LÅNEKASSEN_STIPEND": {
         "heading": "Sykestipend fra lånekassen",
@@ -147,12 +147,12 @@
     },
     "punkt2": {
       "label": "Vi vurderer mulighetene og begrensningene dine i møte med arbeidslivet",
-      "tekst": "Du har krav på en vurdering av hvilken oppfølging du trenger fra NAV for å komme i eller beholde arbeid (NAV-loven §14a). Vi tar utgangspunkt i de opplysningene du har gitt oss. Hvis vi trenger det, tar vi kontakt med deg. Du får et brev med vurderingen vår. Hvis du har spørsmål kan du ta kontakt med oss. Hvis du ikke er enig i den, <a>kan du klage på oppfølgingsvedtaket (åpnes i ny fane).</a>"
+      "tekst": "Du har krav på en vurdering av hvilken oppfølging du trenger fra NAV for å komme i eller beholde arbeid (NAV-loven §14a). Vi tar utgangspunkt i de opplysningene du har gitt oss. Hvis vi trenger det, tar vi kontakt med deg. Du får et brev med vurderingen vår. Hvis du har spørsmål, kan du ta kontakt med oss. Hvis du ikke er enig i den, <a>kan du klage på oppfølgingsvedtaket (åpnes i ny fane).</a>"
     },
     "punkt3": {
       "label": "Hva kan du gjøre?",
       "tekst": "Det er til hjelp for oss om du:",
-      "punkt1": "Registrerer <a>CV-en din, gjerne på arbeidsplassen.no (åpnes i ny fane)</a>.",
+      "punkt1": "Registrerer <a>CV-en din, gjerne på arbeidsplassen.no (åpnes i ny fane).</a>",
       "punkt2": "Ettersender dokumenter som mangler.",
       "punkt3": "Gir beskjed hvis situasjonen din endrer seg.",
       "link": "kan du klage på oppfølgingsvedtaket"
@@ -163,7 +163,7 @@
     },
     "punkt5": {
       "label": "Svar på AAP-søknaden",
-      "tekst": "Du får et vedtak med vurderingen vår av om du har rett på AAP eller ikke, og hvor mye du vil få utbetalt. Hvis du har spørsmål til vurderingen, kan du ta kontakt med oss. Hvis du ikke er enig, <a>kan du klage på AAP-vedtaket (åpnes i ny fane)</a>.",
+      "tekst": "Du får et vedtak med vurderingen vår av om du har rett på AAP eller ikke, og hvor mye du vil få utbetalt. Hvis du har spørsmål til vurderingen, kan du ta kontakt med oss. Hvis du ikke er enig, <a>kan du klage på AAP-vedtaket (åpnes i ny fane).</a>",
       "tekst2": "Du har rett til oppfølgning fra NAV uansett om du får innvilget AAP eller ikke."
     }
   }
