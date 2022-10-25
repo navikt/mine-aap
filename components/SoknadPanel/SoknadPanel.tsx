@@ -1,8 +1,7 @@
-import { Heading, Panel, BodyShort, Alert, Button, Label, LinkPanel } from '@navikt/ds-react';
+import { Heading, Panel, BodyShort, Alert, Button, Label, Link } from '@navikt/ds-react';
 import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { Søknad } from 'lib/types/types';
 import { formatFullDate } from 'lib/utils/date';
-import Link from 'next/link';
 import router from 'next/router';
 import * as styles from 'components/SoknadPanel/SoknadPanel.module.css';
 
