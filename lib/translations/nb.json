@@ -11,7 +11,8 @@
     "underUtvikling": "Denne siden er under utvikling, og vil bli utvidet med flere funksjoner etter hvert.",
     "seInnsendteSøknaderLink": "Se alle dine innsendte søknader",
     "ettersendelse": {
-      "tekst": "Er det noe du vil ettersende til oss om din AAP sak Da kan du gjøre det her.",
+      "tittel": "Ettersending",
+      "tekst": "Er det noe mer du vil ettersende til din AAP-sak, så kan du gjøre det her.",
       "knapp": "Ettersend dokumenter"
     },
     "endring": {

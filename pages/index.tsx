@@ -72,7 +72,9 @@ const Index = ({ søknader, dokumenter }: PageProps) => {
         <Section>
           <Dokumentoversikt dokumenter={dokumenter} />
           <Panel border>
-            <Label spacing>Ettersending</Label>
+            <Heading level="2" size="medium" spacing>
+              {formatMessage('forside.ettersendelse.tittel')}
+            </Heading>
             <BodyShort spacing>{formatMessage('forside.ettersendelse.tekst')}</BodyShort>
             <Button variant="secondary" onClick={() => router.push('/ettersendelse')}>
               {formatMessage('forside.ettersendelse.knapp')}
