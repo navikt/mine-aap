@@ -70,6 +70,14 @@
     "appTittel": "Ettersending til arbeidsavklaringspenger (AAP)",
     "heading": "Ettersend dokumentasjon",
     "guide": "Hvis du skal ettersende vedlegg, må du sende disse innen 14 dager. Du kan ettersende enten digitalt eller per post. Trenger du mer tid, kan du be om lenger frist. Dette kan du gjøre via nav.no eller ringe oss etter at søknaden er sendt inn.",
+    "annet": {
+      "guide": {
+        "tekst1": "Her kan du ettersende dokumentasjon digitalt. ",
+        "tekst2": "Du kan også ettersende per post, eller levere dokumentasjon på ditt lokale NAV-kontor."
+      },
+      "label": "Vi finner ingen innsendte søknader.",
+      "tekst": "Du kan likevel sende inn dokumentasjon du mener er relevant."
+    },
     "gjeldendeSøknad": "Gjelder søknad sendt til oss {dateTime}",
     "manglerDokumentasjon": "Ut fra det du har svart i søknaden, mangler du følgende dokumentasjon for at vi kan ferdigbehandle søknaden din",
     "vedleggstyper": {
@@ -94,8 +102,8 @@
         "description": "Last opp bekreftelse på at du er forelder til barnet. Hvis du er fosterforelder, last opp bekreftelse på dette, for eksempel fra barnevernet."
       },
       "ANNET": {
-        "heading": "Annen dokumentasjon",
-        "description": "Hvis du har noe annet du ønsker å legge ved, kan du laste det opp her."
+        "heading": "Annen dokumentasjon til din AAP-sak",
+        "description": "Hvis du har noe annet du ønsker å legge ved til din AAP-sak, kan du laste det opp her."
       },
       "LÅNEKASSEN_STIPEND": {
         "heading": "Sykestipend fra lånekassen",

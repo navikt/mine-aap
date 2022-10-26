@@ -19,3 +19,6 @@
   flex-direction: row;
   gap: 1.5rem;
 }
+.annetTekst {
+  margin-top: var(--navds-spacing-4);
+}

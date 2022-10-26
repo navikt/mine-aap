@@ -1,4 +1,4 @@
-import { Button, Heading, Link } from '@navikt/ds-react';
+import { Label, BodyShort, Button, Heading, Link } from '@navikt/ds-react';
 import { FileUpload } from 'components/Inputs/FileUpload';
 import PageHeader from 'components/PageHeader';
 import { Section } from 'components/Section/Section';
@@ -12,6 +12,7 @@ import { useRouter } from 'next/router';
 import metrics from 'lib/metrics';
 import { getSøknader } from './api/soknader/soknader';
 import { getAccessToken } from 'lib/auth/accessToken';
+import { LucaGuidePanel } from '@navikt/aap-felles-innbygger-react';
 
 const Ettersendelse = () => {
   const { formatMessage } = useFeatureToggleIntl();
@@ -34,6 +35,16 @@ const Ettersendelse = () => {
           <Heading level="2" size="large" spacing>
             {formatMessage('ettersendelse.heading')}
           </Heading>
+          <LucaGuidePanel>
+            <BodyShort spacing>{formatMessage('ettersendelse.annet.guide.tekst1')}</BodyShort>
+            <BodyShort spacing>{formatMessage('ettersendelse.annet.guide.tekst2')}</BodyShort>
+          </LucaGuidePanel>
+          <div>
+            <Label>{formatMessage('ettersendelse.annet.label')}</Label>
+            <BodyShort className={styles.annetTekst}>
+              {formatMessage('ettersendelse.annet.tekst')}
+            </BodyShort>
+          </div>
         </Section>
 
         <FileUpload
