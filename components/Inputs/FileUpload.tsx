@@ -8,7 +8,7 @@ import { FileInput, validateFile } from 'components/Inputs/FileInput';
 import * as styles from 'components/Inputs/FileUpload.module.css';
 import { FileUploadFields } from 'components/Inputs/FileUploadFields';
 
-const MAX_TOTAL_FILE_SIZE = 1024 * 1024 * 150; // 150 MB
+const MAX_TOTAL_FILE_SIZE = 1024 * 1024 * 50; // 50 MB
 export const TOTAL_FILE_SIZE = 'totalFileSize';
 
 export const bytesToMB = (bytes: number) => (bytes / (1024 * 1024)).toPrecision(2);
