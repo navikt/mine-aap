@@ -73,7 +73,6 @@ export const FileInput = ({ krav, append }: Props) => {
       <input
         id={inputId}
         type="file"
-        multiple
         className={styles.visuallyHidden}
         tabIndex={-1}
         ref={fileUploadInputElement}
