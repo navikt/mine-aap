@@ -1,5 +1,5 @@
-import { BodyShort, Button, Heading, Label, Link } from '@navikt/ds-react';
-import { LucaGuidePanel } from '@navikt/aap-felles-innbygger-react';
+import { BodyShort, Button, Heading, Label, Link, ReadMore } from '@navikt/ds-react';
+import { LucaGuidePanel, ScanningGuide } from '@navikt/aap-felles-innbygger-react';
 import { GetServerSidePropsResult, NextPageContext } from 'next';
 import { getAccessToken } from 'lib/auth/accessToken';
 import { beskyttetSide } from 'lib/auth/beskyttetSide';
@@ -21,6 +21,7 @@ import { Left } from '@navikt/ds-icons';
 import { useRouter } from 'next/router';
 import metrics from 'lib/metrics';
 import { formatFullDate } from 'lib/utils/date';
+import { useIntl } from 'react-intl';
 
 interface PageProps {
   søknad: Søknad;
@@ -28,6 +29,7 @@ interface PageProps {
 
 const Index = ({ søknad }: PageProps) => {
   const { formatMessage } = useFeatureToggleIntl();
+  const { locale } = useIntl();
 
   const [errors, setErrors] = useState<FieldErrors>({});
   const [manglendeVedlegg, setManglendeVedlegg] = useState<VedleggType[]>(
@@ -93,6 +95,9 @@ const Index = ({ søknad }: PageProps) => {
               </ul>
             </div>
           )}
+          <ReadMore header={formatMessage('ettersendelse.slikTarDuBilde')}>
+            <ScanningGuide locale={locale} />
+          </ReadMore>
         </Section>
 
         <FormErrorSummary id={errorSummaryId} errors={errors} />

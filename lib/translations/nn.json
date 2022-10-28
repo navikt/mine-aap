@@ -72,6 +72,7 @@
     "guide": "Dersom du skal ettersenda vedlegg, må du sende desse innan 14 dagar. Du kan ettersende anten digitalt eller per post. Treng du meir tid, kan du be om å få forlenga fristen. Dette kan du gjere via nav.no eller ved å ringje oss etter at søknaden er send inn.",
     "gjeldendeSøknad": "Gjelder søknad sendt til oss {dateTime}",
     "manglerDokumentasjon": "Ut frå det du har svart i søknaden, treng vi følgjande dokumentasjon frå deg for å kunne ferdigbehandle søknaden din",
+    "slikTarDuBilde": "Slik tar du et godt bilde av dokumentet",
     "annet": {
       "guide": {
         "tekst1": "Her kan du ettersende dokumentasjon digitalt. ",

@@ -1,4 +1,4 @@
-import { Label, BodyShort, Button, Heading, Link } from '@navikt/ds-react';
+import { ReadMore, Label, BodyShort, Button, Heading, Link } from '@navikt/ds-react';
 import { FileUpload } from 'components/Inputs/FileUpload';
 import PageHeader from 'components/PageHeader';
 import { Section } from 'components/Section/Section';
@@ -13,9 +13,12 @@ import metrics from 'lib/metrics';
 import { getSøknader } from './api/soknader/soknader';
 import { getAccessToken } from 'lib/auth/accessToken';
 import { LucaGuidePanel } from '@navikt/aap-felles-innbygger-react';
+import { useIntl } from 'react-intl';
+import { ScanningGuide } from '@navikt/aap-felles-innbygger-react';
 
 const Ettersendelse = () => {
   const { formatMessage } = useFeatureToggleIntl();
+  const { locale } = useIntl();
 
   const router = useRouter();
 
@@ -45,6 +48,9 @@ const Ettersendelse = () => {
               {formatMessage('ettersendelse.annet.tekst')}
             </BodyShort>
           </div>
+          <ReadMore header={formatMessage('ettersendelse.slikTarDuBilde')}>
+            <ScanningGuide locale={locale} />
+          </ReadMore>
         </Section>
 
         <FileUpload
