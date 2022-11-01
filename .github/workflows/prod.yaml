@@ -1,9 +1,9 @@
 name: 'Build and deploy aap-innsyn to prod'
 on:
   workflow_dispatch:
-#  push:
-#    branches:
-#      - 'main'
+  push:
+    branches:
+      - 'main'
 env:
   'IMAGE': 'ghcr.io/${{ github.repository }}:${{ github.sha }}-prod'
   SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
