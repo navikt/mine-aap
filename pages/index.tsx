@@ -80,6 +80,12 @@ const Index = ({ søknader, dokumenter }: PageProps) => {
               {formatMessage('forside.ettersendelse.knapp')}
             </Button>
           </Panel>
+          <Link
+            target="_blank"
+            href="https://www.nav.no/saksbehandlingstider#arbeidsavklaringspenger-aap"
+          >
+            {formatMessage('sisteSøknad.søknad.saksbehandlingstid')}
+          </Link>
         </Section>
       )}
 
