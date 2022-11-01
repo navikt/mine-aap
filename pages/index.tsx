@@ -117,6 +117,7 @@ export const getServerSideProps = beskyttetSide(
     const dokumenter = await getDocuments(bearerToken);
 
     logger.info(`søknader: ${JSON.stringify(søknader)}`);
+    logger.info(`dokumenter: ${JSON.stringify(dokumenter)}`);
 
     stopTimer();
     return {
