@@ -3,6 +3,7 @@ import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { Søknad } from 'lib/types/types';
 import { formatFullDate } from 'lib/utils/date';
 import router from 'next/router';
+import NextLink from 'next/link';
 import * as styles from 'components/SoknadPanel/SoknadPanel.module.css';
 
 interface Props {
@@ -42,12 +43,12 @@ export const SoknadPanel = ({ søknad }: Props) => {
           <ul>
             {søknad.innsendteVedlegg?.map((krav) => (
               <li key={krav.innsendingsId}>
-                <Link
+                <NextLink
                   href={`/api/dokument/?journalpostId=${krav.journalpostId}&dokumentId=${krav.dokumentId}`}
                   target="_blank"
                 >
                   {krav.tittel}
-                </Link>
+                </NextLink>
               </li>
             ))}
           </ul>
