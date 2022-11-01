@@ -24,5 +24,21 @@ export const mockSøknader: Søknad[] = [
     ],
     manglendeVedlegg: ['ARBEIDSGIVER'],
   },
+  {
+    innsendtDato: '2022-10-31T14:27:09.600090Z',
+    søknadId: 'bae8e32a-7174-44cf-8ad4-a32df63c6654',
+    journalpostId: '573788744',
+    innsendteVedlegg: [
+      {
+        journalpostId: '573788744',
+        dokumentId: '599052289',
+        tittel: 'Søknad om AAP',
+        type: 'I',
+        innsendingId: 'bae8e32a-7174-44cf-8ad4-a32df63c6654',
+        dato: '2022-10-31T15:27:09Z',
+      },
+    ],
+    manglendeVedlegg: ['LÅNEKASSEN_STIPEND'],
+  },
   { innsendtDato: '2022-08-30T08:53:47.215149', søknadId: '835a12fc-e642-42da-b182-5169c488842f' },
 ];
