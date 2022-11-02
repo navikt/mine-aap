@@ -18,9 +18,10 @@ export const validateFile = (file: File) => {
 interface Props {
   krav: VedleggType;
   append: UseFieldArrayAppend<VedleggFormValues>;
+  setShowMultipleFilesInfo: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const FileInput = ({ krav, append }: Props) => {
+export const FileInput = ({ krav, append, setShowMultipleFilesInfo }: Props) => {
   const { formatMessage } = useFeatureToggleIntl();
 
   const [inputId] = useState<string>(`file-upload-input-${krav}`);
@@ -47,15 +48,30 @@ export const FileInput = ({ krav, append }: Props) => {
   };
 
   const addFiles = async (files: FileList | null) => {
+    setShowMultipleFilesInfo(false);
     setDragOver(false);
-    Array.from(files || []).forEach((file) => {
+    // Deaktiver multiple fileupload
+    // Array.from(files || []).forEach((file) => {
+    //   append({
+    //     name: file.name,
+    //     size: file.size,
+    //     file: file,
+    //     isUploading: true,
+    //   });
+    // });
+    const fileArray = Array.from(files || []);
+    if (fileArray.length > 1) {
+      setShowMultipleFilesInfo(true);
+    }
+    const firstFile = fileArray.find((e) => e);
+    if (firstFile) {
       append({
-        name: file.name,
-        size: file.size,
-        file: file,
+        name: firstFile.name,
+        size: firstFile.size,
+        file: firstFile,
         isUploading: true,
       });
-    });
+    }
   };
 
   const resetInputValue = (event: any) => {

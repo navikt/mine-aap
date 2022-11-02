@@ -1,5 +1,5 @@
 import { Alert, BodyShort, Button, Heading } from '@navikt/ds-react';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm, useFieldArray, FieldArrayWithId, FieldErrors } from 'react-hook-form';
 import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { Ettersendelse, OpplastetVedlegg, VedleggType } from 'lib/types/types';
@@ -50,6 +50,7 @@ export const FileUpload = ({
   const [uploadFinished, setUploadFinished] = useState(false);
   const [hasEttersendingError, setHasEttersendingError] = useState(false);
   const [isSendingEttersendelse, setIsSendingEttersendelse] = useState(false);
+  const [showMultipleFilesInfo, setShowMultipleFilesInfo] = useState(false);
 
   const { control, handleSubmit, setError, setValue, clearErrors, formState } =
     useForm<VedleggFormValues>();
@@ -165,6 +166,7 @@ export const FileUpload = ({
       setHasEttersendingError(true);
     }
     setIsSendingEttersendelse(false);
+    setShowMultipleFilesInfo(false);
   };
 
   return (
@@ -215,6 +217,9 @@ export const FileUpload = ({
               remove={remove}
             />
           )}
+          {showMultipleFilesInfo && (
+            <Alert variant={'info'}>{formatMessage('filopplasting.formangefiler')}</Alert>
+          )}
           {fields.length > 0 && (
             <div>
               <Button variant="primary" type="submit" loading={isSendingEttersendelse}>
@@ -222,7 +227,13 @@ export const FileUpload = ({
               </Button>
             </div>
           )}
-          {(!uploadFinished || krav === 'ANNET') && <FileInput krav={krav} append={append} />}
+          {(!uploadFinished || krav === 'ANNET') && (
+            <FileInput
+              krav={krav}
+              append={append}
+              setShowMultipleFilesInfo={setShowMultipleFilesInfo}
+            />
+          )}
         </div>
       </form>
     </Section>

@@ -56,6 +56,7 @@
     "mottatt": "Motteke"
   },
   "filopplasting": {
+    "formangefiler": "Ver vennleg og dra inn éi fil i lista av gongen. Du kan leggja til fleire filer før du sender inn.",
     "vedlegg": {
       "slett": "Slett",
       "avbryt": "Avbryt",
