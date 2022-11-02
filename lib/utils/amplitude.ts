@@ -25,3 +25,6 @@ export function logAmplitudeEvent(eventName: string, eventData?: Record<string, 
     }
   });
 }
+export function logLastOppFilEvent(opplastingsType: string) {
+  logAmplitudeEvent('last opp fil', { opplastingsType });
+}

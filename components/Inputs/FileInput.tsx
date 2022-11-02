@@ -6,6 +6,7 @@ import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { VedleggFormValues } from 'components/Inputs/FileUpload';
 import * as styles from 'components/Inputs/FileInput.module.css';
 import { VedleggType } from 'lib/types/types';
+import { logLastOppFilEvent } from 'lib/utils/amplitude';
 
 export const validFileTypes = ['image/png', 'image/jpg', 'image/jpeg', 'application/pdf'];
 
@@ -42,6 +43,7 @@ export const FileInput = ({ krav, append, setShowMultipleFilesInfo }: Props) => 
     e.preventDefault();
   };
   const handleDrop: DragEventHandler<HTMLDivElement> = (e) => {
+    logLastOppFilEvent('dragdrop');
     e.preventDefault();
     const files = e.dataTransfer.files;
     addFiles(files);
@@ -92,7 +94,10 @@ export const FileInput = ({ krav, append, setShowMultipleFilesInfo }: Props) => 
         className={styles.visuallyHidden}
         tabIndex={-1}
         ref={fileUploadInputElement}
-        onChange={(event) => addFiles(event.target.files)}
+        onChange={(event) => {
+          logLastOppFilEvent('input');
+          addFiles(event.target.files);
+        }}
         onClick={(event) => resetInputValue(event)}
         accept="image/*,.pdf"
       />
