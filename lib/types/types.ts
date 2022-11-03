@@ -37,6 +37,12 @@ export interface OpplastetVedlegg {
 
 export interface Ettersendelse {
   søknadId?: string;
+  totalFileSize: number;
+  ettersendteVedlegg: Array<EttersendteVedlegg>;
+}
+
+export interface EttersendelseBackendState {
+  søknadId?: string;
   ettersendteVedlegg: Array<EttersendteVedlegg>;
 }
 

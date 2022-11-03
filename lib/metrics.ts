@@ -34,6 +34,18 @@ export class AppMetrics {
     help: 'Ettersendte vedlegg til søknad gruppert på type',
     labelNames: ['type'],
   });
+
+  public ettersendVedleggSizeHistogram = new Histogram({
+    name: 'mine_aap_ettersend_vedlegg_size',
+    help: 'Total size of documents',
+    labelNames: [''],
+  });
+
+  public ettersendVedleggNumberOfDocumentsHistogram = new Histogram({
+    name: 'mine_aap_ettersend_vedlegg_number_of_documents',
+    help: 'Total number of documents',
+    labelNames: [''],
+  });
 }
 
 global._metrics = global._metrics || new AppMetrics();

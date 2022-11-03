@@ -51,6 +51,7 @@ export const FileUpload = ({
   const [hasEttersendingError, setHasEttersendingError] = useState(false);
   const [isSendingEttersendelse, setIsSendingEttersendelse] = useState(false);
   const [showMultipleFilesInfo, setShowMultipleFilesInfo] = useState(false);
+  const [totalFileSize, setTotalFileSize] = useState(0);
 
   const { control, handleSubmit, setError, setValue, clearErrors, formState } =
     useForm<VedleggFormValues>();
@@ -81,6 +82,7 @@ export const FileUpload = ({
       for await (const [index, field] of fields.entries()) {
         await validateAndUploadFile(field, index);
       }
+      setTotalFileSize(totalSize);
     };
 
     const validateAndUploadFile = async (
@@ -139,6 +141,7 @@ export const FileUpload = ({
     setHasEttersendingError(false);
     const ettersendelse: Ettersendelse = {
       ...(søknadId && { søknadId: søknadId }),
+      totalFileSize: totalFileSize,
       ettersendteVedlegg: [
         {
           vedleggType: krav,
