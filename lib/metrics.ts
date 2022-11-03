@@ -38,13 +38,11 @@ export class AppMetrics {
   public ettersendVedleggSizeHistogram = new Histogram({
     name: 'mine_aap_ettersend_vedlegg_size',
     help: 'Total size of documents',
-    labelNames: [''],
   });
 
   public ettersendVedleggNumberOfDocumentsHistogram = new Histogram({
     name: 'mine_aap_ettersend_vedlegg_number_of_documents',
     help: 'Total number of documents',
-    labelNames: [''],
   });
 }
 
