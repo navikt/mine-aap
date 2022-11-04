@@ -66,12 +66,6 @@ const Index = ({ søknad }: PageProps) => {
       </PageHeader>
       <main className={styles.main}>
         <Section>
-          <NextLink href="/" passHref legacyBehavior>
-            <Link>
-              <Left />
-              Tilbake til Mine Arbeidsavklaringspenger
-            </Link>
-          </NextLink>
           <Heading level="2" size="xlarge" spacing>
             {formatMessage('ettersendelse.heading')}
           </Heading>
