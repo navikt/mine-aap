@@ -16,6 +16,15 @@ const nextConfig = {
     locales: ['nb', 'nn'],
     defaultLocale: 'nb',
   },
+
+  webpack(webpackConfig) {
+    return {
+      ...webpackConfig,
+      optimization: {
+        minimize: false,
+      },
+    };
+  },
 };
 
 if (process.env.ENABLE_SENTRY === 'true') {
