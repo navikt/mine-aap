@@ -17,6 +17,7 @@ import { Dokumentoversikt } from 'components/Dokumentoversikt/Dokumentoversikt';
 import metrics from 'lib/metrics';
 import { HvaSkjerPanel } from 'components/HvaSkjerPanel/HvaSkjerPanel';
 import { LucaGuidePanel } from '@navikt/aap-felles-innbygger-react';
+import Head from 'next/head';
 
 interface PageProps {
   søknader: Søknad[];
@@ -34,6 +35,9 @@ const Index = ({ søknader, dokumenter }: PageProps) => {
 
   return (
     <Layout>
+      <Head>
+        <title>{formatMessage('appTittel')}</title>
+      </Head>
       <Section>
         <LucaGuidePanel>
           <Heading level="2" size="medium" spacing>
