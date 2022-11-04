@@ -29,7 +29,7 @@ const Ettersendelse = () => {
       </PageHeader>
       <main className={styles.main}>
         <Section>
-          <NextLink href="/" passHref>
+          <NextLink href="/" passHref legacyBehavior>
             <Link>
               <Left />
               Tilbake til Mine Arbeidsavklaringspenger
