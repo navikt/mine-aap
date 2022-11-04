@@ -25,15 +25,11 @@ class _Document extends Document<{ decorator: Components }> {
         <Head>
           <meta name="robots" content="noindex,nofollow" />
         </Head>
-        <Styles />
-        <Scripts />
 
         <body>
-          <Header />
           <div id="app" className="app">
             <Main />
           </div>
-          <Footer />
           <NextScript />
         </body>
       </Html>
