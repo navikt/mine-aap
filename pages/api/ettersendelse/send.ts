@@ -4,23 +4,30 @@ import { beskyttetApi } from 'lib/auth/beskyttetApi';
 import { tokenXProxy } from 'lib/auth/tokenXProxy';
 import { isMock } from 'lib/utils/environments';
 import metrics from 'lib/metrics';
-import { Ettersendelse } from 'lib/types/types';
+import { Ettersendelse, EttersendelseBackendState } from 'lib/types/types';
 import { logger } from '@navikt/aap-felles-innbygger-utils';
 
 const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) => {
   const accessToken = getAccessTokenFromRequest(req);
-  await sendEttersendelse(req.body, accessToken);
+  const { ettersendteVedlegg, søknadId, totalFileSize }: Ettersendelse = JSON.parse(req.body);
+  const body: EttersendelseBackendState = {
+    ...(søknadId && { søknadId: søknadId }),
+    ettersendteVedlegg,
+  };
+  await sendEttersendelse(body, accessToken);
 
-  const { ettersendteVedlegg }: Ettersendelse = JSON.parse(req.body);
   ettersendteVedlegg.forEach((ettersendelse) => {
     logger.info(`lager metrics for ettersendelse.${ettersendelse.vedleggType}`);
     metrics.ettersendVedleggCounter.inc({ type: ettersendelse.vedleggType });
+
+    metrics.ettersendVedleggSizeHistogram.observe(totalFileSize);
+    metrics.ettersendVedleggNumberOfDocumentsHistogram.observe(ettersendelse.ettersending.length);
   });
 
   res.status(201).json({});
 });
 
-export const sendEttersendelse = async (data: string, accessToken?: string) => {
+export const sendEttersendelse = async (data: EttersendelseBackendState, accessToken?: string) => {
   if (isMock()) {
     return {};
   }
@@ -28,7 +35,7 @@ export const sendEttersendelse = async (data: string, accessToken?: string) => {
     url: `${process.env.SOKNAD_API_URL}/innsending/ettersend`,
     prometheusPath: '/innsending/ettersend',
     method: 'POST',
-    data: data,
+    data: JSON.stringify(data),
     audience: process.env.SOKNAD_API_AUDIENCE!,
     bearerToken: accessToken,
     noResponse: true,
