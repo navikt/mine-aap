@@ -1,5 +1,5 @@
 ingresses:
-- "https://aap-innsyn.dev.nav.no"
+- "https://aap-innsyn.dev.nav.no/aap/mine-aap"
 env:
 - name: APP_URL
   value: "https://aap-innsyn.dev.nav.no"

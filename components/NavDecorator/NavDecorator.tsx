@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 
-export const NavDecorator = ({ children }: { children: React.ReactElement }) => {
+export const NavDecorator = ({ children }: { children: React.ReactNode }) => {
   const { formatMessage } = useFeatureToggleIntl();
 
   const router = useRouter();

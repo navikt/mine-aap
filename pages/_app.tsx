@@ -11,6 +11,7 @@ import { useRouter } from 'next/router';
 import { Locale } from '@navikt/nav-dekoratoren-moduler';
 import { SUPPORTED_LOCALE } from 'lib/translations/locales';
 import { NavDecorator } from 'components/NavDecorator/NavDecorator';
+import { TimeoutBox } from 'components/TimeoutBox/TimeoutBox';
 
 function flattenMessages(nestedMessages: object, prefix = ''): Record<string, string> {
   return Object.keys(nestedMessages).reduce((messages, key) => {
@@ -60,6 +61,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <IntlProvider locale={locale} messages={messages[locale]}>
         <NavDecorator>
           <Component {...pageProps} />
+          <TimeoutBox />
         </NavDecorator>
       </IntlProvider>
     </>
