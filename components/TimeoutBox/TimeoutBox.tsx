@@ -20,7 +20,7 @@ const beregnUtloggingsTidspunkt = (sessionDurationInSeconds: number): number => 
 };
 
 export const TimeoutBox = () => {
-  const [isLoggedOut, setIsLoggedOut] = useState(true);
+  const [isLoggedOut, setIsLoggedOut] = useState(false);
   const [logoutTime, setLogoutTime] = useState(beregnUtloggingsTidspunkt(SECONDS_IN_HOUR));
 
   const { formatMessage } = useFeatureToggleIntl();
