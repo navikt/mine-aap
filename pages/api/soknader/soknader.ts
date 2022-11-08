@@ -13,7 +13,7 @@ const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) =
 });
 
 export const getSøknader = async (params: Record<string, string>, accessToken?: string) => {
-  if (isMock()) return [];
+  if (isMock()) return mockSøknader;
   const urlParams = Object.entries(params)
     .map(([key, value]) => `${key}=${value}`)
     .join('&');
