@@ -53,7 +53,7 @@
       "bullet2": "Andre dokumenter du har sendt oss om AAP.",
       "bullet3": "Dokumenter du har mottatt fra oss om AAP."
     },
-"mottatt": "Mottatt"
+    "mottatt": "Mottatt"
   },
   "filopplasting": {
     "formangefiler": "Vennligst dra inn én fil i listen av gangen. Du kan legge til flere filer før du sender inn.",
@@ -176,5 +176,9 @@
       "tekst": "Du får et vedtak med vurderingen vår av om du har rett på AAP eller ikke, og hvor mye du vil få utbetalt. Hvis du har spørsmål til vurderingen, kan du ta kontakt med oss. Hvis du ikke er enig, <a>kan du klage på AAP-vedtaket (åpnes i ny fane).</a>",
       "tekst2": "Du har rett til oppfølgning fra NAV uansett om du får innvilget AAP eller ikke."
     }
+  },
+  "logoutModal": {
+    "title": "Du har blitt logget ut",
+    "buttonText": "Logg inn på nytt"
   }
 }

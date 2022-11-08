@@ -1,10 +1,14 @@
-import { BodyShort, Button, Heading, Modal } from '@navikt/ds-react';
+import { Button, Heading, Link, Modal } from '@navikt/ds-react';
+import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { useInterval } from 'lib/hooks/useInterval';
 import { isMock } from 'lib/utils/environments';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import * as styles from './TimeoutBox.module.css';
 
 const ONE_SECOND_IN_MS = 1000;
+const SECONDS_IN_MINUTE = 60;
+const SECONDS_IN_HOUR = 60 * 60;
 
 const now = (): number => {
   return new Date().getTime();
@@ -16,16 +20,16 @@ const beregnUtloggingsTidspunkt = (sessionDurationInSeconds: number): number => 
 };
 
 export const TimeoutBox = () => {
-  const [isLoggedOut, setIsLoggedOut] = useState(false);
-  const [logoutTime, setLogoutTime] = useState(
-    beregnUtloggingsTidspunkt(60 * 60 * ONE_SECOND_IN_MS)
-  );
+  const [isLoggedOut, setIsLoggedOut] = useState(true);
+  const [logoutTime, setLogoutTime] = useState(beregnUtloggingsTidspunkt(SECONDS_IN_HOUR));
+
+  const { formatMessage } = useFeatureToggleIntl();
 
   const router = useRouter();
 
   useEffect(() => {
     if (isMock()) {
-      setLogoutTime(beregnUtloggingsTidspunkt(60 * ONE_SECOND_IN_MS));
+      setLogoutTime(beregnUtloggingsTidspunkt(SECONDS_IN_HOUR));
     } else {
       fetch('/aap/mine-aap/oauth2/session')
         .then((res) => res.json())
@@ -43,9 +47,8 @@ export const TimeoutBox = () => {
 
   useInterval(() => {
     const tidIgjenAvSesjon = logoutTime - now();
-    console.log('tidigjentillogout', tidIgjenAvSesjon);
     setIsLoggedOut(tidIgjenAvSesjon < 0);
-  }, 60 * ONE_SECOND_IN_MS);
+  }, SECONDS_IN_MINUTE * ONE_SECOND_IN_MS);
 
   return (
     <Modal
@@ -56,10 +59,12 @@ export const TimeoutBox = () => {
     >
       <Modal.Content>
         <Heading level="1" size="large" spacing>
-          Du har blitt logget ut
+          {formatMessage('logoutModal.title')}
         </Heading>
-        <BodyShort spacing>Trykk på knappen under for å logge inn på nytt.</BodyShort>
-        <Button onClick={onLoginClick}>Logg inn på nytt</Button>
+        <div className={styles.buttonRow}>
+          <Button onClick={onLoginClick}>{formatMessage('logoutModal.buttonText')}</Button>
+          <Link href="https://www.nav.no">Gå tilbake til nav.no</Link>
+        </div>
       </Modal.Content>
     </Modal>
   );
