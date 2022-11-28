@@ -50,14 +50,6 @@ jobs:
           cdn-team-name: aap
           source: ./.next/static
           destination: '/aap-innsyn/_next'
-      - name: Upload static files to NAV CDN prod
-        if: github.ref == 'refs/heads/main'
-        uses: nais/frontend-plattform-cdn-upload-action@main
-        with:
-          cdn-environment: cdn.nav.no
-          cdn-team-name: aap
-          source: ./.next/static
-          destination: '/aap-innsyn/_next'
       - name: "Set up Docker Buildx"
         id: "buildx"
         uses: "docker/setup-buildx-action@v1"
