@@ -11,6 +11,7 @@ const nextConfig = {
   trailingSlash: true,
   reactStrictMode: true,
   output: 'standalone',
+  assetPrefix: process.env.ASSET_PREFIX,
 
   i18n: {
     locales: ['nb', 'nn'],
