@@ -43,9 +43,7 @@ export const FileUploadFields = ({ fields, krav, remove, errors }: Props) => {
                       {fieldHasError ? (
                         <>
                           <div className={styles?.fileError}>
-                            <FileError
-                              color={'var(--navds-semantic-color-interaction-danger-hover)'}
-                            />
+                            <FileError color={'var(--a-surface-danger-hover)'} />
                           </div>
                           <div>
                             <Label id={`${krav}.fields.${index}`}>{attachment.name}</Label>
@@ -54,9 +52,7 @@ export const FileUploadFields = ({ fields, krav, remove, errors }: Props) => {
                       ) : (
                         <>
                           <div className={styles?.fileSuccess}>
-                            <FileSuccess
-                              color={'var(--navds-semantic-color-feedback-success-icon)'}
-                            />
+                            <FileSuccess color={'var(--a-icon-success)'} />
                           </div>
                           <div>
                             <Link

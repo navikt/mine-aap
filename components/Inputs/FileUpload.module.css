@@ -1,6 +1,6 @@
 .fileUpload {
   padding: 2rem;
-  background-color: var(--navds-semantic-color-component-background-alternate);
+  background-color: var(--a-surface-subtle);
   display: flex;
   flex-direction: column;
   row-gap: 1rem;
