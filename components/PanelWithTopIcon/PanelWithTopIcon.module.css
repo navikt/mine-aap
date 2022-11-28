@@ -12,13 +12,13 @@
   width: 48px;
   padding: 0.25rem;
 
-  border: 1px solid var(--navds-panel-color-border);
+  border: 1px solid var(--a-border-default);
   border-top-left-radius: 25px;
   border-top-right-radius: 25px;
 
   border-bottom: 0px;
 
-  background-color: var(--navds-semantic-color-canvas-background-light);
+  background-color: var(--a-bg-default);
 
   box-sizing: border-box;
 }

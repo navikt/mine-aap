@@ -3,8 +3,8 @@
 }
 .dropZone {
   padding: 30px;
-  border: 2px dashed var(--navds-semantic-color-interaction-primary);
-  background-color: var(--navds-semantic-color-interaction-primary-hover-subtle);
+  border: 2px dashed var(--a-surface-action);
+  background-color: var(--a-surface-action-subtle-hover);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -16,8 +16,8 @@
 
 .fileInputButton:focus {
   outline: none;
-  color: var(--navds-link-color-text-focus);
+  color: var(--a-text-on-action);
   text-decoration: none;
-  background-color: var(--navds-link-color-background-focus);
-  box-shadow: 0 0 0 2px var(--navds-semantic-color-focus);
+  background-color: var(--a-border-focus);
+  box-shadow: 0 0 0 2px var(--a-border-focus);
 }
