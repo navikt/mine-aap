@@ -3,7 +3,9 @@ import { beskyttetApi } from 'lib/auth/beskyttetApi';
 import { getAccessTokenFromRequest } from 'lib/auth/accessToken';
 import { isMock } from 'lib/utils/environments';
 import { mockDokumenter } from 'lib/mock/mockDokumenter';
-import { tokenXProxy } from 'lib/auth/tokenXProxy';
+import { logger } from '@navikt/aap-felles-innbygger-utils';
+import { tokenXApiProxy } from '@navikt/aap-felles-innbygger-auth';
+import metrics from 'lib/metrics';
 
 const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) => {
   const accessToken = getAccessTokenFromRequest(req);
@@ -13,12 +15,15 @@ const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) =
 
 export const getDocuments = async (accessToken?: string) => {
   if (isMock()) return mockDokumenter;
-  return await tokenXProxy({
+  return await tokenXApiProxy({
     url: `${process.env.SOKNAD_API_URL}/oppslag/dokumenter`,
     prometheusPath: '/oppslag/dokumenter',
     method: 'GET',
     audience: process.env.SOKNAD_API_AUDIENCE!,
     bearerToken: accessToken,
+    logger: logger,
+    metricsStatusCodeCounter: metrics.backendApiStatusCodeCounter,
+    metricsTimer: metrics.backendApiDurationHistogram,
   });
 };
 

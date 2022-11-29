@@ -1,9 +1,11 @@
 import { getAccessTokenFromRequest } from 'lib/auth/accessToken';
 import { beskyttetApi } from 'lib/auth/beskyttetApi';
-import { tokenXProxy } from 'lib/auth/tokenXProxy';
 import { isMock } from 'lib/utils/environments';
 import { getStringFromPossiblyArrayQuery } from 'lib/utils/string';
 import { NextApiRequest, NextApiResponse } from 'next';
+import { logger } from '@navikt/aap-felles-innbygger-utils';
+import { tokenXApiProxy } from '@navikt/aap-felles-innbygger-auth';
+import metrics from 'lib/metrics';
 
 const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) => {
   const journalpostId = getStringFromPossiblyArrayQuery(req.query.journalpostId);
@@ -29,13 +31,16 @@ export const lesDokument = async (
   accessToken?: string
 ) => {
   if (isMock()) return await fetch('http://localhost:3000/aap/mine-aap/Rød.png');
-  return await tokenXProxy({
+  return await tokenXApiProxy({
     url: `${process.env.SOKNAD_API_URL}/oppslag/dokument/${journalpostId}/${dokumentId}`,
     prometheusPath: '/oppslag/dokument/{journalpostId}/{dokumentId}',
     method: 'GET',
     audience: process.env.SOKNAD_API_AUDIENCE!,
     bearerToken: accessToken,
     rawResonse: true,
+    logger: logger,
+    metricsStatusCodeCounter: metrics.backendApiStatusCodeCounter,
+    metricsTimer: metrics.backendApiDurationHistogram,
   });
 };
 
