@@ -1,11 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getAccessTokenFromRequest } from 'lib/auth/accessToken';
 import { beskyttetApi } from 'lib/auth/beskyttetApi';
-import { tokenXProxy } from 'lib/auth/tokenXProxy';
 import { isMock } from 'lib/utils/environments';
 import metrics from 'lib/metrics';
 import { Ettersendelse, EttersendelseBackendState } from 'lib/types/types';
 import { logger } from '@navikt/aap-felles-innbygger-utils';
+import { tokenXApiProxy } from '@navikt/aap-felles-innbygger-auth';
 
 const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) => {
   const accessToken = getAccessTokenFromRequest(req);
@@ -31,7 +31,7 @@ export const sendEttersendelse = async (data: EttersendelseBackendState, accessT
   if (isMock()) {
     return {};
   }
-  const ettersendelse = await tokenXProxy({
+  const ettersendelse = await tokenXApiProxy({
     url: `${process.env.SOKNAD_API_URL}/innsending/ettersend`,
     prometheusPath: '/innsending/ettersend',
     method: 'POST',
@@ -39,6 +39,9 @@ export const sendEttersendelse = async (data: EttersendelseBackendState, accessT
     audience: process.env.SOKNAD_API_AUDIENCE!,
     bearerToken: accessToken,
     noResponse: true,
+    logger: logger,
+    metricsStatusCodeCounter: metrics.backendApiStatusCodeCounter,
+    metricsTimer: metrics.backendApiDurationHistogram,
   });
   return ettersendelse;
 };

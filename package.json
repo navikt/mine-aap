@@ -13,6 +13,7 @@
     "postinstall": "patch-package"
   },
   "dependencies": {
+    "@navikt/aap-felles-innbygger-auth": "^0.0.33",
     "@navikt/aap-felles-innbygger-css": "0.0.26",
     "@navikt/aap-felles-innbygger-react": "0.0.26",
     "@navikt/aap-felles-innbygger-utils": "0.0.25",
