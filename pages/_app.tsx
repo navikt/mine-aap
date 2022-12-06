@@ -1,7 +1,7 @@
 import '@navikt/ds-css';
 import '@navikt/aap-felles-innbygger-css';
 import 'styles/globals.css';
-import type { AppProps } from 'next/app';
+import type { AppProps, NextWebVitalsMetric } from 'next/app';
 import { useEffect } from 'react';
 import { initAmplitude } from 'lib/utils/amplitude';
 import messagesNb from 'lib/translations/nb.json';
@@ -12,6 +12,7 @@ import { Locale } from '@navikt/nav-dekoratoren-moduler';
 import { SUPPORTED_LOCALE } from 'lib/translations/locales';
 import { NavDecorator } from 'components/NavDecorator/NavDecorator';
 import { TimeoutBox } from 'components/TimeoutBox/TimeoutBox';
+import { WebVital } from 'lib/types/webWital';
 
 function flattenMessages(nestedMessages: object, prefix = ''): Record<string, string> {
   return Object.keys(nestedMessages).reduce((messages, key) => {
@@ -45,6 +46,18 @@ type Messages = {
 export const messages: Messages = {
   nb: flattenMessages(messagesNb),
   nn: flattenMessages(messagesNn),
+};
+
+export const reportWebVitals = (metric: NextWebVitalsMetric) => {
+  const webVital: WebVital = {
+    name: metric.name,
+    label: metric.label,
+    value: metric.value,
+    path: window.location.pathname,
+  };
+  if (navigator.sendBeacon) {
+    navigator.sendBeacon('/aap/mine-aap/api/web-vitals', JSON.stringify(webVital));
+  }
 };
 
 function MyApp({ Component, pageProps }: AppProps) {

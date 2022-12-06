@@ -44,6 +44,34 @@ export class AppMetrics {
     name: 'mine_aap_ettersend_vedlegg_number_of_documents',
     help: 'Total number of documents',
   });
+
+  public webVitalsLcpHistogram = new Histogram({
+    name: 'web_vitals_lcp',
+    help: 'Largest Contentful Paint',
+    labelNames: ['path'],
+    buckets: [2500, 4000],
+  });
+
+  public webVitalsFcpHistogram = new Histogram({
+    name: 'web_vitals_fcp',
+    help: 'First Contentful Paint',
+    labelNames: ['path'],
+    buckets: [100, 300],
+  });
+
+  public webVitalsClsHistogram = new Histogram({
+    name: 'web_vitals_cls',
+    help: 'Cumulative Layout Shift',
+    labelNames: ['path'],
+    buckets: [0.1, 0.25],
+  });
+
+  public webVitalsTtfbHistogram = new Histogram({
+    name: 'web_vitals_ttfb',
+    help: 'Time to First Byte',
+    labelNames: ['path'],
+    buckets: [800, 1800],
+  });
 }
 
 global._metrics = global._metrics || new AppMetrics();
