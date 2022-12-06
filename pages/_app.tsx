@@ -13,6 +13,7 @@ import { SUPPORTED_LOCALE } from 'lib/translations/locales';
 import { NavDecorator } from 'components/NavDecorator/NavDecorator';
 import { TimeoutBox } from 'components/TimeoutBox/TimeoutBox';
 import { WebVital } from 'lib/types/webWital';
+import { replaceUUIDsInString } from 'lib/utils/string';
 
 function flattenMessages(nestedMessages: object, prefix = ''): Record<string, string> {
   return Object.keys(nestedMessages).reduce((messages, key) => {
@@ -53,7 +54,7 @@ export const reportWebVitals = (metric: NextWebVitalsMetric) => {
     name: metric.name,
     label: metric.label,
     value: metric.value,
-    path: window.location.pathname,
+    path: replaceUUIDsInString(window.location.pathname),
   };
   if (navigator.sendBeacon) {
     navigator.sendBeacon('/aap/mine-aap/api/web-vitals', JSON.stringify(webVital));

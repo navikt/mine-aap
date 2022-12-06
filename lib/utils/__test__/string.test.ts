@@ -1,4 +1,5 @@
-import { getStringFromPossiblyArrayQuery } from 'lib/utils/string';
+import { randomUUID } from 'crypto';
+import { getStringFromPossiblyArrayQuery, replaceUUIDsInString } from 'lib/utils/string';
 
 describe('getStringFromPossiblyArrayQuery', () => {
   it('should return the first element of an array', () => {
@@ -14,5 +15,13 @@ describe('getStringFromPossiblyArrayQuery', () => {
   it('should return undefined if the query is undefined', () => {
     const query = undefined;
     expect(getStringFromPossiblyArrayQuery(query)).toBeUndefined();
+  });
+});
+
+describe('replaceUUIDsInString', () => {
+  it('should replace UUIDs with [UUID]', () => {
+    const UUID = randomUUID();
+    const string = `/some/path/${UUID}/`;
+    expect(replaceUUIDsInString(string)).toBe(`/some/path/[UUID]/`);
   });
 });
