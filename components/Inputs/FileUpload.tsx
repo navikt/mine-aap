@@ -1,5 +1,5 @@
 import { Alert, BodyShort, Button, Heading } from '@navikt/ds-react';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useForm, useFieldArray, FieldArrayWithId, FieldErrors } from 'react-hook-form';
 import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { Ettersendelse, OpplastetVedlegg, VedleggType } from 'lib/types/types';
@@ -61,6 +61,8 @@ export const FileUpload = ({
     control,
   });
 
+  const isUploadingFiles = useMemo(() => fields.some((field) => field.isUploading), [fields]);
+
   useEffect(() => {
     const iterateOverFiles = async (fields: FieldArrayWithId<VedleggFormValues>[]) => {
       if (fields.length > 0) {
@@ -106,23 +108,32 @@ export const FileUpload = ({
       }
       const data = new FormData();
       data.append('vedlegg', field.file);
-      const vedlegg = await fetch('/aap/mine-aap/api/vedlegg/lagre/', {
-        method: 'POST',
-        body: data,
-      });
-      const vedleggData = await vedlegg.json();
-      if (vedlegg.ok) {
-        update(index, { ...field, vedleggId: vedleggData, isUploading: false });
-      } else {
+      try {
+        const vedlegg = await fetch('/aap/mine-aap/api/vedlegg/lagre/', {
+          method: 'POST',
+          body: data,
+        });
+
+        const vedleggData = await vedlegg.json();
+        if (vedlegg.ok) {
+          update(index, { ...field, vedleggId: vedleggData, isUploading: false });
+        } else {
+          setError(`${krav}.fields.${index}`, {
+            type: 'custom',
+            // @ts-ignore-line
+            message: formatMessage(
+              `validation.${getErrorKeyForStatusCode(vedlegg.status, vedleggData?.substatus)}`,
+              {
+                size: bytesToMB(MAX_TOTAL_FILE_SIZE),
+              }
+            ),
+          });
+          update(index, { ...field, isUploading: false });
+        }
+      } catch (error) {
         setError(`${krav}.fields.${index}`, {
           type: 'custom',
-          // @ts-ignore-line
-          message: formatMessage(
-            `validation.${getErrorKeyForStatusCode(vedlegg.status, vedleggData?.substatus)}`,
-            {
-              size: bytesToMB(MAX_TOTAL_FILE_SIZE),
-            }
-          ),
+          message: formatMessage(`validation.feilet`),
         });
         update(index, { ...field, isUploading: false });
       }
@@ -223,7 +234,7 @@ export const FileUpload = ({
           {showMultipleFilesInfo && (
             <Alert variant={'info'}>{formatMessage('filopplasting.formangefiler')}</Alert>
           )}
-          {fields.length > 0 && (
+          {fields.length > 0 && !isUploadingFiles && (
             <div>
               <Button variant="primary" type="submit" loading={isSendingEttersendelse}>
                 {formatMessage('ettersendelse.buttons.primary')}

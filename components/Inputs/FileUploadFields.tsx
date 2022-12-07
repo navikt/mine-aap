@@ -68,7 +68,7 @@ export const FileUploadFields = ({ fields, krav, remove, errors }: Props) => {
                     </>
                   )}
                 </div>
-                {fieldHasError ? (
+                {fieldHasError && (
                   <button
                     type={'button'}
                     onClick={() => {
@@ -85,7 +85,8 @@ export const FileUploadFields = ({ fields, krav, remove, errors }: Props) => {
                     <Cancel title={formatMessage('filopplasting.vedlegg.avbryt')} />
                     <BodyShort>{formatMessage('filopplasting.vedlegg.avbryt')}</BodyShort>
                   </button>
-                ) : (
+                )}
+                {!fieldHasError && !attachment.isUploading && (
                   <button
                     type={'button'}
                     onClick={() =>
