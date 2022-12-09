@@ -1,3 +1,12 @@
+.pageHeaderWrapper {
+  padding: 0 2rem;
+}
+@media (max-width: 480px) {
+  .pageHeaderWrapper {
+    padding-left: var(--a-spacing-2);
+    padding-right: var(--a-spacing-2);
+  }
+}
 .navdsPageHeader {
   display: flex;
   justify-content: center;

@@ -4,6 +4,12 @@
   align-items: center;
   padding: 2rem;
 }
+@media (max-width: 480px) {
+  .section {
+    padding-left: var(--a-spacing-2);
+    padding-right: var(--a-spacing-2);
+  }
+}
 
 .container {
   width: 100%;
