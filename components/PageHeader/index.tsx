@@ -6,7 +6,7 @@ export interface PageHeaderProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * PageHeader title
    */
-  children: string;
+  children: string | React.ReactNode;
   /**
    * Pictogram placed in PageHeader
    */
@@ -52,19 +52,23 @@ const PageHeader = forwardRef<HTMLDivElement, PageHeaderProps>(
       }
     }, [align]);
     return (
-      <div
-        ref={ref}
-        className={`${classes?.navdsPageHeader} ${className} ${classes?.[variantClass]} ${classes?.[alignClass]}`}
-        {...rest}
-      >
-        {illustration && <div className={classes?.navdsPageHeaderIllustration}>{illustration}</div>}
-        <div className="navdsPageHeaderWrapper">
-          <Heading className="navdsPageHeaderTitle" size="xlarge" level="1">
-            {children}
-          </Heading>
-          {description && (
-            <BodyShort className="navdsPageHeaderDescription">{description}</BodyShort>
+      <div className={classes?.pageHeaderWrapper}>
+        <div
+          ref={ref}
+          className={`${classes?.navdsPageHeader} ${className} ${classes?.[variantClass]} ${classes?.[alignClass]}`}
+          {...rest}
+        >
+          {illustration && (
+            <div className={classes?.navdsPageHeaderIllustration}>{illustration}</div>
           )}
+          <div className="navdsPageHeaderWrapper">
+            <Heading className="navdsPageHeaderTitle" size="xlarge" level="1">
+              {children}
+            </Heading>
+            {description && (
+              <BodyShort className="navdsPageHeaderDescription">{description}</BodyShort>
+            )}
+          </div>
         </div>
       </div>
     );

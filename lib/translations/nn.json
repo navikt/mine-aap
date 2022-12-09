@@ -1,5 +1,5 @@
 {
-  "appTittel": "Mine arbeidsavklaringspengar",
+  "appTittel": "Mine arbeidsavklarings{shy}pengar",
   "forside": {
     "heading": "Velkommen til Mine AAP!",
     "introListe": {
@@ -68,7 +68,7 @@
   },
   "tilbakeTilMineAAPKnapp": "Tilbake til Mine arbeidsavklaringspengar",
   "ettersendelse": {
-    "appTittel": "Ettersending til arbeidsavklaringspengar (AAP)",
+    "appTittel": "Ettersending til arbeidsavklarings{shy}pengar (AAP)",
     "heading": "Ettersend dokumentasjon",
     "guide": "Dersom du skal ettersenda vedlegg, må du sende desse innan 14 dagar. Du kan ettersende anten digitalt eller per post. Treng du meir tid, kan du be om å få forlenga fristen. Dette kan du gjere via nav.no eller ved å ringje oss etter at søknaden er send inn.",
     "gjeldendeSøknad": "Gjelder søknad sendt til oss {dateTime}",

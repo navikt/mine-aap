@@ -9,7 +9,9 @@ export const AppHeader = () => {
     <header className={styles.appHeader}>
       <div className={styles.container}>
         <Heading level="1" size="xlarge">
-          {intl.formatMessage('appTittel')}
+          {intl.formatElement('appTittel', {
+            shy: <>&shy;</>,
+          })}
         </Heading>
       </div>
     </header>

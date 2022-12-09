@@ -17,7 +17,7 @@ import { useIntl } from 'react-intl';
 import { ScanningGuide } from '@navikt/aap-felles-innbygger-react';
 
 const Ettersendelse = () => {
-  const { formatMessage } = useFeatureToggleIntl();
+  const { formatMessage, formatElement } = useFeatureToggleIntl();
   const { locale } = useIntl();
 
   const router = useRouter();
@@ -25,7 +25,9 @@ const Ettersendelse = () => {
   return (
     <>
       <PageHeader align="center" variant="guide">
-        {formatMessage('ettersendelse.appTittel')}
+        {formatElement('ettersendelse.appTittel', {
+          shy: <>&shy;</>,
+        })}
       </PageHeader>
       <main className={styles.main}>
         <Section>

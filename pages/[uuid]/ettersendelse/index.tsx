@@ -28,7 +28,7 @@ interface PageProps {
 }
 
 const Index = ({ søknad }: PageProps) => {
-  const { formatMessage } = useFeatureToggleIntl();
+  const { formatMessage, formatElement } = useFeatureToggleIntl();
   const { locale } = useIntl();
 
   const [errors, setErrors] = useState<FieldErrors>({});
@@ -55,14 +55,15 @@ const Index = ({ søknad }: PageProps) => {
 
   const onEttersendelseSuccess = (krav: string) => {
     const updatedManglendeVedlegg = manglendeVedlegg.filter((vedlegg) => vedlegg !== krav);
-    console.log('updatedManglendeVedlegg', updatedManglendeVedlegg);
     setManglendeVedlegg(updatedManglendeVedlegg);
   };
 
   return (
     <>
       <PageHeader align="center" variant="guide">
-        {formatMessage('ettersendelse.appTittel')}
+        {formatElement('ettersendelse.appTittel', {
+          shy: <>&shy;</>,
+        })}
       </PageHeader>
       <main className={styles.main}>
         <Section>
@@ -72,7 +73,7 @@ const Index = ({ søknad }: PageProps) => {
               Tilbake til Mine Arbeidsavklaringspenger
             </Link>
           </NextLink>
-          <Heading level="2" size="xlarge" spacing>
+          <Heading level="2" size="large" spacing>
             {formatMessage('ettersendelse.heading')}
           </Heading>
           <LucaGuidePanel>
