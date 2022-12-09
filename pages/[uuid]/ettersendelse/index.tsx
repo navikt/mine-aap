@@ -22,6 +22,7 @@ import { useRouter } from 'next/router';
 import metrics from 'lib/metrics';
 import { formatFullDate } from 'lib/utils/date';
 import { useIntl } from 'react-intl';
+import Head from 'next/head';
 
 interface PageProps {
   søknad: Søknad;
@@ -60,6 +61,13 @@ const Index = ({ søknad }: PageProps) => {
 
   return (
     <>
+      <Head>
+        <title>
+          {`${formatElement('ettersendelse.appTittel', {
+            shy: '',
+          })} - nav.no`}
+        </title>
+      </Head>
       <PageHeader align="center" variant="guide">
         {formatElement('ettersendelse.appTittel', {
           shy: <>&shy;</>,

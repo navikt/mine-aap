@@ -14,6 +14,7 @@ import { useRouter } from 'next/router';
 import NextLink from 'next/link';
 import metrics from 'lib/metrics';
 import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
+import Head from 'next/head';
 
 interface PageProps {
   søknader: Søknad[];
@@ -21,10 +22,17 @@ interface PageProps {
 
 const Søknader = ({ søknader }: PageProps) => {
   const router = useRouter();
-  const { formatMessage } = useFeatureToggleIntl();
+  const { formatMessage, formatElement } = useFeatureToggleIntl();
 
   return (
     <Layout>
+      <Head>
+        <title>
+          {`${formatElement('appTittel', {
+            shy: '',
+          })} - nav.no`}
+        </title>
+      </Head>
       <Section>
         <NextLink href="/" passHref>
           <Link>

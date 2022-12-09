@@ -15,6 +15,7 @@ import { getAccessToken } from 'lib/auth/accessToken';
 import { LucaGuidePanel } from '@navikt/aap-felles-innbygger-react';
 import { useIntl } from 'react-intl';
 import { ScanningGuide } from '@navikt/aap-felles-innbygger-react';
+import Head from 'next/head';
 
 const Ettersendelse = () => {
   const { formatMessage, formatElement } = useFeatureToggleIntl();
@@ -24,6 +25,13 @@ const Ettersendelse = () => {
 
   return (
     <>
+      <Head>
+        <title>
+          {`${formatElement('ettersendelse.appTittel', {
+            shy: '',
+          })} - nav.no`}
+        </title>
+      </Head>
       <PageHeader align="center" variant="guide">
         {formatElement('ettersendelse.appTittel', {
           shy: <>&shy;</>,

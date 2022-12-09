@@ -17,6 +17,7 @@ import { Dokumentoversikt } from 'components/Dokumentoversikt/Dokumentoversikt';
 import metrics from 'lib/metrics';
 import { HvaSkjerPanel } from 'components/HvaSkjerPanel/HvaSkjerPanel';
 import { LucaGuidePanel } from '@navikt/aap-felles-innbygger-react';
+import Head from 'next/head';
 
 interface PageProps {
   søknader: Søknad[];
@@ -24,7 +25,7 @@ interface PageProps {
 }
 
 const Index = ({ søknader, dokumenter }: PageProps) => {
-  const { formatMessage } = useFeatureToggleIntl();
+  const { formatMessage, formatElement } = useFeatureToggleIntl();
 
   const router = useRouter();
 
@@ -34,6 +35,13 @@ const Index = ({ søknader, dokumenter }: PageProps) => {
 
   return (
     <Layout>
+      <Head>
+        <title>
+          {`${formatElement('appTittel', {
+            shy: '',
+          })} - nav.no`}
+        </title>
+      </Head>
       <Section>
         <LucaGuidePanel>
           <Heading level="2" size="medium" spacing>
