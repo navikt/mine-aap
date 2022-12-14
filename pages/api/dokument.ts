@@ -1,5 +1,4 @@
-import { getAccessTokenFromRequest } from 'lib/auth/accessToken';
-import { beskyttetApi } from 'lib/auth/beskyttetApi';
+import { beskyttetApi, getAccessTokenFromRequest } from '@navikt/aap-felles-innbygger-auth';
 import { isMock } from 'lib/utils/environments';
 import { getStringFromPossiblyArrayQuery } from 'lib/utils/string';
 import { NextApiRequest, NextApiResponse } from 'next';

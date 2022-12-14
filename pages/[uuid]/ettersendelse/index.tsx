@@ -1,8 +1,7 @@
 import { BodyShort, Button, Heading, Label, Link, ReadMore } from '@navikt/ds-react';
 import { LucaGuidePanel, ScanningGuide } from '@navikt/aap-felles-innbygger-react';
 import { GetServerSidePropsResult, NextPageContext } from 'next';
-import { getAccessToken } from 'lib/auth/accessToken';
-import { beskyttetSide } from 'lib/auth/beskyttetSide';
+import { beskyttetSide, getAccessToken } from '@navikt/aap-felles-innbygger-auth';
 import { FileUpload } from 'components/Inputs/FileUpload';
 import PageHeader from 'components/PageHeader';
 import { Section } from 'components/Section/Section';

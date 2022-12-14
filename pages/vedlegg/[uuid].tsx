@@ -1,4 +1,4 @@
-import { beskyttetSide } from 'lib/auth/beskyttetSide';
+import { beskyttetSide } from '@navikt/aap-felles-innbygger-auth';
 import { GetServerSidePropsResult, NextPageContext } from 'next';
 import { useEffect, useState } from 'react';
 import { getStringFromPossiblyArrayQuery } from 'lib/utils/string';

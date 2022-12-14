@@ -2,8 +2,7 @@ import { BodyShort, Button, Heading, Label, Link, Panel } from '@navikt/ds-react
 import type { GetServerSidePropsResult, NextPageContext } from 'next';
 import NextLink from 'next/link';
 import { useMemo } from 'react';
-import { getAccessToken } from 'lib/auth/accessToken';
-import { beskyttetSide } from 'lib/auth/beskyttetSide';
+import { beskyttetSide, getAccessToken } from '@navikt/aap-felles-innbygger-auth';
 import { Layout } from 'components/Layout/Layout';
 import { Section } from 'components/Section/Section';
 import { SoknadPanel } from 'components/SoknadPanel/SoknadPanel';
@@ -11,7 +10,6 @@ import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { Dokument, Søknad } from 'lib/types/types';
 import { getDocuments } from 'pages/api/dokumenter';
 import { getSøknader } from 'pages/api/soknader/soknader';
-import { logger } from '@navikt/aap-felles-innbygger-utils';
 import { useRouter } from 'next/router';
 import { Dokumentoversikt } from 'components/Dokumentoversikt/Dokumentoversikt';
 import metrics from 'lib/metrics';
