@@ -1,7 +1,6 @@
 import { randomUUID } from 'crypto';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { getAccessTokenFromRequest } from 'lib/auth/accessToken';
-import { beskyttetApi } from 'lib/auth/beskyttetApi';
+import { beskyttetApi, getAccessTokenFromRequest } from '@navikt/aap-felles-innbygger-auth';
 import { isMock } from 'lib/utils/environments';
 import { logger } from '@navikt/aap-felles-innbygger-utils';
 import { tokenXApiStreamProxy } from '@navikt/aap-felles-innbygger-auth';

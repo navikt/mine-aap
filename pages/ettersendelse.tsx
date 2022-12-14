@@ -2,7 +2,7 @@ import { ReadMore, Label, BodyShort, Button, Heading, Link } from '@navikt/ds-re
 import { FileUpload } from 'components/Inputs/FileUpload';
 import PageHeader from 'components/PageHeader';
 import { Section } from 'components/Section/Section';
-import { beskyttetSide } from 'lib/auth/beskyttetSide';
+import { beskyttetSide, getAccessToken } from '@navikt/aap-felles-innbygger-auth';
 import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { GetServerSidePropsResult, NextPageContext } from 'next';
 import * as styles from 'pages/[uuid]/ettersendelse/Ettersendelse.module.css';
@@ -11,10 +11,8 @@ import { Left } from '@navikt/ds-icons';
 import { useRouter } from 'next/router';
 import metrics from 'lib/metrics';
 import { getSøknader } from './api/soknader/soknader';
-import { getAccessToken } from 'lib/auth/accessToken';
-import { LucaGuidePanel } from '@navikt/aap-felles-innbygger-react';
+import { LucaGuidePanel, ScanningGuide } from '@navikt/aap-felles-innbygger-react';
 import { useIntl } from 'react-intl';
-import { ScanningGuide } from '@navikt/aap-felles-innbygger-react';
 import Head from 'next/head';
 
 const Ettersendelse = () => {
