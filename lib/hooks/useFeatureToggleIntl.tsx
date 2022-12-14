@@ -25,7 +25,7 @@ export const useFeatureToggleIntl = () => {
     values?:
       | Record<
           string,
-          string | number | boolean | {} | Date | React.ReactElement<any, any> | undefined
+          string | number | boolean | Date | React.ReactElement<any, string> | undefined
         >
       | undefined
   ) =>
