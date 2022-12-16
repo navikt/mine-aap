@@ -1,9 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { beskyttetApi, getAccessTokenFromRequest } from '@navikt/aap-felles-innbygger-auth';
-import { isMock } from 'lib/utils/environments';
 import { getCommaSeparatedStringFromStringOrArray } from 'lib/utils/string';
-import { logger } from '@navikt/aap-felles-innbygger-utils';
-import { tokenXApiProxy } from '@navikt/aap-felles-innbygger-auth';
+import {
+  logger,
+  isMock,
+  tokenXApiProxy,
+  beskyttetApi,
+  getAccessTokenFromRequest,
+} from '@navikt/aap-felles-innbygger-utils';
 import metrics from 'lib/metrics';
 
 const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) => {

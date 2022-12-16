@@ -1,6 +1,6 @@
 import { Button, Heading, Link } from '@navikt/ds-react';
 import { NextPageContext, GetServerSidePropsResult } from 'next';
-import { beskyttetSide, getAccessToken } from '@navikt/aap-felles-innbygger-auth';
+import { beskyttetSide, getAccessToken } from '@navikt/aap-felles-innbygger-utils';
 import { VerticalFlexContainer } from 'components/FlexContainer/VerticalFlexContainer';
 import { Layout } from 'components/Layout/Layout';
 import { Section } from 'components/Section/Section';

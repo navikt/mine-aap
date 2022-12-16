@@ -2,7 +2,7 @@ import { ReadMore, Label, BodyShort, Button, Heading, Link } from '@navikt/ds-re
 import { FileUpload } from 'components/Inputs/FileUpload';
 import PageHeader from 'components/PageHeader';
 import { Section } from 'components/Section/Section';
-import { beskyttetSide, getAccessToken } from '@navikt/aap-felles-innbygger-auth';
+import { beskyttetSide, getAccessToken } from '@navikt/aap-felles-innbygger-utils';
 import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { GetServerSidePropsResult, NextPageContext } from 'next';
 import * as styles from 'pages/[uuid]/ettersendelse/Ettersendelse.module.css';
