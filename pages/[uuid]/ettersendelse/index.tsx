@@ -1,7 +1,6 @@
 import { BodyShort, Button, Heading, Label, Link, ReadMore } from '@navikt/ds-react';
 import { LucaGuidePanel, ScanningGuide } from '@navikt/aap-felles-innbygger-react';
 import { GetServerSidePropsResult, NextPageContext } from 'next';
-import { beskyttetSide, getAccessToken } from '@navikt/aap-felles-innbygger-auth';
 import { FileUpload } from 'components/Inputs/FileUpload';
 import PageHeader from 'components/PageHeader';
 import { Section } from 'components/Section/Section';
@@ -10,7 +9,7 @@ import { Søknad, VedleggType } from 'lib/types/types';
 import * as styles from 'pages/[uuid]/ettersendelse/Ettersendelse.module.css';
 import { getSøknad } from 'pages/api/soknader/[uuid]';
 import { getStringFromPossiblyArrayQuery } from 'lib/utils/string';
-import { logger } from '@navikt/aap-felles-innbygger-utils';
+import { logger, beskyttetSide, getAccessToken } from '@navikt/aap-felles-innbygger-utils';
 import { useState } from 'react';
 import { FieldErrors } from 'react-hook-form';
 import { FormErrorSummary } from 'components/FormErrorSummary/FormErrorSummary';
