@@ -2,7 +2,7 @@ import { BodyShort, Button, Heading, Label, Link, Panel } from '@navikt/ds-react
 import type { GetServerSidePropsResult, NextPageContext } from 'next';
 import NextLink from 'next/link';
 import { useMemo } from 'react';
-import { beskyttetSide, getAccessToken } from '@navikt/aap-felles-innbygger-auth';
+import { beskyttetSide, getAccessToken } from '@navikt/aap-felles-innbygger-utils';
 import { Layout } from 'components/Layout/Layout';
 import { Section } from 'components/Section/Section';
 import { SoknadPanel } from 'components/SoknadPanel/SoknadPanel';
