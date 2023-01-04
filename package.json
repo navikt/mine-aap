@@ -14,9 +14,10 @@
   },
   "dependencies": {
     "@amplitude/analytics-browser": "^1.6.6",
-    "@navikt/aap-felles-innbygger-css": "^0.0.45",
-    "@navikt/aap-felles-innbygger-react": "^0.0.45",
-    "@navikt/aap-felles-innbygger-utils": "^0.0.45",
+    "@navikt/aap-felles-innbygger-css": "^0.0.48",
+    "@navikt/aap-felles-innbygger-react": "^0.0.48",
+    "@navikt/aap-felles-innbygger-utils": "^0.0.48",
+    "@navikt/aap-felles-utils-client": "^0.0.48",
     "@navikt/ds-css": "^2.0.5",
     "@navikt/ds-icons": "^2.0.5",
     "@navikt/ds-react": "^2.0.5",

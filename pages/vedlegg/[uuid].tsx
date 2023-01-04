@@ -1,7 +1,7 @@
 import { beskyttetSide } from '@navikt/aap-felles-innbygger-utils';
 import { GetServerSidePropsResult, NextPageContext } from 'next';
 import { useEffect, useState } from 'react';
-import { getStringFromPossiblyArrayQuery } from 'lib/utils/string';
+import { getStringFromPossiblyArrayQuery } from '@navikt/aap-felles-utils-client';
 
 interface PageProps {
   uuid: string;

@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { mockSøknader } from 'lib/mock/mockSoknad';
-import { getStringFromPossiblyArrayQuery } from 'lib/utils/string';
+import { getStringFromPossiblyArrayQuery } from '@navikt/aap-felles-utils-client';
 import {
   logger,
   isMock,

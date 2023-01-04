@@ -13,7 +13,7 @@ import { SUPPORTED_LOCALE } from 'lib/translations/locales';
 import { NavDecorator } from 'components/NavDecorator/NavDecorator';
 import { TimeoutBox } from 'components/TimeoutBox/TimeoutBox';
 import { WebVital } from 'lib/types/webWital';
-import { replaceUUIDsInString } from 'lib/utils/string';
+import { replaceUUIDsInString } from '@navikt/aap-felles-utils-client';
 
 function flattenMessages(nestedMessages: object, prefix = ''): Record<string, string> {
   return Object.keys(nestedMessages).reduce((messages, key) => {
