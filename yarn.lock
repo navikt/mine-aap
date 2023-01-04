@@ -796,15 +796,15 @@
     "@jridgewell/resolve-uri" "3.1.0"
     "@jridgewell/sourcemap-codec" "1.4.14"
 
-"@navikt/aap-felles-innbygger-css@^0.0.44":
-  version "0.0.44"
-  resolved "https://npm.pkg.github.com/download/@navikt/aap-felles-innbygger-css/0.0.44/0f296e64ac93ae7d718217d44c716f3eb0498d1f#0f296e64ac93ae7d718217d44c716f3eb0498d1f"
-  integrity sha512-lLX9qSRpaKicsw00otB2n+qO5FZBDbx5qBtRUW7sbMT3HXh6hFmJ3PG0HSzhkGThoJ4OMmP+90wAHQTHM50jyQ==
+"@navikt/aap-felles-innbygger-css@^0.0.45":
+  version "0.0.45"
+  resolved "https://npm.pkg.github.com/download/@navikt/aap-felles-innbygger-css/0.0.45/15222d8a2290c8cc3caf1f80f431202bc4c9cb56#15222d8a2290c8cc3caf1f80f431202bc4c9cb56"
+  integrity sha512-kE30osuTT1ezczPjcY6VcrSakZQ5HBJwdiyTsLD399mSu7gfby07GnLaQt6yk0OC8N20M4rzbaPWDBL2GoMr7g==
 
-"@navikt/aap-felles-innbygger-react@^0.0.44":
-  version "0.0.44"
-  resolved "https://npm.pkg.github.com/download/@navikt/aap-felles-innbygger-react/0.0.44/47a14f0f7ab8402ddd92ae817ff7dd9985c9722d#47a14f0f7ab8402ddd92ae817ff7dd9985c9722d"
-  integrity sha512-ZND5/izO/NsCqhFz0lpmQt7YBD5sTkUxxCd2huSdYIUpHAzDnp4r+udr3cHrCDXrjRUX7TCVjtWLDQXJ4weMcA==
+"@navikt/aap-felles-innbygger-react@^0.0.45":
+  version "0.0.45"
+  resolved "https://npm.pkg.github.com/download/@navikt/aap-felles-innbygger-react/0.0.45/8b965f6e44d961fe588eda8d438d91057eb75d69#8b965f6e44d961fe588eda8d438d91057eb75d69"
+  integrity sha512-3ukKxalEw/L9j7D6DWOr8ynZV5sWznpRcZb5MoV0e+1eR5BZol1nyOqvXPePbPk+rICLh0MXQlH2UQyQQdTbyQ==
   dependencies:
     "@navikt/ds-css" "^2.0.5"
     "@navikt/ds-icons" "^2.0.5"
@@ -813,10 +813,10 @@
     prop-types "^15.8.1"
     react "^18.2.0"
 
-"@navikt/aap-felles-innbygger-utils@^0.0.44":
-  version "0.0.44"
-  resolved "https://npm.pkg.github.com/download/@navikt/aap-felles-innbygger-utils/0.0.44/9ca64825578d31ab777315cbf895f7352c25c2dc#9ca64825578d31ab777315cbf895f7352c25c2dc"
-  integrity sha512-8K6pS6InnPp+AU8/TBxCWWfelv00pxZ9KQQ5ZoLcp5RdqQPZpNkNwPVqxN4x1eT6ZJSm/mRHtKrXaUGKsPfx+A==
+"@navikt/aap-felles-innbygger-utils@^0.0.45":
+  version "0.0.45"
+  resolved "https://npm.pkg.github.com/download/@navikt/aap-felles-innbygger-utils/0.0.45/597b61299e61071e4b36191efc1cfbcccbe7a477#597b61299e61071e4b36191efc1cfbcccbe7a477"
+  integrity sha512-ZfivNn9jKffwXq4FitKpmtIFxGUWb8V5Yf6MOI1BocMr2uhxvqFCSAdOgksb2+V5T4wgH9807CR/dgv049F6Ww==
   dependencies:
     "@elastic/ecs-pino-format" "1.3.0"
     axios "^1.2.1"
