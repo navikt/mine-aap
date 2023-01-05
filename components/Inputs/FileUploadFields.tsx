@@ -2,7 +2,7 @@ import { Cancel, Delete, FileError, FileSuccess } from '@navikt/ds-icons';
 import { BodyShort, Detail, Label, Link, Loader, Panel } from '@navikt/ds-react';
 import { FieldArrayWithId, FieldErrors, UseFieldArrayRemove } from 'react-hook-form';
 import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
-import { fileSizeString } from 'lib/utils/string';
+import { fileSizeString } from '@navikt/aap-felles-utils-client';
 import { TOTAL_FILE_SIZE, VedleggFormValues } from 'components/Inputs/FileUpload';
 import * as styles from 'components/Inputs/FileUploadFields.module.css';
 import { VedleggType } from 'lib/types/types';

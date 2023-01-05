@@ -8,7 +8,7 @@ import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { Søknad, VedleggType } from 'lib/types/types';
 import * as styles from 'pages/[uuid]/ettersendelse/Ettersendelse.module.css';
 import { getSøknad } from 'pages/api/soknader/[uuid]';
-import { getStringFromPossiblyArrayQuery } from 'lib/utils/string';
+import { getStringFromPossiblyArrayQuery } from '@navikt/aap-felles-utils-client';
 import { logger, beskyttetSide, getAccessToken } from '@navikt/aap-felles-innbygger-utils';
 import { useState } from 'react';
 import { FieldErrors } from 'react-hook-form';

@@ -3,7 +3,7 @@ import { FieldErrors } from 'react-hook-form';
 import { ErrorSummary } from '@navikt/ds-react';
 import * as classes from 'components/FormErrorSummary/FormErrorSummary.module.css';
 import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
-import { flattenObject } from 'lib/utils/object';
+import { flattenObject } from '@navikt/aap-felles-utils-client';
 
 const FormErrorSummary = (props: { id: string; errors: FieldErrors }) => {
   const { formatMessage } = useFeatureToggleIntl();

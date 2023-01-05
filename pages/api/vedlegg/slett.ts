@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { getCommaSeparatedStringFromStringOrArray } from 'lib/utils/string';
+import { getCommaSeparatedStringFromStringOrArray } from '@navikt/aap-felles-utils-client';
 import {
   logger,
   isMock,

@@ -1,4 +1,4 @@
-import { getStringFromPossiblyArrayQuery } from 'lib/utils/string';
+import { getStringFromPossiblyArrayQuery } from '@navikt/aap-felles-utils-client';
 import { NextApiRequest, NextApiResponse } from 'next';
 import {
   logger,

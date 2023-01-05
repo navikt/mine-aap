@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { getStringFromPossiblyArrayQuery } from 'lib/utils/string';
+import { getStringFromPossiblyArrayQuery } from '@navikt/aap-felles-utils-client';
 import {
   logger,
   isMock,
