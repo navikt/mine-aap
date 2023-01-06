@@ -1,11 +1,4 @@
-import BodyLong, {
-  ReadMore,
-  Panel,
-  Heading,
-  BodyShort,
-  LinkPanel,
-  Accordion,
-} from '@navikt/ds-react';
+import { ReadMore, Panel, Heading, BodyShort, Accordion } from '@navikt/ds-react';
 import { VerticalFlexContainer } from 'components/FlexContainer/VerticalFlexContainer';
 import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { Dokument } from 'lib/types/types';

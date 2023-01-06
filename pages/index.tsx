@@ -66,7 +66,7 @@ const Index = ({ søknader, dokumenter }: PageProps) => {
           </div>
           {søknader.length > 0 && (
             <div>
-              <NextLink href="/soknader" passHref>
+              <NextLink href="/soknader" passHref legacyBehavior>
                 <Link>{formatMessage('forside.seInnsendteSøknaderLink')}</Link>
               </NextLink>
             </div>
