@@ -21,6 +21,7 @@ import metrics from 'lib/metrics';
 import { formatFullDate } from 'lib/utils/date';
 import { useIntl } from 'react-intl';
 import Head from 'next/head';
+import { ClientRender } from 'components/ClientRender';
 
 interface PageProps {
   søknad: Søknad;
@@ -85,11 +86,13 @@ const Index = ({ søknad }: PageProps) => {
           <LucaGuidePanel>
             <BodyShort spacing>{formatMessage('ettersendelse.guide')}</BodyShort>
           </LucaGuidePanel>
-          <Label>
-            {formatMessage('ettersendelse.gjeldendeSøknad', {
-              dateTime: formatFullDate(søknad.innsendtDato),
-            })}
-          </Label>
+          <ClientRender>
+            <Label>
+              {formatMessage('ettersendelse.gjeldendeSøknad', {
+                dateTime: formatFullDate(søknad.innsendtDato),
+              })}
+            </Label>
+          </ClientRender>
           {(manglendeVedlegg.length ?? 0) > 0 && (
             <div>
               <BodyShort spacing>{formatMessage('ettersendelse.manglerDokumentasjon')}</BodyShort>

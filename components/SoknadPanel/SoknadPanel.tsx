@@ -5,6 +5,7 @@ import { formatFullDate } from 'lib/utils/date';
 import router from 'next/router';
 import NextLink from 'next/link';
 import * as styles from 'components/SoknadPanel/SoknadPanel.module.css';
+import { ClientRender } from 'components/ClientRender';
 
 interface Props {
   søknad: Søknad;
@@ -18,11 +19,13 @@ export const SoknadPanel = ({ søknad }: Props) => {
       <Heading level="3" size="small">
         {formatMessage('sisteSøknad.søknad.heading')}
       </Heading>
-      {/*<BodyShort spacing>
-        {formatMessage('sisteSøknad.søknad.mottatt', {
-          date: formatFullDate(søknad.innsendtDato),
-        })}
-      </BodyShort>*/}
+      <ClientRender placeholderHeight="36px">
+        <BodyShort spacing>
+          {formatMessage('sisteSøknad.søknad.mottatt', {
+            date: formatFullDate(søknad.innsendtDato),
+          })}
+        </BodyShort>
+      </ClientRender>
       <BodyShort spacing>
         <Link
           target="_blank"

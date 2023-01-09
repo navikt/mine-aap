@@ -1,4 +1,5 @@
 import { ReadMore, Panel, Heading, BodyShort, Accordion } from '@navikt/ds-react';
+import { ClientRender } from 'components/ClientRender';
 import { VerticalFlexContainer } from 'components/FlexContainer/VerticalFlexContainer';
 import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { Dokument } from 'lib/types/types';
@@ -31,7 +32,9 @@ export const Dokumentoversikt = ({ dokumenter }: Props) => {
             <Accordion.Item>
               <Accordion.Header>{dokument.tittel}</Accordion.Header>
               <Accordion.Content>
-                <BodyShort spacing>Mottatt {formatFullDate(dokument.dato)}</BodyShort>
+                <ClientRender>
+                  <BodyShort spacing>Mottatt {formatFullDate(dokument.dato)}</BodyShort>
+                </ClientRender>
                 <BodyShort spacing>
                   <Link
                     href={`/api/dokument/?journalpostId=${dokument.journalpostId}&dokumentId=${dokument.dokumentId}`}
