@@ -18,11 +18,11 @@ export const SoknadPanel = ({ søknad }: Props) => {
       <Heading level="3" size="small">
         {formatMessage('sisteSøknad.søknad.heading')}
       </Heading>
-      <BodyShort spacing>
+      {/*<BodyShort spacing>
         {formatMessage('sisteSøknad.søknad.mottatt', {
           date: formatFullDate(søknad.innsendtDato),
         })}
-      </BodyShort>
+      </BodyShort>*/}
       <BodyShort spacing>
         <Link
           target="_blank"
