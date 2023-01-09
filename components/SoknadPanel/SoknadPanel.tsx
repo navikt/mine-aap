@@ -39,7 +39,7 @@ export const SoknadPanel = ({ søknad }: Props) => {
 
       {(søknad.innsendteVedlegg?.length ?? 0) > 0 && (
         <>
-          <Label>{formatMessage('sisteSøknad.dokumentasjon.mottatt')}</Label>
+          <Label as="p">{formatMessage('sisteSøknad.dokumentasjon.mottatt')}</Label>
           <ul>
             {søknad.innsendteVedlegg?.map((krav) => (
               <li key={krav.innsendingsId}>

@@ -33,7 +33,7 @@ const Søknader = ({ søknader }: PageProps) => {
         </title>
       </Head>
       <Section>
-        <NextLink href="/" passHref>
+        <NextLink href="/" passHref legacyBehavior>
           <Link>
             <Left />
             {formatMessage('tilbakeTilMineAAPKnapp')}
