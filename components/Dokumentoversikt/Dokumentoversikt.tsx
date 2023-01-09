@@ -32,7 +32,7 @@ export const Dokumentoversikt = ({ dokumenter }: Props) => {
             <Accordion.Item>
               <Accordion.Header>{dokument.tittel}</Accordion.Header>
               <Accordion.Content>
-                <ClientRender>
+                <ClientRender placeholderHeight="36px">
                   <BodyShort spacing>Mottatt {formatFullDate(dokument.dato)}</BodyShort>
                 </ClientRender>
                 <BodyShort spacing>

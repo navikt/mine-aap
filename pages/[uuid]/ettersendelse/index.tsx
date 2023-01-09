@@ -86,7 +86,7 @@ const Index = ({ søknad }: PageProps) => {
           <LucaGuidePanel>
             <BodyShort spacing>{formatMessage('ettersendelse.guide')}</BodyShort>
           </LucaGuidePanel>
-          <ClientRender>
+          <ClientRender placeholderHeight="36px">
             <Label>
               {formatMessage('ettersendelse.gjeldendeSøknad', {
                 dateTime: formatFullDate(søknad.innsendtDato),
