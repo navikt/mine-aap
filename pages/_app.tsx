@@ -3,7 +3,6 @@ import '@navikt/aap-felles-innbygger-css';
 import 'styles/globals.css';
 import type { AppProps, NextWebVitalsMetric } from 'next/app';
 import { useEffect } from 'react';
-import { initAmplitude } from 'lib/utils/amplitude';
 import messagesNb from 'lib/translations/nb.json';
 import messagesNn from 'lib/translations/nn.json';
 import { IntlProvider } from 'react-intl';
@@ -64,10 +63,6 @@ export const reportWebVitals = (metric: NextWebVitalsMetric) => {
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const locale = getLocaleOrFallback(router.locale);
-
-  useEffect(() => {
-    initAmplitude();
-  }, []);
 
   return (
     <>

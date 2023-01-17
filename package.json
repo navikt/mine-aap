@@ -13,7 +13,6 @@
     "postinstall": "patch-package"
   },
   "dependencies": {
-    "@amplitude/analytics-browser": "^1.6.6",
     "@navikt/aap-felles-innbygger-css": "^0.0.50",
     "@navikt/aap-felles-innbygger-react": "^0.0.50",
     "@navikt/aap-felles-innbygger-utils": "^0.0.50",
