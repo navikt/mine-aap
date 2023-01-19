@@ -91,7 +91,7 @@ const Index = ({ søknad }: PageProps) => {
             })}
           </Label>
           {(manglendeVedlegg.length ?? 0) > 0 && (
-            <div>
+            <div className={styles?.manglendeVedlegg}>
               <BodyShort spacing>{formatMessage('ettersendelse.manglerDokumentasjon')}</BodyShort>
               <ul>
                 {manglendeVedlegg.map((krav) => (
@@ -102,9 +102,12 @@ const Index = ({ søknad }: PageProps) => {
               </ul>
             </div>
           )}
-          <ReadMore header={formatMessage('ettersendelse.slikTarDuBilde')}>
-            <ScanningGuide locale={locale} />
-          </ReadMore>
+          <div>
+            <BodyShort>{formatMessage('ettersendelse.slikTarDuBildeBeskrivelse')}</BodyShort>
+            <ReadMore header={formatMessage('ettersendelse.slikTarDuBilde')}>
+              <ScanningGuide locale={locale} />
+            </ReadMore>
+          </div>
         </Section>
 
         <FormErrorSummary id={errorSummaryId} errors={errors} />

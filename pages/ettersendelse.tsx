@@ -56,9 +56,12 @@ const Ettersendelse = () => {
               {formatMessage('ettersendelse.annet.tekst')}
             </BodyShort>
           </div>
-          <ReadMore header={formatMessage('ettersendelse.slikTarDuBilde')}>
-            <ScanningGuide locale={locale} />
-          </ReadMore>
+          <div>
+            <BodyShort>{formatMessage('ettersendelse.slikTarDuBildeBeskrivelse')}</BodyShort>
+            <ReadMore header={formatMessage('ettersendelse.slikTarDuBilde')}>
+              <ScanningGuide locale={locale} />
+            </ReadMore>
+          </div>
         </Section>
 
         <FileUpload
