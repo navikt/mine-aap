@@ -68,3 +68,4 @@ jobs:
           "CLUSTER": "labs-gcp"
           "RESOURCE": ".nais/nais.yaml,.nais/alerts.yaml"
           "VARS": ".nais/labs.yaml"
+          "DEPLOY_SERVER": deploy.nais.io:443
