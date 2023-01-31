@@ -169,12 +169,12 @@
       "link": "kan du klage på oppfølgingsvedtaket"
     },
     "punkt4": {
-      "label": "Vi sjekker om du har rett på AAP",
-      "tekst": "Til sist sjekker vi om du har rett på AAP etter folketrygdloven kapittel 11. Vi bruker her opplysningene vi har fått i forbindelse med søknaden."
+      "label": "Vi sjekker om du har rett til AAP",
+      "tekst": "Til sist sjekker vi om du har rett til AAP etter folketrygdloven kapittel 11. Vi bruker her opplysningene vi har fått i forbindelse med søknaden."
     },
     "punkt5": {
       "label": "Svar på AAP-søknaden",
-      "tekst": "Du får et vedtak med vurderingen vår av om du har rett på AAP eller ikke, og hvor mye du vil få utbetalt. Hvis du har spørsmål til vurderingen, kan du ta kontakt med oss. Hvis du ikke er enig, <a>kan du klage på AAP-vedtaket (åpnes i ny fane).</a>",
+      "tekst": "Du får et vedtak med vurderingen vår av om du har rett til AAP eller ikke, og hvor mye du vil få utbetalt. Hvis du har spørsmål til vurderingen, kan du ta kontakt med oss. Hvis du ikke er enig, <a>kan du klage på AAP-vedtaket (åpnes i ny fane).</a>",
       "tekst2": "Du har rett til oppfølgning fra NAV uansett om du får innvilget AAP eller ikke."
     }
   },
