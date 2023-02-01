@@ -1,0 +1,15 @@
+.flexContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 var(--a-spacing-4);
+}
+
+.content {
+  max-width: 920px;
+  width: 100%;
+}
+
+.subtleBackground {
+  background-color: var(--a-bg-subtle);
+}
