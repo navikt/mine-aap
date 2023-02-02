@@ -8,6 +8,8 @@
 .content {
   max-width: 920px;
   width: 100%;
+  margin-block-start: var(--a-spacing-6);
+  margin-block-end: var(--a-spacing-8);
 }
 
 .subtleBackground {

@@ -1,0 +1,25 @@
+.card {
+  width: 100%;
+  background-color: var(--a-bg-default);
+  border: 1px solid var(--a-border-subtle);
+  border-radius: 12px;
+  padding: var(--a-spacing-4);
+}
+
+@media screen and (min-width: 480px) {
+  .card {
+    padding: var(--a-spacing-6);
+  }
+}
+
+.subtleBlue {
+  background-color: var(--a-surface-action-subtle);
+}
+
+.divider {
+  height: 0px;
+  width: calc(100% + var(--a-spacing-8));
+  border-top: 1px solid var(--a-border-subtle);
+  margin-block: var(--a-spacing-4);
+  margin-inline: calc(var(--a-spacing-4) * -1);
+}
