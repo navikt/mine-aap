@@ -175,6 +175,7 @@
     "punkt5": {
       "label": "Svar på AAP-søknaden",
       "tekst": "Du får eit vedtak med vurderinga vi har gjort av kor vidt du har rett til AAP eller ikkje, og kor mykje du vil få utbetalt. Ta gjerne kontakt med oss dersom du har spørsmål om vurderinga. <a>Du kan klage på AAP-vedtaket (blir opna i ny fane)</a> dersom du meiner det er feil.",
+      "tekst1": "Me tilrår at du sjekkar skattekortet ditt med Skatteetaten, sidan endringar i inntekt også kan føra til endring i kor mykje skatt du skal trekkjast. NAV hentar skattekortet ditt automatisk frå Skatteetaten, og trekkjer skatt ut frå opplysningane derfrå. <a>Du kan lesa meir om skattetrekk på ytingar frå NAV her (blir opna i ny fane).</a>",
       "tekst2": "Du har rett til oppfølging frå NAV uavhengig av om du får innvilga AAP."
     }
   },

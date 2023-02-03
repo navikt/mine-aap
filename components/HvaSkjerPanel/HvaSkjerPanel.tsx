@@ -66,6 +66,16 @@ export const HvaSkjerPanel = () => {
               ),
             })}
           </BodyLong>
+          <BodyLong spacing>
+            {formatElement('hvaSkjerPanel.punkt5.tekst1', {
+              // @ts-ignore-line
+              a: (chunks: string[]) => (
+                <Link target="_blank" href={'https://www.nav.no/skattetrekk'}>
+                  {chunks?.[0]}
+                </Link>
+              ),
+            })}
+          </BodyLong>
           <BodyLong spacing>{formatMessage('hvaSkjerPanel.punkt5.tekst2')}</BodyLong>
         </li>
       </ul>
