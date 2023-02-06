@@ -14,6 +14,7 @@ import NextLink from 'next/link';
 import metrics from 'lib/metrics';
 import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import Head from 'next/head';
+import { FormattedMessage } from 'react-intl';
 
 interface PageProps {
   søknader: Søknad[];
@@ -21,27 +22,31 @@ interface PageProps {
 
 const Søknader = ({ søknader }: PageProps) => {
   const router = useRouter();
-  const { formatMessage, formatElement } = useFeatureToggleIntl();
 
   return (
     <Layout>
       <Head>
         <title>
-          {`${formatElement('appTittel', {
-            shy: '',
-          })} - nav.no`}
+          {`${(
+            <FormattedMessage
+              id="appTittel"
+              values={{
+                shy: '',
+              }}
+            />
+          )} - nav.no`}
         </title>
       </Head>
       <Section>
         <NextLink href="/" passHref legacyBehavior>
           <Link>
             <Left />
-            {formatMessage('tilbakeTilMineAAPKnapp')}
+            <FormattedMessage id="tilbakeTilMineAAPKnapp" />
           </Link>
         </NextLink>
         <div>
           <Heading level="2" size="medium" spacing>
-            {formatMessage('dineSøknader.heading')}
+            <FormattedMessage id="dineSøknader.heading" />
           </Heading>
           <VerticalFlexContainer>
             {søknader.map((søknad) => (
@@ -53,7 +58,7 @@ const Søknader = ({ søknader }: PageProps) => {
       <Section>
         <div>
           <Button icon={<Left />} variant="tertiary" onClick={() => router.push('/')}>
-            {formatMessage('tilbakeTilMineAAPKnapp')}
+            <FormattedMessage id="tilbakeTilMineAAPKnapp" />
           </Button>
         </div>
       </Section>

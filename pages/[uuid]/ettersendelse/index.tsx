@@ -19,7 +19,7 @@ import { Left } from '@navikt/ds-icons';
 import { useRouter } from 'next/router';
 import metrics from 'lib/metrics';
 import { formatFullDate } from 'lib/utils/date';
-import { useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import Head from 'next/head';
 
 interface PageProps {
@@ -27,7 +27,6 @@ interface PageProps {
 }
 
 const Index = ({ søknad }: PageProps) => {
-  const { formatMessage, formatElement } = useFeatureToggleIntl();
   const { locale } = useIntl();
 
   const [errors, setErrors] = useState<FieldErrors>({});
@@ -61,15 +60,23 @@ const Index = ({ søknad }: PageProps) => {
     <>
       <Head>
         <title>
-          {`${formatElement('ettersendelse.appTittel', {
-            shy: '',
-          })} - nav.no`}
+          {`${(
+            <FormattedMessage
+              id="ettersendelse.appTittel"
+              values={{
+                shy: '',
+              }}
+            />
+          )} - nav.no`}
         </title>
       </Head>
       <PageHeader align="center" variant="guide">
-        {formatElement('ettersendelse.appTittel', {
-          shy: <>&shy;</>,
-        })}
+        <FormattedMessage
+          id="ettersendelse.appTittel"
+          values={{
+            shy: <>&shy;</>,
+          }}
+        />
       </PageHeader>
       <main className={styles.main}>
         <Section>
@@ -80,31 +87,42 @@ const Index = ({ søknad }: PageProps) => {
             </Link>
           </NextLink>
           <Heading level="2" size="large" spacing>
-            {formatMessage('ettersendelse.heading')}
+            <FormattedMessage id="ettersendelse.heading" />
           </Heading>
           <LucaGuidePanel>
-            <BodyShort spacing>{formatMessage('ettersendelse.guide')}</BodyShort>
+            <BodyShort spacing>
+              <FormattedMessage id="ettersendelse.guide" />
+            </BodyShort>
           </LucaGuidePanel>
           <Label>
-            {formatMessage('ettersendelse.gjeldendeSøknad', {
-              dateTime: formatFullDate(søknad.innsendtDato),
-            })}
+            <FormattedMessage
+              id="ettersendelse.gjeldendeSøknad"
+              values={{
+                dateTime: formatFullDate(søknad.innsendtDato),
+              }}
+            />
           </Label>
           {(manglendeVedlegg.length ?? 0) > 0 && (
             <div className={styles?.manglendeVedlegg}>
-              <BodyShort spacing>{formatMessage('ettersendelse.manglerDokumentasjon')}</BodyShort>
+              <BodyShort spacing>
+                <FormattedMessage id="ettersendelse.manglerDokumentasjon" />
+              </BodyShort>
               <ul>
                 {manglendeVedlegg.map((krav) => (
                   <li key={krav}>
-                    <Label>{formatMessage(`ettersendelse.vedleggstyper.${krav}.heading`)}</Label>
+                    <Label>
+                      <FormattedMessage id={`ettersendelse.vedleggstyper.${krav}.heading`} />
+                    </Label>
                   </li>
                 ))}
               </ul>
             </div>
           )}
           <div>
-            <BodyShort>{formatMessage('ettersendelse.slikTarDuBildeBeskrivelse')}</BodyShort>
-            <ReadMore header={formatMessage('ettersendelse.slikTarDuBilde')}>
+            <BodyShort>
+              <FormattedMessage id="ettersendelse.slikTarDuBildeBeskrivelse" />
+            </BodyShort>
+            <ReadMore header={<FormattedMessage id="ettersendelse.slikTarDuBilde" />}>
               <ScanningGuide locale={locale} />
             </ReadMore>
           </div>
@@ -134,7 +152,7 @@ const Index = ({ søknad }: PageProps) => {
         <Section>
           <div>
             <Button icon={<Left />} variant="tertiary" onClick={() => router.push('/')}>
-              {formatMessage('tilbakeTilMineAAPKnapp')}
+              <FormattedMessage id="tilbakeTilMineAAPKnapp" />
             </Button>
           </div>
         </Section>

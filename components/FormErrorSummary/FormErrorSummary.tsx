@@ -2,12 +2,10 @@ import React, { useRef } from 'react';
 import { FieldErrors } from 'react-hook-form';
 import { ErrorSummary } from '@navikt/ds-react';
 import * as classes from 'components/FormErrorSummary/FormErrorSummary.module.css';
-import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { flattenObject } from '@navikt/aap-felles-utils-client';
+import { FormattedMessage } from 'react-intl';
 
 const FormErrorSummary = (props: { id: string; errors: FieldErrors }) => {
-  const { formatMessage } = useFeatureToggleIntl();
-
   const flatErrors = flattenObject(props?.errors);
   const keyList = Object.keys(flatErrors).filter((key: string) => flatErrors[key] !== undefined);
   const errorSummaryElement = useRef(null);
@@ -16,7 +14,7 @@ const FormErrorSummary = (props: { id: string; errors: FieldErrors }) => {
     return (
       <ErrorSummary
         ref={errorSummaryElement}
-        heading={formatMessage('errorSummary.title')}
+        heading={<FormattedMessage id="errorSummary.title" />}
         role={'alert'}
         aria-hidden={keyList?.length === 0}
         className={keyList?.length === 0 ? classes?.visuallyHidden : ''}
@@ -31,7 +29,7 @@ const FormErrorSummary = (props: { id: string; errors: FieldErrors }) => {
       <div className={classes.container}>
         <ErrorSummary
           ref={errorSummaryElement}
-          heading={formatMessage('errorSummary.title')}
+          heading={<FormattedMessage id="errorSummary.title" />}
           role={'alert'}
           aria-hidden={keyList?.length === 0}
           className={keyList?.length === 0 ? classes?.visuallyHidden : ''}

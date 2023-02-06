@@ -6,6 +6,7 @@ import { fileSizeString } from '@navikt/aap-felles-utils-client';
 import { TOTAL_FILE_SIZE, VedleggFormValues } from 'components/Inputs/FileUpload';
 import * as styles from 'components/Inputs/FileUploadFields.module.css';
 import { VedleggType } from 'lib/types/types';
+import { FormattedMessage } from 'react-intl';
 
 interface Props {
   fields: FieldArrayWithId<VedleggFormValues>[] | undefined;
@@ -83,7 +84,9 @@ export const FileUploadFields = ({ fields, krav, remove, errors }: Props) => {
                     className={styles?.deleteAttachment}
                   >
                     <Cancel title={formatMessage('filopplasting.vedlegg.avbryt')} />
-                    <BodyShort>{formatMessage('filopplasting.vedlegg.avbryt')}</BodyShort>
+                    <BodyShort>
+                      <FormattedMessage id="filopplasting.vedlegg.avbryt" />
+                    </BodyShort>
                   </button>
                 )}
                 {!fieldHasError && !attachment.isUploading && (
@@ -103,7 +106,9 @@ export const FileUploadFields = ({ fields, krav, remove, errors }: Props) => {
                     className={styles?.deleteAttachment}
                   >
                     <Delete title={formatMessage('filopplasting.vedlegg.slett')} />
-                    <BodyShort>{formatMessage('filopplasting.vedlegg.slett')}</BodyShort>
+                    <BodyShort>
+                      <FormattedMessage id="filopplasting.vedlegg.slett" />
+                    </BodyShort>
                   </button>
                 )}
               </Panel>

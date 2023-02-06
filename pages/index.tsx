@@ -16,6 +16,7 @@ import metrics from 'lib/metrics';
 import { HvaSkjerPanel } from 'components/HvaSkjerPanel/HvaSkjerPanel';
 import { LucaGuidePanel } from '@navikt/aap-felles-innbygger-react';
 import Head from 'next/head';
+import { FormattedMessage } from 'react-intl';
 
 interface PageProps {
   søknader: Søknad[];
@@ -23,8 +24,6 @@ interface PageProps {
 }
 
 const Index = ({ søknader, dokumenter }: PageProps) => {
-  const { formatMessage, formatElement } = useFeatureToggleIntl();
-
   const router = useRouter();
 
   const sisteSøknad = useMemo(() => {
@@ -35,39 +34,56 @@ const Index = ({ søknader, dokumenter }: PageProps) => {
     <Layout>
       <Head>
         <title>
-          {`${formatElement('appTittel', {
-            shy: '',
-          })} - nav.no`}
+          {`${(
+            <FormattedMessage
+              id="appTittel"
+              values={{
+                shy: '',
+              }}
+            />
+          )} - nav.no`}
         </title>
       </Head>
       <Section>
         <LucaGuidePanel>
           <Heading level="2" size="medium" spacing>
-            {formatMessage('forside.heading')}
+            <FormattedMessage id="forside.heading" />
           </Heading>
-          <BodyShort spacing>{formatMessage('forside.introListe.tittel')}</BodyShort>
+          <BodyShort spacing>
+            <FormattedMessage id="forside.introListe.tittel" />
+          </BodyShort>
 
           <ul>
-            <li>{formatMessage('forside.introListe.punkt1')}</li>
-            <li>{formatMessage('forside.introListe.punkt2')}</li>
-            <li>{formatMessage('forside.introListe.punkt3')}</li>
+            <li>
+              <FormattedMessage id="forside.introListe.punkt1" />
+            </li>
+            <li>
+              <FormattedMessage id="forside.introListe.punkt2" />
+            </li>
+            <li>
+              <FormattedMessage id="forside.introListe.punkt3" />
+            </li>
           </ul>
 
-          <BodyShort spacing>{formatMessage('forside.underUtvikling')}</BodyShort>
+          <BodyShort spacing>
+            <FormattedMessage id="forside.underUtvikling" />
+          </BodyShort>
         </LucaGuidePanel>
       </Section>
       {sisteSøknad && (
         <Section lightBlue>
           <div>
             <Heading level="2" size="medium" spacing>
-              {formatMessage('sisteSøknad.heading')}
+              <FormattedMessage id="sisteSøknad.heading" />
             </Heading>
             <SoknadPanel søknad={sisteSøknad} />
           </div>
           {søknader.length > 0 && (
             <div>
               <NextLink href="/soknader" passHref legacyBehavior>
-                <Link>{formatMessage('forside.seInnsendteSøknaderLink')}</Link>
+                <Link>
+                  <FormattedMessage id="forside.seInnsendteSøknaderLink" />
+                </Link>
               </NextLink>
             </div>
           )}
@@ -79,18 +95,20 @@ const Index = ({ søknader, dokumenter }: PageProps) => {
           <Dokumentoversikt dokumenter={dokumenter} />
           <Panel border>
             <Heading level="2" size="medium" spacing>
-              {formatMessage('forside.ettersendelse.tittel')}
+              <FormattedMessage id="forside.ettersendelse.tittel" />
             </Heading>
-            <BodyShort spacing>{formatMessage('forside.ettersendelse.tekst')}</BodyShort>
+            <BodyShort spacing>
+              <FormattedMessage id="forside.ettersendelse.tekst" />
+            </BodyShort>
             <Button variant="secondary" onClick={() => router.push('/ettersendelse')}>
-              {formatMessage('forside.ettersendelse.knapp')}
+              <FormattedMessage id="forside.ettersendelse.knapp" />
             </Button>
           </Panel>
           <Link
             target="_blank"
             href="https://www.nav.no/saksbehandlingstider#arbeidsavklaringspenger-aap"
           >
-            {formatMessage('sisteSøknad.søknad.saksbehandlingstid')}
+            <FormattedMessage id="sisteSøknad.søknad.saksbehandlingstid" />
           </Link>
         </Section>
       )}
@@ -100,17 +118,19 @@ const Index = ({ søknader, dokumenter }: PageProps) => {
 
         <Panel border>
           <Heading level="2" size="medium" spacing>
-            {formatMessage('forside.endring.heading')}
+            <FormattedMessage id="forside.endring.heading" />
           </Heading>
 
-          <BodyShort spacing>{formatMessage('forside.endring.tekst')}</BodyShort>
+          <BodyShort spacing>
+            <FormattedMessage id="forside.endring.tekst" />
+          </BodyShort>
           <Button
             variant="secondary"
             onClick={() =>
               (window.location.href = 'https://innboks.nav.no/s/skriv-til-oss?category=Arbeid')
             }
           >
-            {formatMessage('forside.endring.knapp')}
+            <FormattedMessage id="forside.endring.knapp" />
           </Button>
         </Panel>
 

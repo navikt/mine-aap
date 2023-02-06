@@ -1,17 +1,18 @@
 import { Heading } from '@navikt/ds-react';
-import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import styles from 'components/AppHeader/AppHeader.module.css';
+import { FormattedMessage } from 'react-intl';
 
 export const AppHeader = () => {
-  const intl = useFeatureToggleIntl();
-
   return (
     <header className={styles.appHeader}>
       <div className={styles.container}>
         <Heading level="1" size="xlarge">
-          {intl.formatElement('appTittel', {
-            shy: <>&shy;</>,
-          })}
+          <FormattedMessage
+            id="appTittel"
+            values={{
+              shy: <>&shy;</>,
+            }}
+          />
         </Heading>
       </div>
     </header>

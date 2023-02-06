@@ -12,7 +12,7 @@ import { useRouter } from 'next/router';
 import metrics from 'lib/metrics';
 import { getSøknader } from './api/soknader/soknader';
 import { LucaGuidePanel, ScanningGuide } from '@navikt/aap-felles-innbygger-react';
-import { useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import Head from 'next/head';
 
 const Ettersendelse = () => {
@@ -47,18 +47,26 @@ const Ettersendelse = () => {
             {formatMessage('ettersendelse.heading')}
           </Heading>
           <LucaGuidePanel>
-            <BodyShort spacing>{formatMessage('ettersendelse.annet.guide.tekst1')}</BodyShort>
-            <BodyShort spacing>{formatMessage('ettersendelse.annet.guide.tekst2')}</BodyShort>
+            <BodyShort spacing>
+              <FormattedMessage id="ettersendelse.annet.guide.tekst1" />
+            </BodyShort>
+            <BodyShort spacing>
+              <FormattedMessage id="ettersendelse.annet.guide.tekst2" />
+            </BodyShort>
           </LucaGuidePanel>
           <div>
-            <Label>{formatMessage('ettersendelse.annet.label')}</Label>
+            <Label>
+              <FormattedMessage id="ettersendelse.annet.label" />
+            </Label>
             <BodyShort className={styles.annetTekst}>
-              {formatMessage('ettersendelse.annet.tekst')}
+              <FormattedMessage id="ettersendelse.annet.tekst" />
             </BodyShort>
           </div>
           <div>
-            <BodyShort>{formatMessage('ettersendelse.slikTarDuBildeBeskrivelse')}</BodyShort>
-            <ReadMore header={formatMessage('ettersendelse.slikTarDuBilde')}>
+            <BodyShort>
+              <FormattedMessage id="ettersendelse.slikTarDuBildeBeskrivelse" />
+            </BodyShort>
+            <ReadMore header={<FormattedMessage id="ettersendelse.slikTarDuBilde" />}>
               <ScanningGuide locale={locale} />
             </ReadMore>
           </div>
@@ -74,7 +82,7 @@ const Ettersendelse = () => {
         <Section>
           <div>
             <Button icon={<Left />} variant="tertiary" onClick={() => router.push('/')}>
-              {formatMessage('tilbakeTilMineAAPKnapp')}
+              <FormattedMessage id="tilbakeTilMineAAPKnapp" />
             </Button>
           </div>
         </Section>

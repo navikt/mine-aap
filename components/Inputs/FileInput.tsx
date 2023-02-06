@@ -7,6 +7,7 @@ import { VedleggFormValues } from 'components/Inputs/FileUpload';
 import * as styles from 'components/Inputs/FileInput.module.css';
 import { VedleggType } from 'lib/types/types';
 import { logLastOppFilEvent } from 'lib/utils/amplitude';
+import { FormattedMessage } from 'react-intl';
 
 export const validFileTypes = ['image/png', 'image/jpg', 'image/jpeg', 'application/pdf'];
 
@@ -101,8 +102,12 @@ export const FileInput = ({ krav, append, setShowMultipleFilesInfo }: Props) => 
         onClick={(event) => resetInputValue(event)}
         accept="image/*,.pdf"
       />
-      <BodyShort>{formatMessage('filopplasting.vedlegg.draOgSlipp')}</BodyShort>
-      <BodyShort>{formatMessage('filopplasting.vedlegg.eller')}</BodyShort>
+      <BodyShort>
+        <FormattedMessage id="filopplasting.vedlegg.draOgSlipp" />
+      </BodyShort>
+      <BodyShort>
+        <FormattedMessage id="filopplasting.vedlegg.eller" />
+      </BodyShort>
       <label htmlFor={inputId}>
         <span
           className={`${styles?.fileInputButton} navds-button navds-button__inner navds-body-short navds-button--secondary`}
@@ -116,7 +121,7 @@ export const FileInput = ({ krav, append, setShowMultipleFilesInfo }: Props) => 
           }}
         >
           <SvgUpload title={formatMessage('filopplasting.vedlegg.lastOppFil')} />
-          {formatMessage('filopplasting.vedlegg.velgDineFiler')}
+          <FormattedMessage id="filopplasting.vedlegg.velgDineFiler" />
         </span>
       </label>
     </div>

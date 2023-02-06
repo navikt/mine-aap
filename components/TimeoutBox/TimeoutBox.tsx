@@ -1,10 +1,10 @@
 import { Button, Heading, Link, Modal } from '@navikt/ds-react';
-import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { useInterval } from 'lib/hooks/useInterval';
 import { isMock } from 'lib/utils/environments';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import * as styles from './TimeoutBox.module.css';
+import { FormattedMessage } from 'react-intl';
 
 const ONE_SECOND_IN_MS = 1000;
 const SECONDS_IN_MINUTE = 60;
@@ -22,8 +22,6 @@ const beregnUtloggingsTidspunkt = (sessionDurationInSeconds: number): number => 
 export const TimeoutBox = () => {
   const [isLoggedOut, setIsLoggedOut] = useState(false);
   const [logoutTime, setLogoutTime] = useState(beregnUtloggingsTidspunkt(SECONDS_IN_HOUR));
-
-  const { formatMessage } = useFeatureToggleIntl();
 
   const router = useRouter();
 
@@ -59,10 +57,12 @@ export const TimeoutBox = () => {
     >
       <Modal.Content>
         <Heading level="1" size="large" spacing>
-          {formatMessage('logoutModal.title')}
+          <FormattedMessage id="logoutModal.title" />
         </Heading>
         <div className={styles.buttonRow}>
-          <Button onClick={onLoginClick}>{formatMessage('logoutModal.buttonText')}</Button>
+          <Button onClick={onLoginClick}>
+            <FormattedMessage id="logoutModal.buttonText" />
+          </Button>
           <Link href="https://www.nav.no">Gå tilbake til nav.no</Link>
         </div>
       </Modal.Content>

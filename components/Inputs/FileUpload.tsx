@@ -7,6 +7,7 @@ import { Section } from 'components/Section/Section';
 import { FileInput, validateFile } from 'components/Inputs/FileInput';
 import * as styles from 'components/Inputs/FileUpload.module.css';
 import { FileUploadFields } from 'components/Inputs/FileUploadFields';
+import { FormattedMessage } from 'react-intl';
 
 const MAX_TOTAL_FILE_SIZE = 1024 * 1024 * 50; // 50 MB
 export const TOTAL_FILE_SIZE = 'totalFileSize';
@@ -80,7 +81,7 @@ export const FileUpload = ({
             filesSize: bytesToMB(totalSize).toString(),
           }),
         });
-      }
+      } // TODO: this?
       for await (const [index, field] of fields.entries()) {
         await validateAndUploadFile(field, index);
       }
@@ -197,11 +198,11 @@ export const FileUpload = ({
       >
         <div className={styles.fileUpload}>
           <Heading level="3" size="small" spacing>
-            {formatMessage(`ettersendelse.vedleggstyper.${krav}.heading`)}
+            <FormattedMessage id={`ettersendelse.vedleggstyper.${krav}.heading`} />
           </Heading>
 
           <BodyShort spacing>
-            {formatMessage(`ettersendelse.vedleggstyper.${krav}.description`)}
+            <FormattedMessage id={`ettersendelse.vedleggstyper.${krav}.description`} />
           </BodyShort>
           {hasEttersendingError && (
             <Alert variant="error">
@@ -232,12 +233,14 @@ export const FileUpload = ({
             />
           )}
           {showMultipleFilesInfo && (
-            <Alert variant={'info'}>{formatMessage('filopplasting.formangefiler')}</Alert>
+            <Alert variant={'info'}>
+              <FormattedMessage id="filopplasting.formangefiler" />
+            </Alert>
           )}
           {fields.length > 0 && !isUploadingFiles && (
             <div>
               <Button variant="primary" type="submit" loading={isSendingEttersendelse}>
-                {formatMessage('ettersendelse.buttons.primary')}
+                <FormattedMessage id="ettersendelse.buttons.primary" />
               </Button>
             </div>
           )}
