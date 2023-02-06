@@ -12,7 +12,6 @@ import { Left } from '@navikt/ds-icons';
 import { useRouter } from 'next/router';
 import NextLink from 'next/link';
 import metrics from 'lib/metrics';
-import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import Head from 'next/head';
 import { FormattedMessage } from 'react-intl';
 

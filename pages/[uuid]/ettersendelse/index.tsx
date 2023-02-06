@@ -4,7 +4,6 @@ import { GetServerSidePropsResult, NextPageContext } from 'next';
 import { FileUpload } from 'components/Inputs/FileUpload';
 import PageHeader from 'components/PageHeader';
 import { Section } from 'components/Section/Section';
-import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { Søknad, VedleggType } from 'lib/types/types';
 import * as styles from 'pages/[uuid]/ettersendelse/Ettersendelse.module.css';
 import { getSøknad } from 'pages/api/soknader/[uuid]';

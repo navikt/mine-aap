@@ -6,7 +6,6 @@ import { beskyttetSide, getAccessToken } from '@navikt/aap-felles-innbygger-util
 import { Layout } from 'components/Layout/Layout';
 import { Section } from 'components/Section/Section';
 import { SoknadPanel } from 'components/SoknadPanel/SoknadPanel';
-import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { Dokument, Søknad } from 'lib/types/types';
 import { getDocuments } from 'pages/api/dokumenter';
 import { getSøknader } from 'pages/api/soknader/soknader';
