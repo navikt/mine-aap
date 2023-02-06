@@ -6,10 +6,10 @@ import {
 } from '@navikt/nav-dekoratoren-moduler';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
-import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
+import { useIntl } from 'react-intl';
 
 export const NavDecorator = ({ children }: { children: React.ReactNode }) => {
-  const { formatMessage } = useFeatureToggleIntl();
+  const intl = useIntl();
 
   const router = useRouter();
   const { pathname, asPath, query } = router;
@@ -33,24 +33,28 @@ export const NavDecorator = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     const breadcrumbs = [
-      { title: formatMessage('breadcrumbs.mineAAP'), url: router.basePath, handleInApp: true },
+      {
+        title: intl.formatMessage({ id: 'breadcrumbs.mineAAP' }),
+        url: router.basePath,
+        handleInApp: true,
+      },
     ];
     if (router.asPath.endsWith('ettersendelse/')) {
       breadcrumbs.push({
-        title: formatMessage('breadcrumbs.ettersending'),
+        title: intl.formatMessage({ id: 'breadcrumbs.ettersending' }),
         url: router.asPath,
         handleInApp: true,
       });
     }
     if (router.asPath.endsWith('soknader/')) {
       breadcrumbs.push({
-        title: formatMessage('breadcrumbs.mineAAPSoknader'),
+        title: intl.formatMessage({ id: 'breadcrumbs.mineAAPSoknader' }),
         url: router.asPath,
         handleInApp: true,
       });
     }
     setBreadcrumbs(breadcrumbs);
-  }, [router, formatMessage]);
+  }, [router, intl.formatMessage]);
 
   onBreadcrumbClick((breadcrumb) => {
     // TODO: Bedre logikk for breadcrumbs

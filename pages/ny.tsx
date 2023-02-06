@@ -4,19 +4,22 @@ import { Card } from 'components/Card/Card';
 import { PageComponentFlexContainer } from 'components/PageComponentFlexContainer/PageComponentFlexContainer';
 import { PageContainer } from 'components/PageContainer/PageContainer';
 import { Soknad } from 'components/Soknad/Soknad';
-import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { GetServerSidePropsResult, NextPageContext } from 'next';
 import Head from 'next/head';
+import { useIntl } from 'react-intl';
 
 const Index = () => {
-  const { formatElement } = useFeatureToggleIntl();
+  const intl = useIntl();
   return (
     <PageContainer>
       <Head>
         <title>
-          {`${formatElement('appTittel', {
-            shy: '',
-          })} - nav.no`}
+          {`${intl.formatMessage(
+            { id: 'appTittel' },
+            {
+              shy: '',
+            }
+          )} - nav.no`}
         </title>
       </Head>
       <PageComponentFlexContainer>

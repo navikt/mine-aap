@@ -3,7 +3,6 @@ import { FileUpload } from 'components/Inputs/FileUpload';
 import PageHeader from 'components/PageHeader';
 import { Section } from 'components/Section/Section';
 import { beskyttetSide, getAccessToken } from '@navikt/aap-felles-innbygger-utils';
-import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { GetServerSidePropsResult, NextPageContext } from 'next';
 import * as styles from 'pages/[uuid]/ettersendelse/Ettersendelse.module.css';
 import NextLink from 'next/link';
@@ -16,7 +15,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import Head from 'next/head';
 
 const Ettersendelse = () => {
-  const { formatMessage, formatElement } = useFeatureToggleIntl();
+  const intl = useIntl();
   const { locale } = useIntl();
 
   const router = useRouter();
@@ -25,15 +24,21 @@ const Ettersendelse = () => {
     <>
       <Head>
         <title>
-          {`${formatElement('ettersendelse.appTittel', {
-            shy: '',
-          })} - nav.no`}
+          {`${intl.formatMessage(
+            { id: 'ettersendelse.appTittel' },
+            {
+              shy: '',
+            }
+          )} - nav.no`}
         </title>
       </Head>
       <PageHeader align="center" variant="guide">
-        {formatElement('ettersendelse.appTittel', {
-          shy: <>&shy;</>,
-        })}
+        <FormattedMessage
+          id="ettersendelse.appTittel"
+          values={{
+            shy: <>&shy;</>,
+          }}
+        />
       </PageHeader>
       <main className={styles.main}>
         <Section>
@@ -44,7 +49,7 @@ const Ettersendelse = () => {
             </Link>
           </NextLink>
           <Heading level="2" size="large" spacing>
-            {formatMessage('ettersendelse.heading')}
+            <FormattedMessage id="ettersendelse.heading" />
           </Heading>
           <LucaGuidePanel>
             <BodyShort spacing>

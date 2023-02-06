@@ -1,13 +1,12 @@
 import { Alert, BodyShort, Button, Heading } from '@navikt/ds-react';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useForm, useFieldArray, FieldArrayWithId, FieldErrors } from 'react-hook-form';
-import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { Ettersendelse, OpplastetVedlegg, VedleggType } from 'lib/types/types';
 import { Section } from 'components/Section/Section';
 import { FileInput, validateFile } from 'components/Inputs/FileInput';
 import * as styles from 'components/Inputs/FileUpload.module.css';
 import { FileUploadFields } from 'components/Inputs/FileUploadFields';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 const MAX_TOTAL_FILE_SIZE = 1024 * 1024 * 50; // 50 MB
 export const TOTAL_FILE_SIZE = 'totalFileSize';
@@ -46,7 +45,7 @@ export const FileUpload = ({
   setErrorSummaryFocus,
   onEttersendSuccess,
 }: Props) => {
-  const { formatMessage } = useFeatureToggleIntl();
+  const intl = useIntl();
 
   const [uploadFinished, setUploadFinished] = useState(false);
   const [hasEttersendingError, setHasEttersendingError] = useState(false);
@@ -76,12 +75,15 @@ export const FileUpload = ({
       if (totalSize > MAX_TOTAL_FILE_SIZE) {
         setError(`${krav}.${TOTAL_FILE_SIZE}`, {
           type: 'custom',
-          message: formatMessage('validation.totalStorrelse', {
-            size: bytesToMB(MAX_TOTAL_FILE_SIZE).toString(),
-            filesSize: bytesToMB(totalSize).toString(),
-          }),
+          message: intl.formatMessage(
+            { id: 'validation.totalStorrelse' },
+            {
+              size: bytesToMB(MAX_TOTAL_FILE_SIZE).toString(),
+              filesSize: bytesToMB(totalSize).toString(),
+            }
+          ),
         });
-      } // TODO: this?
+      }
       for await (const [index, field] of fields.entries()) {
         await validateAndUploadFile(field, index);
       }
@@ -100,9 +102,12 @@ export const FileUpload = ({
       if (validationResult) {
         setError(`${krav}.fields.${index}`, {
           type: 'custom',
-          message: formatMessage('validation.filtype', {
-            type: `.${getFileExtension(field.file.name)}`,
-          }),
+          message: intl.formatMessage(
+            { id: 'validation.filtype' },
+            {
+              type: `.${getFileExtension(field.file.name)}`,
+            }
+          ),
         });
         update(index, { ...field, isUploading: false });
         return;
@@ -134,7 +139,7 @@ export const FileUpload = ({
       } catch (error) {
         setError(`${krav}.fields.${index}`, {
           type: 'custom',
-          message: formatMessage(`validation.feilet`),
+          message: intl.formatMessage({ id: `validation.feilet` }),
         });
         update(index, { ...field, isUploading: false });
       }

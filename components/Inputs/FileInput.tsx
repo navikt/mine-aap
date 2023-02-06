@@ -2,12 +2,11 @@ import { Upload as SvgUpload } from '@navikt/ds-icons';
 import { BodyShort } from '@navikt/ds-react';
 import React, { DragEventHandler, useRef, useState } from 'react';
 import { UseFieldArrayAppend } from 'react-hook-form';
-import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { VedleggFormValues } from 'components/Inputs/FileUpload';
 import * as styles from 'components/Inputs/FileInput.module.css';
 import { VedleggType } from 'lib/types/types';
 import { logLastOppFilEvent } from 'lib/utils/amplitude';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 export const validFileTypes = ['image/png', 'image/jpg', 'image/jpeg', 'application/pdf'];
 
@@ -24,7 +23,7 @@ interface Props {
 }
 
 export const FileInput = ({ krav, append, setShowMultipleFilesInfo }: Props) => {
-  const { formatMessage } = useFeatureToggleIntl();
+  const intl = useIntl();
 
   const [inputId] = useState<string>(`file-upload-input-${krav}`);
 
@@ -120,7 +119,7 @@ export const FileInput = ({ krav, append, setShowMultipleFilesInfo }: Props) => 
             }
           }}
         >
-          <SvgUpload title={formatMessage('filopplasting.vedlegg.lastOppFil')} />
+          <SvgUpload title={intl.formatMessage({ id: 'filopplasting.vedlegg.lastOppFil' })} />
           <FormattedMessage id="filopplasting.vedlegg.velgDineFiler" />
         </span>
       </label>

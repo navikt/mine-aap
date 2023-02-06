@@ -1,12 +1,11 @@
 import { Cancel, Delete, FileError, FileSuccess } from '@navikt/ds-icons';
 import { BodyShort, Detail, Label, Link, Loader, Panel } from '@navikt/ds-react';
 import { FieldArrayWithId, FieldErrors, UseFieldArrayRemove } from 'react-hook-form';
-import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { fileSizeString } from '@navikt/aap-felles-utils-client';
 import { TOTAL_FILE_SIZE, VedleggFormValues } from 'components/Inputs/FileUpload';
 import * as styles from 'components/Inputs/FileUploadFields.module.css';
 import { VedleggType } from 'lib/types/types';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 interface Props {
   fields: FieldArrayWithId<VedleggFormValues>[] | undefined;
@@ -16,7 +15,7 @@ interface Props {
 }
 
 export const FileUploadFields = ({ fields, krav, remove, errors }: Props) => {
-  const { formatMessage } = useFeatureToggleIntl();
+  const intl = useIntl();
   const totalFileSizeErrorMessage = errors?.[krav]?.[TOTAL_FILE_SIZE]?.message;
   return (
     <>
@@ -83,7 +82,7 @@ export const FileUploadFields = ({ fields, krav, remove, errors }: Props) => {
                     }}
                     className={styles?.deleteAttachment}
                   >
-                    <Cancel title={formatMessage('filopplasting.vedlegg.avbryt')} />
+                    <Cancel title={intl.formatMessage({ id: 'filopplasting.vedlegg.avbryt' })} />
                     <BodyShort>
                       <FormattedMessage id="filopplasting.vedlegg.avbryt" />
                     </BodyShort>
@@ -105,7 +104,7 @@ export const FileUploadFields = ({ fields, krav, remove, errors }: Props) => {
                     }}
                     className={styles?.deleteAttachment}
                   >
-                    <Delete title={formatMessage('filopplasting.vedlegg.slett')} />
+                    <Delete title={intl.formatMessage({ id: 'filopplasting.vedlegg.slett' })} />
                     <BodyShort>
                       <FormattedMessage id="filopplasting.vedlegg.slett" />
                     </BodyShort>
