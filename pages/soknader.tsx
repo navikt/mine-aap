@@ -13,7 +13,7 @@ import { useRouter } from 'next/router';
 import NextLink from 'next/link';
 import metrics from 'lib/metrics';
 import Head from 'next/head';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 interface PageProps {
   søknader: Søknad[];
@@ -21,20 +21,12 @@ interface PageProps {
 
 const Søknader = ({ søknader }: PageProps) => {
   const router = useRouter();
+  const intl = useIntl();
 
   return (
     <Layout>
       <Head>
-        <title>
-          {`${(
-            <FormattedMessage
-              id="appTittel"
-              values={{
-                shy: '',
-              }}
-            />
-          )} - nav.no`}
-        </title>
+        <title>{`${intl.formatMessage({ id: 'appTittel' }, { shy: '' })} - nav.no`}</title>
       </Head>
       <Section>
         <NextLink href="/" passHref legacyBehavior>

@@ -15,7 +15,7 @@ import metrics from 'lib/metrics';
 import { HvaSkjerPanel } from 'components/HvaSkjerPanel/HvaSkjerPanel';
 import { LucaGuidePanel } from '@navikt/aap-felles-innbygger-react';
 import Head from 'next/head';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 interface PageProps {
   søknader: Søknad[];
@@ -24,6 +24,7 @@ interface PageProps {
 
 const Index = ({ søknader, dokumenter }: PageProps) => {
   const router = useRouter();
+  const intl = useIntl();
 
   const sisteSøknad = useMemo(() => {
     return søknader[0];
@@ -32,16 +33,7 @@ const Index = ({ søknader, dokumenter }: PageProps) => {
   return (
     <Layout>
       <Head>
-        <title>
-          {`${(
-            <FormattedMessage
-              id="appTittel"
-              values={{
-                shy: '',
-              }}
-            />
-          )} - nav.no`}
-        </title>
+        <title>{`${intl.formatMessage({ id: 'appTittel' }, { shy: '' })} - nav.no`}</title>
       </Head>
       <Section>
         <LucaGuidePanel>

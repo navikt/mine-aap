@@ -26,7 +26,7 @@ interface PageProps {
 }
 
 const Index = ({ søknad }: PageProps) => {
-  const { locale } = useIntl();
+  const intl = useIntl();
 
   const [errors, setErrors] = useState<FieldErrors>({});
   const [manglendeVedlegg, setManglendeVedlegg] = useState<VedleggType[]>(
@@ -34,7 +34,6 @@ const Index = ({ søknad }: PageProps) => {
   );
 
   const router = useRouter();
-
   const errorSummaryId = `form-error-summary-${søknad?.søknadId ?? 'generic'}`;
 
   const updateErrorSummary = (errorsFromKrav: FieldErrors, krav: string) => {
@@ -58,16 +57,7 @@ const Index = ({ søknad }: PageProps) => {
   return (
     <>
       <Head>
-        <title>
-          {`${(
-            <FormattedMessage
-              id="ettersendelse.appTittel"
-              values={{
-                shy: '',
-              }}
-            />
-          )} - nav.no`}
-        </title>
+        <title>{`${intl.formatMessage({ id: 'appTittel' }, { shy: '' })} - nav.no`}</title>
       </Head>
       <PageHeader align="center" variant="guide">
         <FormattedMessage
@@ -122,7 +112,7 @@ const Index = ({ søknad }: PageProps) => {
               <FormattedMessage id="ettersendelse.slikTarDuBildeBeskrivelse" />
             </BodyShort>
             <ReadMore header={<FormattedMessage id="ettersendelse.slikTarDuBilde" />}>
-              <ScanningGuide locale={locale} />
+              <ScanningGuide locale={intl.locale} />
             </ReadMore>
           </div>
         </Section>
