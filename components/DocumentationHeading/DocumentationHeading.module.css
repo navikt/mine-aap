@@ -1,0 +1,17 @@
+.heading {
+  background-color: var(--a-bg-subtle);
+  margin-inline: calc(var(--a-spacing-4) * -1);
+  padding-inline: var(--a-spacing-4);
+  padding-block: var(--a-spacing-2);
+}
+
+@media screen and (min-width: 480px) {
+  .heading {
+    margin-inline: calc(var(--a-spacing-6) * -1);
+    padding-inline: var(--a-spacing-6);
+  }
+}
+
+.orange {
+  background-color: var(--a-surface-warning-subtle-hover);
+}
