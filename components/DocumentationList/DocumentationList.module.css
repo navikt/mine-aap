@@ -12,6 +12,12 @@
   border-bottom: 1px solid var(--a-border-subtle);
 }
 
-.listItem:last-child {
-  padding-block-end: 0;
+@media screen and (min-width: 480px) {
+  .linkPanel {
+    padding-inline: var(--a-spacing-6);
+  }
+}
+
+.detail {
+  color: var(--a-text-subtle);
 }

@@ -19,24 +19,26 @@ export const Soknad = () => {
         raskt du kan.
       </Alert>
       <CardDivider />
-      <DocumentationHeading heading="Dokumentasjon vi har mottatt" />
-      <ul>
-        <li>
-          <Link href="#">Dokumentasjon fra arbeidsgiver</Link>
-        </li>
-      </ul>
 
-      <DocumentationHeading heading="Dokumentasjon vi mangler" orangeBackground />
+      <DocumentationHeading heading="Dokumentasjon vi mangler" />
       <DocumentationList
-        elements={['Dokumentasjon fra arbeidsgiver', 'Bekreftelse på avbrutt studie']}
+        elements={[
+          { tittel: 'Dokumentasjon fra arbeidsgiver' },
+          { tittel: 'Bekreftelse på avbrutt studie' },
+        ]}
       />
-
-      <CardDivider />
 
       <ButtonRow>
         <Button variant="primary">Ettersend dokumentasjon</Button>
-        <Button variant="secondary">Se og last ned søknaden</Button>
       </ButtonRow>
+      <DocumentationHeading heading="Dette har vi mottatt fra deg" />
+      <DocumentationList
+        elements={[
+          { tittel: 'Søknad om AAP', href: '#', innsendt: new Date() },
+          { tittel: 'Dokumentasjon på sykepenger', href: '#', innsendt: new Date() },
+          { tittel: 'Dokumentasjon fra barnevern', href: '#', innsendt: new Date() },
+        ]}
+      />
     </div>
   );
 };
