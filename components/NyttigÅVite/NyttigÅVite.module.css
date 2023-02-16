@@ -1,0 +1,22 @@
+.linkPanel {
+  background-color: var(--a-bg-subtle);
+  border-radius: 12px;
+}
+
+.linkPanel button {
+  border-bottom: 0px;
+}
+
+.accordionContent {
+  border-bottom: 0px;
+}
+
+.accordionHeader {
+  background-color: transparent !important;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--a-spacing-3);
+}

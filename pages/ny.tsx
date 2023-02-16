@@ -1,6 +1,7 @@
 import { beskyttetSide } from '@navikt/aap-felles-innbygger-utils';
-import { BodyShort, Button, Heading, Ingress } from '@navikt/ds-react';
+import { BodyShort, Button, Heading, Ingress, LinkPanel } from '@navikt/ds-react';
 import { Card } from 'components/Card/Card';
+import { NyttigÅVite } from 'components/NyttigÅVite/NyttigÅVite';
 import { PageComponentFlexContainer } from 'components/PageComponentFlexContainer/PageComponentFlexContainer';
 import { PageContainer } from 'components/PageContainer/PageContainer';
 import { Soknad } from 'components/Soknad/Soknad';
@@ -37,9 +38,7 @@ const Index = () => {
         </Card>
       </PageComponentFlexContainer>
       <PageComponentFlexContainer>
-        <Heading level="2" size="medium" spacing>
-          Nyttig å vite
-        </Heading>
+        <NyttigÅVite />
       </PageComponentFlexContainer>
       <PageComponentFlexContainer>
         <Heading level="2" size="medium" spacing>
