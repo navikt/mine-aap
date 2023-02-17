@@ -1,4 +1,5 @@
-import { Heading, LinkPanel } from '@navikt/ds-react';
+import { BodyLong, BodyShort, Heading, Label, Link, LinkPanel } from '@navikt/ds-react';
+import { FormattedMessage } from 'react-intl';
 import * as styles from './NyttigÅVite.module.css';
 
 export const NyttigÅVite = () => {
@@ -14,6 +15,116 @@ export const NyttigÅVite = () => {
         <LinkPanel className={styles.linkPanel} href="#" border={false}>
           Alle dine innsendte søknader
         </LinkPanel>
+        <Heading level="3" size="small" spacing>
+          <FormattedMessage id="hvaSkjerPanel.heading" />
+        </Heading>
+        <ul>
+          <li>
+            <Label as={'p'}>
+              <FormattedMessage id="hvaSkjerPanel.punkt1.label" />
+            </Label>
+            <BodyLong spacing>
+              <FormattedMessage id="hvaSkjerPanel.punkt1.tekst" />
+            </BodyLong>
+          </li>
+          <li>
+            <Label as={'p'}>
+              <FormattedMessage id="hvaSkjerPanel.punkt2.label" />
+            </Label>
+            <BodyLong spacing>
+              <FormattedMessage
+                id="hvaSkjerPanel.punkt2.tekst"
+                values={{
+                  a: (chunks) => (
+                    <Link target="_blank" href="https://klage.nav.no/nb/arbeid/nav-loven-14a">
+                      {chunks}
+                    </Link>
+                  ),
+                }}
+              />
+            </BodyLong>
+          </li>
+          <li>
+            <Label as={'p'}>
+              <FormattedMessage id="hvaSkjerPanel.punkt3.label" />
+            </Label>
+            <BodyShort spacing>
+              <FormattedMessage id="hvaSkjerPanel.punkt3.tekst" />
+            </BodyShort>
+            <ul>
+              <li>
+                <BodyShort spacing>
+                  <FormattedMessage
+                    id="hvaSkjerPanel.punkt3.punkt1"
+                    values={{
+                      a: (chunks) => (
+                        <Link target="_blank" href="https://arbeidsplassen.nav.no/">
+                          {chunks}
+                        </Link>
+                      ),
+                    }}
+                  />
+                </BodyShort>
+              </li>
+              <li>
+                <BodyShort spacing>
+                  <FormattedMessage id="hvaSkjerPanel.punkt3.punkt2" />
+                </BodyShort>
+              </li>
+
+              <li>
+                <BodyShort spacing>
+                  <FormattedMessage id="hvaSkjerPanel.punkt3.punkt3" />
+                </BodyShort>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <Label as={'p'}>
+              <FormattedMessage id="hvaSkjerPanel.punkt4.label" />
+            </Label>
+            <BodyLong spacing>
+              <FormattedMessage id="hvaSkjerPanel.punkt4.tekst" />
+            </BodyLong>
+          </li>
+          <li>
+            <Label as={'p'}>
+              <FormattedMessage id="hvaSkjerPanel.punkt5.label" />
+            </Label>
+            <BodyLong spacing>
+              <FormattedMessage
+                id="hvaSkjerPanel.punkt5.tekst"
+                values={{
+                  a: (chunks) => (
+                    <Link
+                      target="_blank"
+                      href={
+                        'https://www.nav.no/soknader/nb/person/arbeid/arbeidsavklaringspenger/NAV%2011-13.05/klage-eller-anke/brev'
+                      }
+                    >
+                      {chunks}
+                    </Link>
+                  ),
+                }}
+              />
+            </BodyLong>
+            <BodyLong spacing>
+              <FormattedMessage
+                id="hvaSkjerPanel.punkt5.tekst1"
+                values={{
+                  a: (chunks) => (
+                    <Link target="_blank" href={'https://www.nav.no/skattetrekk'}>
+                      {chunks}
+                    </Link>
+                  ),
+                }}
+              />
+            </BodyLong>
+            <BodyShort spacing>
+              <FormattedMessage id="hvaSkjerPanel.punkt5.tekst2" />
+            </BodyShort>
+          </li>
+        </ul>
       </div>
     </>
   );
