@@ -1,15 +1,20 @@
-import { beskyttetSide } from '@navikt/aap-felles-innbygger-utils';
-import { BodyShort, Button, Heading, Ingress, LinkPanel } from '@navikt/ds-react';
+import { beskyttetSide, getAccessToken } from '@navikt/aap-felles-innbygger-utils';
+import { BodyShort, Button, Heading, Ingress, LinkPanel, Select } from '@navikt/ds-react';
 import { Card } from 'components/Card/Card';
+import { Dokumentoversikt } from 'components/DokumentoversiktNy/Dokumentoversikt';
 import { NyttigÅVite } from 'components/NyttigÅVite/NyttigÅVite';
 import { PageComponentFlexContainer } from 'components/PageComponentFlexContainer/PageComponentFlexContainer';
 import { PageContainer } from 'components/PageContainer/PageContainer';
 import { Soknad } from 'components/Soknad/Soknad';
 import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
+import metrics from 'lib/metrics';
+import { Dokument, Søknad } from 'lib/types/types';
 import { GetServerSidePropsResult, NextPageContext } from 'next';
 import Head from 'next/head';
+import { getDocuments } from './api/dokumenter';
+import { getSøknader } from './api/soknader/soknader';
 
-const Index = () => {
+const Index = ({ søknader, dokumenter }: { søknader: Søknad[]; dokumenter: Dokument[] }) => {
   const { formatElement } = useFeatureToggleIntl();
   return (
     <PageContainer>
@@ -56,6 +61,12 @@ const Index = () => {
         <Heading level="2" size="medium" spacing>
           Dokumentoversikt
         </Heading>
+        <BodyShort spacing>
+          Her finner du alle søknader, vedlegg, vedtak, brev, samtalerefater og meldinger om AAP og
+          oppfølging.
+        </BodyShort>
+
+        <Dokumentoversikt dokumenter={dokumenter} />
       </PageComponentFlexContainer>
     </PageContainer>
   );
@@ -71,8 +82,16 @@ export const getServerSideProps = beskyttetSide(
       };
     }
 
+    const stopTimer = metrics.getServersidePropsDurationHistogram.startTimer({ path: '/' });
+    const bearerToken = getAccessToken(ctx);
+    const params = { page: '0', size: '1', sort: 'created,desc' };
+    const søknader = await getSøknader(params, bearerToken);
+    const dokumenter = await getDocuments(bearerToken);
+
+    stopTimer();
+
     return {
-      props: {},
+      props: { søknader, dokumenter },
     };
   }
 );
