@@ -11,11 +11,17 @@ import metrics from 'lib/metrics';
 import { Dokument, Søknad } from 'lib/types/types';
 import { GetServerSidePropsResult, NextPageContext } from 'next';
 import Head from 'next/head';
+import { useMemo } from 'react';
 import { getDocuments } from './api/dokumenter';
 import { getSøknader } from './api/soknader/soknader';
 
 const Index = ({ søknader, dokumenter }: { søknader: Søknad[]; dokumenter: Dokument[] }) => {
   const { formatElement } = useFeatureToggleIntl();
+
+  const sisteSøknad = useMemo(() => {
+    return søknader[0];
+  }, [søknader]);
+
   return (
     <PageContainer>
       <Head>
@@ -34,14 +40,16 @@ const Index = ({ søknader, dokumenter }: { søknader: Søknad[]; dokumenter: Do
           beskjed om eventuelle endringer.
         </Ingress>
       </PageComponentFlexContainer>
-      <PageComponentFlexContainer subtleBackground>
-        <Heading level="2" size="medium" spacing>
-          Min siste søknad
-        </Heading>
-        <Card>
-          <Soknad />
-        </Card>
-      </PageComponentFlexContainer>
+      {sisteSøknad && (
+        <PageComponentFlexContainer subtleBackground>
+          <Heading level="2" size="medium" spacing>
+            Min siste søknad
+          </Heading>
+          <Card>
+            <Soknad søknad={sisteSøknad} />
+          </Card>
+        </PageComponentFlexContainer>
+      )}
       <PageComponentFlexContainer>
         <NyttigÅVite />
       </PageComponentFlexContainer>

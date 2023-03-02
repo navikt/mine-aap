@@ -11,7 +11,13 @@ export const DocumentationList = ({
     <ul className={styles.list}>
       {elements.map((element, index) => (
         <li key={index} className={styles.listItem}>
-          {element.href ? <Link href={element.href}>{element.tittel}</Link> : <>{element.tittel}</>}
+          {element.href ? (
+            <Link href={element.href} target="_blank">
+              {element.tittel}
+            </Link>
+          ) : (
+            <>{element.tittel}</>
+          )}
           {element.innsendt && (
             <Detail className={styles.detail}>
               Mottatt: {format(element.innsendt, 'dd.MM.yyyy hh:MM')}
