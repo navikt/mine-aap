@@ -1,0 +1,16 @@
+.container {
+  max-width: 600px;
+}
+
+.listItem {
+  margin-block: var(--a-spacing-3);
+  background: var(--a-bg-default);
+  padding: var(--a-spacing-2);
+  border-radius: 12px;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}

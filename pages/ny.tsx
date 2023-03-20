@@ -65,7 +65,7 @@ const Index = ({ søknader, dokumenter }: { søknader: Søknad[]; dokumenter: Do
           <Button variant="secondary">Meld endring</Button>
         </Card>
       </PageComponentFlexContainer>
-      <PageComponentFlexContainer>
+      <PageComponentFlexContainer subtleBackground>
         <Heading level="2" size="medium" spacing>
           Dokumentoversikt
         </Heading>
