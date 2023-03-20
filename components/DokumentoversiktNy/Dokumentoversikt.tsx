@@ -47,6 +47,13 @@ export const Dokumentoversikt = ({ dokumenter }: { dokumenter: Dokument[] }) => 
     return filtrerteDokumenter.slice(startIndex, endIndex);
   }, [filtrerteDokumenter, pageNumber]);
 
+  useEffect(() => {
+    const numberOfPages = getNumberOfPages(filtrerteDokumenter, PAGE_SIZE);
+    if (pageNumber > numberOfPages) {
+      setPageNumber(numberOfPages);
+    }
+  }, [filtrerteDokumenter, pageNumber]);
+
   const onSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
     setSortType(value);
