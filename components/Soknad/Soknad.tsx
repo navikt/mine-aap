@@ -6,11 +6,14 @@ import { DocumentationList } from 'components/DocumentationList/DocumentationLis
 import { format } from 'date-fns';
 import { nb } from 'date-fns/locale';
 import { Søknad } from 'lib/types/types';
+import { useRouter } from 'next/router';
 import { useIntl } from 'react-intl';
 import * as styles from './Soknad.module.css';
 
 export const Soknad = ({ søknad }: { søknad: Søknad }) => {
   const { formatMessage } = useIntl();
+  const router = useRouter();
+
   return (
     <div className={styles.soknad}>
       <Heading level="2" size="medium" style={{ marginBlockEnd: '8px' }}>
@@ -21,11 +24,10 @@ export const Soknad = ({ søknad }: { søknad: Søknad }) => {
       </BodyShort>
       {søknad.manglendeVedlegg?.length && (
         <>
-          <Alert variant="warning" size="small">
+          <Alert variant="warning" size="small" className={styles.alert}>
             Vi mangler dokumentasjon fra deg for å kunne behandle søknaden. Ettersend dette til oss
             så raskt du kan.
           </Alert>
-          <CardDivider />
           <DocumentationHeading heading="Dokumentasjon vi mangler" />
           <DocumentationList
             elements={søknad.manglendeVedlegg.map((vedlegg) => {
@@ -38,7 +40,9 @@ export const Soknad = ({ søknad }: { søknad: Søknad }) => {
       )}
 
       <ButtonRow>
-        <Button variant="primary">Ettersend dokumentasjon</Button>
+        <Button variant="primary" onClick={() => router.push(`/${søknad.søknadId}/ettersendelse/`)}>
+          Ettersend dokumentasjon
+        </Button>
       </ButtonRow>
       {søknad.innsendteVedlegg?.length && (
         <>

@@ -1,0 +1,9 @@
+.alert {
+  margin-block-end: var(--a-spacing-4);
+}
+
+@media screen and (min-width: 480px) {
+  .alert {
+    margin-block-end: var(--a-spacing-6);
+  }
+}
