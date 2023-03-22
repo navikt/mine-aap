@@ -9,3 +9,7 @@ export const logAmplitudeEvent = (eventName: string, eventData?: Record<string, 
 export function logLastOppFilEvent(opplastingsType: string) {
   logAmplitudeEvent('last opp fil', { opplastingsType });
 }
+
+export function logDokumentoversiktEvent(antallSider: number, interaksjonsType: string) {
+  logAmplitudeEvent('interaksjon med dokumentoversikt', { antallSider, interaksjonsType });
+}

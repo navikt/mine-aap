@@ -70,7 +70,7 @@ const Index = ({ søknader, dokumenter }: { søknader: Søknad[]; dokumenter: Do
           Dokumentoversikt
         </Heading>
         <BodyShort spacing>
-          Her finner du alle søknader, vedlegg, vedtak, brev, samtalerefater og meldinger om AAP og
+          Her finner du dine søknader, vedlegg, vedtak, brev, samtalerefater og meldinger om AAP og
           oppfølging.
         </BodyShort>
 

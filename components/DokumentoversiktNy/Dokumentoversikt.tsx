@@ -1,14 +1,16 @@
-import { Button, Detail, Link, Pagination, Search, Select, Table } from '@navikt/ds-react';
+import { BodyShort, Detail, Link, Pagination, ReadMore, Select } from '@navikt/ds-react';
 import { format } from 'date-fns';
 import { nb } from 'date-fns/locale';
 import { Dokument } from 'lib/types/types';
 import styles from './Dokumentoversikt.module.css';
 import { useEffect, useMemo, useState } from 'react';
+import { logAmplitudeEvent, logDokumentoversiktEvent } from 'lib/utils/amplitude';
+import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 
 const getAvsender = (type: string) => {
   switch (type) {
     case 'I':
-      return 'Deg';
+      return 'deg';
     case 'U':
       return 'NAV';
     default:
@@ -27,6 +29,8 @@ export const Dokumentoversikt = ({ dokumenter }: { dokumenter: Dokument[] }) => 
   const [sortType, setSortType] = useState('datoAsc');
   const [pageNumber, setPageNumber] = useState(1);
   const [searchFilter, setSearchFilter] = useState('');
+
+  const { formatMessage } = useFeatureToggleIntl();
 
   const filtrerteDokumenter = useMemo(() => {
     return sorterteDokumenter.filter((dokument) => {
@@ -47,6 +51,10 @@ export const Dokumentoversikt = ({ dokumenter }: { dokumenter: Dokument[] }) => 
     return filtrerteDokumenter.slice(startIndex, endIndex);
   }, [filtrerteDokumenter, pageNumber]);
 
+  const antallSider = useMemo(() => {
+    return getNumberOfPages(filtrerteDokumenter, PAGE_SIZE);
+  }, [filtrerteDokumenter]);
+
   useEffect(() => {
     const numberOfPages = getNumberOfPages(filtrerteDokumenter, PAGE_SIZE);
     if (pageNumber > numberOfPages) {
@@ -56,6 +64,7 @@ export const Dokumentoversikt = ({ dokumenter }: { dokumenter: Dokument[] }) => 
 
   const onSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
+    logDokumentoversiktEvent(antallSider, `sorter etter ${value}`);
     setSortType(value);
   };
 
@@ -74,20 +83,24 @@ export const Dokumentoversikt = ({ dokumenter }: { dokumenter: Dokument[] }) => 
 
   return (
     <div className={styles.container}>
+      <ReadMore header={formatMessage('dokumentoversikt.manglendeDokument.header')}>
+        <BodyShort>{formatMessage('dokumentoversikt.manglendeDokument.tekst')}</BodyShort>
+        {formatMessage('dokumentoversikt.manglendeDokument.bulletsTekst')}
+      </ReadMore>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
         <Select label="Sorter etter" onChange={onSortChange}>
           <option value="datoAsc">Nyeste først</option>
           <option value="datoDesc">Eldste først</option>
         </Select>
-        <Search
+        {/*<Search
           label="Søk i dokumentoversikten"
           onChange={(value) => setSearchFilter(value)}
           onClear={() => setSearchFilter('')}
           hideLabel={false}
-        />
+  />*/}
       </div>
       <ul style={{ listStyle: 'none', margin: '0', padding: '0' }}>
-        {sortedPaginatedDocuments.map((document, index) => {
+        {sortedPaginatedDocuments.map((document) => {
           return (
             <li
               key={`${document.journalpostId}-${document.dokumentId}`}
@@ -98,12 +111,13 @@ export const Dokumentoversikt = ({ dokumenter }: { dokumenter: Dokument[] }) => 
                   <Link
                     href={`/aap/mine-aap/api/dokument/?journalpostId=${document.journalpostId}&dokumentId=${document.dokumentId}`}
                     target="_blank"
+                    onClick={() => logDokumentoversiktEvent(antallSider, 'klikk lenke')}
                   >
                     {document.tittel}
                   </Link>
                 </span>
                 <Detail style={{ color: 'var(--a-text-default' }}>
-                  Sendt av: {getAvsender(document.type)} -{' '}
+                  Sendt av {getAvsender(document.type)} den{' '}
                   {format(new Date(document.dato), 'dd. MMMM yyyy', { locale: nb })}
                 </Detail>
               </div>
@@ -113,8 +127,11 @@ export const Dokumentoversikt = ({ dokumenter }: { dokumenter: Dokument[] }) => 
       </ul>
       <Pagination
         page={pageNumber}
-        onPageChange={(x) => setPageNumber(x)}
-        count={getNumberOfPages(filtrerteDokumenter, PAGE_SIZE)}
+        onPageChange={(x) => {
+          setPageNumber(x);
+          logDokumentoversiktEvent(antallSider, 'pagination');
+        }}
+        count={antallSider}
         size="small"
       />
     </div>
