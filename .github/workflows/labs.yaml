@@ -68,4 +68,3 @@ jobs:
           "CLUSTER": "dev-gcp"
           "RESOURCE": ".nais/nais-mock.yaml"
           "VARS": ".nais/labs.yaml"
-          "DEPLOY_SERVER": deploy.nais.io:443
