@@ -1,7 +1,7 @@
 ingresses:
-- "https://aap-innsyn.labs.nais.io/"
+- "https://aap-innsyn.ekstern.dev.nav.no/"
 env:
 - name: APP_URL
-  value: "https://aap-innsyn.labs.nais.io/"
+  value: "https://aap-innsyn.ekstern.dev.nav.no/"
 externals:
   - "dekoratoren.dev.nav.no"

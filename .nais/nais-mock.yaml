@@ -1,0 +1,42 @@
+apiVersion: "nais.io/v1alpha1"
+kind: "Application"
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "50M"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "90"
+  name: "innsyn"
+  namespace: "aap"
+  labels:
+    "team": "aap"
+spec:
+  image: {{image}}
+  port: 3000
+  liveness:
+    path: "/aap/mine-aap/api/internal/isAlive"
+    initialDelay: 20
+    timeout: 60
+  readiness:
+    path: "/aap/mine-aap/api/internal/isReady"
+    initialDelay: 20
+    timeout: 60
+  replicas:
+    min: 2
+    max: 4
+  resources:
+    requests:
+      cpu: 200m
+      memory: 512Mi
+    limits:
+      memory: 512Mi
+  prometheus:
+    enabled: true
+    path: /aap/mine-aap/api/internal/prometheus/
+  ingresses:
+  {{#each ingresses as |url|}}
+    - {{url}}
+  {{/each}}
+  env:
+  {{#each env}}
+    - name: {{this.name }}
+      value: {{this.value}}
+  {{/each}}
