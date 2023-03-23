@@ -3,10 +3,10 @@
 }
 
 .listItem {
-  margin-block: var(--a-spacing-3);
+  margin-block: var(--a-spacing-2);
   background: var(--a-bg-default);
   padding: var(--a-spacing-4);
-  border-radius: 12px;
+  border-radius: 8px;
 }
 
 .content {

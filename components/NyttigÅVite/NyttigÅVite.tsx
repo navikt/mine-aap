@@ -18,113 +18,106 @@ export const NyttigÅVite = () => {
         <Heading level="3" size="small" spacing>
           <FormattedMessage id="hvaSkjerPanel.heading" />
         </Heading>
+
+        <Heading level="4" size="xsmall">
+          <FormattedMessage id="hvaSkjerPanel.punkt1.label" />
+        </Heading>
+        <BodyLong spacing>
+          <FormattedMessage id="hvaSkjerPanel.punkt1.tekst" />
+        </BodyLong>
+
+        <Heading level="4" size="xsmall">
+          <FormattedMessage id="hvaSkjerPanel.punkt2.label" />
+        </Heading>
+        <BodyLong spacing>
+          <FormattedMessage
+            id="hvaSkjerPanel.punkt2.tekst"
+            values={{
+              a: (chunks) => (
+                <Link target="_blank" href="https://klage.nav.no/nb/arbeid/nav-loven-14a">
+                  {chunks}
+                </Link>
+              ),
+            }}
+          />
+        </BodyLong>
+
+        <Heading level="4" size="xsmall">
+          <FormattedMessage id="hvaSkjerPanel.punkt3.label" />
+        </Heading>
+        <BodyShort>
+          <FormattedMessage id="hvaSkjerPanel.punkt3.tekst" />
+        </BodyShort>
         <ul>
           <li>
-            <Label as={'p'}>
-              <FormattedMessage id="hvaSkjerPanel.punkt1.label" />
-            </Label>
-            <BodyLong spacing>
-              <FormattedMessage id="hvaSkjerPanel.punkt1.tekst" />
-            </BodyLong>
-          </li>
-          <li>
-            <Label as={'p'}>
-              <FormattedMessage id="hvaSkjerPanel.punkt2.label" />
-            </Label>
-            <BodyLong spacing>
+            <BodyShort spacing>
               <FormattedMessage
-                id="hvaSkjerPanel.punkt2.tekst"
+                id="hvaSkjerPanel.punkt3.punkt1"
                 values={{
                   a: (chunks) => (
-                    <Link target="_blank" href="https://klage.nav.no/nb/arbeid/nav-loven-14a">
+                    <Link target="_blank" href="https://arbeidsplassen.nav.no/">
                       {chunks}
                     </Link>
                   ),
                 }}
               />
-            </BodyLong>
-          </li>
-          <li>
-            <Label as={'p'}>
-              <FormattedMessage id="hvaSkjerPanel.punkt3.label" />
-            </Label>
-            <BodyShort spacing>
-              <FormattedMessage id="hvaSkjerPanel.punkt3.tekst" />
             </BodyShort>
-            <ul>
-              <li>
-                <BodyShort spacing>
-                  <FormattedMessage
-                    id="hvaSkjerPanel.punkt3.punkt1"
-                    values={{
-                      a: (chunks) => (
-                        <Link target="_blank" href="https://arbeidsplassen.nav.no/">
-                          {chunks}
-                        </Link>
-                      ),
-                    }}
-                  />
-                </BodyShort>
-              </li>
-              <li>
-                <BodyShort spacing>
-                  <FormattedMessage id="hvaSkjerPanel.punkt3.punkt2" />
-                </BodyShort>
-              </li>
-
-              <li>
-                <BodyShort spacing>
-                  <FormattedMessage id="hvaSkjerPanel.punkt3.punkt3" />
-                </BodyShort>
-              </li>
-            </ul>
           </li>
           <li>
-            <Label as={'p'}>
-              <FormattedMessage id="hvaSkjerPanel.punkt4.label" />
-            </Label>
-            <BodyLong spacing>
-              <FormattedMessage id="hvaSkjerPanel.punkt4.tekst" />
-            </BodyLong>
-          </li>
-          <li>
-            <Label as={'p'}>
-              <FormattedMessage id="hvaSkjerPanel.punkt5.label" />
-            </Label>
-            <BodyLong spacing>
-              <FormattedMessage
-                id="hvaSkjerPanel.punkt5.tekst"
-                values={{
-                  a: (chunks) => (
-                    <Link
-                      target="_blank"
-                      href={
-                        'https://www.nav.no/soknader/nb/person/arbeid/arbeidsavklaringspenger/NAV%2011-13.05/klage-eller-anke/brev'
-                      }
-                    >
-                      {chunks}
-                    </Link>
-                  ),
-                }}
-              />
-            </BodyLong>
-            <BodyLong spacing>
-              <FormattedMessage
-                id="hvaSkjerPanel.punkt5.tekst1"
-                values={{
-                  a: (chunks) => (
-                    <Link target="_blank" href={'https://www.nav.no/skattetrekk'}>
-                      {chunks}
-                    </Link>
-                  ),
-                }}
-              />
-            </BodyLong>
             <BodyShort spacing>
-              <FormattedMessage id="hvaSkjerPanel.punkt5.tekst2" />
+              <FormattedMessage id="hvaSkjerPanel.punkt3.punkt2" />
+            </BodyShort>
+          </li>
+
+          <li>
+            <BodyShort spacing>
+              <FormattedMessage id="hvaSkjerPanel.punkt3.punkt3" />
             </BodyShort>
           </li>
         </ul>
+
+        <Heading level="4" size="xsmall">
+          <FormattedMessage id="hvaSkjerPanel.punkt4.label" />
+        </Heading>
+        <BodyLong spacing>
+          <FormattedMessage id="hvaSkjerPanel.punkt4.tekst" />
+        </BodyLong>
+
+        <Heading level="4" size="xsmall">
+          <FormattedMessage id="hvaSkjerPanel.punkt5.label" />
+        </Heading>
+        <BodyLong spacing>
+          <FormattedMessage
+            id="hvaSkjerPanel.punkt5.tekst"
+            values={{
+              a: (chunks) => (
+                <Link
+                  target="_blank"
+                  href={
+                    'https://www.nav.no/soknader/nb/person/arbeid/arbeidsavklaringspenger/NAV%2011-13.05/klage-eller-anke/brev'
+                  }
+                >
+                  {chunks}
+                </Link>
+              ),
+            }}
+          />
+        </BodyLong>
+        <BodyLong spacing>
+          <FormattedMessage
+            id="hvaSkjerPanel.punkt5.tekst1"
+            values={{
+              a: (chunks) => (
+                <Link target="_blank" href={'https://www.nav.no/skattetrekk'}>
+                  {chunks}
+                </Link>
+              ),
+            }}
+          />
+        </BodyLong>
+        <BodyShort spacing>
+          <FormattedMessage id="hvaSkjerPanel.punkt5.tekst2" />
+        </BodyShort>
       </div>
     </>
   );

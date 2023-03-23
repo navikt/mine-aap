@@ -16,7 +16,7 @@ import { getDocuments } from './api/dokumenter';
 import { getSøknader } from './api/soknader/soknader';
 
 const Index = ({ søknader, dokumenter }: { søknader: Søknad[]; dokumenter: Dokument[] }) => {
-  const { formatElement } = useFeatureToggleIntl();
+  const { formatElement, formatMessage } = useFeatureToggleIntl();
 
   const sisteSøknad = useMemo(() => {
     return søknader[0];
@@ -73,6 +73,7 @@ const Index = ({ søknader, dokumenter }: { søknader: Søknad[]; dokumenter: Do
           Her finner du dine søknader, vedlegg, vedtak, brev, samtalerefater og meldinger om AAP og
           oppfølging.
         </BodyShort>
+        <BodyShort spacing>{formatMessage('dokumentoversikt.manglendeDokument.tekst')}</BodyShort>
 
         <Dokumentoversikt dokumenter={dokumenter} />
       </PageComponentFlexContainer>

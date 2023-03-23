@@ -1,10 +1,10 @@
-import { BodyShort, Detail, Link, Pagination, ReadMore, Select } from '@navikt/ds-react';
+import { BodyShort, Checkbox, Detail, Link, Pagination, ReadMore, Select } from '@navikt/ds-react';
 import { format } from 'date-fns';
 import { nb } from 'date-fns/locale';
 import { Dokument } from 'lib/types/types';
 import styles from './Dokumentoversikt.module.css';
 import { useEffect, useMemo, useState } from 'react';
-import { logAmplitudeEvent, logDokumentoversiktEvent } from 'lib/utils/amplitude';
+import { logDokumentoversiktEvent } from 'lib/utils/amplitude';
 import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 
 const getAvsender = (type: string) => {
@@ -29,6 +29,7 @@ export const Dokumentoversikt = ({ dokumenter }: { dokumenter: Dokument[] }) => 
   const [sortType, setSortType] = useState('datoAsc');
   const [pageNumber, setPageNumber] = useState(1);
   const [searchFilter, setSearchFilter] = useState('');
+  const [visMeldekort, setVisMeldekort] = useState(true);
 
   const { formatMessage } = useFeatureToggleIntl();
 
@@ -36,7 +37,7 @@ export const Dokumentoversikt = ({ dokumenter }: { dokumenter: Dokument[] }) => 
     return sorterteDokumenter.filter((dokument) => {
       if (searchFilter) {
         return (
-          dokument.tittel.toLowerCase().includes(searchFilter.toLowerCase()) ||
+          !dokument.tittel.toLowerCase().includes(searchFilter.toLowerCase()) ||
           getAvsender(dokument.type).toLowerCase().includes(searchFilter.toLowerCase())
         );
       }
@@ -62,6 +63,14 @@ export const Dokumentoversikt = ({ dokumenter }: { dokumenter: Dokument[] }) => 
     }
   }, [filtrerteDokumenter, pageNumber]);
 
+  useEffect(() => {
+    if (visMeldekort) {
+      setSearchFilter('Meldekort for uke');
+    } else {
+      setSearchFilter('');
+    }
+  }, [visMeldekort]);
+
   const onSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
     logDokumentoversiktEvent(antallSider, `sorter etter ${value}`);
@@ -83,10 +92,6 @@ export const Dokumentoversikt = ({ dokumenter }: { dokumenter: Dokument[] }) => 
 
   return (
     <div className={styles.container}>
-      <ReadMore header={formatMessage('dokumentoversikt.manglendeDokument.header')}>
-        <BodyShort>{formatMessage('dokumentoversikt.manglendeDokument.tekst')}</BodyShort>
-        {formatMessage('dokumentoversikt.manglendeDokument.bulletsTekst')}
-      </ReadMore>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
         <Select label="Sorter etter" onChange={onSortChange}>
           <option value="datoAsc">Nyeste først</option>
@@ -98,6 +103,13 @@ export const Dokumentoversikt = ({ dokumenter }: { dokumenter: Dokument[] }) => 
           onClear={() => setSearchFilter('')}
           hideLabel={false}
   />*/}
+        <Checkbox
+          value={visMeldekort}
+          checked={!visMeldekort}
+          onChange={() => setVisMeldekort(!visMeldekort)}
+        >
+          Vis meldekort
+        </Checkbox>
       </div>
       <ul style={{ listStyle: 'none', margin: '0', padding: '0' }}>
         {sortedPaginatedDocuments.map((document) => {

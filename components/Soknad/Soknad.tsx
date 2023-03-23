@@ -29,13 +29,16 @@ export const Soknad = ({ søknad }: { søknad: Søknad }) => {
             så raskt du kan.
           </Alert>
           <DocumentationHeading heading="Dokumentasjon vi mangler" />
-          <DocumentationList
-            elements={søknad.manglendeVedlegg.map((vedlegg) => {
-              return {
-                tittel: formatMessage({ id: `ettersendelse.vedleggstyper.${vedlegg}.heading` }),
-              };
+
+          <ul>
+            {søknad.manglendeVedlegg.map((vedlegg) => {
+              return (
+                <li key={vedlegg}>
+                  {formatMessage({ id: `ettersendelse.vedleggstyper.${vedlegg}.heading` })}
+                </li>
+              );
             })}
-          />
+          </ul>
         </>
       )}
 
