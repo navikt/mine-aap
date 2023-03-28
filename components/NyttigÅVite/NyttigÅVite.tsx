@@ -10,7 +10,7 @@ export const NyttigÅVite = () => {
       </Heading>
       <div className={styles.container}>
         <LinkPanel className={styles.linkPanel} href="#" border={false}>
-          Forventet saksbehandlingstider
+          Forventet saksbehandlingstid
         </LinkPanel>
         <LinkPanel className={styles.linkPanel} href="#" border={false}>
           Alle dine innsendte søknader

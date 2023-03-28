@@ -154,7 +154,7 @@
     "heading": "Vi har mottatt søknaden din, hva skjer nå?",
     "punkt1": {
       "label": "Vi sjekker om vi har nok helseopplysninger",
-      "tekst": "Hvis vi trenger flere helseopplysninger, spør vi legen din om å sende en legeerklæring. Vi bruker da informasjonen du ga oss i søknaden om lege eller behandler. Dette gjør vi så fort vi kan, for vi vet at det kan ta tid å få legeerklæringen. "
+      "tekst": "Hvis vi trenger flere helseopplysninger, spør vi legen din om å sende en legeerklæring. Vi bruker da informasjonen du ga oss i søknaden om lege eller behandler. Dette gjør vi så fort vi kan, siden det kan ta tid å få legeerklæringen. "
     },
     "punkt2": {
       "label": "Vi vurderer mulighetene og begrensningene dine i møte med arbeidslivet",
@@ -170,12 +170,12 @@
     },
     "punkt4": {
       "label": "Vi sjekker om du har rett til AAP",
-      "tekst": "Til sist sjekker vi om du har rett til AAP etter folketrygdloven kapittel 11. Vi bruker her opplysningene vi har fått i forbindelse med søknaden."
+      "tekst": "Under saksbehandlingen sjekker vi om du har rett til AAP etter folketrygdloven kapittel 11. Vi bruker her opplysningene vi har fått i forbindelse med søknaden."
     },
     "punkt5": {
       "label": "Svar på AAP-søknaden",
-      "tekst": "Du får et vedtak med vurderingen vår av om du har rett til AAP eller ikke, og hvor mye du vil få utbetalt. Hvis du har spørsmål til vurderingen, kan du ta kontakt med oss. Hvis du ikke er enig, <a>kan du klage på AAP-vedtaket (åpnes i ny fane).</a>",
-      "tekst1": "Vi anbefaler at du sjekker skattekortet ditt med Skatteetaten, siden endringer i inntekt også kan føre til endring i hvor mye skatt du skal trekkes. NAV henter skattekortet ditt automatisk fra Skatteetaten, og trekker skatt ut fra opplysningene derfra. <a>Du kan lese mer om skattetrekk på ytelser fra NAV her (åpnes i ny fane).</a>",
+      "tekst": "Du får et vedtak med vurderingen av om du har rett til AAP eller ikke, og hvor mye du vil få utbetalt. Hvis du har spørsmål til vurderingen, kan du ta kontakt med oss. Hvis du ikke er enig, <a>kan du klage på AAP-vedtaket (åpnes i ny fane).</a>",
+      "tekst1": "Vi anbefaler at du sjekker skattekortet ditt hos Skatteetaten, siden endringer i inntekt også kan føre til endring i hvor mye skatt du skal trekkes. NAV henter skattekortet ditt automatisk fra Skatteetaten, og trekker skatt ut fra opplysningene derfra. <a>Du kan lese mer om skattetrekk på ytelser fra NAV her (åpnes i ny fane).</a>",
       "tekst2": "Du har rett til oppfølgning fra NAV uansett om du får innvilget AAP eller ikke."
     }
   },
