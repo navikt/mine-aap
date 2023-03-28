@@ -1,4 +1,4 @@
-import { BodyShort, Button, Heading, Label, Link, Panel } from '@navikt/ds-react';
+import { Alert, BodyShort, Button, Heading, Label, Link, Panel } from '@navikt/ds-react';
 import type { GetServerSidePropsResult, NextPageContext } from 'next';
 import NextLink from 'next/link';
 import { useMemo } from 'react';
@@ -40,7 +40,18 @@ const Index = ({ søknader, dokumenter }: PageProps) => {
           })} - nav.no`}
         </title>
       </Head>
+
       <Section>
+        <Alert variant="info">
+          <BodyShort spacing>
+            Fra mandag 27. mars kl 9:30 til tirsdag 28. mars kl 11:00 var det problemer med
+            nedlasting av dokumenter.
+          </BodyShort>
+          <BodyShort spacing>
+            Vi har rettet feilen og beklager ulempene dette har medført. Hvis du har prøvd å laste
+            ned dokumenter i denne perioden og opplevd feil, kan du prøve på nytt nå.
+          </BodyShort>
+        </Alert>
         <LucaGuidePanel>
           <Heading level="2" size="medium" spacing>
             {formatMessage('forside.heading')}
