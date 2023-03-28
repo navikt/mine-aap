@@ -1,0 +1,49 @@
+.flexContainer {
+  display: flex;
+  justify-content: space-around;
+}
+.errorContainer {
+  display: flex;
+  flex-direction: column;
+
+  max-width: 600px;
+  margin-block-end: 4rem;
+}
+
+.textBox {
+  background: var(--a-surface-subtle);
+  padding: 1.5rem;
+}
+
+.containerToHideCat {
+  background-color: var(--a-bg-default);
+  margin-top: 210px;
+  padding-block-end: 60px;
+  z-index: 2;
+}
+
+.catContainer {
+  max-width: 600px;
+}
+
+.cat {
+  position: absolute;
+  height: 210px;
+  width: 100%;
+  max-width: 600px;
+
+  animation: slidein 5s;
+}
+
+.cat > svg {
+  width: 100%;
+}
+
+@keyframes slidein {
+  100% {
+    transform: translateY(0%);
+  }
+  0% {
+    transform: translateY(100%);
+  }
+}
