@@ -1,11 +1,10 @@
-import { Panel, Heading, Label, BodyLong, BodyShort, Link } from '@navikt/ds-react';
-import styles from './HvaSkjerPanel.module.css';
-import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
-import { useIntl, FormattedMessage } from 'react-intl';
+import { BodyLong, BodyShort, Heading, Label, Link, Panel } from '@navikt/ds-react';
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
+
+import styles from './HvaSkjerPanel.module.css';
 
 export const HvaSkjerPanel = () => {
-  const intl = useIntl();
   return (
     <Panel className={styles.panel}>
       <Heading level="2" size="medium" spacing>

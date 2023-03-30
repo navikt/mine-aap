@@ -1,6 +1,6 @@
-import { useIntl } from 'react-intl';
-import React, { useEffect, useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
+import React, { useEffect, useMemo, useState } from 'react';
+import { useIntl } from 'react-intl';
 
 export const useFeatureToggleIntl = () => {
   const intl = useIntl();
@@ -9,25 +9,15 @@ export const useFeatureToggleIntl = () => {
   const searchParams = router.query;
   const isShowKeys = useMemo(() => Object.keys(searchParams).includes('showKeys'), [searchParams]);
   useEffect(
-    () =>
-      setHostname(
-        window?.location?.hostname === 'localhost' ? 'dev.nav.no' : window.location.hostname
-      ),
+    () => setHostname(window?.location?.hostname === 'localhost' ? 'dev.nav.no' : window.location.hostname),
     []
   );
 
   const formatMessage = (id: string, values?: Record<string, string | undefined>) =>
-    isShowKeys
-      ? `${id}:${intl.formatMessage({ id: id }, values)}`
-      : intl.formatMessage({ id: id }, values);
+    isShowKeys ? `${id}:${intl.formatMessage({ id: id }, values)}` : intl.formatMessage({ id: id }, values);
   const formatElement = (
     id: string,
-    values?:
-      | Record<
-          string,
-          string | number | boolean | Date | React.ReactElement<any, string> | undefined
-        >
-      | undefined
+    values?: Record<string, string | number | boolean | Date | React.ReactElement<any, string> | undefined> | undefined
   ) =>
     isShowKeys ? (
       <>

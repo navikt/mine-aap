@@ -1,13 +1,13 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import { getCommaSeparatedStringFromStringOrArray } from '@navikt/aap-felles-utils-client';
 import {
-  logger,
-  isMock,
-  tokenXApiProxy,
   beskyttetApi,
   getAccessTokenFromRequest,
+  isMock,
+  logger,
+  tokenXApiProxy,
 } from '@navikt/aap-felles-innbygger-utils';
+import { getCommaSeparatedStringFromStringOrArray } from '@navikt/aap-felles-utils-client';
 import metrics from 'lib/metrics';
+import { NextApiRequest, NextApiResponse } from 'next';
 
 const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) => {
   const uuids = req.query.uuid ?? [];

@@ -1,5 +1,6 @@
 import { Heading } from '@navikt/ds-react';
 import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
+
 import styles from 'components/AppHeader/AppHeader.module.css';
 
 export const AppHeader = () => {

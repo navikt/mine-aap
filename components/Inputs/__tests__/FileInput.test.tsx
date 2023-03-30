@@ -1,4 +1,4 @@
-import { validateFile, validFileTypes } from '../FileInput';
+import { validFileTypes, validateFile } from '../FileInput';
 
 describe('FileInput validation', () => {
   it('should return 415 for wrong file type', () => {

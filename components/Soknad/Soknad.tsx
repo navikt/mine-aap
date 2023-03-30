@@ -1,13 +1,14 @@
 import { Alert, BodyShort, Button, Heading } from '@navikt/ds-react';
-import { ButtonRow } from 'components/ButtonRow/ButtonRow';
-import { CardDivider } from 'components/Card/CardDivider';
-import { DocumentationHeading } from 'components/DocumentationHeading/DocumentationHeading';
-import { DocumentationList } from 'components/DocumentationList/DocumentationList';
 import { format } from 'date-fns';
 import { nb } from 'date-fns/locale';
 import { Søknad } from 'lib/types/types';
 import { useRouter } from 'next/router';
 import { useIntl } from 'react-intl';
+
+import { ButtonRow } from 'components/ButtonRow/ButtonRow';
+import { DocumentationHeading } from 'components/DocumentationHeading/DocumentationHeading';
+import { DocumentationList } from 'components/DocumentationList/DocumentationList';
+
 import * as styles from './Soknad.module.css';
 
 export const Soknad = ({ søknad }: { søknad: Søknad }) => {
@@ -25,18 +26,13 @@ export const Soknad = ({ søknad }: { søknad: Søknad }) => {
       {søknad.manglendeVedlegg?.length && (
         <>
           <Alert variant="warning" size="small" className={styles.alert}>
-            Vi mangler dokumentasjon fra deg for å kunne behandle søknaden. Ettersend dette til oss
-            så raskt du kan.
+            Vi mangler dokumentasjon fra deg for å kunne behandle søknaden. Ettersend dette til oss så raskt du kan.
           </Alert>
           <DocumentationHeading heading="Dokumentasjon vi mangler" />
 
           <ul>
             {søknad.manglendeVedlegg.map((vedlegg) => {
-              return (
-                <li key={vedlegg}>
-                  {formatMessage({ id: `ettersendelse.vedleggstyper.${vedlegg}.heading` })}
-                </li>
-              );
+              return <li key={vedlegg}>{formatMessage({ id: `ettersendelse.vedleggstyper.${vedlegg}.heading` })}</li>;
             })}
           </ul>
         </>

@@ -1,12 +1,13 @@
 import { Upload as SvgUpload } from '@navikt/ds-icons';
 import { BodyShort } from '@navikt/ds-react';
-import React, { DragEventHandler, useRef, useState } from 'react';
-import { UseFieldArrayAppend } from 'react-hook-form';
 import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
-import { VedleggFormValues } from 'components/Inputs/FileUpload';
-import * as styles from 'components/Inputs/FileInput.module.css';
 import { VedleggType } from 'lib/types/types';
 import { logLastOppFilEvent } from 'lib/utils/amplitude';
+import React, { DragEventHandler, useRef, useState } from 'react';
+import { UseFieldArrayAppend } from 'react-hook-form';
+
+import * as styles from 'components/Inputs/FileInput.module.css';
+import { VedleggFormValues } from 'components/Inputs/FileUpload';
 
 export const validFileTypes = ['image/png', 'image/jpg', 'image/jpeg', 'application/pdf'];
 

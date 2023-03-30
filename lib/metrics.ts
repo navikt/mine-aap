@@ -1,5 +1,5 @@
-import { collectDefaultMetrics, Counter, Histogram } from 'prom-client';
 import { logger } from '@navikt/aap-felles-innbygger-utils';
+import { Counter, Histogram, collectDefaultMetrics } from 'prom-client';
 
 declare global {
   var _metrics: AppMetrics;

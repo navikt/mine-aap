@@ -1,11 +1,11 @@
-import { BodyShort, Checkbox, Detail, Link, Pagination, ReadMore, Select } from '@navikt/ds-react';
+import { Checkbox, Detail, Link, Pagination, Select } from '@navikt/ds-react';
 import { format } from 'date-fns';
 import { nb } from 'date-fns/locale';
 import { Dokument } from 'lib/types/types';
-import styles from './Dokumentoversikt.module.css';
-import { useEffect, useMemo, useState } from 'react';
 import { logDokumentoversiktEvent } from 'lib/utils/amplitude';
-import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
+import { useEffect, useMemo, useState } from 'react';
+
+import styles from './Dokumentoversikt.module.css';
 
 const getAvsender = (type: string) => {
   switch (type) {
@@ -30,8 +30,6 @@ export const Dokumentoversikt = ({ dokumenter }: { dokumenter: Dokument[] }) => 
   const [pageNumber, setPageNumber] = useState(1);
   const [searchFilter, setSearchFilter] = useState('');
   const [visMeldekort, setVisMeldekort] = useState(true);
-
-  const { formatMessage } = useFeatureToggleIntl();
 
   const filtrerteDokumenter = useMemo(() => {
     return sorterteDokumenter.filter((dokument) => {
@@ -79,14 +77,10 @@ export const Dokumentoversikt = ({ dokumenter }: { dokumenter: Dokument[] }) => 
 
   useEffect(() => {
     if (sortType === 'datoAsc') {
-      setSorterteDokumenter(
-        [...dokumenter].sort((a, b) => new Date(b.dato).getTime() - new Date(a.dato).getTime())
-      );
+      setSorterteDokumenter([...dokumenter].sort((a, b) => new Date(b.dato).getTime() - new Date(a.dato).getTime()));
     }
     if (sortType === 'datoDesc') {
-      setSorterteDokumenter(
-        [...dokumenter].sort((a, b) => new Date(a.dato).getTime() - new Date(b.dato).getTime())
-      );
+      setSorterteDokumenter([...dokumenter].sort((a, b) => new Date(a.dato).getTime() - new Date(b.dato).getTime()));
     }
   }, [sortType, dokumenter]);
 
@@ -103,21 +97,14 @@ export const Dokumentoversikt = ({ dokumenter }: { dokumenter: Dokument[] }) => 
           onClear={() => setSearchFilter('')}
           hideLabel={false}
   />*/}
-        <Checkbox
-          value={visMeldekort}
-          checked={!visMeldekort}
-          onChange={() => setVisMeldekort(!visMeldekort)}
-        >
+        <Checkbox value={visMeldekort} checked={!visMeldekort} onChange={() => setVisMeldekort(!visMeldekort)}>
           Vis meldekort
         </Checkbox>
       </div>
       <ul style={{ listStyle: 'none', margin: '0', padding: '0' }}>
         {sortedPaginatedDocuments.map((document) => {
           return (
-            <li
-              key={`${document.journalpostId}-${document.dokumentId}`}
-              className={styles.listItem}
-            >
+            <li key={`${document.journalpostId}-${document.dokumentId}`} className={styles.listItem}>
               <div className={styles.content}>
                 <span>
                   <Link

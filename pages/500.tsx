@@ -1,4 +1,5 @@
 import { Heading } from '@navikt/ds-react';
+
 import { Layout } from 'components/Layout/Layout';
 import { Section } from 'components/Section/Section';
 

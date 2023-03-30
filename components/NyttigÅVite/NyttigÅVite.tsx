@@ -1,5 +1,6 @@
-import { BodyLong, BodyShort, Heading, Label, Link, LinkPanel } from '@navikt/ds-react';
+import { BodyLong, BodyShort, Heading, Link, LinkPanel } from '@navikt/ds-react';
 import { FormattedMessage } from 'react-intl';
+
 import * as styles from './NyttigÅVite.module.css';
 
 export const NyttigÅVite = () => {

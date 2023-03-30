@@ -1,21 +1,22 @@
-import { Alert, BodyShort, Button, Heading, Label, Link, Panel } from '@navikt/ds-react';
-import type { GetServerSidePropsResult, NextPageContext } from 'next';
-import NextLink from 'next/link';
-import { useMemo } from 'react';
+import { LucaGuidePanel } from '@navikt/aap-felles-innbygger-react';
 import { beskyttetSide, getAccessToken } from '@navikt/aap-felles-innbygger-utils';
+import { Alert, BodyShort, Button, Heading, Link, Panel } from '@navikt/ds-react';
+import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
+import metrics from 'lib/metrics';
+import { Dokument, Søknad } from 'lib/types/types';
+import type { GetServerSidePropsResult, NextPageContext } from 'next';
+import Head from 'next/head';
+import NextLink from 'next/link';
+import { useRouter } from 'next/router';
+import { getDocuments } from 'pages/api/dokumenter';
+import { getSøknader } from 'pages/api/soknader/soknader';
+import { useMemo } from 'react';
+
+import { Dokumentoversikt } from 'components/Dokumentoversikt/Dokumentoversikt';
+import { HvaSkjerPanel } from 'components/HvaSkjerPanel/HvaSkjerPanel';
 import { Layout } from 'components/Layout/Layout';
 import { Section } from 'components/Section/Section';
 import { SoknadPanel } from 'components/SoknadPanel/SoknadPanel';
-import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
-import { Dokument, Søknad } from 'lib/types/types';
-import { getDocuments } from 'pages/api/dokumenter';
-import { getSøknader } from 'pages/api/soknader/soknader';
-import { useRouter } from 'next/router';
-import { Dokumentoversikt } from 'components/Dokumentoversikt/Dokumentoversikt';
-import metrics from 'lib/metrics';
-import { HvaSkjerPanel } from 'components/HvaSkjerPanel/HvaSkjerPanel';
-import { LucaGuidePanel } from '@navikt/aap-felles-innbygger-react';
-import Head from 'next/head';
 
 interface PageProps {
   søknader: Søknad[];
@@ -44,12 +45,11 @@ const Index = ({ søknader, dokumenter }: PageProps) => {
       <Section>
         <Alert variant="info">
           <BodyShort spacing>
-            Fra mandag 27. mars kl 9:30 til tirsdag 28. mars kl 11:00 var det problemer med
-            nedlasting av dokumenter.
+            Fra mandag 27. mars kl 9:30 til tirsdag 28. mars kl 11:00 var det problemer med nedlasting av dokumenter.
           </BodyShort>
           <BodyShort spacing>
-            Vi har rettet feilen og beklager ulempene dette har medført. Hvis du har prøvd å laste
-            ned dokumenter i denne perioden og opplevd feil, kan du prøve på nytt nå.
+            Vi har rettet feilen og beklager ulempene dette har medført. Hvis du har prøvd å laste ned dokumenter i
+            denne perioden og opplevd feil, kan du prøve på nytt nå.
           </BodyShort>
         </Alert>
         <LucaGuidePanel>
@@ -97,10 +97,7 @@ const Index = ({ søknader, dokumenter }: PageProps) => {
               {formatMessage('forside.ettersendelse.knapp')}
             </Button>
           </Panel>
-          <Link
-            target="_blank"
-            href="https://www.nav.no/saksbehandlingstider#arbeidsavklaringspenger-aap"
-          >
+          <Link target="_blank" href="https://www.nav.no/saksbehandlingstider#arbeidsavklaringspenger-aap">
             {formatMessage('sisteSøknad.søknad.saksbehandlingstid')}
           </Link>
         </Section>
@@ -117,9 +114,7 @@ const Index = ({ søknader, dokumenter }: PageProps) => {
           <BodyShort spacing>{formatMessage('forside.endring.tekst')}</BodyShort>
           <Button
             variant="secondary"
-            onClick={() =>
-              (window.location.href = 'https://innboks.nav.no/s/skriv-til-oss?category=Arbeid')
-            }
+            onClick={() => (window.location.href = 'https://innboks.nav.no/s/skriv-til-oss?category=Arbeid')}
           >
             {formatMessage('forside.endring.knapp')}
           </Button>
@@ -131,19 +126,17 @@ const Index = ({ søknader, dokumenter }: PageProps) => {
   );
 };
 
-export const getServerSideProps = beskyttetSide(
-  async (ctx: NextPageContext): Promise<GetServerSidePropsResult<{}>> => {
-    const stopTimer = metrics.getServersidePropsDurationHistogram.startTimer({ path: '/' });
-    const bearerToken = getAccessToken(ctx);
-    const params = { page: '0', size: '1', sort: 'created,desc' };
-    const søknader = await getSøknader(params, bearerToken);
-    const dokumenter = await getDocuments(bearerToken);
+export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Promise<GetServerSidePropsResult<{}>> => {
+  const stopTimer = metrics.getServersidePropsDurationHistogram.startTimer({ path: '/' });
+  const bearerToken = getAccessToken(ctx);
+  const params = { page: '0', size: '1', sort: 'created,desc' };
+  const søknader = await getSøknader(params, bearerToken);
+  const dokumenter = await getDocuments(bearerToken);
 
-    stopTimer();
-    return {
-      props: { søknader, dokumenter },
-    };
-  }
-);
+  stopTimer();
+  return {
+    props: { søknader, dokumenter },
+  };
+});
 
 export default Index;

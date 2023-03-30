@@ -1,18 +1,18 @@
-import '@navikt/ds-css';
 import '@navikt/aap-felles-innbygger-css';
-import 'styles/globals.css';
-import type { AppProps, NextWebVitalsMetric } from 'next/app';
-import { useEffect } from 'react';
-import messagesNb from 'lib/translations/nb.json';
-import messagesNn from 'lib/translations/nn.json';
-import { IntlProvider } from 'react-intl';
-import { useRouter } from 'next/router';
+import { replaceUUIDsInString } from '@navikt/aap-felles-utils-client';
+import '@navikt/ds-css';
 import { Locale } from '@navikt/nav-dekoratoren-moduler';
 import { SUPPORTED_LOCALE } from 'lib/translations/locales';
+import messagesNb from 'lib/translations/nb.json';
+import messagesNn from 'lib/translations/nn.json';
+import { WebVital } from 'lib/types/webWital';
+import type { AppProps, NextWebVitalsMetric } from 'next/app';
+import { useRouter } from 'next/router';
+import { IntlProvider } from 'react-intl';
+import 'styles/globals.css';
+
 import { NavDecorator } from 'components/NavDecorator/NavDecorator';
 import { TimeoutBox } from 'components/TimeoutBox/TimeoutBox';
-import { WebVital } from 'lib/types/webWital';
-import { replaceUUIDsInString } from '@navikt/aap-felles-utils-client';
 
 function flattenMessages(nestedMessages: object, prefix = ''): Record<string, string> {
   return Object.keys(nestedMessages).reduce((messages, key) => {

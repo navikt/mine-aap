@@ -1,26 +1,27 @@
-import { BodyShort, Button, Heading, Label, Link, ReadMore } from '@navikt/ds-react';
 import { LucaGuidePanel, ScanningGuide } from '@navikt/aap-felles-innbygger-react';
+import { beskyttetSide, getAccessToken, logger } from '@navikt/aap-felles-innbygger-utils';
+import { getStringFromPossiblyArrayQuery } from '@navikt/aap-felles-utils-client';
+import { Left } from '@navikt/ds-icons';
+import { BodyShort, Button, Heading, Label, Link, ReadMore } from '@navikt/ds-react';
+import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
+import metrics from 'lib/metrics';
+import { Søknad, VedleggType } from 'lib/types/types';
+import { formatFullDate } from 'lib/utils/date';
+import { setFocus } from 'lib/utils/dom';
 import { GetServerSidePropsResult, NextPageContext } from 'next';
+import Head from 'next/head';
+import NextLink from 'next/link';
+import { useRouter } from 'next/router';
+import * as styles from 'pages/[uuid]/ettersendelse/Ettersendelse.module.css';
+import { getSøknad } from 'pages/api/soknader/[uuid]';
+import { useState } from 'react';
+import { FieldErrors } from 'react-hook-form';
+import { useIntl } from 'react-intl';
+
+import { FormErrorSummary } from 'components/FormErrorSummary/FormErrorSummary';
 import { FileUpload } from 'components/Inputs/FileUpload';
 import PageHeader from 'components/PageHeader';
 import { Section } from 'components/Section/Section';
-import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
-import { Søknad, VedleggType } from 'lib/types/types';
-import * as styles from 'pages/[uuid]/ettersendelse/Ettersendelse.module.css';
-import { getSøknad } from 'pages/api/soknader/[uuid]';
-import { getStringFromPossiblyArrayQuery } from '@navikt/aap-felles-utils-client';
-import { logger, beskyttetSide, getAccessToken } from '@navikt/aap-felles-innbygger-utils';
-import { useState } from 'react';
-import { FieldErrors } from 'react-hook-form';
-import { FormErrorSummary } from 'components/FormErrorSummary/FormErrorSummary';
-import { setFocus } from 'lib/utils/dom';
-import NextLink from 'next/link';
-import { Left } from '@navikt/ds-icons';
-import { useRouter } from 'next/router';
-import metrics from 'lib/metrics';
-import { formatFullDate } from 'lib/utils/date';
-import { useIntl } from 'react-intl';
-import Head from 'next/head';
 
 interface PageProps {
   søknad: Søknad;
@@ -31,9 +32,7 @@ const Index = ({ søknad }: PageProps) => {
   const { locale } = useIntl();
 
   const [errors, setErrors] = useState<FieldErrors>({});
-  const [manglendeVedlegg, setManglendeVedlegg] = useState<VedleggType[]>(
-    søknad.manglendeVedlegg ?? []
-  );
+  const [manglendeVedlegg, setManglendeVedlegg] = useState<VedleggType[]>(søknad.manglendeVedlegg ?? []);
 
   const router = useRouter();
 
@@ -143,27 +142,25 @@ const Index = ({ søknad }: PageProps) => {
   );
 };
 
-export const getServerSideProps = beskyttetSide(
-  async (ctx: NextPageContext): Promise<GetServerSidePropsResult<{}>> => {
-    const stopTimer = metrics.getServersidePropsDurationHistogram.startTimer({
-      path: '/{uuid}/ettersendelse',
-    });
-    const bearerToken = getAccessToken(ctx);
-    const uuid = getStringFromPossiblyArrayQuery(ctx.query.uuid);
-    const søknad = await getSøknad(uuid as string, bearerToken);
+export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Promise<GetServerSidePropsResult<{}>> => {
+  const stopTimer = metrics.getServersidePropsDurationHistogram.startTimer({
+    path: '/{uuid}/ettersendelse',
+  });
+  const bearerToken = getAccessToken(ctx);
+  const uuid = getStringFromPossiblyArrayQuery(ctx.query.uuid);
+  const søknad = await getSøknad(uuid as string, bearerToken);
 
-    logger.info(`Søknad ${JSON.stringify(søknad)}`);
-    stopTimer();
-    if (!søknad) {
-      return {
-        notFound: true,
-      };
-    }
-
+  logger.info(`Søknad ${JSON.stringify(søknad)}`);
+  stopTimer();
+  if (!søknad) {
     return {
-      props: { søknad },
+      notFound: true,
     };
   }
-);
+
+  return {
+    props: { søknad },
+  };
+});
 
 export default Index;

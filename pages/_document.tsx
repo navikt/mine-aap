@@ -1,5 +1,5 @@
-import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/document';
-import { Components, Env, fetchDecoratorReact, Props } from '@navikt/nav-dekoratoren-moduler/ssr';
+import { Components, Env, Props, fetchDecoratorReact } from '@navikt/nav-dekoratoren-moduler/ssr';
+import Document, { DocumentContext, Head, Html, Main, NextScript } from 'next/document';
 
 const decoratorEnv = process.env.DECORATOR_ENV as Exclude<Env, 'localhost'>;
 

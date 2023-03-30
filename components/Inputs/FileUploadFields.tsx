@@ -1,11 +1,12 @@
+import { fileSizeString } from '@navikt/aap-felles-utils-client';
 import { Cancel, Delete, FileError, FileSuccess } from '@navikt/ds-icons';
 import { BodyShort, Detail, Label, Link, Loader, Panel } from '@navikt/ds-react';
-import { FieldArrayWithId, FieldErrors, UseFieldArrayRemove } from 'react-hook-form';
 import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
-import { fileSizeString } from '@navikt/aap-felles-utils-client';
+import { VedleggType } from 'lib/types/types';
+import { FieldArrayWithId, FieldErrors, UseFieldArrayRemove } from 'react-hook-form';
+
 import { TOTAL_FILE_SIZE, VedleggFormValues } from 'components/Inputs/FileUpload';
 import * as styles from 'components/Inputs/FileUploadFields.module.css';
-import { VedleggType } from 'lib/types/types';
 
 interface Props {
   fields: FieldArrayWithId<VedleggFormValues>[] | undefined;
@@ -24,10 +25,7 @@ export const FileUploadFields = ({ fields, krav, remove, errors }: Props) => {
           const fieldHasError: boolean = errors?.[krav]?.fields?.[index]?.message !== undefined;
           return (
             <div key={attachment.id}>
-              <Panel
-                className={`${styles.fileCard} ${fieldHasError ?? styles?.error}`}
-                key={attachment.id}
-              >
+              <Panel className={`${styles.fileCard} ${fieldHasError ?? styles?.error}`} key={attachment.id}>
                 <div className={styles.fileCardLeftContent}>
                   {attachment.isUploading ? (
                     <>
@@ -55,10 +53,7 @@ export const FileUploadFields = ({ fields, krav, remove, errors }: Props) => {
                             <FileSuccess color={'var(--a-icon-success)'} />
                           </div>
                           <div>
-                            <Link
-                              target={'_blank'}
-                              href={`/aap/mine-aap/vedlegg/${attachment?.vedleggId}`}
-                            >
+                            <Link target={'_blank'} href={`/aap/mine-aap/vedlegg/${attachment?.vedleggId}`}>
                               {attachment?.name}
                             </Link>
                             <Detail>{fileSizeString(attachment?.size)}</Detail>
@@ -108,9 +103,7 @@ export const FileUploadFields = ({ fields, krav, remove, errors }: Props) => {
                 )}
               </Panel>
               {fieldHasError && (
-                <div
-                  className={`navds-error-message navds-error-message--medium navds-label ${styles.errorMessage}`}
-                >
+                <div className={`navds-error-message navds-error-message--medium navds-label ${styles.errorMessage}`}>
                   {errors?.[krav]?.fields?.[index]?.message}
                 </div>
               )}

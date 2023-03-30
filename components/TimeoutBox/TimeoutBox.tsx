@@ -4,6 +4,7 @@ import { useInterval } from 'lib/hooks/useInterval';
 import { isMock } from 'lib/utils/environments';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+
 import * as styles from './TimeoutBox.module.css';
 
 const ONE_SECOND_IN_MS = 1000;
@@ -51,12 +52,7 @@ export const TimeoutBox = () => {
   }, SECONDS_IN_MINUTE * ONE_SECOND_IN_MS);
 
   return (
-    <Modal
-      open={isLoggedOut}
-      onClose={() => null}
-      shouldCloseOnOverlayClick={false}
-      closeButton={false}
-    >
+    <Modal open={isLoggedOut} onClose={() => null} shouldCloseOnOverlayClick={false} closeButton={false}>
       <Modal.Content>
         <Heading level="1" size="large" spacing>
           {formatMessage('logoutModal.title')}

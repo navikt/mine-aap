@@ -1,4 +1,5 @@
 import { Label } from '@navikt/ds-react';
+
 import * as styles from './DocumentationHeading.module.css';
 
 export const DocumentationHeading = ({ heading }: { heading: string }) => {

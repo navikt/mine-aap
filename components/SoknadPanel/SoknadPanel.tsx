@@ -1,9 +1,10 @@
-import { Heading, Panel, BodyShort, Alert, Button, Label, Link } from '@navikt/ds-react';
+import { Alert, BodyShort, Button, Heading, Label, Link, Panel } from '@navikt/ds-react';
 import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { Søknad } from 'lib/types/types';
 import { formatFullDate } from 'lib/utils/date';
-import router from 'next/router';
 import NextLink from 'next/link';
+import router from 'next/router';
+
 import * as styles from 'components/SoknadPanel/SoknadPanel.module.css';
 
 interface Props {
@@ -24,10 +25,7 @@ export const SoknadPanel = ({ søknad }: Props) => {
         })}
       </BodyShort>
       <BodyShort spacing>
-        <Link
-          target="_blank"
-          href="https://www.nav.no/saksbehandlingstider#arbeidsavklaringspenger-aap"
-        >
+        <Link target="_blank" href="https://www.nav.no/saksbehandlingstider#arbeidsavklaringspenger-aap">
           {formatMessage('sisteSøknad.søknad.saksbehandlingstid')}
         </Link>
       </BodyShort>

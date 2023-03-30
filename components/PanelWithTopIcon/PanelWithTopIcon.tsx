@@ -1,4 +1,5 @@
 import { Heading, Panel } from '@navikt/ds-react';
+
 import styles from 'components/PanelWithTopIcon/PanelWithTopIcon.module.css';
 
 export interface PanelWithTopIconProps {

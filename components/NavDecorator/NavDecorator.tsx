@@ -1,12 +1,12 @@
 import {
+  onBreadcrumbClick,
+  onLanguageSelect,
   setAvailableLanguages,
   setBreadcrumbs,
-  onLanguageSelect,
-  onBreadcrumbClick,
 } from '@navikt/nav-dekoratoren-moduler';
+import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
-import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 
 export const NavDecorator = ({ children }: { children: React.ReactNode }) => {
   const { formatMessage } = useFeatureToggleIntl();
@@ -32,9 +32,7 @@ export const NavDecorator = ({ children }: { children: React.ReactNode }) => {
   });
 
   useEffect(() => {
-    const breadcrumbs = [
-      { title: formatMessage('breadcrumbs.mineAAP'), url: router.basePath, handleInApp: true },
-    ];
+    const breadcrumbs = [{ title: formatMessage('breadcrumbs.mineAAP'), url: router.basePath, handleInApp: true }];
     if (router.asPath.endsWith('ettersendelse/')) {
       breadcrumbs.push({
         title: formatMessage('breadcrumbs.ettersending'),

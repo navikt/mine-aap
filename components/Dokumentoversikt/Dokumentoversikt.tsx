@@ -1,9 +1,10 @@
-import { ReadMore, Panel, Heading, BodyShort, Accordion } from '@navikt/ds-react';
-import { VerticalFlexContainer } from 'components/FlexContainer/VerticalFlexContainer';
+import { Accordion, BodyShort, Heading, Panel, ReadMore } from '@navikt/ds-react';
 import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { Dokument } from 'lib/types/types';
 import { formatFullDate } from 'lib/utils/date';
 import Link from 'next/link';
+
+import { VerticalFlexContainer } from 'components/FlexContainer/VerticalFlexContainer';
 
 interface Props {
   dokumenter: Dokument[];

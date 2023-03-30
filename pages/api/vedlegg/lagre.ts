@@ -1,13 +1,13 @@
-import { randomUUID } from 'crypto';
-import { NextApiRequest, NextApiResponse } from 'next';
 import {
-  logger,
-  isMock,
-  tokenXApiStreamProxy,
   beskyttetApi,
   getAccessTokenFromRequest,
+  isMock,
+  logger,
+  tokenXApiStreamProxy,
 } from '@navikt/aap-felles-innbygger-utils';
+import { randomUUID } from 'crypto';
 import metrics from 'lib/metrics';
+import { NextApiRequest, NextApiResponse } from 'next';
 
 const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) => {
   logger.info('Har mottatt request om filopplasting');

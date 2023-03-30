@@ -1,13 +1,13 @@
-import { getStringFromPossiblyArrayQuery } from '@navikt/aap-felles-utils-client';
-import { NextApiRequest, NextApiResponse } from 'next';
 import {
-  logger,
-  isMock,
-  tokenXApiProxy,
   beskyttetApi,
   getAccessTokenFromRequest,
+  isMock,
+  logger,
+  tokenXApiProxy,
 } from '@navikt/aap-felles-innbygger-utils';
+import { getStringFromPossiblyArrayQuery } from '@navikt/aap-felles-utils-client';
 import metrics from 'lib/metrics';
+import { NextApiRequest, NextApiResponse } from 'next';
 
 const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) => {
   const journalpostId = getStringFromPossiblyArrayQuery(req.query.journalpostId);
@@ -16,22 +16,14 @@ const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) =
     res.status(400).json({ error: 'journalpostId og dokumentId må være satt' });
   }
   const accessToken = getAccessTokenFromRequest(req);
-  const result: Response = await lesDokument(
-    journalpostId as string,
-    dokumentId as string,
-    accessToken
-  );
+  const result: Response = await lesDokument(journalpostId as string, dokumentId as string, accessToken);
 
   res.setHeader('Content-Type', result.headers.get('Content-Type') ?? '');
   res.setHeader('Content-Disposition', result.headers.get('Content-Disposition') ?? '');
   res.status(200).send(result.body);
 });
 
-export const lesDokument = async (
-  journalpostId: string,
-  dokumentId: string,
-  accessToken?: string
-) => {
+export const lesDokument = async (journalpostId: string, dokumentId: string, accessToken?: string) => {
   if (isMock()) return await fetch('http://localhost:3000/aap/mine-aap/Rød.png');
   return await tokenXApiProxy({
     url: `${process.env.SOKNAD_API_URL}/oppslag/dokument/${journalpostId}/${dokumentId}`,
