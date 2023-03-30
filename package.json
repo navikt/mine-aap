@@ -33,6 +33,8 @@
     "react-intl": "^6.0.5"
   },
   "devDependencies": {
+    "@navikt/aap-felles-prettier": "^0.0.59",
+    "@navikt/eslint-config-aap": "^0.0.59",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^14.0.0",
     "@types/amplitude-js": "^8.16.1",
@@ -51,6 +53,7 @@
     "prettier": "^2.7.1",
     "typescript": "^5.0.2"
   },
+  "prettier": "@navikt/aap-felles-prettier",
   "lint-staged": {
     "*.{js,ts,tsx}": "eslint --cache --fix",
     "*.{js,ts,tsx,css,md}": "prettier --write"
