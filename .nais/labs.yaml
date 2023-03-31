@@ -4,4 +4,4 @@ env:
 - name: APP_URL
   value: "https://aap-aap-mine.ekstern.dev.nav.no/"
 externals:
-  - "dekoratoren.dev.nav.no"
+  - "dekoratoren.ekstern.dev.nav.no"
