@@ -1,6 +1,6 @@
+import * as styles from './NyttigÅVite.module.css';
 import { BodyLong, BodyShort, Heading, Label, Link, LinkPanel } from '@navikt/ds-react';
 import { FormattedMessage } from 'react-intl';
-import * as styles from './NyttigÅVite.module.css';
 
 export const NyttigÅVite = () => {
   return (
@@ -9,10 +9,14 @@ export const NyttigÅVite = () => {
         Nyttig å vite
       </Heading>
       <div className={styles.container}>
-        <LinkPanel className={styles.linkPanel} href="#" border={false}>
+        <LinkPanel
+          className={styles.linkPanel}
+          href="https://www.nav.no/saksbehandlingstider#arbeidsavklaringspenger-aap"
+          border={false}
+        >
           Forventet saksbehandlingstider
         </LinkPanel>
-        <LinkPanel className={styles.linkPanel} href="#" border={false}>
+        <LinkPanel className={styles.linkPanel} href="#" border={false} target="_blank">
           Alle dine innsendte søknader
         </LinkPanel>
         <Heading level="3" size="small" spacing>

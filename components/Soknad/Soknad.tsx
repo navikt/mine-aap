@@ -1,3 +1,4 @@
+import * as styles from './Soknad.module.css';
 import { Alert, BodyShort, Button, Heading } from '@navikt/ds-react';
 import { ButtonRow } from 'components/ButtonRow/ButtonRow';
 import { CardDivider } from 'components/Card/CardDivider';
@@ -6,9 +7,9 @@ import { DocumentationList } from 'components/DocumentationList/DocumentationLis
 import { format } from 'date-fns';
 import { nb } from 'date-fns/locale';
 import { Søknad } from 'lib/types/types';
+import { formatDate } from 'lib/utils/date';
 import { useRouter } from 'next/router';
 import { useIntl } from 'react-intl';
-import * as styles from './Soknad.module.css';
 
 export const Soknad = ({ søknad }: { søknad: Søknad }) => {
   const { formatMessage } = useIntl();
@@ -17,10 +18,10 @@ export const Soknad = ({ søknad }: { søknad: Søknad }) => {
   return (
     <div className={styles.soknad}>
       <Heading level="2" size="medium" style={{ marginBlockEnd: '8px' }}>
-        Arbeidsavklarings&shy;penger (AAP)
+        Søknad om arbeidsavklarings&shy;penger (AAP)
       </Heading>
       <BodyShort size="small" style={{ color: 'var(--a-text-subtle)', marginBlockEnd: '16px' }}>
-        Mottatt: {format(new Date(søknad.innsendtDato), 'dd. MMMM yyyy', { locale: nb })}
+        Mottatt: {formatDate(søknad.innsendtDato)}
       </BodyShort>
       {søknad.manglendeVedlegg?.length && (
         <>
@@ -55,7 +56,7 @@ export const Soknad = ({ søknad }: { søknad: Søknad }) => {
               return {
                 tittel: vedlegg.tittel,
                 href: `/aap/mine-aap/api/dokument/?journalpostId=${vedlegg.journalpostId}&dokumentId=${vedlegg.dokumentId}`,
-                innsendt: new Date(vedlegg.dato),
+                innsendt: vedlegg.dato,
               };
             })}
           />

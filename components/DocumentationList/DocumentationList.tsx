@@ -1,11 +1,12 @@
+import * as styles from './DocumentationList.module.css';
 import { Detail, Link } from '@navikt/ds-react';
 import { format } from 'date-fns';
-import * as styles from './DocumentationList.module.css';
+import { formatDate } from 'lib/utils/date';
 
 export const DocumentationList = ({
   elements,
 }: {
-  elements: { tittel: string; href?: string; innsendt?: Date }[];
+  elements: { tittel: string; href?: string; innsendt?: string }[];
 }) => {
   return (
     <ul className={styles.list}>
@@ -19,9 +20,7 @@ export const DocumentationList = ({
             <>{element.tittel}</>
           )}
           {element.innsendt && (
-            <Detail className={styles.detail}>
-              Mottatt: {format(element.innsendt, 'dd.MM.yyyy hh:MM')}
-            </Detail>
+            <Detail className={styles.detail}>Mottatt: {formatDate(element.innsendt)}</Detail>
           )}
         </li>
       ))}

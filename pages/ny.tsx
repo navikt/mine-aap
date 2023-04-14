@@ -1,3 +1,5 @@
+import { getDocuments } from './api/dokumenter';
+import { getSøknader } from './api/soknader/soknader';
 import { beskyttetSide, getAccessToken } from '@navikt/aap-felles-innbygger-utils';
 import { BodyShort, Button, Heading, Ingress, LinkPanel, Select } from '@navikt/ds-react';
 import { Card } from 'components/Card/Card';
@@ -12,8 +14,6 @@ import { Dokument, Søknad } from 'lib/types/types';
 import { GetServerSidePropsResult, NextPageContext } from 'next';
 import Head from 'next/head';
 import { useMemo } from 'react';
-import { getDocuments } from './api/dokumenter';
-import { getSøknader } from './api/soknader/soknader';
 
 const Index = ({ søknader, dokumenter }: { søknader: Søknad[]; dokumenter: Dokument[] }) => {
   const { formatElement, formatMessage } = useFeatureToggleIntl();
@@ -33,7 +33,7 @@ const Index = ({ søknader, dokumenter }: { søknader: Søknad[]; dokumenter: Do
       </Head>
       <PageComponentFlexContainer>
         <Heading level="1" size="large" spacing>
-          Arbeidsavklarings&shy;pengene mine
+          Mine Arbeidsavklarings&shy;penger
         </Heading>
         <Ingress style={{ color: 'var(--a-text-subtle)' }}>
           Se status på søknaden din, ettersend- og se tidligere innsendte dokumenter, eller gi

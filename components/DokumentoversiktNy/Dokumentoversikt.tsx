@@ -1,11 +1,12 @@
+import styles from './Dokumentoversikt.module.css';
 import { BodyShort, Checkbox, Detail, Link, Pagination, ReadMore, Select } from '@navikt/ds-react';
 import { format } from 'date-fns';
 import { nb } from 'date-fns/locale';
-import { Dokument } from 'lib/types/types';
-import styles from './Dokumentoversikt.module.css';
-import { useEffect, useMemo, useState } from 'react';
-import { logDokumentoversiktEvent } from 'lib/utils/amplitude';
 import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
+import { Dokument } from 'lib/types/types';
+import { logDokumentoversiktEvent } from 'lib/utils/amplitude';
+import { formatDate } from 'lib/utils/date';
+import { useEffect, useMemo, useState } from 'react';
 
 const getAvsender = (type: string) => {
   switch (type) {
@@ -129,8 +130,7 @@ export const Dokumentoversikt = ({ dokumenter }: { dokumenter: Dokument[] }) => 
                   </Link>
                 </span>
                 <Detail style={{ color: 'var(--a-text-default' }}>
-                  Sendt av {getAvsender(document.type)} den{' '}
-                  {format(new Date(document.dato), 'dd. MMMM yyyy', { locale: nb })}
+                  Sendt av {getAvsender(document.type)} den {formatDate(document.dato)}
                 </Detail>
               </div>
             </li>
