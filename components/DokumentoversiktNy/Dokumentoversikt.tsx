@@ -19,7 +19,7 @@ const getAvsender = (type: string) => {
   }
 };
 
-const PAGE_SIZE = 5;
+const PAGE_SIZE = 7;
 
 const getNumberOfPages = (dokumenter: Dokument[], pageSize: number) => {
   return Math.ceil(dokumenter.length / pageSize);
@@ -137,15 +137,17 @@ export const Dokumentoversikt = ({ dokumenter }: { dokumenter: Dokument[] }) => 
           );
         })}
       </ul>
-      <Pagination
-        page={pageNumber}
-        onPageChange={(x) => {
-          setPageNumber(x);
-          logDokumentoversiktEvent(antallSider, 'pagination');
-        }}
-        count={antallSider}
-        size="small"
-      />
+      {antallSider > 1 && (
+        <Pagination
+          page={pageNumber}
+          onPageChange={(x) => {
+            setPageNumber(x);
+            logDokumentoversiktEvent(antallSider, 'pagination');
+          }}
+          count={antallSider}
+          size="small"
+        />
+      )}
     </div>
   );
 };
