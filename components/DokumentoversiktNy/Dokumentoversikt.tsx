@@ -3,6 +3,7 @@ import { BodyShort, Checkbox, Detail, Link, Pagination, ReadMore, Select } from 
 import { Dokument } from 'lib/types/types';
 import { logDokumentoversiktEvent } from 'lib/utils/amplitude';
 import { formatDate } from 'lib/utils/date';
+import { getNumberOfPages, sortDatoAsc, sortDatoDesc } from 'lib/utils/dokumentOversikt';
 import { useEffect, useMemo, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -22,10 +23,6 @@ const getAvsender = (type: string) => {
 };
 
 const PAGE_SIZE = 7;
-
-const getNumberOfPages = (dokumenter: Dokument[], pageSize: number) => {
-  return Math.ceil(dokumenter.length / pageSize);
-};
 
 export const Dokumentoversikt = ({ dokumenter }: { dokumenter: Dokument[] }) => {
   const [sorterteDokumenter, setSorterteDokumenter] = useState(dokumenter);
@@ -74,16 +71,16 @@ export const Dokumentoversikt = ({ dokumenter }: { dokumenter: Dokument[] }) => 
 
   useEffect(() => {
     if (sortType === 'datoAsc') {
-      setSorterteDokumenter(
-        [...dokumenter].sort((a, b) => new Date(b.dato).getTime() - new Date(a.dato).getTime())
-      );
+      setSorterteDokumenter(sortDatoAsc(dokumenter));
     }
     if (sortType === 'datoDesc') {
-      setSorterteDokumenter(
-        [...dokumenter].sort((a, b) => new Date(a.dato).getTime() - new Date(b.dato).getTime())
-      );
+      setSorterteDokumenter(sortDatoDesc(dokumenter));
     }
   }, [sortType, dokumenter]);
+
+  if (sorterteDokumenter.length === 0) {
+    return null;
+  }
 
   return (
     <div className={styles.container}>
