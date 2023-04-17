@@ -1,21 +1,21 @@
-import { Alert, BodyShort, Button, Heading, Label, Link, Panel } from '@navikt/ds-react';
-import type { GetServerSidePropsResult, NextPageContext } from 'next';
-import NextLink from 'next/link';
-import { useMemo } from 'react';
+import { LucaGuidePanel } from '@navikt/aap-felles-innbygger-react';
 import { beskyttetSide, getAccessToken } from '@navikt/aap-felles-innbygger-utils';
+import { BodyShort, Button, Heading, Link, Panel } from '@navikt/ds-react';
+import { Dokumentoversikt } from 'components/Dokumentoversikt/Dokumentoversikt';
+import { HvaSkjerPanel } from 'components/HvaSkjerPanel/HvaSkjerPanel';
 import { Layout } from 'components/Layout/Layout';
 import { Section } from 'components/Section/Section';
 import { SoknadPanel } from 'components/SoknadPanel/SoknadPanel';
 import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
+import metrics from 'lib/metrics';
 import { Dokument, Søknad } from 'lib/types/types';
+import type { GetServerSidePropsResult, NextPageContext } from 'next';
+import Head from 'next/head';
+import NextLink from 'next/link';
+import { useRouter } from 'next/router';
 import { getDocuments } from 'pages/api/dokumenter';
 import { getSøknader } from 'pages/api/soknader/soknader';
-import { useRouter } from 'next/router';
-import { Dokumentoversikt } from 'components/Dokumentoversikt/Dokumentoversikt';
-import metrics from 'lib/metrics';
-import { HvaSkjerPanel } from 'components/HvaSkjerPanel/HvaSkjerPanel';
-import { LucaGuidePanel } from '@navikt/aap-felles-innbygger-react';
-import Head from 'next/head';
+import { useMemo } from 'react';
 
 interface PageProps {
   søknader: Søknad[];
@@ -42,16 +42,6 @@ const Index = ({ søknader, dokumenter }: PageProps) => {
       </Head>
 
       <Section>
-        <Alert variant="info">
-          <BodyShort spacing>
-            Fra mandag 27. mars kl 9:30 til tirsdag 28. mars kl 11:00 var det problemer med
-            nedlasting av dokumenter.
-          </BodyShort>
-          <BodyShort spacing>
-            Vi har rettet feilen og beklager ulempene dette har medført. Hvis du har prøvd å laste
-            ned dokumenter i denne perioden og opplevd feil, kan du prøve på nytt nå.
-          </BodyShort>
-        </Alert>
         <LucaGuidePanel>
           <Heading level="2" size="medium" spacing>
             {formatMessage('forside.heading')}
