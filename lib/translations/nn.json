@@ -182,5 +182,14 @@
   "logoutModal": {
     "title": "Du har blitt logga ut",
     "buttonText": "Logg inn på nytt"
+  },
+  "dokumentOversikt": {
+    "sorter": {
+      "label": "Sorter etter",
+      "datoAsc": "Nyaste først",
+      "datoDesc": "Eldste først"
+    },
+    "visMeldekort": "Vis meldekort",
+    "avsender": "Sendt av {name} den {date}"
   }
 }

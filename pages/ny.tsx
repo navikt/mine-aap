@@ -1,7 +1,7 @@
 import { getDocuments } from './api/dokumenter';
 import { getSøknader } from './api/soknader/soknader';
 import { beskyttetSide, getAccessToken } from '@navikt/aap-felles-innbygger-utils';
-import { BodyShort, Button, Heading, Ingress, LinkPanel, Select } from '@navikt/ds-react';
+import { BodyShort, Button, Heading, Ingress } from '@navikt/ds-react';
 import { Card } from 'components/Card/Card';
 import { Dokumentoversikt } from 'components/DokumentoversiktNy/Dokumentoversikt';
 import { NyttigÅVite } from 'components/NyttigÅVite/NyttigÅVite';
@@ -65,17 +65,19 @@ const Index = ({ søknader, dokumenter }: { søknader: Søknad[]; dokumenter: Do
           <Button variant="secondary">Meld endring</Button>
         </Card>
       </PageComponentFlexContainer>
-      <PageComponentFlexContainer subtleBackground style={{ maxWidth: '600px' }}>
-        <Heading level="2" size="medium" spacing>
-          Dokumentoversikt
-        </Heading>
-        <BodyShort spacing>
-          Her finner du dine søknader, vedlegg, vedtak, brev, samtalerefater og meldinger om AAP og
-          oppfølging.
-        </BodyShort>
-        <BodyShort spacing>{formatMessage('dokumentoversikt.manglendeDokument.tekst')}</BodyShort>
+      <PageComponentFlexContainer subtleBackground>
+        <div style={{ maxWidth: '600px' }}>
+          <Heading level="2" size="medium" spacing>
+            Dokumentoversikt
+          </Heading>
+          <BodyShort spacing>
+            Her finner du dine søknader, vedlegg, vedtak, brev, samtalerefater og meldinger om AAP
+            og oppfølging.
+          </BodyShort>
+          <BodyShort spacing>{formatMessage('dokumentoversikt.manglendeDokument.tekst')}</BodyShort>
 
-        <Dokumentoversikt dokumenter={dokumenter} />
+          <Dokumentoversikt dokumenter={dokumenter} />
+        </div>
       </PageComponentFlexContainer>
     </PageContainer>
   );

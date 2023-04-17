@@ -1,12 +1,14 @@
 import styles from './Dokumentoversikt.module.css';
 import { BodyShort, Checkbox, Detail, Link, Pagination, ReadMore, Select } from '@navikt/ds-react';
-import { format } from 'date-fns';
-import { nb } from 'date-fns/locale';
-import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { Dokument } from 'lib/types/types';
 import { logDokumentoversiktEvent } from 'lib/utils/amplitude';
 import { formatDate } from 'lib/utils/date';
 import { useEffect, useMemo, useState } from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
+
+const MELDEKORT_TITTEL = 'Meldekort for uke';
+
+type SortType = 'datoAsc' | 'datoDesc';
 
 const getAvsender = (type: string) => {
   switch (type) {
@@ -27,24 +29,20 @@ const getNumberOfPages = (dokumenter: Dokument[], pageSize: number) => {
 
 export const Dokumentoversikt = ({ dokumenter }: { dokumenter: Dokument[] }) => {
   const [sorterteDokumenter, setSorterteDokumenter] = useState(dokumenter);
-  const [sortType, setSortType] = useState('datoAsc');
+  const [sortType, setSortType] = useState<SortType>('datoAsc');
   const [pageNumber, setPageNumber] = useState(1);
-  const [searchFilter, setSearchFilter] = useState('');
-  const [visMeldekort, setVisMeldekort] = useState(true);
+  const [visMeldekort, setVisMeldekort] = useState(false);
 
-  const { formatMessage } = useFeatureToggleIntl();
+  const intl = useIntl();
 
   const filtrerteDokumenter = useMemo(() => {
     return sorterteDokumenter.filter((dokument) => {
-      if (searchFilter) {
-        return (
-          !dokument.tittel.toLowerCase().includes(searchFilter.toLowerCase()) ||
-          getAvsender(dokument.type).toLowerCase().includes(searchFilter.toLowerCase())
-        );
+      if (dokument.tittel.includes(MELDEKORT_TITTEL)) {
+        return visMeldekort;
       }
       return true;
     });
-  }, [sorterteDokumenter, searchFilter]);
+  }, [sorterteDokumenter, visMeldekort]);
 
   const sortedPaginatedDocuments = useMemo(() => {
     const startIndex = (pageNumber - 1) * PAGE_SIZE;
@@ -57,6 +55,10 @@ export const Dokumentoversikt = ({ dokumenter }: { dokumenter: Dokument[] }) => 
     return getNumberOfPages(filtrerteDokumenter, PAGE_SIZE);
   }, [filtrerteDokumenter]);
 
+  const inneholderMeldekort = useMemo(() => {
+    return sorterteDokumenter.some((dokument) => dokument.tittel.includes(MELDEKORT_TITTEL));
+  }, [sorterteDokumenter]);
+
   useEffect(() => {
     const numberOfPages = getNumberOfPages(filtrerteDokumenter, PAGE_SIZE);
     if (pageNumber > numberOfPages) {
@@ -64,18 +66,10 @@ export const Dokumentoversikt = ({ dokumenter }: { dokumenter: Dokument[] }) => 
     }
   }, [filtrerteDokumenter, pageNumber]);
 
-  useEffect(() => {
-    if (visMeldekort) {
-      setSearchFilter('Meldekort for uke');
-    } else {
-      setSearchFilter('');
-    }
-  }, [visMeldekort]);
-
   const onSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
     logDokumentoversiktEvent(antallSider, `sorter etter ${value}`);
-    setSortType(value);
+    setSortType(value as SortType);
   };
 
   useEffect(() => {
@@ -93,26 +87,26 @@ export const Dokumentoversikt = ({ dokumenter }: { dokumenter: Dokument[] }) => 
 
   return (
     <div className={styles.container}>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-        <Select label="Sorter etter" onChange={onSortChange}>
-          <option value="datoAsc">Nyeste først</option>
-          <option value="datoDesc">Eldste først</option>
-        </Select>
-        {/*<Search
-          label="Søk i dokumentoversikten"
-          onChange={(value) => setSearchFilter(value)}
-          onClear={() => setSearchFilter('')}
-          hideLabel={false}
-  />*/}
-        <Checkbox
-          value={visMeldekort}
-          checked={!visMeldekort}
-          onChange={() => setVisMeldekort(!visMeldekort)}
+      <div className={styles.inputWrapper}>
+        <Select
+          label={intl.formatMessage({ id: 'dokumentOversikt.sorter.label' })}
+          onChange={onSortChange}
+          className={`${styles.select} ${!inneholderMeldekort && styles.noCheckbox}`}
         >
-          Vis meldekort
-        </Checkbox>
+          <option value="datoAsc">
+            <FormattedMessage id="dokumentOversikt.sorter.datoAsc" />
+          </option>
+          <option value="datoDesc">
+            <FormattedMessage id="dokumentOversikt.sorter.datoDesc" />
+          </option>
+        </Select>
+        {inneholderMeldekort && (
+          <Checkbox value={visMeldekort} onChange={() => setVisMeldekort(!visMeldekort)}>
+            <FormattedMessage id="dokumentOversikt.visMeldekort" />
+          </Checkbox>
+        )}
       </div>
-      <ul style={{ listStyle: 'none', margin: '0', padding: '0' }}>
+      <ul className={styles.documentList}>
         {sortedPaginatedDocuments.map((document) => {
           return (
             <li
@@ -125,12 +119,16 @@ export const Dokumentoversikt = ({ dokumenter }: { dokumenter: Dokument[] }) => 
                     href={`/aap/mine-aap/api/dokument/?journalpostId=${document.journalpostId}&dokumentId=${document.dokumentId}`}
                     target="_blank"
                     onClick={() => logDokumentoversiktEvent(antallSider, 'klikk lenke')}
+                    lang="no"
                   >
                     {document.tittel}
                   </Link>
                 </span>
                 <Detail style={{ color: 'var(--a-text-default' }}>
-                  Sendt av {getAvsender(document.type)} den {formatDate(document.dato)}
+                  <FormattedMessage
+                    id="dokumentOversikt.avsender"
+                    values={{ name: getAvsender(document.type), date: formatDate(document.dato) }}
+                  />
                 </Detail>
               </div>
             </li>

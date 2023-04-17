@@ -2,6 +2,12 @@
   max-width: 600px;
 }
 
+.documentList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
 .listItem {
   margin-block: var(--a-spacing-2);
   background: var(--a-bg-default);
@@ -13,4 +19,18 @@
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+}
+
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--a-spacing-3);
+}
+
+.select {
+  max-width: 12rem;
+}
+
+.noCheckbox {
+  padding-block-end: var(--a-spacing-3);
 }
