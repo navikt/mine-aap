@@ -1,5 +1,6 @@
 {
   "appTittel": "Mine arbeidsavklarings{shy}pengar",
+  "appIngress": "Sjå status på søknaden din, ettersend- og sjå tidligare innsendte dokument, eller gi beskjed om eventuelle endringar.",
   "forside": {
     "heading": "Velkommen til Mine AAP!",
     "introListe": {
@@ -19,6 +20,29 @@
       "heading": "Vil du melde frå om endring i situasjonen din?",
       "tekst": "Her kan du seie frå om endringar og gi oss opplysningar du meiner er viktige for saka di. Dersom du har ein aktivitetsplan, nyttar du denne.",
       "knapp": "Meld endring"
+    },
+    "endretSituasjon": {
+      "heading": "Situasjonen min har endra seg",
+      "tekst": "Her kan du gi beskjed om endringar og gi oss opplysninger du mener er viktig for saken din. Hvis du har en aktivitetsplan, benytter du denne.",
+      "knapp": "Meld endring"
+    }
+  },
+  "minSisteSøknad": {
+    "heading": "Min siste søknad",
+    "mottatt": "Motteke {date}",
+    "søknad": {
+      "heading": "Søknad om arbeidsavklaringspengar (AAP)",
+      "saksbehandlingstid": "Sjå forventa saksbehandlingstid (blir opna i ny fane)",
+      "alert": {
+        "message": "Vi manglar dokumentasjon frå deg for å kunne behandle søknaden. Ettersend dette til oss så raskt du kan."
+      },
+      "button": {
+        "text": "Ettersend dokumentasjon"
+      }
+    },
+    "dokumentasjon": {
+      "mangler": "Dokumentasjon vi manglar",
+      "mottatt": "Dette har vi mottatt frå deg"
     }
   },
   "sisteSøknad": {

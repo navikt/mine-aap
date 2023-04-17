@@ -1,15 +1,12 @@
 import * as styles from './Soknad.module.css';
 import { Alert, BodyShort, Button, Heading } from '@navikt/ds-react';
 import { ButtonRow } from 'components/ButtonRow/ButtonRow';
-import { CardDivider } from 'components/Card/CardDivider';
 import { DocumentationHeading } from 'components/DocumentationHeading/DocumentationHeading';
 import { DocumentationList } from 'components/DocumentationList/DocumentationList';
-import { format } from 'date-fns';
-import { nb } from 'date-fns/locale';
 import { Søknad } from 'lib/types/types';
 import { formatDate } from 'lib/utils/date';
 import { useRouter } from 'next/router';
-import { useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 export const Soknad = ({ søknad }: { søknad: Søknad }) => {
   const { formatMessage } = useIntl();
@@ -18,18 +15,22 @@ export const Soknad = ({ søknad }: { søknad: Søknad }) => {
   return (
     <div className={styles.soknad}>
       <Heading level="2" size="medium" style={{ marginBlockEnd: '8px' }}>
-        Søknad om arbeidsavklarings&shy;penger (AAP)
+        <FormattedMessage id="minSisteSøknad.søknad.heading" />
       </Heading>
       <BodyShort size="small" style={{ color: 'var(--a-text-subtle)', marginBlockEnd: '16px' }}>
-        Mottatt: {formatDate(søknad.innsendtDato)}
+        <FormattedMessage
+          id="minSisteSøknad.mottatt"
+          values={{ date: formatDate(søknad.innsendtDato) }}
+        />
       </BodyShort>
       {søknad.manglendeVedlegg?.length && (
         <>
           <Alert variant="warning" size="small" className={styles.alert}>
-            Vi mangler dokumentasjon fra deg for å kunne behandle søknaden. Ettersend dette til oss
-            så raskt du kan.
+            <FormattedMessage id="minSisteSøknad.søknad.alert.message" />
           </Alert>
-          <DocumentationHeading heading="Dokumentasjon vi mangler" />
+          <DocumentationHeading
+            heading={formatMessage({ id: 'minSisteSøknad.dokumentasjon.mangler' })}
+          />
 
           <ul>
             {søknad.manglendeVedlegg.map((vedlegg) => {
@@ -45,12 +46,14 @@ export const Soknad = ({ søknad }: { søknad: Søknad }) => {
 
       <ButtonRow>
         <Button variant="primary" onClick={() => router.push(`/${søknad.søknadId}/ettersendelse/`)}>
-          Ettersend dokumentasjon
+          <FormattedMessage id="minSisteSøknad.søknad.button.text" />
         </Button>
       </ButtonRow>
       {søknad.innsendteVedlegg?.length && (
         <>
-          <DocumentationHeading heading="Dette har vi mottatt fra deg" />
+          <DocumentationHeading
+            heading={formatMessage({ id: 'minSisteSøknad.dokumentasjon.mottatt' })}
+          />
           <DocumentationList
             elements={søknad.innsendteVedlegg.map((vedlegg) => {
               return {

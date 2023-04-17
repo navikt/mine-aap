@@ -1,5 +1,6 @@
 import * as styles from './NyttigÅVite.module.css';
-import { BodyLong, BodyShort, Heading, Label, Link, LinkPanel } from '@navikt/ds-react';
+import { BodyLong, BodyShort, Heading, Link, LinkPanel } from '@navikt/ds-react';
+import NextLink from 'next/link';
 import { FormattedMessage } from 'react-intl';
 
 export const NyttigÅVite = () => {
@@ -9,16 +10,21 @@ export const NyttigÅVite = () => {
         Nyttig å vite
       </Heading>
       <div className={styles.container}>
-        <LinkPanel
-          className={styles.linkPanel}
-          href="https://www.nav.no/saksbehandlingstider#arbeidsavklaringspenger-aap"
-          border={false}
-        >
-          Forventet saksbehandlingstider
-        </LinkPanel>
-        <LinkPanel className={styles.linkPanel} href="#" border={false} target="_blank">
-          Alle dine innsendte søknader
-        </LinkPanel>
+        <div className={styles.linkPanelContainer}>
+          <LinkPanel
+            target="_blank"
+            className={styles.linkPanel}
+            href="https://www.nav.no/saksbehandlingstider#arbeidsavklaringspenger-aap"
+            border={false}
+          >
+            Forventede saksbehandlingstider
+          </LinkPanel>
+          <NextLink href="/soknader" passHref legacyBehavior>
+            <LinkPanel className={styles.linkPanel} href="#" border={false}>
+              Alle dine innsendte søknader
+            </LinkPanel>
+          </NextLink>
+        </div>
         <Heading level="3" size="small" spacing>
           <FormattedMessage id="hvaSkjerPanel.heading" />
         </Heading>

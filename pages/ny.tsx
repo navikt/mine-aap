@@ -14,6 +14,7 @@ import { Dokument, Søknad } from 'lib/types/types';
 import { GetServerSidePropsResult, NextPageContext } from 'next';
 import Head from 'next/head';
 import { useMemo } from 'react';
+import { FormattedMessage } from 'react-intl';
 
 const Index = ({ søknader, dokumenter }: { søknader: Søknad[]; dokumenter: Dokument[] }) => {
   const { formatElement, formatMessage } = useFeatureToggleIntl();
@@ -33,17 +34,16 @@ const Index = ({ søknader, dokumenter }: { søknader: Søknad[]; dokumenter: Do
       </Head>
       <PageComponentFlexContainer>
         <Heading level="1" size="large" spacing>
-          Mine Arbeidsavklarings&shy;penger
+          <FormattedMessage id="appTittel" values={{ shy: <>&shy;</> }} />
         </Heading>
         <Ingress style={{ color: 'var(--a-text-subtle)' }}>
-          Se status på søknaden din, ettersend- og se tidligere innsendte dokumenter, eller gi
-          beskjed om eventuelle endringer.
+          <FormattedMessage id="appIngress" />
         </Ingress>
       </PageComponentFlexContainer>
       {sisteSøknad && (
         <PageComponentFlexContainer subtleBackground>
           <Heading level="2" size="medium" spacing>
-            Min siste søknad
+            <FormattedMessage id="minSisteSøknad.heading" />
           </Heading>
           <Card>
             <Soknad søknad={sisteSøknad} />
@@ -55,14 +55,20 @@ const Index = ({ søknader, dokumenter }: { søknader: Søknad[]; dokumenter: Do
       </PageComponentFlexContainer>
       <PageComponentFlexContainer>
         <Heading level="2" size="medium" spacing>
-          Situasjonen min har endret seg
+          <FormattedMessage id="forside.endretSituasjon.heading" />
         </Heading>
         <Card subtleBlue>
           <BodyShort spacing>
-            Her kan du gi beskjed om endringer og gi oss opplysninger du mener er viktig for saken
-            din. Hvis du har en aktivitetsplan, benytter du denne.
+            <FormattedMessage id="forside.endretSituasjon.tekst" />
           </BodyShort>
-          <Button variant="secondary">Meld endring</Button>
+          <Button
+            variant="secondary"
+            onClick={() =>
+              (window.location.href = 'https://innboks.nav.no/s/skriv-til-oss?category=Arbeid')
+            }
+          >
+            <FormattedMessage id="forside.endretSituasjon.knapp" />
+          </Button>
         </Card>
       </PageComponentFlexContainer>
       <PageComponentFlexContainer subtleBackground>
