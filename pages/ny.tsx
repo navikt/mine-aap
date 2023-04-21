@@ -1,9 +1,10 @@
 import { getDocuments } from './api/dokumenter';
 import { getSøknader } from './api/soknader/soknader';
 import { beskyttetSide, getAccessToken } from '@navikt/aap-felles-innbygger-utils';
-import { BodyShort, Button, Heading, Ingress } from '@navikt/ds-react';
+import { BodyShort, Button, Heading, ReadMore } from '@navikt/ds-react';
 import { Card } from 'components/Card/Card';
 import { Dokumentoversikt } from 'components/DokumentoversiktNy/Dokumentoversikt';
+import { ForsideIngress } from 'components/Forside/Ingress/ForsideIngress';
 import { NyttigÅVite } from 'components/NyttigÅVite/NyttigÅVite';
 import { PageComponentFlexContainer } from 'components/PageComponentFlexContainer/PageComponentFlexContainer';
 import { PageContainer } from 'components/PageContainer/PageContainer';
@@ -36,9 +37,9 @@ const Index = ({ søknader, dokumenter }: { søknader: Søknad[]; dokumenter: Do
         <Heading level="1" size="large" spacing>
           <FormattedMessage id="appTittel" values={{ shy: <>&shy;</> }} />
         </Heading>
-        <Ingress style={{ color: 'var(--a-text-subtle)' }}>
+        <ForsideIngress>
           <FormattedMessage id="appIngress" />
-        </Ingress>
+        </ForsideIngress>
       </PageComponentFlexContainer>
       {sisteSøknad && (
         <PageComponentFlexContainer subtleBackground>
@@ -74,13 +75,16 @@ const Index = ({ søknader, dokumenter }: { søknader: Søknad[]; dokumenter: Do
       <PageComponentFlexContainer subtleBackground>
         <div style={{ maxWidth: '600px' }}>
           <Heading level="2" size="medium" spacing>
-            Dokumentoversikt
+            <FormattedMessage id="dokumentoversikt.tittel" />
           </Heading>
           <BodyShort spacing>
-            Her finner du dine søknader, vedlegg, vedtak, brev, samtalerefater og meldinger om AAP
-            og oppfølging.
+            <FormattedMessage id="dokumentoversikt.tekst" />
           </BodyShort>
-          <BodyShort spacing>{formatMessage('dokumentoversikt.manglendeDokument.tekst')}</BodyShort>
+          <ReadMore header={formatMessage('dokumentoversikt.manglendeDokument.header')}>
+            <BodyShort spacing>
+              <FormattedMessage id="dokumentoversikt.manglendeDokument.tekst" />
+            </BodyShort>
+          </ReadMore>
 
           <Dokumentoversikt dokumenter={dokumenter} />
         </div>
