@@ -4,6 +4,7 @@ import { beskyttetSide, getAccessToken } from '@navikt/aap-felles-innbygger-util
 import { BodyShort, Button, Heading, ReadMore } from '@navikt/ds-react';
 import { Card } from 'components/Card/Card';
 import { Dokumentoversikt } from 'components/DokumentoversiktNy/Dokumentoversikt';
+import { DokumentoversiktContainer } from 'components/DokumentoversiktNy/DokumentoversiktContainer';
 import { ForsideIngress } from 'components/Forside/Ingress/ForsideIngress';
 import { NyttigÅVite } from 'components/NyttigÅVite/NyttigÅVite';
 import { PageComponentFlexContainer } from 'components/PageComponentFlexContainer/PageComponentFlexContainer';
@@ -14,11 +15,14 @@ import metrics from 'lib/metrics';
 import { Dokument, Søknad } from 'lib/types/types';
 import { GetServerSidePropsResult, NextPageContext } from 'next';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 const Index = ({ søknader, dokumenter }: { søknader: Søknad[]; dokumenter: Dokument[] }) => {
-  const { formatElement, formatMessage } = useFeatureToggleIntl();
+  const { formatElement } = useFeatureToggleIntl();
+
+  const router = useRouter();
 
   const sisteSøknad = useMemo(() => {
     return søknader[0];
@@ -51,6 +55,24 @@ const Index = ({ søknader, dokumenter }: { søknader: Søknad[]; dokumenter: Do
           </Card>
         </PageComponentFlexContainer>
       )}
+      {!sisteSøknad && (
+        <>
+          <DokumentoversiktContainer dokumenter={dokumenter} />
+          <PageComponentFlexContainer>
+            <Heading level="2" size="medium" spacing>
+              <FormattedMessage id="forside.ettersendelse.tittel" />
+            </Heading>
+            <Card subtleBlue>
+              <BodyShort spacing>
+                <FormattedMessage id="forside.ettersendelse.tekst" />
+              </BodyShort>
+              <Button variant="secondary" onClick={() => router.push('/ettersendelse')}>
+                <FormattedMessage id="forside.ettersendelse.knapp" />
+              </Button>
+            </Card>
+          </PageComponentFlexContainer>
+        </>
+      )}
       <PageComponentFlexContainer>
         <NyttigÅVite />
       </PageComponentFlexContainer>
@@ -72,23 +94,7 @@ const Index = ({ søknader, dokumenter }: { søknader: Søknad[]; dokumenter: Do
           </Button>
         </Card>
       </PageComponentFlexContainer>
-      <PageComponentFlexContainer subtleBackground>
-        <div style={{ maxWidth: '600px' }}>
-          <Heading level="2" size="medium" spacing>
-            <FormattedMessage id="dokumentoversikt.tittel" />
-          </Heading>
-          <BodyShort spacing>
-            <FormattedMessage id="dokumentoversikt.tekst" />
-          </BodyShort>
-          <ReadMore header={formatMessage('dokumentoversikt.manglendeDokument.header')}>
-            <BodyShort spacing>
-              <FormattedMessage id="dokumentoversikt.manglendeDokument.tekst" />
-            </BodyShort>
-          </ReadMore>
-
-          <Dokumentoversikt dokumenter={dokumenter} />
-        </div>
-      </PageComponentFlexContainer>
+      {sisteSøknad && <DokumentoversiktContainer dokumenter={dokumenter} />}
     </PageContainer>
   );
 };

@@ -28,18 +28,18 @@ export const Dokumentoversikt = ({ dokumenter }: { dokumenter: Dokument[] }) => 
   const [sorterteDokumenter, setSorterteDokumenter] = useState(dokumenter);
   const [sortType, setSortType] = useState<SortType>('datoAsc');
   const [pageNumber, setPageNumber] = useState(1);
-  const [visMeldekort, setVisMeldekort] = useState(false);
+  const [hideMeldekort, setHideMeldekort] = useState(true);
 
   const intl = useIntl();
 
   const filtrerteDokumenter = useMemo(() => {
     return sorterteDokumenter.filter((dokument) => {
       if (dokument.tittel.includes(MELDEKORT_TITTEL)) {
-        return visMeldekort;
+        return !hideMeldekort;
       }
       return true;
     });
-  }, [sorterteDokumenter, visMeldekort]);
+  }, [sorterteDokumenter, hideMeldekort]);
 
   const sortedPaginatedDocuments = useMemo(() => {
     const startIndex = (pageNumber - 1) * PAGE_SIZE;
@@ -98,7 +98,11 @@ export const Dokumentoversikt = ({ dokumenter }: { dokumenter: Dokument[] }) => 
           </option>
         </Select>
         {inneholderMeldekort && (
-          <Checkbox value={visMeldekort} onChange={() => setVisMeldekort(!visMeldekort)}>
+          <Checkbox
+            checked={hideMeldekort}
+            value={hideMeldekort}
+            onChange={() => setHideMeldekort(!hideMeldekort)}
+          >
             <FormattedMessage id="dokumentOversikt.visMeldekort" />
           </Checkbox>
         )}

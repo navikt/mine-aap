@@ -214,7 +214,7 @@
       "datoAsc": "Nyeste først",
       "datoDesc": "Eldste først"
     },
-    "visMeldekort": "Vis meldekort",
+    "visMeldekort": "Skjul meldekort",
     "avsender": "Sendt av {name} den {date}"
   }
 }

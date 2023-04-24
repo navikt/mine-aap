@@ -1,3 +1,4 @@
 .ingress {
   color: var(--a-text-subtle);
+  max-width: 600px;
 }
