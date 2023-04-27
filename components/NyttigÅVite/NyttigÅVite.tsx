@@ -7,7 +7,7 @@ export const NyttigÅVite = () => {
   return (
     <>
       <Heading level="2" size="medium" spacing>
-        Nyttig å vite
+        <FormattedMessage id="nyttigÅVite.title" />
       </Heading>
       <div className={styles.container}>
         <div className={styles.linkPanelContainer}>
@@ -17,11 +17,11 @@ export const NyttigÅVite = () => {
             href="https://www.nav.no/saksbehandlingstider#arbeidsavklaringspenger-aap"
             border={false}
           >
-            Forventede saksbehandlingstider
+            <FormattedMessage id="nyttigÅVite.saksbehandlingstider" />
           </LinkPanel>
           <NextLink href="/soknader" passHref legacyBehavior>
             <LinkPanel className={styles.linkPanel} href="#" border={false}>
-              Alle dine innsendte søknader
+              <FormattedMessage id="nyttigÅVite.søknader" />
             </LinkPanel>
           </NextLink>
         </div>

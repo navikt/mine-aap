@@ -1,6 +1,6 @@
 {
   "appTittel": "Mine arbeidsavklarings{shy}penger",
-  "appIngress": "Se status på søknaden din, ettersend- og se tidligere innsendte dokumenter, eller gi beskjed om eventuelle endringer.",
+  "appIngress": "Se status på søknaden din, se innsendte dokumenter, ettersend dokumenter eller gi beskjed om eventuelle endringer.",
   "forside": {
     "heading": "Velkommen til Mine AAP!",
     "introListe": {
@@ -207,6 +207,11 @@
   "logoutModal": {
     "title": "Du har blitt logget ut",
     "buttonText": "Logg inn på nytt"
+  },
+  "nyttigÅVite": {
+    "title": "Nyttig å vite",
+    "saksbehandlingstider": "Forventede saksbehandlingstider (åpnes i ny fane)",
+    "søknader": "Alle dine innsendte søknader"
   },
   "dokumentOversikt": {
     "sorter": {

@@ -1,6 +1,6 @@
 {
   "appTittel": "Mine arbeidsavklarings{shy}pengar",
-  "appIngress": "Sjå status på søknaden din, ettersend- og sjå tidligare innsendte dokument, eller gi beskjed om eventuelle endringar.",
+  "appIngress": "Sjå status på søknaden din, sjå innsendte dokument, ettersend dokument eller gi beskjed om eventuelle endringar.",
   "forside": {
     "heading": "Velkommen til Mine AAP!",
     "introListe": {
@@ -183,7 +183,7 @@
     },
     "punkt2": {
       "label": "Vi vurderer moglegheitene og avgrensingane dine i møte med arbeidslivet",
-      "tekst": "Du har krav på ei vurdering av oppfølginga du treng frå NAV for å kome i arbeid eller halde på jobben du har (NAV-lova §14a). Vi tek utgangspunkt i opplysningane du har gitt oss. Vi kontaktar deg ved behov. Du får eit brev med vurderinga vår. Ta gjerne kontakt med oss dersom du har spørsmål. <a>Du kan klage på oppfølgingsvedtaket (blir opna i ny fane)</a> dersom du meiner det er feil."
+      "tekst": "Du har krav på ei vurdering av oppfølginga du treng frå NAV for å kome i arbeid eller halde på jobben du har (NAV-lova §14a). Vi tek utgangspunkt i opplysningane du har gitt oss, og kontaktar deg ved behov. Du får eit brev med vurderinga vår, og må gjerne ta kontakt med oss dersom du har spørsmål. <a>Du kan klage på oppfølgingsvedtaket (blir opna i ny fane)</a> dersom du meiner det er feil."
     },
     "punkt3": {
       "label": "Kva kan du gjere?",
@@ -207,6 +207,11 @@
   "logoutModal": {
     "title": "Du har blitt logga ut",
     "buttonText": "Logg inn på nytt"
+  },
+  "nyttigÅVite": {
+    "title": "Nyttig å vite",
+    "saksbehandlingstider": "Forventede saksbehandlingstider (åpnes i ny fane)",
+    "søknader": "Alle dine innsendte søknader"
   },
   "dokumentOversikt": {
     "sorter": {
