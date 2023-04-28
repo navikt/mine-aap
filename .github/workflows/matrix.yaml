@@ -44,7 +44,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
 
       - name: Copy env-file for  ${{matrix.env}}
-        run: cp .nais/ ${{matrix.env}}.env .env.local
+        run: cp .nais/${{matrix.env}}.env .env.local
 
       - name: Print env
         run: cat .env.local
