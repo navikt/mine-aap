@@ -12,7 +12,7 @@ jobs:
   build:
     strategy:
       matrix:
-        env: [ dev ]
+        env: [ dev, prod]
     name: build  ${{matrix.env}}
     runs-on: ubuntu-latest
     outputs:
@@ -94,7 +94,7 @@ jobs:
   deploy:
     strategy:
       matrix:
-        cluster: [ dev-gcp ]
+        cluster: [ dev-gcp , prod-gcp]
     name: Deploy app to ${{matrix.cluster}}
     needs: build
     runs-on: ubuntu-latest
