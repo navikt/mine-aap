@@ -1,11 +1,11 @@
 name: "Build and deploy aap-innsyn matrix"
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths-ignore:
-      - '**.md'
+#  push:
+#    branches:
+#      - main
+#    paths-ignore:
+#      - '**.md'
 env:
   IMAGE_BASE: europe-north1-docker.pkg.dev/${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}/aap/${{ github.event.repository.name }}
 jobs:
