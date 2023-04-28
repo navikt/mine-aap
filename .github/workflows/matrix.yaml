@@ -16,7 +16,7 @@ jobs:
     name: build  ${{matrix.env}}
     runs-on: ubuntu-latest
     outputs:
-      image: ${{ steps.image.outputs.image }}
+      image: ${{ steps.image.outputs.image }}-${{matrix.env}}
     permissions:
       contents: read
       id-token: write
@@ -71,8 +71,8 @@ jobs:
       -   name: Setter image-navn
           id: image
           run: |
-               echo "IMAGE=$(echo $IMAGE_BASE)-$(echo $TAG)-${{matrix.env}}" >> $GITHUB_ENV
-               echo "image=$(echo $IMAGE_BASE)-$(echo $TAG)-${{matrix.env}}" >> $GITHUB_OUTPUT
+               echo "IMAGE=$(echo $IMAGE_BASE)-$(echo $TAG)" >> $GITHUB_ENV
+               echo "image=$(echo $IMAGE_BASE)-$(echo $TAG)" >> $GITHUB_OUTPUT
 
       -  name: Login GAR
          uses: nais/login@v0
@@ -94,17 +94,17 @@ jobs:
   deploy:
     strategy:
       matrix:
-        cluster: [ dev-gcp , prod-gcp]
-    name: Deploy app to ${{matrix.cluster}}
+        cluster: [ dev, prod]
+    name: Deploy app to ${{matrix.cluster}}-gcp
     needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Deploy to ${{matrix.env}}
+      - name: Deploy to ${{matrix.env}}-gcp
         uses: nais/deploy/actions/deploy@v1
         env:
           IMAGE: ${{needs.build.outputs.image}}
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: ${{matrix.cluster}}
+          CLUSTER: ${{matrix.cluster}}-gcp
           RESOURCE: .nais/nais.yaml,.nais/alerts.yaml
           VARS: .nais/${{matrix.cluster}}.yaml
