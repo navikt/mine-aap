@@ -1,16 +1,19 @@
 name: "Build and deploy aap-innsyn to dev"
-#on:
-#  workflow_dispatch:
-#  push:
-#    branches:
-#      - main
-#    paths-ignore:
-#      - '**.md'
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - '**.md'
 env:
   IMAGE_BASE: europe-north1-docker.pkg.dev/${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}/aap/${{ github.event.repository.name }}
 jobs:
-  "build":
-    name: build
+  build:
+    strategy:
+      matrix:
+        env: [ dev ]
+    name: build  ${{matrix.env}}
     runs-on: ubuntu-latest
     outputs:
       image: ${{ steps.image.outputs.image }}
@@ -19,7 +22,7 @@ jobs:
       id-token: write
       packages: write
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - uses: actions/setup-node@v3
         with:
@@ -40,8 +43,8 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
 
-      - name: Copy env-file for dev
-        run: cp .nais/dev.env .env.local
+      - name: Copy env-file for  ${{matrix.env}}
+        run: cp .nais/ ${{matrix.env}}.env .env.local
 
       - name: Print env
         run: cat .env.local
@@ -68,8 +71,8 @@ jobs:
       -   name: Setter image-navn
           id: image
           run: |
-               echo "IMAGE=$(echo $IMAGE_BASE)-$(echo $TAG)" >> $GITHUB_ENV
-               echo "image=$(echo $IMAGE_BASE)-$(echo $TAG)" >> $GITHUB_OUTPUT
+               echo "IMAGE=$(echo $IMAGE_BASE)-$(echo $TAG)-${{matrix.env}}" >> $GITHUB_ENV
+               echo "image=$(echo $IMAGE_BASE)-$(echo $TAG)-${{matrix.env}}" >> $GITHUB_OUTPUT
 
       -  name: Login GAR
          uses: nais/login@v0
@@ -88,17 +91,20 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-  "deployAppToDev":
-    name: Deploy app to dev
+  deploy:
+    strategy:
+      matrix:
+        cluster: [ dev-gcp ]
+    name: Deploy app to ${{matrix.cluster}}
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Deploy to DEV
+      - uses: actions/checkout@v3
+      - name: Deploy to ${{matrix.env}}
         uses: nais/deploy/actions/deploy@v1
         env:
           IMAGE: ${{needs.build.outputs.image}}
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: dev-gcp
+          CLUSTER: ${{matrix.cluster}}
           RESOURCE: .nais/nais.yaml,.nais/alerts.yaml
-          VARS: .nais/dev.yaml
+          VARS: .nais/${{matrix.cluster}}.yaml
