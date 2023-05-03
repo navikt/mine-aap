@@ -69,7 +69,7 @@
   },
   "dokumentoversikt": {
     "tittel": "Dokumentoversikt",
-    "tekst": "Her finner du dine søknader, vedlegg, vedtak, brev, samtalerefater og meldinger om AAP og oppfølging.",
+    "tekst": "Her finner du dine søknader, vedlegg, vedtak, brev og samtalerefater.",
     "manglendeDokument": {
       "header": "Har du sendt en søknad eller et dokument som ikke vises her?",  
       "tekst": "Det kan ta noen minutter fra du har sendt en digital søknad til den vises i oversikten. Hvis du har sendt en søknad i posten tar det som regel 2 uker fra den er postlagt til den vises i dokumentoversikten.",
