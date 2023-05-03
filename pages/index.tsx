@@ -1,29 +1,25 @@
-import { LucaGuidePanel } from '@navikt/aap-felles-innbygger-react';
+import { getDocuments } from './api/dokumenter';
+import { getSøknader } from './api/soknader/soknader';
 import { beskyttetSide, getAccessToken } from '@navikt/aap-felles-innbygger-utils';
-import { BodyShort, Button, Heading, Link, Panel } from '@navikt/ds-react';
-import { Dokumentoversikt } from 'components/Dokumentoversikt/Dokumentoversikt';
-import { HvaSkjerPanel } from 'components/HvaSkjerPanel/HvaSkjerPanel';
-import { Layout } from 'components/Layout/Layout';
-import { Section } from 'components/Section/Section';
-import { SoknadPanel } from 'components/SoknadPanel/SoknadPanel';
+import { BodyShort, Button, Heading } from '@navikt/ds-react';
+import { Card } from 'components/Card/Card';
+import { DokumentoversiktContainer } from 'components/DokumentoversiktNy/DokumentoversiktContainer';
+import { ForsideIngress } from 'components/Forside/Ingress/ForsideIngress';
+import { NyttigÅVite } from 'components/NyttigÅVite/NyttigÅVite';
+import { PageComponentFlexContainer } from 'components/PageComponentFlexContainer/PageComponentFlexContainer';
+import { PageContainer } from 'components/PageContainer/PageContainer';
+import { Soknad } from 'components/Soknad/Soknad';
 import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import metrics from 'lib/metrics';
 import { Dokument, Søknad } from 'lib/types/types';
-import type { GetServerSidePropsResult, NextPageContext } from 'next';
+import { GetServerSidePropsResult, NextPageContext } from 'next';
 import Head from 'next/head';
-import NextLink from 'next/link';
 import { useRouter } from 'next/router';
-import { getDocuments } from 'pages/api/dokumenter';
-import { getSøknader } from 'pages/api/soknader/soknader';
 import { useMemo } from 'react';
+import { FormattedMessage } from 'react-intl';
 
-interface PageProps {
-  søknader: Søknad[];
-  dokumenter: Dokument[];
-}
-
-const Index = ({ søknader, dokumenter }: PageProps) => {
-  const { formatMessage, formatElement } = useFeatureToggleIntl();
+const Index = ({ søknader, dokumenter }: { søknader: Søknad[]; dokumenter: Dokument[] }) => {
+  const { formatElement } = useFeatureToggleIntl();
 
   const router = useRouter();
 
@@ -32,7 +28,7 @@ const Index = ({ søknader, dokumenter }: PageProps) => {
   }, [søknader]);
 
   return (
-    <Layout>
+    <PageContainer>
       <Head>
         <title>
           {`${formatElement('appTittel', {
@@ -40,84 +36,65 @@ const Index = ({ søknader, dokumenter }: PageProps) => {
           })} - nav.no`}
         </title>
       </Head>
-
-      <Section>
-        <LucaGuidePanel>
-          <Heading level="2" size="medium" spacing>
-            {formatMessage('forside.heading')}
-          </Heading>
-          <BodyShort spacing>{formatMessage('forside.introListe.tittel')}</BodyShort>
-
-          <ul>
-            <li>{formatMessage('forside.introListe.punkt1')}</li>
-            <li>{formatMessage('forside.introListe.punkt2')}</li>
-            <li>{formatMessage('forside.introListe.punkt3')}</li>
-          </ul>
-
-          <BodyShort spacing>{formatMessage('forside.underUtvikling')}</BodyShort>
-        </LucaGuidePanel>
-      </Section>
+      <PageComponentFlexContainer>
+        <Heading level="1" size="large" spacing>
+          <FormattedMessage id="appTittel" values={{ shy: <>&shy;</> }} />
+        </Heading>
+        <ForsideIngress>
+          <FormattedMessage id="appIngress" />
+        </ForsideIngress>
+      </PageComponentFlexContainer>
       {sisteSøknad && (
-        <Section lightBlue>
-          <div>
-            <Heading level="2" size="medium" spacing>
-              {formatMessage('sisteSøknad.heading')}
-            </Heading>
-            <SoknadPanel søknad={sisteSøknad} />
-          </div>
-          {søknader.length > 0 && (
-            <div>
-              <NextLink href="/soknader" passHref legacyBehavior>
-                <Link>{formatMessage('forside.seInnsendteSøknaderLink')}</Link>
-              </NextLink>
-            </div>
-          )}
-        </Section>
-      )}
-
-      {!sisteSøknad && (
-        <Section>
-          <Dokumentoversikt dokumenter={dokumenter} />
-          <Panel border>
-            <Heading level="2" size="medium" spacing>
-              {formatMessage('forside.ettersendelse.tittel')}
-            </Heading>
-            <BodyShort spacing>{formatMessage('forside.ettersendelse.tekst')}</BodyShort>
-            <Button variant="secondary" onClick={() => router.push('/ettersendelse')}>
-              {formatMessage('forside.ettersendelse.knapp')}
-            </Button>
-          </Panel>
-          <Link
-            target="_blank"
-            href="https://www.nav.no/saksbehandlingstider#arbeidsavklaringspenger-aap"
-          >
-            {formatMessage('sisteSøknad.søknad.saksbehandlingstid')}
-          </Link>
-        </Section>
-      )}
-
-      <Section>
-        <HvaSkjerPanel />
-
-        <Panel border>
+        <PageComponentFlexContainer subtleBackground>
           <Heading level="2" size="medium" spacing>
-            {formatMessage('forside.endring.heading')}
+            <FormattedMessage id="minSisteSøknad.heading" />
           </Heading>
-
-          <BodyShort spacing>{formatMessage('forside.endring.tekst')}</BodyShort>
+          <Card>
+            <Soknad søknad={sisteSøknad} />
+          </Card>
+        </PageComponentFlexContainer>
+      )}
+      {!sisteSøknad && (
+        <>
+          <DokumentoversiktContainer dokumenter={dokumenter} />
+          <PageComponentFlexContainer>
+            <Heading level="2" size="medium" spacing>
+              <FormattedMessage id="forside.ettersendelse.tittel" />
+            </Heading>
+            <Card subtleBlue>
+              <BodyShort spacing>
+                <FormattedMessage id="forside.ettersendelse.tekst" />
+              </BodyShort>
+              <Button variant="secondary" onClick={() => router.push('/ettersendelse')}>
+                <FormattedMessage id="forside.ettersendelse.knapp" />
+              </Button>
+            </Card>
+          </PageComponentFlexContainer>
+        </>
+      )}
+      <PageComponentFlexContainer>
+        <NyttigÅVite />
+      </PageComponentFlexContainer>
+      <PageComponentFlexContainer>
+        <Heading level="2" size="medium" spacing>
+          <FormattedMessage id="forside.endretSituasjon.heading" />
+        </Heading>
+        <Card subtleBlue>
+          <BodyShort spacing>
+            <FormattedMessage id="forside.endretSituasjon.tekst" />
+          </BodyShort>
           <Button
             variant="secondary"
             onClick={() =>
               (window.location.href = 'https://innboks.nav.no/s/skriv-til-oss?category=Arbeid')
             }
           >
-            {formatMessage('forside.endring.knapp')}
+            <FormattedMessage id="forside.endretSituasjon.knapp" />
           </Button>
-        </Panel>
-
-        {sisteSøknad && <Dokumentoversikt dokumenter={dokumenter} />}
-      </Section>
-    </Layout>
+        </Card>
+      </PageComponentFlexContainer>
+      {sisteSøknad && <DokumentoversiktContainer dokumenter={dokumenter} />}
+    </PageContainer>
   );
 };
 
@@ -130,6 +107,7 @@ export const getServerSideProps = beskyttetSide(
     const dokumenter = await getDocuments(bearerToken);
 
     stopTimer();
+
     return {
       props: { søknader, dokumenter },
     };
