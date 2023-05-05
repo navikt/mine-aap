@@ -13,6 +13,7 @@ import metrics from 'lib/metrics';
 const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) => {
   logger.info('Har mottatt request om filopplasting');
   const accessToken = getAccessTokenFromRequest(req);
+  logger.info('DEBUG: accessToken: ' + accessToken);
   if (isMock()) {
     res.status(201).json(randomUUID());
   } else {
@@ -21,7 +22,7 @@ const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) =
       res,
       hostname: 'soknad-api',
       path: '/vedlegg/lagre',
-      bearerToken: accessToken,
+      bearerToken: accessToken?.substring('Bearer '.length),
       https: false,
     });
     /*await tokenXApiStreamProxy({
