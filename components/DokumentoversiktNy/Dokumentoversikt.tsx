@@ -101,7 +101,10 @@ export const Dokumentoversikt = ({ dokumenter }: { dokumenter: Dokument[] }) => 
           <Checkbox
             checked={hideMeldekort}
             value={hideMeldekort}
-            onChange={() => setHideMeldekort(!hideMeldekort)}
+            onChange={() => {
+              logDokumentoversiktEvent(antallSider, 'toggle meldekort');
+              setHideMeldekort(!hideMeldekort);
+            }}
           >
             <FormattedMessage id="dokumentOversikt.visMeldekort" />
           </Checkbox>
