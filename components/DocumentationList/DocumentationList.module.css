@@ -8,6 +8,10 @@
   padding-block: var(--a-spacing-4);
 }
 
+.listItem:first-child {
+  padding-block-start: var(--a-spacing-2);
+}
+
 .listItem:not(:last-child) {
   border-bottom: 1px solid var(--a-border-subtle);
 }

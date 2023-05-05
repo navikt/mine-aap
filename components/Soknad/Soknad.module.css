@@ -7,3 +7,7 @@
     margin-block-end: var(--a-spacing-6);
   }
 }
+
+.dokumentasjonManglerList {
+  margin-block-start: var(--a-spacing-2);
+}

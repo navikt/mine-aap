@@ -3,15 +3,20 @@
   flex-direction: column;
   align-items: center;
   padding: 0 var(--a-spacing-4);
+  margin-block: var(--a-spacing-8);
+}
+
+.flexContainer:last-child {
+  margin-block-end: 0;
+  padding-block-end: var(--a-spacing-24);
 }
 
 .content {
   max-width: 920px;
   width: 100%;
-  margin-block-start: var(--a-spacing-6);
-  margin-block-end: var(--a-spacing-8);
 }
 
 .subtleBackground {
   background-color: var(--a-bg-subtle);
+  padding-block: var(--a-spacing-8);
 }

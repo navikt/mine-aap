@@ -25,7 +25,7 @@ export const NyttigÅVite = () => {
             </LinkPanel>
           </NextLink>
         </div>
-        <Heading level="3" size="small" spacing>
+        <Heading level="3" size="small">
           <FormattedMessage id="hvaSkjerPanel.heading" />
         </Heading>
 

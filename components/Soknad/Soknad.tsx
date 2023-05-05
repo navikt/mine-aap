@@ -32,7 +32,7 @@ export const Soknad = ({ søknad }: { søknad: Søknad }) => {
             heading={formatMessage({ id: 'minSisteSøknad.dokumentasjon.mangler' })}
           />
 
-          <ul>
+          <ul className={styles.dokumentasjonManglerList}>
             {søknad.manglendeVedlegg.map((vedlegg) => {
               return (
                 <li key={vedlegg}>
