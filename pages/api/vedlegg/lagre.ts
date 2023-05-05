@@ -19,7 +19,7 @@ const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) =
     await proxyApiRouteRequest({
       req,
       res,
-      hostname: process.env.SOKNAD_API_URL!,
+      hostname: 'soknad-api',
       path: '/vedlegg/lagre',
       bearerToken: accessToken,
       https: false,
