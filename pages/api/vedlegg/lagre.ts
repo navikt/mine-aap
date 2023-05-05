@@ -7,6 +7,7 @@ import {
   beskyttetApi,
   getAccessTokenFromRequest,
 } from '@navikt/aap-felles-innbygger-utils';
+import { proxyApiRouteRequest } from '@navikt/next-api-proxy';
 import metrics from 'lib/metrics';
 
 const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) => {
@@ -15,7 +16,15 @@ const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) =
   if (isMock()) {
     res.status(201).json(randomUUID());
   } else {
-    await tokenXApiStreamProxy({
+    await proxyApiRouteRequest({
+      req,
+      res,
+      hostname: process.env.SOKNAD_API_URL!,
+      path: '/vedlegg/lagre',
+      bearerToken: accessToken,
+      https: false,
+    });
+    /*await tokenXApiStreamProxy({
       url: `${process.env.SOKNAD_API_URL}/vedlegg/lagre`,
       prometheusPath: '/vedlegg/lagre',
       req,
@@ -25,13 +34,14 @@ const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) =
       logger: logger,
       metricsStatusCodeCounter: metrics.backendApiStatusCodeCounter,
       metricsTimer: metrics.backendApiDurationHistogram,
-    });
+    });*/
   }
 });
 
 export const config = {
   api: {
     bodyParser: false,
+    externalResolver: true,
   },
 };
 
