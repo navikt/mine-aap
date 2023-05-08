@@ -1,15 +1,7 @@
 import { randomUUID } from 'crypto';
 import { NextApiRequest, NextApiResponse } from 'next';
-import {
-  logger,
-  isMock,
-  tokenXApiStreamProxy,
-  beskyttetApi,
-  getAccessTokenFromRequest,
-  getTokenX,
-} from '@navikt/aap-felles-innbygger-utils';
-import { proxyApiRouteRequest } from '@navikt/next-api-proxy';
-import metrics from 'lib/metrics';
+import { beskyttetApi, isMock, logger } from '@navikt/aap-felles-innbygger-utils';
+import { tokenXProxy } from '../../../lib/api/tokenXProxy';
 
 const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) => {
   logger.info('Har mottatt request om filopplasting');
@@ -17,34 +9,7 @@ const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) =
   if (isMock()) {
     res.status(201).json(randomUUID());
   } else {
-    const accessToken = getAccessTokenFromRequest(req)?.substring('Bearer '.length)!;
-    let tokenxToken;
-    try {
-      tokenxToken = await getTokenX(accessToken, process.env.SOKNAD_API_AUDIENCE!);
-    } catch (err: any) {
-      logger.error({ msg: 'getTokenXError', error: err });
-    }
-    const result = await proxyApiRouteRequest({
-      req,
-      res,
-      hostname: 'soknad-api',
-      path: '/vedlegg/lagre',
-      bearerToken: tokenxToken,
-      https: false,
-    });
-    logger.info(`result ${JSON.stringify(result)}`);
-    return result;
-    /*await tokenXApiStreamProxy({
-      url: `${process.env.SOKNAD_API_URL}/vedlegg/lagre`,
-      prometheusPath: '/vedlegg/lagre',
-      req,
-      res,
-      audience: process.env.SOKNAD_API_AUDIENCE!,
-      bearerToken: accessToken,
-      logger: logger,
-      metricsStatusCodeCounter: metrics.backendApiStatusCodeCounter,
-      metricsTimer: metrics.backendApiDurationHistogram,
-    });*/
+    return await tokenXProxy(req, res, '/vedlegg/lagre', '/vedlegg/lagre');
   }
 });
 
