@@ -24,7 +24,7 @@ const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) =
     } catch (err: any) {
       logger.error({ msg: 'getTokenXError', error: err });
     }
-    await proxyApiRouteRequest({
+    const result = await proxyApiRouteRequest({
       req,
       res,
       hostname: 'soknad-api',
@@ -32,6 +32,8 @@ const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) =
       bearerToken: tokenxToken,
       https: false,
     });
+    logger.info(`result ${JSON.stringify(result)}`);
+    return result;
     /*await tokenXApiStreamProxy({
       url: `${process.env.SOKNAD_API_URL}/vedlegg/lagre`,
       prometheusPath: '/vedlegg/lagre',
