@@ -13,7 +13,7 @@ const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) =
   return await tokenXProxy(
     req,
     res,
-    `/vedlegg/slett'?uuids=${commaSeparatedUuids}`,
+    `/vedlegg/slett?uuids=${commaSeparatedUuids}`,
     '/vedlegg/slett'
   );
 });
