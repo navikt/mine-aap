@@ -6,23 +6,30 @@ import {
   tokenXApiStreamProxy,
   beskyttetApi,
   getAccessTokenFromRequest,
+  getTokenX,
 } from '@navikt/aap-felles-innbygger-utils';
 import { proxyApiRouteRequest } from '@navikt/next-api-proxy';
 import metrics from 'lib/metrics';
 
 const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) => {
   logger.info('Har mottatt request om filopplasting');
-  const accessToken = getAccessTokenFromRequest(req);
-  logger.info('DEBUG: accessToken: ' + accessToken);
+
   if (isMock()) {
     res.status(201).json(randomUUID());
   } else {
+    const accessToken = getAccessTokenFromRequest(req)?.substring('Bearer '.length)!;
+    let tokenxToken;
+    try {
+      tokenxToken = await getTokenX(accessToken, process.env.SOKNAD_API_AUDIENCE!);
+    } catch (err: any) {
+      logger.error({ msg: 'getTokenXError', error: err });
+    }
     await proxyApiRouteRequest({
       req,
       res,
       hostname: 'soknad-api',
       path: '/vedlegg/lagre',
-      bearerToken: accessToken?.substring('Bearer '.length),
+      bearerToken: tokenxToken,
       https: false,
     });
     /*await tokenXApiStreamProxy({
