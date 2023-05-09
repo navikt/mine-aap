@@ -8,15 +8,19 @@ import {
 } from '@navikt/aap-felles-innbygger-utils';
 import metrics from 'lib/metrics';
 import { Ettersendelse, EttersendelseBackendState } from 'lib/types/types';
+import { tokenXProxy } from '../../../lib/api/tokenXProxy';
 
 const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) => {
-  const accessToken = getAccessTokenFromRequest(req);
   const { ettersendteVedlegg, søknadId, totalFileSize }: Ettersendelse = JSON.parse(req.body);
+
+  //TODO: Tror jeg kan fjerne de neste 2(5)(til og med linje 21) linjene
   const body: EttersendelseBackendState = {
     ...(søknadId && { søknadId: søknadId }),
     ettersendteVedlegg,
   };
-  await sendEttersendelse(body, accessToken);
+  req.body = JSON.stringify(body);
+
+  await sendEttersendelse(req, res);
 
   ettersendteVedlegg.forEach((ettersendelse) => {
     logger.info(`lager metrics for ettersendelse.${ettersendelse.vedleggType}`);
@@ -29,23 +33,11 @@ const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) =
   res.status(201).json({});
 });
 
-export const sendEttersendelse = async (data: EttersendelseBackendState, accessToken?: string) => {
+export const sendEttersendelse = async (req: NextApiRequest, res: NextApiResponse) => {
   if (isMock()) {
     return {};
   }
-  const ettersendelse = await tokenXApiProxy({
-    url: `${process.env.SOKNAD_API_URL}/innsending/ettersend`,
-    prometheusPath: '/innsending/ettersend',
-    method: 'POST',
-    data: JSON.stringify(data),
-    audience: process.env.SOKNAD_API_AUDIENCE!,
-    bearerToken: accessToken,
-    noResponse: true,
-    logger: logger,
-    metricsStatusCodeCounter: metrics.backendApiStatusCodeCounter,
-    metricsTimer: metrics.backendApiDurationHistogram,
-  });
-  return ettersendelse;
+  return await tokenXProxy(req, res, `/innsending/ettersend`, '/innsending/ettersend');
 };
 
 export default handler;
