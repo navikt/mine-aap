@@ -25,6 +25,7 @@ export const tokenXProxy = async (
     bearerToken: tokenxToken,
     https: false,
   });
+  logger.info(`result from tokenXProxy: ${JSON.stringify(result)}`);
   stopTimer();
 
   return result;
