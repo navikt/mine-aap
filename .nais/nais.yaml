@@ -52,7 +52,7 @@ spec:
     outbound:
       rules:
         - application: soknad-api
-      external:
-        {{#each externals as |host|}}
-        - host: {{host}}
-        {{/each}}
+#      external:
+#        {{#each externals as |host|}}
+#        - host: {{host}}
+#        {{/each}}
