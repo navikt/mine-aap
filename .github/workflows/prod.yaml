@@ -91,6 +91,7 @@ jobs:
       - name: Deploy to PROD
         uses: nais/deploy/actions/deploy@v1
         env:
+          PRINT_PAYLOAD: true
           'APIKEY': ${{ secrets.NAIS_DEPLOY_APIKEY }}
           'CLUSTER': prod-gcp
           'RESOURCE': .nais/nais.yaml,.nais/prod-alerts.yaml
