@@ -40,4 +40,11 @@ export const sendEttersendelse = async (req: NextApiRequest, res: NextApiRespons
   return await tokenXProxy(req, res, `/innsending/ettersend`, '/innsending/ettersend');
 };
 
+export const config = {
+  api: {
+    bodyParser: false,
+    externalResolver: true,
+  },
+};
+
 export default handler;
