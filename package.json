@@ -25,7 +25,7 @@
     "@navikt/next-api-proxy": "^3.0.0",
     "cookie": "^0.5.0",
     "date-fns": "^2.28.0",
-    "html-react-parser": "^3.0.0",
+    "html-react-parser": "^3.0.16",
     "jsdom": "^21.1.1",
     "next": "^13.2.1",
     "node-cache": "^5.1.2",
