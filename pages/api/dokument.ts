@@ -8,6 +8,7 @@ import {
   getAccessTokenFromRequest,
 } from '@navikt/aap-felles-innbygger-utils';
 import metrics from 'lib/metrics';
+import { tokenXProxy } from 'lib/api/tokenXProxy';
 
 const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) => {
   const journalpostId = getStringFromPossiblyArrayQuery(req.query.journalpostId);
@@ -16,7 +17,14 @@ const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) =
     res.status(400).json({ error: 'journalpostId og dokumentId må være satt' });
   }
   const accessToken = getAccessTokenFromRequest(req);
-  const result: Response = await lesDokument(
+
+  return await tokenXProxy(
+    req,
+    res,
+    `/oppslag/dokument/${journalpostId}/${dokumentId}`,
+    '/oppslag/dokument'
+  );
+  /*const result: Response = await lesDokument(
     journalpostId as string,
     dokumentId as string,
     accessToken
@@ -25,6 +33,7 @@ const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) =
   res.setHeader('Content-Type', result.headers.get('Content-Type') ?? '');
   res.setHeader('Content-Disposition', result.headers.get('Content-Disposition') ?? '');
   res.status(200).send(result.body);
+  */
 });
 
 export const lesDokument = async (
@@ -49,6 +58,7 @@ export const lesDokument = async (
 export const config = {
   api: {
     responseLimit: '50mb',
+    bodyParser: false,
   },
 };
 
