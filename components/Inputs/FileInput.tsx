@@ -1,4 +1,4 @@
-import { Upload as SvgUpload } from '@navikt/ds-icons';
+import { UploadIcon } from '@navikt/aksel-icons';
 import { BodyShort } from '@navikt/ds-react';
 import React, { DragEventHandler, useRef, useState } from 'react';
 import { UseFieldArrayAppend } from 'react-hook-form';
@@ -115,7 +115,7 @@ export const FileInput = ({ krav, append, setShowMultipleFilesInfo }: Props) => 
             }
           }}
         >
-          <SvgUpload title={formatMessage('filopplasting.vedlegg.lastOppFil')} />
+          <UploadIcon title={formatMessage('filopplasting.vedlegg.lastOppFil')} />
           {formatMessage('filopplasting.vedlegg.velgDineFiler')}
         </span>
       </label>

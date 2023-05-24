@@ -8,7 +8,7 @@ import { Søknad } from 'lib/types/types';
 import { logger } from '@navikt/aap-felles-innbygger-utils';
 import { getSøknader } from 'pages/api/soknader/soknader';
 import { SoknadPanel } from 'components/SoknadPanel/SoknadPanel';
-import { Left } from '@navikt/ds-icons';
+import { ArrowLeftIcon } from '@navikt/aksel-icons';
 import { useRouter } from 'next/router';
 import NextLink from 'next/link';
 import metrics from 'lib/metrics';
@@ -35,7 +35,7 @@ const Søknader = ({ søknader }: PageProps) => {
       <Section>
         <NextLink href="/" passHref legacyBehavior>
           <Link>
-            <Left />
+            <ArrowLeftIcon />
             {formatMessage('tilbakeTilMineAAPKnapp')}
           </Link>
         </NextLink>
@@ -52,7 +52,7 @@ const Søknader = ({ søknader }: PageProps) => {
       </Section>
       <Section>
         <div>
-          <Button icon={<Left />} variant="tertiary" onClick={() => router.push('/')}>
+          <Button icon={<ArrowLeftIcon />} variant="tertiary" onClick={() => router.push('/')}>
             {formatMessage('tilbakeTilMineAAPKnapp')}
           </Button>
         </div>

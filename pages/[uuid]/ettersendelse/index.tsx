@@ -15,7 +15,7 @@ import { FieldErrors } from 'react-hook-form';
 import { FormErrorSummary } from 'components/FormErrorSummary/FormErrorSummary';
 import { setFocus } from 'lib/utils/dom';
 import NextLink from 'next/link';
-import { Left } from '@navikt/ds-icons';
+import { ArrowLeftIcon } from '@navikt/aksel-icons';
 import { useRouter } from 'next/router';
 import metrics from 'lib/metrics';
 import { formatFullDate } from 'lib/utils/date';
@@ -75,7 +75,7 @@ const Index = ({ søknad }: PageProps) => {
         <Section>
           <NextLink href="/" passHref legacyBehavior>
             <Link>
-              <Left />
+              <ArrowLeftIcon />
               Tilbake til Mine Arbeidsavklaringspenger
             </Link>
           </NextLink>
@@ -133,7 +133,7 @@ const Index = ({ søknad }: PageProps) => {
 
         <Section>
           <div>
-            <Button icon={<Left />} variant="tertiary" onClick={() => router.push('/')}>
+            <Button icon={<ArrowLeftIcon />} variant="tertiary" onClick={() => router.push('/')}>
               {formatMessage('tilbakeTilMineAAPKnapp')}
             </Button>
           </div>
