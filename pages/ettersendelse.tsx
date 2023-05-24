@@ -7,7 +7,7 @@ import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { GetServerSidePropsResult, NextPageContext } from 'next';
 import * as styles from 'pages/[uuid]/ettersendelse/Ettersendelse.module.css';
 import NextLink from 'next/link';
-import { Left } from '@navikt/ds-icons';
+import { ArrowLeftIcon } from '@navikt/aksel-icons';
 import { useRouter } from 'next/router';
 import metrics from 'lib/metrics';
 import { getSøknader } from './api/soknader/soknader';
@@ -39,7 +39,7 @@ const Ettersendelse = () => {
         <Section>
           <NextLink href="/" passHref legacyBehavior>
             <Link>
-              <Left />
+              <ArrowLeftIcon />
               Tilbake til Mine Arbeidsavklaringspenger
             </Link>
           </NextLink>
@@ -73,7 +73,7 @@ const Ettersendelse = () => {
 
         <Section>
           <div>
-            <Button icon={<Left />} variant="tertiary" onClick={() => router.push('/')}>
+            <Button icon={<ArrowLeftIcon />} variant="tertiary" onClick={() => router.push('/')}>
               {formatMessage('tilbakeTilMineAAPKnapp')}
             </Button>
           </div>

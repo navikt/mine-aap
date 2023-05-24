@@ -1,4 +1,4 @@
-import { Cancel, Delete, FileError, FileSuccess } from '@navikt/ds-icons';
+import { XMarkIcon, TrashIcon, FileCheckmarkIcon, FileXMarkIcon } from '@navikt/aksel-icons';
 import { BodyShort, Detail, Label, Link, Loader, Panel } from '@navikt/ds-react';
 import { FieldArrayWithId, FieldErrors, UseFieldArrayRemove } from 'react-hook-form';
 import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
@@ -43,7 +43,7 @@ export const FileUploadFields = ({ fields, krav, remove, errors }: Props) => {
                       {fieldHasError ? (
                         <>
                           <div className={styles?.fileError}>
-                            <FileError color={'var(--a-surface-danger-hover)'} />
+                            <FileXMarkIcon color={'var(--a-surface-danger-hover)'} />
                           </div>
                           <div>
                             <Label id={`${krav}.fields.${index}`}>{attachment.name}</Label>
@@ -52,7 +52,7 @@ export const FileUploadFields = ({ fields, krav, remove, errors }: Props) => {
                       ) : (
                         <>
                           <div className={styles?.fileSuccess}>
-                            <FileSuccess color={'var(--a-icon-success)'} />
+                            <FileCheckmarkIcon color={'var(--a-icon-success)'} />
                           </div>
                           <div>
                             <Link
@@ -82,7 +82,7 @@ export const FileUploadFields = ({ fields, krav, remove, errors }: Props) => {
                     }}
                     className={styles?.deleteAttachment}
                   >
-                    <Cancel title={formatMessage('filopplasting.vedlegg.avbryt')} />
+                    <XMarkIcon title={formatMessage('filopplasting.vedlegg.avbryt')} />
                     <BodyShort>{formatMessage('filopplasting.vedlegg.avbryt')}</BodyShort>
                   </button>
                 )}
@@ -102,7 +102,7 @@ export const FileUploadFields = ({ fields, krav, remove, errors }: Props) => {
                     }}
                     className={styles?.deleteAttachment}
                   >
-                    <Delete title={formatMessage('filopplasting.vedlegg.slett')} />
+                    <TrashIcon title={formatMessage('filopplasting.vedlegg.slett')} />
                     <BodyShort>{formatMessage('filopplasting.vedlegg.slett')}</BodyShort>
                   </button>
                 )}
