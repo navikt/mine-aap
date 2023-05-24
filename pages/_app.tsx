@@ -7,7 +7,7 @@ import messagesNb from 'lib/translations/nb.json';
 import messagesNn from 'lib/translations/nn.json';
 import { IntlProvider } from 'react-intl';
 import { useRouter } from 'next/router';
-import { Locale } from '@navikt/nav-dekoratoren-moduler';
+import { DecoratorLocale } from '@navikt/nav-dekoratoren-moduler';
 import { SUPPORTED_LOCALE } from 'lib/translations/locales';
 import { NavDecorator } from 'components/NavDecorator/NavDecorator';
 import { TimeoutBox } from 'components/TimeoutBox/TimeoutBox';
@@ -40,7 +40,7 @@ const getLocaleOrFallback = (locale?: string) => {
 };
 
 type Messages = {
-  [K in Locale]?: { [name: string]: string };
+  [K in DecoratorLocale]?: { [name: string]: string };
 };
 
 export const messages: Messages = {
