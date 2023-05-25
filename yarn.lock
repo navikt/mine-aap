@@ -902,9 +902,9 @@
     node-cache "^5.1.2"
 
 "@navikt/next-api-proxy@^3.0.0":
-  version "3.0.0"
-  resolved "https://npm.pkg.github.com/download/@navikt/next-api-proxy/3.0.0/b99cd17a5fe443314d170f70c6f4c3f65b0600a5#b99cd17a5fe443314d170f70c6f4c3f65b0600a5"
-  integrity sha512-AheBwRibAC0ioJpUoLPQOXCoDUi0vPIkerLmh58ERcQPZKaZlSN1adDwI85YFYZ4aT0kP7hHqzq2Y4IeJfq36w==
+  version "3.2.0"
+  resolved "https://npm.pkg.github.com/download/@navikt/next-api-proxy/3.2.0/af63cc82c9f4f50f0ab4fd7b4628fe73ae4bfbbf#af63cc82c9f4f50f0ab4fd7b4628fe73ae4bfbbf"
+  integrity sha512-oL0nBKqeQGIs0o5Q5qlBeqxAJXnQgGJfSxPpGKkWvuDFrR685ZJL3SxdH9DnatImm9MMnZyN5ZisRpkgu6VG2g==
 
 "@next/env@13.1.2":
   version "13.1.2"
