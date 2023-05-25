@@ -803,15 +803,15 @@
     "@jridgewell/resolve-uri" "3.1.0"
     "@jridgewell/sourcemap-codec" "1.4.14"
 
-"@navikt/aap-felles-innbygger-css@^0.0.54":
-  version "0.0.54"
-  resolved "https://npm.pkg.github.com/download/@navikt/aap-felles-innbygger-css/0.0.54/495885916972cb229e26a63a1b36b59798ab6dbb#495885916972cb229e26a63a1b36b59798ab6dbb"
-  integrity sha512-h+Kv/nic3jmZaJdW534G1cB5BZStP6JjCDeAFbYu3eh4NxgJDRMBOKyuFXxPKmAoFRjXvo1sHRsdyswqqeDtEA==
+"@navikt/aap-felles-css@^0.0.67":
+  version "0.0.67"
+  resolved "https://npm.pkg.github.com/download/@navikt/aap-felles-css/0.0.67/7df94d5fe1e47da7b96b1fe4c73e6831b236769c#7df94d5fe1e47da7b96b1fe4c73e6831b236769c"
+  integrity sha512-6Nv/UXrPhcQa93YETgCTyogQjgCIvIycw+rd1prjlRODajhbbTnzc9QwtmmchDaXM3eXeKXowRPYLlzXcrzKbg==
 
-"@navikt/aap-felles-innbygger-react@^0.0.54":
-  version "0.0.54"
-  resolved "https://npm.pkg.github.com/download/@navikt/aap-felles-innbygger-react/0.0.54/bfb26dd1fe0d4a8fc74575951fc2124f740762d2#bfb26dd1fe0d4a8fc74575951fc2124f740762d2"
-  integrity sha512-7STEgVdv6iy5bkO4OIkCLJGF0x9C6dQ0LgB6EUmNh2fq0n1s/HNB+/j9peQSlTXk8t5FwKkeGkuyGRZlR0zhRw==
+"@navikt/aap-felles-react@^0.0.67":
+  version "0.0.67"
+  resolved "https://npm.pkg.github.com/download/@navikt/aap-felles-react/0.0.67/80dc89cb583ed1ef5ccac94eee2988b754a65a2a#80dc89cb583ed1ef5ccac94eee2988b754a65a2a"
+  integrity sha512-dwcl4cdFShfOfvebl7K6Qu3ccqhKM5al6+o3sNgVcy9UmVuspDJwDcTaSqD1KgbIBXzJNQFzg5bYVRGCEjf4XQ==
   dependencies:
     "@navikt/ds-css" "^2.0.5"
     "@navikt/ds-icons" "^2.0.5"
@@ -820,10 +820,17 @@
     prop-types "^15.8.1"
     react "^18.2.0"
 
-"@navikt/aap-felles-innbygger-utils@^0.0.54":
-  version "0.0.54"
-  resolved "https://npm.pkg.github.com/download/@navikt/aap-felles-innbygger-utils/0.0.54/f6f4b3ad103e3b48276a9f099cf301895787a6a1#f6f4b3ad103e3b48276a9f099cf301895787a6a1"
-  integrity sha512-5khJvL8hqo1b+IshM3ot/MHdn27jGc3/wLJdAVyLgTB7V965oqxnWk150bmTDU0NMA9zeXLplVgP6BJr7uL2bw==
+"@navikt/aap-felles-utils-client@^0.0.67":
+  version "0.0.67"
+  resolved "https://npm.pkg.github.com/download/@navikt/aap-felles-utils-client/0.0.67/6faecb33de643793f11ff6289b14fd064a10b105#6faecb33de643793f11ff6289b14fd064a10b105"
+  integrity sha512-FjAMCGSfA+nhNqRENgS/D+Jm5Zd+DI1n/Dn3IppZOhzKEU6vbC99hINPbRyaoms2vFuTY/hJVwsGR9qoTJmPCg==
+  dependencies:
+    date-fns "2.29.3"
+
+"@navikt/aap-felles-utils@^0.0.67":
+  version "0.0.67"
+  resolved "https://npm.pkg.github.com/download/@navikt/aap-felles-utils/0.0.67/f3bc41f7b198ffc5aef07ab18e42f93c6e240993#f3bc41f7b198ffc5aef07ab18e42f93c6e240993"
+  integrity sha512-wGilsDcedTSk1VoGfH1xyBNYX7Y6FTSSyCRhn1TgiIlZOWZ7ZKshNqV/5HvbYd1+CBSSnSdFFfLNUMggHovTlg==
   dependencies:
     "@elastic/ecs-pino-format" "1.3.0"
     axios "^1.2.1"
@@ -832,11 +839,6 @@
     openid-client "^5.3.1"
     pino "^8.8.0"
     prom-client "^14.1.0"
-
-"@navikt/aap-felles-utils-client@^0.0.54":
-  version "0.0.54"
-  resolved "https://npm.pkg.github.com/download/@navikt/aap-felles-utils-client/0.0.54/de39c391b57642d3422f503cc7f3adcfb5a85b5b#de39c391b57642d3422f503cc7f3adcfb5a85b5b"
-  integrity sha512-8fAZU3FfezbybWT37zY6YRG6Gbcj8O92vzervs9CUkLeHimkorVig+bsVd1j4rN66sQF7B0fvGl6h6uEx9e3QA==
 
 "@navikt/aksel-icons@^3.2.2", "@navikt/aksel-icons@^3.2.4":
   version "3.2.4"

@@ -6,7 +6,7 @@ import {
   tokenXApiStreamProxy,
   beskyttetApi,
   getAccessTokenFromRequest,
-} from '@navikt/aap-felles-innbygger-utils';
+} from '@navikt/aap-felles-utils';
 import metrics from 'lib/metrics';
 
 const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) => {

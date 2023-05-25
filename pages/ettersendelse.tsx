@@ -2,7 +2,7 @@ import { ReadMore, Label, BodyShort, Button, Heading, Link } from '@navikt/ds-re
 import { FileUpload } from 'components/Inputs/FileUpload';
 import PageHeader from 'components/PageHeader';
 import { Section } from 'components/Section/Section';
-import { beskyttetSide, getAccessToken } from '@navikt/aap-felles-innbygger-utils';
+import { beskyttetSide, getAccessToken } from '@navikt/aap-felles-utils';
 import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { GetServerSidePropsResult, NextPageContext } from 'next';
 import * as styles from 'pages/[uuid]/ettersendelse/Ettersendelse.module.css';
@@ -11,7 +11,7 @@ import { ArrowLeftIcon } from '@navikt/aksel-icons';
 import { useRouter } from 'next/router';
 import metrics from 'lib/metrics';
 import { getSøknader } from './api/soknader/soknader';
-import { LucaGuidePanel, ScanningGuide } from '@navikt/aap-felles-innbygger-react';
+import { LucaGuidePanel, ScanningGuide } from '@navikt/aap-felles-react';
 import { useIntl } from 'react-intl';
 import Head from 'next/head';
 

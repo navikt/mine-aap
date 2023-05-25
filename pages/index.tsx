@@ -1,6 +1,6 @@
 import { getDocuments } from './api/dokumenter';
 import { getSøknader } from './api/soknader/soknader';
-import { beskyttetSide, getAccessToken } from '@navikt/aap-felles-innbygger-utils';
+import { beskyttetSide, getAccessToken } from '@navikt/aap-felles-utils';
 import { BodyShort, Button, Heading } from '@navikt/ds-react';
 import { Card } from 'components/Card/Card';
 import { DokumentoversiktContainer } from 'components/DokumentoversiktNy/DokumentoversiktContainer';

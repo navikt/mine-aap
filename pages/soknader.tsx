@@ -1,11 +1,10 @@
 import { Button, Heading, Link } from '@navikt/ds-react';
 import { NextPageContext, GetServerSidePropsResult } from 'next';
-import { beskyttetSide, getAccessToken } from '@navikt/aap-felles-innbygger-utils';
+import { beskyttetSide, getAccessToken, logger } from '@navikt/aap-felles-utils';
 import { VerticalFlexContainer } from 'components/FlexContainer/VerticalFlexContainer';
 import { Layout } from 'components/Layout/Layout';
 import { Section } from 'components/Section/Section';
 import { Søknad } from 'lib/types/types';
-import { logger } from '@navikt/aap-felles-innbygger-utils';
 import { getSøknader } from 'pages/api/soknader/soknader';
 import { SoknadPanel } from 'components/SoknadPanel/SoknadPanel';
 import { ArrowLeftIcon } from '@navikt/aksel-icons';

@@ -1,6 +1,6 @@
 import { proxyApiRouteRequest } from '@navikt/next-api-proxy';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { getAccessTokenFromRequest, getTokenX, logger } from '@navikt/aap-felles-innbygger-utils';
+import { getAccessTokenFromRequest, getTokenX, logger } from '@navikt/aap-felles-utils';
 import metrics from '../metrics';
 
 export const tokenXProxy = async (
