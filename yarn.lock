@@ -272,7 +272,14 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@^7.13.10", "@babel/runtime@^7.20.7":
+"@babel/runtime@^7.13.10":
+  version "7.21.5"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.21.5.tgz#8492dddda9644ae3bda3b45eabe87382caee7200"
+  integrity sha512-8jI69toZqqcsnqGGqwGS4Qb1VwLOEp4hz+CXPywcvjs60u3B4Pom/U/7rm4W8tMOYEB+E9wgD0mW1l3r8qlI9Q==
+  dependencies:
+    regenerator-runtime "^0.13.11"
+
+"@babel/runtime@^7.20.7":
   version "7.21.0"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.21.0.tgz#5b55c9d394e5fcf304909a8b00c07dc217b56673"
   integrity sha512-xwII0//EObnq89Ji5AKYQaRYiW/nZ3llSv29d49IuxPhKbtJoLP+9QUUZ4nVragQVtaVGeZrpB+ZtG/Pdy/POw==
@@ -378,10 +385,15 @@
   dependencies:
     heap ">= 0.2.0"
 
-"@floating-ui/core@^1.2.3", "@floating-ui/core@^1.2.4":
+"@floating-ui/core@^1.2.3":
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/@floating-ui/core/-/core-1.2.5.tgz#612f0d203e6f647490d572c7b798eebac9e3cf54"
   integrity sha512-qrcbyfnRVziRlB6IYwjCopYhO7Vud750JlJyuljruIXcPxr22y8zdckcJGsuOdnQ639uVD1tTXddrcH3t3QYIQ==
+
+"@floating-ui/core@^1.2.6":
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/@floating-ui/core/-/core-1.2.6.tgz#d21ace437cc919cdd8f1640302fa8851e65e75c0"
+  integrity sha512-EvYTiXet5XqweYGClEmpu3BoxmsQ4hkj3QaYA6qEnigCWffTP3vNRwBReTdrwDwo7OoJ3wM8Uoe9Uk4n+d4hfg==
 
 "@floating-ui/dom@^1.1.0":
   version "1.2.4"
@@ -391,11 +403,11 @@
     "@floating-ui/core" "^1.2.3"
 
 "@floating-ui/dom@^1.2.1":
-  version "1.2.5"
-  resolved "https://registry.yarnpkg.com/@floating-ui/dom/-/dom-1.2.5.tgz#c9ec259a24ce0958b1ea29674df4eee4455361a9"
-  integrity sha512-+sAUfpQ3Frz+VCbPCqj+cZzvEESy3fjSeT/pDWkYCWOBXYNNKZfuVsHuv8/JO2zze8+Eb/Q7a6hZVgzS81fLbQ==
+  version "1.2.8"
+  resolved "https://registry.yarnpkg.com/@floating-ui/dom/-/dom-1.2.8.tgz#aee0f6ccc0787ab8fe741487a6e5e95b7b125375"
+  integrity sha512-XLwhYV90MxiHDq6S0rzFZj00fnDM+A1R9jhSioZoMsa7G0Q0i+Q4x40ajR8FHSdYDE1bgjG45mIWe6jtv9UPmg==
   dependencies:
-    "@floating-ui/core" "^1.2.4"
+    "@floating-ui/core" "^1.2.6"
 
 "@floating-ui/react-dom-interactions@0.9.2":
   version "0.9.2"
@@ -826,10 +838,10 @@
   resolved "https://npm.pkg.github.com/download/@navikt/aap-felles-utils-client/0.0.54/de39c391b57642d3422f503cc7f3adcfb5a85b5b#de39c391b57642d3422f503cc7f3adcfb5a85b5b"
   integrity sha512-8fAZU3FfezbybWT37zY6YRG6Gbcj8O92vzervs9CUkLeHimkorVig+bsVd1j4rN66sQF7B0fvGl6h6uEx9e3QA==
 
-"@navikt/aksel-icons@^3.2.2":
-  version "3.2.2"
-  resolved "https://npm.pkg.github.com/download/@navikt/aksel-icons/3.2.2/05c99d0f26d2092cd8bc5561d46df1d105ceb5cd#05c99d0f26d2092cd8bc5561d46df1d105ceb5cd"
-  integrity sha512-heoVEICnWVE9suPn6+zblxzw9JNLMpJ5dKiScrfE3iwZLQ51Q4PfoYjc/UUC4+PP7MCCVIF3Y2JywZSx6Vj6WQ==
+"@navikt/aksel-icons@^3.2.2", "@navikt/aksel-icons@^3.2.4":
+  version "3.2.4"
+  resolved "https://npm.pkg.github.com/download/@navikt/aksel-icons/3.2.4/abd204c7bb30f3e4811d287aa0a3ec79422c27f3#abd204c7bb30f3e4811d287aa0a3ec79422c27f3"
+  integrity sha512-IJPy2tZ4pSeSb6Cjklomzo3ddrGZRgZsb8Qk0MwdZXi9gsYqsK4goybQ4+uFbfgQgElRDuuEphLNRNkVYu2cUw==
 
 "@navikt/ds-css@^2.0.5":
   version "2.0.5"
@@ -837,9 +849,9 @@
   integrity sha512-s5VTJAt+iUpHZKkgEVVirmA4sVgOimKHxeTlrynlamZeGowI+0uYpvjcUnaGTePab1tkNBGl2Rvh+9DI2TjO2A==
 
 "@navikt/ds-css@^3.2.2":
-  version "3.2.2"
-  resolved "https://npm.pkg.github.com/download/@navikt/ds-css/3.2.2/9cc2f6fe6f9b362f569f2e26aaef805e67a66065#9cc2f6fe6f9b362f569f2e26aaef805e67a66065"
-  integrity sha512-Tc+sJ0SQkDa0rrouOnaVUaYsQ7FkBUX5/MsRNEaAI11/cYiR/C4Ja8m1rdMiGvl1zG71l39Mf/3kHQha8zHvfA==
+  version "3.2.4"
+  resolved "https://npm.pkg.github.com/download/@navikt/ds-css/3.2.4/c668e70581371d36cd297593f13d855b93428758#c668e70581371d36cd297593f13d855b93428758"
+  integrity sha512-Yo4xpvTkotj0JnB9dHes6oQXUz6ilNmw1mM85qfz2Oc+nHmZ3n1cwnLkuN1hBVpWNYdZt/L1u8OHFjnZ2BFwZA==
 
 "@navikt/ds-icons@^2.0.5":
   version "2.0.5"
@@ -861,12 +873,12 @@
     react-modal "3.15.1"
 
 "@navikt/ds-react@^3.2.2":
-  version "3.2.2"
-  resolved "https://npm.pkg.github.com/download/@navikt/ds-react/3.2.2/2d9a1a2a9ab943fb4edcbed7a120e4914d6649c2#2d9a1a2a9ab943fb4edcbed7a120e4914d6649c2"
-  integrity sha512-V8aCqEPmtOiOZ0cgb9ccQ33x22KeOjSw/S41wVuIZKOjUhj/+WJep8YvADtdm32JRp8VJuYeCZCMPtVQTgdRrw==
+  version "3.2.4"
+  resolved "https://npm.pkg.github.com/download/@navikt/ds-react/3.2.4/5df7838128b5ecc4b98ff1a0c2cf994819d5d0e1#5df7838128b5ecc4b98ff1a0c2cf994819d5d0e1"
+  integrity sha512-/9Enw2QY894MS+DYo3gQmUX4NM/DRATXkM/uNKDQywNthPm2j6TwqIFKEz45fB5aw+BA6DbLrwv9awLM+ugldw==
   dependencies:
     "@floating-ui/react" "0.17.0"
-    "@navikt/aksel-icons" "^3.2.2"
+    "@navikt/aksel-icons" "^3.2.4"
     "@radix-ui/react-tabs" "1.0.0"
     "@radix-ui/react-toggle-group" "1.0.0"
     clsx "^1.2.1"
@@ -5484,9 +5496,9 @@ synckit@^0.8.4:
     tslib "^2.5.0"
 
 tabbable@^6.0.1:
-  version "6.1.1"
-  resolved "https://registry.yarnpkg.com/tabbable/-/tabbable-6.1.1.tgz#40cfead5ed11be49043f04436ef924c8890186a0"
-  integrity sha512-4kl5w+nCB44EVRdO0g/UGoOp3vlwgycUVtkk/7DPyeLZUCuNFFKCFG6/t/DgHLrUPHjrZg6s5tNm+56Q2B0xyg==
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/tabbable/-/tabbable-6.1.2.tgz#b0d3ca81d582d48a80f71b267d1434b1469a3703"
+  integrity sha512-qCN98uP7i9z0fIS4amQ5zbGBOq+OSigYeGvPy7NDk8Y9yncqDZ9pRPgfsc2PJIVM9RrJj7GIfuRgmjoUU9zTHQ==
 
 tapable@^2.2.0:
   version "2.2.1"
@@ -5597,7 +5609,12 @@ tslib@^1.8.1:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
 
-tslib@^2.0.0, tslib@^2.1.0, tslib@^2.4.0, tslib@^2.5.0:
+tslib@^2.0.0:
+  version "2.5.2"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.5.2.tgz#1b6f07185c881557b0ffa84b111a0106989e8338"
+  integrity sha512-5svOrSA2w3iGFDs1HibEVBGbDrAY82bFQ3HZ3ixB+88nsbsWQoKqDRb5UBYAUPEzbBn6dAp5gRNXglySbx1MlA==
+
+tslib@^2.1.0, tslib@^2.4.0, tslib@^2.5.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.5.0.tgz#42bfed86f5787aeb41d031866c8f402429e0fddf"
   integrity sha512-336iVw3rtn2BUK7ORdIAHTyxHGRIHVReokCR3XjbckJMK7ms8FysBfhLR8IXnAgy7T0PTPNBWKiH514FOW/WSg==
