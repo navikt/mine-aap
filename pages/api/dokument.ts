@@ -1,6 +1,6 @@
 import { getStringFromPossiblyArrayQuery } from '@navikt/aap-felles-utils-client';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { beskyttetApi, getAccessTokenFromRequest } from '@navikt/aap-felles-innbygger-utils';
+import { beskyttetApi, getAccessTokenFromRequest } from '@navikt/aap-felles-utils';
 import { tokenXProxy } from 'lib/api/tokenXProxy';
 
 const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) => {

@@ -13,10 +13,10 @@
     "postinstall": "patch-package"
   },
   "dependencies": {
-    "@navikt/aap-felles-innbygger-css": "^0.0.54",
-    "@navikt/aap-felles-innbygger-react": "^0.0.54",
-    "@navikt/aap-felles-innbygger-utils": "^0.0.54",
-    "@navikt/aap-felles-utils-client": "^0.0.54",
+    "@navikt/aap-felles-css": "^0.0.67",
+    "@navikt/aap-felles-react": "^0.0.67",
+    "@navikt/aap-felles-utils": "^0.0.67",
+    "@navikt/aap-felles-utils-client": "^0.0.67",
     "@navikt/aksel-icons": "^3.2.2",
     "@navikt/ds-css": "^3.2.2",
     "@navikt/ds-react": "^3.2.2",

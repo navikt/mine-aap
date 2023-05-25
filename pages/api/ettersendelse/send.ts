@@ -5,7 +5,7 @@ import {
   beskyttetApi,
   getAccessTokenFromRequest,
   tokenXApiProxy,
-} from '@navikt/aap-felles-innbygger-utils';
+} from '@navikt/aap-felles-utils';
 import metrics from 'lib/metrics';
 import { Ettersendelse, EttersendelseBackendState } from 'lib/types/types';
 

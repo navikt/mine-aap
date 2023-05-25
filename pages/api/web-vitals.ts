@@ -1,4 +1,4 @@
-import { logger } from '@navikt/aap-felles-innbygger-utils';
+import { logger } from '@navikt/aap-felles-utils';
 import metrics from 'lib/metrics';
 import { WebVital } from 'lib/types/webWital';
 import { NextApiRequest, NextApiResponse } from 'next';

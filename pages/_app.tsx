@@ -1,5 +1,5 @@
 import '@navikt/ds-css';
-import '@navikt/aap-felles-innbygger-css';
+import '@navikt/aap-felles-css';
 import 'styles/globals.css';
 import type { AppProps, NextWebVitalsMetric } from 'next/app';
 import { useEffect } from 'react';
