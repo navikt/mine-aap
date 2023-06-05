@@ -53,10 +53,10 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   useEffect(() => {
     initializeFaro({
-      url: 'https://telemetry.ekstern.dev.nav.no/collect',
+      url: process.env.NEXT_PUBLIC_FARO_URL ?? '',
       app: {
         name: 'aap-mine-aap',
-        version: 'dev',
+        version: process.env.NEXT_PUBLIC_ENVIRONMENT ?? '',
       },
     });
   }, []);
