@@ -17,3 +17,5 @@ const Debug = () => {
     </div>
   );
 };
+
+export default Debug;
