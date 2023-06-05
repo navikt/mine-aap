@@ -13,6 +13,7 @@
     "postinstall": "patch-package"
   },
   "dependencies": {
+    "@grafana/faro-web-sdk": "^1.0.5",
     "@navikt/aap-felles-css": "^0.0.67",
     "@navikt/aap-felles-react": "^0.0.67",
     "@navikt/aap-felles-utils": "^0.0.67",

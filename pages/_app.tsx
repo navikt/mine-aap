@@ -11,8 +11,7 @@ import { DecoratorLocale } from '@navikt/nav-dekoratoren-moduler';
 import { SUPPORTED_LOCALE } from 'lib/translations/locales';
 import { NavDecorator } from 'components/NavDecorator/NavDecorator';
 import { TimeoutBox } from 'components/TimeoutBox/TimeoutBox';
-import { WebVital } from 'lib/types/webWital';
-import { replaceUUIDsInString } from '@navikt/aap-felles-utils-client';
+import { initializeFaro } from '@grafana/faro-web-sdk';
 
 function flattenMessages(nestedMessages: object, prefix = ''): Record<string, string> {
   return Object.keys(nestedMessages).reduce((messages, key) => {
@@ -48,21 +47,19 @@ export const messages: Messages = {
   nn: flattenMessages(messagesNn),
 };
 
-export const reportWebVitals = (metric: NextWebVitalsMetric) => {
-  const webVital: WebVital = {
-    name: metric.name,
-    label: metric.label,
-    value: metric.value,
-    path: replaceUUIDsInString(window.location.pathname),
-  };
-  if (navigator.sendBeacon) {
-    navigator.sendBeacon('/aap/mine-aap/api/web-vitals', JSON.stringify(webVital));
-  }
-};
-
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const locale = getLocaleOrFallback(router.locale);
+
+  useEffect(() => {
+    initializeFaro({
+      url: 'https://telemetry.ekstern.dev.nav.no/collect',
+      app: {
+        name: 'aap-mine-aap',
+        version: 'dev',
+      },
+    });
+  }, []);
 
   return (
     <>
