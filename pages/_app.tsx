@@ -1,7 +1,7 @@
 import '@navikt/ds-css';
 import '@navikt/aap-felles-css';
 import 'styles/globals.css';
-import type { AppProps, NextWebVitalsMetric } from 'next/app';
+import type { AppProps } from 'next/app';
 import { useEffect } from 'react';
 import messagesNb from 'lib/translations/nb.json';
 import messagesNn from 'lib/translations/nn.json';
@@ -52,13 +52,15 @@ function MyApp({ Component, pageProps }: AppProps) {
   const locale = getLocaleOrFallback(router.locale);
 
   useEffect(() => {
-    initializeFaro({
-      url: process.env.NEXT_PUBLIC_FARO_URL ?? '',
-      app: {
-        name: 'aap-mine-aap',
-        version: process.env.NEXT_PUBLIC_ENVIRONMENT ?? '',
-      },
-    });
+    if (process.env.NEXT_PUBLIC_FARO_URL) {
+      initializeFaro({
+        url: process.env.NEXT_PUBLIC_FARO_URL,
+        app: {
+          name: 'aap-mine-aap',
+          version: process.env.NEXT_PUBLIC_ENVIRONMENT ?? '',
+        },
+      });
+    }
   }, []);
 
   return (
