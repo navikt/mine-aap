@@ -1,4 +1,3 @@
-import { NextApiRequest, NextApiResponse } from 'next';
 import { mockDokumenter } from 'lib/mock/mockDokumenter';
 import {
   logger,
@@ -9,7 +8,7 @@ import {
 } from '@navikt/aap-felles-utils';
 import metrics from 'lib/metrics';
 
-const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) => {
+const handler = beskyttetApi(async (req, res) => {
   const accessToken = getAccessTokenFromRequest(req);
   const dokumenter = await getDocuments(accessToken);
   res.status(200).json(dokumenter);

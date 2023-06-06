@@ -1,9 +1,8 @@
 import { getStringFromPossiblyArrayQuery } from '@navikt/aap-felles-utils-client';
-import { NextApiRequest, NextApiResponse } from 'next';
 import { beskyttetApi, getAccessTokenFromRequest } from '@navikt/aap-felles-utils';
 import { tokenXProxy } from 'lib/api/tokenXProxy';
 
-const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) => {
+const handler = beskyttetApi(async (req, res) => {
   const journalpostId = getStringFromPossiblyArrayQuery(req.query.journalpostId);
   const dokumentId = getStringFromPossiblyArrayQuery(req.query.dokumentId);
   if (!journalpostId || !dokumentId) {
@@ -13,6 +12,7 @@ const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) =
 
   return await tokenXProxy(
     req,
+    /* @ts-ignore: TODO: Følge opp med tokenXproxy repo for å fikse type */
     res,
     `/oppslag/dokument/${journalpostId}/${dokumentId}`,
     '/oppslag/dokument'

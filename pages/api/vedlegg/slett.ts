@@ -1,4 +1,3 @@
-import { NextApiRequest, NextApiResponse } from 'next';
 import { getCommaSeparatedStringFromStringOrArray } from '@navikt/aap-felles-utils-client';
 import {
   logger,
@@ -9,7 +8,7 @@ import {
 } from '@navikt/aap-felles-utils';
 import metrics from 'lib/metrics';
 
-const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) => {
+const handler = beskyttetApi(async (req, res) => {
   const uuids = req.query.uuid ?? [];
   if (!uuids) {
     res.status(400).json({ error: 'uuid må være en string' });
