@@ -1,4 +1,3 @@
-import { NextApiRequest, NextApiResponse } from 'next';
 import {
   logger,
   isMock,
@@ -9,7 +8,7 @@ import {
 import metrics from 'lib/metrics';
 import { Ettersendelse, EttersendelseBackendState } from 'lib/types/types';
 
-const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) => {
+const handler = beskyttetApi(async (req, res) => {
   const accessToken = getAccessTokenFromRequest(req);
   const { ettersendteVedlegg, søknadId, totalFileSize }: Ettersendelse = JSON.parse(req.body);
   const body: EttersendelseBackendState = {

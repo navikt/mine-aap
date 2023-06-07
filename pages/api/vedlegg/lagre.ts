@@ -1,5 +1,4 @@
 import { randomUUID } from 'crypto';
-import { NextApiRequest, NextApiResponse } from 'next';
 import {
   logger,
   isMock,
@@ -9,7 +8,7 @@ import {
 } from '@navikt/aap-felles-utils';
 import metrics from 'lib/metrics';
 
-const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) => {
+const handler = beskyttetApi(async (req, res) => {
   logger.info('Har mottatt request om filopplasting');
   const accessToken = getAccessTokenFromRequest(req);
   if (isMock()) {

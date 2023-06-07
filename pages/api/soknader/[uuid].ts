@@ -1,4 +1,3 @@
-import { NextApiRequest, NextApiResponse } from 'next';
 import { mockSøknader } from 'lib/mock/mockSoknad';
 import { getStringFromPossiblyArrayQuery } from '@navikt/aap-felles-utils-client';
 import {
@@ -10,7 +9,7 @@ import {
 } from '@navikt/aap-felles-utils';
 import metrics from 'lib/metrics';
 
-const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) => {
+const handler = beskyttetApi(async (req, res) => {
   const accessToken = getAccessTokenFromRequest(req);
   const uuid = getStringFromPossiblyArrayQuery(req.query.uuid);
   if (!uuid) {
