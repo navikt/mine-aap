@@ -103,8 +103,11 @@ export const getServerSideProps = beskyttetSide(
     const stopTimer = metrics.getServersidePropsDurationHistogram.startTimer({ path: '/' });
     const bearerToken = getAccessToken(ctx);
     const params = { page: '0', size: '1', sort: 'created,desc' };
-    const søknader = await getSøknader(params, bearerToken);
-    const dokumenter = await getDocuments(bearerToken);
+
+    const [søknader, dokumenter] = await Promise.all([
+      getSøknader(params, bearerToken),
+      getDocuments(bearerToken),
+    ]);
 
     stopTimer();
 
