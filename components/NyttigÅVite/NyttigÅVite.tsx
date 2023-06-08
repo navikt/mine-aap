@@ -103,9 +103,7 @@ export const NyttigÅVite = () => {
               a: (chunks) => (
                 <Link
                   target="_blank"
-                  href={
-                    'https://www.nav.no/soknader/nb/person/arbeid/arbeidsavklaringspenger/NAV%2011-13.05/klage-eller-anke/brev'
-                  }
+                  href={'https://klage.nav.no/nb/arbeid/arbeidsavklaringspenger'}
                 >
                   {chunks}
                 </Link>
