@@ -44,7 +44,7 @@ export const mapSafResponseToDokumenter = (safResponse: SafResponse): Dokument[]
         journalpostId: journalpost.journalpostId,
         type: journalpost.journalposttype,
         dato:
-          journalpost.relevanteDatoer.find((dato) => dato.datoType === 'DATO_REGISTRERT')?.dato ??
+          journalpost.relevanteDatoer.find((dato) => dato.datoType === 'DATO_OPPRETTET')?.dato ??
           '',
         innsendingsId: '',
       });
