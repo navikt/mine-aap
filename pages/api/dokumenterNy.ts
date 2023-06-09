@@ -18,7 +18,7 @@ export interface SafResponse {
           relevanteDatoer: [
             {
               dato: string;
-              datoType: string;
+              datotype: string;
             }
           ];
           tittel: string;
@@ -44,7 +44,7 @@ export const mapSafResponseToDokumenter = (safResponse: SafResponse): Dokument[]
         journalpostId: journalpost.journalpostId,
         type: journalpost.journalposttype,
         dato:
-          journalpost.relevanteDatoer.find((dato) => dato.datoType === 'DATO_OPPRETTET')?.dato ??
+          journalpost.relevanteDatoer.find((dato) => dato.datotype === 'DATO_OPPRETTET')?.dato ??
           '',
         innsendingsId: '',
       });
