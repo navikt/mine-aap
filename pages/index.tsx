@@ -1,4 +1,4 @@
-import { getDocuments } from './api/dokumenter';
+import { getDocuments, mapSafResponseToDokumenter } from './api/dokumenterNy';
 import { getSøknader } from './api/soknader/soknader';
 import { beskyttetSide, getAccessToken } from '@navikt/aap-felles-utils';
 import { BodyShort, Button, Heading } from '@navikt/ds-react';
@@ -104,7 +104,7 @@ export const getServerSideProps = beskyttetSide(
     const bearerToken = getAccessToken(ctx);
     const params = { page: '0', size: '1', sort: 'created,desc' };
 
-    const [søknader, dokumenter] = await Promise.all([
+    const [søknader, safResponse] = await Promise.all([
       getSøknader(params, bearerToken),
       getDocuments(bearerToken),
     ]);
@@ -112,7 +112,7 @@ export const getServerSideProps = beskyttetSide(
     stopTimer();
 
     return {
-      props: { søknader, dokumenter },
+      props: { søknader, dokumenter: mapSafResponseToDokumenter(safResponse) },
     };
   }
 );
