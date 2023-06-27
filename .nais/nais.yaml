@@ -31,6 +31,9 @@ spec:
   prometheus:
     enabled: true
     path: /aap/mine-aap/api/internal/prometheus/
+  observability:
+    tracing:
+      enabled: true
   idporten:
     enabled: true
     sidecar:
