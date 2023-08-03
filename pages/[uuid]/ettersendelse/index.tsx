@@ -152,7 +152,6 @@ export const getServerSideProps = beskyttetSide(
     const uuid = getStringFromPossiblyArrayQuery(ctx.query.uuid);
     const søknad = await getSøknad(uuid as string, bearerToken);
 
-    logger.info(`Søknad ${JSON.stringify(søknad)}`);
     stopTimer();
     if (!søknad) {
       return {
