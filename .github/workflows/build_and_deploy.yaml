@@ -43,6 +43,6 @@ jobs:
     secrets: inherit
     with:
       cluster: prod-gcp
-      manifest: .nais/nais.yaml
+      manifest: .nais/nais.yaml,.nais/prod-alerts.yaml
       imageSuffix: -prod-gcp
-      vars: .nais/prod.yaml,.nais/prod-alerts.yaml
+      vars: .nais/prod.yaml
