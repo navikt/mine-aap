@@ -24,4 +24,5 @@ jobs:
     with:
       cluster: dev-gcp
       manifest: .nais/nais.yaml
+      imageSuffix: -dev-gcp
       vars: .nais/dev.yaml
