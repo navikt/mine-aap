@@ -273,11 +273,11 @@
     regenerator-runtime "^0.13.4"
 
 "@babel/runtime@^7.13.10":
-  version "7.22.6"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.22.6.tgz#57d64b9ae3cff1d67eb067ae117dac087f5bd438"
-  integrity sha512-wDb5pWm4WDdF6LFUde3Jl8WzPA+3ZbxYqkC6xAXuD3irdEHN1k0NfTRrJD8ZD378SJ61miMLCqIOXYhd8x+AJQ==
+  version "7.22.10"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.22.10.tgz#ae3e9631fd947cb7e3610d3e9d8fef5f76696682"
+  integrity sha512-21t/fkKLMZI4pqP2wlmsQAWnYW1PDyKyyUV4vCi+B25ydmdaYTKXPwCj0BzSUnZf4seIiYvSA3jcZ3gdsMFkLQ==
   dependencies:
-    regenerator-runtime "^0.13.11"
+    regenerator-runtime "^0.14.0"
 
 "@babel/runtime@^7.20.7":
   version "7.21.0"
@@ -856,15 +856,15 @@
     "@jridgewell/resolve-uri" "3.1.0"
     "@jridgewell/sourcemap-codec" "1.4.14"
 
-"@navikt/aap-felles-css@^0.0.70":
-  version "0.0.70"
-  resolved "https://npm.pkg.github.com/download/@navikt/aap-felles-css/0.0.70/20e3e7034f42ec721bc455422bf040ed6ea1c9d9"
-  integrity sha512-pCHy9mov9OQnr2Llq9LBNfNEo0pZjM1DKwBNKujd/o5FfA2lV/HtwzZfT5HM3cvxsaMB++MuV0R+3Hd9YgdG+w==
+"@navikt/aap-felles-css@^0.0.72":
+  version "0.0.72"
+  resolved "https://npm.pkg.github.com/download/@navikt/aap-felles-css/0.0.72/943bbe40daa5d7361bfdb96a0af69b882eb75ad5#943bbe40daa5d7361bfdb96a0af69b882eb75ad5"
+  integrity sha512-bhvJtBQv+a0B/8dk6e4Nq/Jp7N2unjwEfsBWTmrvz/GOvobAo+hoqhDCWnEtkZhYAUoRUhnH9IM8Fidy30NBbg==
 
-"@navikt/aap-felles-react@^0.0.70":
-  version "0.0.70"
-  resolved "https://npm.pkg.github.com/download/@navikt/aap-felles-react/0.0.70/396d4cfea0219756c1851aa4e026a5be9a29e391"
-  integrity sha512-Pu34RbeiR3jkfxj1CLgKZ9Oc8y8fL2BGkCE0OvH8HydTB9Ou9WxlUVrarPt6RSobrT8CtcfFIY5t/IcekEGarg==
+"@navikt/aap-felles-react@^0.0.72":
+  version "0.0.72"
+  resolved "https://npm.pkg.github.com/download/@navikt/aap-felles-react/0.0.72/9564c87167487f0d021e6271fa59d5eae9434c62#9564c87167487f0d021e6271fa59d5eae9434c62"
+  integrity sha512-InpndvdyqH+Ka/PxnRLlqT088X1KA+0fgengWQ1/4Qy/0V3JrvmK96gTgcjmPqe0yewv+H4sxHKYAtcno+EH0w==
   dependencies:
     "@navikt/ds-css" "^2.0.5"
     "@navikt/ds-icons" "^2.0.5"
@@ -873,17 +873,17 @@
     prop-types "^15.8.1"
     react "^18.2.0"
 
-"@navikt/aap-felles-utils-client@^0.0.70":
-  version "0.0.70"
-  resolved "https://npm.pkg.github.com/download/@navikt/aap-felles-utils-client/0.0.70/1e6acbf258371cccdc9b2f1a35adbf1b9a14dd14"
-  integrity sha512-q2ks67vpYOF6sYzvBCNA5EXxWvvVv4q/dpvmP1VL1vHsBwVYcZd3mujkG6jiRMd/3qzlSAlWUreV4yldSFTp8g==
+"@navikt/aap-felles-utils-client@^0.0.72":
+  version "0.0.72"
+  resolved "https://npm.pkg.github.com/download/@navikt/aap-felles-utils-client/0.0.72/cb93b6a179f7b74b4893139a03ccbe50d5385e56#cb93b6a179f7b74b4893139a03ccbe50d5385e56"
+  integrity sha512-pxNpRq9hehePkYN5Dx2cHV0hmBDEK/Vm3ABzIJ/sanPKiTFYLmGS4flOvxk4KWnsG+23JXLFQrTqZzIVWZewrQ==
   dependencies:
     date-fns "2.29.3"
 
-"@navikt/aap-felles-utils@^0.0.70":
-  version "0.0.70"
-  resolved "https://npm.pkg.github.com/download/@navikt/aap-felles-utils/0.0.70/474e47793a1cb99d647145639cd690a6fd0d6e86"
-  integrity sha512-VyTQGCaJQJeIqj3smIdfbxERTaaO1aHE/O196fnQV8hMdQqHdWaD/i8fS6wGCf1eR462dwUtdmn3VBe5Tv4cXQ==
+"@navikt/aap-felles-utils@^0.0.72":
+  version "0.0.72"
+  resolved "https://npm.pkg.github.com/download/@navikt/aap-felles-utils/0.0.72/c677dc3336dfb2c36bc848d13ff0dc4dcb0f56e9#c677dc3336dfb2c36bc848d13ff0dc4dcb0f56e9"
+  integrity sha512-Uj7dXGDkixxbRnUQKoYmtS+KTvDtR8hrZ1MNaWTJGs+uqX9uJKyAUxfUzWNrDRz2NOzNtn5TEK7/uHOny0lQoA==
   dependencies:
     "@elastic/ecs-pino-format" "1.3.0"
     axios "^1.2.1"
@@ -893,10 +893,10 @@
     pino "^8.8.0"
     prom-client "^14.1.0"
 
-"@navikt/aksel-icons@^4.4.1", "@navikt/aksel-icons@^4.7.2":
-  version "4.7.2"
-  resolved "https://npm.pkg.github.com/download/@navikt/aksel-icons/4.7.2/217c844b451f517a7262e532c3848c53509295be#217c844b451f517a7262e532c3848c53509295be"
-  integrity sha512-pFZg5yCX6QMsyyl8j/O3bF3EBqMiIF00Bo2CAdVl4V1JVQNBTJ5Ed6Tktmq0mtv4vBE5C7NvRelUeUN+Jex+/Q==
+"@navikt/aksel-icons@^4.4.1", "@navikt/aksel-icons@^4.9.0":
+  version "4.9.0"
+  resolved "https://npm.pkg.github.com/download/@navikt/aksel-icons/4.9.0/041744a25684a8cee8c3375c2f9b929ea1cdcb93#041744a25684a8cee8c3375c2f9b929ea1cdcb93"
+  integrity sha512-WOTkelI+W1VR0VvC6DyTznHcgCcYq5BTWIHU3zmPJMi2ImfmOAP768kGW8imxQ600hN9bTwnjBZixAC5pFsM6A==
 
 "@navikt/ds-css@^2.0.5":
   version "2.0.5"
@@ -904,9 +904,9 @@
   integrity sha512-s5VTJAt+iUpHZKkgEVVirmA4sVgOimKHxeTlrynlamZeGowI+0uYpvjcUnaGTePab1tkNBGl2Rvh+9DI2TjO2A==
 
 "@navikt/ds-css@^4.4.1":
-  version "4.7.2"
-  resolved "https://npm.pkg.github.com/download/@navikt/ds-css/4.7.2/68cc42891f6ac554168c6249ab2d799229982e51#68cc42891f6ac554168c6249ab2d799229982e51"
-  integrity sha512-EvbwCbsCoVprOBz+f83IkNLLvkA/dkkKVhKlSEHFrSNPbp7GR1zIRuNOQ8LLr9xhhQAace4HQCRhOV4iR8+rWQ==
+  version "4.9.0"
+  resolved "https://npm.pkg.github.com/download/@navikt/ds-css/4.9.0/bbe29245205e41026bebe4bbcfa1e682b1149e81#bbe29245205e41026bebe4bbcfa1e682b1149e81"
+  integrity sha512-jR3cpspyrt2XQVUcu26g0wEKwDEsMZw3BdE02PIiBa9ucULxv92lj/N+nEbzTSl4jK4Xf9waWUhuepvVPJu2tg==
 
 "@navikt/ds-icons@^2.0.5":
   version "2.0.5"
@@ -928,12 +928,12 @@
     react-modal "3.15.1"
 
 "@navikt/ds-react@^4.4.1":
-  version "4.7.2"
-  resolved "https://npm.pkg.github.com/download/@navikt/ds-react/4.7.2/06504ebc7d27702f80c8fde9144ff42be5efb177#06504ebc7d27702f80c8fde9144ff42be5efb177"
-  integrity sha512-u62Z0OevPx3tDcxuX6JEEzfjDAPBBsPAXa5+OfM+jV1tw8wEuv2Vy/55BV5lzkbnYTAeMaXw+ZZeKrx9EEq/ug==
+  version "4.9.0"
+  resolved "https://npm.pkg.github.com/download/@navikt/ds-react/4.9.0/15ffd74b3a4cf9edfbf88ae4ed67417bed1d26c1#15ffd74b3a4cf9edfbf88ae4ed67417bed1d26c1"
+  integrity sha512-BlUFXT0AqWpj+SiOEsSujG5zvpZvm2+KIeBAaj7OneVwotaECVi9rkCpdpNQLKlmGIQatDSkSgrpCf4sNEEphw==
   dependencies:
     "@floating-ui/react" "0.24.1"
-    "@navikt/aksel-icons" "^4.7.2"
+    "@navikt/aksel-icons" "^4.9.0"
     "@radix-ui/react-tabs" "1.0.0"
     "@radix-ui/react-toggle-group" "1.0.0"
     clsx "^1.2.1"
@@ -947,9 +947,9 @@
   integrity sha512-nqRd50hJ5AGOBOVQh6FpWiR0XYwgO0Ybf8Z/r6F5doi+ZX8vOV1DwTboapyMfJsQOEv5ph+oGGSNCDo5nFNRIQ==
 
 "@navikt/nav-dekoratoren-moduler@^2.1.0":
-  version "2.1.0"
-  resolved "https://npm.pkg.github.com/download/@navikt/nav-dekoratoren-moduler/2.1.0/970a8892f4b1b23190c77363f84054a1169fef8a#970a8892f4b1b23190c77363f84054a1169fef8a"
-  integrity sha512-zF/K8lnl7941cJwYfcuQzn9ZWSoBKWXTT0APmcEM0R8jbIVSesSo2rDgBuvS+nGf1GxrvGQFac9IGIQdRHcW7Q==
+  version "2.1.1"
+  resolved "https://npm.pkg.github.com/download/@navikt/nav-dekoratoren-moduler/2.1.1/376c613ecbbf7dec44b182b20d6140848214ff3f#376c613ecbbf7dec44b182b20d6140848214ff3f"
+  integrity sha512-asnWDbNBoN8uMrvrEDiqDb0TVdAcprluDKY2APm3lxtEPN1GRhK1fMhYI4BOYQIAegRQU3NRmdL7p5/fJDB1kg==
   dependencies:
     csp-header "^5.1.0"
     html-react-parser "^3.0.16"
@@ -2578,7 +2578,7 @@ cross-spawn@^7.0.2, cross-spawn@^7.0.3:
 
 csp-header@^5.1.0:
   version "5.1.0"
-  resolved "https://registry.npmjs.org/csp-header/-/csp-header-5.1.0.tgz"
+  resolved "https://registry.yarnpkg.com/csp-header/-/csp-header-5.1.0.tgz#6aa7aecbc2b4118e808f8e50106dc918c4f16f62"
   integrity sha512-HIKOtf0g4LrWSZKKZA/VSvjU7wLFknXW31NqvCfkkAU6g6RObEbR+E1TLThx4nfE1ozY4be9/5p+u6hmyVi7OQ==
 
 css.escape@^1.5.1:
@@ -2773,7 +2773,7 @@ dom-accessibility-api@^0.5.6, dom-accessibility-api@^0.5.9:
 
 dom-serializer@^2.0.0:
   version "2.0.0"
-  resolved "https://registry.npmjs.org/dom-serializer/-/dom-serializer-2.0.0.tgz"
+  resolved "https://registry.yarnpkg.com/dom-serializer/-/dom-serializer-2.0.0.tgz#e41b802e1eedf9f6cae183ce5e622d789d7d8e53"
   integrity sha512-wIkAryiqt/nV5EQKqQpo3SToSOV9J0DnbJqwK7Wv/Trc92zIAYZ4FlMu+JPFW1DfGFt81ZTCGgDEabffXeLyJg==
   dependencies:
     domelementtype "^2.3.0"
@@ -2782,7 +2782,7 @@ dom-serializer@^2.0.0:
 
 domelementtype@^2.3.0:
   version "2.3.0"
-  resolved "https://registry.npmjs.org/domelementtype/-/domelementtype-2.3.0.tgz"
+  resolved "https://registry.yarnpkg.com/domelementtype/-/domelementtype-2.3.0.tgz#5c45e8e869952626331d7aab326d01daf65d589d"
   integrity sha512-OLETBj6w0OsagBwdXnPdN0cnMfF9opN69co+7ZrbfPGrdpPVNBUj02spi6B1N7wChLQiPn4CSH/zJvXw56gmHw==
 
 domexception@^4.0.0:
@@ -2794,7 +2794,7 @@ domexception@^4.0.0:
 
 domhandler@5.0.3, domhandler@^5.0.2, domhandler@^5.0.3:
   version "5.0.3"
-  resolved "https://registry.npmjs.org/domhandler/-/domhandler-5.0.3.tgz"
+  resolved "https://registry.yarnpkg.com/domhandler/-/domhandler-5.0.3.tgz#cc385f7f751f1d1fc650c21374804254538c7d31"
   integrity sha512-cgwlv/1iFQiFnU96XXgROh8xTeetsnJiDsTc7TYCLFd9+/WNkIqPTxiM/8pSd8VIrhXGTf1Ny1q1hquVqDJB5w==
   dependencies:
     domelementtype "^2.3.0"
@@ -3663,7 +3663,7 @@ hoist-non-react-statics@^3.3.0, hoist-non-react-statics@^3.3.2:
 
 html-dom-parser@3.1.7:
   version "3.1.7"
-  resolved "https://registry.npmjs.org/html-dom-parser/-/html-dom-parser-3.1.7.tgz"
+  resolved "https://registry.yarnpkg.com/html-dom-parser/-/html-dom-parser-3.1.7.tgz#89debae290d1117ad98a174264bb478dce3f3e74"
   integrity sha512-cDgNF4YgF6J3H+d9mcldGL19p0GzVdS3iGuDNzYWQpU47q3+IRM85X3Xo07E+nntF4ek4s78A9V24EwxlPTjig==
   dependencies:
     domhandler "5.0.3"
@@ -3691,7 +3691,7 @@ html-escaper@^2.0.0:
 
 html-react-parser@^3.0.16:
   version "3.0.16"
-  resolved "https://registry.npmjs.org/html-react-parser/-/html-react-parser-3.0.16.tgz"
+  resolved "https://registry.yarnpkg.com/html-react-parser/-/html-react-parser-3.0.16.tgz#bdd535a7730683c6d0ec60e7493e5d7a5463c8ca"
   integrity sha512-ysQZtRFPcg+McVb4B05oNWSnqM14zagpvTgGcI5e1/BvCl38YwzWzKibrbBmXeemg70olN1bAoeixo7o06G5Eg==
   dependencies:
     domhandler "5.0.3"
@@ -3711,7 +3711,7 @@ html-react-parser@^4.0.0:
 
 htmlparser2@8.0.2:
   version "8.0.2"
-  resolved "https://registry.npmjs.org/htmlparser2/-/htmlparser2-8.0.2.tgz"
+  resolved "https://registry.yarnpkg.com/htmlparser2/-/htmlparser2-8.0.2.tgz#f002151705b383e62433b5cf466f5b716edaec21"
   integrity sha512-GYdjWKDkbRLkZ5geuHs5NY1puJ+PXwP7+fHPRz06Eirsb9ugf6d8kkXav6ADhcODhFFPMIXyxkxSuMf3D6NCFA==
   dependencies:
     domelementtype "^2.3.0"
@@ -3814,7 +3814,7 @@ inherits@2:
 
 inline-style-parser@0.1.1:
   version "0.1.1"
-  resolved "https://registry.npmjs.org/inline-style-parser/-/inline-style-parser-0.1.1.tgz"
+  resolved "https://registry.yarnpkg.com/inline-style-parser/-/inline-style-parser-0.1.1.tgz#ec8a3b429274e9c0a1f1c4ffa9453a7fef72cea1"
   integrity sha512-7NXolsK4CAS5+xvdj5OMMbI962hU/wvwoxk+LWR9Ek9bVtyuuYScDN6eS0rUm6TxApFpw7CX1o4uJzcd4AyD3Q==
 
 internal-slot@^1.0.3, internal-slot@^1.0.4, internal-slot@^1.0.5:
@@ -5601,7 +5601,7 @@ react-modal@3.15.1:
 
 react-property@2.0.0:
   version "2.0.0"
-  resolved "https://registry.npmjs.org/react-property/-/react-property-2.0.0.tgz"
+  resolved "https://registry.yarnpkg.com/react-property/-/react-property-2.0.0.tgz#2156ba9d85fa4741faf1918b38efc1eae3c6a136"
   integrity sha512-kzmNjIgU32mO4mmH5+iUyrqlpFQhF8K2k7eZ4fdLSOPFrD1XgEuSBv9LDEgxRXTMBqMd8ppT0x6TIzqE5pdGdw==
 
 react@18.2.0, react@^18.2.0:
@@ -5635,6 +5635,11 @@ regenerator-runtime@^0.13.11, regenerator-runtime@^0.13.4:
   version "0.13.11"
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.11.tgz#f6dca3e7ceec20590d07ada785636a90cdca17f9"
   integrity sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==
+
+regenerator-runtime@^0.14.0:
+  version "0.14.0"
+  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.14.0.tgz#5e19d68eb12d486f797e15a3c6a918f7cec5eb45"
+  integrity sha512-srw17NI0TUWHuGa5CFGGmhfNIeja30WMBfbslPNhf6JrqQlLN5gcrvig1oqPxiVaXb0oW0XRKtH6Nngs5lKCIA==
 
 regexp.prototype.flags@^1.4.3:
   version "1.4.3"
@@ -6073,14 +6078,14 @@ strip-json-comments@^3.1.0, strip-json-comments@^3.1.1:
 
 style-to-js@1.1.3:
   version "1.1.3"
-  resolved "https://registry.npmjs.org/style-to-js/-/style-to-js-1.1.3.tgz"
+  resolved "https://registry.yarnpkg.com/style-to-js/-/style-to-js-1.1.3.tgz#2012d75dc89bf400edc29c545ed61c8626b00184"
   integrity sha512-zKI5gN/zb7LS/Vm0eUwjmjrXWw8IMtyA8aPBJZdYiQTXj4+wQ3IucOLIOnF7zCHxvW8UhIGh/uZh/t9zEHXNTQ==
   dependencies:
     style-to-object "0.4.1"
 
 style-to-object@0.4.1:
   version "0.4.1"
-  resolved "https://registry.npmjs.org/style-to-object/-/style-to-object-0.4.1.tgz"
+  resolved "https://registry.yarnpkg.com/style-to-object/-/style-to-object-0.4.1.tgz#53cf856f7cf7f172d72939d9679556469ba5de37"
   integrity sha512-HFpbb5gr2ypci7Qw+IOhnP2zOU7e77b+rzM+wTzXzfi1PrtBCX0E7Pk4wL4iTLnhzZ+JgEGAhX81ebTg/aYjQw==
   dependencies:
     inline-style-parser "0.1.1"
