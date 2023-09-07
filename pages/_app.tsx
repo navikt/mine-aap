@@ -10,7 +10,6 @@ import { useRouter } from 'next/router';
 import { DecoratorLocale } from '@navikt/nav-dekoratoren-moduler';
 import { SUPPORTED_LOCALE } from 'lib/translations/locales';
 import { NavDecorator } from 'components/NavDecorator/NavDecorator';
-import { TimeoutBox } from 'components/TimeoutBox/TimeoutBox';
 import { initializeFaro } from '@grafana/faro-web-sdk';
 
 function flattenMessages(nestedMessages: object, prefix = ''): Record<string, string> {
@@ -69,7 +68,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       <IntlProvider locale={locale} messages={messages[locale]}>
         <NavDecorator>
           <Component {...pageProps} />
-          <TimeoutBox />
         </NavDecorator>
       </IntlProvider>
     </>
