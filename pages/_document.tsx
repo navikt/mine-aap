@@ -16,6 +16,7 @@ const decoratorParams: DecoratorFetchProps = {
     chatbot: false,
     feedback: false,
     urlLookupTable: false,
+    logoutWarning: true,
   },
 };
 
