@@ -10,6 +10,10 @@ on:
 
 jobs:
   buildDev:
+    permissions:
+      contents: read
+      id-token: write
+      packages: write
     uses: navikt/aap-workflows/.github/workflows/frontend-next-build.yml@main
     secrets: inherit
     with:
@@ -19,6 +23,10 @@ jobs:
       cdn: true
 
   buildProd:
+    permissions:
+      contents: read
+      id-token: write
+      packages: write
     uses: navikt/aap-workflows/.github/workflows/frontend-next-build.yml@main
     if: github.ref == 'refs/heads/main'
     secrets: inherit
