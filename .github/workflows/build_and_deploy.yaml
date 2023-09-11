@@ -10,24 +10,23 @@ on:
 
 jobs:
   buildDev:
+    uses: navikt/aap-workflows/.github/workflows/frontend-next-build.yml@main
     permissions:
       contents: read
       id-token: write
       packages: write
-    uses: navikt/aap-workflows/.github/workflows/frontend-next-build.yml@main
     secrets: inherit
     with:
       cluster: dev-gcp
       appname: 'aap-innsyn'
       playwright: false
       cdn: true
-
   buildProd:
+    uses: navikt/aap-workflows/.github/workflows/frontend-next-build.yml@main
     permissions:
       contents: read
       id-token: write
       packages: write
-    uses: navikt/aap-workflows/.github/workflows/frontend-next-build.yml@main
     if: github.ref == 'refs/heads/main'
     secrets: inherit
     with:
@@ -39,6 +38,9 @@ jobs:
   deployDev:
     needs: buildDev
     uses: navikt/aap-workflows/.github/workflows/deploy.yml@main
+    permissions:
+      contents: read
+      id-token: write
     secrets: inherit
     with:
       cluster: dev-gcp
@@ -49,6 +51,9 @@ jobs:
   deployProd:
     needs: buildProd
     uses: navikt/aap-workflows/.github/workflows/deploy.yml@main
+    permissions:
+      contents: read
+      id-token: write
     if: github.ref == 'refs/heads/main'
     secrets: inherit
     with:
