@@ -16,15 +16,17 @@ jobs:
       cluster: dev-gcp
       appname: 'aap-innsyn'
       playwright: false
+      cdn: true
 
   buildProd:
     uses: navikt/aap-workflows/.github/workflows/frontend-next-build.yml@main
     if: github.ref == 'refs/heads/main'
     secrets: inherit
     with:
-        cluster: prod-gcp
-        appname: 'aap-innsyn'
-        playwright: false
+      cluster: prod-gcp
+      appname: 'aap-innsyn'
+      playwright: false
+      cdn: true
 
   deployDev:
     needs: buildDev
