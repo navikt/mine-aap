@@ -1,5 +1,5 @@
 import { getStringFromPossiblyArrayQuery } from '@navikt/aap-felles-utils-client';
-import { beskyttetApi, getAccessTokenFromRequest } from '@navikt/aap-felles-utils';
+import { beskyttetApi } from '@navikt/aap-felles-utils';
 import { tokenXProxy } from 'lib/api/tokenXProxy';
 
 const handler = beskyttetApi(async (req, res) => {
@@ -8,7 +8,6 @@ const handler = beskyttetApi(async (req, res) => {
   if (!journalpostId || !dokumentId) {
     res.status(400).json({ error: 'journalpostId og dokumentId må være satt' });
   }
-  const accessToken = getAccessTokenFromRequest(req);
 
   return await tokenXProxy(
     req,

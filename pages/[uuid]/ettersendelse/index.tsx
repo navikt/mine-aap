@@ -9,7 +9,7 @@ import { Søknad, VedleggType } from 'lib/types/types';
 import * as styles from 'pages/[uuid]/ettersendelse/Ettersendelse.module.css';
 import { getSøknad } from 'pages/api/soknader/[uuid]';
 import { getStringFromPossiblyArrayQuery } from '@navikt/aap-felles-utils-client';
-import { logger, beskyttetSide, getAccessToken } from '@navikt/aap-felles-utils';
+import { beskyttetSide, getAccessToken } from '@navikt/aap-felles-utils';
 import { useState } from 'react';
 import { FieldErrors } from 'react-hook-form';
 import { FormErrorSummary } from 'components/FormErrorSummary/FormErrorSummary';
@@ -31,9 +31,7 @@ const Index = ({ søknad }: PageProps) => {
   const { locale } = useIntl();
 
   const [errors, setErrors] = useState<FieldErrors>({});
-  const [manglendeVedlegg, setManglendeVedlegg] = useState<VedleggType[]>(
-    søknad.manglendeVedlegg ?? []
-  );
+  const [manglendeVedlegg, setManglendeVedlegg] = useState<VedleggType[]>(søknad.manglendeVedlegg ?? []);
 
   const router = useRouter();
 
@@ -143,26 +141,24 @@ const Index = ({ søknad }: PageProps) => {
   );
 };
 
-export const getServerSideProps = beskyttetSide(
-  async (ctx: NextPageContext): Promise<GetServerSidePropsResult<{}>> => {
-    const stopTimer = metrics.getServersidePropsDurationHistogram.startTimer({
-      path: '/{uuid}/ettersendelse',
-    });
-    const bearerToken = getAccessToken(ctx);
-    const uuid = getStringFromPossiblyArrayQuery(ctx.query.uuid);
-    const søknad = await getSøknad(uuid as string, bearerToken);
+export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Promise<GetServerSidePropsResult<{}>> => {
+  const stopTimer = metrics.getServersidePropsDurationHistogram.startTimer({
+    path: '/{uuid}/ettersendelse',
+  });
+  const bearerToken = getAccessToken(ctx);
+  const uuid = getStringFromPossiblyArrayQuery(ctx.query.uuid);
+  const søknad = await getSøknad(uuid as string, bearerToken);
 
-    stopTimer();
-    if (!søknad) {
-      return {
-        notFound: true,
-      };
-    }
-
+  stopTimer();
+  if (!søknad) {
     return {
-      props: { søknad },
+      notFound: true,
     };
   }
-);
+
+  return {
+    props: { søknad },
+  };
+});
 
 export default Index;

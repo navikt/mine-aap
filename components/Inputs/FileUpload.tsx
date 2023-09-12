@@ -38,13 +38,7 @@ export interface VedleggFormValues {
   [key: string]: { fields: OpplastetVedlegg[]; totalFileSize: number };
 }
 
-export const FileUpload = ({
-  søknadId,
-  krav,
-  updateErrorSummary,
-  setErrorSummaryFocus,
-  onEttersendSuccess,
-}: Props) => {
+export const FileUpload = ({ søknadId, krav, updateErrorSummary, setErrorSummaryFocus, onEttersendSuccess }: Props) => {
   const { formatMessage } = useFeatureToggleIntl();
 
   const [uploadFinished, setUploadFinished] = useState(false);
@@ -53,8 +47,7 @@ export const FileUpload = ({
   const [showMultipleFilesInfo, setShowMultipleFilesInfo] = useState(false);
   const [totalFileSize, setTotalFileSize] = useState(0);
 
-  const { control, handleSubmit, setError, setValue, clearErrors, formState } =
-    useForm<VedleggFormValues>();
+  const { control, handleSubmit, setError, setValue, clearErrors, formState } = useForm<VedleggFormValues>();
 
   const { append, update, remove, fields } = useFieldArray({
     name: `${krav as string}.fields`,
@@ -87,10 +80,7 @@ export const FileUpload = ({
       setTotalFileSize(totalSize);
     };
 
-    const validateAndUploadFile = async (
-      field: FieldArrayWithId<VedleggFormValues>,
-      index: number
-    ) => {
+    const validateAndUploadFile = async (field: FieldArrayWithId<VedleggFormValues>, index: number) => {
       if (field.vedleggId || !field.isUploading) {
         return;
       }
@@ -121,12 +111,9 @@ export const FileUpload = ({
           setError(`${krav}.fields.${index}`, {
             type: 'custom',
             // @ts-ignore-line
-            message: formatMessage(
-              `validation.${getErrorKeyForStatusCode(vedlegg.status, vedleggData?.substatus)}`,
-              {
-                size: bytesToMB(MAX_TOTAL_FILE_SIZE),
-              }
-            ),
+            message: formatMessage(`validation.${getErrorKeyForStatusCode(vedlegg.status, vedleggData?.substatus)}`, {
+              size: bytesToMB(MAX_TOTAL_FILE_SIZE),
+            }),
           });
           update(index, { ...field, isUploading: false });
         }
@@ -190,7 +177,7 @@ export const FileUpload = ({
           (data) => {
             onSubmit(data);
           },
-          (error) => {
+          () => {
             setErrorSummaryFocus();
           }
         )}
@@ -200,40 +187,31 @@ export const FileUpload = ({
             {formatMessage(`ettersendelse.vedleggstyper.${krav}.heading`)}
           </Heading>
 
-          <BodyShort spacing>
-            {formatMessage(`ettersendelse.vedleggstyper.${krav}.description`)}
-          </BodyShort>
+          <BodyShort spacing>{formatMessage(`ettersendelse.vedleggstyper.${krav}.description`)}</BodyShort>
           {hasEttersendingError && (
             <Alert variant="error">
-              Beklager, vi har litt rusk i NAVet. Du kan prøve på nytt om et par minutter, eller
-              sende inn dokumentasjonen på papir.
+              Beklager, vi har litt rusk i NAVet. Du kan prøve på nytt om et par minutter, eller sende inn
+              dokumentasjonen på papir.
             </Alert>
           )}
           {uploadFinished ? (
             <Alert variant="success">
               {krav === 'ANNET' ? (
                 <>
-                  Takk! Dokumentasjonen er nå sendt inn! Har du flere dokumenter du ønsker å sende,
-                  kan du laste de opp under.
+                  Takk! Dokumentasjonen er nå sendt inn! Har du flere dokumenter du ønsker å sende, kan du laste de opp
+                  under.
                 </>
               ) : (
                 <>
-                  Takk! Dokumentasjonen er nå sendt inn! Har du flere dokumenter du ønsker å sende,
-                  kan du laste de opp under &quot;Annen dokumentasjon&quot;.
+                  Takk! Dokumentasjonen er nå sendt inn! Har du flere dokumenter du ønsker å sende, kan du laste de opp
+                  under &quot;Annen dokumentasjon&quot;.
                 </>
               )}
             </Alert>
           ) : (
-            <FileUploadFields
-              fields={fields}
-              krav={krav}
-              errors={formState.errors}
-              remove={remove}
-            />
+            <FileUploadFields fields={fields} krav={krav} errors={formState.errors} remove={remove} />
           )}
-          {showMultipleFilesInfo && (
-            <Alert variant={'info'}>{formatMessage('filopplasting.formangefiler')}</Alert>
-          )}
+          {showMultipleFilesInfo && <Alert variant={'info'}>{formatMessage('filopplasting.formangefiler')}</Alert>}
           {fields.length > 0 && !isUploadingFiles && (
             <div>
               <Button variant="primary" type="submit" loading={isSendingEttersendelse}>
@@ -242,11 +220,7 @@ export const FileUpload = ({
             </div>
           )}
           {(!uploadFinished || krav === 'ANNET') && (
-            <FileInput
-              krav={krav}
-              append={append}
-              setShowMultipleFilesInfo={setShowMultipleFilesInfo}
-            />
+            <FileInput krav={krav} append={append} setShowMultipleFilesInfo={setShowMultipleFilesInfo} />
           )}
         </div>
       </form>
