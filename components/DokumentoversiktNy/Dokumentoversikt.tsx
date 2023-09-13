@@ -1,5 +1,5 @@
 import styles from './Dokumentoversikt.module.css';
-import { BodyShort, Checkbox, Detail, Link, Pagination, ReadMore, Select } from '@navikt/ds-react';
+import { Checkbox, Detail, Link, Pagination, Select } from '@navikt/ds-react';
 import { Dokument } from 'lib/types/types';
 import { logDokumentoversiktEvent } from 'lib/utils/amplitude';
 import { formatDate } from 'lib/utils/date';
@@ -113,10 +113,7 @@ export const Dokumentoversikt = ({ dokumenter }: { dokumenter: Dokument[] }) => 
       <ul className={styles.documentList}>
         {sortedPaginatedDocuments.map((document) => {
           return (
-            <li
-              key={`${document.journalpostId}-${document.dokumentId}`}
-              className={styles.listItem}
-            >
+            <li key={`${document.journalpostId}-${document.dokumentId}`} className={styles.listItem}>
               <div className={styles.content}>
                 <span>
                   <Link

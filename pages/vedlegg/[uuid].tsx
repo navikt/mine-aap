@@ -12,9 +12,7 @@ const Vedlegg = ({ uuid }: PageProps) => {
 
   useEffect(() => {
     const getFile = async () => {
-      const file = await fetch(`/aap/mine-aap/api/vedlegg/les/?uuid=${uuid}`).then((res) =>
-        res.blob()
-      );
+      const file = await fetch(`/aap/mine-aap/api/vedlegg/les/?uuid=${uuid}`).then((res) => res.blob());
       file && setFile(file);
     };
     getFile();
@@ -27,7 +25,7 @@ const Vedlegg = ({ uuid }: PageProps) => {
   return (
     <div>
       <object data={URL.createObjectURL(file)}>
-        <iframe src={URL.createObjectURL(file)}>
+        <iframe title="vedlegg" src={URL.createObjectURL(file)}>
           <p>This browser does not suppoert</p>
         </iframe>
       </object>
@@ -35,13 +33,11 @@ const Vedlegg = ({ uuid }: PageProps) => {
   );
 };
 
-export const getServerSideProps = beskyttetSide(
-  async (ctx: NextPageContext): Promise<GetServerSidePropsResult<{}>> => {
-    const uuid = getStringFromPossiblyArrayQuery(ctx.query['uuid']);
-    return {
-      props: { uuid },
-    };
-  }
-);
+export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Promise<GetServerSidePropsResult<{}>> => {
+  const uuid = getStringFromPossiblyArrayQuery(ctx.query['uuid']);
+  return {
+    props: { uuid },
+  };
+});
 
 export default Vedlegg;

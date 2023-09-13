@@ -1,6 +1,5 @@
 import * as styles from './DocumentationList.module.css';
 import { Detail, Link } from '@navikt/ds-react';
-import { format } from 'date-fns';
 import { formatDate } from 'lib/utils/date';
 import { FormattedMessage } from 'react-intl';
 
@@ -22,10 +21,7 @@ export const DocumentationList = ({
           )}
           {element.innsendt && (
             <Detail className={styles.detail}>
-              <FormattedMessage
-                id="minSisteSøknad.mottatt"
-                values={{ date: formatDate(element.innsendt) }}
-              />
+              <FormattedMessage id="minSisteSøknad.mottatt" values={{ date: formatDate(element.innsendt) }} />
             </Detail>
           )}
         </li>
