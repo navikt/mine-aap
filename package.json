@@ -15,10 +15,10 @@
   "prettier": "@navikt/aap-felles-prettier",
   "dependencies": {
     "@grafana/faro-web-sdk": "^1.1.1",
-    "@navikt/aap-felles-css": "^0.0.75",
-    "@navikt/aap-felles-react": "^0.0.75",
-    "@navikt/aap-felles-utils": "^0.0.75",
-    "@navikt/aap-felles-utils-client": "^0.0.75",
+    "@navikt/aap-felles-css": "^0.0.77",
+    "@navikt/aap-felles-react": "^0.0.77",
+    "@navikt/aap-felles-utils": "^0.0.77",
+    "@navikt/aap-felles-utils-client": "^0.0.77",
     "@navikt/aksel-icons": "^5.4.1",
     "@navikt/ds-css": "^5.4.1",
     "@navikt/ds-react": "^5.4.1",
@@ -38,8 +38,8 @@
     "react-intl": "^6.4.4"
   },
   "devDependencies": {
-    "@navikt/aap-felles-prettier": "^0.0.75",
-    "@navikt/eslint-config-aap": "^0.0.75",
+    "@navikt/aap-felles-prettier": "^0.0.77",
+    "@navikt/eslint-config-aap": "^0.0.77",
     "@playwright/test": "^1.35.1",
     "@testing-library/jest-dom": "^6.0.0",
     "@testing-library/react": "^14.0.0",

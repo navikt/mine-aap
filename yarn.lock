@@ -882,23 +882,23 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
-"@navikt/aap-felles-css@^0.0.75":
-  version "0.0.75"
-  resolved "https://npm.pkg.github.com/download/@navikt/aap-felles-css/0.0.75/8a93225c6a9a6763687c83501e05d785a36be69a#8a93225c6a9a6763687c83501e05d785a36be69a"
-  integrity sha512-V50Gdrc94zU5CSlTYwPRovC6X4yQ1sa/4kuUlTSDyQdTSqlVjLhfqQmaL29y9tbI/kPe//4/Lrkyurc1sP8Ynw==
+"@navikt/aap-felles-css@^0.0.77":
+  version "0.0.77"
+  resolved "https://npm.pkg.github.com/download/@navikt/aap-felles-css/0.0.77/624663e4446ffa8c697dba5c46aa51bc4981beed#624663e4446ffa8c697dba5c46aa51bc4981beed"
+  integrity sha512-25vb21Btx+OoKb3li7CNfLlVgN090E0TgpnjC/XU/UpH/ch43/7Wg+BU7rUmWqiJjTFzdToNyU5DCBe+R7fOFQ==
 
-"@navikt/aap-felles-prettier@^0.0.75":
-  version "0.0.75"
-  resolved "https://npm.pkg.github.com/download/@navikt/aap-felles-prettier/0.0.75/abfb29264261cf685c199db8642499563afac7aa#abfb29264261cf685c199db8642499563afac7aa"
-  integrity sha512-dHf++VtAJxm2X1oD0O8/HOVH6V/FoyzTLdrXxGUQ0hw9q/lobLMGwhYSNnfoYBQYSivrbVvBZUxxwQ4BDepHSw==
+"@navikt/aap-felles-prettier@^0.0.77":
+  version "0.0.77"
+  resolved "https://npm.pkg.github.com/download/@navikt/aap-felles-prettier/0.0.77/e9f8a9233f8f9ef63b0dc943c2aa1699360eb052#e9f8a9233f8f9ef63b0dc943c2aa1699360eb052"
+  integrity sha512-MAy1WAlRxwG/RHY5Z04UVSwXcTNccjlr36/8zp1TZvUVak2NQj8ilWrVRT4RhDwUH0n0eXYz77JGsMp2UYa1Kg==
   dependencies:
     "@trivago/prettier-plugin-sort-imports" "^4.2.0"
     prettier "^3.0.3"
 
-"@navikt/aap-felles-react@^0.0.75":
-  version "0.0.75"
-  resolved "https://npm.pkg.github.com/download/@navikt/aap-felles-react/0.0.75/5e1ae2cce5080bfef436af0f3772e5c4c38737b7#5e1ae2cce5080bfef436af0f3772e5c4c38737b7"
-  integrity sha512-UPvitjiFKmp/X6vMGqlvGywiwHmZbwTIeOcWdWIvgvMuH2MMy1Ys+t5pfWxmvKPYB5JzGu4ptYvNSMj10QiyfA==
+"@navikt/aap-felles-react@^0.0.77":
+  version "0.0.77"
+  resolved "https://npm.pkg.github.com/download/@navikt/aap-felles-react/0.0.77/65645347d241cb28bf5f71c826eabd390911948a#65645347d241cb28bf5f71c826eabd390911948a"
+  integrity sha512-iIDUkMN7OPD2LMiLjY46IYo8ydpLH+AyH/Rrl7+pGX+xy++X5+YpclT4coXTUWF5w59mznMTcWS0xhVizWxppQ==
   dependencies:
     "@navikt/aksel-icons" "^5.4.1"
     "@navikt/ds-css" "^5.4.1"
@@ -906,17 +906,17 @@
     prop-types "^15.8.1"
     react "^18.2.0"
 
-"@navikt/aap-felles-utils-client@^0.0.75":
-  version "0.0.75"
-  resolved "https://npm.pkg.github.com/download/@navikt/aap-felles-utils-client/0.0.75/f1a5187ea1b97d7dc23549e4c92d6d98ec3999fe#f1a5187ea1b97d7dc23549e4c92d6d98ec3999fe"
-  integrity sha512-q4uLCTr2jNkIi2dFO2vvDMHTNfjqHyUQBze2xWoX2lBamKPxPlyINaY7ocIU65dUFq43z3XR9iU3jqcFKjrPSQ==
+"@navikt/aap-felles-utils-client@^0.0.77":
+  version "0.0.77"
+  resolved "https://npm.pkg.github.com/download/@navikt/aap-felles-utils-client/0.0.77/a820b4ad0fa32202fab5cbac0063018a9eaa5839#a820b4ad0fa32202fab5cbac0063018a9eaa5839"
+  integrity sha512-Jy1AjQ3rZvEVU3mcRPrG0y/bNEsAQgLfHXdIAFAgDipyGHJe+QEtuRmv9ltlzl+38ugK60zd2B63g7QmGR1J0w==
   dependencies:
-    date-fns "2.29.3"
+    date-fns "^2.30.0"
 
-"@navikt/aap-felles-utils@^0.0.75":
-  version "0.0.75"
-  resolved "https://npm.pkg.github.com/download/@navikt/aap-felles-utils/0.0.75/e37431a6177b5353f340e2005cc1c985796942d5#e37431a6177b5353f340e2005cc1c985796942d5"
-  integrity sha512-27h2D0jKuirtGGDLmRUk+wiVdazRpiHOtYdLvDr6awbw8QWvwAvs2WH1h/pqtGaQtCJZ6xIP/CJybmQt1S1FsQ==
+"@navikt/aap-felles-utils@^0.0.77":
+  version "0.0.77"
+  resolved "https://npm.pkg.github.com/download/@navikt/aap-felles-utils/0.0.77/c4b07d4ad045860d8e656d6638e36dbd086b72e3#c4b07d4ad045860d8e656d6638e36dbd086b72e3"
+  integrity sha512-9XHABKIpG0fUFbhH8EW/2UBGS12A0lI17lK5ml7m79jtvLyhZhat58/fKA/jK9TMtWMt6qrjv5g+wqsAKklGfA==
   dependencies:
     "@elastic/ecs-pino-format" "1.3.0"
     axios "^1.2.1"
@@ -949,10 +949,10 @@
     date-fns "2.29.3"
     react-day-picker "8.3.4"
 
-"@navikt/eslint-config-aap@^0.0.75":
-  version "0.0.75"
-  resolved "https://npm.pkg.github.com/download/@navikt/eslint-config-aap/0.0.75/b332899f704fd253feb0e1e5e11e89bd0a588264#b332899f704fd253feb0e1e5e11e89bd0a588264"
-  integrity sha512-X2RwWs+rxH2w+TbYN/TfLr2OvYwV0+9PVxXX2SJlrnRnnb8ZfzYWmCqLp1lxdl3YY1M79IcpKJR/DU5J3tsB7Q==
+"@navikt/eslint-config-aap@^0.0.77":
+  version "0.0.77"
+  resolved "https://npm.pkg.github.com/download/@navikt/eslint-config-aap/0.0.77/b2f69afc3ae7db2b96f2d7ca0b25600e00de9245#b2f69afc3ae7db2b96f2d7ca0b25600e00de9245"
+  integrity sha512-ubmdSUW3239niRnYRujIm7/0I7iwDEM1mCViRVTwuxt3FmXT+A9f+LyvBpt0Y0kI7zQw8tRldd13WEf4AVmWew==
 
 "@navikt/nav-dekoratoren-moduler@^2.1.0":
   version "2.1.3"
@@ -2752,9 +2752,9 @@ date-fns@2.29.3:
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.29.3.tgz#27402d2fc67eb442b511b70bbdf98e6411cd68a8"
   integrity sha512-dDCnyH2WnnKusqvZZ6+jA1O51Ibt8ZMRNkDZdyAyK4YfbDwa/cEmuztzG5pk6hqlp9aSBPYcjOlktquahGwGeA==
 
-date-fns@^2.28.0:
+date-fns@^2.28.0, date-fns@^2.30.0:
   version "2.30.0"
-  resolved "https://registry.npmjs.org/date-fns/-/date-fns-2.30.0.tgz"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.30.0.tgz#f367e644839ff57894ec6ac480de40cae4b0f4d0"
   integrity sha512-fnULvOpxnC5/Vg3NCiWelDsLiUc9bRwAPs/+LfTLNvetFCtCTN+yQz15C/fs4AwX1R9K5GLtLfn8QW+dWisaAw==
   dependencies:
     "@babel/runtime" "^7.21.0"
