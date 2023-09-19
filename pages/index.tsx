@@ -1,4 +1,3 @@
-import { getDocuments } from './api/dokumenter';
 import { getSøknader } from './api/soknader/soknader';
 import { beskyttetSide, getAccessToken } from '@navikt/aap-felles-utils';
 import { BodyShort, Button, Heading } from '@navikt/ds-react';
@@ -11,14 +10,14 @@ import { PageContainer } from 'components/PageContainer/PageContainer';
 import { Soknad } from 'components/Soknad/Soknad';
 import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import metrics from 'lib/metrics';
-import { Dokument, Søknad } from 'lib/types/types';
+import { Søknad } from 'lib/types/types';
 import { GetServerSidePropsResult, NextPageContext } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-const Index = ({ søknader, dokumenter }: { søknader: Søknad[]; dokumenter: Dokument[] }) => {
+const Index = ({ søknader }: { søknader: Søknad[] }) => {
   const { formatElement } = useFeatureToggleIntl();
 
   const router = useRouter();
@@ -56,7 +55,7 @@ const Index = ({ søknader, dokumenter }: { søknader: Søknad[]; dokumenter: Do
       )}
       {!sisteSøknad && (
         <>
-          <DokumentoversiktContainer dokumenter={dokumenter} />
+          <DokumentoversiktContainer />
           <PageComponentFlexContainer>
             <Heading level="2" size="medium" spacing>
               <FormattedMessage id="forside.ettersendelse.tittel" />
@@ -85,36 +84,29 @@ const Index = ({ søknader, dokumenter }: { søknader: Søknad[]; dokumenter: Do
           </BodyShort>
           <Button
             variant="secondary"
-            onClick={() =>
-              (window.location.href = 'https://innboks.nav.no/s/skriv-til-oss?category=Arbeid')
-            }
+            onClick={() => (window.location.href = 'https://innboks.nav.no/s/skriv-til-oss?category=Arbeid')}
           >
             <FormattedMessage id="forside.endretSituasjon.knapp" />
           </Button>
         </Card>
       </PageComponentFlexContainer>
-      {sisteSøknad && <DokumentoversiktContainer dokumenter={dokumenter} />}
+      {sisteSøknad && <DokumentoversiktContainer />}
     </PageContainer>
   );
 };
 
-export const getServerSideProps = beskyttetSide(
-  async (ctx: NextPageContext): Promise<GetServerSidePropsResult<{}>> => {
-    const stopTimer = metrics.getServersidePropsDurationHistogram.startTimer({ path: '/' });
-    const bearerToken = getAccessToken(ctx);
-    const params = { page: '0', size: '1', sort: 'created,desc' };
+export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Promise<GetServerSidePropsResult<{}>> => {
+  const stopTimer = metrics.getServersidePropsDurationHistogram.startTimer({ path: '/' });
+  const bearerToken = getAccessToken(ctx);
+  const params = { page: '0', size: '1', sort: 'created,desc' };
 
-    const [søknader, dokumenter] = await Promise.all([
-      getSøknader(params, bearerToken),
-      getDocuments(bearerToken),
-    ]);
+  const [søknader] = await Promise.all([getSøknader(params, bearerToken)]);
 
-    stopTimer();
+  stopTimer();
 
-    return {
-      props: { søknader, dokumenter },
-    };
-  }
-);
+  return {
+    props: { søknader },
+  };
+});
 
 export default Index;
