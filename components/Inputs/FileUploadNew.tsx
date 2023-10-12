@@ -21,7 +21,7 @@ export const FileUploadNew = ({ søknadId, krav, addErrorMessage, deleteErrorMes
   const [harEttersendingError, setHarEttersendingError] = useState<boolean>(false);
 
   const harFeilmeldinger = files.some((file) => file.errorMessage);
-  const kanSendeInnEttersendelse = !harFeilmeldinger && !harLastetOppEttersending;
+  const kanSendeInnEttersendelse = !harFeilmeldinger && !harLastetOppEttersending && files.length > 0;
 
   const onClick = async () => {
     if (harFeilmeldinger) {
