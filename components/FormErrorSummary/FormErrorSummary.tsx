@@ -1,26 +1,33 @@
 import React, { useRef } from 'react';
-import { FieldErrors } from 'react-hook-form';
 import { ErrorSummary } from '@navikt/ds-react';
 import * as classes from 'components/FormErrorSummary/FormErrorSummary.module.css';
 import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
-import { flattenObject } from '@navikt/aap-felles-utils-client';
 
-const FormErrorSummary = (props: { id: string; errors: FieldErrors }) => {
+export interface ErrorSummaryElement {
+  path: string;
+  message?: string;
+  id: string;
+}
+
+interface Props {
+  id: string;
+  errors: ErrorSummaryElement[];
+}
+
+const FormErrorSummary = ({ id, errors }: Props) => {
   const { formatMessage } = useFeatureToggleIntl();
 
-  const flatErrors = flattenObject(props?.errors);
-  const keyList = Object.keys(flatErrors).filter((key: string) => flatErrors[key] !== undefined);
   const errorSummaryElement = useRef(null);
 
-  if (keyList?.length < 1) {
+  if (errors?.length < 1) {
     return (
       <ErrorSummary
         ref={errorSummaryElement}
         heading={formatMessage('errorSummary.title')}
         role={'alert'}
-        aria-hidden={keyList?.length === 0}
-        className={keyList?.length === 0 ? classes?.visuallyHidden : ''}
-        {...props}
+        aria-hidden={errors?.length === 0}
+        className={errors?.length === 0 ? classes?.visuallyHidden : ''}
+        id={id}
       >
         {'hidden'}
       </ErrorSummary>
@@ -33,16 +40,13 @@ const FormErrorSummary = (props: { id: string; errors: FieldErrors }) => {
           ref={errorSummaryElement}
           heading={formatMessage('errorSummary.title')}
           role={'alert'}
-          aria-hidden={keyList?.length === 0}
-          className={keyList?.length === 0 ? classes?.visuallyHidden : ''}
-          {...props}
+          aria-hidden={errors?.length === 0}
+          className={errors?.length === 0 ? classes?.visuallyHidden : ''}
+          id={id}
         >
-          {keyList.map((key) => (
-            <ErrorSummary.Item key={key} href={`#${key}`}>
-              {
-                // @ts-ignore
-                flatErrors[key]
-              }
+          {errors.map((error, index) => (
+            <ErrorSummary.Item key={index} href={`#${error.path}`}>
+              {error.message}
             </ErrorSummary.Item>
           ))}
         </ErrorSummary>
