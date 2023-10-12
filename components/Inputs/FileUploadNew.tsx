@@ -29,7 +29,7 @@ export const FileUploadNew = ({ søknadId, krav, addError, deleteError, onSucces
   const [harEttersendingError, setHarEttersendingError] = useState<boolean>(false);
 
   const harFeilmeldinger = files.some((file) => file.errorMessage);
-  const kanSendeInnEttersendelse = !harFeilmeldinger && !harLastetOppEttersending && files.length > 0;
+  const visSendInnKnapp = !harLastetOppEttersending && files.length > 0;
 
   const onClick = async () => {
     if (harFeilmeldinger) {
@@ -109,7 +109,7 @@ export const FileUploadNew = ({ søknadId, krav, addError, deleteError, onSucces
           på papir.
         </Alert>
       )}
-      {kanSendeInnEttersendelse && <Button onClick={onClick}>Send inn</Button>}
+      {visSendInnKnapp && <Button onClick={onClick}>Send inn</Button>}
     </Section>
   );
 };
