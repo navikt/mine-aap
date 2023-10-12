@@ -4,17 +4,17 @@ import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { Section } from 'components/Section/Section';
 import { Alert, Button } from '@navikt/ds-react';
 import React, { useState } from 'react';
-import { ErrorSummaryElement } from 'components/FormErrorSummary/FormErrorSummary';
+import { Error } from 'components/FormErrorSummary/FormErrorSummary';
 
 interface Props {
   søknadId?: string;
   krav: VedleggType;
-  addErrorMessage: (errors: ErrorSummaryElement[]) => void;
-  deleteErrorMessage: (vedlegg: Vedlegg) => void;
+  addError: (errors: Error[]) => void;
+  deleteError: (vedlegg: Vedlegg) => void;
   setErrorSummaryFocus: () => void;
-  onEttersendSuccess: (krav: VedleggType) => void;
+  onSuccess: (krav: VedleggType) => void;
 }
-export const FileUploadNew = ({ søknadId, krav, addErrorMessage, deleteErrorMessage, onEttersendSuccess }: Props) => {
+export const FileUploadNew = ({ søknadId, krav, addError, deleteError, onSuccess }: Props) => {
   const { formatMessage } = useFeatureToggleIntl();
   const [files, setFiles] = useState<Vedlegg[]>([]);
   const [harLastetOppEttersending, setHarLastetOppEttersending] = useState<boolean>(false);
@@ -47,7 +47,7 @@ export const FileUploadNew = ({ søknadId, krav, addErrorMessage, deleteErrorMes
       if (response.ok) {
         setFiles([]);
         setHarLastetOppEttersending(true);
-        onEttersendSuccess(krav);
+        onSuccess(krav);
       } else {
         setHarEttersendingError(true);
       }
@@ -71,14 +71,14 @@ export const FileUploadNew = ({ søknadId, krav, addErrorMessage, deleteErrorMes
             });
 
           if (errors) {
-            addErrorMessage(errors);
+            addError(errors);
           }
 
           setFiles([...files, ...vedlegg]);
         }}
         onDelete={(vedlegg) => {
           if (vedlegg.errorMessage) {
-            deleteErrorMessage(vedlegg);
+            deleteError(vedlegg);
           }
 
           const newFiles = files.filter((file) => file.vedleggId !== vedlegg.vedleggId);

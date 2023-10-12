@@ -3,7 +3,7 @@ import { ErrorSummary } from '@navikt/ds-react';
 import * as classes from 'components/FormErrorSummary/FormErrorSummary.module.css';
 import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 
-export interface ErrorSummaryElement {
+export interface Error {
   path: string;
   message?: string;
   id: string;
@@ -11,7 +11,7 @@ export interface ErrorSummaryElement {
 
 interface Props {
   id: string;
-  errors: ErrorSummaryElement[];
+  errors: Error[];
 }
 
 const FormErrorSummary = ({ id, errors }: Props) => {

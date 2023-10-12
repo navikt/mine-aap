@@ -10,7 +10,7 @@ import { getSøknad } from 'pages/api/soknader/[uuid]';
 import { getStringFromPossiblyArrayQuery } from '@navikt/aap-felles-utils-client';
 import { beskyttetSide, getAccessToken } from '@navikt/aap-felles-utils';
 import { useState } from 'react';
-import { ErrorSummaryElement, FormErrorSummary } from 'components/FormErrorSummary/FormErrorSummary';
+import { Error, FormErrorSummary } from 'components/FormErrorSummary/FormErrorSummary';
 import { setFocus } from 'lib/utils/dom';
 import NextLink from 'next/link';
 import { ArrowLeftIcon } from '@navikt/aksel-icons';
@@ -29,22 +29,16 @@ const Index = ({ søknad }: PageProps) => {
   const { formatMessage, formatElement } = useFeatureToggleIntl();
   const { locale } = useIntl();
 
-  const [errors, setErrors] = useState<ErrorSummaryElement[]>([]);
+  const [errors, setErrors] = useState<Error[]>([]);
   const [manglendeVedlegg, setManglendeVedlegg] = useState<VedleggType[]>(søknad.manglendeVedlegg ?? []);
 
   const router = useRouter();
 
   const errorSummaryId = `form-error-summary-${søknad?.søknadId ?? 'generic'}`;
 
-  const updateErrorSummary = (errorsFromKrav: ErrorSummaryElement[]) => {
-    const updatedErrors = [...errors, ...errorsFromKrav];
-    setErrors(updatedErrors);
-  };
+  const addError = (errorsFromKrav: Error[]) => setErrors([...errors, ...errorsFromKrav]);
 
-  const slettErrorMessage = (vedlegg: Vedlegg) => {
-    const updatedErrors = errors.filter((error) => error.id !== vedlegg.vedleggId);
-    setErrors(updatedErrors);
-  };
+  const deleteError = (vedlegg: Vedlegg) => setErrors(errors.filter((error) => error.id !== vedlegg.vedleggId));
 
   const onEttersendelseSuccess = (krav: string) => {
     const updatedManglendeVedlegg = manglendeVedlegg.filter((vedlegg) => vedlegg !== krav);
@@ -110,10 +104,10 @@ const Index = ({ søknad }: PageProps) => {
           <FileUploadNew
             søknadId={søknad.søknadId}
             krav={krav}
-            addErrorMessage={updateErrorSummary}
-            deleteErrorMessage={slettErrorMessage}
+            addError={addError}
+            deleteError={deleteError}
             setErrorSummaryFocus={() => setFocus(errorSummaryId)}
-            onEttersendSuccess={(krav) => onEttersendelseSuccess(krav)}
+            onSuccess={(krav) => onEttersendelseSuccess(krav)}
             key={krav}
           />
         ))}
@@ -121,10 +115,10 @@ const Index = ({ søknad }: PageProps) => {
         <FileUploadNew
           søknadId={søknad.søknadId}
           krav="ANNET"
-          addErrorMessage={updateErrorSummary}
-          deleteErrorMessage={slettErrorMessage}
+          addError={addError}
+          deleteError={deleteError}
           setErrorSummaryFocus={() => setFocus(errorSummaryId)}
-          onEttersendSuccess={() => {}}
+          onSuccess={() => {}}
         />
 
         <Section>
