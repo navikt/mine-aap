@@ -14,6 +14,14 @@ interface Props {
   setErrorSummaryFocus: () => void;
   onSuccess: (krav: VedleggType) => void;
 }
+
+const findErrors = (vedlegg: Vedlegg[], krav: string) =>
+  vedlegg
+    .filter((file) => file.errorMessage)
+    .map((errorFile) => {
+      return { path: krav, message: errorFile.errorMessage, id: errorFile.vedleggId };
+    });
+
 export const FileUploadNew = ({ søknadId, krav, addError, deleteError, onSuccess }: Props) => {
   const { formatMessage } = useFeatureToggleIntl();
   const [files, setFiles] = useState<Vedlegg[]>([]);
@@ -64,16 +72,8 @@ export const FileUploadNew = ({ søknadId, krav, addError, deleteError, onSucces
         ingress={formatMessage(`ettersendelse.vedleggstyper.${krav}.description`)}
         id={krav}
         onUpload={(vedlegg) => {
-          const errors = vedlegg
-            .filter((file) => file.errorMessage)
-            .map((errorFile) => {
-              return { path: krav, message: errorFile.errorMessage, id: errorFile.vedleggId };
-            });
-
-          if (errors) {
-            addError(errors);
-          }
-
+          const errors = findErrors(vedlegg, krav);
+          errors && addError(errors);
           setFiles([...files, ...vedlegg]);
         }}
         onDelete={(vedlegg) => {
