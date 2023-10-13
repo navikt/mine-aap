@@ -6,6 +6,8 @@ import { Alert, Button } from '@navikt/ds-react';
 import React, { useState } from 'react';
 import { Error } from 'components/FormErrorSummary/FormErrorSummary';
 
+import styles from './FileUploadNew.module.css';
+
 interface Props {
   søknadId?: string;
   krav: VedleggType;
@@ -67,49 +69,55 @@ export const FileUploadNew = ({ søknadId, krav, addError, deleteError, onSucces
 
   return (
     <Section>
-      <FileInput
-        heading={formatMessage(`ettersendelse.vedleggstyper.${krav}.heading`)}
-        ingress={formatMessage(`ettersendelse.vedleggstyper.${krav}.description`)}
-        id={krav}
-        onUpload={(vedlegg) => {
-          const errors = findErrors(vedlegg, krav);
-          errors && addError(errors);
-          setFiles([...files, ...vedlegg]);
-        }}
-        onDelete={(vedlegg) => {
-          if (vedlegg.errorMessage) {
-            deleteError(vedlegg);
-          }
+      <div className={styles.fileinputWrapper}>
+        <FileInput
+          heading={formatMessage(`ettersendelse.vedleggstyper.${krav}.heading`)}
+          ingress={formatMessage(`ettersendelse.vedleggstyper.${krav}.description`)}
+          id={krav}
+          onUpload={(vedlegg) => {
+            const errors = findErrors(vedlegg, krav);
+            errors && addError(errors);
+            setFiles([...files, ...vedlegg]);
+          }}
+          onDelete={(vedlegg) => {
+            if (vedlegg.errorMessage) {
+              deleteError(vedlegg);
+            }
 
-          const newFiles = files.filter((file) => file.vedleggId !== vedlegg.vedleggId);
-          setFiles(newFiles);
-        }}
-        deleteUrl={'/aap/mine-aap/api/vedlegg/slett/?uuid='}
-        uploadUrl={'/aap/mine-aap/api/vedlegg/lagre/'}
-        files={files}
-      />
-      {harLastetOppEttersending && (
-        <Alert variant="success">
-          {krav === 'ANNET' ? (
-            <>
-              Takk! Dokumentasjonen er nå sendt inn! Har du flere dokumenter du ønsker å sende, kan du laste de opp
-              under.
-            </>
-          ) : (
-            <>
-              Takk! Dokumentasjonen er nå sendt inn! Har du flere dokumenter du ønsker å sende, kan du laste de opp
-              under &quot;Annen dokumentasjon&quot;.
-            </>
-          )}
-        </Alert>
-      )}
-      {harEttersendingError && (
-        <Alert variant="error">
-          Beklager, vi har litt rusk i NAVet. Du kan prøve på nytt om et par minutter, eller sende inn dokumentasjonen
-          på papir.
-        </Alert>
-      )}
-      {visSendInnKnapp && <Button onClick={onClick}>Send inn</Button>}
+            const newFiles = files.filter((file) => file.vedleggId !== vedlegg.vedleggId);
+            setFiles(newFiles);
+          }}
+          deleteUrl={'/aap/mine-aap/api/vedlegg/slett/?uuid='}
+          uploadUrl={'/aap/mine-aap/api/vedlegg/lagre/'}
+          files={files}
+        />
+        {harLastetOppEttersending && (
+          <Alert variant="success">
+            {krav === 'ANNET' ? (
+              <>
+                Takk! Dokumentasjonen er nå sendt inn! Har du flere dokumenter du ønsker å sende, kan du laste de opp
+                under.
+              </>
+            ) : (
+              <>
+                Takk! Dokumentasjonen er nå sendt inn! Har du flere dokumenter du ønsker å sende, kan du laste de opp
+                under &quot;Annen dokumentasjon&quot;.
+              </>
+            )}
+          </Alert>
+        )}
+        {harEttersendingError && (
+          <Alert variant="error">
+            Beklager, vi har litt rusk i NAVet. Du kan prøve på nytt om et par minutter, eller sende inn dokumentasjonen
+            på papir.
+          </Alert>
+        )}
+        {visSendInnKnapp && (
+          <Button onClick={onClick} className={styles.sendButton}>
+            Send inn
+          </Button>
+        )}
+      </div>
     </Section>
   );
 };
