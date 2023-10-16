@@ -6,3 +6,11 @@
   margin-left: var(--a-spacing-8);
   margin-bottom: var(--a-spacing-4);
 }
+
+.successWrapper {
+  display: flex;
+  flex-direction: column;
+
+  padding: var(--a-spacing-8);
+  gap: var(--a-spacing-4);
+}
