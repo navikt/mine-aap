@@ -67,15 +67,20 @@ export const FileUploadNew = ({ søknadId, krav, addError, deleteError, onSucces
     }
   };
 
+  const successWrapperKlassenavn = krav === 'ANNET' ? styles.successWrapperAnnet : styles.successWrapper;
+
   return (
     <Section>
       <div className={styles.fileinputWrapper}>
-        {!harLastetOppEttersending && (
+        {(!harLastetOppEttersending || krav === 'ANNET') && (
           <FileInput
             heading={formatMessage(`ettersendelse.vedleggstyper.${krav}.heading`)}
             ingress={formatMessage(`ettersendelse.vedleggstyper.${krav}.description`)}
             id={krav}
             onUpload={(vedlegg) => {
+              if (harLastetOppEttersending) {
+                setHarLastetOppEttersending(false);
+              }
               const errors = findErrors(vedlegg, krav);
               errors && addError(errors);
               setFiles([...files, ...vedlegg]);
@@ -94,14 +99,18 @@ export const FileUploadNew = ({ søknadId, krav, addError, deleteError, onSucces
           />
         )}
         {harLastetOppEttersending && (
-          <div className={styles.successWrapper}>
-            <Heading size={'medium'}>{formatMessage(`ettersendelse.vedleggstyper.${krav}.heading`)}</Heading>
-            <BodyShort>{formatMessage(`ettersendelse.vedleggstyper.${krav}.description`)}</BodyShort>
+          <div className={successWrapperKlassenavn}>
+            {krav !== 'ANNET' && (
+              <>
+                <Heading size={'medium'}>{formatMessage(`ettersendelse.vedleggstyper.${krav}.heading`)}</Heading>
+                <BodyShort>{formatMessage(`ettersendelse.vedleggstyper.${krav}.description`)}</BodyShort>
+              </>
+            )}
             <Alert variant="success">
               {krav === 'ANNET' ? (
                 <>
                   Takk! Dokumentasjonen er nå sendt inn! Har du flere dokumenter du ønsker å sende, kan du laste de opp
-                  under.
+                  over.
                 </>
               ) : (
                 <>
