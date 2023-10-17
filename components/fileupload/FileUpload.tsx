@@ -4,9 +4,9 @@ import { Section } from 'components/Section/Section';
 import { Alert, BodyShort, Button, Heading } from '@navikt/ds-react';
 import React, { useState } from 'react';
 import { Error } from 'components/FormErrorSummary/FormErrorSummary';
+import { useIntl } from 'react-intl';
 
 import styles from 'components/fileupload/FileUpload.module.css';
-import { useIntl } from 'react-intl';
 
 interface Props {
   søknadId?: string;
@@ -24,17 +24,20 @@ const findErrors = (vedlegg: Vedlegg[], krav: string) =>
       return { path: krav, message: errorFile.errorMessage, id: errorFile.vedleggId };
     });
 
-export const FileUpload = ({ søknadId, krav, addError, deleteError, onSuccess }: Props) => {
+export const FileUpload = ({ søknadId, krav, addError, deleteError, onSuccess, setErrorSummaryFocus }: Props) => {
   const { formatMessage } = useIntl();
   const [files, setFiles] = useState<Vedlegg[]>([]);
   const [harLastetOppEttersending, setHarLastetOppEttersending] = useState<boolean>(false);
   const [harEttersendingError, setHarEttersendingError] = useState<boolean>(false);
 
+  const kravErAnnet = krav === 'ANNET';
+  const successWrapperKlassenavn = kravErAnnet ? styles.successWrapperAnnet : styles.successWrapper;
   const harFeilmeldinger = files.some((file) => file.errorMessage);
   const visSendInnKnapp = !harLastetOppEttersending && files.length > 0;
 
   const onClick = async () => {
     if (harFeilmeldinger) {
+      setErrorSummaryFocus();
       return;
     }
 
@@ -67,12 +70,10 @@ export const FileUpload = ({ søknadId, krav, addError, deleteError, onSuccess }
     }
   };
 
-  const successWrapperKlassenavn = krav === 'ANNET' ? styles.successWrapperAnnet : styles.successWrapper;
-
   return (
     <Section>
       <div className={styles.fileinputWrapper}>
-        {(!harLastetOppEttersending || krav === 'ANNET') && (
+        {(!harLastetOppEttersending || kravErAnnet) && (
           <FileInput
             heading={formatMessage({ id: `ettersendelse.vedleggstyper.${krav}.heading` })}
             ingress={formatMessage({ id: `ettersendelse.vedleggstyper.${krav}.description` })}
@@ -100,7 +101,7 @@ export const FileUpload = ({ søknadId, krav, addError, deleteError, onSuccess }
         )}
         {harLastetOppEttersending && (
           <div className={successWrapperKlassenavn}>
-            {krav !== 'ANNET' && (
+            {!kravErAnnet && (
               <>
                 <Heading size={'medium'}>
                   {formatMessage({ id: `ettersendelse.vedleggstyper.${krav}.heading` })}
@@ -109,16 +110,16 @@ export const FileUpload = ({ søknadId, krav, addError, deleteError, onSuccess }
               </>
             )}
             <Alert variant="success">
-              {krav === 'ANNET' ? (
-                <>
+              {kravErAnnet ? (
+                <BodyShort>
                   Takk! Dokumentasjonen er nå sendt inn! Har du flere dokumenter du ønsker å sende, kan du laste de opp
                   over.
-                </>
+                </BodyShort>
               ) : (
-                <>
+                <BodyShort>
                   Takk! Dokumentasjonen er nå sendt inn! Har du flere dokumenter du ønsker å sende, kan du laste de opp
                   under &quot;Annen dokumentasjon&quot;.
-                </>
+                </BodyShort>
               )}
             </Alert>
           </div>
