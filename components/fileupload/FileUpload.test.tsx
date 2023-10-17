@@ -15,7 +15,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
-import { FileUploadNew } from 'components/Inputs/FileUploadNew';
+import { FileUpload } from 'components/fileupload/FileUpload';
 import messagesNb from 'lib/translations/nb.json';
 
 function flattenMessages(nestedMessages: object, prefix = ''): Record<string, string> {
@@ -47,7 +47,7 @@ describe('FileUpload', () => {
   it('skal vise suksessmelding når man sender inn ettersendelse', () => {
     render(
       <IntlWrapper>
-        <FileUploadNew
+        <FileUpload
           krav={'UTLAND'}
           addError={jest.fn}
           deleteError={jest.fn}

@@ -5,7 +5,7 @@ import { Alert, BodyShort, Button, Heading } from '@navikt/ds-react';
 import React, { useState } from 'react';
 import { Error } from 'components/FormErrorSummary/FormErrorSummary';
 
-import styles from './FileUploadNew.module.css';
+import styles from 'components/fileupload/FileUpload.module.css';
 import { useIntl } from 'react-intl';
 
 interface Props {
@@ -24,7 +24,7 @@ const findErrors = (vedlegg: Vedlegg[], krav: string) =>
       return { path: krav, message: errorFile.errorMessage, id: errorFile.vedleggId };
     });
 
-export const FileUploadNew = ({ søknadId, krav, addError, deleteError, onSuccess }: Props) => {
+export const FileUpload = ({ søknadId, krav, addError, deleteError, onSuccess }: Props) => {
   const { formatMessage } = useIntl();
   const [files, setFiles] = useState<Vedlegg[]>([]);
   const [harLastetOppEttersending, setHarLastetOppEttersending] = useState<boolean>(false);

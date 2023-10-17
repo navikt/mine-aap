@@ -19,7 +19,7 @@ import metrics from 'lib/metrics';
 import { formatFullDate } from 'lib/utils/date';
 import { useIntl } from 'react-intl';
 import Head from 'next/head';
-import { FileUploadNew } from 'components/Inputs/FileUploadNew';
+import { FileUpload } from 'components/fileupload/FileUpload';
 
 interface PageProps {
   søknad: Søknad;
@@ -101,7 +101,7 @@ const Index = ({ søknad }: PageProps) => {
         <FormErrorSummary id={errorSummaryId} errors={errors} />
 
         {søknad.manglendeVedlegg?.map((krav) => (
-          <FileUploadNew
+          <FileUpload
             søknadId={søknad.søknadId}
             krav={krav}
             addError={addError}
@@ -112,7 +112,7 @@ const Index = ({ søknad }: PageProps) => {
           />
         ))}
 
-        <FileUploadNew
+        <FileUpload
           søknadId={søknad.søknadId}
           krav="ANNET"
           addError={addError}
