@@ -71,7 +71,7 @@
     "tittel": "Dokumentoversikt",
     "tekst": "Her finner du dine søknader, vedlegg, vedtak, brev og samtalerefater.",
     "manglendeDokument": {
-      "header": "Har du sendt en søknad eller et dokument som ikke vises her?",  
+      "header": "Har du sendt en søknad eller et dokument som ikke vises her?",
       "tekst": "Det kan ta noen minutter fra du har sendt en digital søknad til den vises i oversikten. Hvis du har sendt en søknad i posten tar det som regel 2 uker fra den er postlagt til den vises i dokumentoversikten.",
       "bulletsTekst": "Denne siden viser:",
       "bullet1": "Søknader om AAP vi har mottatt fra deg.",
@@ -166,14 +166,6 @@
     "mineAAP": "Mine AAP",
     "ettersending": "Ettersending til søknad",
     "mineAAPSoknader": "Mine AAP søknader"
-  },
-  "validation": {
-    "filtype": "Filtypen {type} kan ikke lastes opp. Last opp dokumentet i et annet format (PDF, PNG eller JPG)",
-    "virus": "Det er oppdaget virus på filen du prøver å laste opp. Velg en annen fil å last opp.",
-    "password_protected": "Filen er passord-beskyttet og vil ikke kunne leses av en saksbehandler, fjern beskyttelsen og prøv igjen",
-    "feilet": "Opplastingen feilet. Prøv på nytt",
-    "storrelse": "Filen du lastet opp er for stor. Last opp en fil hvor størrelsen er under {size} MB",
-    "totalStorrelse": "Filene du lastet opp er for store. Du kan totalt laste opp filer på {size} MB. Samlet størrelese er {filesSize} MB"
   },
   "hvaSkjerPanel": {
     "heading": "Vi har mottatt søknaden din, hva skjer nå?",
