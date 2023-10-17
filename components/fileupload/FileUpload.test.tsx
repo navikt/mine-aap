@@ -5,10 +5,13 @@ import { IntlWrapper } from 'test-utils/IntlWrapper';
 import { enableFetchMocks } from 'jest-fetch-mock';
 import { userEvent } from '@testing-library/user-event';
 import { v4 as uuidV4 } from 'uuid';
+import { VedleggType } from 'lib/types/types';
 
 enableFetchMocks();
-const fileOne: File = new File(['fil en'], 'fila.pdf', { type: 'application/pdf' });
-const fileTwo: File = new File(['fil en'], 'fila_v2.pdf', { type: 'application/pdf' });
+const filnavn1 = 'fil1.pdf';
+const filnavn2 = 'fil2.pdf';
+const fileOne: File = new File(['fil en'], filnavn1, { type: 'application/pdf' });
+const fileTwo: File = new File(['fil to'], filnavn2, { type: 'application/pdf' });
 describe('FileUpload', () => {
   beforeEach(() => {
     fetchMock.resetMocks();
@@ -18,20 +21,10 @@ describe('FileUpload', () => {
 
   it('skal vise suksessmelding når man sender inn ettersendelse', async () => {
     mockUploadFile();
-    render(
-      <IntlWrapper>
-        <FileUpload
-          krav={'UTLAND'}
-          addError={jest.fn}
-          deleteError={jest.fn}
-          setErrorSummaryFocus={jest.fn}
-          onSuccess={jest.fn}
-        />
-      </IntlWrapper>
-    );
+    render(<Filopplastning krav={'OMSORG'} />);
     const input = screen.getByTestId('fileinput');
     await user.upload(input, fileOne);
-    expect(await screen.findByText('fila.pdf')).toBeVisible();
+    expect(await screen.findByText(filnavn1)).toBeVisible();
     const sendInnKnapp = screen.getByRole('button', { name: 'Send inn' });
     expect(sendInnKnapp).toBeVisible();
     await user.click(sendInnKnapp);
@@ -44,17 +37,7 @@ describe('FileUpload', () => {
 
   it('skal ikke vise fileinput etter at ettersendelse er sendt inn dersom krav ikke er ANNET', async () => {
     mockUploadFile();
-    render(
-      <IntlWrapper>
-        <FileUpload
-          krav={'UTLAND'}
-          addError={jest.fn}
-          deleteError={jest.fn}
-          setErrorSummaryFocus={jest.fn}
-          onSuccess={jest.fn}
-        />
-      </IntlWrapper>
-    );
+    render(<Filopplastning krav={'UTLAND'} />);
     const input = screen.getByTestId('fileinput');
     await user.upload(input, fileOne);
     const sendInnKnapp = screen.getByRole('button', { name: 'Send inn' });
@@ -69,17 +52,7 @@ describe('FileUpload', () => {
 
   it('skal vise fileinput etter at ettersendelse er sendt inn dersom krav er ANNET', async () => {
     mockUploadFile();
-    render(
-      <IntlWrapper>
-        <FileUpload
-          krav={'ANNET'}
-          addError={jest.fn}
-          deleteError={jest.fn}
-          setErrorSummaryFocus={jest.fn}
-          onSuccess={jest.fn}
-        />
-      </IntlWrapper>
-    );
+    render(<Filopplastning krav={'ANNET'} />);
     const input = screen.getByTestId('fileinput');
     await user.upload(input, fileOne);
     const sendInnKnapp = screen.getByRole('button', { name: 'Send inn' });
@@ -92,23 +65,9 @@ describe('FileUpload', () => {
     expect(screen.getByTestId('fileinput')).toBeInTheDocument();
   });
 
-  beforeEach(() => {
-    fetchMock.resetMocks();
-  });
-
   it('send knapp vises først når man har lagt til minst ett dokument', async () => {
     mockUploadFile();
-    render(
-      <IntlWrapper>
-        <FileUpload
-          krav={'ANNET'}
-          addError={jest.fn}
-          deleteError={jest.fn}
-          setErrorSummaryFocus={jest.fn}
-          onSuccess={jest.fn}
-        />
-      </IntlWrapper>
-    );
+    render(<Filopplastning krav={'ANNET'} />);
     expect(screen.queryByRole('button', { name: 'Send inn' })).not.toBeInTheDocument();
     const input = screen.getByTestId('fileinput');
     await user.upload(input, fileOne);
@@ -117,17 +76,7 @@ describe('FileUpload', () => {
 
   it('send knapp vises ikke når krav ikke er ANNET og filer er lastet opp', async () => {
     mockUploadFile();
-    render(
-      <IntlWrapper>
-        <FileUpload
-          krav={'OMSORG'}
-          addError={jest.fn}
-          deleteError={jest.fn}
-          setErrorSummaryFocus={jest.fn}
-          onSuccess={jest.fn}
-        />
-      </IntlWrapper>
-    );
+    render(<Filopplastning krav={'UTLAND'} />);
     const input = screen.getByTestId('fileinput');
     await user.upload(input, fileOne);
     const sendInnKnapp = screen.getByRole('button', { name: 'Send inn' });
@@ -137,17 +86,7 @@ describe('FileUpload', () => {
 
   it('send knapp vises når krav er ANNET og filer allerede er lastet opp, og det er lagt til nye filer', async () => {
     mockUploadFile();
-    render(
-      <IntlWrapper>
-        <FileUpload
-          krav={'ANNET'}
-          addError={jest.fn}
-          deleteError={jest.fn}
-          setErrorSummaryFocus={jest.fn}
-          onSuccess={jest.fn}
-        />
-      </IntlWrapper>
-    );
+    render(<Filopplastning krav={'ANNET'} />);
     const input = screen.getByTestId('fileinput');
     await user.upload(input, fileOne);
     const sendInnKnapp = screen.getByRole('button', { name: 'Send inn' });
@@ -164,6 +103,17 @@ describe('FileUpload', () => {
   });
 });
 
+const Filopplastning = ({ krav }: { krav: VedleggType }) => (
+  <IntlWrapper>
+    <FileUpload
+      krav={krav}
+      addError={jest.fn}
+      deleteError={jest.fn}
+      setErrorSummaryFocus={jest.fn}
+      onSuccess={jest.fn}
+    />
+  </IntlWrapper>
+);
 function mockUploadFile() {
   fetchMock.mockResponseOnce(JSON.stringify(uuidV4()), { status: 200 });
 }
