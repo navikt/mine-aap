@@ -1,12 +1,12 @@
 import { Ettersendelse, VedleggType } from 'lib/types/types';
 import { FileInput, Vedlegg } from '@navikt/aap-felles-react';
-import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { Section } from 'components/Section/Section';
 import { Alert, BodyShort, Button, Heading } from '@navikt/ds-react';
 import React, { useState } from 'react';
 import { Error } from 'components/FormErrorSummary/FormErrorSummary';
 
 import styles from './FileUploadNew.module.css';
+import { useIntl } from 'react-intl';
 
 interface Props {
   søknadId?: string;
@@ -25,7 +25,7 @@ const findErrors = (vedlegg: Vedlegg[], krav: string) =>
     });
 
 export const FileUploadNew = ({ søknadId, krav, addError, deleteError, onSuccess }: Props) => {
-  const { formatMessage } = useFeatureToggleIntl();
+  const { formatMessage } = useIntl();
   const [files, setFiles] = useState<Vedlegg[]>([]);
   const [harLastetOppEttersending, setHarLastetOppEttersending] = useState<boolean>(false);
   const [harEttersendingError, setHarEttersendingError] = useState<boolean>(false);
@@ -74,8 +74,8 @@ export const FileUploadNew = ({ søknadId, krav, addError, deleteError, onSucces
       <div className={styles.fileinputWrapper}>
         {(!harLastetOppEttersending || krav === 'ANNET') && (
           <FileInput
-            heading={formatMessage(`ettersendelse.vedleggstyper.${krav}.heading`)}
-            ingress={formatMessage(`ettersendelse.vedleggstyper.${krav}.description`)}
+            heading={formatMessage({ id: `ettersendelse.vedleggstyper.${krav}.heading` })}
+            ingress={formatMessage({ id: `ettersendelse.vedleggstyper.${krav}.description` })}
             id={krav}
             onUpload={(vedlegg) => {
               if (harLastetOppEttersending) {
@@ -102,8 +102,10 @@ export const FileUploadNew = ({ søknadId, krav, addError, deleteError, onSucces
           <div className={successWrapperKlassenavn}>
             {krav !== 'ANNET' && (
               <>
-                <Heading size={'medium'}>{formatMessage(`ettersendelse.vedleggstyper.${krav}.heading`)}</Heading>
-                <BodyShort>{formatMessage(`ettersendelse.vedleggstyper.${krav}.description`)}</BodyShort>
+                <Heading size={'medium'}>
+                  {formatMessage({ id: `ettersendelse.vedleggstyper.${krav}.heading` })}
+                </Heading>
+                <BodyShort>{formatMessage({ id: `ettersendelse.vedleggstyper.${krav}.description` })}</BodyShort>
               </>
             )}
             <Alert variant="success">
