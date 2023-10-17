@@ -1,7 +1,6 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen } from 'setUpTest';
 import { FileUpload } from 'components/fileupload/FileUpload';
-import { IntlWrapper } from 'test-utils/IntlWrapper';
 import { enableFetchMocks } from 'jest-fetch-mock';
 import { userEvent } from '@testing-library/user-event';
 import { v4 as uuidV4 } from 'uuid';
@@ -104,15 +103,7 @@ describe('FileUpload', () => {
 });
 
 const Filopplastning = ({ krav }: { krav: VedleggType }) => (
-  <IntlWrapper>
-    <FileUpload
-      krav={krav}
-      addError={jest.fn}
-      deleteError={jest.fn}
-      setErrorSummaryFocus={jest.fn}
-      onSuccess={jest.fn}
-    />
-  </IntlWrapper>
+  <FileUpload krav={krav} addError={jest.fn} deleteError={jest.fn} setErrorSummaryFocus={jest.fn} onSuccess={jest.fn} />
 );
 function mockUploadFile() {
   fetchMock.mockResponseOnce(JSON.stringify(uuidV4()), { status: 200 });
