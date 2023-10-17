@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { ErrorSummary } from '@navikt/ds-react';
 import * as classes from 'components/FormErrorSummary/FormErrorSummary.module.css';
-import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
+import { useIntl } from 'react-intl';
 
 export interface Error {
   path: string;
@@ -15,7 +15,7 @@ interface Props {
 }
 
 const FormErrorSummary = ({ id, errors }: Props) => {
-  const { formatMessage } = useFeatureToggleIntl();
+  const { formatMessage } = useIntl();
 
   const errorSummaryElement = useRef(null);
 
@@ -23,7 +23,7 @@ const FormErrorSummary = ({ id, errors }: Props) => {
     return (
       <ErrorSummary
         ref={errorSummaryElement}
-        heading={formatMessage('errorSummary.title')}
+        heading={formatMessage({ id: 'errorSummary.title' })}
         role={'alert'}
         aria-hidden={errors?.length === 0}
         className={errors?.length === 0 ? classes?.visuallyHidden : ''}
@@ -38,7 +38,7 @@ const FormErrorSummary = ({ id, errors }: Props) => {
       <div className={classes.container}>
         <ErrorSummary
           ref={errorSummaryElement}
-          heading={formatMessage('errorSummary.title')}
+          heading={formatMessage({ id: 'errorSummary.title' })}
           role={'alert'}
           aria-hidden={errors?.length === 0}
           className={errors?.length === 0 ? classes?.visuallyHidden : ''}

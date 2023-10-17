@@ -1,12 +1,12 @@
 import { Alert, BodyShort, Button, Heading } from '@navikt/ds-react';
 import React, { useEffect, useMemo, useState } from 'react';
-import { useForm, useFieldArray, FieldArrayWithId, FieldErrors } from 'react-hook-form';
-import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
+import { FieldArrayWithId, FieldErrors, useFieldArray, useForm } from 'react-hook-form';
 import { Ettersendelse, OpplastetVedlegg, VedleggType } from 'lib/types/types';
 import { Section } from 'components/Section/Section';
 import { FileInput, validateFile } from 'components/Inputs/FileInput';
 import * as styles from 'components/Inputs/FileUpload.module.css';
 import { FileUploadFields } from 'components/Inputs/FileUploadFields';
+import { useIntl } from 'react-intl';
 
 const MAX_TOTAL_FILE_SIZE = 1024 * 1024 * 50; // 50 MB
 export const TOTAL_FILE_SIZE = 'totalFileSize';
@@ -39,7 +39,7 @@ export interface VedleggFormValues {
 }
 
 export const FileUpload = ({ søknadId, krav, updateErrorSummary, setErrorSummaryFocus, onEttersendSuccess }: Props) => {
-  const { formatMessage } = useFeatureToggleIntl();
+  const { formatMessage } = useIntl();
 
   const [uploadFinished, setUploadFinished] = useState(false);
   const [hasEttersendingError, setHasEttersendingError] = useState(false);
@@ -68,10 +68,13 @@ export const FileUpload = ({ søknadId, krav, updateErrorSummary, setErrorSummar
       if (totalSize > MAX_TOTAL_FILE_SIZE) {
         setError(`${krav}.${TOTAL_FILE_SIZE}`, {
           type: 'custom',
-          message: formatMessage('validation.totalStorrelse', {
-            size: bytesToMB(MAX_TOTAL_FILE_SIZE).toString(),
-            filesSize: bytesToMB(totalSize).toString(),
-          }),
+          message: formatMessage(
+            { id: 'validation.totalStorrelse' },
+            {
+              size: bytesToMB(MAX_TOTAL_FILE_SIZE).toString(),
+              filesSize: bytesToMB(totalSize).toString(),
+            }
+          ),
         });
       }
       for await (const [index, field] of fields.entries()) {
@@ -89,9 +92,12 @@ export const FileUpload = ({ søknadId, krav, updateErrorSummary, setErrorSummar
       if (validationResult) {
         setError(`${krav}.fields.${index}`, {
           type: 'custom',
-          message: formatMessage('validation.filtype', {
-            type: `.${getFileExtension(field.file.name)}`,
-          }),
+          message: formatMessage(
+            { id: 'validation.filtype' },
+            {
+              type: `.${getFileExtension(field.file.name)}`,
+            }
+          ),
         });
         update(index, { ...field, isUploading: false });
         return;
@@ -120,7 +126,7 @@ export const FileUpload = ({ søknadId, krav, updateErrorSummary, setErrorSummar
       } catch (error) {
         setError(`${krav}.fields.${index}`, {
           type: 'custom',
-          message: formatMessage(`validation.feilet`),
+          message: formatMessage({ id: `validation.feilet` }),
         });
         update(index, { ...field, isUploading: false });
       }
@@ -184,10 +190,10 @@ export const FileUpload = ({ søknadId, krav, updateErrorSummary, setErrorSummar
       >
         <div className={styles.fileUpload}>
           <Heading level="3" size="small" spacing>
-            {formatMessage(`ettersendelse.vedleggstyper.${krav}.heading`)}
+            {formatMessage({ id: `ettersendelse.vedleggstyper.${krav}.heading` })}
           </Heading>
 
-          <BodyShort spacing>{formatMessage(`ettersendelse.vedleggstyper.${krav}.description`)}</BodyShort>
+          <BodyShort spacing>{formatMessage({ id: `ettersendelse.vedleggstyper.${krav}.description` })}</BodyShort>
           {hasEttersendingError && (
             <Alert variant="error">
               Beklager, vi har litt rusk i NAVet. Du kan prøve på nytt om et par minutter, eller sende inn
@@ -211,11 +217,13 @@ export const FileUpload = ({ søknadId, krav, updateErrorSummary, setErrorSummar
           ) : (
             <FileUploadFields fields={fields} krav={krav} errors={formState.errors} remove={remove} />
           )}
-          {showMultipleFilesInfo && <Alert variant={'info'}>{formatMessage('filopplasting.formangefiler')}</Alert>}
+          {showMultipleFilesInfo && (
+            <Alert variant={'info'}>{formatMessage({ id: 'filopplasting.formangefiler' })}</Alert>
+          )}
           {fields.length > 0 && !isUploadingFiles && (
             <div>
               <Button variant="primary" type="submit" loading={isSendingEttersendelse}>
-                {formatMessage('ettersendelse.buttons.primary')}
+                {formatMessage({ id: 'ettersendelse.buttons.primary' })}
               </Button>
             </div>
           )}

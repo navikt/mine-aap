@@ -1,11 +1,11 @@
-import { XMarkIcon, TrashIcon, FileCheckmarkIcon, FileXMarkIcon } from '@navikt/aksel-icons';
+import { FileCheckmarkIcon, FileXMarkIcon, TrashIcon, XMarkIcon } from '@navikt/aksel-icons';
 import { BodyShort, Detail, Label, Link, Loader, Panel } from '@navikt/ds-react';
 import { FieldArrayWithId, FieldErrors, UseFieldArrayRemove } from 'react-hook-form';
-import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { fileSizeString } from '@navikt/aap-felles-utils-client';
 import { TOTAL_FILE_SIZE, VedleggFormValues } from 'components/Inputs/FileUpload';
 import * as styles from 'components/Inputs/FileUploadFields.module.css';
 import { VedleggType } from 'lib/types/types';
+import { useIntl } from 'react-intl';
 
 interface Props {
   fields: FieldArrayWithId<VedleggFormValues>[] | undefined;
@@ -15,7 +15,7 @@ interface Props {
 }
 
 export const FileUploadFields = ({ fields, krav, remove, errors }: Props) => {
-  const { formatMessage } = useFeatureToggleIntl();
+  const { formatMessage } = useIntl();
   const totalFileSizeErrorMessage = errors?.[krav]?.[TOTAL_FILE_SIZE]?.message;
   return (
     <>
@@ -24,10 +24,7 @@ export const FileUploadFields = ({ fields, krav, remove, errors }: Props) => {
           const fieldHasError: boolean = errors?.[krav]?.fields?.[index]?.message !== undefined;
           return (
             <div key={attachment.id}>
-              <Panel
-                className={`${styles.fileCard} ${fieldHasError ?? styles?.error}`}
-                key={attachment.id}
-              >
+              <Panel className={`${styles.fileCard} ${fieldHasError ?? styles?.error}`} key={attachment.id}>
                 <div className={styles.fileCardLeftContent}>
                   {attachment.isUploading ? (
                     <>
@@ -55,10 +52,7 @@ export const FileUploadFields = ({ fields, krav, remove, errors }: Props) => {
                             <FileCheckmarkIcon color={'var(--a-icon-success)'} />
                           </div>
                           <div>
-                            <Link
-                              target={'_blank'}
-                              href={`/aap/mine-aap/vedlegg/${attachment?.vedleggId}`}
-                            >
+                            <Link target={'_blank'} href={`/aap/mine-aap/vedlegg/${attachment?.vedleggId}`}>
                               {attachment?.name}
                             </Link>
                             <Detail>{fileSizeString(attachment?.size)}</Detail>
@@ -82,8 +76,8 @@ export const FileUploadFields = ({ fields, krav, remove, errors }: Props) => {
                     }}
                     className={styles?.deleteAttachment}
                   >
-                    <XMarkIcon title={formatMessage('filopplasting.vedlegg.avbryt')} />
-                    <BodyShort>{formatMessage('filopplasting.vedlegg.avbryt')}</BodyShort>
+                    <XMarkIcon title={formatMessage({ id: 'filopplasting.vedlegg.avbryt' })} />
+                    <BodyShort>{formatMessage({ id: 'filopplasting.vedlegg.avbryt' })}</BodyShort>
                   </button>
                 )}
                 {!fieldHasError && !attachment.isUploading && (
@@ -102,15 +96,13 @@ export const FileUploadFields = ({ fields, krav, remove, errors }: Props) => {
                     }}
                     className={styles?.deleteAttachment}
                   >
-                    <TrashIcon title={formatMessage('filopplasting.vedlegg.slett')} />
-                    <BodyShort>{formatMessage('filopplasting.vedlegg.slett')}</BodyShort>
+                    <TrashIcon title={formatMessage({ id: 'filopplasting.vedlegg.slett' })} />
+                    <BodyShort>{formatMessage({ id: 'filopplasting.vedlegg.slett' })}</BodyShort>
                   </button>
                 )}
               </Panel>
               {fieldHasError && (
-                <div
-                  className={`navds-error-message navds-error-message--medium navds-label ${styles.errorMessage}`}
-                >
+                <div className={`navds-error-message navds-error-message--medium navds-label ${styles.errorMessage}`}>
                   {errors?.[krav]?.fields?.[index]?.message}
                 </div>
               )}

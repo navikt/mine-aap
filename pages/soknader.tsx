@@ -1,5 +1,5 @@
 import { Button, Heading, Link } from '@navikt/ds-react';
-import { NextPageContext, GetServerSidePropsResult } from 'next';
+import { GetServerSidePropsResult, NextPageContext } from 'next';
 import { beskyttetSide, getAccessToken, logger } from '@navikt/aap-felles-utils';
 import { VerticalFlexContainer } from 'components/FlexContainer/VerticalFlexContainer';
 import { Layout } from 'components/Layout/Layout';
@@ -11,8 +11,8 @@ import { ArrowLeftIcon } from '@navikt/aksel-icons';
 import { useRouter } from 'next/router';
 import NextLink from 'next/link';
 import metrics from 'lib/metrics';
-import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import Head from 'next/head';
+import { useIntl } from 'react-intl';
 
 interface PageProps {
   søknader: Søknad[];
@@ -20,27 +20,30 @@ interface PageProps {
 
 const Søknader = ({ søknader }: PageProps) => {
   const router = useRouter();
-  const { formatMessage, formatElement } = useFeatureToggleIntl();
+  const { formatMessage } = useIntl();
 
   return (
     <Layout>
       <Head>
         <title>
-          {`${formatElement('appTittel', {
-            shy: '',
-          })} - nav.no`}
+          {`${formatMessage(
+            { id: 'appTittel' },
+            {
+              shy: '',
+            }
+          )} - nav.no`}
         </title>
       </Head>
       <Section>
         <NextLink href="/" passHref legacyBehavior>
           <Link>
             <ArrowLeftIcon />
-            {formatMessage('tilbakeTilMineAAPKnapp')}
+            {formatMessage({ id: 'tilbakeTilMineAAPKnapp' })}
           </Link>
         </NextLink>
         <div>
           <Heading level="2" size="medium" spacing>
-            {formatMessage('dineSøknader.heading')}
+            {formatMessage({ id: 'dineSøknader.heading' })}
           </Heading>
           <VerticalFlexContainer>
             {søknader.map((søknad) => (
@@ -52,7 +55,7 @@ const Søknader = ({ søknader }: PageProps) => {
       <Section>
         <div>
           <Button icon={<ArrowLeftIcon />} variant="tertiary" onClick={() => router.push('/')}>
-            {formatMessage('tilbakeTilMineAAPKnapp')}
+            {formatMessage({ id: 'tilbakeTilMineAAPKnapp' })}
           </Button>
         </div>
       </Section>
@@ -60,20 +63,18 @@ const Søknader = ({ søknader }: PageProps) => {
   );
 };
 
-export const getServerSideProps = beskyttetSide(
-  async (ctx: NextPageContext): Promise<GetServerSidePropsResult<{}>> => {
-    const stopTimer = metrics.getServersidePropsDurationHistogram.startTimer({ path: '/soknader' });
-    const bearerToken = getAccessToken(ctx);
-    const params = { page: '0', size: '200', sort: 'created,desc' };
-    const søknader = await getSøknader(params, bearerToken);
+export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Promise<GetServerSidePropsResult<{}>> => {
+  const stopTimer = metrics.getServersidePropsDurationHistogram.startTimer({ path: '/soknader' });
+  const bearerToken = getAccessToken(ctx);
+  const params = { page: '0', size: '200', sort: 'created,desc' };
+  const søknader = await getSøknader(params, bearerToken);
 
-    logger.info(`søknader: ${JSON.stringify(søknader)}`);
+  logger.info(`søknader: ${JSON.stringify(søknader)}`);
 
-    stopTimer();
-    return {
-      props: { søknader },
-    };
-  }
-);
+  stopTimer();
+  return {
+    props: { søknader },
+  };
+});
 
 export default Søknader;
