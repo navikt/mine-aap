@@ -8,17 +8,16 @@ import { NyttigÅVite } from 'components/NyttigÅVite/NyttigÅVite';
 import { PageComponentFlexContainer } from 'components/PageComponentFlexContainer/PageComponentFlexContainer';
 import { PageContainer } from 'components/PageContainer/PageContainer';
 import { Soknad } from 'components/Soknad/Soknad';
-import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import metrics from 'lib/metrics';
 import { Søknad } from 'lib/types/types';
 import { GetServerSidePropsResult, NextPageContext } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useMemo } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 const Index = ({ søknader }: { søknader: Søknad[] }) => {
-  const { formatElement } = useFeatureToggleIntl();
+  const { formatMessage } = useIntl();
 
   const router = useRouter();
 
@@ -30,9 +29,12 @@ const Index = ({ søknader }: { søknader: Søknad[] }) => {
     <PageContainer>
       <Head>
         <title>
-          {`${formatElement('appTittel', {
-            shy: '',
-          })} - nav.no`}
+          {`${formatMessage(
+            { id: 'appTittel' },
+            {
+              shy: '',
+            }
+          )} - nav.no`}
         </title>
       </Head>
       <PageComponentFlexContainer>

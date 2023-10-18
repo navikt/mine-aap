@@ -3,7 +3,6 @@ import { LucaGuidePanel, ScanningGuide, Vedlegg } from '@navikt/aap-felles-react
 import { GetServerSidePropsResult, NextPageContext } from 'next';
 import PageHeader from 'components/PageHeader';
 import { Section } from 'components/Section/Section';
-import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { Søknad, VedleggType } from 'lib/types/types';
 import * as styles from 'pages/[uuid]/ettersendelse/Ettersendelse.module.css';
 import { getSøknad } from 'pages/api/soknader/[uuid]';
@@ -26,7 +25,7 @@ interface PageProps {
 }
 
 const Index = ({ søknad }: PageProps) => {
-  const { formatMessage, formatElement } = useFeatureToggleIntl();
+  const { formatMessage } = useIntl();
   const { locale } = useIntl();
 
   const [errors, setErrors] = useState<Error[]>([]);
@@ -49,15 +48,21 @@ const Index = ({ søknad }: PageProps) => {
     <>
       <Head>
         <title>
-          {`${formatElement('ettersendelse.appTittel', {
-            shy: '',
-          })} - nav.no`}
+          {`${formatMessage(
+            { id: 'ettersendelse.appTittel' },
+            {
+              shy: '',
+            }
+          )} - nav.no`}
         </title>
       </Head>
       <PageHeader align="center" variant="guide">
-        {formatElement('ettersendelse.appTittel', {
-          shy: <>&shy;</>,
-        })}
+        {formatMessage(
+          { id: 'ettersendelse.appTittel' },
+          {
+            shy: <>&shy;</>,
+          }
+        )}
       </PageHeader>
       <main className={styles.main}>
         <Section>
@@ -68,31 +73,34 @@ const Index = ({ søknad }: PageProps) => {
             </Link>
           </NextLink>
           <Heading level="2" size="large" spacing>
-            {formatMessage('ettersendelse.heading')}
+            {formatMessage({ id: 'ettersendelse.heading' })}
           </Heading>
           <LucaGuidePanel>
-            <BodyShort spacing>{formatMessage('ettersendelse.guide')}</BodyShort>
+            <BodyShort spacing>{formatMessage({ id: 'ettersendelse.guide' })}</BodyShort>
           </LucaGuidePanel>
           <Label>
-            {formatMessage('ettersendelse.gjeldendeSøknad', {
-              dateTime: formatFullDate(søknad.innsendtDato),
-            })}
+            {formatMessage(
+              { id: 'ettersendelse.gjeldendeSøknad' },
+              {
+                dateTime: formatFullDate(søknad.innsendtDato),
+              }
+            )}
           </Label>
           {(manglendeVedlegg.length ?? 0) > 0 && (
             <div className={styles?.manglendeVedlegg}>
-              <BodyShort spacing>{formatMessage('ettersendelse.manglerDokumentasjon')}</BodyShort>
+              <BodyShort spacing>{formatMessage({ id: 'ettersendelse.manglerDokumentasjon' })}</BodyShort>
               <ul>
                 {manglendeVedlegg.map((krav) => (
                   <li key={krav}>
-                    <Label>{formatMessage(`ettersendelse.vedleggstyper.${krav}.heading`)}</Label>
+                    <Label>{formatMessage({ id: `ettersendelse.vedleggstyper.${krav}.heading` })}</Label>
                   </li>
                 ))}
               </ul>
             </div>
           )}
           <div>
-            <BodyShort>{formatMessage('ettersendelse.slikTarDuBildeBeskrivelse')}</BodyShort>
-            <ReadMore header={formatMessage('ettersendelse.slikTarDuBilde')}>
+            <BodyShort>{formatMessage({ id: 'ettersendelse.slikTarDuBildeBeskrivelse' })}</BodyShort>
+            <ReadMore header={formatMessage({ id: 'ettersendelse.slikTarDuBilde' })}>
               <ScanningGuide locale={locale} />
             </ReadMore>
           </div>
@@ -124,7 +132,7 @@ const Index = ({ søknad }: PageProps) => {
         <Section>
           <div>
             <Button icon={<ArrowLeftIcon />} variant="tertiary" onClick={() => router.push('/')}>
-              {formatMessage('tilbakeTilMineAAPKnapp')}
+              {formatMessage({ id: 'tilbakeTilMineAAPKnapp' })}
             </Button>
           </div>
         </Section>
