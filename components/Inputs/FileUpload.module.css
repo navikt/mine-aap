@@ -1,7 +1,0 @@
-.fileUpload {
-  padding: 2rem;
-  background-color: var(--a-surface-subtle);
-  display: flex;
-  flex-direction: column;
-  row-gap: 1rem;
-}
