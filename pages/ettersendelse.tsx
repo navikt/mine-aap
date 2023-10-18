@@ -2,7 +2,6 @@ import { ReadMore, Label, BodyShort, Button, Heading, Link } from '@navikt/ds-re
 import PageHeader from 'components/PageHeader';
 import { Section } from 'components/Section/Section';
 import { beskyttetSide, getAccessToken } from '@navikt/aap-felles-utils';
-import { useFeatureToggleIntl } from 'lib/hooks/useFeatureToggleIntl';
 import { GetServerSidePropsResult, NextPageContext } from 'next';
 import * as styles from 'pages/[uuid]/ettersendelse/Ettersendelse.module.css';
 import NextLink from 'next/link';
@@ -16,7 +15,7 @@ import Head from 'next/head';
 import { FileUpload } from 'components/fileupload/FileUpload';
 
 const Ettersendelse = () => {
-  const { formatMessage, formatElement } = useFeatureToggleIntl();
+  const { formatMessage } = useIntl();
   const { locale } = useIntl();
 
   const router = useRouter();
@@ -25,15 +24,21 @@ const Ettersendelse = () => {
     <>
       <Head>
         <title>
-          {`${formatElement('ettersendelse.appTittel', {
-            shy: '',
-          })} - nav.no`}
+          {`${formatMessage(
+            { id: 'ettersendelse.appTittel' },
+            {
+              shy: '',
+            }
+          )} - nav.no`}
         </title>
       </Head>
       <PageHeader align="center" variant="guide">
-        {formatElement('ettersendelse.appTittel', {
-          shy: <>&shy;</>,
-        })}
+        {formatMessage(
+          { id: 'ettersendelse.appTittel' },
+          {
+            shy: <>&shy;</>,
+          }
+        )}
       </PageHeader>
       <main className={styles.main}>
         <Section>
@@ -44,19 +49,19 @@ const Ettersendelse = () => {
             </Link>
           </NextLink>
           <Heading level="2" size="large" spacing>
-            {formatMessage('ettersendelse.heading')}
+            {formatMessage({ id: 'ettersendelse.heading' })}
           </Heading>
           <LucaGuidePanel>
-            <BodyShort spacing>{formatMessage('ettersendelse.annet.guide.tekst1')}</BodyShort>
-            <BodyShort spacing>{formatMessage('ettersendelse.annet.guide.tekst2')}</BodyShort>
+            <BodyShort spacing>{formatMessage({ id: 'ettersendelse.annet.guide.tekst1' })}</BodyShort>
+            <BodyShort spacing>{formatMessage({ id: 'ettersendelse.annet.guide.tekst2' })}</BodyShort>
           </LucaGuidePanel>
           <div>
-            <Label>{formatMessage('ettersendelse.annet.label')}</Label>
-            <BodyShort className={styles.annetTekst}>{formatMessage('ettersendelse.annet.tekst')}</BodyShort>
+            <Label>{formatMessage({ id: 'ettersendelse.annet.label' })}</Label>
+            <BodyShort className={styles.annetTekst}>{formatMessage({ id: 'ettersendelse.annet.tekst' })}</BodyShort>
           </div>
           <div>
-            <BodyShort>{formatMessage('ettersendelse.slikTarDuBildeBeskrivelse')}</BodyShort>
-            <ReadMore header={formatMessage('ettersendelse.slikTarDuBilde')}>
+            <BodyShort>{formatMessage({ id: 'ettersendelse.slikTarDuBildeBeskrivelse' })}</BodyShort>
+            <ReadMore header={formatMessage({ id: 'ettersendelse.slikTarDuBilde' })}>
               <ScanningGuide locale={locale} />
             </ReadMore>
           </div>
@@ -72,7 +77,7 @@ const Ettersendelse = () => {
         <Section>
           <div>
             <Button icon={<ArrowLeftIcon />} variant="tertiary" onClick={() => router.push('/')}>
-              {formatMessage('tilbakeTilMineAAPKnapp')}
+              {formatMessage({ id: 'tilbakeTilMineAAPKnapp' })}
             </Button>
           </div>
         </Section>
