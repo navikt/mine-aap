@@ -1,5 +1,4 @@
 import { ReadMore, Label, BodyShort, Button, Heading, Link } from '@navikt/ds-react';
-import { FileUpload } from 'components/Inputs/FileUpload';
 import PageHeader from 'components/PageHeader';
 import { Section } from 'components/Section/Section';
 import { beskyttetSide, getAccessToken } from '@navikt/aap-felles-utils';
@@ -14,6 +13,7 @@ import { getSøknader } from './api/soknader/soknader';
 import { LucaGuidePanel, ScanningGuide } from '@navikt/aap-felles-react';
 import { useIntl } from 'react-intl';
 import Head from 'next/head';
+import { FileUpload } from 'components/fileupload/FileUpload';
 
 const Ettersendelse = () => {
   const { formatMessage, formatElement } = useFeatureToggleIntl();
@@ -52,9 +52,7 @@ const Ettersendelse = () => {
           </LucaGuidePanel>
           <div>
             <Label>{formatMessage('ettersendelse.annet.label')}</Label>
-            <BodyShort className={styles.annetTekst}>
-              {formatMessage('ettersendelse.annet.tekst')}
-            </BodyShort>
+            <BodyShort className={styles.annetTekst}>{formatMessage('ettersendelse.annet.tekst')}</BodyShort>
           </div>
           <div>
             <BodyShort>{formatMessage('ettersendelse.slikTarDuBildeBeskrivelse')}</BodyShort>
@@ -66,11 +64,11 @@ const Ettersendelse = () => {
 
         <FileUpload
           krav="ANNET"
-          updateErrorSummary={() => {}}
+          addError={() => {}}
+          deleteError={() => {}}
           setErrorSummaryFocus={() => {}}
-          onEttersendSuccess={() => {}}
+          onSuccess={() => {}}
         />
-
         <Section>
           <div>
             <Button icon={<ArrowLeftIcon />} variant="tertiary" onClick={() => router.push('/')}>
@@ -83,29 +81,27 @@ const Ettersendelse = () => {
   );
 };
 
-export const getServerSideProps = beskyttetSide(
-  async (ctx: NextPageContext): Promise<GetServerSidePropsResult<{}>> => {
-    const stopTimer = metrics.getServersidePropsDurationHistogram.startTimer({
-      path: '/ettersendelse',
-    });
-    const bearerToken = getAccessToken(ctx);
-    const params = { page: '0', size: '1', sort: 'created,desc' };
-    const søknader = await getSøknader(params, bearerToken);
-    stopTimer();
+export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Promise<GetServerSidePropsResult<{}>> => {
+  const stopTimer = metrics.getServersidePropsDurationHistogram.startTimer({
+    path: '/ettersendelse',
+  });
+  const bearerToken = getAccessToken(ctx);
+  const params = { page: '0', size: '1', sort: 'created,desc' };
+  const søknader = await getSøknader(params, bearerToken);
+  stopTimer();
 
-    if (søknader.length > 0) {
-      return {
-        redirect: {
-          destination: `/${søknader[0].søknadId}/ettersendelse/`,
-          permanent: false,
-        },
-      };
-    }
-
+  if (søknader.length > 0) {
     return {
-      props: {},
+      redirect: {
+        destination: `/${søknader[0].søknadId}/ettersendelse/`,
+        permanent: false,
+      },
     };
   }
-);
+
+  return {
+    props: {},
+  };
+});
 
 export default Ettersendelse;
