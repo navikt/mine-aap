@@ -77,6 +77,7 @@ export const FileUpload = ({ søknadId, krav, addError, deleteError, onSuccess, 
           <FileInput
             heading={formatMessage({ id: `ettersendelse.vedleggstyper.${krav}.heading` })}
             ingress={formatMessage({ id: `ettersendelse.vedleggstyper.${krav}.description` })}
+            readAttachmentUrl={'/aap/mine-aap/vedlegg/'}
             id={krav}
             onUpload={(vedlegg) => {
               if (harLastetOppEttersending) {
