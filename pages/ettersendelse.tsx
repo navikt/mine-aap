@@ -9,16 +9,24 @@ import { ArrowLeftIcon } from '@navikt/aksel-icons';
 import { useRouter } from 'next/router';
 import metrics from 'lib/metrics';
 import { getSøknader } from './api/soknader/soknader';
-import { LucaGuidePanel, ScanningGuide } from '@navikt/aap-felles-react';
+import { LucaGuidePanel, ScanningGuide, Vedlegg } from '@navikt/aap-felles-react';
 import { useIntl } from 'react-intl';
 import Head from 'next/head';
 import { FileUpload } from 'components/fileupload/FileUpload';
+import { Error, FormErrorSummary } from 'components/FormErrorSummary/FormErrorSummary';
+import { useState } from 'react';
+import { setFocus } from 'lib/utils/dom';
 
 const Ettersendelse = () => {
   const { formatMessage } = useIntl();
+  const router = useRouter();
   const { locale } = useIntl();
 
-  const router = useRouter();
+  const [errors, setErrors] = useState<Error[]>([]);
+  const errorSummaryId = 'errorSummary';
+
+  const addError = (errorsFromKrav: Error[]) => setErrors([...errors, ...errorsFromKrav]);
+  const deleteError = (vedlegg: Vedlegg) => setErrors(errors.filter((error) => error.id !== vedlegg.vedleggId));
 
   return (
     <>
@@ -67,11 +75,13 @@ const Ettersendelse = () => {
           </div>
         </Section>
 
+        <FormErrorSummary id={errorSummaryId} errors={errors} />
+
         <FileUpload
           krav="ANNET"
-          addError={() => {}}
-          deleteError={() => {}}
-          setErrorSummaryFocus={() => {}}
+          addError={addError}
+          deleteError={deleteError}
+          setErrorSummaryFocus={() => setFocus(errorSummaryId)}
           onSuccess={() => {}}
         />
         <Section>
