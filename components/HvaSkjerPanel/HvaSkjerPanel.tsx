@@ -9,6 +9,7 @@ export const HvaSkjerPanel = () => {
       <Heading level="2" size="medium" spacing>
         <FormattedMessage id="hvaSkjerPanel.heading" />
       </Heading>
+      <div>Heihei</div>
       <ul>
         <li>
           <Label as={'p'}>
