@@ -621,22 +621,22 @@
     intl-messageformat "10.5.8"
     tslib "^2.4.0"
 
-"@grafana/faro-core@^1.2.6":
-  version "1.2.6"
-  resolved "https://registry.yarnpkg.com/@grafana/faro-core/-/faro-core-1.2.6.tgz#cdf6fc000c157baa59e87e12692a15bfae57abf6"
-  integrity sha512-fDszhDS9mWdLYSFp65swbxSj6ptc8mV2Ru9stm+g3HZHLnmNbe+LcKVCWpyNf64jK3dYM8Lx9zXjjn9Z5r+8nQ==
+"@grafana/faro-core@^1.2.7":
+  version "1.2.7"
+  resolved "https://registry.yarnpkg.com/@grafana/faro-core/-/faro-core-1.2.7.tgz#4bad7b12394d866d233b1925fb09857f2bb3381a"
+  integrity sha512-BgZngS/FAMk7ytp4OpYh5I08r7OP/gq3kyTXNtoVS4f8j9btNhqH+IIuFkxP8zhprEvJqEu15gZAgvxhKb8ktQ==
   dependencies:
     "@opentelemetry/api" "^1.4.1"
     "@opentelemetry/api-metrics" "^0.33.0"
     "@opentelemetry/otlp-transformer" "^0.41.2"
     murmurhash-js "^1.0.0"
 
-"@grafana/faro-web-sdk@^1.2.6":
-  version "1.2.6"
-  resolved "https://registry.yarnpkg.com/@grafana/faro-web-sdk/-/faro-web-sdk-1.2.6.tgz#53b44a2b6b6898b8a749d9305537b5c39d959c78"
-  integrity sha512-uM9GU4sDjnrOZ0Aisut1c86zHHSiPgG/Nr5mfENorz5Sj2c7EMy32UV8O0CgVKRjWQzFrZgrhs8WjqW+IcaZ1Q==
+"@grafana/faro-web-sdk@^1.2.7":
+  version "1.2.7"
+  resolved "https://registry.yarnpkg.com/@grafana/faro-web-sdk/-/faro-web-sdk-1.2.7.tgz#9a3f70561416bf55e10dd69304df381214da6d31"
+  integrity sha512-V0ypwnYXgpp4tvO4yEWtvRhaoPEtA9vubVb4/JKkPMe0h97d31OR1ttvI9OFGwuJWVLFe44P2DccFKEjd7T8RA==
   dependencies:
-    "@grafana/faro-core" "^1.2.6"
+    "@grafana/faro-core" "^1.2.7"
     ua-parser-js "^1.0.32"
     web-vitals "^3.1.1"
 
