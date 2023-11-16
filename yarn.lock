@@ -1029,10 +1029,10 @@
     html-react-parser "^3.0.16"
     node-cache "^5.1.2"
 
-"@navikt/next-api-proxy@^3.3.0":
-  version "3.3.0"
-  resolved "https://npm.pkg.github.com/download/@navikt/next-api-proxy/3.3.0/c3d32b0d9bbfd066b679546165f0ee48d972e954#c3d32b0d9bbfd066b679546165f0ee48d972e954"
-  integrity sha512-Ad/Ybiket4BR/lw8/DFQ4+v6aQFouMRZvmjb4uH+dhM1nST+/yriuUv5ZOkIUPGwkVavOfptrPI6DSYKRRaANg==
+"@navikt/next-api-proxy@^3.4.0":
+  version "3.4.0"
+  resolved "https://npm.pkg.github.com/download/@navikt/next-api-proxy/3.4.0/b0ec19f54b1f153ed3f91e6f513ba97d146c6f01#b0ec19f54b1f153ed3f91e6f513ba97d146c6f01"
+  integrity sha512-qXCa0BOFPIvjAFC6ieMC71EKzc5mlVc/0OvUgC0DdeKxyokr+wuQWWrHYwPnToz2uEejv2m80IH6O4cw5hW1dQ==
 
 "@next/env@13.1.2":
   version "13.1.2"
