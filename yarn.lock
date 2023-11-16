@@ -621,22 +621,22 @@
     intl-messageformat "10.5.4"
     tslib "^2.4.0"
 
-"@grafana/faro-core@^1.1.2":
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/@grafana/faro-core/-/faro-core-1.1.2.tgz#016aebdb429325c1e26d1952e750a81f3ff5af8f"
-  integrity sha512-bkDRivNUEjk2oOzsC+xJEr2hhFZDsHBoXqGbZiR2rQ4BT3qN5Mm4Eb3GOaHrRBLXp82HeV6ZXP0Gfsv3+YMEQA==
+"@grafana/faro-core@^1.2.5":
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/@grafana/faro-core/-/faro-core-1.2.5.tgz#e333cd9b99f917dc5e4a28de603bbd50929fd8f2"
+  integrity sha512-cHVUWahoK0SktBrDscm2KpeOZJZXQYg1k9lDjfYy/5zTUCOv47BnAzdEwH8p7oKsbY00h5OJLjAM+vNdNfrK4A==
   dependencies:
     "@opentelemetry/api" "^1.4.1"
     "@opentelemetry/api-metrics" "^0.33.0"
-    "@opentelemetry/otlp-transformer" "^0.37.0"
+    "@opentelemetry/otlp-transformer" "^0.41.2"
     murmurhash-js "^1.0.0"
 
-"@grafana/faro-web-sdk@^1.1.1":
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/@grafana/faro-web-sdk/-/faro-web-sdk-1.1.2.tgz#a45c0b1b86ea2cf4e316056b8c87cd6d60df2d3d"
-  integrity sha512-WH3xBlb33+pLeiPzV9id2ZUjlJR4nOmsGH/g+Uvosp9S2YQV+hL6LiWpP/jjC0KCROhCUgl8luly8UlssFMNDA==
+"@grafana/faro-web-sdk@^1.2.5":
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/@grafana/faro-web-sdk/-/faro-web-sdk-1.2.5.tgz#1938265cd8e4ec8bbac656992cc08ae41d08584f"
+  integrity sha512-WT5KgxUPz9w7f8a6fpGRCNWP1JSP3Rx0DKjrOoQSHZU4nahCnNTq/KMUJk65x+vW6DJfBMG75igFvap6x3bWUw==
   dependencies:
-    "@grafana/faro-core" "^1.1.2"
+    "@grafana/faro-core" "^1.2.5"
     ua-parser-js "^1.0.32"
     web-vitals "^3.1.1"
 
@@ -963,25 +963,39 @@
     pino "^8.8.0"
     prom-client "^14.1.0"
 
+"@navikt/aksel-icons@^5.10.1":
+  version "5.10.1"
+  resolved "https://npm.pkg.github.com/download/@navikt/aksel-icons/5.10.1/02483b56f481c1bfd1e9256eac9f8c35f920b742#02483b56f481c1bfd1e9256eac9f8c35f920b742"
+  integrity sha512-VOwshZoNAOCrmfWyfTkKHwKdUpF9a77zOAuonM3zkrluo66NRwa1p9rqas6ZrAZjGUjtxQ7dXg+reLdqsxfUWw==
+
 "@navikt/aksel-icons@^5.4.1":
   version "5.4.1"
   resolved "https://npm.pkg.github.com/download/@navikt/aksel-icons/5.4.1/ff7b887a287ef24a443bccef0471a04f4c299387#ff7b887a287ef24a443bccef0471a04f4c299387"
   integrity sha512-PWjCtiLXSWvUDeeLsRUHCNl69AZpihdVqe8jcOM6sCYwIBv6QFw/HG4rQKtD1VirrsXvk+yOeENTC75zEJXiTw==
 
-"@navikt/aksel-icons@^5.7.2":
-  version "5.7.2"
-  resolved "https://npm.pkg.github.com/download/@navikt/aksel-icons/5.7.2/38619136dc4d27d55d2e5003ffa139168a5dcf86#38619136dc4d27d55d2e5003ffa139168a5dcf86"
-  integrity sha512-n46qhpW+KxhNTRGOkidSDOaa2AancHEPUPJe2y5zwXicrXMWz9F97rsPogEqblX7zt0ltl1Kqw5oAIZTl8aXog==
+"@navikt/ds-css@^5.10.1":
+  version "5.10.1"
+  resolved "https://npm.pkg.github.com/download/@navikt/ds-css/5.10.1/fb0dc63ae42c7ba17aa47992829952d4598d5def#fb0dc63ae42c7ba17aa47992829952d4598d5def"
+  integrity sha512-+PheVLcMgFz7V/o3LNDOfT2A/pmh57IbTVc4XHedY6y1fmA6YoQ6DeqPKryb1OYrC+hdagMjrA0J/snKsWH2xw==
 
 "@navikt/ds-css@^5.4.1":
   version "5.4.1"
   resolved "https://npm.pkg.github.com/download/@navikt/ds-css/5.4.1/261168dc8c8a5bd8739f301d45238d634bab95c3#261168dc8c8a5bd8739f301d45238d634bab95c3"
   integrity sha512-f/Fs5i4vv54dORLa8cq0muXielCUQy6asO7ugFzkzBdfzqa49gizQ14kQAbpGoEkEsfa09oSgyqL/KgH8tPX1g==
 
-"@navikt/ds-css@^5.7.2":
-  version "5.7.2"
-  resolved "https://npm.pkg.github.com/download/@navikt/ds-css/5.7.2/3b37f026826667a2ca165ca593fcaa781bca27b6#3b37f026826667a2ca165ca593fcaa781bca27b6"
-  integrity sha512-Tr+5ZREbXUJwEWpNXUe/6cx0B91NLRHYVwoKFJ1Do50FjEYscfAxhWgrFwrl/RFxcjMF9mIaI9MwC+CibzukWA==
+"@navikt/ds-react@^5.10.1":
+  version "5.10.1"
+  resolved "https://npm.pkg.github.com/download/@navikt/ds-react/5.10.1/57cd27a134fac3c2c92aadaa86d4864d1efa2c3d#57cd27a134fac3c2c92aadaa86d4864d1efa2c3d"
+  integrity sha512-60y6aovWVdycRI6WczBnvjzAbRSK0wa6XAwx53NULmBM/KnqLurYlg61P8twx+HE959LDlZ2x/R6+oSYGWBRBA==
+  dependencies:
+    "@floating-ui/react" "0.25.4"
+    "@navikt/aksel-icons" "^5.10.1"
+    "@navikt/ds-tokens" "^5.10.1"
+    "@radix-ui/react-tabs" "1.0.0"
+    "@radix-ui/react-toggle-group" "1.0.0"
+    clsx "^1.2.1"
+    date-fns "2.29.3"
+    react-day-picker "8.3.4"
 
 "@navikt/ds-react@^5.4.1":
   version "5.4.1"
@@ -996,24 +1010,10 @@
     date-fns "2.29.3"
     react-day-picker "8.3.4"
 
-"@navikt/ds-react@^5.7.2":
-  version "5.7.2"
-  resolved "https://npm.pkg.github.com/download/@navikt/ds-react/5.7.2/b4c6b236df3c86d0d3f10140e2f779b166293045#b4c6b236df3c86d0d3f10140e2f779b166293045"
-  integrity sha512-O5k5vQNSC8S4rH1pJunS583hcCYdGcpKOvgUWiD4Fb6CpCCNAjgzQoiutJCGzd1m+yy95lsUePYHRofMtlxV8Q==
-  dependencies:
-    "@floating-ui/react" "0.25.4"
-    "@navikt/aksel-icons" "^5.7.2"
-    "@navikt/ds-tokens" "^5.7.2"
-    "@radix-ui/react-tabs" "1.0.0"
-    "@radix-ui/react-toggle-group" "1.0.0"
-    clsx "^1.2.1"
-    date-fns "2.29.3"
-    react-day-picker "8.3.4"
-
-"@navikt/ds-tokens@^5.7.2":
-  version "5.7.2"
-  resolved "https://npm.pkg.github.com/download/@navikt/ds-tokens/5.7.2/34bb3982f8da115331fa50c6a3a0c69499a072eb#34bb3982f8da115331fa50c6a3a0c69499a072eb"
-  integrity sha512-jRPyyb2I/9efxscrFbsVJ9o0wHwqtqya02xtcukmVkhyrc3CgCy3Ac1CJmKLxXmCALAdQ4B0a/qXohYlyS0Y5A==
+"@navikt/ds-tokens@^5.10.1":
+  version "5.10.1"
+  resolved "https://npm.pkg.github.com/download/@navikt/ds-tokens/5.10.1/e6ad53ab10ea5a6e9e206fe010c5781fdda949c3#e6ad53ab10ea5a6e9e206fe010c5781fdda949c3"
+  integrity sha512-7M6sUuuoS4aY/xPbTJNsrer2zFXq7hzkQ5Ccv6WjpLh3wZ51Hy+fqSeyMZrsEo4/IPdVvErndDWMyDKmfoGThQ==
 
 "@navikt/eslint-config-aap@^0.0.91":
   version "0.0.91"
@@ -1182,6 +1182,13 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@opentelemetry/api-logs@0.41.2":
+  version "0.41.2"
+  resolved "https://registry.yarnpkg.com/@opentelemetry/api-logs/-/api-logs-0.41.2.tgz#600c9b3d79018e7421d2ff7189f41b6d2c987d6a"
+  integrity sha512-JEV2RAqijAFdWeT6HddYymfnkiRu2ASxoTBr4WsnGJhOjWZkEy6vp+Sx9ozr1NaIODOa2HUyckExIqQjn6qywQ==
+  dependencies:
+    "@opentelemetry/api" "^1.0.0"
+
 "@opentelemetry/api-metrics@^0.33.0":
   version "0.33.0"
   resolved "https://registry.yarnpkg.com/@opentelemetry/api-metrics/-/api-metrics-0.33.0.tgz#753d355289b7811ad254d6e5b0193bd1b9f23ab0"
@@ -1204,13 +1211,6 @@
   resolved "https://registry.yarnpkg.com/@opentelemetry/context-async-hooks/-/context-async-hooks-1.14.0.tgz#1ede5b0da289c53dac791a6f3c709d13c1b6b6bd"
   integrity sha512-KfwMzdjxUtQM3uy4ogEdN3pdakFreyZNybKKlvxUM+inF5tAObsGamlmsfmUt6s3mXEC70+DY743+TdG4FMf/Q==
 
-"@opentelemetry/core@1.11.0":
-  version "1.11.0"
-  resolved "https://registry.yarnpkg.com/@opentelemetry/core/-/core-1.11.0.tgz#3141a0e96a9ade6ee2dcdd794fd0b014e1013dde"
-  integrity sha512-aP1wHSb+YfU0pM63UAkizYPuS4lZxzavHHw5KJfFNN2oWQ79HSm6JR3CzwFKHwKhSzHN8RE9fgP1IdVJ8zmo1w==
-  dependencies:
-    "@opentelemetry/semantic-conventions" "1.11.0"
-
 "@opentelemetry/core@1.12.0":
   version "1.12.0"
   resolved "https://registry.yarnpkg.com/@opentelemetry/core/-/core-1.12.0.tgz#afa32341b794045c54c979d4561de2f8f00d0da9"
@@ -1224,6 +1224,13 @@
   integrity sha512-MnMZ+sxsnlzloeuXL2nm5QcNczt/iO82UOeQQDHhV83F2fP3sgntW2evvtoxJki0MBLxEsh5ADD7PR/Hn5uzjw==
   dependencies:
     "@opentelemetry/semantic-conventions" "1.14.0"
+
+"@opentelemetry/core@1.15.2":
+  version "1.15.2"
+  resolved "https://registry.yarnpkg.com/@opentelemetry/core/-/core-1.15.2.tgz#5b170bf223a2333884bbc2d29d95812cdbda7c9f"
+  integrity sha512-+gBv15ta96WqkHZaPpcDHiaz0utiiHZVfm2YOYSqFGrUaJpPkMoSuLBB58YFQGi6Rsb9EHos84X6X5+9JspmLw==
+  dependencies:
+    "@opentelemetry/semantic-conventions" "1.15.2"
 
 "@opentelemetry/exporter-jaeger@1.12.0":
   version "1.12.0"
@@ -1325,15 +1332,17 @@
     "@opentelemetry/sdk-metrics" "1.12.0"
     "@opentelemetry/sdk-trace-base" "1.12.0"
 
-"@opentelemetry/otlp-transformer@^0.37.0":
-  version "0.37.0"
-  resolved "https://registry.yarnpkg.com/@opentelemetry/otlp-transformer/-/otlp-transformer-0.37.0.tgz#5de4bf39da9a14841ca0ebd7ac220801d616de64"
-  integrity sha512-cIzV9x2DhJ5gN0mld8OqN+XM95sDiuAJJvXsRjVuz9vu8TSNbbao/QCKNfJLOXqe8l3Ge05nKzQ6Q2gDDEN36w==
+"@opentelemetry/otlp-transformer@^0.41.2":
+  version "0.41.2"
+  resolved "https://registry.yarnpkg.com/@opentelemetry/otlp-transformer/-/otlp-transformer-0.41.2.tgz#cd3a7185ef77fe9b7b4c2d2f9e001fa1d2fa6cf8"
+  integrity sha512-jJbPwB0tNu2v+Xi0c/v/R3YBLJKLonw1p+v3RVjT2VfzeUyzSp/tBeVdY7RZtL6dzZpA9XSmp8UEfWIFQo33yA==
   dependencies:
-    "@opentelemetry/core" "1.11.0"
-    "@opentelemetry/resources" "1.11.0"
-    "@opentelemetry/sdk-metrics" "1.11.0"
-    "@opentelemetry/sdk-trace-base" "1.11.0"
+    "@opentelemetry/api-logs" "0.41.2"
+    "@opentelemetry/core" "1.15.2"
+    "@opentelemetry/resources" "1.15.2"
+    "@opentelemetry/sdk-logs" "0.41.2"
+    "@opentelemetry/sdk-metrics" "1.15.2"
+    "@opentelemetry/sdk-trace-base" "1.15.2"
 
 "@opentelemetry/propagator-b3@1.12.0":
   version "1.12.0"
@@ -1363,14 +1372,6 @@
   dependencies:
     "@opentelemetry/core" "1.14.0"
 
-"@opentelemetry/resources@1.11.0":
-  version "1.11.0"
-  resolved "https://registry.yarnpkg.com/@opentelemetry/resources/-/resources-1.11.0.tgz#68e3ca399e63246a6b87bc495f819c5bd9f2c112"
-  integrity sha512-y0z2YJTqk0ag+hGT4EXbxH/qPhDe8PfwltYb4tXIEsozgEFfut/bqW7H7pDvylmCjBRMG4NjtLp57V1Ev++brA==
-  dependencies:
-    "@opentelemetry/core" "1.11.0"
-    "@opentelemetry/semantic-conventions" "1.11.0"
-
 "@opentelemetry/resources@1.12.0":
   version "1.12.0"
   resolved "https://registry.yarnpkg.com/@opentelemetry/resources/-/resources-1.12.0.tgz#895394c727dc3e7e51d1d2cc50907ec07a626dca"
@@ -1387,14 +1388,21 @@
     "@opentelemetry/core" "1.14.0"
     "@opentelemetry/semantic-conventions" "1.14.0"
 
-"@opentelemetry/sdk-metrics@1.11.0":
-  version "1.11.0"
-  resolved "https://registry.yarnpkg.com/@opentelemetry/sdk-metrics/-/sdk-metrics-1.11.0.tgz#0fe347fb39a802ec270315cba0eba2e3ce64c4a2"
-  integrity sha512-knuq3pwU0+46FEMdw9Ses+alXL9cbcLUUTdYBBBsaKkqKwoVMHfhBufW7u6YCu4i+47Wg6ZZTN/eGc4LbTbK5Q==
+"@opentelemetry/resources@1.15.2":
+  version "1.15.2"
+  resolved "https://registry.yarnpkg.com/@opentelemetry/resources/-/resources-1.15.2.tgz#0c9e26cb65652a1402834a3c030cce6028d6dd9d"
+  integrity sha512-xmMRLenT9CXmm5HMbzpZ1hWhaUowQf8UB4jMjFlAxx1QzQcsD3KFNAVX/CAWzFPtllTyTplrA4JrQ7sCH3qmYw==
   dependencies:
-    "@opentelemetry/core" "1.11.0"
-    "@opentelemetry/resources" "1.11.0"
-    lodash.merge "4.6.2"
+    "@opentelemetry/core" "1.15.2"
+    "@opentelemetry/semantic-conventions" "1.15.2"
+
+"@opentelemetry/sdk-logs@0.41.2":
+  version "0.41.2"
+  resolved "https://registry.yarnpkg.com/@opentelemetry/sdk-logs/-/sdk-logs-0.41.2.tgz#c3eeb6793bdfa52351d66e2e66637e433abed672"
+  integrity sha512-smqKIw0tTW15waj7BAPHFomii5c3aHnSE4LQYTszGoK5P9nZs8tEAIpu15UBxi3aG31ZfsLmm4EUQkjckdlFrw==
+  dependencies:
+    "@opentelemetry/core" "1.15.2"
+    "@opentelemetry/resources" "1.15.2"
 
 "@opentelemetry/sdk-metrics@1.12.0":
   version "1.12.0"
@@ -1404,6 +1412,15 @@
     "@opentelemetry/core" "1.12.0"
     "@opentelemetry/resources" "1.12.0"
     lodash.merge "4.6.2"
+
+"@opentelemetry/sdk-metrics@1.15.2":
+  version "1.15.2"
+  resolved "https://registry.yarnpkg.com/@opentelemetry/sdk-metrics/-/sdk-metrics-1.15.2.tgz#eadd0a049de9cd860e1e0d49eea01156469c4b60"
+  integrity sha512-9aIlcX8GnhcsAHW/Wl8bzk4ZnWTpNlLtud+fxUfBtFATu6OZ6TrGrF4JkT9EVrnoxwtPIDtjHdEsSjOqisY/iA==
+  dependencies:
+    "@opentelemetry/core" "1.15.2"
+    "@opentelemetry/resources" "1.15.2"
+    lodash.merge "^4.6.2"
 
 "@opentelemetry/sdk-node@^0.38.0":
   version "0.38.0"
@@ -1423,15 +1440,6 @@
     "@opentelemetry/sdk-trace-node" "1.12.0"
     "@opentelemetry/semantic-conventions" "1.12.0"
 
-"@opentelemetry/sdk-trace-base@1.11.0":
-  version "1.11.0"
-  resolved "https://registry.yarnpkg.com/@opentelemetry/sdk-trace-base/-/sdk-trace-base-1.11.0.tgz#a962dbe74ae28442501ce804d4a270892e70d862"
-  integrity sha512-DV8e5/Qo42V8FMBlQ0Y0Liv6Hl/Pp5bAZ73s7r1euX8w4bpRes1B7ACiA4yujADbWMJxBgSo4fGbi4yjmTMG2A==
-  dependencies:
-    "@opentelemetry/core" "1.11.0"
-    "@opentelemetry/resources" "1.11.0"
-    "@opentelemetry/semantic-conventions" "1.11.0"
-
 "@opentelemetry/sdk-trace-base@1.12.0":
   version "1.12.0"
   resolved "https://registry.yarnpkg.com/@opentelemetry/sdk-trace-base/-/sdk-trace-base-1.12.0.tgz#62b895dbb5900048a85e4899c38fec5585447d4b"
@@ -1449,6 +1457,15 @@
     "@opentelemetry/core" "1.14.0"
     "@opentelemetry/resources" "1.14.0"
     "@opentelemetry/semantic-conventions" "1.14.0"
+
+"@opentelemetry/sdk-trace-base@1.15.2":
+  version "1.15.2"
+  resolved "https://registry.yarnpkg.com/@opentelemetry/sdk-trace-base/-/sdk-trace-base-1.15.2.tgz#4821f94033c55a6c8bbd35ae387b715b6108517a"
+  integrity sha512-BEaxGZbWtvnSPchV98qqqqa96AOcb41pjgvhfzDij10tkBhIu9m0Jd6tZ1tJB5ZHfHbTffqYVYE0AOGobec/EQ==
+  dependencies:
+    "@opentelemetry/core" "1.15.2"
+    "@opentelemetry/resources" "1.15.2"
+    "@opentelemetry/semantic-conventions" "1.15.2"
 
 "@opentelemetry/sdk-trace-node@1.12.0":
   version "1.12.0"
@@ -1474,11 +1491,6 @@
     "@opentelemetry/sdk-trace-base" "1.14.0"
     semver "^7.3.5"
 
-"@opentelemetry/semantic-conventions@1.11.0":
-  version "1.11.0"
-  resolved "https://registry.yarnpkg.com/@opentelemetry/semantic-conventions/-/semantic-conventions-1.11.0.tgz#b7ed9a601acb6e0aef67564b37e4f9abad449170"
-  integrity sha512-fG4D0AktoHyHwGhFGv+PzKrZjxbKJfckJauTJdq2A+ej5cTazmNYjJVAODXXkYyrsI10muMl+B1iO2q1R6Lp+w==
-
 "@opentelemetry/semantic-conventions@1.12.0":
   version "1.12.0"
   resolved "https://registry.yarnpkg.com/@opentelemetry/semantic-conventions/-/semantic-conventions-1.12.0.tgz#19c959bdb900986e74939d4227e757aa16936b91"
@@ -1488,6 +1500,11 @@
   version "1.14.0"
   resolved "https://registry.yarnpkg.com/@opentelemetry/semantic-conventions/-/semantic-conventions-1.14.0.tgz#6a729b7f372ce30f77a3f217c09bc216f863fccb"
   integrity sha512-rJfCY8rCWz3cb4KI6pEofnytvMPuj3YLQwoscCCYZ5DkdiPjo15IQ0US7+mjcWy9H3fcZIzf2pbJZ7ck/h4tug==
+
+"@opentelemetry/semantic-conventions@1.15.2":
+  version "1.15.2"
+  resolved "https://registry.yarnpkg.com/@opentelemetry/semantic-conventions/-/semantic-conventions-1.15.2.tgz#3bafb5de3e20e841dff6cb3c66f4d6e9694c4241"
+  integrity sha512-CjbOKwk2s+3xPIMcd5UNYQzsf+v94RczbdNix9/kQh38WiQkM90sUOi3if8eyHFgiBjBjhwXrA7W3ydiSQP9mw==
 
 "@pkgr/utils@^2.3.1":
   version "2.3.1"
@@ -3850,10 +3867,10 @@ html-dom-parser@3.1.7:
     domhandler "5.0.3"
     htmlparser2 "8.0.2"
 
-html-dom-parser@4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/html-dom-parser/-/html-dom-parser-4.0.0.tgz#dc382fbbc9306f8c9b5aae4e3f2822e113a48709"
-  integrity sha512-TUa3wIwi80f5NF8CVWzkopBVqVAtlawUzJoLwVLHns0XSJGynss4jiY0mTWpiDOsuyw+afP+ujjMgRh9CoZcXw==
+html-dom-parser@5.0.4:
+  version "5.0.4"
+  resolved "https://registry.yarnpkg.com/html-dom-parser/-/html-dom-parser-5.0.4.tgz#2941a762317d088e747db31c8cf290987ec30a55"
+  integrity sha512-azy8THLKd4Ar0OVJpEgX+MSjYvKdNDWlGiRBIlovMqEQYMAnLLXBhhiSwjylDD3RDdcCYT8Utg6uoRDeLHUyHg==
   dependencies:
     domhandler "5.0.3"
     htmlparser2 "9.0.0"
@@ -3880,15 +3897,15 @@ html-react-parser@^3.0.16:
     react-property "2.0.0"
     style-to-js "1.1.3"
 
-html-react-parser@^4.2.2:
-  version "4.2.2"
-  resolved "https://registry.yarnpkg.com/html-react-parser/-/html-react-parser-4.2.2.tgz#91f1cc2138bc069d65cbd8b9d97b1e71ed423300"
-  integrity sha512-lh0wEGISnFZEAmvQqK4xc0duFMUh/m9YYyAhFursWxdtNv+hCZge0kj1y4wep6qPB5Zm33L+2/P6TcGWAJJbjA==
+html-react-parser@^5.0.6:
+  version "5.0.6"
+  resolved "https://registry.yarnpkg.com/html-react-parser/-/html-react-parser-5.0.6.tgz#ee9e8ae404aa38cfbaf3825cb26fabced46024a1"
+  integrity sha512-aPSzFhO2bK/L/mYQbMwFz+1QG8nhxozbwENt/52HTApasrBvDX87MFD5uSQIjq7Io0bnKzH4uh7PM42zZ4ag9A==
   dependencies:
     domhandler "5.0.3"
-    html-dom-parser "4.0.0"
-    react-property "2.0.0"
-    style-to-js "1.1.4"
+    html-dom-parser "5.0.4"
+    react-property "2.0.2"
+    style-to-js "1.1.9"
 
 htmlparser2@8.0.2:
   version "8.0.2"
@@ -3997,6 +4014,11 @@ inline-style-parser@0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/inline-style-parser/-/inline-style-parser-0.1.1.tgz#ec8a3b429274e9c0a1f1c4ffa9453a7fef72cea1"
   integrity sha512-7NXolsK4CAS5+xvdj5OMMbI962hU/wvwoxk+LWR9Ek9bVtyuuYScDN6eS0rUm6TxApFpw7CX1o4uJzcd4AyD3Q==
+
+inline-style-parser@0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/inline-style-parser/-/inline-style-parser-0.2.2.tgz#d498b4e6de0373458fc610ff793f6b14ebf45633"
+  integrity sha512-EcKzdTHVe8wFVOGEYXiW9WmJXPjqi1T+234YpJr98RiFYKHV3cdy1+3mkTE+KHTHxFFLH51SfaGOoUdW+v7ViQ==
 
 internal-slot@^1.0.3, internal-slot@^1.0.4, internal-slot@^1.0.5:
   version "1.0.5"
@@ -5708,6 +5730,11 @@ react-property@2.0.0:
   resolved "https://registry.yarnpkg.com/react-property/-/react-property-2.0.0.tgz#2156ba9d85fa4741faf1918b38efc1eae3c6a136"
   integrity sha512-kzmNjIgU32mO4mmH5+iUyrqlpFQhF8K2k7eZ4fdLSOPFrD1XgEuSBv9LDEgxRXTMBqMd8ppT0x6TIzqE5pdGdw==
 
+react-property@2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/react-property/-/react-property-2.0.2.tgz#d5ac9e244cef564880a610bc8d868bd6f60fdda6"
+  integrity sha512-+PbtI3VuDV0l6CleQMsx2gtK0JZbZKbpdu5ynr+lbsuvtmgbNcS3VM0tuY2QjFNOcWxvXeHjDpy42RO+4U2rug==
+
 react@18.2.0, react@^18.2.0:
   version "18.2.0"
   resolved "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
@@ -6178,12 +6205,12 @@ style-to-js@1.1.3:
   dependencies:
     style-to-object "0.4.1"
 
-style-to-js@1.1.4:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/style-to-js/-/style-to-js-1.1.4.tgz#5fa07a181ec3ca354d699edf442549e0ac61ed32"
-  integrity sha512-zEeU3vy9xL/hdLBFmzqjhm+2vJ1Y35V0ctDeB2sddsvN1856OdMZUCOOfKUn3nOjjEKr6uLhOnY4CrX6gLDRrA==
+style-to-js@1.1.9:
+  version "1.1.9"
+  resolved "https://registry.yarnpkg.com/style-to-js/-/style-to-js-1.1.9.tgz#5bdc23ba7624016094a19d6ea90fa3f98bee34c4"
+  integrity sha512-6bkwhOlPOx+wKiHVlPTHjUqM4zDKv9pyccehB8zetZL0hhQ7MVp7UEWUsohjiMdxwhSsEdjMrEve+8qzUVmY4w==
   dependencies:
-    style-to-object "0.4.2"
+    style-to-object "1.0.4"
 
 style-to-object@0.4.1:
   version "0.4.1"
@@ -6192,12 +6219,12 @@ style-to-object@0.4.1:
   dependencies:
     inline-style-parser "0.1.1"
 
-style-to-object@0.4.2:
-  version "0.4.2"
-  resolved "https://registry.yarnpkg.com/style-to-object/-/style-to-object-0.4.2.tgz#a8247057111dea8bd3b8a1a66d2d0c9cf9218a54"
-  integrity sha512-1JGpfPB3lo42ZX8cuPrheZbfQ6kqPPnPHlKMyeRYtfKD+0jG+QsXgXN57O/dvJlzlB2elI6dGmrPnl5VPQFPaA==
+style-to-object@1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/style-to-object/-/style-to-object-1.0.4.tgz#496fded508ce520eca13e738e8af33b8b5af98f2"
+  integrity sha512-KyNO6mfijxSnypdvEjeXlhvbGPSh0l1zBJp80n+ncBQvrEbSwBHwZCpo0xz6Q4AKSPfXowWwypCBAUAdfz3rFQ==
   dependencies:
-    inline-style-parser "0.1.1"
+    inline-style-parser "0.2.2"
 
 styled-jsx@5.1.1:
   version "5.1.1"
