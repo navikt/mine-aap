@@ -41,7 +41,7 @@
     "@navikt/eslint-config-aap": "^0.0.91",
     "@playwright/test": "^1.39.0",
     "@testing-library/jest-dom": "^6.1.4",
-    "@testing-library/react": "^14.1.0",
+    "@testing-library/react": "^14.1.1",
     "@testing-library/user-event": "^14.5.1",
     "@types/amplitude-js": "^8.16.5",
     "@types/cookie": "^0.5.4",
