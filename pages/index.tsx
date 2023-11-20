@@ -8,12 +8,13 @@ import { NyttigÅVite } from 'components/NyttigÅVite/NyttigÅVite';
 import { PageComponentFlexContainer } from 'components/PageComponentFlexContainer/PageComponentFlexContainer';
 import { PageContainer } from 'components/PageContainer/PageContainer';
 import { Soknad } from 'components/Soknad/Soknad';
+import { isBefore, sub } from 'date-fns';
 import metrics from 'lib/metrics';
 import { Søknad } from 'lib/types/types';
 import { GetServerSidePropsResult, NextPageContext } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 const Index = ({ søknader }: { søknader: Søknad[] }) => {
@@ -24,6 +25,18 @@ const Index = ({ søknader }: { søknader: Søknad[] }) => {
   const sisteSøknad = useMemo(() => {
     return søknader[0];
   }, [søknader]);
+
+  useEffect(() => {
+    if (sisteSøknad?.innsendtDato) {
+      const erEldreEnn14Uker = isBefore(new Date(sisteSøknad.innsendtDato), sub(new Date(), { weeks: 14 }));
+      if (erEldreEnn14Uker) {
+        // @ts-ignore-line
+        window?.hj('trigger', 'aap_brev_undersokelse');
+      } else {
+        console.log('Siste søknad er ikke eldre enn 14 uker');
+      }
+    }
+  }, [sisteSøknad]);
 
   return (
     <PageContainer>
