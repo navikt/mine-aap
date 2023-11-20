@@ -27,9 +27,9 @@ const Index = ({ søknader }: { søknader: Søknad[] }) => {
   }, [søknader]);
 
   useEffect(() => {
-    if (sisteSøknad?.innsendtDato) {
+    if (sisteSøknad != undefined && sisteSøknad.innsendtDato != undefined) {
       const erEldreEnn14Uker = isBefore(new Date(sisteSøknad.innsendtDato), sub(new Date(), { weeks: 14 }));
-      if (erEldreEnn14Uker) {
+      if (erEldreEnn14Uker && Object.hasOwn(window, 'hj')) {
         // @ts-ignore-line
         window?.hj('trigger', 'aap_brev_undersokelse');
       } else {
