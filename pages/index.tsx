@@ -29,9 +29,16 @@ const Index = ({ søknader }: { søknader: Søknad[] }) => {
   useEffect(() => {
     if (sisteSøknad != undefined && sisteSøknad.innsendtDato != undefined) {
       const erEldreEnn14Uker = isBefore(new Date(sisteSøknad.innsendtDato), sub(new Date(), { weeks: 14 }));
-      if (erEldreEnn14Uker && Object.hasOwn(window, 'hj')) {
-        // @ts-ignore-line
-        window?.hj('trigger', 'aap_brev_undersokelse');
+      if (erEldreEnn14Uker) {
+        setTimeout(() => {
+          // @ts-ignore-line
+          if (typeof window.hj === 'function') {
+            // @ts-ignore-line
+            window?.hj('trigger', 'aap_brev_undersokelse');
+          } else {
+            console.log('hotjar ble ikke lastet inn i tide :(');
+          }
+        }, 1000);
       } else {
         console.log('Siste søknad er ikke eldre enn 14 uker');
       }
