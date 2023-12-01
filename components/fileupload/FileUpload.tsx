@@ -53,7 +53,7 @@ export const FileUpload = ({ søknadId, krav, addError, deleteError, onSuccess, 
     };
 
     try {
-      const response = await fetch('/aap/mine-aap/api/ettersendelse/send/', {
+      const response = await fetch('/aap/mine-aap/api/innsending/send/', {
         method: 'POST',
         body: JSON.stringify(ettersendelse),
       });
@@ -96,7 +96,7 @@ export const FileUpload = ({ søknadId, krav, addError, deleteError, onSuccess, 
               setFiles(newFiles);
             }}
             deleteUrl={'/aap/mine-aap/api/vedlegg/slett/?uuid='}
-            uploadUrl={'/aap/mine-aap/api/vedlegg/lagre/'}
+            uploadUrl={'/aap/mine-aap/api/innsending/vedlegg/lagre/'}
             files={files}
           />
         )}
