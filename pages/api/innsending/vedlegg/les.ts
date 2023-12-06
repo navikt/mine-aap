@@ -14,6 +14,7 @@ const handler = beskyttetApi(async (req, res) => {
     req: req,
     audience: process.env.INNSENDING_AUDIENCE!,
     bearerToken: accessToken,
+    rawResonse: true,
   });
 });
 
