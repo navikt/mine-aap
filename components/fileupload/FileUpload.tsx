@@ -1,4 +1,4 @@
-import { Ettersendelse, VedleggType } from 'lib/types/types';
+import { InnsendingBackendState, VedleggType } from 'lib/types/types';
 import { FileInput, Vedlegg } from '@navikt/aap-felles-react';
 import { Section } from 'components/Section/Section';
 import { Alert, BodyShort, Button, Heading } from '@navikt/ds-react';
@@ -41,15 +41,13 @@ export const FileUpload = ({ søknadId, krav, addError, deleteError, onSuccess, 
       return;
     }
 
-    const ettersendelse: Ettersendelse = {
+    const ettersendelse: InnsendingBackendState = {
       ...(søknadId && { søknadId: søknadId }),
-      totalFileSize: files.reduce((acc, curr) => acc + curr.size, 0),
-      ettersendteVedlegg: [
-        {
-          vedleggType: krav,
-          ettersending: files.map((file) => file.vedleggId),
-        },
-      ],
+
+      filer: files.map((file) => ({
+        tittel: file.name,
+        id: file.vedleggId,
+      })),
     };
 
     try {
