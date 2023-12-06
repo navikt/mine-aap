@@ -30,7 +30,7 @@ export const sendEttersendelse = async (data: InnsendingBackendState, accessToke
     prometheusPath: '/innsending',
     method: 'POST',
     data: JSON.stringify(data),
-    audience: process.env.INNSENDING_URL!,
+    audience: process.env.INNSENDING_AUDIENCE!,
     bearerToken: accessToken,
     noResponse: true,
     logger: logger,

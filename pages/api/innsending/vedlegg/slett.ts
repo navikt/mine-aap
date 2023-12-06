@@ -12,7 +12,7 @@ const handler = beskyttetApi(async (req, res) => {
     method: 'DELETE',
     prometheusPath: '/mellomlagring/fil',
     req,
-    audience: process.env.INNSENDING_URL!,
+    audience: process.env.INNSENDING_AUDIENCE!,
     bearerToken: accessToken,
   });
 });

@@ -12,7 +12,7 @@ const handler = beskyttetApi(async (req, res) => {
     method: 'GET',
     prometheusPath: '/mellomlagring/fil',
     req: req,
-    audience: process.env.INNSENDING_URL!,
+    audience: process.env.INNSENDING_AUDIENCE!,
     bearerToken: accessToken,
   });
 });
