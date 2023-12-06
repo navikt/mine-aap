@@ -95,7 +95,7 @@ export const FileUpload = ({ søknadId, krav, addError, deleteError, onSuccess, 
               const newFiles = files.filter((file) => file.vedleggId !== vedlegg.vedleggId);
               setFiles(newFiles);
             }}
-            deleteUrl={'/aap/mine-aap/api/vedlegg/slett/?uuid='}
+            deleteUrl={'/aap/mine-aap/api/innsending/vedlegg/slett/?uuid='}
             uploadUrl={'/aap/mine-aap/api/innsending/vedlegg/lagre/'}
             files={files}
           />
