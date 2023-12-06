@@ -8,7 +8,7 @@ const handler = beskyttetApi(async (req, res) => {
   }
   const accessToken = getAccessTokenFromRequest(req);
   return await tokenXApiProxy({
-    url: `/mellomlagring/fil/${uuid}`,
+    url: `${process.env.INNSENDING_URL}/mellomlagring/fil/${uuid}`,
     method: 'GET',
     prometheusPath: '/mellomlagring/fil',
     req: req,
