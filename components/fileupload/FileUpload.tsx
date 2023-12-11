@@ -29,6 +29,7 @@ export const FileUpload = ({ søknadId, krav, addError, deleteError, onSuccess, 
   const [files, setFiles] = useState<Vedlegg[]>([]);
   const [harLastetOppEttersending, setHarLastetOppEttersending] = useState<boolean>(false);
   const [harEttersendingError, setHarEttersendingError] = useState<boolean>(false);
+  const [isUploading, setIsUploading] = useState<boolean>(false);
 
   const kravErAnnet = krav === 'ANNET';
   const successWrapperKlassenavn = kravErAnnet ? styles.successWrapperAnnet : styles.successWrapper;
@@ -36,8 +37,10 @@ export const FileUpload = ({ søknadId, krav, addError, deleteError, onSuccess, 
   const visSendInnKnapp = !harLastetOppEttersending && files.length > 0;
 
   const onClick = async () => {
+    setIsUploading(true);
     if (harFeilmeldinger) {
       setErrorSummaryFocus();
+      setIsUploading(false);
       return;
     }
 
@@ -66,6 +69,7 @@ export const FileUpload = ({ søknadId, krav, addError, deleteError, onSuccess, 
       console.log(err);
       setHarEttersendingError(true);
     }
+    setIsUploading(false);
   };
 
   return (
@@ -130,7 +134,7 @@ export const FileUpload = ({ søknadId, krav, addError, deleteError, onSuccess, 
           </Alert>
         )}
         {visSendInnKnapp && (
-          <Button onClick={onClick} className={styles.sendButton}>
+          <Button onClick={onClick} loading={isUploading} className={styles.sendButton}>
             Send inn
           </Button>
         )}
