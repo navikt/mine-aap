@@ -17,11 +17,12 @@ const handler = beskyttetApi(async (req, res) => {
   }
   return await proxyApiRouteRequest({
     hostname: 'innsending',
-    path: `mellomlagring/fil/${uuid}`,
+    path: `/mellomlagring/fil/${uuid}`,
     req: req,
     /* @ts-ignore: TODO */
     res: res,
     bearerToken: tokenxToken,
+    https: false,
   });
 });
 
