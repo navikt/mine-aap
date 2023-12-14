@@ -1,5 +1,5 @@
 import { InnsendingBackendState, VedleggType } from 'lib/types/types';
-import { FileInput, Vedlegg } from '@navikt/aap-felles-react';
+import { FileInputInnsending, Vedlegg } from '@navikt/aap-felles-react';
 import { Section } from 'components/Section/Section';
 import { Alert, BodyShort, Button, Heading } from '@navikt/ds-react';
 import React, { useState } from 'react';
@@ -76,7 +76,7 @@ export const FileUpload = ({ søknadId, krav, addError, deleteError, onSuccess, 
     <Section>
       <div className={styles.fileinputWrapper}>
         {(!harLastetOppEttersending || kravErAnnet) && (
-          <FileInput
+          <FileInputInnsending
             heading={formatMessage({ id: `ettersendelse.vedleggstyper.${krav}.heading` })}
             ingress={formatMessage({ id: `ettersendelse.vedleggstyper.${krav}.description` })}
             readAttachmentUrl={'/aap/mine-aap/vedlegg/'}
