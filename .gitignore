@@ -42,3 +42,7 @@ yarn-error.log*
 
 # vscode
 .vscode
+
+#ignorer co-author hook
+.husky/prepare-commit-msg
+.git-co-authors.yaml
