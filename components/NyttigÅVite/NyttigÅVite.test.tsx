@@ -50,13 +50,11 @@ describe('NyttigÅVite', () => {
   test('har lenke til hvor man kan klage på oppfølgingsvedtak', () => {
     const lenke = screen.getByRole('link', { name: 'kan du klage på oppfølgingsvedtaket (åpnes i ny fane).' });
     expect(lenke).toBeVisible();
-    expect(lenke).toBeVisible();
     expect(lenke).toHaveAttribute('target');
     expect(lenke.getAttribute('target')).toEqual('_blank');
   });
   test('har lenke til hvor man kan klage på vedtak', () => {
     const lenke = screen.getByRole('link', { name: 'kan du klage på AAP-vedtaket (åpnes i ny fane).' });
-    expect(lenke).toBeVisible();
     expect(lenke).toBeVisible();
     expect(lenke).toHaveAttribute('target');
     expect(lenke.getAttribute('target')).toEqual('_blank');
