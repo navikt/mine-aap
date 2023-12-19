@@ -13,8 +13,7 @@ describe('NyttigÅVite', () => {
   test('har lenke til forventede saksbehandlingstider', () => {
     const lenke = screen.getByRole('link', { name: 'Forventede saksbehandlingstider (åpnes i ny fane)' });
     expect(lenke).toBeVisible();
-    expect(lenke).toHaveAttribute('target');
-    expect(lenke.getAttribute('target')).toEqual('_blank');
+    expect(lenke).toHaveAttribute('target', '_blank');
   });
 
   test('har lenke til alle innsendte søknader', () => {
@@ -43,20 +42,18 @@ describe('NyttigÅVite', () => {
   test('har lenke til cv-registrering på arbeidsplassen.no', () => {
     const lenke = screen.getByRole('link', { name: 'CV-en din, gjerne på arbeidsplassen.no (åpnes i ny fane).' });
     expect(lenke).toBeVisible();
-    expect(lenke).toHaveAttribute('target');
-    expect(lenke.getAttribute('target')).toEqual('_blank');
+    expect(lenke).toHaveAttribute('target', '_blank');
   });
 
   test('har lenke til hvor man kan klage på oppfølgingsvedtak', () => {
     const lenke = screen.getByRole('link', { name: 'kan du klage på oppfølgingsvedtaket (åpnes i ny fane).' });
     expect(lenke).toBeVisible();
-    expect(lenke).toHaveAttribute('target');
-    expect(lenke.getAttribute('target')).toEqual('_blank');
+    expect(lenke).toHaveAttribute('target', '_blank');
   });
+
   test('har lenke til hvor man kan klage på vedtak', () => {
     const lenke = screen.getByRole('link', { name: 'kan du klage på AAP-vedtaket (åpnes i ny fane).' });
     expect(lenke).toBeVisible();
-    expect(lenke).toHaveAttribute('target');
-    expect(lenke.getAttribute('target')).toEqual('_blank');
+    expect(lenke).toHaveAttribute('target', '_blank');
   });
 });
