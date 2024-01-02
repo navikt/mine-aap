@@ -34,3 +34,6 @@ export const mockSøknader: Søknad[] = [
   },
   { innsendtDato: '2022-08-30T08:53:47.215149', søknadId: '835a12fc-e642-42da-b182-5169c488842f' },
 ];
+
+export const søknadMedInnsendteOgManglendeVedlegg: Søknad = mockSøknader[0];
+export const søknadUtenVedlegg: Søknad = mockSøknader[1];
