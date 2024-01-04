@@ -1,5 +1,5 @@
 import { getStringFromPossiblyArrayQuery } from '@navikt/aap-felles-utils-client';
-import { beskyttetApi, getTokenX } from '@navikt/aap-felles-utils';
+import { beskyttetApi, getAccessTokenFromRequest, getTokenX } from '@navikt/aap-felles-utils';
 import { tokenXProxy } from '../../../lib/api/tokenXProxy';
 import { proxyApiRouteRequest } from '@navikt/next-api-proxy';
 
@@ -9,7 +9,6 @@ const handler = beskyttetApi(async (req, res) => {
     res.status(400).json({ error: 'uuid må være en string' });
   }
   if (process.env.NEXT_PUBLIC_NY_INNSENDING === 'enabled') {
-    // @ts-ignore-line TODO: Feil med type for NextApiResponse vi henter fra felleslib
     const accessToken = getAccessTokenFromRequest(req)?.substring('Bearer '.length)!;
     let tokenxToken;
     try {
