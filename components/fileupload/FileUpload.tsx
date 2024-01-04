@@ -1,5 +1,5 @@
 import { Ettersendelse, VedleggType } from 'lib/types/types';
-import { FileInput, Vedlegg } from '@navikt/aap-felles-react';
+import { FileInput, FileInputInnsending, Vedlegg } from '@navikt/aap-felles-react';
 import { Section } from 'components/Section/Section';
 import { Alert, BodyShort, Button, Heading } from '@navikt/ds-react';
 import React, { useState } from 'react';
@@ -78,31 +78,61 @@ export const FileUpload = ({ søknadId, krav, addError, deleteError, onSuccess, 
     <Section>
       <div className={styles.fileinputWrapper}>
         {(!harLastetOppEttersending || kravErAnnet) && (
-          <FileInput
-            heading={formatMessage({ id: `ettersendelse.vedleggstyper.${krav}.heading` })}
-            ingress={formatMessage({ id: `ettersendelse.vedleggstyper.${krav}.description` })}
-            readAttachmentUrl={'/aap/mine-aap/vedlegg/'}
-            id={krav}
-            onUpload={(vedlegg) => {
-              if (harLastetOppEttersending) {
-                setHarLastetOppEttersending(false);
-              }
-              const errors = findErrors(vedlegg, krav);
-              errors && addError(errors);
-              setFiles([...files, ...vedlegg]);
-            }}
-            onDelete={(vedlegg) => {
-              if (vedlegg.errorMessage) {
-                deleteError(vedlegg);
-              }
+          <>
+            {process.env.NEXT_PUBLIC_NY_INNSENDING === 'enabled' ? (
+              <FileInputInnsending
+                heading={formatMessage({ id: `ettersendelse.vedleggstyper.${krav}.heading` })}
+                ingress={formatMessage({ id: `ettersendelse.vedleggstyper.${krav}.description` })}
+                readAttachmentUrl={'/aap/mine-aap/vedlegg/'}
+                id={krav}
+                onUpload={(vedlegg) => {
+                  if (harLastetOppEttersending) {
+                    setHarLastetOppEttersending(false);
+                  }
+                  const errors = findErrors(vedlegg, krav);
+                  errors && addError(errors);
+                  setFiles([...files, ...vedlegg]);
+                }}
+                onDelete={(vedlegg) => {
+                  if (vedlegg.errorMessage) {
+                    deleteError(vedlegg);
+                  }
 
-              const newFiles = files.filter((file) => file.vedleggId !== vedlegg.vedleggId);
-              setFiles(newFiles);
-            }}
-            deleteUrl={'/aap/mine-aap/api/vedlegg/slett/?uuid='}
-            uploadUrl={'/aap/mine-aap/api/vedlegg/lagre/'}
-            files={files}
-          />
+                  const newFiles = files.filter((file) => file.vedleggId !== vedlegg.vedleggId);
+                  setFiles(newFiles);
+                }}
+                deleteUrl={'/aap/mine-aap/api/vedlegg/slett/?uuid='}
+                uploadUrl={'/aap/mine-aap/api/vedlegg/lagre/'}
+                files={files}
+              />
+            ) : (
+              <FileInput
+                heading={formatMessage({ id: `ettersendelse.vedleggstyper.${krav}.heading` })}
+                ingress={formatMessage({ id: `ettersendelse.vedleggstyper.${krav}.description` })}
+                readAttachmentUrl={'/aap/mine-aap/vedlegg/'}
+                id={krav}
+                onUpload={(vedlegg) => {
+                  if (harLastetOppEttersending) {
+                    setHarLastetOppEttersending(false);
+                  }
+                  const errors = findErrors(vedlegg, krav);
+                  errors && addError(errors);
+                  setFiles([...files, ...vedlegg]);
+                }}
+                onDelete={(vedlegg) => {
+                  if (vedlegg.errorMessage) {
+                    deleteError(vedlegg);
+                  }
+
+                  const newFiles = files.filter((file) => file.vedleggId !== vedlegg.vedleggId);
+                  setFiles(newFiles);
+                }}
+                deleteUrl={'/aap/mine-aap/api/vedlegg/slett/?uuid='}
+                uploadUrl={'/aap/mine-aap/api/vedlegg/lagre/'}
+                files={files}
+              />
+            )}
+          </>
         )}
         {harLastetOppEttersending && (
           <div className={successWrapperKlassenavn}>

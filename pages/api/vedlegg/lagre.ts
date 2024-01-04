@@ -14,7 +14,7 @@ const handler = beskyttetApi(async (req, res) => {
   console.log('body', req.body);
   if (isMock()) {
     res.status(201).json(randomUUID());
-  } else if (process.env.NY_INNSENDING === 'enabled') {
+  } else if (process.env.NEXT_PUBLIC_NY_INNSENDING === 'enabled') {
     await tokenXApiStreamProxy({
       url: `${process.env.INNSENDING_URL}/mellomlagring/fil`,
       prometheusPath: '/mellomlagring/fil',

@@ -6,7 +6,7 @@ const handler = beskyttetApi(async (req, res) => {
   const accessToken = getAccessTokenFromRequest(req);
   const { ettersendteVedlegg, søknadId, totalFileSize }: Ettersendelse = JSON.parse(req.body);
 
-  if (process.env.NY_INNSENDING === 'enabled') {
+  if (process.env.NEXT_PUBLIC_NY_INNSENDING === 'enabled') {
     const ettersending = ettersendteVedlegg[0];
     const body: InnsendingBackendState = {
       filer: ettersending.ettersending.map((ettersendtVedlegg) => ({
