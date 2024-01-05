@@ -50,3 +50,12 @@ export interface EttersendteVedlegg {
   ettersending: Array<string>;
   vedleggType: VedleggType;
 }
+
+export interface InnsendingBackendState {
+  filer: InnsendingFil[];
+}
+
+export interface InnsendingFil {
+  id: string;
+  tittel: string;
+}
