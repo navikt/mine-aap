@@ -1,4 +1,4 @@
-import { getSøknader } from './api/soknader/soknader';
+import { getSøknader, getSøknaderInnsending } from './api/soknader/soknader';
 import { beskyttetSide, getAccessToken } from '@navikt/aap-felles-utils';
 import { BodyShort, Button, Heading } from '@navikt/ds-react';
 import { Card } from 'components/Card/Card';
@@ -122,7 +122,12 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
   const bearerToken = getAccessToken(ctx);
   const params = { page: '0', size: '1', sort: 'created,desc' };
 
-  const [søknader] = await Promise.all([getSøknader(params, bearerToken)]);
+  let søknader;
+  if (process.env.NEXT_PUBLIC_NY_INNSENDING === 'enabled') {
+    søknader = await getSøknaderInnsending(bearerToken);
+  } else {
+    søknader = await getSøknader(params, bearerToken);
+  }
 
   stopTimer();
 
