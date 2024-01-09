@@ -1,7 +1,7 @@
 import { Skeleton } from '@navikt/ds-react';
 
 export const SkeletonDokumentOversikt = () => (
-  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }} data-testid={'skeletonLoader'}>
     <Skeleton variant="rectangle" width="200px" height="80px" />
     <Skeleton variant="rectangle" width="150px" height="50px" />
     <Skeleton variant="rounded" width="100%" height="76px" />
