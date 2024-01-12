@@ -1,26 +1,15 @@
 import styles from './Dokumentoversikt.module.css';
-import { Checkbox, Detail, Link, Pagination, Select } from '@navikt/ds-react';
+import { Checkbox, Pagination, Select } from '@navikt/ds-react';
 import { Dokument } from 'lib/types/types';
 import { logDokumentoversiktEvent } from 'lib/utils/amplitude';
-import { formatDate } from 'lib/utils/date';
 import { getNumberOfPages, sortDatoAsc, sortDatoDesc } from 'lib/utils/dokumentOversikt';
 import { useEffect, useMemo, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
+import { Dokumentrad } from 'components/DokumentoversiktNy/Dokumentrad/Dokumentrad';
 
 const MELDEKORT_TITTEL = 'Meldekort for uke';
 
 type SortType = 'datoAsc' | 'datoDesc';
-
-const getAvsender = (type: string) => {
-  switch (type) {
-    case 'I':
-      return 'deg';
-    case 'U':
-      return 'NAV';
-    default:
-      return 'Ukjent';
-  }
-};
 
 const PAGE_SIZE = 7;
 
@@ -111,30 +100,13 @@ export const Dokumentoversikt = ({ dokumenter }: { dokumenter: Dokument[] }) => 
         )}
       </div>
       <ul className={styles.documentList}>
-        {sortedPaginatedDocuments.map((document) => {
-          return (
-            <li key={`${document.journalpostId}-${document.dokumentId}`} className={styles.listItem}>
-              <div className={styles.content}>
-                <span>
-                  <Link
-                    href={`/aap/mine-aap/api/dokument/?journalpostId=${document.journalpostId}&dokumentId=${document.dokumentId}`}
-                    target="_blank"
-                    onClick={() => logDokumentoversiktEvent(antallSider, 'klikk lenke')}
-                    lang="no"
-                  >
-                    {document.tittel}
-                  </Link>
-                </span>
-                <Detail style={{ color: 'var(--a-text-default' }}>
-                  <FormattedMessage
-                    id="dokumentOversikt.avsender"
-                    values={{ name: getAvsender(document.type), date: formatDate(document.dato) }}
-                  />
-                </Detail>
-              </div>
-            </li>
-          );
-        })}
+        {sortedPaginatedDocuments.map((document) => (
+          <Dokumentrad
+            dokument={document}
+            antallSider={antallSider}
+            key={`${document.journalpostId}-${document.dokumentId}`}
+          />
+        ))}
       </ul>
       {antallSider > 1 && (
         <Pagination
