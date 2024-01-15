@@ -1,7 +1,7 @@
 import { BodyShort, Button, Heading, Label, Link, ReadMore } from '@navikt/ds-react';
 import { LucaGuidePanel, ScanningGuide, Vedlegg } from '@navikt/aap-felles-react';
 import { GetServerSidePropsResult, NextPageContext } from 'next';
-import PageHeader from 'components/PageHeader';
+import { PageHeader } from 'components/PageHeader';
 import { Section } from 'components/Section/Section';
 import { Søknad, VedleggType } from 'lib/types/types';
 import * as styles from 'pages/[uuid]/ettersendelse/Ettersendelse.module.css';
@@ -56,7 +56,7 @@ const Index = ({ søknad }: PageProps) => {
           )} - nav.no`}
         </title>
       </Head>
-      <PageHeader align="center" variant="guide">
+      <PageHeader>
         {formatMessage(
           { id: 'ettersendelse.appTittel' },
           {
