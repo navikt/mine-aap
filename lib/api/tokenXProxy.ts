@@ -7,7 +7,8 @@ export const tokenXProxy = async (
   req: NextApiRequest,
   res: NextApiResponse,
   path: string,
-  prometheusPath: string
+  prometheusPath: string,
+  hostname: 'oppslag' | 'soknad-api'
 ) => {
   const accessToken = getAccessTokenFromRequest(req)?.substring('Bearer '.length)!;
   let tokenxToken;
@@ -20,8 +21,8 @@ export const tokenXProxy = async (
   const result = await proxyApiRouteRequest({
     req,
     res,
-    hostname: 'soknad-api',
-    path: path,
+    hostname,
+    path,
     bearerToken: tokenxToken,
     https: false,
   });

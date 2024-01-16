@@ -54,6 +54,7 @@ spec:
   accessPolicy:
     outbound:
       rules:
+        - application: oppslag
         - application: soknad-api
         - application: innsending
         - application: dokumenter
