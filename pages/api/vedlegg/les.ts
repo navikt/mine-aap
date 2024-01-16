@@ -26,9 +26,9 @@ const handler = beskyttetApi(async (req, res) => {
       https: false,
     });
   }
-  /* @ts-ignore: TODO: Følge opp med tokenXproxy repo for å fikse type */
   return await tokenXProxy(
     req,
+    /* @ts-ignore: TODO: Følge opp med tokenXproxy repo for å fikse type */
     res,
     `/vedlegg/les/${uuid}`,
     '/vedlegg/les',
