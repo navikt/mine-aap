@@ -27,7 +27,14 @@ const handler = beskyttetApi(async (req, res) => {
     });
   }
   /* @ts-ignore: TODO: Følge opp med tokenXproxy repo for å fikse type */
-  return await tokenXProxy(req, res, `/vedlegg/les/${uuid}`, '/vedlegg/les', 'soknad-api');
+  return await tokenXProxy(
+    req,
+    res,
+    `/vedlegg/les/${uuid}`,
+    '/vedlegg/les',
+    'soknad-api',
+    process.env.SOKNAD_API_AUDIENCE
+  );
 });
 
 export const config = {

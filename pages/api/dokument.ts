@@ -15,7 +15,8 @@ const handler = beskyttetApi(async (req, res) => {
     res,
     `/dokumenter/${journalpostId}/${dokumentId}`,
     '/oppslag/dokument',
-    'oppslag'
+    'oppslag',
+    process.env.OPPSLAG_AUDIENCE
   );
 });
 

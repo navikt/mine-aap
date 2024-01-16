@@ -8,12 +8,13 @@ export const tokenXProxy = async (
   res: NextApiResponse,
   path: string,
   prometheusPath: string,
-  hostname: 'oppslag' | 'soknad-api'
+  hostname: 'oppslag' | 'soknad-api',
+  audience: string
 ) => {
   const accessToken = getAccessTokenFromRequest(req)?.substring('Bearer '.length)!;
   let tokenxToken;
   try {
-    tokenxToken = await getTokenX(accessToken, process.env.SOKNAD_API_AUDIENCE!);
+    tokenxToken = await getTokenX(accessToken, audience!);
   } catch (err: any) {
     logger.error({ msg: 'getTokenXError', error: err });
   }
