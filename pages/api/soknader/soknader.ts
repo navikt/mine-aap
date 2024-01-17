@@ -11,10 +11,10 @@ const handler = beskyttetApi(async (req, res) => {
 export const getSøknader = async (accessToken?: string) => {
   if (isMock()) return mockSøknader;
   const søknader = await tokenXApiProxy({
-    url: `${process.env.OPPSLAG_API_URL}/innsending/søknader`,
+    url: `${process.env.INNSENDING_API_URL}/innsending/søknader`,
     prometheusPath: '/oppslag/soeknader',
     method: 'GET',
-    audience: process.env.OPPSLAG_AUDIENCE ?? '',
+    audience: process.env.INNSENDING_AUDIENCE ?? '',
     bearerToken: accessToken,
     logger: logger,
     metricsStatusCodeCounter: metrics.backendApiStatusCodeCounter,
