@@ -1,4 +1,4 @@
-import { ReadMore, Label, BodyShort, Button, Heading, Link } from '@navikt/ds-react';
+import { BodyShort, Button, Heading, Label, Link, ReadMore } from '@navikt/ds-react';
 import { PageHeader } from 'components/PageHeader';
 import { Section } from 'components/Section/Section';
 import { beskyttetSide, getAccessToken } from '@navikt/aap-felles-utils';
@@ -101,8 +101,7 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
     path: '/ettersendelse',
   });
   const bearerToken = getAccessToken(ctx);
-  const params = { page: '0', size: '1', sort: 'created,desc' };
-  const søknader = await getSøknader(params, bearerToken);
+  const søknader = await getSøknader(bearerToken);
   stopTimer();
 
   if (søknader.length > 0) {

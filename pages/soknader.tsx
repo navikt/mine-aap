@@ -66,8 +66,7 @@ const Søknader = ({ søknader }: PageProps) => {
 export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Promise<GetServerSidePropsResult<{}>> => {
   const stopTimer = metrics.getServersidePropsDurationHistogram.startTimer({ path: '/soknader' });
   const bearerToken = getAccessToken(ctx);
-  const params = { page: '0', size: '200', sort: 'created,desc' };
-  const søknader = await getSøknader(params, bearerToken);
+  const søknader = await getSøknader(bearerToken);
 
   logger.info(`søknader: ${JSON.stringify(søknader)}`);
 

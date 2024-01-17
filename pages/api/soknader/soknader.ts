@@ -1,30 +1,20 @@
 import { mockSøknader } from 'lib/mock/mockSoknad';
-import {
-  logger,
-  isMock,
-  tokenXApiProxy,
-  beskyttetApi,
-  getAccessTokenFromRequest,
-} from '@navikt/aap-felles-utils';
+import { logger, isMock, tokenXApiProxy, beskyttetApi, getAccessTokenFromRequest } from '@navikt/aap-felles-utils';
 import metrics from 'lib/metrics';
 
 const handler = beskyttetApi(async (req, res) => {
   const accessToken = getAccessTokenFromRequest(req);
-  const params = {};
-  const søknader = await getSøknader(params, accessToken);
+  const søknader = await getSøknader(accessToken);
   res.status(200).json(søknader);
 });
 
-export const getSøknader = async (params: Record<string, string>, accessToken?: string) => {
+export const getSøknader = async (accessToken?: string) => {
   if (isMock()) return mockSøknader;
-  const urlParams = Object.entries(params)
-    .map(([key, value]) => `${key}=${value}`)
-    .join('&');
   const søknader = await tokenXApiProxy({
-    url: `${process.env.SOKNAD_API_URL}/oppslag/soeknader${urlParams ? '?' + urlParams : ''}`,
+    url: `${process.env.OPPSLAG_API_URL}/innsending/søknader`,
     prometheusPath: '/oppslag/soeknader',
     method: 'GET',
-    audience: process.env.SOKNAD_API_AUDIENCE ?? '',
+    audience: process.env.OPPSLAG_AUDIENCE ?? '',
     bearerToken: accessToken,
     logger: logger,
     metricsStatusCodeCounter: metrics.backendApiStatusCodeCounter,

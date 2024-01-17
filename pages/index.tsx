@@ -120,9 +120,8 @@ const Index = ({ søknader }: { søknader: Søknad[] }) => {
 export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Promise<GetServerSidePropsResult<{}>> => {
   const stopTimer = metrics.getServersidePropsDurationHistogram.startTimer({ path: '/' });
   const bearerToken = getAccessToken(ctx);
-  const params = { page: '0', size: '1', sort: 'created,desc' };
 
-  const [søknader] = await Promise.all([getSøknader(params, bearerToken)]);
+  const søknader = await getSøknader(bearerToken);
 
   stopTimer();
 
