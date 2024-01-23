@@ -1,5 +1,5 @@
 import { ReadMore, Label, BodyShort, Button, Heading, Link } from '@navikt/ds-react';
-import PageHeader from 'components/PageHeader';
+import { PageHeader } from 'components/PageHeader';
 import { Section } from 'components/Section/Section';
 import { beskyttetSide, getAccessToken } from '@navikt/aap-felles-utils';
 import { GetServerSidePropsResult, NextPageContext } from 'next';
@@ -40,7 +40,7 @@ const Ettersendelse = () => {
           )} - nav.no`}
         </title>
       </Head>
-      <PageHeader align="center" variant="guide">
+      <PageHeader>
         {formatMessage(
           { id: 'ettersendelse.appTittel' },
           {
