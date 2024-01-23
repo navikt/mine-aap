@@ -1,31 +1,39 @@
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: innsyn-alerts
+  name: mine-aap-alerts
+  namespace: aap
   labels:
     team: aap
     app: innsyn
-  namespace: aap
 spec:
-  receivers:
-    slack:
-      channel: '#po-aap-innbygger-prod-varslinger'
-  alerts:
-    - alert: Mine AAP(aap-innsyn) er nede
-      expr: kube_deployment_status_replicas_unavailable{deployment="innsyn",job="kubernetes-service-endpoints"} > 0
-      for: 10m
-      description: "innsyn har utilgjengelige podder i aap"
-      action: "kubectl describe pod -l app=innsyn -n aap` for events og `kubectl get pods -l app=innsyn -n aap` for å se feilende podder"
-      sla: respond within 1h, during office hours
-      severity: danger
-    - alert: Mine AAP(aap-innsyn) kontinuerlig restart
-      expr: sum(increase(kube_pod_container_status_restarts_total{container=~"innsyn"}[5m])) by (container) > 2
-      for: 2m
-      description: "innsyn har restartet flere ganger de siste 5 minuttene!"
-      action: "Se `kubectl describe pod innsyn` for events, og `kubectl logs innsyn` for logger"
-      sla: respond within 1h, during office hours
-      severity: danger
-    - alert: Mine AAP(aap-innsyn) - høy feilrate i logger
-      expr: (100 * sum by (log_app, log_namespace) (rate(logd_messages_total{log_app="innsyn",log_level=~"Error"}[10m])) / sum by (log_app, log_namespace) (rate(logd_messages_total{log_app="innsyn"}[10m]))) > 15
-      for: 5m
-      action: "<https://logs.adeo.no/goto/c5feac60-58ff-11ed-b3e8-d969437dd878|Check logs>"
+  groups:
+    - name: 'aap-mine-aap-alerts'
+      rules:
+        - alert: Mine aap - app nede
+          expr: kube_deployment_status_replicas_unavailable{deployment="mine-aap",job="kubernetes-service-endpoints"} > 0
+          for: 10m
+          annotations:
+            summary: "mine-aap har utilgjengelige podder i prod"
+            action: "kubectl describe pod -l app=innsyn -n aap` for events og `kubectl get pods -l app=innsyn -n aap` for å se feilende podder"
+          labels:
+            namespace: aap
+            severity: danger
+        - alert: Mine aap -kontinuerlig restart
+          expr: sum(increase(kube_pod_container_status_restarts_total{container=~"innsyn"}[5m])) by (container) > 2
+          for: 2m
+          annotations:
+            summary: "Mine aap har restartet flere ganger de siste 5 minuttene"
+            action: "Se `kubectl describe pod innsyn` for events, og `kubectl logs innsyn` for logger"
+          labels:
+            namespace: aap
+            severity: danger
+        - alert: Mine aap - høy feilrate i logger
+          expr: (100 * sum by (log_app, log_namespace) (rate(logd_messages_total{log_app="innsyn",log_level=~"Error"}[10m])) / sum by (log_app, log_namespace) (rate(logd_messages_total{log_app="innsyn"}[10m]))) > 15
+          for: 5m
+          annotations:
+            summary: "Høy feilrate i prod logger"
+            action: "<https://logs.adeo.no/goto/c5feac60-58ff-11ed-b3e8-d969437dd878|Check logs>"
+          labels:
+            namespace: aap
+            severity: danger
