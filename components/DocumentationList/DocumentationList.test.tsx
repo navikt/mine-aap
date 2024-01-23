@@ -1,5 +1,6 @@
 import { render, screen } from 'setUpTest';
 import { DocumentationList } from 'components/DocumentationList/DocumentationList';
+import { axe } from 'jest-axe';
 
 const dokumentliste: { tittel: string; href?: string; innsendt?: string }[] = [
   {
@@ -41,5 +42,13 @@ describe('DocumentationList', () => {
   test('viser dato for når dokumentet er mottatt når innsendt er satt', () => {
     const forventetLengde = dokumentliste.filter((dokument) => dokument.innsendt).length;
     expect(screen.getAllByText('Mottatt 10. august 2023')).toHaveLength(forventetLengde);
+  });
+});
+
+describe('DocumentationList - UU', () => {
+  test('jest-axe finner ingen feil', async () => {
+    const { container } = render(<DocumentationList elements={dokumentliste} />);
+    const res = await axe(container);
+    expect(res).toHaveNoViolations();
   });
 });

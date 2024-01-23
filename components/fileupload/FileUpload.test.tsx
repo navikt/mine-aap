@@ -5,6 +5,7 @@ import { enableFetchMocks } from 'jest-fetch-mock';
 import { userEvent } from '@testing-library/user-event';
 import { v4 as uuidV4 } from 'uuid';
 import { VedleggType } from 'lib/types/types';
+import { axe } from 'jest-axe';
 
 enableFetchMocks();
 const filnavn1 = 'fil1.pdf';
@@ -99,6 +100,15 @@ describe('FileUpload', () => {
     expect(screen.queryByRole('button', { name: 'Send inn' })).not.toBeInTheDocument();
     await user.upload(screen.getByTestId('fileinput'), fileTwo);
     expect(screen.getByRole('button', { name: 'Send inn' })).toBeVisible();
+  });
+});
+
+describe('FileUpload - UU', () => {
+  test('jest-axe finner ingen feil', async () => {
+    mockUploadFile();
+    const { container } = render(<Filopplastning krav={'ANNET'} />);
+    const res = await axe(container);
+    expect(res).toHaveNoViolations();
   });
 });
 

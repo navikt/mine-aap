@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom';
 
+import { toHaveNoViolations } from 'jest-axe';
 import React, { ReactElement } from 'react';
 import { IntlProvider } from 'react-intl';
 import { render as rtlRender } from '@testing-library/react';
@@ -9,6 +10,8 @@ require('jest-fetch-mock').enableMocks();
 jest.mock('next/router', () => ({
   useRouter: jest.fn(),
 }));
+
+expect.extend(toHaveNoViolations);
 
 function flattenMessages(nestedMessages: object, prefix = ''): Record<string, string> {
   return Object.keys(nestedMessages).reduce((messages, key) => {
@@ -37,7 +40,6 @@ function render(ui: ReactElement, { locale = 'nb', ...options } = {}) {
   }
   return rtlRender(ui, { wrapper: Wrapper, ...options });
 }
-
 // re-export everything
 export * from '@testing-library/react';
 

@@ -2,6 +2,7 @@ import { Dokumentoversikt } from 'components/DokumentoversiktNy/Dokumentoversikt
 import { mockDokumenter } from 'lib/mock/mockDokumenter';
 import { render, screen } from 'setUpTest';
 import { userEvent } from '@testing-library/user-event';
+import { axe } from 'jest-axe';
 
 describe('Dokumentoversikt', () => {
   const user = userEvent.setup();
@@ -39,5 +40,13 @@ describe('Dokumentoversikt', () => {
     const checkbox = screen.getByRole('checkbox', { name: 'Skjul meldekort' });
     await user.click(checkbox);
     expect(screen.getAllByRole('listitem')).toHaveLength(mockDokumenter.length);
+  });
+});
+
+describe('Dokumentoversikt - UU', () => {
+  test('jest-axe finner ingen feil', async () => {
+    const { container } = render(<Dokumentoversikt dokumenter={mockDokumenter} />);
+    const res = await axe(container);
+    expect(res).toHaveNoViolations();
   });
 });

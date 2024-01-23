@@ -5,6 +5,7 @@ import {
   søknadUtenVedlegg,
 } from 'lib/mock/mockSoknad';
 import { render, screen } from 'setUpTest';
+import { axe } from 'jest-axe';
 
 describe('Soknad', () => {
   describe('alle søknader', () => {
@@ -64,5 +65,13 @@ describe('Soknad', () => {
         )
       ).not.toBeInTheDocument();
     });
+  });
+});
+
+describe('Soknad - UU', () => {
+  test('jest-axe finner ingen feil', async () => {
+    const { container } = render(<Soknad søknad={søknadMedInnsendteOgManglendeVedlegg} />);
+    const res = await axe(container);
+    expect(res).toHaveNoViolations();
   });
 });
