@@ -23,6 +23,9 @@ const Index = ({ søknader }: { søknader: Søknad[] }) => {
   const router = useRouter();
 
   const sisteSøknad = useMemo(() => {
+    if (process.env.NEXT_PUBLIC_NY_INNSENDING === 'enabled') {
+      console.log('Søknader', søknader);
+    }
     return søknader[0];
   }, [søknader]);
 
