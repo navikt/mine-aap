@@ -11,7 +11,7 @@ const handler = beskyttetApi(async (req, res) => {
 export const getDocuments = async (accessToken?: string) => {
   if (isMock()) return mockDokumenter;
   return await tokenXApiProxy({
-    url: `${process.env.OPPSLAG_API_URL}/dokumenter`,
+    url: `${process.env.OPPSLAG_URL}/dokumenter`,
     prometheusPath: '/oppslag/dokumenter',
     method: 'GET',
     audience: process.env.OPPSLAG_AUDIENCE!,
