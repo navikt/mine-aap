@@ -121,7 +121,9 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
   const stopTimer = metrics.getServersidePropsDurationHistogram.startTimer({ path: '/' });
   const bearerToken = getAccessToken(ctx);
 
-  const søknader = await getSøknader(bearerToken);
+  const params = { page: '0', size: '1', sort: 'created,desc' };
+
+  const [søknader] = await Promise.all([getSøknader(params, bearerToken)]);
 
   stopTimer();
 
