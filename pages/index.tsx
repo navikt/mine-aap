@@ -8,24 +8,28 @@ import { NyttigÅVite } from 'components/NyttigÅVite/NyttigÅVite';
 import { PageComponentFlexContainer } from 'components/PageComponentFlexContainer/PageComponentFlexContainer';
 import { PageContainer } from 'components/PageContainer/PageContainer';
 import { Soknad } from 'components/Soknad/Soknad';
-import { isBefore, sub } from 'date-fns';
+import { SoknadInnsending } from 'components/SoknadInnsending/SoknadInnsending';
+import { isAfter, isBefore, sub } from 'date-fns';
 import metrics from 'lib/metrics';
-import { Søknad } from 'lib/types/types';
+import { InnsendingSøknad, Søknad } from 'lib/types/types';
 import { GetServerSidePropsResult, NextPageContext } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-const Index = ({ søknader }: { søknader: Søknad[] }) => {
+const Index = ({
+  søknader,
+  sisteSøknadInnsending,
+}: {
+  søknader: Søknad[];
+  sisteSøknadInnsending?: InnsendingSøknad;
+}) => {
   const { formatMessage } = useIntl();
 
   const router = useRouter();
 
   const sisteSøknad = useMemo(() => {
-    if (process.env.NEXT_PUBLIC_NY_INNSENDING === 'enabled') {
-      console.log('Søknader', søknader);
-    }
     return søknader[0];
   }, [søknader]);
 
@@ -68,7 +72,17 @@ const Index = ({ søknader }: { søknader: Søknad[] }) => {
           <FormattedMessage id="appIngress" />
         </ForsideIngress>
       </PageComponentFlexContainer>
-      {sisteSøknad && (
+      {sisteSøknadInnsending && (
+        <PageComponentFlexContainer subtleBackground>
+          <Heading level="2" size="medium" spacing>
+            <FormattedMessage id="minSisteSøknad.heading" />
+          </Heading>
+          <Card>
+            <SoknadInnsending søknad={sisteSøknadInnsending} />
+          </Card>
+        </PageComponentFlexContainer>
+      )}
+      {sisteSøknad && !sisteSøknadInnsending && (
         <PageComponentFlexContainer subtleBackground>
           <Heading level="2" size="medium" spacing>
             <FormattedMessage id="minSisteSøknad.heading" />
@@ -78,7 +92,7 @@ const Index = ({ søknader }: { søknader: Søknad[] }) => {
           </Card>
         </PageComponentFlexContainer>
       )}
-      {!sisteSøknad && (
+      {!sisteSøknad && !sisteSøknadInnsending && (
         <>
           <DokumentoversiktContainer />
           <PageComponentFlexContainer>
@@ -115,7 +129,7 @@ const Index = ({ søknader }: { søknader: Søknad[] }) => {
           </Button>
         </Card>
       </PageComponentFlexContainer>
-      {sisteSøknad && <DokumentoversiktContainer />}
+      {(sisteSøknad || sisteSøknadInnsending) && <DokumentoversiktContainer />}
     </PageContainer>
   );
 };
@@ -125,17 +139,19 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
   const bearerToken = getAccessToken(ctx);
   const params = { page: '0', size: '1', sort: 'created,desc' };
 
-  let søknader;
-  if (process.env.NEXT_PUBLIC_NY_INNSENDING === 'enabled') {
-    søknader = await getSøknaderInnsending(bearerToken);
-  } else {
-    søknader = await getSøknader(params, bearerToken);
-  }
+  const søknader = await getSøknader(params, bearerToken);
+  const innsendingSøknader: InnsendingSøknad[] = await getSøknaderInnsending(bearerToken);
+
+  const sortedByMottattDato = innsendingSøknader.sort((a, b) =>
+    isAfter(new Date(a.mottattDato), new Date(b.mottattDato)) ? -1 : 1
+  );
+
+  const sisteSøknadInnsending = sortedByMottattDato[0];
 
   stopTimer();
 
   return {
-    props: { søknader },
+    props: { søknader, sisteSøknadInnsending },
   };
 });
 

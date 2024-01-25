@@ -17,6 +17,11 @@ export interface Søknad {
   manglendeVedlegg?: Array<VedleggType>;
 }
 
+export interface InnsendingSøknad {
+  mottattDato: string;
+  journalpostId?: string;
+}
+
 export interface MellomlagretSøknad {
   timestamp: string;
 }
