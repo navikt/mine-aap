@@ -4,17 +4,21 @@ import metrics from 'lib/metrics';
 
 const handler = beskyttetApi(async (req, res) => {
   const accessToken = getAccessTokenFromRequest(req);
-  const søknader = await getSøknader(accessToken);
+  const params = {};
+  const søknader = await getSøknader(params, accessToken);
   res.status(200).json(søknader);
 });
 
-export const getSøknader = async (accessToken?: string) => {
+export const getSøknader = async (params: Record<string, string>, accessToken?: string) => {
   if (isMock()) return mockSøknader;
+  const urlParams = Object.entries(params)
+    .map(([key, value]) => `${key}=${value}`)
+    .join('&');
   const søknader = await tokenXApiProxy({
-    url: `${process.env.INNSENDING_URL}/innsending/søknader`,
+    url: `${process.env.SOKNAD_API_URL}/oppslag/soeknader${urlParams ? '?' + urlParams : ''}`,
     prometheusPath: '/oppslag/soeknader',
     method: 'GET',
-    audience: process.env.INNSENDING_AUDIENCE ?? '',
+    audience: process.env.SOKNAD_API_AUDIENCE ?? '',
     bearerToken: accessToken,
     logger: logger,
     metricsStatusCodeCounter: metrics.backendApiStatusCodeCounter,
