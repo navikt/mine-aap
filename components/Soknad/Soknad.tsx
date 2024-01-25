@@ -18,27 +18,18 @@ export const Soknad = ({ søknad }: { søknad: Søknad }) => {
         <FormattedMessage id="minSisteSøknad.søknad.heading" />
       </Heading>
       <BodyShort size="small" style={{ color: 'var(--a-text-subtle)', marginBlockEnd: '16px' }}>
-        <FormattedMessage
-          id="minSisteSøknad.mottatt"
-          values={{ date: formatDate(søknad.innsendtDato) }}
-        />
+        <FormattedMessage id="minSisteSøknad.mottatt" values={{ date: formatDate(søknad.innsendtDato) }} />
       </BodyShort>
       {søknad.manglendeVedlegg?.length && (
         <>
           <Alert variant="warning" size="small" className={styles.alert}>
             <FormattedMessage id="minSisteSøknad.søknad.alert.message" />
           </Alert>
-          <DocumentationHeading
-            heading={formatMessage({ id: 'minSisteSøknad.dokumentasjon.mangler' })}
-          />
+          <DocumentationHeading heading={formatMessage({ id: 'minSisteSøknad.dokumentasjon.mangler' })} />
 
           <ul className={styles.dokumentasjonManglerList}>
             {søknad.manglendeVedlegg.map((vedlegg) => {
-              return (
-                <li key={vedlegg}>
-                  {formatMessage({ id: `ettersendelse.vedleggstyper.${vedlegg}.heading` })}
-                </li>
-              );
+              return <li key={vedlegg}>{formatMessage({ id: `ettersendelse.vedleggstyper.${vedlegg}.heading` })}</li>;
             })}
           </ul>
         </>
@@ -51,14 +42,25 @@ export const Soknad = ({ søknad }: { søknad: Søknad }) => {
       </ButtonRow>
       {søknad.innsendteVedlegg?.length && (
         <>
-          <DocumentationHeading
-            heading={formatMessage({ id: 'minSisteSøknad.dokumentasjon.mottatt' })}
-          />
+          <DocumentationHeading heading={formatMessage({ id: 'minSisteSøknad.dokumentasjon.mottatt' })} />
+
+          <p>Denne bruker api fra aap-oppslag for å hente et spesifikt dokument</p>
           <DocumentationList
             elements={søknad.innsendteVedlegg.map((vedlegg) => {
               return {
                 tittel: vedlegg.tittel,
                 href: `/aap/mine-aap/api/dokument/?journalpostId=${vedlegg.journalpostId}&dokumentId=${vedlegg.dokumentId}`,
+                innsendt: vedlegg.dato,
+              };
+            })}
+          />
+
+          <p>Denne bruker api fra soknad-api for å hente et spesifikt dokument</p>
+          <DocumentationList
+            elements={søknad.innsendteVedlegg.map((vedlegg) => {
+              return {
+                tittel: vedlegg.tittel,
+                href: `/aap/mine-aap/api/dokumentgammel/?journalpostId=${vedlegg.journalpostId}&dokumentId=${vedlegg.dokumentId}`,
                 innsendt: vedlegg.dato,
               };
             })}

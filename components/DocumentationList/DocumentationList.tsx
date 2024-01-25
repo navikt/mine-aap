@@ -13,9 +13,11 @@ export const DocumentationList = ({
       {elements.map((element, index) => (
         <li key={index} className={styles.listItem}>
           {element.href ? (
-            <Link href={element.href} target="_blank" lang="no">
-              {element.tittel}
-            </Link>
+            <>
+              <Link href={element.href} target="_blank" lang="no">
+                {element.tittel}
+              </Link>
+            </>
           ) : (
             <span lang="no">{element.tittel}</span>
           )}
