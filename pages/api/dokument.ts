@@ -14,7 +14,9 @@ const handler = beskyttetApi(async (req, res) => {
     /* @ts-ignore: TODO: Følge opp med tokenXproxy repo for å fikse type */
     res,
     `/oppslag/dokument/${journalpostId}/${dokumentId}`,
-    '/oppslag/dokument'
+    '/oppslag/dokument',
+    'oppslag',
+    process.env.OPPSLAG_AUDIENCE
   );
 });
 
