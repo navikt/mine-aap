@@ -15,8 +15,8 @@ const handler = beskyttetApi(async (req, res) => {
     res,
     `/oppslag/dokument/${journalpostId}/${dokumentId}`,
     '/oppslag/dokument',
-    'oppslag',
-    process.env.OPPSLAG_AUDIENCE
+    'soknad-api',
+    process.env.SOKNAD_API_AUDIENCE
   );
 });
 
