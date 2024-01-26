@@ -4,11 +4,11 @@ import metrics from 'lib/metrics';
 
 const handler = beskyttetApi(async (req, res) => {
   const accessToken = getAccessTokenFromRequest(req);
-  const dokumenter = await getDocuments(accessToken);
+  const dokumenter = await hentDokumenterFraOppslag(accessToken);
   res.status(200).json(dokumenter);
 });
 
-export const getDocuments = async (accessToken?: string) => {
+export const hentDokumenterFraOppslag = async (accessToken?: string) => {
   if (isMock()) return mockDokumenter;
   return await tokenXApiProxy({
     url: `${process.env.OPPSLAG_URL}/dokumenter`,
