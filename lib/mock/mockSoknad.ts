@@ -1,4 +1,4 @@
-import { Søknad } from 'lib/types/types';
+import { InnsendingSøknad, Søknad } from 'lib/types/types';
 const mockSøknader: Søknad[] = [
   {
     innsendtDato: '2022-08-30T10:54:49.737467',
@@ -32,6 +32,17 @@ const mockSøknader: Søknad[] = [
     manglendeVedlegg: ['ARBEIDSGIVER'],
   },
   { innsendtDato: '2022-08-30T08:53:47.215149', søknadId: '835a12fc-e642-42da-b182-5169c488842f' },
+];
+
+const mockSøknaderInnsending: InnsendingSøknad[] = [
+  {
+    mottattDato: '2024-01-30T00:01:00.000000',
+    journalpostId: '1',
+  },
+  {
+    mottattDato: '2024-02-30T00:01:00.000000',
+    journalpostId: '2',
+  },
 ];
 
 const søknadMedInnsendteOgManglendeVedlegg: Søknad = mockSøknader[0];
@@ -68,4 +79,10 @@ const søknadMedInnsendteVedlegg: Søknad = {
   ],
 };
 
-export { mockSøknader, søknadMedInnsendteVedlegg, søknadUtenVedlegg, søknadMedInnsendteOgManglendeVedlegg };
+export {
+  mockSøknader,
+  mockSøknaderInnsending,
+  søknadMedInnsendteVedlegg,
+  søknadUtenVedlegg,
+  søknadMedInnsendteOgManglendeVedlegg,
+};

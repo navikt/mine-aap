@@ -1,5 +1,5 @@
-import { getSøknader } from './api/soknader/soknader';
-import { beskyttetSide, getAccessToken } from '@navikt/aap-felles-utils';
+import { getSøknader, getSøknaderInnsending } from './api/soknader/soknader';
+import { beskyttetSide, getAccessToken, logger } from '@navikt/aap-felles-utils';
 import { BodyShort, Button, Heading } from '@navikt/ds-react';
 import { Card } from 'components/Card/Card';
 import { DokumentoversiktContainer } from 'components/DokumentoversiktNy/DokumentoversiktContainer';
@@ -8,9 +8,9 @@ import { NyttigÅVite } from 'components/NyttigÅVite/NyttigÅVite';
 import { PageComponentFlexContainer } from 'components/PageComponentFlexContainer/PageComponentFlexContainer';
 import { PageContainer } from 'components/PageContainer/PageContainer';
 import { Soknad } from 'components/Soknad/Soknad';
-import { isBefore, sub } from 'date-fns';
+import { isAfter, isBefore, sub } from 'date-fns';
 import metrics from 'lib/metrics';
-import { Søknad } from 'lib/types/types';
+import { InnsendingSøknad, Søknad } from 'lib/types/types';
 import { GetServerSidePropsResult, NextPageContext } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -122,7 +122,24 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
   const bearerToken = getAccessToken(ctx);
   const params = { page: '0', size: '1', sort: 'created,desc' };
 
-  const [søknader] = await Promise.all([getSøknader(params, bearerToken)]);
+  const [søknader, innsendingSøknader] = await Promise.all([
+    getSøknader(params, bearerToken),
+    (await getSøknaderInnsending(bearerToken)) as InnsendingSøknad[],
+  ]);
+
+  try {
+    const sortedByMottattDato = innsendingSøknader.sort((a, b) =>
+      isAfter(new Date(a.mottattDato), new Date(b.mottattDato)) ? -1 : 1
+    );
+
+    const sisteSøknadInnsending = sortedByMottattDato[0];
+
+    if (sisteSøknadInnsending) {
+      logger.info('Bruker har søknad sendt inn via innsending');
+    }
+  } catch (error) {
+    logger.error('Feil ved henting av søknader sendt inn via innsending', error);
+  }
 
   stopTimer();
 
