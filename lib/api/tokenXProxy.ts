@@ -16,7 +16,7 @@ export const tokenXProxy = async (
   try {
     tokenxToken = await getTokenX(accessToken, audience);
   } catch (err: any) {
-    logger.error({ msg: 'getTokenXError', error: err });
+    logger.error({ msg: `getTokenXError mot ${path}`, error: err });
   }
   const stopTimer = metrics.backendApiDurationHistogram.startTimer({ path: prometheusPath });
   const result = await proxyApiRouteRequest({

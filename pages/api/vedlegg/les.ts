@@ -1,6 +1,6 @@
 import { getStringFromPossiblyArrayQuery } from '@navikt/aap-felles-utils-client';
 import { beskyttetApi, getAccessTokenFromRequest, getTokenX } from '@navikt/aap-felles-utils';
-import { tokenXProxy } from '../../../lib/api/tokenXProxy';
+import { tokenXProxy } from 'lib/api/tokenXProxy';
 import { proxyApiRouteRequest } from '@navikt/next-api-proxy';
 
 const handler = beskyttetApi(async (req, res) => {
@@ -26,8 +26,16 @@ const handler = beskyttetApi(async (req, res) => {
       https: false,
     });
   }
-  /* @ts-ignore: TODO: Følge opp med tokenXproxy repo for å fikse type */
-  return await tokenXProxy(req, res, `/vedlegg/les/${uuid}`, '/vedlegg/les');
+
+  return await tokenXProxy(
+    req,
+    // @ts-ignore
+    res,
+    `/vedlegg/les/${uuid}`,
+    '/vedlegg/les',
+    'soknad-api',
+    process.env.SOKNAD_API_AUDIENCE
+  );
 });
 
 export const config = {
