@@ -24,7 +24,7 @@
     "@navikt/ds-react": "^5.15.1",
     "@navikt/nav-dekoratoren-moduler": "^2.1.5",
     "@navikt/next-api-proxy": "^3.4.0",
-    "@vercel/otel": "^0.3.0",
+    "@vercel/otel": "^1.1.0",
     "cookie": "^0.6.0",
     "date-fns": "^3.3.1",
     "html-react-parser": "^5.1.1",
