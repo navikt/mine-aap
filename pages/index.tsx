@@ -16,8 +16,15 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
+import { SoknadInnsending } from 'components/Soknad/SoknadInnsending';
 
-const Index = ({ søknader }: { søknader: Søknad[] }) => {
+const Index = ({
+  søknader,
+  sisteSøknadInnsending,
+}: {
+  søknader: Søknad[];
+  sisteSøknadInnsending: InnsendingSøknad;
+}) => {
   const { formatMessage } = useIntl();
 
   const router = useRouter();
@@ -65,7 +72,17 @@ const Index = ({ søknader }: { søknader: Søknad[] }) => {
           <FormattedMessage id="appIngress" />
         </ForsideIngress>
       </PageComponentFlexContainer>
-      {sisteSøknad && (
+      {sisteSøknadInnsending && (
+        <PageComponentFlexContainer subtleBackground>
+          <Heading level="2" size="medium" spacing>
+            <FormattedMessage id="minSisteSøknad.heading" />
+          </Heading>
+          <Card>
+            <SoknadInnsending søknad={sisteSøknadInnsending} />
+          </Card>
+        </PageComponentFlexContainer>
+      )}
+      {!sisteSøknadInnsending && sisteSøknad && (
         <PageComponentFlexContainer subtleBackground>
           <Heading level="2" size="medium" spacing>
             <FormattedMessage id="minSisteSøknad.heading" />
@@ -75,7 +92,7 @@ const Index = ({ søknader }: { søknader: Søknad[] }) => {
           </Card>
         </PageComponentFlexContainer>
       )}
-      {!sisteSøknad && (
+      {!sisteSøknad && !sisteSøknadInnsending && (
         <>
           <DokumentoversiktContainer />
           <PageComponentFlexContainer>
@@ -112,7 +129,7 @@ const Index = ({ søknader }: { søknader: Søknad[] }) => {
           </Button>
         </Card>
       </PageComponentFlexContainer>
-      {sisteSøknad && <DokumentoversiktContainer />}
+      {(sisteSøknad || sisteSøknadInnsending) && <DokumentoversiktContainer />}
     </PageContainer>
   );
 };
@@ -124,15 +141,16 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
 
   const [søknader, innsendingSøknader] = await Promise.all([
     getSøknader(params, bearerToken),
-    (await getSøknaderInnsending(bearerToken)) as InnsendingSøknad[],
+    getSøknaderInnsending(bearerToken),
   ]);
 
+  let sisteSøknadInnsending;
   try {
     const sortedByMottattDato = innsendingSøknader.sort((a, b) =>
       isAfter(new Date(a.mottattDato), new Date(b.mottattDato)) ? -1 : 1
     );
 
-    const sisteSøknadInnsending = sortedByMottattDato[0];
+    sisteSøknadInnsending = sortedByMottattDato[0];
 
     if (sisteSøknadInnsending) {
       logger.info('Bruker har søknad sendt inn via innsending');
@@ -144,7 +162,7 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
   stopTimer();
 
   return {
-    props: { søknader },
+    props: { søknader, sisteSøknadInnsending },
   };
 });
 

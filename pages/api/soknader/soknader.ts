@@ -1,6 +1,7 @@
 import { mockSøknader, mockSøknaderInnsending } from 'lib/mock/mockSoknad';
 import { logger, isMock, tokenXApiProxy, beskyttetApi, getAccessTokenFromRequest } from '@navikt/aap-felles-utils';
 import metrics from 'lib/metrics';
+import { InnsendingSøknad } from 'lib/types/types';
 
 const handler = beskyttetApi(async (req, res) => {
   const accessToken = getAccessTokenFromRequest(req);
@@ -9,7 +10,7 @@ const handler = beskyttetApi(async (req, res) => {
   res.status(200).json(søknader);
 });
 
-export const getSøknaderInnsending = async (accessToken?: string) => {
+export const getSøknaderInnsending = async (accessToken?: string): Promise<InnsendingSøknad[]> => {
   if (isMock()) return mockSøknaderInnsending;
   const søknader = await tokenXApiProxy({
     url: `${process.env.INNSENDING_URL}/innsending/søknader`,
