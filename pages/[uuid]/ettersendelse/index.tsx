@@ -7,7 +7,7 @@ import { InnsendingSøknad, Søknad, VedleggType } from 'lib/types/types';
 import * as styles from 'pages/[uuid]/ettersendelse/Ettersendelse.module.css';
 import { getSøknad } from 'pages/api/soknader/[uuid]';
 import { getStringFromPossiblyArrayQuery } from '@navikt/aap-felles-utils-client';
-import { beskyttetSide, getAccessToken } from '@navikt/aap-felles-utils';
+import { beskyttetSide, getAccessToken, logger } from '@navikt/aap-felles-utils';
 import { useState } from 'react';
 import { Error, FormErrorSummary } from 'components/FormErrorSummary/FormErrorSummary';
 import { setFocus } from 'lib/utils/dom';
@@ -160,8 +160,15 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
 
   const bearerToken = getAccessToken(ctx);
   const søknad = await getSøknad(uuid, bearerToken);
-  const søknaderFraInnsending = await getSøknaderInnsending(bearerToken);
-  const søknadFraInnsending = søknaderFraInnsending.find((søknad) => søknad.innsendingsId === uuid);
+
+  let søknadFraInnsending;
+
+  try {
+    const søknaderFraInnsending = await getSøknaderInnsending(bearerToken);
+    søknadFraInnsending = søknaderFraInnsending.find((søknad) => søknad.innsendingsId === uuid);
+  } catch (e) {
+    logger.error('Noe gikk galt i kallet fra getSøknaderInnsending', e);
+  }
 
   stopTimer();
   if (!søknad && !søknadFraInnsending) {
