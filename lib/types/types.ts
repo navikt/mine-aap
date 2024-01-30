@@ -63,4 +63,5 @@ export interface InnsendingFil {
 export interface InnsendingSøknad {
   mottattDato: string;
   journalpostId?: string;
+  innsendingsId: string;
 }
