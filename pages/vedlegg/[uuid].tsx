@@ -1,18 +1,23 @@
-import { beskyttetSide } from '@navikt/aap-felles-utils';
+import { beskyttetSide, getAccessToken } from '@navikt/aap-felles-utils';
 import { GetServerSidePropsResult, NextPageContext } from 'next';
 import { useEffect, useState } from 'react';
 import { getStringFromPossiblyArrayQuery } from '@navikt/aap-felles-utils-client';
+import { getSøknaderInnsending } from 'pages/api/soknader/soknader';
 
 interface PageProps {
   uuid: string;
+  brukInnsending: boolean;
 }
 
-const Vedlegg = ({ uuid }: PageProps) => {
+const Vedlegg = ({ uuid, brukInnsending }: PageProps) => {
   const [file, setFile] = useState<Blob | undefined>(undefined);
+  const url = brukInnsending
+    ? `/aap/mine-aap/api/vedlegginnsending/les/?uuid=${uuid}`
+    : `/aap/mine-aap/api/vedlegg/les/?uuid=${uuid}`;
 
   useEffect(() => {
     const getFile = async () => {
-      const file = await fetch(`/aap/mine-aap/api/vedlegg/les/?uuid=${uuid}`).then((res) => res.blob());
+      const file = await fetch(url).then((res) => res.blob());
       file && setFile(file);
     };
     getFile();
@@ -34,9 +39,14 @@ const Vedlegg = ({ uuid }: PageProps) => {
 };
 
 export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Promise<GetServerSidePropsResult<{}>> => {
-  const uuid = getStringFromPossiblyArrayQuery(ctx.query['uuid']);
+  const bearerToken = getAccessToken(ctx);
+  const innsendingSøknader = await getSøknaderInnsending(bearerToken);
+  const innsendingSøknad = innsendingSøknader[0];
+
+  const uuid = innsendingSøknad ? innsendingSøknad.innsendingsId : getStringFromPossiblyArrayQuery(ctx.query['uuid']);
+
   return {
-    props: { uuid },
+    props: { uuid, brukInnsending: Boolean(innsendingSøknad) },
   };
 });
 

@@ -110,8 +110,8 @@ export const FileUpload = ({
                   const newFiles = files.filter((file) => file.vedleggId !== vedlegg.vedleggId);
                   setFiles(newFiles);
                 }}
-                deleteUrl={'/aap/mine-aap/api/vedlegg/slett/?uuid='}
-                uploadUrl={'/aap/mine-aap/api/vedlegg/lagre/'}
+                deleteUrl={'/aap/mine-aap/api/vedlegginnsending/slett/?uuid='}
+                uploadUrl={'/aap/mine-aap/api/vedlegginnsending/lagre/'}
                 files={files}
               />
             ) : (
