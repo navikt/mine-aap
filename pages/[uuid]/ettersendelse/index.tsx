@@ -158,26 +158,33 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
   });
 
   const bearerToken = getAccessToken(ctx);
-  const søknad = await getSøknad(uuid, bearerToken);
 
-  const søknaderFraInnsending = await getSøknaderInnsending(bearerToken);
-  const søknadFraInnsending = søknaderFraInnsending.find((søknad) => søknad.innsendingsId === uuid);
+  try {
+    const [søknad, søknaderFraInnsending] = await Promise.all([
+      getSøknad(uuid, bearerToken),
+      getSøknaderInnsending(bearerToken),
+    ]);
 
-  logger.error('søknad', JSON.stringify(søknad));
-  logger.error('søknad fra innsending', JSON.stringify(søknadFraInnsending));
-  logger.error('søknader fra innsending', JSON.stringify(søknaderFraInnsending));
+    const søknadFraInnsending = søknaderFraInnsending.find((søknad) => søknad.innsendingsId === uuid);
+    logger.error('søknad', JSON.stringify(søknad));
+    logger.error('søknad fra innsending', JSON.stringify(søknadFraInnsending));
+    logger.error('søknader fra innsending', JSON.stringify(søknaderFraInnsending));
+    stopTimer();
 
-  stopTimer();
+    if (!søknad && !søknadFraInnsending) {
+      return {
+        notFound: true,
+      };
+    }
 
-  if (!søknad && !søknadFraInnsending) {
     return {
-      notFound: true,
+      props: { søknad: søknad || null, søknadFraInnsending: søknad || null },
     };
+  } catch (e) {
+    logger.error('Noe gikk galt i ettersendelse', e);
   }
 
-  return {
-    props: { søknad: søknad || null, søknadFraInnsending: søknad || null },
-  };
+  return { props: {} };
 });
 
 export default Index;
