@@ -1,13 +1,8 @@
 import { mockSøknader } from 'lib/mock/mockSoknad';
 import { getStringFromPossiblyArrayQuery } from '@navikt/aap-felles-utils-client';
-import {
-  logger,
-  isMock,
-  tokenXApiProxy,
-  beskyttetApi,
-  getAccessTokenFromRequest,
-} from '@navikt/aap-felles-utils';
+import { logger, isMock, tokenXApiProxy, beskyttetApi, getAccessTokenFromRequest } from '@navikt/aap-felles-utils';
 import metrics from 'lib/metrics';
+import { Søknad } from 'lib/types/types';
 
 const handler = beskyttetApi(async (req, res) => {
   const accessToken = getAccessTokenFromRequest(req);
@@ -20,7 +15,7 @@ const handler = beskyttetApi(async (req, res) => {
   res.status(200).json(søknad);
 });
 
-export const getSøknad = async (uuid: string, accessToken?: string) => {
+export const getSøknad = async (uuid: string, accessToken?: string): Promise<Søknad | undefined> => {
   if (isMock()) return mockSøknader.find((s) => s.søknadId === uuid);
   const søknader = await tokenXApiProxy({
     url: `${process.env.SOKNAD_API_URL}/oppslag/soeknad/${uuid}`,
