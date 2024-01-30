@@ -7,7 +7,7 @@ import { InnsendingSøknad, Søknad, VedleggType } from 'lib/types/types';
 import * as styles from 'pages/[uuid]/ettersendelse/Ettersendelse.module.css';
 import { getSøknad } from 'pages/api/soknader/[uuid]';
 import { getStringFromPossiblyArrayQuery } from '@navikt/aap-felles-utils-client';
-import { beskyttetSide, getAccessToken, logger } from '@navikt/aap-felles-utils';
+import { beskyttetSide, getAccessToken } from '@navikt/aap-felles-utils';
 import { useState } from 'react';
 import { Error, FormErrorSummary } from 'components/FormErrorSummary/FormErrorSummary';
 import { setFocus } from 'lib/utils/dom';
@@ -22,16 +22,16 @@ import { FileUpload } from 'components/fileupload/FileUpload';
 import { getSøknaderInnsending } from 'pages/api/soknader/soknader';
 
 interface PageProps {
-  søknad: Søknad;
+  søknad: Søknad | null;
   søknadFraInnsending?: InnsendingSøknad;
 }
 
 const Index = ({ søknad, søknadFraInnsending }: PageProps) => {
   const { formatMessage } = useIntl();
   const { locale } = useIntl();
-  const søknadId = søknadFraInnsending ? søknadFraInnsending.innsendingsId : søknad.søknadId;
+  const søknadId = søknadFraInnsending ? søknadFraInnsending.innsendingsId : søknad?.søknadId;
   const [errors, setErrors] = useState<Error[]>([]);
-  const [manglendeVedlegg, setManglendeVedlegg] = useState<VedleggType[]>(søknad.manglendeVedlegg ?? []);
+  const [manglendeVedlegg, setManglendeVedlegg] = useState<VedleggType[]>(søknad?.manglendeVedlegg ?? []);
 
   const router = useRouter();
 
@@ -45,7 +45,6 @@ const Index = ({ søknad, søknadFraInnsending }: PageProps) => {
     const updatedManglendeVedlegg = manglendeVedlegg.filter((vedlegg) => vedlegg !== krav);
     setManglendeVedlegg(updatedManglendeVedlegg);
   };
-
   return (
     <>
       <Head>
@@ -84,7 +83,7 @@ const Index = ({ søknad, søknadFraInnsending }: PageProps) => {
             {formatMessage(
               { id: 'ettersendelse.gjeldendeSøknad' },
               {
-                dateTime: formatFullDate(søknad.innsendtDato),
+                dateTime: formatFullDate(søknad?.innsendtDato),
               }
             )}
           </Label>
@@ -111,7 +110,7 @@ const Index = ({ søknad, søknadFraInnsending }: PageProps) => {
         <FormErrorSummary id={errorSummaryId} errors={errors} />
 
         {!søknadFraInnsending &&
-          søknad.manglendeVedlegg?.map((krav) => (
+          søknad?.manglendeVedlegg?.map((krav) => (
             <FileUpload
               søknadId={søknad.søknadId}
               krav={krav}
@@ -161,16 +160,11 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
   const bearerToken = getAccessToken(ctx);
   const søknad = await getSøknad(uuid, bearerToken);
 
-  let søknadFraInnsending;
-
-  try {
-    const søknaderFraInnsending = await getSøknaderInnsending(bearerToken);
-    søknadFraInnsending = søknaderFraInnsending.find((søknad) => søknad.innsendingsId === uuid);
-  } catch (e) {
-    logger.error('Noe gikk galt i kallet fra getSøknaderInnsending', e);
-  }
+  const søknaderFraInnsending = await getSøknaderInnsending(bearerToken);
+  const søknadFraInnsending = søknaderFraInnsending.find((søknad) => søknad.innsendingsId === uuid);
 
   stopTimer();
+
   if (!søknad && !søknadFraInnsending) {
     return {
       notFound: true,
@@ -178,7 +172,7 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
   }
 
   return {
-    props: { søknad, søknadFraInnsending },
+    props: { søknad: søknad ? søknad : null, søknadFraInnsending },
   };
 });
 
