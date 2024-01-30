@@ -15,6 +15,7 @@ interface Props {
   deleteError: (vedlegg: Vedlegg) => void;
   setErrorSummaryFocus: () => void;
   onSuccess: (krav: VedleggType) => void;
+  brukInnsending?: boolean;
 }
 
 const findErrors = (vedlegg: Vedlegg[], krav: string) =>
@@ -24,7 +25,15 @@ const findErrors = (vedlegg: Vedlegg[], krav: string) =>
       return { path: krav, message: errorFile.errorMessage, id: errorFile.vedleggId };
     });
 
-export const FileUpload = ({ søknadId, krav, addError, deleteError, onSuccess, setErrorSummaryFocus }: Props) => {
+export const FileUpload = ({
+  søknadId,
+  krav,
+  addError,
+  deleteError,
+  onSuccess,
+  setErrorSummaryFocus,
+  brukInnsending = false,
+}: Props) => {
   const { formatMessage } = useIntl();
   const [files, setFiles] = useState<Vedlegg[]>([]);
   const [harLastetOppEttersending, setHarLastetOppEttersending] = useState<boolean>(false);
@@ -79,7 +88,7 @@ export const FileUpload = ({ søknadId, krav, addError, deleteError, onSuccess, 
       <div className={styles.fileinputWrapper}>
         {(!harLastetOppEttersending || kravErAnnet) && (
           <>
-            {process.env.NEXT_PUBLIC_NY_INNSENDING === 'enabled' ? (
+            {brukInnsending ? (
               <FileInputInnsending
                 heading={formatMessage({ id: `ettersendelse.vedleggstyper.${krav}.heading` })}
                 ingress={formatMessage({ id: `ettersendelse.vedleggstyper.${krav}.description` })}

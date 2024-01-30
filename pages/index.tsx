@@ -8,7 +8,7 @@ import { NyttigÅVite } from 'components/NyttigÅVite/NyttigÅVite';
 import { PageComponentFlexContainer } from 'components/PageComponentFlexContainer/PageComponentFlexContainer';
 import { PageContainer } from 'components/PageContainer/PageContainer';
 import { Soknad } from 'components/Soknad/Soknad';
-import { isAfter, isBefore, sub } from 'date-fns';
+import { isBefore, sub } from 'date-fns';
 import metrics from 'lib/metrics';
 import { InnsendingSøknad, Søknad } from 'lib/types/types';
 import { GetServerSidePropsResult, NextPageContext } from 'next';
@@ -146,11 +146,7 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
 
   let sisteSøknadInnsending;
   try {
-    const sortedByMottattDato = innsendingSøknader.sort((a, b) =>
-      isAfter(new Date(a.mottattDato), new Date(b.mottattDato)) ? -1 : 1
-    );
-
-    sisteSøknadInnsending = sortedByMottattDato[0];
+    sisteSøknadInnsending = innsendingSøknader[0];
 
     if (sisteSøknadInnsending) {
       logger.info('Bruker har søknad sendt inn via innsending');

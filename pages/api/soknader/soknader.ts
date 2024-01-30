@@ -1,7 +1,8 @@
 import { mockSøknader, mockSøknaderInnsending } from 'lib/mock/mockSoknad';
-import { logger, isMock, tokenXApiProxy, beskyttetApi, getAccessTokenFromRequest } from '@navikt/aap-felles-utils';
+import { beskyttetApi, getAccessTokenFromRequest, isMock, logger, tokenXApiProxy } from '@navikt/aap-felles-utils';
 import metrics from 'lib/metrics';
 import { InnsendingSøknad } from 'lib/types/types';
+import { isAfter } from 'date-fns';
 
 const handler = beskyttetApi(async (req, res) => {
   const accessToken = getAccessTokenFromRequest(req);
@@ -12,7 +13,7 @@ const handler = beskyttetApi(async (req, res) => {
 
 export const getSøknaderInnsending = async (accessToken?: string): Promise<InnsendingSøknad[]> => {
   if (isMock()) return mockSøknaderInnsending;
-  const søknader = await tokenXApiProxy({
+  const søknader: InnsendingSøknad[] = await tokenXApiProxy({
     url: `${process.env.INNSENDING_URL}/innsending/søknader`,
     prometheusPath: '/innsending/soeknader',
     method: 'GET',
@@ -22,7 +23,7 @@ export const getSøknaderInnsending = async (accessToken?: string): Promise<Inns
     metricsStatusCodeCounter: metrics.backendApiStatusCodeCounter,
     metricsTimer: metrics.backendApiDurationHistogram,
   });
-  return søknader;
+  return søknader.sort((a, b) => (isAfter(new Date(a.mottattDato), new Date(b.mottattDato)) ? -1 : 1));
 };
 
 export const getSøknader = async (params: Record<string, string>, accessToken?: string) => {

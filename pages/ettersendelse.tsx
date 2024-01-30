@@ -8,7 +8,7 @@ import NextLink from 'next/link';
 import { ArrowLeftIcon } from '@navikt/aksel-icons';
 import { useRouter } from 'next/router';
 import metrics from 'lib/metrics';
-import { getSøknader } from './api/soknader/soknader';
+import { getSøknader, getSøknaderInnsending } from './api/soknader/soknader';
 import { LucaGuidePanel, ScanningGuide, Vedlegg } from '@navikt/aap-felles-react';
 import { useIntl } from 'react-intl';
 import Head from 'next/head';
@@ -83,6 +83,7 @@ const Ettersendelse = () => {
           deleteError={deleteError}
           setErrorSummaryFocus={() => setFocus(errorSummaryId)}
           onSuccess={() => {}}
+          brukInnsending={true}
         />
         <Section>
           <div>
@@ -103,12 +104,16 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
   const bearerToken = getAccessToken(ctx);
   const params = { page: '0', size: '1', sort: 'created,desc' };
   const søknader = await getSøknader(params, bearerToken);
+  const søknaderFraInnsending = await getSøknaderInnsending(bearerToken);
+  const førsteSøknad = søknaderFraInnsending.length > 0 ? søknaderFraInnsending[0] : undefined;
+
   stopTimer();
 
-  if (søknader.length > 0) {
+  if (søknader.length > 0 || førsteSøknad) {
+    const søknadId = førsteSøknad?.innsendingsId ?? søknader.søknadId;
     return {
       redirect: {
-        destination: `/${søknader[0].søknadId}/ettersendelse/`,
+        destination: `/${søknadId}/ettersendelse/`,
         permanent: false,
       },
     };

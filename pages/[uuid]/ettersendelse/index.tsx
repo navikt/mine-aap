@@ -3,7 +3,7 @@ import { LucaGuidePanel, ScanningGuide, Vedlegg } from '@navikt/aap-felles-react
 import { GetServerSidePropsResult, NextPageContext } from 'next';
 import { PageHeader } from 'components/PageHeader';
 import { Section } from 'components/Section/Section';
-import { Søknad, VedleggType } from 'lib/types/types';
+import { InnsendingSøknad, Søknad, VedleggType } from 'lib/types/types';
 import * as styles from 'pages/[uuid]/ettersendelse/Ettersendelse.module.css';
 import { getSøknad } from 'pages/api/soknader/[uuid]';
 import { getStringFromPossiblyArrayQuery } from '@navikt/aap-felles-utils-client';
@@ -19,21 +19,23 @@ import { formatFullDate } from 'lib/utils/date';
 import { useIntl } from 'react-intl';
 import Head from 'next/head';
 import { FileUpload } from 'components/fileupload/FileUpload';
+import { getSøknaderInnsending } from 'pages/api/soknader/soknader';
 
 interface PageProps {
   søknad: Søknad;
+  søknadFraInnsending?: InnsendingSøknad;
 }
 
-const Index = ({ søknad }: PageProps) => {
+const Index = ({ søknad, søknadFraInnsending }: PageProps) => {
   const { formatMessage } = useIntl();
   const { locale } = useIntl();
-
+  const søknadId = søknadFraInnsending ? søknadFraInnsending.innsendingsId : søknad.søknadId;
   const [errors, setErrors] = useState<Error[]>([]);
   const [manglendeVedlegg, setManglendeVedlegg] = useState<VedleggType[]>(søknad.manglendeVedlegg ?? []);
 
   const router = useRouter();
 
-  const errorSummaryId = `form-error-summary-${søknad?.søknadId ?? 'generic'}`;
+  const errorSummaryId = `form-error-summary-${søknadId ?? 'generic'}`;
 
   const addError = (errorsFromKrav: Error[]) => setErrors([...errors, ...errorsFromKrav]);
 
@@ -108,25 +110,27 @@ const Index = ({ søknad }: PageProps) => {
 
         <FormErrorSummary id={errorSummaryId} errors={errors} />
 
-        {søknad.manglendeVedlegg?.map((krav) => (
-          <FileUpload
-            søknadId={søknad.søknadId}
-            krav={krav}
-            addError={addError}
-            deleteError={deleteError}
-            setErrorSummaryFocus={() => setFocus(errorSummaryId)}
-            onSuccess={(krav) => onEttersendelseSuccess(krav)}
-            key={krav}
-          />
-        ))}
+        {!søknadFraInnsending &&
+          søknad.manglendeVedlegg?.map((krav) => (
+            <FileUpload
+              søknadId={søknad.søknadId}
+              krav={krav}
+              addError={addError}
+              deleteError={deleteError}
+              setErrorSummaryFocus={() => setFocus(errorSummaryId)}
+              onSuccess={(krav) => onEttersendelseSuccess(krav)}
+              key={krav}
+            />
+          ))}
 
         <FileUpload
-          søknadId={søknad.søknadId}
+          søknadId={søknadId}
           krav="ANNET"
           addError={addError}
           deleteError={deleteError}
           setErrorSummaryFocus={() => setFocus(errorSummaryId)}
           onSuccess={() => {}}
+          brukInnsending={Boolean(søknadFraInnsending)}
         />
 
         <Section>
@@ -142,22 +146,32 @@ const Index = ({ søknad }: PageProps) => {
 };
 
 export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Promise<GetServerSidePropsResult<{}>> => {
+  const uuid = getStringFromPossiblyArrayQuery(ctx.query.uuid);
+
+  if (!uuid) {
+    return {
+      notFound: true,
+    };
+  }
+
   const stopTimer = metrics.getServersidePropsDurationHistogram.startTimer({
     path: '/{uuid}/ettersendelse',
   });
+
   const bearerToken = getAccessToken(ctx);
-  const uuid = getStringFromPossiblyArrayQuery(ctx.query.uuid);
-  const søknad = await getSøknad(uuid as string, bearerToken);
+  const søknad = await getSøknad(uuid, bearerToken);
+  const søknaderFraInnsending = await getSøknaderInnsending(bearerToken);
+  const søknadFraInnsending = søknaderFraInnsending.find((søknad) => søknad.innsendingsId === uuid);
 
   stopTimer();
-  if (!søknad) {
+  if (!søknad && !søknadFraInnsending) {
     return {
       notFound: true,
     };
   }
 
   return {
-    props: { søknad },
+    props: { søknad, søknadFraInnsending },
   };
 });
 
