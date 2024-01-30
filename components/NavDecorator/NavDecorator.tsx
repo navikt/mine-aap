@@ -53,7 +53,6 @@ export const NavDecorator = ({ children }: { children: React.ReactNode }) => {
   }, [router, formatMessage]);
 
   onBreadcrumbClick((breadcrumb) => {
-    // TODO: Bedre logikk for breadcrumbs
     router.push(breadcrumb.url.replace(router.basePath, '/'));
   });
 
