@@ -19,7 +19,6 @@ import { formatFullDate } from 'lib/utils/date';
 import { useIntl } from 'react-intl';
 import Head from 'next/head';
 import { FileUpload } from 'components/fileupload/FileUpload';
-import { getSøknaderInnsending } from 'pages/api/soknader/soknader';
 
 interface PageProps {
   søknad: Søknad | null;
@@ -146,6 +145,7 @@ const Index = ({ søknad, søknadFraInnsending }: PageProps) => {
 
 export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Promise<GetServerSidePropsResult<{}>> => {
   const uuid = getStringFromPossiblyArrayQuery(ctx.query.uuid);
+  logger.info('Server side på ettersendelse! =)');
 
   if (!uuid) {
     return {
@@ -160,25 +160,28 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
   const bearerToken = getAccessToken(ctx);
 
   try {
-    const [søknad, søknaderFraInnsending] = await Promise.all([
-      getSøknad(uuid, bearerToken),
-      getSøknaderInnsending(bearerToken),
-    ]);
+    const søknad = await getSøknad(uuid, bearerToken);
 
-    const søknadFraInnsending = søknaderFraInnsending.find((søknad) => søknad.innsendingsId === uuid);
+    // const søknadFraInnsending = søknaderFraInnsending.find((søknad) => søknad.innsendingsId === uuid);
     logger.error('søknad', JSON.stringify(søknad));
-    logger.error('søknad fra innsending', JSON.stringify(søknadFraInnsending));
-    logger.error('søknader fra innsending', JSON.stringify(søknaderFraInnsending));
+    // logger.error('søknad fra innsending', JSON.stringify(søknadFraInnsending));
+    // logger.error('søknader fra innsending', JSON.stringify(søknaderFraInnsending));
     stopTimer();
 
-    if (!søknad && !søknadFraInnsending) {
+    // if (!søknad && !søknadFraInnsending) {
+    //   return {
+    //     notFound: true,
+    //   };
+    // }
+
+    if (!søknad) {
       return {
         notFound: true,
       };
     }
 
     return {
-      props: { søknad: søknad || null, søknadFraInnsending: søknad || null },
+      props: { søknad: søknad || null, søknadFraInnsending: {} },
     };
   } catch (e) {
     logger.error('Noe gikk galt i ettersendelse', e);
