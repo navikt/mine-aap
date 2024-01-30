@@ -18,7 +18,6 @@ const handler = beskyttetApi(async (req, res) => {
   }
   const accessToken = getAccessTokenFromRequest(req);
   if (process.env.NEXT_PUBLIC_NY_INNSENDING === 'enabled') {
-    // @ts-ignore-line TODO: Feil med type for NextApiResponse vi henter fra felleslib
     return await slettVedleggInnsending(uuids as string, accessToken!, req, res);
   }
   await slettVedlegg(uuids, accessToken);

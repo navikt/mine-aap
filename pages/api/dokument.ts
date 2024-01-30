@@ -15,12 +15,11 @@ const handler = beskyttetApi(async (req, res) => {
 
   return await tokenXProxy(
     req,
-    /* @ts-ignore: TODO: Følge opp med tokenXproxy repo for å fikse type */
     res,
     `/dokumenter/${journalpostId}/${dokumentId}`,
     '/oppslag/dokument',
     'oppslag',
-    process.env.OPPSLAG_AUDIENCE
+    process.env.OPPSLAG_AUDIENCE!
   );
 });
 

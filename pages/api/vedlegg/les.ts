@@ -20,7 +20,6 @@ const handler = beskyttetApi(async (req, res) => {
       hostname: 'innsending',
       path: `/mellomlagring/fil/${uuid}`,
       req: req,
-      /* @ts-ignore: TODO */
       res: res,
       bearerToken: tokenxToken,
       https: false,
@@ -29,12 +28,11 @@ const handler = beskyttetApi(async (req, res) => {
 
   return await tokenXProxy(
     req,
-    // @ts-ignore
     res,
     `/vedlegg/les/${uuid}`,
     '/vedlegg/les',
     'soknad-api',
-    process.env.SOKNAD_API_AUDIENCE
+    process.env.SOKNAD_API_AUDIENCE!
   );
 });
 
