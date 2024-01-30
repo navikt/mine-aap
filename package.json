@@ -14,7 +14,7 @@
   },
   "prettier": "@navikt/aap-felles-prettier",
   "dependencies": {
-    "@grafana/faro-web-sdk": "^1.3.6",
+    "@grafana/faro-web-sdk": "^1.3.7",
     "@navikt/aap-felles-css": "^0.0.96",
     "@navikt/aap-felles-react": "^0.0.96",
     "@navikt/aap-felles-utils": "^0.0.96",
