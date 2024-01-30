@@ -172,7 +172,7 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
   }
 
   return {
-    props: { søknad: søknad ? søknad : null, søknadFraInnsending },
+    props: { søknad: søknad ? søknad : null, søknadFraInnsending: søknadFraInnsending ? søknadFraInnsending : null },
   };
 });
 
