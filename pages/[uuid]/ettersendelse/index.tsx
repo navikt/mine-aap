@@ -180,7 +180,7 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
       props: { søknad: søknad || null, søknadFraInnsending: {} },
     };
   } catch (e) {
-    logger.error('Noe gikk galt i ettersendelse', e);
+    logger.error('Noe gikk galt i ettersendelse:' + e?.toString());
   }
 
   return { props: {} };
