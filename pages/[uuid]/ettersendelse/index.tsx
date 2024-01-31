@@ -19,6 +19,7 @@ import { formatFullDate } from 'lib/utils/date';
 import { useIntl } from 'react-intl';
 import Head from 'next/head';
 import { FileUpload } from 'components/fileupload/FileUpload';
+import { getSøknaderInnsending } from 'pages/api/soknader/soknader';
 
 interface PageProps {
   søknad: Søknad | null;
@@ -161,20 +162,15 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
 
   try {
     const søknad = await getSøknad(uuid, bearerToken);
+    const søknaderFraInnsending = await getSøknaderInnsending(bearerToken);
 
-    // const søknadFraInnsending = søknaderFraInnsending.find((søknad) => søknad.innsendingsId === uuid);
+    const søknadFraInnsending = søknaderFraInnsending.find((søknad) => søknad.innsendingsId === uuid);
     logger.error('søknad', JSON.stringify(søknad));
-    // logger.error('søknad fra innsending', JSON.stringify(søknadFraInnsending));
-    // logger.error('søknader fra innsending', JSON.stringify(søknaderFraInnsending));
+    logger.error('søknad fra innsending', JSON.stringify(søknadFraInnsending));
+    logger.error('søknader fra innsending', JSON.stringify(søknaderFraInnsending));
     stopTimer();
 
-    // if (!søknad && !søknadFraInnsending) {
-    //   return {
-    //     notFound: true,
-    //   };
-    // }
-
-    if (!søknad) {
+    if (!søknad && !søknadFraInnsending) {
       return {
         notFound: true,
       };
