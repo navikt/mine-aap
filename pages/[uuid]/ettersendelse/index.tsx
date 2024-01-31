@@ -165,9 +165,9 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
     const søknaderFraInnsending = await getSøknaderInnsending(bearerToken);
 
     const søknadFraInnsending = søknaderFraInnsending.find((søknad) => søknad.innsendingsId === uuid);
-    logger.error('søknad', JSON.stringify(søknad));
-    logger.error('søknad fra innsending', JSON.stringify(søknadFraInnsending));
-    logger.error('søknader fra innsending', JSON.stringify(søknaderFraInnsending));
+    logger.error('søknad:' + `${søknad}`);
+    logger.error('søknad fra innsending:' + `${søknadFraInnsending}`);
+    logger.error('søknader fra innsending:' + `${søknaderFraInnsending}`);
     stopTimer();
 
     if (!søknad && !søknadFraInnsending) {
