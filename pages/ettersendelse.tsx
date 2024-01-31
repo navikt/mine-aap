@@ -104,13 +104,14 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
   const bearerToken = getAccessToken(ctx);
   const params = { page: '0', size: '1', sort: 'created,desc' };
   const søknader = await getSøknader(params, bearerToken);
+  const søknad = søknader[0];
   const søknaderFraInnsending = await getSøknaderInnsending(bearerToken);
-  const førsteSøknad = søknaderFraInnsending.length > 0 ? søknaderFraInnsending[0] : undefined;
+  const søknadFraInnsending = søknaderFraInnsending.length > 0 ? søknaderFraInnsending[0] : undefined;
 
   stopTimer();
 
-  if (søknader.length > 0 || førsteSøknad) {
-    const søknadId = førsteSøknad?.innsendingsId ?? søknader.søknadId;
+  if (søknad || søknadFraInnsending) {
+    const søknadId = søknadFraInnsending?.innsendingsId ?? søknad.søknadId;
     return {
       redirect: {
         destination: `/${søknadId}/ettersendelse/`,

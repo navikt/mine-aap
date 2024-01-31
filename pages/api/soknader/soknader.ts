@@ -1,7 +1,7 @@
 import { mockSøknader, mockSøknaderInnsending } from 'lib/mock/mockSoknad';
 import { beskyttetApi, getAccessTokenFromRequest, isMock, logger, tokenXApiProxy } from '@navikt/aap-felles-utils';
 import metrics from 'lib/metrics';
-import { InnsendingSøknad } from 'lib/types/types';
+import { InnsendingSøknad, Søknad } from 'lib/types/types';
 import { isAfter } from 'date-fns';
 
 const handler = beskyttetApi(async (req, res) => {
@@ -26,7 +26,7 @@ export const getSøknaderInnsending = async (accessToken?: string): Promise<Inns
   return søknader.sort((a, b) => (isAfter(new Date(a.mottattDato), new Date(b.mottattDato)) ? -1 : 1));
 };
 
-export const getSøknader = async (params: Record<string, string>, accessToken?: string) => {
+export const getSøknader = async (params: Record<string, string>, accessToken?: string): Promise<Array<Søknad>> => {
   if (isMock()) return mockSøknader;
   const urlParams = Object.entries(params)
     .map(([key, value]) => `${key}=${value}`)
