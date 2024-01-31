@@ -1,25 +1,26 @@
-import { beskyttetSide, getAccessToken } from '@navikt/aap-felles-utils';
-import { GetServerSidePropsResult, NextPageContext } from 'next';
 import { useEffect, useState } from 'react';
-import { getStringFromPossiblyArrayQuery } from '@navikt/aap-felles-utils-client';
-import { getSøknaderInnsending } from 'pages/api/soknader/soknader';
+import { useParams } from 'next/navigation';
 
-interface PageProps {
-  uuid: string;
-  brukInnsending: boolean;
-}
-
-const Vedlegg = ({ uuid, brukInnsending }: PageProps) => {
+const Vedlegg = () => {
   const [file, setFile] = useState<Blob | undefined>(undefined);
-  const url = brukInnsending
-    ? `/aap/mine-aap/api/vedlegginnsending/les/?uuid=${uuid}`
-    : `/aap/mine-aap/api/vedlegg/les/?uuid=${uuid}`;
+  const { uuid } = useParams<{ uuid: string }>();
 
   useEffect(() => {
     const getFile = async () => {
-      const file = await fetch(url).then((res) => res.blob());
-      file && setFile(file);
+      const [fileFromSoknadApi, fileFromInnsending] = await Promise.all([
+        fetch(`/aap/mine-aap/api/vedlegg/les/?uuid=${uuid}`)
+          .then((res) => res.blob())
+          .catch(() => undefined),
+        fetch(`/aap/mine-aap/api/vedlegginnsending/les/?uuid=${uuid}`).then((res) => res.blob().catch(() => undefined)),
+      ]);
+
+      if (fileFromInnsending) {
+        setFile(fileFromInnsending);
+      } else if (fileFromSoknadApi) {
+        setFile(fileFromSoknadApi);
+      }
     };
+
     getFile();
   }, [uuid]);
 
@@ -37,17 +38,5 @@ const Vedlegg = ({ uuid, brukInnsending }: PageProps) => {
     </div>
   );
 };
-
-export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Promise<GetServerSidePropsResult<{}>> => {
-  const bearerToken = getAccessToken(ctx);
-  const innsendingSøknader = await getSøknaderInnsending(bearerToken);
-  const innsendingSøknad = innsendingSøknader[0];
-
-  const uuid = innsendingSøknad ? innsendingSøknad.innsendingsId : getStringFromPossiblyArrayQuery(ctx.query['uuid']);
-
-  return {
-    props: { uuid, brukInnsending: Boolean(innsendingSøknad) },
-  };
-});
 
 export default Vedlegg;
