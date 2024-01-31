@@ -2,7 +2,7 @@ import { InnsendingSøknad, Søknad } from 'lib/types/types';
 const mockSøknader: Søknad[] = [
   {
     innsendtDato: '2022-08-30T10:54:49.737467',
-    søknadId: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+    søknadId: 'udsf-asdl-jsadf-kfljs',
     innsendteVedlegg: [
       {
         journalpostId: '1',
