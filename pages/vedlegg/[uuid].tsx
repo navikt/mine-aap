@@ -3,15 +3,17 @@ import { useParams } from 'next/navigation';
 
 const Vedlegg = () => {
   const [file, setFile] = useState<Blob | undefined>(undefined);
-  const { uuid } = useParams<{ uuid: string }>();
+  const params = useParams<{ uuid: string }>();
 
   useEffect(() => {
     const getFile = async () => {
       const [fileFromSoknadApi, fileFromInnsending] = await Promise.all([
-        fetch(`/aap/mine-aap/api/vedlegg/les/?uuid=${uuid}`)
+        fetch(`/aap/mine-aap/api/vedlegg/les/?uuid=${params.uuid}`)
           .then((res) => res.blob())
           .catch(() => undefined),
-        fetch(`/aap/mine-aap/api/vedlegginnsending/les/?uuid=${uuid}`).then((res) => res.blob().catch(() => undefined)),
+        fetch(`/aap/mine-aap/api/vedlegginnsending/les/?uuid=${params.uuid}`).then((res) =>
+          res.blob().catch(() => undefined)
+        ),
       ]);
 
       if (fileFromInnsending) {
@@ -22,7 +24,7 @@ const Vedlegg = () => {
     };
 
     getFile();
-  }, [uuid]);
+  }, [params]);
 
   if (file === undefined) {
     return <h1>Loading...</h1>;
