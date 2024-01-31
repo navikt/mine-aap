@@ -64,8 +64,12 @@ export const FileUpload = ({
       ],
     };
 
+    const url = brukInnsending
+      ? '/aap/mine-aap/api/ettersendelseinnsending/send/'
+      : '/aap/mine-aap/api/ettersendelse/send/';
+
     try {
-      const response = await fetch('/aap/mine-aap/api/ettersendelse/send/', {
+      const response = await fetch(url, {
         method: 'POST',
         body: JSON.stringify(ettersendelse),
       });
