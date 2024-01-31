@@ -13,9 +13,21 @@ const Vedlegg = ({ uuid }: Props) => {
     const getFile = async () => {
       const [fileFromSoknadApi, fileFromInnsending] = await Promise.all([
         fetch(`/aap/mine-aap/api/vedlegg/les/?uuid=${uuid}`)
-          .then((res) => res.blob())
+          .then((res) => {
+            if (res.ok) {
+              return res.blob();
+            }
+            return undefined;
+          })
           .catch(() => undefined),
-        fetch(`/aap/mine-aap/api/vedlegginnsending/les/?uuid=${uuid}`).then((res) => res.blob().catch(() => undefined)),
+        fetch(`/aap/mine-aap/api/vedlegginnsending/les/?uuid=${uuid}`)
+          .then((res) => {
+            if (res.ok) {
+              return res.blob();
+            }
+            return undefined;
+          })
+          .catch(() => undefined),
       ]);
 
       if (fileFromInnsending) {
