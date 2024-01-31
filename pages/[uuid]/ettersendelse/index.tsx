@@ -160,30 +160,27 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
 
   const bearerToken = getAccessToken(ctx);
 
+  let søknad = null;
   try {
-    const søknad = await getSøknad(uuid, bearerToken);
-    const søknaderFraInnsending = await getSøknaderInnsending(bearerToken);
-
-    const søknadFraInnsending = søknaderFraInnsending.find((søknad) => søknad.innsendingsId === uuid);
-    logger.error('søknad:' + `${søknad}`);
-    logger.error('søknad fra innsending:' + `${søknadFraInnsending}`);
-    logger.error('søknader fra innsending:' + `${søknaderFraInnsending}`);
-    stopTimer();
-
-    if (!søknad && !søknadFraInnsending) {
-      return {
-        notFound: true,
-      };
-    }
-
-    return {
-      props: { søknad: søknad || null, søknadFraInnsending: {} },
-    };
+    søknad = await getSøknad(uuid, bearerToken);
   } catch (e) {
-    logger.error('Noe gikk galt i ettersendelse:' + e?.toString());
+    logger.error('getSøknad fra søknad-api feilet:' + e?.toString());
   }
 
-  return { props: {} };
+  const søknaderFraInnsending = await getSøknaderInnsending(bearerToken);
+  const søknadFraInnsending = søknaderFraInnsending.find((søknad) => søknad.innsendingsId === uuid) ?? null;
+
+  stopTimer();
+
+  if (!søknad && !søknadFraInnsending) {
+    return {
+      notFound: true,
+    };
+  }
+
+  return {
+    props: { søknad, søknadFraInnsending },
+  };
 });
 
 export default Index;
