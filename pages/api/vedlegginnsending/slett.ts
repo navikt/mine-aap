@@ -19,9 +19,10 @@ export const slettVedleggInnsending = async (
   res: NextApiResponse
 ) => {
   if (isMock()) return;
+  const idportenToken = accessToken.split(' ')[1];
   let tokenXToken;
   try {
-    tokenXToken = await getTokenX(accessToken, process.env.INNSENDING_AUDIENCE!);
+    tokenXToken = await getTokenX(idportenToken, process.env.INNSENDING_AUDIENCE!);
   } catch (error) {
     logger.error('Kunne ikke hente tokenXToken i sletting av vedlegg i ny innsending', error);
     throw error;
