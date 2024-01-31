@@ -1,6 +1,6 @@
 import { beskyttetApi, getAccessTokenFromRequest, isMock, logger, tokenXApiProxy } from '@navikt/aap-felles-utils';
 import metrics from 'lib/metrics';
-import { Ettersendelse, InnsendingBackendState } from 'lib/types/types';
+import { Ettersendelse, InnsendingBackendState, VedleggType } from 'lib/types/types';
 
 const handler = beskyttetApi(async (req, res) => {
   const accessToken = getAccessTokenFromRequest(req);
@@ -10,7 +10,7 @@ const handler = beskyttetApi(async (req, res) => {
   const body: InnsendingBackendState = {
     filer: ettersending.ettersending.map((ettersendtVedlegg) => ({
       id: ettersendtVedlegg,
-      tittel: ettersending.vedleggType,
+      tittel: mapVedleggTypeTilVedleggstekst(ettersending.vedleggType),
     })),
   };
   await sendEttersendelseInnsending(body, accessToken);
@@ -36,5 +36,24 @@ export const sendEttersendelseInnsending = async (data: InnsendingBackendState, 
   });
   return ettersendelse;
 };
+
+function mapVedleggTypeTilVedleggstekst(vedleggType: VedleggType): string {
+  switch (vedleggType) {
+    case 'ANDREBARN':
+      return 'Dokumentasjon av andre barn';
+    case 'OMSORG':
+      return 'Dokumentasjon av omsorgsstønad fra kommunen';
+    case 'STUDIER':
+      return 'Dokumentasjon av studier';
+    case 'UTLAND':
+      return 'Dokumentasjon av ytelser fra utenlandske trygdemyndigheter';
+    case 'ARBEIDSGIVER':
+      return 'Dokumentasjon av ekstra utbetaling fra arbeidsgiver';
+    case 'ANNET':
+      return 'Annen dokumentasjon';
+    default:
+      return vedleggType;
+  }
+}
 
 export default handler;
