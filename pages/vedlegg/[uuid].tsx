@@ -1,19 +1,21 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
+import { beskyttetSide } from '@navikt/aap-felles-utils';
+import { GetServerSidePropsResult, NextPageContext } from 'next';
+import { getStringFromPossiblyArrayQuery } from '@navikt/aap-felles-utils-client';
 
-const Vedlegg = () => {
+interface Props {
+  uuid: string;
+}
+const Vedlegg = ({ uuid }: Props) => {
   const [file, setFile] = useState<Blob | undefined>(undefined);
-  const params = useParams<{ uuid: string }>();
 
   useEffect(() => {
     const getFile = async () => {
       const [fileFromSoknadApi, fileFromInnsending] = await Promise.all([
-        fetch(`/aap/mine-aap/api/vedlegg/les/?uuid=${params.uuid}`)
+        fetch(`/aap/mine-aap/api/vedlegg/les/?uuid=${uuid}`)
           .then((res) => res.blob())
           .catch(() => undefined),
-        fetch(`/aap/mine-aap/api/vedlegginnsending/les/?uuid=${params.uuid}`).then((res) =>
-          res.blob().catch(() => undefined)
-        ),
+        fetch(`/aap/mine-aap/api/vedlegginnsending/les/?uuid=${uuid}`).then((res) => res.blob().catch(() => undefined)),
       ]);
 
       if (fileFromInnsending) {
@@ -24,7 +26,7 @@ const Vedlegg = () => {
     };
 
     getFile();
-  }, [params]);
+  }, [uuid]);
 
   if (file === undefined) {
     return <h1>Loading...</h1>;
@@ -40,5 +42,19 @@ const Vedlegg = () => {
     </div>
   );
 };
+
+export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Promise<GetServerSidePropsResult<{}>> => {
+  const uuid = getStringFromPossiblyArrayQuery(ctx.query.uuid);
+
+  if (!uuid) {
+    return {
+      notFound: true,
+    };
+  }
+
+  return {
+    props: { uuid },
+  };
+});
 
 export default Vedlegg;
