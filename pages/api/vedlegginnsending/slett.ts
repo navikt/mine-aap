@@ -29,7 +29,7 @@ export const slettVedleggInnsending = async (
 
   return await proxyApiRouteRequest({
     hostname: 'innsending',
-    path: `/mellomlarging/fil/${uuid}`,
+    path: `/mellomlagring/fil/${uuid}`,
     req: req,
     res: res,
     bearerToken: tokenXToken,

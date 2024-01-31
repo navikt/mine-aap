@@ -8,6 +8,7 @@ const handler = beskyttetApi(async (req, res) => {
     res.status(400).json({ error: 'uuid må være en string' });
   }
 
+  logger.info(`Les fil: /mellomlagring/fil/${uuid}`);
   const accessToken = getAccessTokenFromRequest(req)?.substring('Bearer '.length)!;
 
   let tokenxToken;
