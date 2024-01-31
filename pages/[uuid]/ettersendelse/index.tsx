@@ -22,7 +22,7 @@ import { FileUpload } from 'components/fileupload/FileUpload';
 import { getSøknaderInnsending } from 'pages/api/soknader/soknader';
 
 interface PageProps {
-  søknad: Søknad | null;
+  søknad?: Søknad;
   søknadFraInnsending?: InnsendingSøknad;
 }
 
@@ -30,6 +30,7 @@ const Index = ({ søknad, søknadFraInnsending }: PageProps) => {
   const { formatMessage } = useIntl();
   const { locale } = useIntl();
   const søknadId = søknadFraInnsending ? søknadFraInnsending.innsendingsId : søknad?.søknadId;
+  const mottattDato = søknadFraInnsending ? søknadFraInnsending.mottattDato : søknad?.innsendtDato;
   const [errors, setErrors] = useState<Error[]>([]);
   const [manglendeVedlegg, setManglendeVedlegg] = useState<VedleggType[]>(søknad?.manglendeVedlegg ?? []);
 
@@ -83,7 +84,7 @@ const Index = ({ søknad, søknadFraInnsending }: PageProps) => {
             {formatMessage(
               { id: 'ettersendelse.gjeldendeSøknad' },
               {
-                dateTime: formatFullDate(søknad?.innsendtDato),
+                dateTime: formatFullDate(mottattDato),
               }
             )}
           </Label>
@@ -146,7 +147,6 @@ const Index = ({ søknad, søknadFraInnsending }: PageProps) => {
 
 export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Promise<GetServerSidePropsResult<{}>> => {
   const uuid = getStringFromPossiblyArrayQuery(ctx.query.uuid);
-  logger.info('Server side på ettersendelse! =)');
 
   if (!uuid) {
     return {
@@ -160,11 +160,12 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
 
   const bearerToken = getAccessToken(ctx);
 
+  // soknad-api returnerer null når den ikke finner søknad. Fører til parsing error. Forventet oppførsel når vi slår opp en søknad som er sendt inn med ny innsending
   let søknad = null;
   try {
     søknad = await getSøknad(uuid, bearerToken);
   } catch (e) {
-    logger.error('getSøknad fra søknad-api feilet:' + e?.toString());
+    logger.info('getSøknad fra søknad-api feilet:' + e?.toString());
   }
 
   const søknaderFraInnsending = await getSøknaderInnsending(bearerToken);
