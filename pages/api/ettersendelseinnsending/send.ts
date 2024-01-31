@@ -4,7 +4,7 @@ import { Ettersendelse, InnsendingBackendState } from 'lib/types/types';
 
 const handler = beskyttetApi(async (req, res) => {
   const accessToken = getAccessTokenFromRequest(req);
-  const { ettersendteVedlegg, totalFileSize }: Ettersendelse = JSON.parse(req.body);
+  const { ettersendteVedlegg }: Ettersendelse = JSON.parse(req.body);
 
   const ettersending = ettersendteVedlegg[0];
   const body: InnsendingBackendState = {
@@ -15,13 +15,6 @@ const handler = beskyttetApi(async (req, res) => {
   };
   await sendEttersendelseInnsending(body, accessToken);
 
-  ettersendteVedlegg.forEach((ettersendelse) => {
-    logger.info(`lager metrics for ettersendelse.${ettersendelse.vedleggType}`);
-    metrics.ettersendVedleggCounter.inc({ type: ettersendelse.vedleggType });
-
-    metrics.ettersendVedleggSizeHistogram.observe(totalFileSize);
-    metrics.ettersendVedleggNumberOfDocumentsHistogram.observe(ettersendelse.ettersending.length);
-  });
   res.status(201).json({});
 });
 
