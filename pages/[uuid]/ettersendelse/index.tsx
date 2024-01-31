@@ -16,8 +16,8 @@ interface PageProps {
 const Index = ({ søknad, søknadFraInnsending }: PageProps) => {
   return (
     <>
+      {søknadFraInnsending && <EttersendelseInnsending søknad={søknadFraInnsending} />}
       {søknad && !søknadFraInnsending && <EttersendelseSoknadApi søknad={søknad} />}
-      {søknadFraInnsending && !søknad && <EttersendelseInnsending søknad={søknadFraInnsending} />}
     </>
   );
 };
