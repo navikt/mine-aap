@@ -1,31 +1,35 @@
-import { ReadMore, Label, BodyShort, Button, Heading, Link } from '@navikt/ds-react';
-import { PageHeader } from 'components/PageHeader';
-import { Section } from 'components/Section/Section';
-import { beskyttetSide, getAccessToken } from '@navikt/aap-felles-utils';
-import { GetServerSidePropsResult, NextPageContext } from 'next';
-import * as styles from 'pages/[uuid]/ettersendelse/Ettersendelse.module.css';
-import NextLink from 'next/link';
-import { ArrowLeftIcon } from '@navikt/aksel-icons';
-import { useRouter } from 'next/router';
-import metrics from 'lib/metrics';
-import { getSøknader, getSøknaderInnsending } from './api/soknader/soknader';
-import { LucaGuidePanel, ScanningGuide, Vedlegg } from '@navikt/aap-felles-react';
 import { useIntl } from 'react-intl';
-import Head from 'next/head';
-import { FileUpload } from 'components/fileupload/FileUpload';
-import { Error, FormErrorSummary } from 'components/FormErrorSummary/FormErrorSummary';
+import { InnsendingSøknad } from 'lib/types/types';
 import { useState } from 'react';
+import { Error, FormErrorSummary } from 'components/FormErrorSummary/FormErrorSummary';
+import { useRouter } from 'next/router';
+import { LucaGuidePanel, ScanningGuide, Vedlegg } from '@navikt/aap-felles-react';
+import Head from 'next/head';
+import { PageHeader } from 'components/PageHeader';
+import * as styles from 'pages/[uuid]/ettersendelse/Ettersendelse.module.css';
+import { Section } from 'components/Section/Section';
+import NextLink from 'next/link';
+import { BodyShort, Button, Heading, Label, Link, ReadMore } from '@navikt/ds-react';
+import { ArrowLeftIcon } from '@navikt/aksel-icons';
+import { formatFullDate } from 'lib/utils/date';
+import { FileUpload } from 'components/fileupload/FileUpload';
 import { setFocus } from 'lib/utils/dom';
 
-const Ettersendelse = () => {
-  const { formatMessage } = useIntl();
-  const router = useRouter();
-  const { locale } = useIntl();
+interface Props {
+  søknad: InnsendingSøknad;
+}
 
+export const EttersendelseInnsending = ({ søknad }: Props) => {
+  const { formatMessage } = useIntl();
+  const { locale } = useIntl();
   const [errors, setErrors] = useState<Error[]>([]);
-  const errorSummaryId = 'errorSummary';
+
+  const router = useRouter();
+
+  const errorSummaryId = `form-error-summary-${søknad.innsendingsId ?? 'generic'}`;
 
   const addError = (errorsFromKrav: Error[]) => setErrors([...errors, ...errorsFromKrav]);
+
   const deleteError = (vedlegg: Vedlegg) => setErrors(errors.filter((error) => error.id !== vedlegg.vedleggId));
 
   return (
@@ -60,13 +64,16 @@ const Ettersendelse = () => {
             {formatMessage({ id: 'ettersendelse.heading' })}
           </Heading>
           <LucaGuidePanel>
-            <BodyShort spacing>{formatMessage({ id: 'ettersendelse.annet.guide.tekst1' })}</BodyShort>
-            <BodyShort spacing>{formatMessage({ id: 'ettersendelse.annet.guide.tekst2' })}</BodyShort>
+            <BodyShort spacing>{formatMessage({ id: 'ettersendelse.guide' })}</BodyShort>
           </LucaGuidePanel>
-          <div>
-            <Label>{formatMessage({ id: 'ettersendelse.annet.label' })}</Label>
-            <BodyShort className={styles.annetTekst}>{formatMessage({ id: 'ettersendelse.annet.tekst' })}</BodyShort>
-          </div>
+          <Label>
+            {formatMessage(
+              { id: 'ettersendelse.gjeldendeSøknad' },
+              {
+                dateTime: formatFullDate(søknad.mottattDato),
+              }
+            )}
+          </Label>
           <div>
             <BodyShort>{formatMessage({ id: 'ettersendelse.slikTarDuBildeBeskrivelse' })}</BodyShort>
             <ReadMore header={formatMessage({ id: 'ettersendelse.slikTarDuBilde' })}>
@@ -78,6 +85,7 @@ const Ettersendelse = () => {
         <FormErrorSummary id={errorSummaryId} errors={errors} />
 
         <FileUpload
+          søknadId={søknad.innsendingsId}
           krav="ANNET"
           addError={addError}
           deleteError={deleteError}
@@ -85,6 +93,7 @@ const Ettersendelse = () => {
           onSuccess={() => {}}
           brukInnsending={true}
         />
+
         <Section>
           <div>
             <Button icon={<ArrowLeftIcon />} variant="tertiary" onClick={() => router.push('/')}>
@@ -96,33 +105,3 @@ const Ettersendelse = () => {
     </>
   );
 };
-
-export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Promise<GetServerSidePropsResult<{}>> => {
-  const stopTimer = metrics.getServersidePropsDurationHistogram.startTimer({
-    path: '/ettersendelse',
-  });
-  const bearerToken = getAccessToken(ctx);
-  const params = { page: '0', size: '1', sort: 'created,desc' };
-  const søknader = await getSøknader(params, bearerToken);
-  const søknad = søknader[0];
-  const søknaderFraInnsending = await getSøknaderInnsending(bearerToken);
-  const søknadFraInnsending = søknaderFraInnsending.length > 0 ? søknaderFraInnsending[0] : undefined;
-
-  stopTimer();
-
-  if (søknad || søknadFraInnsending) {
-    const søknadId = søknadFraInnsending?.innsendingsId ?? søknad.søknadId;
-    return {
-      redirect: {
-        destination: `/${søknadId}/ettersendelse/`,
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: {},
-  };
-});
-
-export default Ettersendelse;

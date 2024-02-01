@@ -15,6 +15,7 @@ interface Props {
   deleteError: (vedlegg: Vedlegg) => void;
   setErrorSummaryFocus: () => void;
   onSuccess: (krav: VedleggType) => void;
+  brukInnsending?: boolean;
 }
 
 const findErrors = (vedlegg: Vedlegg[], krav: string) =>
@@ -24,7 +25,15 @@ const findErrors = (vedlegg: Vedlegg[], krav: string) =>
       return { path: krav, message: errorFile.errorMessage, id: errorFile.vedleggId };
     });
 
-export const FileUpload = ({ søknadId, krav, addError, deleteError, onSuccess, setErrorSummaryFocus }: Props) => {
+export const FileUpload = ({
+  søknadId,
+  krav,
+  addError,
+  deleteError,
+  onSuccess,
+  setErrorSummaryFocus,
+  brukInnsending = false,
+}: Props) => {
   const { formatMessage } = useIntl();
   const [files, setFiles] = useState<Vedlegg[]>([]);
   const [harLastetOppEttersending, setHarLastetOppEttersending] = useState<boolean>(false);
@@ -55,8 +64,12 @@ export const FileUpload = ({ søknadId, krav, addError, deleteError, onSuccess, 
       ],
     };
 
+    const url = brukInnsending
+      ? '/aap/mine-aap/api/ettersendelseinnsending/send/'
+      : '/aap/mine-aap/api/ettersendelse/send/';
+
     try {
-      const response = await fetch('/aap/mine-aap/api/ettersendelse/send/', {
+      const response = await fetch(url, {
         method: 'POST',
         body: JSON.stringify(ettersendelse),
       });
@@ -79,7 +92,7 @@ export const FileUpload = ({ søknadId, krav, addError, deleteError, onSuccess, 
       <div className={styles.fileinputWrapper}>
         {(!harLastetOppEttersending || kravErAnnet) && (
           <>
-            {process.env.NEXT_PUBLIC_NY_INNSENDING === 'enabled' ? (
+            {brukInnsending ? (
               <FileInputInnsending
                 heading={formatMessage({ id: `ettersendelse.vedleggstyper.${krav}.heading` })}
                 ingress={formatMessage({ id: `ettersendelse.vedleggstyper.${krav}.description` })}
@@ -101,8 +114,8 @@ export const FileUpload = ({ søknadId, krav, addError, deleteError, onSuccess, 
                   const newFiles = files.filter((file) => file.vedleggId !== vedlegg.vedleggId);
                   setFiles(newFiles);
                 }}
-                deleteUrl={'/aap/mine-aap/api/vedlegg/slett/?uuid='}
-                uploadUrl={'/aap/mine-aap/api/vedlegg/lagre/'}
+                deleteUrl={'/aap/mine-aap/api/vedlegginnsending/slett/?uuid='}
+                uploadUrl={'/aap/mine-aap/api/vedlegginnsending/lagre/'}
                 files={files}
               />
             ) : (
