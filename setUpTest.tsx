@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 
 import { toHaveNoViolations } from 'jest-axe';
-import React, { ReactElement } from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 import { IntlProvider } from 'react-intl';
 import { render as rtlRender } from '@testing-library/react';
 import messagesNb from 'lib/translations/nb.json';
@@ -31,7 +31,7 @@ function flattenMessages(nestedMessages: object, prefix = ''): Record<string, st
 }
 
 function render(ui: ReactElement, { locale = 'nb', ...options } = {}) {
-  function Wrapper({ children }: { children: React.JSX.Element }): ReactElement {
+  function Wrapper({ children }: { children: ReactNode }) {
     return (
       <IntlProvider locale={locale} messages={flattenMessages(messagesNb)}>
         {children}
