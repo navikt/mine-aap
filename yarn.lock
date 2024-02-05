@@ -927,10 +927,10 @@
   resolved "https://npm.pkg.github.com/download/@navikt/aap-felles-css/0.0.96/6b9a731d948521b52b602f466637beed6084fbcd#6b9a731d948521b52b602f466637beed6084fbcd"
   integrity sha512-N+BxOp3z4vsIsCM/1jDgNSIMsWX7VIBez7UBiwcIVAkG64+k1mNFu4o5EsOWuCfJrGXBoDvAChALll5msFP7Hg==
 
-"@navikt/aap-felles-prettier@^0.0.93":
-  version "0.0.93"
-  resolved "https://npm.pkg.github.com/download/@navikt/aap-felles-prettier/0.0.93/771dc7fc1efd3a2c7610cdbe75bb9c04512e021f#771dc7fc1efd3a2c7610cdbe75bb9c04512e021f"
-  integrity sha512-Cb1EeOl0kUB80EI+/g39XyD/YkYn4LyxhdaDye8BKSN1l3kALVHrIPpLf3gVad4roNteopR3kw+aSA9V9q1M6Q==
+"@navikt/aap-felles-prettier@^0.0.96":
+  version "0.0.96"
+  resolved "https://npm.pkg.github.com/download/@navikt/aap-felles-prettier/0.0.96/2cf8e6ac8a38a7ec37c56d1decc62a6b58ef59f6#2cf8e6ac8a38a7ec37c56d1decc62a6b58ef59f6"
+  integrity sha512-pxOUyQFdUV++MHAAd3m8BXweS8mdPhDWf+xfHfWvg+23cSEMuR2m80sFCMduOqHpVEMCWwK+lji3gYhnnILjcg==
   dependencies:
     "@trivago/prettier-plugin-sort-imports" "^4.2.0"
     prettier "^3.0.3"
@@ -1019,10 +1019,10 @@
   resolved "https://npm.pkg.github.com/download/@navikt/ds-tokens/5.17.4/fb910b486aa77595200d8bf95397b017310ae027#fb910b486aa77595200d8bf95397b017310ae027"
   integrity sha512-W17JANoQ5zbJ175at4C4uh1iW0IzBWn7XXX+96CbBVdXtrEnyl9AKNnLJ+LXp5Brl8qzUB+meihhYSCgV1Q7KA==
 
-"@navikt/eslint-config-aap@^0.0.93":
-  version "0.0.93"
-  resolved "https://npm.pkg.github.com/download/@navikt/eslint-config-aap/0.0.93/c1239754f00b0c6ad82d7ccc4d9e385ce0f40846#c1239754f00b0c6ad82d7ccc4d9e385ce0f40846"
-  integrity sha512-ASX+yHOzemVpkQh/+HpPzLrURoR/xMvW7LbBgGuV3YX9QW8Pg9WYfBJqilrCdXkZnbo+JvBU4L8oRkZroOHR6w==
+"@navikt/eslint-config-aap@^0.0.96":
+  version "0.0.96"
+  resolved "https://npm.pkg.github.com/download/@navikt/eslint-config-aap/0.0.96/c3d789dc970c4efa02a9ff10a7d3c7edbcab81be#c3d789dc970c4efa02a9ff10a7d3c7edbcab81be"
+  integrity sha512-0TEgvRIW9ZQg3I/Q4T+7N0MlP85xd4pC2AXDtgeMBMB7mBiyYl3hDdwhSmMKUbGJ3xJso92uVEvg+lV6QsvdyA==
 
 "@navikt/nav-dekoratoren-moduler@^2.1.5":
   version "2.1.5"
