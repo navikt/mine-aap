@@ -12,7 +12,7 @@ export const SoknadInnsending = ({
   ettersendelse,
 }: {
   søknad: InnsendingSøknad;
-  ettersendelse: MineAapSoknadMedEttersendinger;
+  ettersendelse?: MineAapSoknadMedEttersendinger;
 }) => {
   const router = useRouter();
   const { formatMessage } = useIntl();
@@ -31,10 +31,10 @@ export const SoknadInnsending = ({
         her. Har vi ikke bedt om dokumentasjon, trenger du ikke sende oss noe.
       </Alert>
 
-      {ettersendelse.ettersendinger.length > 0 && (
+      {ettersendelse && ettersendelse.ettersendinger.length > 0 && (
         <DocumentationHeading heading={formatMessage({ id: 'minSisteSøknad.dokumentasjon.mottatt' })} />
       )}
-      {ettersendelse.ettersendinger.map((ettersendelse) => (
+      {ettersendelse?.ettersendinger.map((ettersendelse) => (
         <div key={ettersendelse.innsendingsId}>{ettersendelse.journalpostId}</div>
       ))}
 

@@ -26,7 +26,7 @@ const Index = ({
 }: {
   søknader: Søknad[];
   sisteSøknadInnsending: InnsendingSøknad;
-  ettersendelse: MineAapSoknadMedEttersendinger;
+  ettersendelse?: MineAapSoknadMedEttersendinger;
 }) => {
   const { formatMessage } = useIntl();
 
