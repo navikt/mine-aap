@@ -12,9 +12,6 @@
     "intl:diff": "json-diff -k ./lib/translations/nb.json ./lib/translations/nn.json",
     "postinstall": "patch-package"
   },
-  "resolutions": {
-    "jackspeak": "2.1.1"
-  },
   "prettier": "@navikt/aap-felles-prettier",
   "dependencies": {
     "@grafana/faro-web-sdk": "^1.3.7",
