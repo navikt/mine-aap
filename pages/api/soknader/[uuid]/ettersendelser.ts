@@ -21,7 +21,7 @@ export const getEttersendelserForSøknad = async (
 ): Promise<MineAapSoknadMedEttersendinger> => {
   if (isMock()) return mockEttersendelserSoknad;
   const ettersendelse: MineAapSoknadMedEttersendinger = await tokenXApiProxy({
-    url: `${process.env.INNSENDING_URL}/innsending/søknader/${uuid}/ettersendelser`,
+    url: `${process.env.INNSENDING_URL}/innsending/søknader/${uuid}/ettersendinger`,
     prometheusPath: '/innsending/soeknader',
     method: 'GET',
     audience: process.env.INNSENDING_AUDIENCE ?? '',
