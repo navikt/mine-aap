@@ -14,6 +14,7 @@ import { ArrowLeftIcon } from '@navikt/aksel-icons';
 import { formatFullDate } from 'lib/utils/date';
 import { FileUpload } from 'components/fileupload/FileUpload';
 import { setFocus } from 'lib/utils/dom';
+import { FileUploadWithCategory } from 'components/fileuploadwithcategory/FileUploadWithCategory';
 
 interface Props {
   søknad: InnsendingSøknad;
@@ -93,6 +94,8 @@ export const EttersendelseInnsending = ({ søknad }: Props) => {
           onSuccess={() => {}}
           brukInnsending={true}
         />
+
+        <FileUploadWithCategory addError={addError} deleteError={deleteError} />
 
         <Section>
           <div>

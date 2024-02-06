@@ -146,6 +146,13 @@
         "description": "Dokumentasjon av ytelser fra utenlandske trygdemyndigheter"
       }
     },
+    "generisk": {
+      "heading": "Dokumentasjon til din AAP-sak",
+      "description": "Her kan du laste opp dokumenter til din AAP-sak. Velg kva dokumentet inneheld fra listen",
+      "dokumenttyper": {
+        "heading": "Kva inneheld dokumentet?"
+      }
+    },
     "annenDokumentasjon": {
       "heading": "Annan dokumentasjon",
       "description": "Dersom du har anna du ønskjer å leggje ved, kan du laste det opp her"
