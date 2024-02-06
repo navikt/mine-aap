@@ -1,4 +1,4 @@
-import { InnsendingSøknad, Søknad } from 'lib/types/types';
+import { InnsendingSøknad, MineAapSoknadMedEttersendinger, Søknad } from 'lib/types/types';
 const mockSøknader: Søknad[] = [
   {
     innsendtDato: '2022-08-30T10:54:49.737467',
@@ -81,9 +81,23 @@ const søknadMedInnsendteVedlegg: Søknad = {
   ],
 };
 
+const mockEttersendelserSoknad: MineAapSoknadMedEttersendinger = {
+  mottattDato: '2024-01-30T00:01:00.000000',
+  journalpostId: '1',
+  innsendingsId: 'udsf-asdl-jsadf-kfljs',
+  ettersendinger: [
+    {
+      mottattDato: '2024-02-30T00:01:00.000000',
+      journalpostId: '2',
+      innsendingsId: 'udsf-asdl-jsadf-dsfff',
+    },
+  ],
+};
+
 export {
   mockSøknader,
   mockSøknaderInnsending,
+  mockEttersendelserSoknad,
   søknadMedInnsendteVedlegg,
   søknadUtenVedlegg,
   søknadMedInnsendteOgManglendeVedlegg,
