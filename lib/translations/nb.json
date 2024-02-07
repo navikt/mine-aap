@@ -148,9 +148,10 @@
     },
     "generisk": {
       "heading": "Dokumentasjon til din AAP-sak",
-      "description": "Her kan du laste opp dokumenter til din AAP-sak. Velg hva dokumentet inneholder fra listen",
+      "description": "Her kan du laste opp dokumenter til din AAP-sak. Velg hva dokumentet inneholder fra listen.",
       "dokumenttyper": {
-        "heading": "Hva inneholder dokumentet?"
+        "heading": "Hva inneholder dokumentet?",
+        "ikkevalgt": "Du må velge hvilken type dokumentasjon du laster opp før du kan fullføre."
       }
     },
     "annenDokumentasjon": {

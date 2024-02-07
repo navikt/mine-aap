@@ -1,32 +1,13 @@
 import { FileInputInnsending, Vedlegg } from '@navikt/aap-felles-react';
 import { useIntl } from 'react-intl';
 import { Section } from 'components/Section/Section';
-import { Button, Select } from '@navikt/ds-react';
+import { Alert, BodyShort, Button, Select } from '@navikt/ds-react';
 import React, { useState } from 'react';
 import { Error } from 'components/FormErrorSummary/FormErrorSummary';
 import styles from 'components/fileupload/FileUpload.module.css';
+import { Ettersendelse, VedleggType } from 'lib/types/types';
 
-type Vedleggstype =
-  | 'STUDIER'
-  | 'ARBEIDSGIVER'
-  | 'OMSORG'
-  | 'UTLAND'
-  | 'ANDREBARN'
-  | 'LÅNEKASSEN_STIPEND'
-  | 'LÅNEKASSEN_LÅN'
-  | 'UTENLANDSKE'
-  | 'ANNET';
-const vedleggstyper: Vedleggstype[] = [
-  'STUDIER',
-  'ARBEIDSGIVER',
-  'OMSORG',
-  'UTLAND',
-  'ANDREBARN',
-  'LÅNEKASSEN_STIPEND',
-  'LÅNEKASSEN_LÅN',
-  'UTENLANDSKE',
-  'ANNET',
-];
+const vedleggstyperOptions: VedleggType[] = ['STUDIER', 'ARBEIDSGIVER', 'OMSORG', 'UTLAND', 'ANDREBARN', 'ANNET'];
 
 const findErrors = (vedlegg: Vedlegg[]) =>
   vedlegg
@@ -34,25 +15,73 @@ const findErrors = (vedlegg: Vedlegg[]) =>
     .map((fil) => ({ path: 'generisk', message: fil.errorMessage, id: fil.vedleggId }));
 
 type Props = {
+  søknadId?: string;
   addError: (errors: Error[]) => void;
   deleteError: (vedlegg: Vedlegg) => void;
 };
 
-export const FileUploadWithCategory = ({ addError, deleteError }: Props) => {
+export const FileUploadWithCategory = ({ søknadId, addError, deleteError }: Props) => {
   const { formatMessage } = useIntl();
   const [files, setFiles] = useState<Vedlegg[]>([]);
+  const [harLastetOppEttersending, setHarLastetOppEttersending] = useState<boolean>(false);
+  const [harEttersendingError, setHarEttersendingError] = useState<boolean>(false);
   const [isUploading, setIsUploading] = useState<boolean>(false);
+  const [valgtVedleggstype, setValgtVedleggstype] = useState<VedleggType | undefined>();
+  const [vedleggstypeerror, setVedleggstypeError] = useState<Error | undefined>();
   const visSendInnKnapp = files.length > 0;
 
-  const onClick = () => {
+  const onClick = async () => {
+    if (!valgtVedleggstype) {
+      const error = {
+        path: 'vedleggstype',
+        message: formatMessage({ id: 'ettersendelse.generisk.dokumenttyper.ikkevalgt' }),
+        id: 'vedleggstype',
+      };
+      addError([error]);
+      setVedleggstypeError(error);
+      return;
+    }
     setIsUploading(true);
-    setIsUploading(false);
+
+    const ettersendelse: Ettersendelse = {
+      ...(søknadId && { søknadId: søknadId }),
+      totalFileSize: files.reduce((acc, curr) => acc + curr.size, 0),
+      ettersendteVedlegg: [
+        {
+          vedleggType: valgtVedleggstype,
+          ettersending: files.map((file) => file.vedleggId),
+        },
+      ],
+    };
+
+    try {
+      const response = await fetch('/aap/mine-aap/api/ettersendelseinnsending/send/', {
+        method: 'POST',
+        body: JSON.stringify(ettersendelse),
+      });
+      if (response.ok) {
+        setFiles([]);
+        setHarLastetOppEttersending(true);
+      } else {
+        setHarEttersendingError(true);
+      }
+    } catch (err) {
+      console.log(err);
+      setHarEttersendingError(true);
+    } finally {
+      setIsUploading(false);
+    }
   };
 
   return (
     <Section>
-      <Select label={formatMessage({ id: 'ettersendelse.generisk.dokumenttyper.heading' })}>
-        {vedleggstyper.map((vedleggstype) => (
+      <Select
+        label={formatMessage({ id: 'ettersendelse.generisk.dokumenttyper.heading' })}
+        onChange={(event) => setValgtVedleggstype(event.target.value as VedleggType)}
+        id={'vedleggtype'}
+        error={vedleggstypeerror && vedleggstypeerror.message}
+      >
+        {vedleggstyperOptions.map((vedleggstype) => (
           <option key={vedleggstype}>
             {formatMessage({ id: `ettersendelse.vedleggstyper.${vedleggstype}.heading` })}
           </option>
@@ -80,6 +109,22 @@ export const FileUploadWithCategory = ({ addError, deleteError }: Props) => {
         uploadUrl={'/aap/mine-aap/api/vedlegginnsending/lagre/'}
         files={files}
       />
+      {harLastetOppEttersending && (
+        <div className={styles.successWrapper}>
+          <Alert variant="success">
+            <BodyShort>
+              Takk! Dokumentasjonen er nå sendt inn! Har du flere dokumenter du ønsker å sende, kan du laste de opp
+              over.
+            </BodyShort>
+          </Alert>
+        </div>
+      )}
+      {harEttersendingError && (
+        <Alert variant="error">
+          Beklager, vi har litt rusk i NAVet. Du kan prøve på nytt om et par minutter, eller sende inn dokumentasjonen
+          på papir.
+        </Alert>
+      )}
       {visSendInnKnapp && (
         <Button onClick={onClick} loading={isUploading} className={styles.sendButton}>
           Send inn

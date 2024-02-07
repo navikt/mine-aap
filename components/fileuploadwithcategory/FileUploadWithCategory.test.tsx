@@ -23,9 +23,7 @@ describe('FileUploadWithCategory', () => {
   test('beskriver formålet', () => {
     render(<FileUploadWithCategory addError={addError} deleteError={deleteError} />);
     expect(
-      screen.getByText(
-        'Her kan du laste opp dokumenter til din AAP-sak. Velg hva dokumentet inneholder fra nedtrekkslisten'
-      )
+      screen.getByText('Her kan du laste opp dokumenter til din AAP-sak. Velg hva dokumentet inneholder fra listen.')
     ).toBeVisible();
   });
 
@@ -42,9 +40,6 @@ describe('FileUploadWithCategory', () => {
     expect(screen.getByRole('option', { name: 'Ytelser fra utenlandske trygdemyndigheter' })).toBeVisible();
     expect(screen.getByRole('option', { name: 'Andre barn' })).toBeVisible();
     expect(screen.getByRole('option', { name: 'Annen dokumentasjon til din AAP-sak' })).toBeVisible();
-    expect(screen.getByRole('option', { name: 'Sykestipend fra lånekassen' })).toBeVisible();
-    expect(screen.getByRole('option', { name: 'Studielån fra lånekassen' })).toBeVisible();
-    expect(screen.getByRole('option', { name: 'Utbetalinger fra utendlandske trygdemyndigheter' })).toBeVisible();
   });
 
   test('viser ikke knapp for å sende inn så lenge det ikke er lastet opp et dokument', () => {
@@ -69,6 +64,15 @@ describe('FileUploadWithCategory', () => {
     expect(avbrytKnapp).toBeVisible();
     await user.click(avbrytKnapp);
     expect(screen.queryByText(filnavn1)).not.toBeInTheDocument();
+  });
+
+  test('viser feilmelding dersom man trykker send inn uten å ha valgt kategori', async () => {
+    mockUploadFile();
+    render(<FileUploadWithCategory addError={addError} deleteError={deleteError} />);
+    const input = screen.getByTestId('fileinput');
+    await user.upload(input, filEn);
+    await user.click(screen.getByRole('button', { name: 'Send inn' }));
+    expect(screen.getByText('Du må velge hvilken type dokumentasjon du laster opp før du kan fullføre.')).toBeVisible();
   });
 });
 
