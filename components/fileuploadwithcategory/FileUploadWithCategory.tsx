@@ -7,7 +7,7 @@ import { Error } from 'components/FormErrorSummary/FormErrorSummary';
 import styles from 'components/fileupload/FileUpload.module.css';
 import { Ettersendelse, VedleggType } from 'lib/types/types';
 
-const vedleggstyperOptions: VedleggType[] = ['STUDIER', 'ARBEIDSGIVER', 'OMSORG', 'UTLAND', 'ANDREBARN', 'ANNET'];
+const vedleggstyper: VedleggType[] = ['STUDIER', 'ARBEIDSGIVER', 'OMSORG', 'UTLAND', 'ANDREBARN', 'ANNET'];
 
 const findErrors = (vedlegg: Vedlegg[]) =>
   vedlegg
@@ -29,6 +29,16 @@ export const FileUploadWithCategory = ({ søknadId, addError, deleteError }: Pro
   const [valgtVedleggstype, setValgtVedleggstype] = useState<VedleggType | undefined>();
   const [vedleggstypeerror, setVedleggstypeError] = useState<Error | undefined>();
   const visSendInnKnapp = files.length > 0;
+
+  const vedleggOptions: { label: string; value: VedleggType | undefined }[] = vedleggstyper.map((vedleggstype) => ({
+    label: formatMessage({ id: `ettersendelse.vedleggstyper.${vedleggstype}.heading` }),
+    value: vedleggstype,
+  }));
+
+  vedleggOptions.unshift({
+    label: formatMessage({ id: 'ettersendelse.generisk.dokumenttyper.placeholder' }),
+    value: undefined,
+  });
 
   const onClick = async () => {
     if (!valgtVedleggstype) {
@@ -77,13 +87,16 @@ export const FileUploadWithCategory = ({ søknadId, addError, deleteError }: Pro
     <Section>
       <Select
         label={formatMessage({ id: 'ettersendelse.generisk.dokumenttyper.heading' })}
-        onChange={(event) => setValgtVedleggstype(event.target.value as VedleggType)}
+        onChange={(event) => {
+          setValgtVedleggstype(event.target.value as VedleggType);
+          setVedleggstypeError(undefined);
+        }}
         id={'vedleggtype'}
         error={vedleggstypeerror && vedleggstypeerror.message}
       >
-        {vedleggstyperOptions.map((vedleggstype) => (
-          <option key={vedleggstype}>
-            {formatMessage({ id: `ettersendelse.vedleggstyper.${vedleggstype}.heading` })}
+        {vedleggOptions.map((vedlegg) => (
+          <option key={vedlegg.label} value={vedlegg.value}>
+            {vedlegg.label}
           </option>
         ))}
       </Select>

@@ -151,7 +151,8 @@
       "description": "Her kan du laste opp dokumenter til din AAP-sak. Velg kva dokumentet inneheld fra listen.",
       "dokumenttyper": {
         "heading": "Kva inneheld dokumentet?",
-        "ikkevalgt": "Du må velja kva for type dokumentasjon du laster opp før du kan fullføre."
+        "ikkevalgt": "Du må velja kva for type dokumentasjon du laster opp før du kan fullføre.",
+        "placeholder": "Vel ein filtype for dokumentasjonen du skal laste opp..."
       }
     },
     "annenDokumentasjon": {
