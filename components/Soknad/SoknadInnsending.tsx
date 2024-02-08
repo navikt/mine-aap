@@ -2,10 +2,17 @@ import * as styles from './Soknad.module.css';
 import { Alert, BodyShort, Button, Heading } from '@navikt/ds-react';
 import { ButtonRow } from 'components/ButtonRow/ButtonRow';
 import { DocumentationHeading } from 'components/DocumentationHeading/DocumentationHeading';
-import { InnsendingSøknad, MineAapSoknadMedEttersendinger } from 'lib/types/types';
+import { Dokument, InnsendingSøknad, MineAapSoknadMedEttersendinger } from 'lib/types/types';
 import { formatDate } from 'lib/utils/date';
 import { useRouter } from 'next/router';
+import { useEffect, useMemo, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
+
+interface DokuementMedTittel {
+  journalpostId?: string;
+  dokumentId?: string;
+  tittel: string;
+}
 
 export const SoknadInnsending = ({
   søknad,
@@ -14,8 +21,42 @@ export const SoknadInnsending = ({
   søknad: InnsendingSøknad;
   ettersendelse?: MineAapSoknadMedEttersendinger;
 }) => {
+  const [dokumenter, setDokumenter] = useState<Dokument[] | undefined>(undefined);
+
   const router = useRouter();
   const { formatMessage } = useIntl();
+
+  useEffect(() => {
+    const getDokumenter = async () => {
+      const result = await fetch('/aap/mine-aap/api/dokumenter/');
+      if (!result.ok) {
+        setDokumenter([]);
+      }
+      const json = await result.json();
+      setDokumenter(json);
+    };
+    getDokumenter();
+  }, []);
+
+  const ettersendteDokumenterMedTittel: DokuementMedTittel[] = useMemo(() => {
+    if (dokumenter && dokumenter.length > 0) {
+      const dokumenter: DokuementMedTittel[] = ettersendelse?.ettersendinger
+        .map((ettersendelse) => {
+          const dokument = dokumenter.find((dokument) => dokument.journalpostId === ettersendelse.journalpostId);
+
+          if (dokument) {
+            return {
+              journalpostId: dokument.journalpostId,
+              dokumentId: dokument.dokumentId,
+              tittel: dokument.tittel,
+            };
+          }
+          return;
+        })
+        .filter((dokument) => dokument !== undefined) as DokuementMedTittel[]; // filter out undefined
+    }
+    return [];
+  }, [dokumenter, ettersendelse]);
 
   return (
     <div className={styles.soknad}>
@@ -31,11 +72,11 @@ export const SoknadInnsending = ({
         her. Har vi ikke bedt om dokumentasjon, trenger du ikke sende oss noe.
       </Alert>
 
-      {ettersendelse && ettersendelse.ettersendinger.length > 0 && (
+      {ettersendteDokumenterMedTittel.length > 0 && (
         <DocumentationHeading heading={formatMessage({ id: 'minSisteSøknad.dokumentasjon.mottatt' })} />
       )}
-      {ettersendelse?.ettersendinger.map((ettersendelse) => (
-        <div key={ettersendelse.innsendingsId}>{ettersendelse.journalpostId}</div>
+      {ettersendteDokumenterMedTittel.map((dokument) => (
+        <div key={dokument.journalpostId}>{dokument.tittel}</div>
       ))}
 
       <ButtonRow>
