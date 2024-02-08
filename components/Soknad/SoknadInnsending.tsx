@@ -1,5 +1,5 @@
 import * as styles from './Soknad.module.css';
-import { Alert, BodyShort, Button, Heading } from '@navikt/ds-react';
+import { Alert, BodyShort, Button, Heading, Link } from '@navikt/ds-react';
 import { ButtonRow } from 'components/ButtonRow/ButtonRow';
 import { DocumentationHeading } from 'components/DocumentationHeading/DocumentationHeading';
 import { Dokument, InnsendingSøknad, MineAapSoknadMedEttersendinger } from 'lib/types/types';
@@ -73,11 +73,23 @@ export const SoknadInnsending = ({
       </Alert>
 
       {ettersendteDokumenterMedTittel.length > 0 && (
-        <DocumentationHeading heading={formatMessage({ id: 'minSisteSøknad.dokumentasjon.mottatt' })} />
+        <>
+          <DocumentationHeading heading={formatMessage({ id: 'minSisteSøknad.dokumentasjon.mottatt' })} />
+          <ul>
+            {ettersendteDokumenterMedTittel.map((dokument) => (
+              <li key={dokument.journalpostId}>
+                <Link
+                  href={`/aap/mine-aap/api/dokument/?journalpostId=${dokument.journalpostId}&dokumentId=${dokument.dokumentId}`}
+                  target="_blank"
+                  lang="no"
+                >
+                  {dokument.tittel}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </>
       )}
-      {ettersendteDokumenterMedTittel.map((dokument) => (
-        <div key={dokument.journalpostId}>{dokument.tittel}</div>
-      ))}
 
       <ButtonRow>
         <Button variant="primary" onClick={() => router.push(`/${søknad.innsendingsId}/ettersendelse/`)}>
