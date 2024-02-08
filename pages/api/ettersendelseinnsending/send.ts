@@ -4,7 +4,7 @@ import { Ettersendelse, InnsendingBackendState, VedleggType } from 'lib/types/ty
 
 const handler = beskyttetApi(async (req, res) => {
   const accessToken = getAccessTokenFromRequest(req);
-  const { ettersendteVedlegg }: Ettersendelse = JSON.parse(req.body);
+  const { ettersendteVedlegg, søknadId }: Ettersendelse = JSON.parse(req.body);
 
   const ettersending = ettersendteVedlegg[0];
   const body: InnsendingBackendState = {
@@ -13,17 +13,21 @@ const handler = beskyttetApi(async (req, res) => {
       tittel: mapVedleggTypeTilVedleggstekst(ettersending.vedleggType),
     })),
   };
-  await sendEttersendelseInnsending(body, accessToken);
+  await sendEttersendelseInnsending(body, søknadId, accessToken);
 
   res.status(201).json({});
 });
 
-export const sendEttersendelseInnsending = async (data: InnsendingBackendState, accessToken?: string) => {
+export const sendEttersendelseInnsending = async (
+  data: InnsendingBackendState,
+  innsendingsId?: string,
+  accessToken?: string
+) => {
   if (isMock()) {
     return {};
   }
   const ettersendelse = await tokenXApiProxy({
-    url: `${process.env.INNSENDING_URL}/innsending`,
+    url: `${process.env.INNSENDING_URL}/innsending${innsendingsId ? `/${innsendingsId}` : ''}`,
     prometheusPath: '/innsending',
     method: 'POST',
     data: JSON.stringify(data),
