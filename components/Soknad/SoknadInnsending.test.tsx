@@ -1,6 +1,7 @@
 import { SoknadInnsending } from 'components/Soknad/SoknadInnsending';
+import { mockDokumenter } from 'lib/mock/mockDokumenter';
 import { InnsendingSøknad } from 'lib/types/types';
-import { render, screen } from 'setUpTest';
+import { render, screen, waitFor } from 'setUpTest';
 
 const mockSøknad: InnsendingSøknad = {
   innsendingsId: '123',
@@ -9,8 +10,19 @@ const mockSøknad: InnsendingSøknad = {
 };
 
 describe('SoknadInnsending', () => {
-  test('Skal rendre komponent for søknad uten ettersendelser', () => {
+  beforeAll(() => {
+    jest.spyOn(global, 'fetch').mockImplementation(
+      jest.fn(() =>
+        Promise.resolve({
+          json: () => Promise.resolve(mockDokumenter),
+        })
+      ) as jest.Mock
+    );
+  });
+  test('Skal rendre komponent for søknad uten ettersendelser', async () => {
     render(<SoknadInnsending søknad={mockSøknad} />);
-    expect(screen.getByRole('heading', { level: 2, name: 'Søknad om arbeidsavklaringspenger (AAP)' })).toBeVisible();
+    await waitFor(() =>
+      expect(screen.getByRole('heading', { level: 2, name: 'Søknad om arbeidsavklaringspenger (AAP)' })).toBeVisible()
+    );
   });
 });
