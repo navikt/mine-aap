@@ -8,7 +8,7 @@ import { userEvent } from '@testing-library/user-event';
 enableFetchMocks();
 const filnavn1 = 'fil1.pdf';
 
-const filEn: File = new File(['fil en'], filnavn1, { type: 'application/json' });
+const filEn: File = new File(['fil en'], filnavn1, { type: 'application/pdf' });
 describe('FileUploadWithCategory', () => {
   const user = userEvent.setup();
   const addError = jest.fn();
