@@ -40,7 +40,7 @@ export const SoknadInnsending = ({
 
   const ettersendteDokumenterMedTittel: DokuementMedTittel[] = useMemo(() => {
     if (dokumenter && dokumenter.length > 0) {
-      const dokumenter: DokuementMedTittel[] = ettersendelse?.ettersendinger
+      return ettersendelse?.ettersendinger
         .map((ettersendelse) => {
           const dokument = dokumenter.find((dokument) => dokument.journalpostId === ettersendelse.journalpostId);
 
