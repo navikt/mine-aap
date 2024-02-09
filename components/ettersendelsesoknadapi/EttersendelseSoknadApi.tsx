@@ -1,5 +1,5 @@
 import { Søknad, VedleggType } from 'lib/types/types';
-import { useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { useState } from 'react';
 import { Error, FormErrorSummary } from 'components/FormErrorSummary/FormErrorSummary';
 import { useRouter } from 'next/router';
@@ -70,6 +70,23 @@ export const EttersendelseSoknadApi = ({ søknad }: Props) => {
           </Heading>
           <LucaGuidePanel>
             <BodyShort spacing>{formatMessage({ id: 'ettersendelse.guide' })}</BodyShort>
+            <BodyShort spacing>
+              <FormattedMessage
+                id={'ettersendelse.guide2'}
+                values={{
+                  a: (chunks) => (
+                    <Link
+                      target="_blank"
+                      href={
+                        'https://www.nav.no/soknader/nb/person/arbeid/arbeidsavklaringspenger/NAV%2011-13.05/ettersendelse'
+                      }
+                    >
+                      {chunks}
+                    </Link>
+                  ),
+                }}
+              />
+            </BodyShort>
           </LucaGuidePanel>
           <Label>
             {formatMessage(
