@@ -17,10 +17,12 @@ Appen kjører på port 3000 som default
 
 Vi bruker Github sitt package registry for npm pakker, siden flere av Nav sine pakker kun blir publisert her.
 
-For å kunne kjøre `npm install` lokalt må du logge inn mot Github package registry:
+For å kunne kjøre `yarn install` lokalt må du logge inn mot Github package registry. Legg til følgende i .bashrc eller .zshrc lokalt på din maskin:
+I .bashrc eller .zshrc:
 
-- Lag/forny access token med repo og read:packages rettigheter i github ( under developer settings). husk enable sso
-- Login på npm med `npm login --scope=@navikt --registry=https://npm.pkg.github.com` og benytt github brukernavn, epost og tokenet du nettopp genererte
+`export NPM_AUTH_TOKEN=“github_pat”`
+
+Hvor github_pat er din personal access token laget på github(settings -> developer settings). Husk read:packages rettighet og enable sso når du oppdaterer/lager PAT.
 
 ---
 
