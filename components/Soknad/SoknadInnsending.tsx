@@ -72,7 +72,7 @@ export const SoknadInnsending = ({
         her. Har vi ikke bedt om dokumentasjon, trenger du ikke sende oss noe.
       </Alert>
 
-      {ettersendteDokumenterMedTittel.length > 0 && (
+      {ettersendteDokumenterMedTittel?.length > 0 && (
         <>
           <DocumentationHeading heading={formatMessage({ id: 'minSisteSøknad.dokumentasjon.mottatt' })} />
           <ul>
