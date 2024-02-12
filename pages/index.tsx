@@ -18,6 +18,7 @@ import { useEffect, useMemo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { SoknadInnsending } from 'components/Soknad/SoknadInnsending';
 import { getEttersendelserForSøknad } from 'pages/api/soknader/[uuid]/ettersendelser';
+import { getDokumentJson } from 'pages/api/dokumentjson';
 
 const Index = ({
   søknader,
@@ -156,6 +157,10 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
       logger.info('Bruker har søknad sendt inn via innsending');
 
       ettersendelse = await getEttersendelserForSøknad(sisteSøknadInnsending.innsendingsId, bearerToken);
+      if (sisteSøknadInnsending.journalpostId) {
+        const søknadJson = await getDokumentJson(sisteSøknadInnsending.journalpostId, bearerToken);
+        logger.info(`oppslag/dokumenter/${sisteSøknadInnsending.journalpostId}: ${JSON.stringify(søknadJson)}`);
+      }
     }
   } catch (error) {
     logger.error('Feil ved henting av søknader sendt inn via innsending', error);
