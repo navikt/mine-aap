@@ -1,5 +1,5 @@
 import { logger } from '@navikt/aap-felles-utils';
-import { getSession } from '@navikt/oasis/provider/';
+import { getSession } from '@navikt/oasis';
 import { randomUUID } from 'crypto';
 import { IncomingMessage } from 'http';
 

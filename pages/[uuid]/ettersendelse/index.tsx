@@ -45,7 +45,11 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
     logger.info('getSøknad fra søknad-api feilet:' + e?.toString());
   }
 
-  const søknaderFraInnsending = await getSøknaderInnsending(bearerToken);
+  if (ctx.req === undefined) {
+    throw new Error('Request object is undefined');
+  }
+
+  const søknaderFraInnsending = await getSøknaderInnsending(ctx.req);
   const søknadFraInnsending = søknaderFraInnsending.find((søknad) => søknad.innsendingsId === uuid) ?? null;
 
   stopTimer();
