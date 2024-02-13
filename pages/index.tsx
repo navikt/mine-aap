@@ -157,13 +157,14 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
       logger.info('Bruker har søknad sendt inn via innsending');
 
       ettersendelse = await getEttersendelserForSøknad(sisteSøknadInnsending.innsendingsId, bearerToken);
+      logger.info(`getEttersendelserForSøknad: ${JSON.stringify(ettersendelse)}`);
       if (sisteSøknadInnsending.journalpostId) {
         const søknadJson = await getDokumentJson(sisteSøknadInnsending.journalpostId, bearerToken);
         logger.info(`oppslag/dokumenter/${sisteSøknadInnsending.journalpostId}: ${JSON.stringify(søknadJson)}`);
       }
     }
   } catch (error) {
-    logger.error('Feil ved henting av søknader sendt inn via innsending', error);
+    logger.error('Feil ved henting av søknader sendt inn via innsending', error?.toString());
   }
 
   stopTimer();
