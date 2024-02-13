@@ -107,9 +107,9 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
   });
   const bearerToken = getAccessToken(ctx);
   const params = { page: '0', size: '1', sort: 'created,desc' };
-  const søknader = await getSøknader(params, ctx.req);
+  const søknader = await getSøknader(params, bearerToken);
   const søknad = søknader[0];
-  const søknaderFraInnsending = await getSøknaderInnsending(bearerToken);
+  const søknaderFraInnsending = await getSøknaderInnsending(ctx.req);
   const søknadFraInnsending = søknaderFraInnsending.length > 0 ? søknaderFraInnsending[0] : undefined;
 
   stopTimer();

@@ -1,6 +1,6 @@
 import { Button, Heading, Link } from '@navikt/ds-react';
 import { GetServerSidePropsResult, NextPageContext } from 'next';
-import { beskyttetSide, logger } from '@navikt/aap-felles-utils';
+import { beskyttetSide, getAccessToken, logger } from '@navikt/aap-felles-utils';
 import { VerticalFlexContainer } from 'components/FlexContainer/VerticalFlexContainer';
 import { Layout } from 'components/Layout/Layout';
 import { Section } from 'components/Section/Section';
@@ -64,13 +64,11 @@ const Søknader = ({ søknader }: PageProps) => {
 };
 
 export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Promise<GetServerSidePropsResult<{}>> => {
-  if (ctx.req === undefined) {
-    throw new Error('Request object is undefined');
-  }
+  const bearerToken = getAccessToken(ctx);
 
   const stopTimer = metrics.getServersidePropsDurationHistogram.startTimer({ path: '/soknader' });
   const params = { page: '0', size: '200', sort: 'created,desc' };
-  const søknader = await getSøknader(params, ctx.req);
+  const søknader = await getSøknader(params, bearerToken);
 
   logger.info(`søknader: ${JSON.stringify(søknader)}`);
 

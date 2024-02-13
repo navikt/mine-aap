@@ -144,8 +144,8 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
   }
 
   const [søknader, innsendingSøknader] = await Promise.all([
-    getSøknader(params, ctx.req),
-    getSøknaderInnsending(bearerToken),
+    getSøknader(params, bearerToken),
+    getSøknaderInnsending(ctx.req),
   ]);
 
   let sisteSøknadInnsending;
