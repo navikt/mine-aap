@@ -98,12 +98,16 @@ const Ettersendelse = () => {
 };
 
 export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Promise<GetServerSidePropsResult<{}>> => {
+  if (ctx.req === undefined) {
+    throw new Error('Request object is undefined');
+  }
+
   const stopTimer = metrics.getServersidePropsDurationHistogram.startTimer({
     path: '/ettersendelse',
   });
   const bearerToken = getAccessToken(ctx);
   const params = { page: '0', size: '1', sort: 'created,desc' };
-  const søknader = await getSøknader(params, bearerToken);
+  const søknader = await getSøknader(params, ctx.req);
   const søknad = søknader[0];
   const søknaderFraInnsending = await getSøknaderInnsending(bearerToken);
   const søknadFraInnsending = søknaderFraInnsending.length > 0 ? søknaderFraInnsending[0] : undefined;

@@ -139,8 +139,12 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
   const bearerToken = getAccessToken(ctx);
   const params = { page: '0', size: '1', sort: 'created,desc' };
 
+  if (ctx.req === undefined) {
+    throw new Error('Request object is undefined');
+  }
+
   const [søknader, innsendingSøknader] = await Promise.all([
-    getSøknader(params, bearerToken),
+    getSøknader(params, ctx.req),
     getSøknaderInnsending(bearerToken),
   ]);
 
