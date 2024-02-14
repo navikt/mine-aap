@@ -1,6 +1,6 @@
 import { Button, Heading, Link } from '@navikt/ds-react';
 import { GetServerSidePropsResult, NextPageContext } from 'next';
-import { beskyttetSide, getAccessToken, logger } from '@navikt/aap-felles-utils';
+import { beskyttetSide, getAccessToken } from '@navikt/aap-felles-utils';
 import { VerticalFlexContainer } from 'components/FlexContainer/VerticalFlexContainer';
 import { Layout } from 'components/Layout/Layout';
 import { Section } from 'components/Section/Section';
@@ -84,7 +84,6 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
     getSøknader(params, bearerToken),
     getSøknaderInnsending(bearerToken),
   ]);
-  logger.info(`søknader: ${JSON.stringify(søknader)}`);
 
   const søknaderMedEttersending = [];
 
