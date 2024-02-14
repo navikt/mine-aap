@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-interface DokuementMedTittel {
+interface DokumentMedTittel {
   journalpostId?: string;
   dokumentId?: string;
   tittel: string;
@@ -38,25 +38,34 @@ export const SoknadInnsending = ({
     getDokumenter();
   }, []);
 
-  const ettersendteDokumenterMedTittel: DokuementMedTittel[] = useMemo(() => {
+  const ettersendteDokumenterMedTittel: DokumentMedTittel[] = useMemo(() => {
     if (dokumenter && dokumenter.length > 0) {
-      return ettersendelse?.ettersendinger
-        .map((ettersendelse) => {
-          const dokument = dokumenter.find((dokument) => dokument.journalpostId === ettersendelse.journalpostId);
+      const dokumenterMedTittel: DokumentMedTittel[] = [];
+      const dokumenterFraSoknad = dokumenter.filter((dokument) => dokument.journalpostId === søknad.journalpostId);
+      dokumenterFraSoknad.forEach((dokument) => {
+        dokumenterMedTittel.push({
+          journalpostId: dokument.journalpostId,
+          dokumentId: dokument.dokumentId,
+          tittel: dokument.tittel,
+        });
+      });
 
-          if (dokument) {
-            return {
-              journalpostId: dokument.journalpostId,
-              dokumentId: dokument.dokumentId,
-              tittel: dokument.tittel,
-            };
-          }
-          return;
-        })
-        .filter((dokument) => dokument !== undefined) as DokuementMedTittel[]; // filter out undefined
+      ettersendelse?.ettersendinger.forEach((ettersendelse) => {
+        const dokument = dokumenter.filter((dokument) => dokument.journalpostId === ettersendelse.journalpostId);
+
+        dokument.forEach((dokument) => {
+          dokumenterMedTittel.push({
+            journalpostId: dokument.journalpostId,
+            dokumentId: dokument.dokumentId,
+            tittel: dokument.tittel,
+          });
+        });
+      });
+
+      return dokumenterMedTittel.filter((dokument) => dokument !== undefined) as DokumentMedTittel[]; // filter out undefined
     }
     return [];
-  }, [dokumenter, ettersendelse]);
+  }, [dokumenter, ettersendelse, søknad]);
 
   return (
     <div className={styles.soknad}>
