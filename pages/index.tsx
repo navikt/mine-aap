@@ -10,20 +10,24 @@ import { PageContainer } from 'components/PageContainer/PageContainer';
 import { Soknad } from 'components/Soknad/Soknad';
 import { isBefore, sub } from 'date-fns';
 import metrics from 'lib/metrics';
-import { InnsendingSøknad, Søknad } from 'lib/types/types';
+import { InnsendingSøknad, MineAapSoknadMedEttersendinger, Søknad } from 'lib/types/types';
 import { GetServerSidePropsResult, NextPageContext } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { SoknadInnsending } from 'components/Soknad/SoknadInnsending';
+import { getEttersendelserForSøknad } from 'pages/api/soknader/[uuid]/ettersendelser';
+import { getDokumentJson } from 'pages/api/dokumentjson';
 
 const Index = ({
   søknader,
   sisteSøknadInnsending,
+  ettersendelse,
 }: {
   søknader: Søknad[];
   sisteSøknadInnsending: InnsendingSøknad;
+  ettersendelse?: MineAapSoknadMedEttersendinger;
 }) => {
   const { formatMessage } = useIntl();
 
@@ -78,7 +82,7 @@ const Index = ({
             <FormattedMessage id="minSisteSøknad.heading" />
           </Heading>
           <Card>
-            <SoknadInnsending søknad={sisteSøknadInnsending} />
+            <SoknadInnsending søknad={sisteSøknadInnsending} ettersendelse={ettersendelse} />
           </Card>
         </PageComponentFlexContainer>
       )}
@@ -145,20 +149,28 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
   ]);
 
   let sisteSøknadInnsending;
+  let ettersendelse: MineAapSoknadMedEttersendinger | null = null;
   try {
     sisteSøknadInnsending = innsendingSøknader[0];
 
     if (sisteSøknadInnsending) {
       logger.info('Bruker har søknad sendt inn via innsending');
+
+      ettersendelse = await getEttersendelserForSøknad(sisteSøknadInnsending.innsendingsId, bearerToken);
+      logger.info(`getEttersendelserForSøknad: ${JSON.stringify(ettersendelse)}`);
+      if (sisteSøknadInnsending.journalpostId) {
+        const søknadJson = await getDokumentJson(sisteSøknadInnsending.journalpostId, bearerToken);
+        logger.info(`oppslag/dokumenter/${sisteSøknadInnsending.journalpostId}: ${JSON.stringify(søknadJson)}`);
+      }
     }
   } catch (error) {
-    logger.error('Feil ved henting av søknader sendt inn via innsending', error);
+    logger.error('Feil ved henting av søknader sendt inn via innsending', error?.toString());
   }
 
   stopTimer();
 
   return {
-    props: { søknader, sisteSøknadInnsending },
+    props: { søknader, sisteSøknadInnsending, ettersendelse: ettersendelse },
   };
 });
 
