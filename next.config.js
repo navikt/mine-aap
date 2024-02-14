@@ -15,7 +15,7 @@ const nextConfig = {
     locales: ['nb', 'nn'],
     defaultLocale: 'nb',
   },
-  headers() {
+  async headers() {
     return [
       {
         source: '/api/:path*',
