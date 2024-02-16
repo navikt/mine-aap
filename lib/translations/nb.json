@@ -95,7 +95,8 @@
   "ettersendelse": {
     "appTittel": "Ettersending til arbeidsavklarings{shy}penger (AAP)",
     "heading": "Ettersend dokumentasjon",
-    "guide": "Hvis du skal ettersende vedlegg, må du sende disse innen 14 dager. Du kan ettersende enten digitalt eller per post. Trenger du mer tid, kan du be om lenger frist. Dette kan du gjøre via nav.no eller ringe oss etter at søknaden er sendt inn.",
+    "guide": "Her kan du ettersende dokumentasjon.",
+    "guide2": "Du kan også <a>ettersende per post (åpnes i ny fane)</a>, eller levere dokumentasjon på ditt lokale NAV-kontor.",
     "slikTarDuBildeBeskrivelse": "Hvis du har vedlegg på papir og ikke har skanner, kan du for eksempel ta bilde av dokumentet med mobiltelefonen din.",
     "slikTarDuBilde": "Slik tar du et godt bilde av dokumentet",
     "annet": {
