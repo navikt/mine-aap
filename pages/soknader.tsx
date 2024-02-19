@@ -82,7 +82,7 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
   const params = { page: '0', size: '200', sort: 'created,desc' };
   const [søknader, innsendingSøknader] = await Promise.all([
     getSøknader(params, bearerToken),
-    getSøknaderInnsending(bearerToken),
+    getSøknaderInnsending(ctx.req),
   ]);
 
   const søknaderMedEttersending = [];
