@@ -158,8 +158,8 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
 
       ettersendelse = await getEttersendelserForSøknad(sisteSøknadInnsending.innsendingsId, bearerToken);
       logger.info(`getEttersendelserForSøknad: ${JSON.stringify(ettersendelse)}`);
-      if (sisteSøknadInnsending.journalpostId) {
-        const søknadJson = await getDokumentJson(sisteSøknadInnsending.journalpostId, bearerToken);
+      if (sisteSøknadInnsending.journalpostId && process.env.NEXT_PUBLIC_ENVIRONMENT === 'dev') {
+        const søknadJson = await getDokumentJson(sisteSøknadInnsending.journalpostId, ctx.req);
         logger.info(`oppslag/dokumenter/${sisteSøknadInnsending.journalpostId}: ${JSON.stringify(søknadJson)}`);
       }
     }
