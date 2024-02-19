@@ -27,7 +27,7 @@ export const getDokumentJson = async (
     });
     return dokumentJson;
   } catch (error) {
-    logger.error(`Error fetching dokumentJson for journalpostId ${journalpostId}`, error);
+    logger.error({ err: error }, `Error fetching dokumentJson for journalpostId ${journalpostId}`);
     return {};
   }
 };
