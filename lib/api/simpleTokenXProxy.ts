@@ -5,11 +5,13 @@ import { IncomingMessage } from 'http';
 
 interface Opts {
   url: string;
+  method?: 'GET' | 'POST' | 'DELETE';
   audience: string;
+  body?: object;
   req?: IncomingMessage;
 }
 
-export const simpleTokenXProxy = async ({ url, audience, req }: Opts) => {
+export const simpleTokenXProxy = async <T>({ url, audience, req, method = 'GET', body }: Opts): Promise<T> => {
   if (!req) {
     logger.error(`Request for ${url} er undefined`);
     throw new Error('Request for simpleTokenXProxy is undefined');
@@ -23,12 +25,13 @@ export const simpleTokenXProxy = async ({ url, audience, req }: Opts) => {
   logger.info(`Starter request mot ${url} med callId ${navCallId}`);
 
   const response = await fetch(url, {
-    method: 'GET',
+    method: method,
     headers: {
       Authorization: `Bearer ${onBehalfOfToken}`,
       'Content-Type': 'application/json',
       'Nav-CallId': navCallId,
     },
+    body: method === 'POST' ? JSON.stringify(body) : undefined,
   });
 
   if (response.ok) {

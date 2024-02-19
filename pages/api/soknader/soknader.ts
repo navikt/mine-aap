@@ -13,10 +13,10 @@ const handler = beskyttetApi(async (req, res) => {
   res.status(200).json(søknader);
 });
 
-export const getSøknaderInnsending = async (req?: IncomingMessage): Promise<InnsendingSøknad[]> => {
+export const getSøknaderInnsending = async (req?: IncomingMessage) => {
   if (isMock()) return mockSøknaderInnsending;
   try {
-    const søknader: InnsendingSøknad[] = await simpleTokenXProxy({
+    const søknader = await simpleTokenXProxy<InnsendingSøknad[]>({
       url: `${process.env.INNSENDING_URL}/innsending/søknader`,
       audience: process.env.INNSENDING_AUDIENCE ?? '',
       req,
