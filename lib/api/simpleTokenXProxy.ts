@@ -32,6 +32,6 @@ export const simpleTokenXProxy = async ({ url, audience, req }: Opts) => {
   if (response.ok) {
     return await response.json();
   }
-  logger.error('Error fetching simpleTokenXProxy');
+  logger.error(`Error fetching simpleTokenXProxy. Fikk responskode ${response.status} fra ${url}`);
   throw new Error('Error fetching simpleTokenXProxy');
 };
