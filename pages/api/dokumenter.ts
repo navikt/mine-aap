@@ -1,24 +1,25 @@
 import { mockDokumenter } from 'lib/mock/mockDokumenter';
-import { logger, isMock, tokenXApiProxy, beskyttetApi, getAccessTokenFromRequest } from '@navikt/aap-felles-utils';
-import metrics from 'lib/metrics';
+import { logger, isMock, beskyttetApi } from '@navikt/aap-felles-utils';
+import { simpleTokenXProxy } from 'lib/api/simpleTokenXProxy';
+import { IncomingMessage } from 'http';
 
 const handler = beskyttetApi(async (req, res) => {
-  const accessToken = getAccessTokenFromRequest(req);
-  const dokumenter = await hentDokumenterFraOppslag(accessToken);
+  const dokumenter = await hentDokumenterFraOppslag(req);
   res.status(200).json(dokumenter);
 });
 
-export const hentDokumenterFraOppslag = async (accessToken?: string) => {
+export const hentDokumenterFraOppslag = async (req?: IncomingMessage) => {
   if (isMock()) return mockDokumenter;
-  return await tokenXApiProxy({
-    url: `${process.env.OPPSLAG_URL}/dokumenter`,
-    prometheusPath: '/oppslag/dokumenter',
-    method: 'GET',
-    audience: process.env.OPPSLAG_AUDIENCE!,
-    bearerToken: accessToken,
-    logger: logger,
-    metricsStatusCodeCounter: metrics.backendApiStatusCodeCounter,
-    metricsTimer: metrics.backendApiDurationHistogram,
-  });
+  try {
+    const dokumenter = await simpleTokenXProxy({
+      url: `${process.env.OPPSLAG_URL}/dokumenter`,
+      audience: process.env.OPPSLAG_AUDIENCE ?? '',
+      req,
+    });
+    return dokumenter;
+  } catch (error) {
+    logger.error('Error fetching dokumenter mot oppslag', error);
+    return [];
+  }
 };
 export default handler;
