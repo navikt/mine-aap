@@ -1,4 +1,4 @@
-import { beskyttetApi, getAccessTokenFromRequest } from '@navikt/aap-felles-utils';
+import { beskyttetApi } from '@navikt/aap-felles-utils';
 import { getSøknaderInnsending } from 'pages/api/soknader/soknader';
 
 const allowedOrigins = [
@@ -8,8 +8,7 @@ const allowedOrigins = [
 ];
 
 const handler = beskyttetApi(async (req, res) => {
-  const accessToken = getAccessTokenFromRequest(req);
-  const søknader = await getSøknaderInnsending(accessToken);
+  const søknader = await getSøknaderInnsending(req);
   if (req.headers.origin) {
     res.setHeader('Access-Control-Allow-Credentials', 'true');
     res.setHeader('Access-Control-Allow-Origin', allowedOrigins.includes(req.headers.origin) ? req.headers.origin : '');
