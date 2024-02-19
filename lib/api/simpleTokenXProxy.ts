@@ -20,6 +20,8 @@ export const simpleTokenXProxy = async ({ url, audience, req }: Opts) => {
 
   const navCallId = randomUUID();
 
+  logger.info(`Starter request mot ${url} med callId ${navCallId}`);
+
   const response = await fetch(url, {
     method: 'GET',
     headers: {
@@ -30,8 +32,11 @@ export const simpleTokenXProxy = async ({ url, audience, req }: Opts) => {
   });
 
   if (response.ok) {
+    logger.info(`Vellykket request mot ${url} med callId ${navCallId}`);
     return await response.json();
   }
-  logger.error(`Error fetching simpleTokenXProxy. Fikk responskode ${response.status} fra ${url}`);
+  logger.error(
+    `Error fetching simpleTokenXProxy. Fikk responskode ${response.status} fra ${url} med navCallId: ${navCallId}`
+  );
   throw new Error('Error fetching simpleTokenXProxy');
 };
