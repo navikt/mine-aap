@@ -1,6 +1,6 @@
 import pino from 'pino';
 
-export const myNewLogger = pino({
+const myNewLogger = pino({
   formatters: {
     level: (label) => {
       return { level: label };
@@ -17,3 +17,40 @@ export const myNewLogger = pino({
     },
   },
 });
+
+export const logInfo = (message: string, error?: unknown, callid?: string) => {
+  const navCallid = callid ? { 'Nav-CallId': callid } : {};
+  const err = error ? { err: error } : {};
+
+  myNewLogger.info(
+    {
+      ...navCallid,
+      ...err,
+    },
+    message
+  );
+};
+export const logWarning = (message: string, error?: unknown, callid?: string) => {
+  const navCallid = callid ? { 'Nav-CallId': callid } : {};
+  const err = error ? { err: error } : {};
+
+  myNewLogger.warn(
+    {
+      ...navCallid,
+      ...err,
+    },
+    message
+  );
+};
+export const logError = (message: string, error?: unknown, callid?: string) => {
+  const navCallid = callid ? { 'Nav-CallId': callid } : {};
+  const err = error ? { err: error } : {};
+
+  myNewLogger.error(
+    {
+      ...navCallid,
+      ...err,
+    },
+    message
+  );
+};

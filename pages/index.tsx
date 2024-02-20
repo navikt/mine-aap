@@ -1,5 +1,5 @@
 import { getSøknader, getSøknaderInnsending } from './api/soknader/soknader';
-import { beskyttetSide, getAccessToken } from '@navikt/aap-felles-utils';
+import { beskyttetSide, getAccessToken, logger } from '@navikt/aap-felles-utils';
 import { BodyShort, Button, Heading } from '@navikt/ds-react';
 import { Card } from 'components/Card/Card';
 import { DokumentoversiktContainer } from 'components/DokumentoversiktNy/DokumentoversiktContainer';
@@ -19,7 +19,6 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { SoknadInnsending } from 'components/Soknad/SoknadInnsending';
 import { getEttersendelserForSøknad } from 'pages/api/soknader/[uuid]/ettersendelser';
 import { getDokumentJson } from 'pages/api/dokumentjson';
-import { myNewLogger } from 'lib/utils/logger';
 
 const Index = ({
   søknader,
@@ -155,18 +154,18 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
     sisteSøknadInnsending = innsendingSøknader[0];
 
     if (sisteSøknadInnsending) {
-      myNewLogger.info('Bruker har søknad sendt inn via innsending');
+      logger.info('Bruker har søknad sendt inn via innsending');
 
       ettersendelse = await getEttersendelserForSøknad(sisteSøknadInnsending.innsendingsId, bearerToken);
-      myNewLogger.info(`getEttersendelserForSøknad: ${JSON.stringify(ettersendelse)}`);
+      logger.info(`getEttersendelserForSøknad: ${JSON.stringify(ettersendelse)}`);
       if (sisteSøknadInnsending.journalpostId) {
         const søknadJson = await getDokumentJson(sisteSøknadInnsending.journalpostId, ctx.req);
-        myNewLogger.info(`oppslag/dokumenter/${sisteSøknadInnsending.journalpostId}: ${JSON.stringify(søknadJson)}`);
+        logger.info(`oppslag/dokumenter/${sisteSøknadInnsending.journalpostId}: ${JSON.stringify(søknadJson)}`);
       }
     }
   } catch (error) {
-    myNewLogger.error({ err: error }, `Error fetching dokumentJson for journalpostId`);
-    myNewLogger.error(error);
+    logger.error({ err: error }, `Error fetching dokumentJson for journalpostId`);
+    logger.error(error);
   }
 
   stopTimer();
