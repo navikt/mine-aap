@@ -20,7 +20,10 @@ export const getDokumentJson = async (
 ): Promise<Record<string, object>> => {
   if (isMock()) return {};
   try {
+    //DEBUG
+    throw new Error('test feillogging');
     // TODO: Vi må ha type på dokumentJson
+    // eslint-disable-next-line no-unreachable
     const dokumentJson: Record<string, object> = await simpleTokenXProxy({
       url: `${process.env.OPPSLAG_URL}/dokumenter/${journalpostId}/json`,
       audience: process.env.OPPSLAG_AUDIENCE ?? '',
