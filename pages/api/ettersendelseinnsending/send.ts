@@ -1,4 +1,4 @@
-import { beskyttetApi, getAccessTokenFromRequest, isMock, logger, tokenXApiProxy } from '@navikt/aap-felles-utils';
+import { beskyttetApi, getAccessTokenFromRequest, isMock, tokenXApiProxy } from '@navikt/aap-felles-utils';
 import metrics from 'lib/metrics';
 import { Ettersendelse, InnsendingBackendState, VedleggType } from 'lib/types/types';
 
@@ -34,7 +34,6 @@ export const sendEttersendelseInnsending = async (
     audience: process.env.INNSENDING_AUDIENCE!,
     bearerToken: accessToken,
     noResponse: true,
-    logger: logger,
     metricsStatusCodeCounter: metrics.backendApiStatusCodeCounter,
     metricsTimer: metrics.backendApiDurationHistogram,
   });

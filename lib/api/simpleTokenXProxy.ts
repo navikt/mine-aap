@@ -1,4 +1,4 @@
-import { logger } from '@navikt/aap-felles-utils';
+import { logError, logInfo } from '@navikt/aap-felles-utils';
 import { getSession } from '@navikt/oasis';
 import { randomUUID } from 'crypto';
 import { IncomingMessage } from 'http';
@@ -11,7 +11,7 @@ interface Opts {
 
 export const simpleTokenXProxy = async ({ url, audience, req }: Opts) => {
   if (!req) {
-    logger.error(`Request for ${url} er undefined`);
+    logError(`Request for ${url} er undefined`);
     throw new Error('Request for simpleTokenXProxy is undefined');
   }
 
@@ -20,7 +20,7 @@ export const simpleTokenXProxy = async ({ url, audience, req }: Opts) => {
 
   const navCallId = randomUUID();
 
-  logger.info(`Starter request mot ${url} med callId ${navCallId}`);
+  logInfo(`${req.method} ${url}, callId ${navCallId}`);
 
   const response = await fetch(url, {
     method: 'GET',
@@ -32,10 +32,10 @@ export const simpleTokenXProxy = async ({ url, audience, req }: Opts) => {
   });
 
   if (response.ok) {
-    logger.info(`Vellykket request mot ${url} med callId ${navCallId}`);
+    logInfo(`${response.status} ${url}, callId ${navCallId}`);
     return await response.json();
   }
-  logger.error(
+  logError(
     `Error fetching simpleTokenXProxy. Fikk responskode ${response.status} fra ${url} med navCallId: ${navCallId}`
   );
   throw new Error('Error fetching simpleTokenXProxy');

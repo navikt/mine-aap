@@ -1,5 +1,5 @@
 import { mockSøknader, mockSøknaderInnsending } from 'lib/mock/mockSoknad';
-import { beskyttetApi, getAccessTokenFromRequest, isMock, logger, tokenXApiProxy } from '@navikt/aap-felles-utils';
+import { beskyttetApi, getAccessTokenFromRequest, isMock, logError, tokenXApiProxy } from '@navikt/aap-felles-utils';
 import metrics from 'lib/metrics';
 import { InnsendingSøknad, Søknad } from 'lib/types/types';
 import { isAfter } from 'date-fns';
@@ -23,7 +23,7 @@ export const getSøknaderInnsending = async (req?: IncomingMessage): Promise<Inn
     });
     return søknader.sort((a, b) => (isAfter(new Date(a.mottattDato), new Date(b.mottattDato)) ? -1 : 1));
   } catch (error) {
-    logger.error('Error fetching søknader for innsending', error);
+    logError('Error fetching søknader for innsending', error);
     return [];
   }
 };
@@ -39,7 +39,6 @@ export const getSøknader = async (params: Record<string, string>, accessToken?:
     method: 'GET',
     audience: process.env.SOKNAD_API_AUDIENCE ?? '',
     bearerToken: accessToken,
-    logger: logger,
     metricsStatusCodeCounter: metrics.backendApiStatusCodeCounter,
     metricsTimer: metrics.backendApiDurationHistogram,
   });

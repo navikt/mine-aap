@@ -3,13 +3,13 @@ import {
   beskyttetApi,
   getAccessTokenFromRequest,
   isMock,
-  logger,
+  logInfo,
   tokenXApiStreamProxy,
 } from '@navikt/aap-felles-utils';
 import metrics from 'lib/metrics';
 
 const handler = beskyttetApi(async (req, res) => {
-  logger.info('Har mottatt request om filopplasting');
+  logInfo('Har mottatt request om filopplasting');
   const accessToken = getAccessTokenFromRequest(req);
   console.log('body', req.body);
   if (isMock()) res.status(201).json(randomUUID());
@@ -21,7 +21,6 @@ const handler = beskyttetApi(async (req, res) => {
     res,
     audience: process.env.SOKNAD_API_AUDIENCE!,
     bearerToken: accessToken,
-    logger: logger,
     metricsStatusCodeCounter: metrics.backendApiStatusCodeCounter,
     metricsTimer: metrics.backendApiDurationHistogram,
   });
