@@ -27,7 +27,7 @@
     "@navikt/ds-react": "^5.15.1",
     "@navikt/nav-dekoratoren-moduler": "^2.1.5",
     "@navikt/next-api-proxy": "^3.4.0",
-    "@navikt/oasis": "^1.0.3",
+    "@navikt/oasis": "^2.0.0",
     "@vercel/otel": "^1.2.1",
     "cookie": "^0.6.0",
     "date-fns": "^3.3.1",
