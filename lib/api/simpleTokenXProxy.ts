@@ -1,5 +1,5 @@
 import { logger } from '@navikt/aap-felles-utils';
-import { getSession } from '@navikt/oasis';
+import { validateToken, requestOboToken, getToken } from '@navikt/oasis';
 import { randomUUID } from 'crypto';
 import { IncomingMessage } from 'http';
 
@@ -15,8 +15,23 @@ export const simpleTokenXProxy = async ({ url, audience, req }: Opts) => {
     throw new Error('Request for simpleTokenXProxy is undefined');
   }
 
-  const session = await getSession(req);
-  const onBehalfOfToken = await session.apiToken(audience);
+  const token = getToken(req);
+  if (!token) {
+    logger.error(`Token for ${url} er undefined`);
+    throw new Error('Token for simpleTokenXProxy is undefined');
+  }
+
+  const validation = await validateToken(token);
+  if (!validation.ok) {
+    logger.error(`Token for ${url} validerte ikke`);
+    throw new Error('Token for simpleTokenXProxy didnt validate');
+  }
+
+  const onBehalfOf = await requestOboToken(token, audience);
+  if (!onBehalfOf.ok) {
+    logger.error(`Henting av oboToken for ${url} feilet`);
+    throw new Error('Request oboToken for simpleTokenXProxy failed');
+  }
 
   const navCallId = randomUUID();
 
@@ -25,7 +40,7 @@ export const simpleTokenXProxy = async ({ url, audience, req }: Opts) => {
   const response = await fetch(url, {
     method: 'GET',
     headers: {
-      Authorization: `Bearer ${onBehalfOfToken}`,
+      Authorization: `Bearer ${onBehalfOf.token}`,
       'Content-Type': 'application/json',
       'Nav-CallId': navCallId,
     },
