@@ -32,7 +32,7 @@ export const simpleTokenXProxy = async ({ url, audience, req }: Opts) => {
   });
 
   if (response.ok) {
-    logInfo(`${response.status} ${url}, callId ${navCallId}`);
+    logInfo(`OK ${url}, status ${response.status}, callId ${navCallId}`);
     return await response.json();
   }
   logError(
