@@ -2,6 +2,7 @@ import { validateToken, requestOboToken, getToken } from '@navikt/oasis';
 import { logError, logInfo } from '@navikt/aap-felles-utils';
 import { randomUUID } from 'crypto';
 import { IncomingMessage } from 'http';
+import { ErrorMedStatus } from 'lib/api/ErrorMedStatus';
 
 interface Opts {
   url: string;
@@ -49,19 +50,23 @@ export const simpleTokenXProxy = async <T>({ url, audience, req, method = 'GET',
     body: method === 'POST' ? JSON.stringify(body) : undefined,
   });
 
-  if (response.ok) {
-    logInfo(`OK ${url}, status ${response.status}, callId ${navCallId}`);
-    const headers = response.headers.get('content-type');
-    const isJson = headers?.includes('application/json');
+  try {
+    if (response.ok) {
+      logInfo(`OK ${url}, status ${response.status}, callId ${navCallId}`);
+      const headers = response.headers.get('content-type');
+      const isJson = headers?.includes('application/json');
 
-    // TODO: Midlertidig, til innsending returnerer json på alle OK-responser
-    if (!isJson) {
-      return (await response.text()) as T;
+      // TODO: Midlertidig, til innsending returnerer json på alle OK-responser
+      if (!isJson) {
+        return (await response.text()) as T;
+      }
+      return await response.json();
     }
-    return await response.json();
+  } catch (error) {
+    logError(`Unable to parse response for ${url}`, error);
   }
   logError(
     `Error fetching simpleTokenXProxy. Fikk responskode ${response.status} fra ${url} med navCallId: ${navCallId}`
   );
-  throw new Error('Error fetching simpleTokenXProxy');
+  throw new ErrorMedStatus('Error fetching simpleTokenXProxy', response.status, navCallId);
 };
