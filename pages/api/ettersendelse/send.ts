@@ -1,4 +1,4 @@
-import { beskyttetApi, getAccessTokenFromRequest, isMock, logger, tokenXApiProxy } from '@navikt/aap-felles-utils';
+import { beskyttetApi, getAccessTokenFromRequest, isMock, logInfo, tokenXApiProxy } from '@navikt/aap-felles-utils';
 import metrics from 'lib/metrics';
 import { Ettersendelse, EttersendelseBackendState } from 'lib/types/types';
 
@@ -14,7 +14,7 @@ const handler = beskyttetApi(async (req, res) => {
   await sendEttersendelse(body, accessToken);
 
   ettersendteVedlegg.forEach((ettersendelse) => {
-    logger.info(`lager metrics for ettersendelse.${ettersendelse.vedleggType}`);
+    logInfo(`lager metrics for ettersendelse.${ettersendelse.vedleggType}`);
     metrics.ettersendVedleggCounter.inc({ type: ettersendelse.vedleggType });
 
     metrics.ettersendVedleggSizeHistogram.observe(totalFileSize);
@@ -36,7 +36,6 @@ export const sendEttersendelse = async (data: EttersendelseBackendState, accessT
     audience: process.env.SOKNAD_API_AUDIENCE!,
     bearerToken: accessToken,
     noResponse: true,
-    logger: logger,
     metricsStatusCodeCounter: metrics.backendApiStatusCodeCounter,
     metricsTimer: metrics.backendApiDurationHistogram,
   });

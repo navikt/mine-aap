@@ -1,4 +1,4 @@
-import { beskyttetApi, isMock } from '@navikt/aap-felles-utils';
+import { beskyttetApi, isMock, logError } from '@navikt/aap-felles-utils';
 import { IncomingMessage } from 'http';
 import { simpleTokenXProxy } from 'lib/api/simpleTokenXProxy';
 import { Ettersendelse, InnsendingBackendState, VedleggType } from 'lib/types/types';
@@ -36,6 +36,7 @@ export const sendEttersendelseInnsending = async (
     });
     return ettersendelse;
   } catch (error) {
+    logError('Error sending ettersendelse', error);
     throw new Error('Error sending ettersendelse');
   }
 };

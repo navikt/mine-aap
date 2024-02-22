@@ -1,4 +1,4 @@
-import { beskyttetApi, isMock, logger } from '@navikt/aap-felles-utils';
+import { beskyttetApi, isMock, logError } from '@navikt/aap-felles-utils';
 import { getStringFromPossiblyArrayQuery } from '@navikt/aap-felles-utils-client';
 import { simpleTokenXProxy } from 'lib/api/simpleTokenXProxy';
 import { IncomingMessage } from 'http';
@@ -24,7 +24,7 @@ export const getDokumentJson = async (journalpostId: string, req?: IncomingMessa
     });
     return dokumentJson;
   } catch (error) {
-    logger.error({ err: error }, `Error fetching dokumentJson for journalpostId ${journalpostId}`);
+    logError(`Error fetching dokumentJson for journalpostId ${journalpostId}`, error);
     return {};
   }
 };

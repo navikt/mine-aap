@@ -1,6 +1,6 @@
 import { mockSøknader } from 'lib/mock/mockSoknad';
 import { getStringFromPossiblyArrayQuery } from '@navikt/aap-felles-utils-client';
-import { logger, isMock, tokenXApiProxy, beskyttetApi, getAccessTokenFromRequest } from '@navikt/aap-felles-utils';
+import { isMock, tokenXApiProxy, beskyttetApi, getAccessTokenFromRequest } from '@navikt/aap-felles-utils';
 import metrics from 'lib/metrics';
 import { Søknad } from 'lib/types/types';
 
@@ -23,7 +23,6 @@ export const getSøknad = async (uuid: string, accessToken?: string): Promise<S�
     method: 'GET',
     audience: process.env.SOKNAD_API_AUDIENCE ?? '',
     bearerToken: accessToken,
-    logger: logger,
     metricsStatusCodeCounter: metrics.backendApiStatusCodeCounter,
     metricsTimer: metrics.backendApiDurationHistogram,
   });

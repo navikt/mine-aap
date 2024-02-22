@@ -1,4 +1,4 @@
-import { beskyttetApi, getAccessTokenFromRequest, isMock, logger, tokenXApiProxy } from '@navikt/aap-felles-utils';
+import { beskyttetApi, getAccessTokenFromRequest, isMock, tokenXApiProxy } from '@navikt/aap-felles-utils';
 import { getStringFromPossiblyArrayQuery } from '@navikt/aap-felles-utils-client';
 import metrics from 'lib/metrics';
 import { mockEttersendelserSoknad } from 'lib/mock/mockSoknad';
@@ -26,7 +26,6 @@ export const getEttersendelserForSøknad = async (
     method: 'GET',
     audience: process.env.INNSENDING_AUDIENCE ?? '',
     bearerToken: accessToken,
-    logger: logger,
     metricsStatusCodeCounter: metrics.backendApiStatusCodeCounter,
     metricsTimer: metrics.backendApiDurationHistogram,
   });
