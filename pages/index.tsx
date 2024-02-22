@@ -156,7 +156,7 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
     if (sisteSøknadInnsending) {
       logInfo('Bruker har søknad sendt inn via innsending');
 
-      ettersendelse = await getEttersendelserForSøknad(sisteSøknadInnsending.innsendingsId, bearerToken);
+      ettersendelse = await getEttersendelserForSøknad(sisteSøknadInnsending.innsendingsId, ctx.req);
       logInfo(`getEttersendelserForSøknad: ${JSON.stringify(ettersendelse)}`);
       if (sisteSøknadInnsending.journalpostId && process.env.NEXT_PUBLIC_ENVIRONMENT === 'dev') {
         const søknadJson = await getDokumentJson(sisteSøknadInnsending.journalpostId, ctx.req);
