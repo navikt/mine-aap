@@ -2,14 +2,17 @@ import { validateToken, requestOboToken, getToken } from '@navikt/oasis';
 import { logError, logInfo } from '@navikt/aap-felles-utils';
 import { randomUUID } from 'crypto';
 import { IncomingMessage } from 'http';
+import { ErrorMedStatus } from 'lib/api/ErrorMedStatus';
 
 interface Opts {
   url: string;
+  method?: 'GET' | 'POST' | 'DELETE';
   audience: string;
+  body?: object;
   req?: IncomingMessage;
 }
 
-export const simpleTokenXProxy = async ({ url, audience, req }: Opts) => {
+export const simpleTokenXProxy = async <T>({ url, audience, req, method = 'GET', body }: Opts): Promise<T> => {
   if (!req) {
     logError(`Request for ${url} er undefined`);
     throw new Error('Request for simpleTokenXProxy is undefined');
@@ -38,20 +41,32 @@ export const simpleTokenXProxy = async ({ url, audience, req }: Opts) => {
   logInfo(`${req.method} ${url}, callId ${navCallId}`);
 
   const response = await fetch(url, {
-    method: 'GET',
+    method: method,
     headers: {
       Authorization: `Bearer ${onBehalfOf.token}`,
       'Content-Type': 'application/json',
       'Nav-CallId': navCallId,
     },
+    body: method === 'POST' ? JSON.stringify(body) : undefined,
   });
 
-  if (response.ok) {
-    logInfo(`OK ${url}, status ${response.status}, callId ${navCallId}`);
-    return await response.json();
+  try {
+    if (response.ok) {
+      logInfo(`OK ${url}, status ${response.status}, callId ${navCallId}`);
+      const headers = response.headers.get('content-type');
+      const isJson = headers?.includes('application/json');
+
+      // TODO: Midlertidig, til innsending returnerer json på alle OK-responser
+      if (!isJson) {
+        return (await response.text()) as T;
+      }
+      return await response.json();
+    }
+  } catch (error) {
+    logError(`Unable to parse response for ${url}`, error);
   }
   logError(
     `Error fetching simpleTokenXProxy. Fikk responskode ${response.status} fra ${url} med navCallId: ${navCallId}`
   );
-  throw new Error('Error fetching simpleTokenXProxy');
+  throw new ErrorMedStatus('Error fetching simpleTokenXProxy', response.status, navCallId);
 };

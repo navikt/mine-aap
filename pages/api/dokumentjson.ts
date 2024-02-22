@@ -13,14 +13,11 @@ const handler = beskyttetApi(async (req, res) => {
   }
 });
 
-export const getDokumentJson = async (
-  journalpostId: string,
-  req?: IncomingMessage
-): Promise<Record<string, object>> => {
+export const getDokumentJson = async (journalpostId: string, req?: IncomingMessage) => {
   if (isMock()) return {};
   try {
     // TODO: Vi må ha type på dokumentJson
-    const dokumentJson: Record<string, object> = await simpleTokenXProxy({
+    const dokumentJson = await simpleTokenXProxy<Record<string, object>>({
       url: `${process.env.OPPSLAG_URL}/dokumenter/${journalpostId}/json`,
       audience: process.env.OPPSLAG_AUDIENCE ?? '',
       req,
