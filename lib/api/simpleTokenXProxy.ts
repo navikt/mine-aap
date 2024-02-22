@@ -51,6 +51,13 @@ export const simpleTokenXProxy = async <T>({ url, audience, req, method = 'GET',
 
   if (response.ok) {
     logInfo(`OK ${url}, status ${response.status}, callId ${navCallId}`);
+    const headers = response.headers.get('content-type');
+    const isJson = headers?.includes('application/json');
+
+    // TODO: Midlertidig, til innsending returnerer json på alle OK-responser
+    if (!isJson) {
+      return (await response.text()) as T;
+    }
     return await response.json();
   }
   logError(
