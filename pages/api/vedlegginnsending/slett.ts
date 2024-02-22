@@ -1,6 +1,6 @@
-import { beskyttetApi, getAccessTokenFromRequest, getTokenX, isMock, logError } from '@navikt/aap-felles-utils';
-import { proxyApiRouteRequest } from '@navikt/next-api-proxy';
-import { NextApiRequest, NextApiResponse } from 'next';
+import { beskyttetApi, isMock, logError } from '@navikt/aap-felles-utils';
+import { simpleTokenXProxy } from 'lib/api/simpleTokenXProxy';
+import { NextApiRequest } from 'next';
 
 const handler = beskyttetApi(async (req, res) => {
   const uuid = req.query.uuid;
@@ -8,41 +8,24 @@ const handler = beskyttetApi(async (req, res) => {
     res.status(400).json({ error: 'uuid må være en string' });
     return;
   }
-  const accessToken = getAccessTokenFromRequest(req);
-  return await slettVedleggInnsending(uuid, accessToken!, req, res);
+  return await slettVedleggInnsending(uuid, req);
 });
 
-export const slettVedleggInnsending = async (
-  uuid: string,
-  accessToken: string,
-  req: NextApiRequest,
-  res: NextApiResponse
-) => {
+export const slettVedleggInnsending = async (uuid: string, req: NextApiRequest) => {
   if (isMock()) return;
-  const idportenToken = accessToken.split(' ')[1];
-  let tokenXToken;
+
   try {
-    tokenXToken = await getTokenX(idportenToken, process.env.INNSENDING_AUDIENCE!);
+    const response = await simpleTokenXProxy({
+      url: `${process.env.INNSENDING_URL}/mellomlagring/fil/${uuid}`,
+      audience: process.env.INNSENDING_AUDIENCE!,
+      method: 'DELETE',
+      req,
+    });
+    return response;
   } catch (error) {
-    logError('Kunne ikke hente tokenXToken i sletting av vedlegg i ny innsending', error);
-    throw error;
+    logError('Error sending slettVedleggInnsending', error);
+    throw new Error('Error sending slettVedleggInnsending');
   }
-
-  return await proxyApiRouteRequest({
-    hostname: 'innsending',
-    path: `/mellomlagring/fil/${uuid}`,
-    req: req,
-    res: res,
-    bearerToken: tokenXToken,
-    https: false,
-  });
-};
-
-export const config = {
-  api: {
-    bodyParser: false,
-    externalResolver: true,
-  },
 };
 
 export default handler;
