@@ -1,5 +1,5 @@
 import { getCommaSeparatedStringFromStringOrArray } from '@navikt/aap-felles-utils-client';
-import { beskyttetApi, getAccessTokenFromRequest, isMock, logger, tokenXApiProxy } from '@navikt/aap-felles-utils';
+import { beskyttetApi, getAccessTokenFromRequest, isMock, tokenXApiProxy } from '@navikt/aap-felles-utils';
 import metrics from 'lib/metrics';
 
 const handler = beskyttetApi(async (req, res) => {
@@ -22,7 +22,6 @@ export const slettVedlegg = async (uuids: string | string[], accessToken?: strin
     noResponse: true,
     audience: process.env.SOKNAD_API_AUDIENCE!,
     bearerToken: accessToken,
-    logger: logger,
     metricsStatusCodeCounter: metrics.backendApiStatusCodeCounter,
     metricsTimer: metrics.backendApiDurationHistogram,
   });

@@ -1,5 +1,5 @@
 import { mockDokumenter } from 'lib/mock/mockDokumenter';
-import { logger, isMock, beskyttetApi } from '@navikt/aap-felles-utils';
+import { isMock, beskyttetApi, logError } from '@navikt/aap-felles-utils';
 import { simpleTokenXProxy } from 'lib/api/simpleTokenXProxy';
 import { IncomingMessage } from 'http';
 
@@ -18,7 +18,7 @@ export const hentDokumenterFraOppslag = async (req?: IncomingMessage) => {
     });
     return dokumenter;
   } catch (error) {
-    logger.error('Error fetching dokumenter mot oppslag', error);
+    logError('Error fetching dokumenter mot oppslag', error);
     return [];
   }
 };

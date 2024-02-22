@@ -1,5 +1,5 @@
 import { getStringFromPossiblyArrayQuery } from '@navikt/aap-felles-utils-client';
-import { beskyttetApi, getAccessTokenFromRequest, getTokenX, logger } from '@navikt/aap-felles-utils';
+import { beskyttetApi, getAccessTokenFromRequest, getTokenX, logError, logInfo } from '@navikt/aap-felles-utils';
 import { proxyApiRouteRequest } from '@navikt/next-api-proxy';
 
 const handler = beskyttetApi(async (req, res) => {
@@ -8,14 +8,14 @@ const handler = beskyttetApi(async (req, res) => {
     res.status(400).json({ error: 'uuid må være en string' });
   }
 
-  logger.info(`Les fil: /mellomlagring/fil/${uuid}`);
+  logInfo(`Les fil: /mellomlagring/fil/${uuid}`);
   const accessToken = getAccessTokenFromRequest(req)?.substring('Bearer '.length)!;
 
   let tokenxToken;
   try {
     tokenxToken = await getTokenX(accessToken, process.env.INNSENDING_AUDIENCE!);
   } catch (err: any) {
-    logger.error(`Noe gikk galt i henting av TokenX i ny innsending LES`);
+    logError(`Noe gikk galt i henting av TokenX i ny innsending LES`, err);
   }
 
   return await proxyApiRouteRequest({

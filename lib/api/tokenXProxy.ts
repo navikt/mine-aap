@@ -1,6 +1,6 @@
 import { proxyApiRouteRequest } from '@navikt/next-api-proxy';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { getAccessTokenFromRequest, getTokenX, logger } from '@navikt/aap-felles-utils';
+import { getAccessTokenFromRequest, getTokenX, logError, logInfo } from '@navikt/aap-felles-utils';
 import metrics from '../metrics';
 
 export const tokenXProxy = async (
@@ -16,7 +16,7 @@ export const tokenXProxy = async (
   try {
     tokenxToken = await getTokenX(accessToken, audience);
   } catch (err: any) {
-    logger.error({ msg: `getTokenXError mot ${path}`, error: err });
+    logError(`getTokenXError mot ${path}`, err);
   }
   const stopTimer = metrics.backendApiDurationHistogram.startTimer({ path: prometheusPath });
   const result = await proxyApiRouteRequest({
@@ -28,7 +28,7 @@ export const tokenXProxy = async (
     https: false,
   });
 
-  logger.info(`res from tokenXProxy: ${JSON.stringify(res.status)}`);
+  logInfo(`res from tokenXProxy: ${res.status}`);
   stopTimer();
 
   return result;
