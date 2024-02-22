@@ -8,7 +8,8 @@ const handler = beskyttetApi(async (req, res) => {
     res.status(400).json({ error: 'uuid må være en string' });
     return;
   }
-  return await slettVedleggInnsending(uuid, req);
+  await slettVedleggInnsending(uuid, req);
+  res.status(200).json({});
 });
 
 export const slettVedleggInnsending = async (uuid: string, req: NextApiRequest) => {
