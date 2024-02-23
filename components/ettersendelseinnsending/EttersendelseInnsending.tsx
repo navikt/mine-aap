@@ -15,6 +15,8 @@ import { formatFullDate } from 'lib/utils/date';
 import { FileUpload } from 'components/fileupload/FileUpload';
 import { setFocus } from 'lib/utils/dom';
 import { FileUploadWithCategory } from 'components/fileuploadwithcategory/FileUploadWithCategory';
+import { FileInputV3 } from 'components/fileinput_v3/FileInputV3';
+import { FileInputV2 } from 'components/fileinput_v2/FileInputV2';
 
 interface Props {
   søknad: InnsendingSøknad;
@@ -101,18 +103,20 @@ export const EttersendelseInnsending = ({ søknad }: Props) => {
         </Section>
 
         <FormErrorSummary id={errorSummaryId} errors={errors} />
+        <FileInputV2 />
+        {/*<FileInputV3 />*/}
 
-        <FileUpload
-          søknadId={søknad.innsendingsId}
-          krav="ANNET"
-          addError={addError}
-          deleteError={deleteError}
-          setErrorSummaryFocus={() => setFocus(errorSummaryId)}
-          onSuccess={() => {}}
-          brukInnsending={true}
-        />
+        {/*<FileUpload*/}
+        {/*  søknadId={søknad.innsendingsId}*/}
+        {/*  krav="ANNET"*/}
+        {/*  addError={addError}*/}
+        {/*  deleteError={deleteError}*/}
+        {/*  setErrorSummaryFocus={() => setFocus(errorSummaryId)}*/}
+        {/*  onSuccess={() => {}}*/}
+        {/*  brukInnsending={true}*/}
+        {/*/>*/}
 
-        <FileUploadWithCategory addError={addError} deleteError={deleteError} />
+        {/*<FileUploadWithCategory addError={addError} deleteError={deleteError} />*/}
 
         <Section>
           <div>
