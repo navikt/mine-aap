@@ -4,20 +4,7 @@ import { randomUUID } from 'crypto';
 import { IncomingMessage } from 'http';
 import { ErrorMedStatus } from 'lib/api/ErrorMedStatus';
 
-interface Opts {
-  url: string;
-  method?: 'GET' | 'POST' | 'DELETE';
-  audience: string;
-  body?: object;
-  req?: IncomingMessage;
-}
-
-export const simpleTokenXProxy = async <T>({ url, audience, req, method = 'GET', body }: Opts): Promise<T> => {
-  if (!req) {
-    logError(`Request for ${url} er undefined`);
-    throw new Error('Request for simpleTokenXProxy is undefined');
-  }
-
+export const getOnBefalfOfToken = async (audience: string, url: string, req: IncomingMessage): Promise<string> => {
   const token = getToken(req);
   if (!token) {
     logError(`Token for ${url} er undefined`);
@@ -36,6 +23,23 @@ export const simpleTokenXProxy = async <T>({ url, audience, req, method = 'GET',
     throw new Error('Request oboToken for simpleTokenXProxy failed');
   }
 
+  return onBehalfOf.token;
+};
+
+interface Opts {
+  url: string;
+  method?: 'GET' | 'POST' | 'DELETE';
+  audience: string;
+  body?: object;
+  req?: IncomingMessage;
+}
+
+export const simpleTokenXProxy = async <T>({ url, audience, req, method = 'GET', body }: Opts): Promise<T> => {
+  if (!req) {
+    logError(`Request for ${url} er undefined`);
+    throw new Error('Request for simpleTokenXProxy is undefined');
+  }
+  const onBehalfOfToken = await getOnBefalfOfToken(audience, url, req);
   const navCallId = randomUUID();
 
   logInfo(`${req.method} ${url}, callId ${navCallId}`);
@@ -43,7 +47,7 @@ export const simpleTokenXProxy = async <T>({ url, audience, req, method = 'GET',
   const response = await fetch(url, {
     method: method,
     headers: {
-      Authorization: `Bearer ${onBehalfOf.token}`,
+      Authorization: `Bearer ${onBehalfOfToken}`,
       'Content-Type': 'application/json',
       'Nav-CallId': navCallId,
     },
