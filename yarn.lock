@@ -2355,7 +2355,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^18.0.0, @types/react-dom@npm:^18.2.18":
+"@types/react-dom@npm:18.0.6":
+  version: 18.0.6
+  resolution: "@types/react-dom@npm:18.0.6"
+  dependencies:
+    "@types/react": "npm:*"
+  checksum: 10c0/8ea6e001b741cced20781b3e5e8704c2597815adf1dc22d6b4d24616f24db93364a7163543cb0690082201a351cbfcb6bb0f8ce44ee5ad76ccabacbfe0fb2dd3
+  languageName: node
+  linkType: hard
+
+"@types/react-dom@npm:^18.0.0":
   version: 18.2.19
   resolution: "@types/react-dom@npm:18.2.19"
   dependencies:
@@ -2694,7 +2703,7 @@ __metadata:
     "@types/jest-axe": "npm:^3.5.9"
     "@types/node": "npm:^20.11.16"
     "@types/react": "npm:18.0.26"
-    "@types/react-dom": "npm:^18.2.18"
+    "@types/react-dom": "npm:18.0.6"
     "@types/uuid": "npm:^9.0.8"
     "@typescript-eslint/eslint-plugin": "npm:^6.19.1"
     "@vercel/otel": "npm:^1.4.0"
