@@ -1,10 +1,10 @@
-import { beskyttetApi, getAccessTokenFromRequest, isMock, logger, tokenXApiProxy } from '@navikt/aap-felles-utils';
-import metrics from 'lib/metrics';
+import { beskyttetApi, isMock, logError } from '@navikt/aap-felles-utils';
+import { IncomingMessage } from 'http';
+import { simpleTokenXProxy } from 'lib/api/simpleTokenXProxy';
 import { Ettersendelse, InnsendingBackendState, VedleggType } from 'lib/types/types';
 
 const handler = beskyttetApi(async (req, res) => {
-  const accessToken = getAccessTokenFromRequest(req);
-  const { ettersendteVedlegg }: Ettersendelse = JSON.parse(req.body);
+  const { ettersendteVedlegg, søknadId }: Ettersendelse = JSON.parse(req.body);
 
   const ettersending = ettersendteVedlegg[0];
   const body: InnsendingBackendState = {
@@ -13,28 +13,32 @@ const handler = beskyttetApi(async (req, res) => {
       tittel: mapVedleggTypeTilVedleggstekst(ettersending.vedleggType),
     })),
   };
-  await sendEttersendelseInnsending(body, accessToken);
+  await sendEttersendelseInnsending(body, søknadId, req);
 
   res.status(201).json({});
 });
 
-export const sendEttersendelseInnsending = async (data: InnsendingBackendState, accessToken?: string) => {
+export const sendEttersendelseInnsending = async (
+  data: InnsendingBackendState,
+  innsendingsId?: string,
+  req?: IncomingMessage
+) => {
   if (isMock()) {
     return {};
   }
-  const ettersendelse = await tokenXApiProxy({
-    url: `${process.env.INNSENDING_URL}/innsending`,
-    prometheusPath: '/innsending',
-    method: 'POST',
-    data: JSON.stringify(data),
-    audience: process.env.INNSENDING_AUDIENCE!,
-    bearerToken: accessToken,
-    noResponse: true,
-    logger: logger,
-    metricsStatusCodeCounter: metrics.backendApiStatusCodeCounter,
-    metricsTimer: metrics.backendApiDurationHistogram,
-  });
-  return ettersendelse;
+  try {
+    const ettersendelse = await simpleTokenXProxy({
+      url: `${process.env.INNSENDING_URL}/innsending${innsendingsId ? `/${innsendingsId}` : ''}`,
+      audience: process.env.INNSENDING_AUDIENCE!,
+      method: 'POST',
+      req,
+      body: data,
+    });
+    return ettersendelse;
+  } catch (error) {
+    logError('Error sending ettersendelse', error);
+    throw new Error('Error sending ettersendelse');
+  }
 };
 
 function mapVedleggTypeTilVedleggstekst(vedleggType: VedleggType): string {

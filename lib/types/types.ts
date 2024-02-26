@@ -65,3 +65,10 @@ export interface InnsendingSøknad {
   journalpostId?: string;
   innsendingsId: string;
 }
+
+export interface MineAapSoknadMedEttersendinger {
+  mottattDato: string;
+  journalpostId?: string;
+  innsendingsId: string;
+  ettersendinger: Array<InnsendingSøknad>;
+}

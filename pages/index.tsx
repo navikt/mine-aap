@@ -1,5 +1,5 @@
 import { getSøknader, getSøknaderInnsending } from './api/soknader/soknader';
-import { beskyttetSide, getAccessToken, logger } from '@navikt/aap-felles-utils';
+import { beskyttetSide, getAccessToken, logError, logInfo } from '@navikt/aap-felles-utils';
 import { BodyShort, Button, Heading } from '@navikt/ds-react';
 import { Card } from 'components/Card/Card';
 import { DokumentoversiktContainer } from 'components/DokumentoversiktNy/DokumentoversiktContainer';
@@ -10,20 +10,24 @@ import { PageContainer } from 'components/PageContainer/PageContainer';
 import { Soknad } from 'components/Soknad/Soknad';
 import { isBefore, sub } from 'date-fns';
 import metrics from 'lib/metrics';
-import { InnsendingSøknad, Søknad } from 'lib/types/types';
+import { InnsendingSøknad, MineAapSoknadMedEttersendinger, Søknad } from 'lib/types/types';
 import { GetServerSidePropsResult, NextPageContext } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { SoknadInnsending } from 'components/Soknad/SoknadInnsending';
+import { getEttersendelserForSøknad } from 'pages/api/soknader/[uuid]/ettersendelser';
+import { getDokumentJson } from 'pages/api/dokumentjson';
 
 const Index = ({
   søknader,
   sisteSøknadInnsending,
+  ettersendelse,
 }: {
   søknader: Søknad[];
   sisteSøknadInnsending: InnsendingSøknad;
+  ettersendelse?: MineAapSoknadMedEttersendinger;
 }) => {
   const { formatMessage } = useIntl();
 
@@ -78,7 +82,7 @@ const Index = ({
             <FormattedMessage id="minSisteSøknad.heading" />
           </Heading>
           <Card>
-            <SoknadInnsending søknad={sisteSøknadInnsending} />
+            <SoknadInnsending søknad={sisteSøknadInnsending} ettersendelse={ettersendelse} />
           </Card>
         </PageComponentFlexContainer>
       )}
@@ -141,24 +145,32 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
 
   const [søknader, innsendingSøknader] = await Promise.all([
     getSøknader(params, bearerToken),
-    getSøknaderInnsending(bearerToken),
+    getSøknaderInnsending(ctx.req),
   ]);
 
   let sisteSøknadInnsending;
+  let ettersendelse: MineAapSoknadMedEttersendinger | null = null;
   try {
     sisteSøknadInnsending = innsendingSøknader[0];
 
     if (sisteSøknadInnsending) {
-      logger.info('Bruker har søknad sendt inn via innsending');
+      logInfo('Bruker har søknad sendt inn via innsending');
+
+      ettersendelse = await getEttersendelserForSøknad(sisteSøknadInnsending.innsendingsId, ctx.req);
+      logInfo(`getEttersendelserForSøknad: ${JSON.stringify(ettersendelse)}`);
+      if (sisteSøknadInnsending.journalpostId && process.env.NEXT_PUBLIC_ENVIRONMENT === 'dev') {
+        const søknadJson = await getDokumentJson(sisteSøknadInnsending.journalpostId, ctx.req);
+        logInfo(`oppslag/dokumenter/${sisteSøknadInnsending.journalpostId}: ${JSON.stringify(søknadJson)}`);
+      }
     }
   } catch (error) {
-    logger.error('Feil ved henting av søknader sendt inn via innsending', error);
+    logError('Feil ved henting av søknader sendt inn via innsending', error);
   }
 
   stopTimer();
 
   return {
-    props: { søknader, sisteSøknadInnsending },
+    props: { søknader, sisteSøknadInnsending, ettersendelse: ettersendelse },
   };
 });
 

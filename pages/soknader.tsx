@@ -1,11 +1,11 @@
 import { Button, Heading, Link } from '@navikt/ds-react';
 import { GetServerSidePropsResult, NextPageContext } from 'next';
-import { beskyttetSide, getAccessToken, logger } from '@navikt/aap-felles-utils';
+import { beskyttetSide, getAccessToken } from '@navikt/aap-felles-utils';
 import { VerticalFlexContainer } from 'components/FlexContainer/VerticalFlexContainer';
 import { Layout } from 'components/Layout/Layout';
 import { Section } from 'components/Section/Section';
-import { Søknad } from 'lib/types/types';
-import { getSøknader } from 'pages/api/soknader/soknader';
+import { InnsendingSøknad, MineAapSoknadMedEttersendinger, Søknad } from 'lib/types/types';
+import { getSøknader, getSøknaderInnsending } from 'pages/api/soknader/soknader';
 import { SoknadPanel } from 'components/SoknadPanel/SoknadPanel';
 import { ArrowLeftIcon } from '@navikt/aksel-icons';
 import { useRouter } from 'next/router';
@@ -13,12 +13,16 @@ import NextLink from 'next/link';
 import metrics from 'lib/metrics';
 import Head from 'next/head';
 import { useIntl } from 'react-intl';
+import { SoknadInnsending } from 'components/Soknad/SoknadInnsending';
+import { getEttersendelserForSøknad } from 'pages/api/soknader/[uuid]/ettersendelser';
 
 interface PageProps {
   søknader: Søknad[];
+  innsendingSøknader: InnsendingSøknad[];
+  søknaderMedEttersending: MineAapSoknadMedEttersendinger[];
 }
 
-const Søknader = ({ søknader }: PageProps) => {
+const Søknader = ({ søknader, innsendingSøknader, søknaderMedEttersending }: PageProps) => {
   const router = useRouter();
   const { formatMessage } = useIntl();
 
@@ -46,6 +50,15 @@ const Søknader = ({ søknader }: PageProps) => {
             {formatMessage({ id: 'dineSøknader.heading' })}
           </Heading>
           <VerticalFlexContainer>
+            {innsendingSøknader.map((søknad) => (
+              <SoknadInnsending
+                key={søknad.innsendingsId}
+                søknad={søknad}
+                ettersendelse={søknaderMedEttersending.find(
+                  (søknadMedEttersending) => søknadMedEttersending.innsendingsId === søknad.innsendingsId
+                )}
+              />
+            ))}
             {søknader.map((søknad) => (
               <SoknadPanel key={søknad.søknadId} søknad={søknad} />
             ))}
@@ -67,13 +80,21 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
   const stopTimer = metrics.getServersidePropsDurationHistogram.startTimer({ path: '/soknader' });
   const bearerToken = getAccessToken(ctx);
   const params = { page: '0', size: '200', sort: 'created,desc' };
-  const søknader = await getSøknader(params, bearerToken);
+  const [søknader, innsendingSøknader] = await Promise.all([
+    getSøknader(params, bearerToken),
+    getSøknaderInnsending(ctx.req),
+  ]);
 
-  logger.info(`søknader: ${JSON.stringify(søknader)}`);
+  const søknaderMedEttersending = [];
+
+  for (const søknad of innsendingSøknader) {
+    const søknadMedEttersending = await getEttersendelserForSøknad(søknad.innsendingsId, ctx.req);
+    søknaderMedEttersending.push(søknadMedEttersending);
+  }
 
   stopTimer();
   return {
-    props: { søknader },
+    props: { søknader, innsendingSøknader, søknaderMedEttersending },
   };
 });
 

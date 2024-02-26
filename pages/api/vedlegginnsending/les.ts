@@ -1,6 +1,7 @@
 import { getStringFromPossiblyArrayQuery } from '@navikt/aap-felles-utils-client';
-import { beskyttetApi, getAccessTokenFromRequest, getTokenX, logger } from '@navikt/aap-felles-utils';
+import { beskyttetApi, logInfo } from '@navikt/aap-felles-utils';
 import { proxyApiRouteRequest } from '@navikt/next-api-proxy';
+import { getOnBefalfOfToken } from 'lib/api/simpleTokenXProxy';
 
 const handler = beskyttetApi(async (req, res) => {
   const uuid = getStringFromPossiblyArrayQuery(req.query.uuid);
@@ -8,22 +9,17 @@ const handler = beskyttetApi(async (req, res) => {
     res.status(400).json({ error: 'uuid må være en string' });
   }
 
-  logger.info(`Les fil: /mellomlagring/fil/${uuid}`);
-  const accessToken = getAccessTokenFromRequest(req)?.substring('Bearer '.length)!;
+  const url = `/mellomlagring/fil/${uuid}`;
+  const onBehalfOfToken = await getOnBefalfOfToken(process.env.INNSENDING_AUDIENCE!, url, req);
 
-  let tokenxToken;
-  try {
-    tokenxToken = await getTokenX(accessToken, process.env.INNSENDING_AUDIENCE!);
-  } catch (err: any) {
-    logger.error(`Noe gikk galt i henting av TokenX i ny innsending LES`);
-  }
+  logInfo(`Les fil: ${url}`);
 
   return await proxyApiRouteRequest({
     hostname: 'innsending',
     path: `/mellomlagring/fil/${uuid}`,
     req: req,
     res: res,
-    bearerToken: tokenxToken,
+    bearerToken: onBehalfOfToken,
     https: false,
   });
 });
