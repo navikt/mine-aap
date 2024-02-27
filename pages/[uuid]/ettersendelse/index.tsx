@@ -2,7 +2,7 @@ import { GetServerSidePropsResult, NextPageContext } from 'next';
 import { InnsendingSøknad, Søknad } from 'lib/types/types';
 import { getSøknad } from 'pages/api/soknader/[uuid]';
 import { getStringFromPossiblyArrayQuery } from '@navikt/aap-felles-utils-client';
-import { beskyttetSide, getAccessToken, logger } from '@navikt/aap-felles-utils';
+import { beskyttetSide, getAccessToken, logInfo } from '@navikt/aap-felles-utils';
 import metrics from 'lib/metrics';
 import { getSøknaderInnsending } from 'pages/api/soknader/soknader';
 import { EttersendelseInnsending } from 'components/ettersendelseinnsending/EttersendelseInnsending';
@@ -42,10 +42,10 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
   try {
     søknad = await getSøknad(uuid, bearerToken);
   } catch (e) {
-    logger.info('getSøknad fra søknad-api feilet:' + e?.toString());
+    logInfo('getSøknad fra søknad-api feilet:', e);
   }
 
-  const søknaderFraInnsending = await getSøknaderInnsending(bearerToken);
+  const søknaderFraInnsending = await getSøknaderInnsending(ctx.req);
   const søknadFraInnsending = søknaderFraInnsending.find((søknad) => søknad.innsendingsId === uuid) ?? null;
 
   stopTimer();

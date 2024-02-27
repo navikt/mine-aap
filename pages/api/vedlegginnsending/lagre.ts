@@ -1,33 +1,31 @@
 import { randomUUID } from 'crypto';
-import {
-  logger,
-  isMock,
-  tokenXApiStreamProxy,
-  beskyttetApi,
-  getAccessTokenFromRequest,
-} from '@navikt/aap-felles-utils';
-import metrics from 'lib/metrics';
+import { isMock, beskyttetApi, logInfo } from '@navikt/aap-felles-utils';
+import { getOnBefalfOfToken } from 'lib/api/simpleTokenXProxy';
+import { proxyApiRouteRequest } from '@navikt/next-api-proxy';
 
 const handler = beskyttetApi(async (req, res) => {
-  logger.info('Har mottatt request om filopplasting i vedlegg innsending');
-  const accessToken = getAccessTokenFromRequest(req);
+  logInfo('Har mottatt request om filopplasting i vedlegg innsending');
+
   if (isMock()) res.status(201).json({ filId: randomUUID() });
-  await tokenXApiStreamProxy({
-    url: `${process.env.INNSENDING_URL}/mellomlagring/fil`,
-    prometheusPath: '/mellomlagring/fil',
-    req,
-    res,
-    audience: process.env.INNSENDING_AUDIENCE!,
-    bearerToken: accessToken,
-    logger: logger,
-    metricsStatusCodeCounter: metrics.backendApiStatusCodeCounter,
-    metricsTimer: metrics.backendApiDurationHistogram,
+
+  const url = `/mellomlagring/fil`;
+  const onBehalfOfToken = await getOnBefalfOfToken(process.env.INNSENDING_AUDIENCE!, url, req);
+
+  return await proxyApiRouteRequest({
+    hostname: 'innsending',
+    path: `/mellomlagring/fil`,
+    req: req,
+    res: res,
+    bearerToken: onBehalfOfToken,
+    https: false,
   });
 });
 
 export const config = {
   api: {
+    responseLimit: '50mb',
     bodyParser: false,
+    externalResolver: true,
   },
 };
 

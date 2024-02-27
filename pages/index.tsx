@@ -1,5 +1,5 @@
 import { getSøknader, getSøknaderInnsending } from './api/soknader/soknader';
-import { beskyttetSide, getAccessToken, logger } from '@navikt/aap-felles-utils';
+import { beskyttetSide, getAccessToken, logError, logInfo } from '@navikt/aap-felles-utils';
 import { BodyShort, Button, Heading } from '@navikt/ds-react';
 import { Card } from 'components/Card/Card';
 import { DokumentoversiktContainer } from 'components/DokumentoversiktNy/DokumentoversiktContainer';
@@ -145,7 +145,7 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
 
   const [søknader, innsendingSøknader] = await Promise.all([
     getSøknader(params, bearerToken),
-    getSøknaderInnsending(bearerToken),
+    getSøknaderInnsending(ctx.req),
   ]);
 
   let sisteSøknadInnsending;
@@ -154,17 +154,17 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
     sisteSøknadInnsending = innsendingSøknader[0];
 
     if (sisteSøknadInnsending) {
-      logger.info('Bruker har søknad sendt inn via innsending');
+      logInfo('Bruker har søknad sendt inn via innsending');
 
-      ettersendelse = await getEttersendelserForSøknad(sisteSøknadInnsending.innsendingsId, bearerToken);
-      logger.info(`getEttersendelserForSøknad: ${JSON.stringify(ettersendelse)}`);
-      if (sisteSøknadInnsending.journalpostId) {
-        const søknadJson = await getDokumentJson(sisteSøknadInnsending.journalpostId, bearerToken);
-        logger.info(`oppslag/dokumenter/${sisteSøknadInnsending.journalpostId}: ${JSON.stringify(søknadJson)}`);
+      ettersendelse = await getEttersendelserForSøknad(sisteSøknadInnsending.innsendingsId, ctx.req);
+      logInfo(`getEttersendelserForSøknad: ${JSON.stringify(ettersendelse)}`);
+      if (sisteSøknadInnsending.journalpostId && process.env.NEXT_PUBLIC_ENVIRONMENT === 'dev') {
+        const søknadJson = await getDokumentJson(sisteSøknadInnsending.journalpostId, ctx.req);
+        logInfo(`oppslag/dokumenter/${sisteSøknadInnsending.journalpostId}: ${JSON.stringify(søknadJson)}`);
       }
     }
   } catch (error) {
-    logger.error('Feil ved henting av søknader sendt inn via innsending', error?.toString());
+    logError('Feil ved henting av søknader sendt inn via innsending', error);
   }
 
   stopTimer();

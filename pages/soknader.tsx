@@ -82,13 +82,13 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
   const params = { page: '0', size: '200', sort: 'created,desc' };
   const [søknader, innsendingSøknader] = await Promise.all([
     getSøknader(params, bearerToken),
-    getSøknaderInnsending(bearerToken),
+    getSøknaderInnsending(ctx.req),
   ]);
 
   const søknaderMedEttersending = [];
 
   for (const søknad of innsendingSøknader) {
-    const søknadMedEttersending = await getEttersendelserForSøknad(søknad.innsendingsId, bearerToken);
+    const søknadMedEttersending = await getEttersendelserForSøknad(søknad.innsendingsId, ctx.req);
     søknaderMedEttersending.push(søknadMedEttersending);
   }
 

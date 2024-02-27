@@ -1,8 +1,10 @@
 import { mockSøknader, mockSøknaderInnsending } from 'lib/mock/mockSoknad';
-import { beskyttetApi, getAccessTokenFromRequest, isMock, logger, tokenXApiProxy } from '@navikt/aap-felles-utils';
+import { beskyttetApi, getAccessTokenFromRequest, isMock, logError, tokenXApiProxy } from '@navikt/aap-felles-utils';
 import metrics from 'lib/metrics';
 import { InnsendingSøknad, Søknad } from 'lib/types/types';
 import { isAfter } from 'date-fns';
+import { IncomingMessage } from 'http';
+import { simpleTokenXProxy } from 'lib/api/simpleTokenXProxy';
 
 const handler = beskyttetApi(async (req, res) => {
   const accessToken = getAccessTokenFromRequest(req);
@@ -11,19 +13,19 @@ const handler = beskyttetApi(async (req, res) => {
   res.status(200).json(søknader);
 });
 
-export const getSøknaderInnsending = async (accessToken?: string): Promise<InnsendingSøknad[]> => {
+export const getSøknaderInnsending = async (req?: IncomingMessage) => {
   if (isMock()) return mockSøknaderInnsending;
-  const søknader: InnsendingSøknad[] = await tokenXApiProxy({
-    url: `${process.env.INNSENDING_URL}/innsending/søknader`,
-    prometheusPath: '/innsending/soeknader',
-    method: 'GET',
-    audience: process.env.INNSENDING_AUDIENCE ?? '',
-    bearerToken: accessToken,
-    logger: logger,
-    metricsStatusCodeCounter: metrics.backendApiStatusCodeCounter,
-    metricsTimer: metrics.backendApiDurationHistogram,
-  });
-  return søknader.sort((a, b) => (isAfter(new Date(a.mottattDato), new Date(b.mottattDato)) ? -1 : 1));
+  try {
+    const søknader = await simpleTokenXProxy<InnsendingSøknad[]>({
+      url: `${process.env.INNSENDING_URL}/innsending/søknader`,
+      audience: process.env.INNSENDING_AUDIENCE ?? '',
+      req,
+    });
+    return søknader.sort((a, b) => (isAfter(new Date(a.mottattDato), new Date(b.mottattDato)) ? -1 : 1));
+  } catch (error) {
+    logError('Error fetching søknader for innsending', error);
+    return [];
+  }
 };
 
 export const getSøknader = async (params: Record<string, string>, accessToken?: string): Promise<Array<Søknad>> => {
@@ -37,7 +39,6 @@ export const getSøknader = async (params: Record<string, string>, accessToken?:
     method: 'GET',
     audience: process.env.SOKNAD_API_AUDIENCE ?? '',
     bearerToken: accessToken,
-    logger: logger,
     metricsStatusCodeCounter: metrics.backendApiStatusCodeCounter,
     metricsTimer: metrics.backendApiDurationHistogram,
   });
