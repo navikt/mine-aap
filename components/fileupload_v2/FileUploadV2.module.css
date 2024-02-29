@@ -1,0 +1,24 @@
+.fileinput_container {
+  background-color: var(--a-surface-subtle);
+}
+
+.sendButton {
+  margin-left: var(--a-spacing-8);
+  margin-bottom: var(--a-spacing-4);
+}
+
+.successWrapper {
+  display: flex;
+  flex-direction: column;
+
+  padding: var(--a-spacing-8);
+  padding-top: 0;
+  gap: var(--a-spacing-4);
+}
+
+.fileInput {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+}

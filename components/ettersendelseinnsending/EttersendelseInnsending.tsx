@@ -12,11 +12,8 @@ import NextLink from 'next/link';
 import { BodyShort, Button, Heading, Label, Link, ReadMore } from '@navikt/ds-react';
 import { ArrowLeftIcon } from '@navikt/aksel-icons';
 import { formatFullDate } from 'lib/utils/date';
-import { FileUpload } from 'components/fileupload/FileUpload';
 import { setFocus } from 'lib/utils/dom';
-import { FileUploadWithCategory } from 'components/fileuploadwithcategory/FileUploadWithCategory';
-import { FileInputV3 } from 'components/fileinput_v3/FileInputV3';
-import { FileInputV2 } from 'components/fileinput_v2/FileInputV2';
+import { FileUploadV2 } from 'components/fileupload_v2/FileUploadV2';
 
 interface Props {
   søknad: InnsendingSøknad;
@@ -103,8 +100,11 @@ export const EttersendelseInnsending = ({ søknad }: Props) => {
         </Section>
 
         <FormErrorSummary id={errorSummaryId} errors={errors} />
-        <FileInputV2 />
-        {/*<FileInputV3 />*/}
+        <FileUploadV2
+          setErrorSummaryFocus={() => setFocus(errorSummaryId)}
+          addError={addError}
+          deleteError={deleteError}
+        />
 
         {/*<FileUpload*/}
         {/*  søknadId={søknad.innsendingsId}*/}
