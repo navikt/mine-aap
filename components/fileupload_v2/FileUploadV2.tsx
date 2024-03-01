@@ -113,7 +113,7 @@ export const FileUploadV2 = (props: Props) => {
             onChange={(v) => velgDokumenttype(v.target.value as VedleggType)}
           >
             {vedleggOptions.map((vedleggtype) => (
-              <option key={vedleggtype.value} value={vedleggtype.value}>
+              <option key={vedleggtype.label} value={vedleggtype.value}>
                 {vedleggtype.label}
               </option>
             ))}

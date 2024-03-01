@@ -1,8 +1,9 @@
-import { UploadIcon } from '@navikt/aksel-icons';
-import { BodyShort, Loader } from '@navikt/ds-react';
 import React, { useMemo, useRef, useState } from 'react';
 import { v4 as uuidV4 } from 'uuid';
 import { useIntl } from 'react-intl';
+import { UploadIcon } from '@navikt/aksel-icons';
+import { BodyShort, Loader } from '@navikt/ds-react';
+
 import { FilePanelError } from 'components/fileupload_v2/FilePanelError';
 import { FilePanelSuccess } from 'components/fileupload_v2/FileInputSuccess';
 import styles from 'components/fileupload_v2/FileInputMinimal.module.css';
