@@ -19,11 +19,12 @@ interface Props {
   addError: (errors: Error[]) => void;
   deleteError: (vedlegg: Vedlegg) => void;
   setErrorSummaryFocus: () => void;
+  søknadId?: string;
 }
 
 const vedleggstyper: VedleggType[] = ['STUDIER', 'ARBEIDSGIVER', 'OMSORG', 'UTLAND', 'ANDREBARN', 'ANNET'];
 export const FileUploadV2 = (props: Props) => {
-  const { addError, deleteError, setErrorSummaryFocus } = props;
+  const { addError, deleteError, setErrorSummaryFocus, søknadId } = props;
   const [files, setFiles] = useState<Vedlegg[]>([]);
   const [valgtDokumenttype, velgDokumenttype] = useState<VedleggType | undefined>();
   const [harLastetOppEttersending, setHarLastetOppEttersending] = useState<boolean>(false);
@@ -44,7 +45,7 @@ export const FileUploadV2 = (props: Props) => {
     }
 
     const ettersendelse: Ettersendelse = {
-      // ...(søknadId && { søknadId: søknadId }),
+      ...(søknadId && { søknadId: søknadId }),
       totalFileSize: files.reduce((acc, curr) => acc + curr.size, 0),
       ettersendteVedlegg: [
         {
@@ -109,6 +110,7 @@ export const FileUploadV2 = (props: Props) => {
           <Heading size={'medium'}>{formatMessage({ id: 'ettersendelse.generisk.heading' })}</Heading>
           <BodyShort>{formatMessage({ id: 'ettersendelse.generisk.description' })}</BodyShort>
           <Select
+            id={'dokumenttype'}
             label={formatMessage({ id: 'ettersendelse.generisk.dokumenttyper.heading' })}
             onChange={(v) => velgDokumenttype(v.target.value as VedleggType)}
           >
