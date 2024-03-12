@@ -104,6 +104,7 @@ export const EttersendelseInnsending = ({ søknad }: Props) => {
           setErrorSummaryFocus={() => setFocus(errorSummaryId)}
           addError={addError}
           deleteError={deleteError}
+          søknadId={søknad.innsendingsId}
         />
 
         {/*<FileUpload*/}
