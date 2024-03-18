@@ -6412,17 +6412,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jose@npm:^4.10.0, jose@npm:^4.11.1":
-  version: 4.11.1
-  resolution: "jose@npm:4.11.1"
-  checksum: 10c0/4638d878b5a3762d91be8729b637bc25590ea2cc031613d4b4ed7b52501e501e4b4d635155bc6f770cb0c841aa07e12feaa480ad2500601d4ca261b07113300e
-  languageName: node
-  linkType: hard
-
-"jose@npm:^4.15.4":
-  version: 4.15.4
-  resolution: "jose@npm:4.15.4"
-  checksum: 10c0/ce8b29f84d6172a566b12b599dafa82f3bef0f16278bb76d562490ac1516fcc14017b05a39d20ffad25ed504f4996d4af4c9d3e0273d95b2d5559bf6d1112bc0
+"jose@npm:^4.10.0, jose@npm:^4.11.1, jose@npm:^4.15.4":
+  version: 4.15.5
+  resolution: "jose@npm:4.15.5"
+  checksum: 10c0/9f208492f55ae9c547fd407c36f67ec3385051b5ca390e24f5449740f17359640b3f96fabfd38bc132cc4292b964c31b921bf356253373b1bd3eb6df799b7433
   languageName: node
   linkType: hard
 
