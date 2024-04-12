@@ -2248,12 +2248,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^18.2.18":
-  version: 18.2.18
-  resolution: "@types/react-dom@npm:18.2.18"
+"@types/react-dom@npm:^18.2.25":
+  version: 18.2.25
+  resolution: "@types/react-dom@npm:18.2.25"
   dependencies:
     "@types/react": "npm:*"
-  checksum: 10c0/74dba11a1b8156f3a763f3fca1fb4ec1dcd349153279b8bf79210024a69f994bf2cf0728198c047f8130c5318420ea56281b0a4ef84c8ae943cd9a0cac705220
+  checksum: 10c0/87604407eca6884c5b4d4657cb511dc5ba28ea1cfa5d0ce1fc2d659a7ad1b64ae85dcda60e3f010641f9a52a6a60dfcaa6be3b0d0de9d624475052a13dae01f4
   languageName: node
   linkType: hard
 
@@ -2634,7 +2634,7 @@ __metadata:
     "@types/jest-axe": "npm:^3.5.9"
     "@types/node": "npm:^20.11.16"
     "@types/react": "npm:18.0.26"
-    "@types/react-dom": "npm:^18.2.18"
+    "@types/react-dom": "npm:^18.2.25"
     "@types/uuid": "npm:^9.0.8"
     "@typescript-eslint/eslint-plugin": "npm:^7.2.0"
     "@vercel/otel": "npm:^1.6.0"
