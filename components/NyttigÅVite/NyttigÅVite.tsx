@@ -44,7 +44,7 @@ export const NyttigÅVite = () => {
             id="hvaSkjerPanel.punkt2.tekst"
             values={{
               a: (chunks) => (
-                <Link target="_blank" href="https://klage.nav.no/nb/arbeid/nav-loven-14a">
+                <Link target="_blank" href="https://klage.nav.no/nb/klage/ny/NAV_LOVEN_14A">
                   {chunks}
                 </Link>
               ),
@@ -101,10 +101,7 @@ export const NyttigÅVite = () => {
             id="hvaSkjerPanel.punkt5.tekst"
             values={{
               a: (chunks) => (
-                <Link
-                  target="_blank"
-                  href={'https://klage.nav.no/nb/arbeid/arbeidsavklaringspenger'}
-                >
+                <Link target="_blank" href={'https://klage.nav.no/nb/klage/ny/ARBEIDSAVKLARINGSPENGER'}>
                   {chunks}
                 </Link>
               ),
@@ -124,7 +121,16 @@ export const NyttigÅVite = () => {
           />
         </BodyLong>
         <BodyShort spacing>
-          <FormattedMessage id="hvaSkjerPanel.punkt5.tekst2" />
+          <FormattedMessage
+            id="hvaSkjerPanel.punkt5.tekst2"
+            values={{
+              a: (chunks) => (
+                <Link target="_blank" href={'https://www.nav.no/klage#arbeidsavklaringspenger-aap'}>
+                  {chunks}
+                </Link>
+              ),
+            }}
+          />
         </BodyShort>
       </div>
     </>
