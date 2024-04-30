@@ -25,6 +25,11 @@
       "heading": "Situasjonen min har endra seg",
       "tekst": "Her kan du gi beskjed om endringar og gi oss opplysninger du mener er viktig for saken din. Hvis du har en aktivitetsplan, benytter du denne.",
       "knapp": "Meld endring"
+    },
+    "søk": {
+      "heading": "Heading",
+      "tekst": "Noe tekst",
+      "knapp": "Søk på nytt"
     }
   },
   "minSisteSøknad": {
