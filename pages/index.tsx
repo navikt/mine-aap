@@ -133,20 +133,6 @@ const Index = ({
           </Button>
         </Card>
       </PageComponentFlexContainer>
-
-      <PageComponentFlexContainer>
-        <Heading level="2" size="medium" spacing>
-          <FormattedMessage id="forside.søk.heading" />
-        </Heading>
-        <Card subtleBlue>
-          <BodyShort spacing>
-            <FormattedMessage id="forside.søk.tekst" />
-          </BodyShort>
-          <Button variant="secondary" onClick={() => (window.location.href = 'https://www.nav.no/aap#sok')}>
-            <FormattedMessage id="forside.søk.knapp" />
-          </Button>
-        </Card>
-      </PageComponentFlexContainer>
       {(sisteSøknad || sisteSøknadInnsending) && <DokumentoversiktContainer />}
     </PageContainer>
   );

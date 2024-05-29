@@ -11,6 +11,7 @@
     },
     "underUtvikling": "Denne sida er under utvikling, og vil bli utvida med fleire funksjonar etter kvart.",
     "seInnsendteSøknaderLink": "Sjå alle søknadene du har sendt inn",
+    "søkPåNyttLink": "Eg vil søkja på nytt",
     "ettersendelse": {
       "tittel": "Ettersending",
       "tekst": "Dersom du ønskjer å ettersende noko til oss om AAP-saka di, kan du gjere det her.",
@@ -25,11 +26,6 @@
       "heading": "Situasjonen min har endra seg",
       "tekst": "Her kan du gi beskjed om endringar og gi oss opplysninger du mener er viktig for saken din. Hvis du har en aktivitetsplan, benytter du denne.",
       "knapp": "Meld endring"
-    },
-    "søk": {
-      "heading": "Heading",
-      "tekst": "Noe tekst",
-      "knapp": "Søk på nytt"
     }
   },
   "minSisteSøknad": {
