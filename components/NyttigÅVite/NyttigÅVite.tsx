@@ -24,6 +24,9 @@ export const NyttigÅVite = () => {
               <FormattedMessage id="nyttigÅVite.søknader" />
             </LinkPanel>
           </NextLink>
+          <LinkPanel className={styles.linkPanel} href="https://www.nav.no/aap#sok" border={false}>
+            <FormattedMessage id="forside.søkPåNyttLink" />
+          </LinkPanel>
         </div>
         <Heading level="3" size="small">
           <FormattedMessage id="hvaSkjerPanel.heading" />
