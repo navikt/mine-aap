@@ -1,7 +1,8 @@
 ingresses:
-- "https://aap-mine-aap.intern.dev.nav.no/aap/mine-aap"
+  - "https://aap-mine-aap.intern.dev.nav.no/aap/mine-aap"
+  - "https://aap-mine-aap.ansatt.dev.nav.no/aap/mine-aap"
 env:
-- name: APP_URL
-  value: "https://aap-mine-aap.intern.dev.nav.no"
+  - name: APP_URL
+    value: "https://aap-mine-aap.intern.dev.nav.no"
 externals:
   - "dekoratoren.dev.nav.no"
