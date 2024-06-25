@@ -33,16 +33,21 @@ export const getSøknader = async (params: Record<string, string>, accessToken?:
   const urlParams = Object.entries(params)
     .map(([key, value]) => `${key}=${value}`)
     .join('&');
-  const søknader = await tokenXApiProxy({
-    url: `${process.env.SOKNAD_API_URL}/oppslag/soeknader${urlParams ? '?' + urlParams : ''}`,
-    prometheusPath: '/oppslag/soeknader',
-    method: 'GET',
-    audience: process.env.SOKNAD_API_AUDIENCE ?? '',
-    bearerToken: accessToken,
-    metricsStatusCodeCounter: metrics.backendApiStatusCodeCounter,
-    metricsTimer: metrics.backendApiDurationHistogram,
-  });
-  return søknader;
+  try {
+    const søknader = await tokenXApiProxy({
+      url: `${process.env.SOKNAD_API_URL}/oppslag/soeknader${urlParams ? '?' + urlParams : ''}`,
+      prometheusPath: '/oppslag/soeknader',
+      method: 'GET',
+      audience: process.env.SOKNAD_API_AUDIENCE ?? '',
+      bearerToken: accessToken,
+      metricsStatusCodeCounter: metrics.backendApiStatusCodeCounter,
+      metricsTimer: metrics.backendApiDurationHistogram,
+    });
+    return søknader;
+  } catch (err) {
+    logError('soknad-api/oppslag/soknader', err);
+    return [];
+  }
 };
 
 export default handler;
