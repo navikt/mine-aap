@@ -39,16 +39,13 @@ const Index = ({
 
   useEffect(() => {
     if (sisteSøknadInnsending != undefined && sisteSøknadInnsending.mottattDato != undefined) {
-      const erEldreEnn14Uker = isBefore(new Date(sisteSøknadInnsending.mottattDato), sub(new Date(), { weeks: 14 }));
-      const erDev = window.location.hostname.includes('dev.nav.no');
-      if (erEldreEnn14Uker || erDev) {
+      const erEldreEnn15Uker = isBefore(new Date(sisteSøknadInnsending.mottattDato), sub(new Date(), { weeks: 15 }));
+      if (erEldreEnn15Uker) {
         setTimeout(() => {
           // @ts-ignore-line
           if (typeof window.TA === 'function') {
-            if (erDev) {
-              // @ts-ignore-line
-              window?.TA('start', '03400');
-            }
+            // @ts-ignore-line
+            window?.TA('start', '03401');
           } else {
             console.log('TA ble ikke lastet inn i tide :(');
           }
