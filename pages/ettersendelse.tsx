@@ -1,14 +1,14 @@
 import { ReadMore, Label, BodyShort, Button, Heading, Link } from '@navikt/ds-react';
 import { PageHeader } from 'components/PageHeader';
 import { Section } from 'components/Section/Section';
-import { beskyttetSide, getAccessToken } from '@navikt/aap-felles-utils';
+import { beskyttetSide } from '@navikt/aap-felles-utils';
 import { GetServerSidePropsResult, NextPageContext } from 'next';
 import * as styles from 'pages/[uuid]/ettersendelse/Ettersendelse.module.css';
 import NextLink from 'next/link';
 import { ArrowLeftIcon } from '@navikt/aksel-icons';
 import { useRouter } from 'next/router';
 import metrics from 'lib/metrics';
-import { getSøknader, getSøknaderInnsending } from './api/soknader/soknader';
+import { getSøknaderInnsending } from './api/soknader/soknader';
 import { LucaGuidePanel, ScanningGuide, Vedlegg } from '@navikt/aap-felles-react';
 import { useIntl } from 'react-intl';
 import Head from 'next/head';
@@ -101,17 +101,13 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
   const stopTimer = metrics.getServersidePropsDurationHistogram.startTimer({
     path: '/ettersendelse',
   });
-  const bearerToken = getAccessToken(ctx);
-  const params = { page: '0', size: '1', sort: 'created,desc' };
-  const søknader = await getSøknader(params, bearerToken);
-  const søknad = søknader[0];
   const søknaderFraInnsending = await getSøknaderInnsending(ctx.req);
   const søknadFraInnsending = søknaderFraInnsending.length > 0 ? søknaderFraInnsending[0] : undefined;
 
   stopTimer();
 
-  if (søknad || søknadFraInnsending) {
-    const søknadId = søknadFraInnsending?.innsendingsId ?? søknad.søknadId;
+  if (søknadFraInnsending) {
+    const søknadId = søknadFraInnsending?.innsendingsId;
     return {
       redirect: {
         destination: `/${søknadId}/ettersendelse/`,

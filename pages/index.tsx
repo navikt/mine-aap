@@ -1,5 +1,5 @@
-import { getSøknader, getSøknaderInnsending } from './api/soknader/soknader';
-import { beskyttetSide, getAccessToken, logError, logInfo } from '@navikt/aap-felles-utils';
+import { getSøknaderInnsending } from './api/soknader/soknader';
+import { beskyttetSide, logError, logInfo } from '@navikt/aap-felles-utils';
 import { BodyShort, Button, Heading } from '@navikt/ds-react';
 import { Card } from 'components/Card/Card';
 import { DokumentoversiktContainer } from 'components/DokumentoversiktNy/DokumentoversiktContainer';
@@ -7,35 +7,28 @@ import { ForsideIngress } from 'components/Forside/Ingress/ForsideIngress';
 import { NyttigÅVite } from 'components/NyttigÅVite/NyttigÅVite';
 import { PageComponentFlexContainer } from 'components/PageComponentFlexContainer/PageComponentFlexContainer';
 import { PageContainer } from 'components/PageContainer/PageContainer';
-import { Soknad } from 'components/Soknad/Soknad';
 import { isBefore, sub } from 'date-fns';
 import metrics from 'lib/metrics';
-import { InnsendingSøknad, MineAapSoknadMedEttersendinger, Søknad } from 'lib/types/types';
+import { InnsendingSøknad, MineAapSoknadMedEttersendinger } from 'lib/types/types';
 import { GetServerSidePropsResult, NextPageContext } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { SoknadInnsending } from 'components/Soknad/SoknadInnsending';
 import { getEttersendelserForSøknad } from 'pages/api/soknader/[uuid]/ettersendelser';
 import { getDokumentJson } from 'pages/api/dokumentjson';
 
 const Index = ({
-  søknader,
   sisteSøknadInnsending,
   ettersendelse,
 }: {
-  søknader: Søknad[];
   sisteSøknadInnsending: InnsendingSøknad;
   ettersendelse?: MineAapSoknadMedEttersendinger;
 }) => {
   const { formatMessage } = useIntl();
 
   const router = useRouter();
-
-  const sisteSøknad = useMemo(() => {
-    return søknader[0];
-  }, [søknader]);
 
   useEffect(() => {
     if (sisteSøknadInnsending != undefined && sisteSøknadInnsending.mottattDato != undefined) {
@@ -86,17 +79,7 @@ const Index = ({
           </Card>
         </PageComponentFlexContainer>
       )}
-      {!sisteSøknadInnsending && sisteSøknad && (
-        <PageComponentFlexContainer subtleBackground>
-          <Heading level="2" size="medium" spacing>
-            <FormattedMessage id="minSisteSøknad.heading" />
-          </Heading>
-          <Card>
-            <Soknad søknad={sisteSøknad} />
-          </Card>
-        </PageComponentFlexContainer>
-      )}
-      {!sisteSøknad && !sisteSøknadInnsending && (
+      {!sisteSøknadInnsending && (
         <>
           <DokumentoversiktContainer />
           <PageComponentFlexContainer>
@@ -133,20 +116,15 @@ const Index = ({
           </Button>
         </Card>
       </PageComponentFlexContainer>
-      {(sisteSøknad || sisteSøknadInnsending) && <DokumentoversiktContainer />}
+      {sisteSøknadInnsending && <DokumentoversiktContainer />}
     </PageContainer>
   );
 };
 
 export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Promise<GetServerSidePropsResult<{}>> => {
   const stopTimer = metrics.getServersidePropsDurationHistogram.startTimer({ path: '/' });
-  const bearerToken = getAccessToken(ctx);
-  const params = { page: '0', size: '1', sort: 'created,desc' };
 
-  const [søknader, innsendingSøknader] = await Promise.all([
-    getSøknader(params, bearerToken),
-    getSøknaderInnsending(ctx.req),
-  ]);
+  const innsendingSøknader = await getSøknaderInnsending(ctx.req);
 
   let sisteSøknadInnsending;
   let ettersendelse: MineAapSoknadMedEttersendinger | null = null;
@@ -170,7 +148,7 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
   stopTimer();
 
   return {
-    props: { søknader, sisteSøknadInnsending, ettersendelse: ettersendelse },
+    props: { sisteSøknadInnsending, ettersendelse: ettersendelse },
   };
 });
 
