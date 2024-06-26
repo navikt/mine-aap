@@ -38,23 +38,23 @@ const Index = ({
   }, [søknader]);
 
   useEffect(() => {
-    if (sisteSøknad != undefined && sisteSøknad.innsendtDato != undefined) {
-      const erEldreEnn14Uker = isBefore(new Date(sisteSøknad.innsendtDato), sub(new Date(), { weeks: 14 }));
-      if (erEldreEnn14Uker) {
+    if (sisteSøknadInnsending != undefined && sisteSøknadInnsending.mottattDato != undefined) {
+      const erEldreEnn15Uker = isBefore(new Date(sisteSøknadInnsending.mottattDato), sub(new Date(), { weeks: 15 }));
+      if (erEldreEnn15Uker) {
         setTimeout(() => {
           // @ts-ignore-line
-          if (typeof window.hj === 'function') {
+          if (typeof window.TA === 'function') {
             // @ts-ignore-line
-            window?.hj('trigger', 'aap_brev_undersokelse');
+            window?.TA('start', '03401');
           } else {
-            console.log('hotjar ble ikke lastet inn i tide :(');
+            console.log('TA ble ikke lastet inn i tide :(');
           }
         }, 1000);
       } else {
         console.log('Siste søknad er ikke eldre enn 14 uker');
       }
     }
-  }, [sisteSøknad]);
+  }, [sisteSøknadInnsending]);
 
   return (
     <PageContainer>
