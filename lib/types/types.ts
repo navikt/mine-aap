@@ -9,14 +9,6 @@ export interface Dokument {
 
 export type VedleggType = 'ARBEIDSGIVER' | 'STUDIER' | 'ANDREBARN' | 'OMSORG' | 'UTLAND' | 'ANNET';
 
-export interface Søknad {
-  fnr?: string;
-  innsendtDato: string;
-  søknadId: string;
-  innsendteVedlegg?: Array<Dokument>;
-  manglendeVedlegg?: Array<VedleggType>;
-}
-
 export interface MellomlagretSøknad {
   timestamp: string;
 }
