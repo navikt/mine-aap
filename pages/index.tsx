@@ -7,7 +7,6 @@ import { ForsideIngress } from 'components/Forside/Ingress/ForsideIngress';
 import { NyttigÅVite } from 'components/NyttigÅVite/NyttigÅVite';
 import { PageComponentFlexContainer } from 'components/PageComponentFlexContainer/PageComponentFlexContainer';
 import { PageContainer } from 'components/PageContainer/PageContainer';
-import { isBefore, sub } from 'date-fns';
 import metrics from 'lib/metrics';
 import { InnsendingSøknad, MineAapSoknadMedEttersendinger } from 'lib/types/types';
 import { GetServerSidePropsResult, NextPageContext } from 'next';
@@ -32,20 +31,15 @@ const Index = ({
 
   useEffect(() => {
     if (sisteSøknadInnsending != undefined && sisteSøknadInnsending.mottattDato != undefined) {
-      const erEldreEnn15Uker = isBefore(new Date(sisteSøknadInnsending.mottattDato), sub(new Date(), { weeks: 15 }));
-      if (erEldreEnn15Uker) {
-        setTimeout(() => {
+      setTimeout(() => {
+        // @ts-ignore-line
+        if (typeof window.TA === 'function') {
           // @ts-ignore-line
-          if (typeof window.TA === 'function') {
-            // @ts-ignore-line
-            window?.TA('start', '03401');
-          } else {
-            console.log('TA ble ikke lastet inn i tide :(');
-          }
-        }, 1000);
-      } else {
-        console.log('Siste søknad er ikke eldre enn 14 uker');
-      }
+          window?.TA('start', '03401');
+        } else {
+          console.log('TA ble ikke lastet inn i tide :(');
+        }
+      }, 1000);
     }
   }, [sisteSøknadInnsending]);
 
