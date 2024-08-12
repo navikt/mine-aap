@@ -56,7 +56,6 @@ spec:
       rules:
         - application: innsending
         - application: oppslag
-        - application: dokumenter
         - application: nav-dekoratoren
           namespace: personbruker
       external:
