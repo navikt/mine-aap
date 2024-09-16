@@ -27,7 +27,7 @@
     "@navikt/oasis": "^3.3.0",
     "@vercel/otel": "^1.9.1",
     "cookie": "^0.6.0",
-    "date-fns": "^3.6.0",
+    "date-fns": "^4.0.0",
     "html-react-parser": "^5.1.10",
     "jsdom": "^24.1.0",
     "next": "^14.2.4",
