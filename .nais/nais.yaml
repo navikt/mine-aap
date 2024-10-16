@@ -34,6 +34,10 @@ spec:
   observability:
     tracing:
       enabled: true
+    logging:
+      destinations:
+        - id: elastic
+        - id: loki
   idporten:
     enabled: true
     sidecar:
