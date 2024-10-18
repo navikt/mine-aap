@@ -14,7 +14,7 @@
   },
   "prettier": "@navikt/aap-felles-prettier",
   "dependencies": {
-    "@grafana/faro-web-sdk": "^1.8.0",
+    "@grafana/faro-web-sdk": "^1.11.0",
     "@navikt/aap-felles-css": "^1.9.7",
     "@navikt/aap-felles-react": "^1.9.7",
     "@navikt/aap-felles-utils": "^1.9.7",
@@ -25,7 +25,7 @@
     "@navikt/nav-dekoratoren-moduler": "^2.1.6",
     "@navikt/next-api-proxy": "^3.4.2",
     "@navikt/oasis": "^3.3.0",
-    "@vercel/otel": "^1.9.1",
+    "@vercel/otel": "^1.10.0",
     "cookie": "^0.6.0",
     "date-fns": "^3.6.0",
     "html-react-parser": "^5.1.10",
