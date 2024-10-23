@@ -20,9 +20,7 @@ function flattenMessages(nestedMessages: GenericMessageObject, prefix = ''): Rec
   }, {});
 }
 
-type Messages = {
-  [K in DecoratorLocale]?: { [name: string]: string };
-};
+type Messages = Partial<Record<DecoratorLocale, { [name: string]: string }>>;
 
 export const messages: Messages = {
   nb: flattenMessages(messagesNb),
