@@ -3,6 +3,7 @@ import { getSøknaderInnsending } from 'pages/api/soknader/soknader';
 
 const allowedOrigins = [
   'https://www.intern.dev.nav.no',
+  'https://www.ansatt.dev.nav.no',
   'https://aap-mine-aap.intern.dev.nav.no',
   'https://aap-mine-aap.ansatt.dev.nav.no',
   'https://www.nav.no',
