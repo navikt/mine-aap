@@ -34,7 +34,7 @@
     "node-cache": "^5.1.2",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "react-intl": "^6.8.1"
+    "react-intl": "^6.8.7"
   },
   "devDependencies": {
     "@navikt/aap-felles-prettier": "^1.9.7",
