@@ -23,7 +23,7 @@
     "@navikt/ds-css": "^6.13.0",
     "@navikt/ds-react": "^6.13.0",
     "@navikt/nav-dekoratoren-moduler": "^2.1.6",
-    "@navikt/next-api-proxy": "^3.4.2",
+    "@navikt/next-api-proxy": "^4.1.3",
     "@navikt/oasis": "^3.4.0",
     "@vercel/otel": "^1.10.0",
     "cookie": "^0.6.0",
