@@ -104,7 +104,7 @@ export const NyttigÅVite = () => {
             id="hvaSkjerPanel.punkt5.tekst"
             values={{
               a: (chunks) => (
-                <Link target="_blank" href={'https://klage.nav.no/nb/klage/ny/ARBEIDSAVKLARINGSPENGER'}>
+                <Link target="_blank" href={'https://klage.nav.no/nb/klage/arbeidsavklaringspenger'}>
                   {chunks}
                 </Link>
               ),
