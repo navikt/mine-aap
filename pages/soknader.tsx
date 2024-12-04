@@ -79,7 +79,7 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
   const søknaderMedEttersending = [];
 
   for (const søknad of innsendingSøknader) {
-    const søknadMedEttersending = await getEttersendelserForSøknad(søknad.innsendingsId, ctx.req);
+    const søknadMedEttersending = await getEttersendelserForSøknad(søknad.innsendingsId as string, ctx.req);
     søknaderMedEttersending.push(søknadMedEttersending);
   }
 

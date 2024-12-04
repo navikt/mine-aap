@@ -102,7 +102,7 @@ export const EttersendelseInnsending = ({ søknad }: Props) => {
         <FormErrorSummary id={errorSummaryId} errors={errors} />
 
         <FileUpload
-          søknadId={søknad.innsendingsId}
+          søknadId={søknad.innsendingsId as string}
           krav="ANNET"
           addError={addError}
           deleteError={deleteError}
