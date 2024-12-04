@@ -18,17 +18,22 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { SoknadInnsending } from 'components/Soknad/SoknadInnsending';
 import { getEttersendelserForSøknad } from 'pages/api/soknader/[uuid]/ettersendelser';
 import { getDokumentJson } from 'pages/api/dokumentjson';
+import { getSøknaderMedEttersendinger } from 'pages/api/soknader/soknadermedettersendinger';
 
 const Index = ({
   sisteSøknadInnsending,
   ettersendelse,
+  søknaderMedEttersendinger,
 }: {
-  sisteSøknadInnsending: InnsendingSøknad;
+  sisteSøknadInnsending?: InnsendingSøknad;
   ettersendelse?: MineAapSoknadMedEttersendinger;
+  søknaderMedEttersendinger: MineAapSoknadMedEttersendinger[];
 }) => {
   const { formatMessage } = useIntl();
 
   const router = useRouter();
+
+  const sisteSøknadInnsendingNy: InnsendingSøknad | undefined = søknaderMedEttersendinger[0] ?? sisteSøknadInnsending;
 
   useEffect(() => {
     if (sisteSøknadInnsending != undefined && sisteSøknadInnsending.mottattDato != undefined) {
@@ -69,17 +74,17 @@ const Index = ({
           <FormattedMessage id="appIngress" />
         </ForsideIngress>
       </PageComponentFlexContainer>
-      {sisteSøknadInnsending && (
+      {sisteSøknadInnsendingNy && (
         <PageComponentFlexContainer subtleBackground>
           <Heading level="2" size="medium" spacing>
             <FormattedMessage id="minSisteSøknad.heading" />
           </Heading>
           <Card>
-            <SoknadInnsending søknad={sisteSøknadInnsending} ettersendelse={ettersendelse} />
+            <SoknadInnsending søknad={sisteSøknadInnsendingNy} ettersendelse={ettersendelse} />
           </Card>
         </PageComponentFlexContainer>
       )}
-      {!sisteSøknadInnsending && (
+      {!sisteSøknadInnsendingNy && (
         <>
           <DokumentoversiktContainer />
           <PageComponentFlexContainer>
@@ -124,6 +129,17 @@ const Index = ({
 export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Promise<GetServerSidePropsResult<{}>> => {
   const stopTimer = metrics.getServersidePropsDurationHistogram.startTimer({ path: '/' });
 
+  try {
+    const søknaderMedEttersendinger = await getSøknaderMedEttersendinger(ctx.req);
+
+    if (søknaderMedEttersendinger?.length > 0) {
+      return {
+        props: { søknaderMedEttersendinger: søknaderMedEttersendinger },
+      };
+    }
+  } catch (error) {
+    logError('Feil ved henting av søknader med ettersendinger mot nytt endepunkt', error);
+  }
   const innsendingSøknader = await getSøknaderInnsending(ctx.req);
 
   let sisteSøknadInnsending;
@@ -134,7 +150,7 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
     if (sisteSøknadInnsending) {
       logInfo('Bruker har søknad sendt inn via innsending');
 
-      ettersendelse = await getEttersendelserForSøknad(sisteSøknadInnsending.innsendingsId, ctx.req);
+      ettersendelse = await getEttersendelserForSøknad(sisteSøknadInnsending.innsendingsId as string, ctx.req);
       logInfo(`getEttersendelserForSøknad: ${JSON.stringify(ettersendelse)}`);
       if (sisteSøknadInnsending.journalpostId && process.env.NEXT_PUBLIC_ENVIRONMENT === 'dev') {
         const søknadJson = await getDokumentJson(sisteSøknadInnsending.journalpostId, ctx.req);
@@ -148,7 +164,7 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
   stopTimer();
 
   return {
-    props: { sisteSøknadInnsending, ettersendelse: ettersendelse },
+    props: { sisteSøknadInnsending, ettersendelse: ettersendelse, søknaderMedEttersendinger: [] },
   };
 });
 
