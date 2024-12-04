@@ -34,6 +34,8 @@ const Index = ({
   const router = useRouter();
 
   const sisteSøknadInnsendingNy: InnsendingSøknad | undefined = søknaderMedEttersendinger[0] ?? sisteSøknadInnsending;
+  const ettersendelser: InnsendingSøknad[] =
+    søknaderMedEttersendinger[0]?.ettersendinger ?? ettersendelse?.ettersendinger;
 
   useEffect(() => {
     if (sisteSøknadInnsending != undefined && sisteSøknadInnsending.mottattDato != undefined) {
@@ -80,7 +82,7 @@ const Index = ({
             <FormattedMessage id="minSisteSøknad.heading" />
           </Heading>
           <Card>
-            <SoknadInnsending søknad={sisteSøknadInnsendingNy} ettersendelse={ettersendelse} />
+            <SoknadInnsending søknad={sisteSøknadInnsendingNy} ettersendelser={ettersendelser} />
           </Card>
         </PageComponentFlexContainer>
       )}
@@ -133,6 +135,7 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
     const søknaderMedEttersendinger = await getSøknaderMedEttersendinger(ctx.req);
 
     if (søknaderMedEttersendinger?.length > 0) {
+      stopTimer();
       return {
         props: { søknaderMedEttersendinger: søknaderMedEttersendinger },
       };

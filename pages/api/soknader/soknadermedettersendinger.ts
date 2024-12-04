@@ -13,6 +13,7 @@ const handler = beskyttetApi(async (req, res) => {
 export const getSøknaderMedEttersendinger = async (
   req?: IncomingMessage
 ): Promise<MineAapSoknadMedEttersendingNy[]> => {
+  //throw new Error('Not implemented');
   if (isMock()) return mockSøknerMedEttersending;
   try {
     const søknader = await simpleTokenXProxy<MineAapSoknadMedEttersendingNy[]>({

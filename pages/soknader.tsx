@@ -52,9 +52,11 @@ const Søknader = ({ innsendingSøknader, søknaderMedEttersending }: PageProps)
               <SoknadInnsending
                 key={søknad.innsendingsId}
                 søknad={søknad}
-                ettersendelse={søknaderMedEttersending.find(
-                  (søknadMedEttersending) => søknadMedEttersending.innsendingsId === søknad.innsendingsId
-                )}
+                ettersendelser={
+                  søknaderMedEttersending.find(
+                    (søknadMedEttersending) => søknadMedEttersending.innsendingsId === søknad.innsendingsId
+                  )?.ettersendinger ?? []
+                }
               />
             ))}
           </VerticalFlexContainer>
