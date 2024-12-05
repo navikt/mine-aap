@@ -38,8 +38,8 @@ const Index = ({
     søknaderMedEttersendinger[0]?.ettersendinger ?? ettersendelse?.ettersendinger;
 
   useEffect(() => {
-    if (sisteSøknadInnsending != undefined && sisteSøknadInnsending.mottattDato != undefined) {
-      const erEldreEnn15Uker = isBefore(new Date(sisteSøknadInnsending.mottattDato), sub(new Date(), { weeks: 15 }));
+    if (sisteSøknadInnsendingNy != undefined && sisteSøknadInnsendingNy.mottattDato != undefined) {
+      const erEldreEnn15Uker = isBefore(new Date(sisteSøknadInnsendingNy.mottattDato), sub(new Date(), { weeks: 15 }));
       if (erEldreEnn15Uker) {
         setTimeout(() => {
           // @ts-ignore-line
@@ -54,7 +54,7 @@ const Index = ({
         console.log('Siste søknad er ikke eldre enn 14 uker');
       }
     }
-  }, [sisteSøknadInnsending]);
+  }, [sisteSøknadInnsendingNy]);
 
   return (
     <PageContainer>
@@ -123,7 +123,7 @@ const Index = ({
           </Button>
         </Card>
       </PageComponentFlexContainer>
-      {sisteSøknadInnsending && <DokumentoversiktContainer />}
+      {sisteSøknadInnsendingNy && <DokumentoversiktContainer />}
     </PageContainer>
   );
 };
