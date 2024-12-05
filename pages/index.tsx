@@ -1,6 +1,6 @@
 import { getSøknaderInnsending } from './api/soknader/soknader';
 import { beskyttetSide, logError, logInfo } from '@navikt/aap-felles-utils';
-import { Alert, BodyShort, Button, Heading, Link } from '@navikt/ds-react';
+import { BodyShort, Button, Heading } from '@navikt/ds-react';
 import { Card } from 'components/Card/Card';
 import { DokumentoversiktContainer } from 'components/DokumentoversiktNy/DokumentoversiktContainer';
 import { ForsideIngress } from 'components/Forside/Ingress/ForsideIngress';
@@ -68,12 +68,6 @@ const Index = ({
           )} - nav.no`}
         </title>
       </Head>
-      <Alert variant="warning">
-        <BodyShort>
-          Vi opplever for tiden ustabilitet ved innsending av søknader og vedlegg. Du kan prøve igjen senere, eller{' '}
-          <Link href="https://www.nav.no/fyllut/nav111305?sub=paper">sende inn søknad på papir</Link>
-        </BodyShort>
-      </Alert>
       <PageComponentFlexContainer>
         <Heading level="1" size="large" spacing>
           <FormattedMessage id="appTittel" values={{ shy: <>&shy;</> }} />
