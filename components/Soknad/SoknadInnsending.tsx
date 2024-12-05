@@ -2,7 +2,7 @@ import * as styles from './Soknad.module.css';
 import { Alert, BodyShort, Button, Heading, Link } from '@navikt/ds-react';
 import { ButtonRow } from 'components/ButtonRow/ButtonRow';
 import { DocumentationHeading } from 'components/DocumentationHeading/DocumentationHeading';
-import { Dokument, InnsendingSøknad, MineAapSoknadMedEttersendinger } from 'lib/types/types';
+import { Dokument, InnsendingSøknad } from 'lib/types/types';
 import { formatDate } from 'lib/utils/date';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
@@ -16,10 +16,10 @@ interface DokumentMedTittel {
 
 export const SoknadInnsending = ({
   søknad,
-  ettersendelse,
+  ettersendelser,
 }: {
   søknad: InnsendingSøknad;
-  ettersendelse?: MineAapSoknadMedEttersendinger;
+  ettersendelser: InnsendingSøknad[];
 }) => {
   const [dokumenter, setDokumenter] = useState<Dokument[] | undefined>(undefined);
 
@@ -50,7 +50,7 @@ export const SoknadInnsending = ({
         });
       });
 
-      ettersendelse?.ettersendinger.forEach((ettersendelse) => {
+      ettersendelser.forEach((ettersendelse) => {
         const dokument = dokumenter.filter((dokument) => dokument.journalpostId === ettersendelse.journalpostId);
 
         dokument.forEach((dokument) => {
@@ -65,7 +65,7 @@ export const SoknadInnsending = ({
       return dokumenterMedTittel.filter((dokument) => dokument !== undefined) as DokumentMedTittel[]; // filter out undefined
     }
     return [];
-  }, [dokumenter, ettersendelse, søknad]);
+  }, [dokumenter, ettersendelser, søknad]);
 
   return (
     <div className={styles.soknad}>

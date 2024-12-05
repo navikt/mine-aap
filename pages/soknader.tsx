@@ -52,9 +52,11 @@ const Søknader = ({ innsendingSøknader, søknaderMedEttersending }: PageProps)
               <SoknadInnsending
                 key={søknad.innsendingsId}
                 søknad={søknad}
-                ettersendelse={søknaderMedEttersending.find(
-                  (søknadMedEttersending) => søknadMedEttersending.innsendingsId === søknad.innsendingsId
-                )}
+                ettersendelser={
+                  søknaderMedEttersending.find(
+                    (søknadMedEttersending) => søknadMedEttersending.innsendingsId === søknad.innsendingsId
+                  )?.ettersendinger ?? []
+                }
               />
             ))}
           </VerticalFlexContainer>
@@ -79,7 +81,7 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
   const søknaderMedEttersending = [];
 
   for (const søknad of innsendingSøknader) {
-    const søknadMedEttersending = await getEttersendelserForSøknad(søknad.innsendingsId, ctx.req);
+    const søknadMedEttersending = await getEttersendelserForSøknad(søknad.innsendingsId as string, ctx.req);
     søknaderMedEttersending.push(søknadMedEttersending);
   }
 

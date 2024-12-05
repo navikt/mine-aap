@@ -64,3 +64,16 @@ export interface MineAapSoknadMedEttersendinger {
   innsendingsId: string;
   ettersendinger: Array<InnsendingSøknad>;
 }
+
+export interface MineAapSoknadMedEttersendingNy {
+  mottattDato: string; // LocalDateTime
+  journalpostId?: string;
+  innsendingsId: string;
+  ettersendinger: Array<MineAapEttersendingNy>;
+}
+
+export interface MineAapEttersendingNy {
+  mottattDato: string; // LocalDateTime
+  journalpostId?: string;
+  innsendingsId: string;
+}

@@ -20,7 +20,7 @@ describe('SoknadInnsending', () => {
     );
   });
   test('Skal rendre komponent for søknad uten ettersendelser', async () => {
-    render(<SoknadInnsending søknad={mockSøknad} />);
+    render(<SoknadInnsending søknad={mockSøknad} ettersendelser={[]} />);
     await waitFor(() =>
       expect(screen.getByRole('heading', { level: 2, name: 'Søknad om arbeidsavklaringspenger (AAP)' })).toBeVisible()
     );
