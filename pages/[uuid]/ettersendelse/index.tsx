@@ -32,8 +32,7 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
     const søknaderMedEttersendinger = await getSøknaderMedEttersendinger(ctx.req);
 
     if (søknaderMedEttersendinger?.length > 0) {
-      const søknadFraInnsending =
-        søknaderMedEttersendinger.find((søknad) => søknad.innsendingsId === parseInt(uuid)) ?? null;
+      const søknadFraInnsending = søknaderMedEttersendinger.find((søknad) => søknad.innsendingsId === uuid) ?? null;
       stopTimer();
       if (!søknadFraInnsending) {
         return {

@@ -55,7 +55,7 @@ export interface InnsendingFil {
 export interface InnsendingSøknad {
   mottattDato: string;
   journalpostId?: string;
-  innsendingsId: string | number;
+  innsendingsId: string;
 }
 
 export interface MineAapSoknadMedEttersendinger {
@@ -68,12 +68,12 @@ export interface MineAapSoknadMedEttersendinger {
 export interface MineAapSoknadMedEttersendingNy {
   mottattDato: string; // LocalDateTime
   journalpostId?: string;
-  innsendingsId: number;
+  innsendingsId: string;
   ettersendinger: Array<MineAapEttersendingNy>;
 }
 
 export interface MineAapEttersendingNy {
   mottattDato: string; // LocalDateTime
   journalpostId?: string;
-  innsendingsId: number;
+  innsendingsId: string;
 }
