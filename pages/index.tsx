@@ -141,7 +141,7 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
       };
     }
   } catch (error) {
-    logError('Feil ved henting av søknader med ettersendinger mot nytt endepunkt', error);
+    logInfo('Feil ved henting av søknader med ettersendinger mot nytt endepunkt', error);
   }
   const innsendingSøknader = await getSøknaderInnsending(ctx.req);
 
