@@ -18,6 +18,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { SoknadInnsending } from 'components/Soknad/SoknadInnsending';
 import { getEttersendelserForSøknad } from 'pages/api/soknader/[uuid]/ettersendelser';
 import { getDokumentJson } from 'pages/api/dokumentjson';
+import { getSøknaderMedEttersendinger } from 'pages/api/soknader/soknadermedettersendinger';
 
 const Index = ({
   sisteSøknadInnsending,
@@ -130,7 +131,6 @@ const Index = ({
 export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Promise<GetServerSidePropsResult<{}>> => {
   const stopTimer = metrics.getServersidePropsDurationHistogram.startTimer({ path: '/' });
 
-  /* Utkommentert i påvente av nytt forsøk på deploy av ny motor for innsending
   try {
     const søknaderMedEttersendinger = await getSøknaderMedEttersendinger(ctx.req);
 
@@ -143,7 +143,7 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
   } catch (error) {
     logInfo('Feil ved henting av søknader med ettersendinger mot nytt endepunkt', error);
   }
-  */
+
   const innsendingSøknader = await getSøknaderInnsending(ctx.req);
 
   let sisteSøknadInnsending;
