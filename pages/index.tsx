@@ -1,5 +1,4 @@
-import { getSøknaderInnsending } from './api/soknader/soknader';
-import { beskyttetSide, logError, logInfo } from '@navikt/aap-felles-utils';
+import { beskyttetSide, logInfo } from '@navikt/aap-felles-utils';
 import { BodyShort, Button, Heading } from '@navikt/ds-react';
 import { Card } from 'components/Card/Card';
 import { DokumentoversiktContainer } from 'components/DokumentoversiktNy/DokumentoversiktContainer';
@@ -16,26 +15,15 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { SoknadInnsending } from 'components/Soknad/SoknadInnsending';
-import { getEttersendelserForSøknad } from 'pages/api/soknader/[uuid]/ettersendelser';
-import { getDokumentJson } from 'pages/api/dokumentjson';
 import { getSøknaderMedEttersendinger } from 'pages/api/soknader/soknadermedettersendinger';
 
-const Index = ({
-  sisteSøknadInnsending,
-  ettersendelse,
-  søknaderMedEttersendinger,
-}: {
-  sisteSøknadInnsending?: InnsendingSøknad;
-  ettersendelse?: MineAapSoknadMedEttersendinger;
-  søknaderMedEttersendinger: MineAapSoknadMedEttersendinger[];
-}) => {
+const Index = ({ søknaderMedEttersendinger }: { søknaderMedEttersendinger: MineAapSoknadMedEttersendinger[] }) => {
   const { formatMessage } = useIntl();
 
   const router = useRouter();
 
-  const sisteSøknadInnsendingNy: InnsendingSøknad | undefined = søknaderMedEttersendinger[0] ?? sisteSøknadInnsending;
-  const ettersendelser: InnsendingSøknad[] =
-    søknaderMedEttersendinger[0]?.ettersendinger ?? ettersendelse?.ettersendinger;
+  const sisteSøknadInnsendingNy: InnsendingSøknad | undefined = søknaderMedEttersendinger[0];
+  const ettersendelser: InnsendingSøknad[] = søknaderMedEttersendinger[0]?.ettersendinger;
 
   useEffect(() => {
     if (sisteSøknadInnsendingNy != undefined && sisteSøknadInnsendingNy.mottattDato != undefined) {
@@ -131,44 +119,19 @@ const Index = ({
 export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Promise<GetServerSidePropsResult<{}>> => {
   const stopTimer = metrics.getServersidePropsDurationHistogram.startTimer({ path: '/' });
 
-  try {
-    const søknaderMedEttersendinger = await getSøknaderMedEttersendinger(ctx.req);
-
-    if (søknaderMedEttersendinger?.length > 0) {
-      stopTimer();
-      return {
-        props: { søknaderMedEttersendinger: søknaderMedEttersendinger },
-      };
-    }
-  } catch (error) {
-    logInfo('Feil ved henting av søknader med ettersendinger mot nytt endepunkt', error);
-  }
-
-  const innsendingSøknader = await getSøknaderInnsending(ctx.req);
-
-  let sisteSøknadInnsending;
-  let ettersendelse: MineAapSoknadMedEttersendinger | null = null;
-  try {
-    sisteSøknadInnsending = innsendingSøknader[0];
-
-    if (sisteSøknadInnsending) {
-      logInfo('Bruker har søknad sendt inn via innsending');
-
-      ettersendelse = await getEttersendelserForSøknad(sisteSøknadInnsending.innsendingsId as string, ctx.req);
-      logInfo(`getEttersendelserForSøknad: ${JSON.stringify(ettersendelse)}`);
-      if (sisteSøknadInnsending.journalpostId && process.env.NEXT_PUBLIC_ENVIRONMENT === 'dev') {
-        const søknadJson = await getDokumentJson(sisteSøknadInnsending.journalpostId, ctx.req);
-        logInfo(`oppslag/dokumenter/${sisteSøknadInnsending.journalpostId}: ${JSON.stringify(søknadJson)}`);
-      }
-    }
-  } catch (error) {
-    logError('Feil ved henting av søknader sendt inn via innsending', error);
-  }
+  const søknaderMedEttersendinger = await getSøknaderMedEttersendinger(ctx.req);
 
   stopTimer();
 
+  if (søknaderMedEttersendinger?.length > 0) {
+    return {
+      props: { søknaderMedEttersendinger: søknaderMedEttersendinger },
+    };
+  }
+
+  logInfo('Fant ingen søknader med ettersendinger');
   return {
-    props: { sisteSøknadInnsending, ettersendelse: ettersendelse, søknaderMedEttersendinger: [] },
+    props: { søknaderMedEttersendinger: [] },
   };
 });
 

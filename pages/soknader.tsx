@@ -1,11 +1,10 @@
 import { Button, Heading, Link } from '@navikt/ds-react';
 import { GetServerSidePropsResult, NextPageContext } from 'next';
-import { beskyttetSide } from '@navikt/aap-felles-utils';
+import { beskyttetSide, logInfo } from '@navikt/aap-felles-utils';
 import { VerticalFlexContainer } from 'components/FlexContainer/VerticalFlexContainer';
 import { Layout } from 'components/Layout/Layout';
 import { Section } from 'components/Section/Section';
-import { InnsendingSøknad, MineAapSoknadMedEttersendinger } from 'lib/types/types';
-import { getSøknaderInnsending } from 'pages/api/soknader/soknader';
+import { MineAapSoknadMedEttersendinger } from 'lib/types/types';
 import { ArrowLeftIcon } from '@navikt/aksel-icons';
 import { useRouter } from 'next/router';
 import NextLink from 'next/link';
@@ -13,14 +12,13 @@ import metrics from 'lib/metrics';
 import Head from 'next/head';
 import { useIntl } from 'react-intl';
 import { SoknadInnsending } from 'components/Soknad/SoknadInnsending';
-import { getEttersendelserForSøknad } from 'pages/api/soknader/[uuid]/ettersendelser';
+import { getSøknaderMedEttersendinger } from 'pages/api/soknader/soknadermedettersendinger';
 
 interface PageProps {
-  innsendingSøknader: InnsendingSøknad[];
-  søknaderMedEttersending: MineAapSoknadMedEttersendinger[];
+  søknaderMedEttersendinger: MineAapSoknadMedEttersendinger[];
 }
 
-const Søknader = ({ innsendingSøknader, søknaderMedEttersending }: PageProps) => {
+const Søknader = ({ søknaderMedEttersendinger }: PageProps) => {
   const router = useRouter();
   const { formatMessage } = useIntl();
 
@@ -48,15 +46,11 @@ const Søknader = ({ innsendingSøknader, søknaderMedEttersending }: PageProps)
             {formatMessage({ id: 'dineSøknader.heading' })}
           </Heading>
           <VerticalFlexContainer>
-            {innsendingSøknader.map((søknad) => (
+            {søknaderMedEttersendinger.map((søknad) => (
               <SoknadInnsending
                 key={søknad.innsendingsId}
                 søknad={søknad}
-                ettersendelser={
-                  søknaderMedEttersending.find(
-                    (søknadMedEttersending) => søknadMedEttersending.innsendingsId === søknad.innsendingsId
-                  )?.ettersendinger ?? []
-                }
+                ettersendelser={søknad.ettersendinger ?? []}
               />
             ))}
           </VerticalFlexContainer>
@@ -76,18 +70,18 @@ const Søknader = ({ innsendingSøknader, søknaderMedEttersending }: PageProps)
 export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Promise<GetServerSidePropsResult<{}>> => {
   const stopTimer = metrics.getServersidePropsDurationHistogram.startTimer({ path: '/soknader' });
 
-  const innsendingSøknader = await getSøknaderInnsending(ctx.req);
-
-  const søknaderMedEttersending = [];
-
-  for (const søknad of innsendingSøknader) {
-    const søknadMedEttersending = await getEttersendelserForSøknad(søknad.innsendingsId as string, ctx.req);
-    søknaderMedEttersending.push(søknadMedEttersending);
-  }
+  const søknaderMedEttersendinger = await getSøknaderMedEttersendinger(ctx.req);
 
   stopTimer();
+
+  if (søknaderMedEttersendinger?.length > 0) {
+    return {
+      props: { søknaderMedEttersendinger: søknaderMedEttersendinger },
+    };
+  }
+  logInfo('Fant ingen søknader med ettersendinger');
   return {
-    props: { innsendingSøknader, søknaderMedEttersending },
+    props: { søknaderMedEttersendinger: [] },
   };
 });
 
