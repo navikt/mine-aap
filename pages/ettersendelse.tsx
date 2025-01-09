@@ -8,7 +8,6 @@ import NextLink from 'next/link';
 import { ArrowLeftIcon } from '@navikt/aksel-icons';
 import { useRouter } from 'next/router';
 import metrics from 'lib/metrics';
-import { getSøknaderInnsending } from './api/soknader/soknader';
 import { LucaGuidePanel, ScanningGuide, Vedlegg } from '@navikt/aap-felles-react';
 import { useIntl } from 'react-intl';
 import Head from 'next/head';
@@ -16,6 +15,7 @@ import { FileUpload } from 'components/fileupload/FileUpload';
 import { Error, FormErrorSummary } from 'components/FormErrorSummary/FormErrorSummary';
 import { useState } from 'react';
 import { setFocus } from 'lib/utils/dom';
+import { getSøknaderMedEttersendinger } from 'pages/api/soknader/soknadermedettersendinger';
 
 const Ettersendelse = () => {
   const { formatMessage } = useIntl();
@@ -101,13 +101,13 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
   const stopTimer = metrics.getServersidePropsDurationHistogram.startTimer({
     path: '/ettersendelse',
   });
-  const søknaderFraInnsending = await getSøknaderInnsending(ctx.req);
-  const søknadFraInnsending = søknaderFraInnsending.length > 0 ? søknaderFraInnsending[0] : undefined;
+
+  const søknaderMedEttersendinger = await getSøknaderMedEttersendinger(ctx.req);
 
   stopTimer();
 
-  if (søknadFraInnsending) {
-    const søknadId = søknadFraInnsending?.innsendingsId;
+  if (søknaderMedEttersendinger?.[0]) {
+    const søknadId = søknaderMedEttersendinger?.[0]?.innsendingsId;
     return {
       redirect: {
         destination: `/${søknadId}/ettersendelse/`,
