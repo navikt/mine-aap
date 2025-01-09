@@ -1,5 +1,5 @@
 import { beskyttetApi } from '@navikt/aap-felles-utils';
-import { getSøknaderInnsending } from 'pages/api/soknader/soknader';
+import { getSøknaderMedEttersendinger } from 'pages/api/soknader/soknadermedettersendinger';
 
 const allowedOrigins = [
   'https://www.intern.dev.nav.no',
@@ -10,7 +10,7 @@ const allowedOrigins = [
 ];
 
 const handler = beskyttetApi(async (req, res) => {
-  const søknader = await getSøknaderInnsending(req);
+  const søknader = await getSøknaderMedEttersendinger(req);
   if (req.headers.origin) {
     res.setHeader('Access-Control-Allow-Credentials', 'true');
     res.setHeader('Access-Control-Allow-Origin', allowedOrigins.includes(req.headers.origin) ? req.headers.origin : '');
