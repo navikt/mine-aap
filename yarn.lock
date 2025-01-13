@@ -1341,13 +1341,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/aksel-icons@npm:^6.13.0":
-  version: 6.13.0
-  resolution: "@navikt/aksel-icons@npm:6.13.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-icons%2F6.13.0%2F7378bad8c8230187b30a9e0b15675f7740dc96cf"
-  checksum: 10c0/3a54483dcbaf119e6a1a49edb6a93f55cec4aca3facd90a45e78d8cac8d43a8c1eaaab30ea90dcbf21cd80560706f42c2b679a8528135e23ac6eea4efc29430d
-  languageName: node
-  linkType: hard
-
 "@navikt/aksel-icons@npm:^7.2.1":
   version: 7.2.1
   resolution: "@navikt/aksel-icons@npm:7.2.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-icons%2F7.2.1%2F8cc80c4d03f7d22428f72fd4cb6a93946b087db1"
@@ -1355,10 +1348,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/ds-css@npm:^6.13.0":
-  version: 6.13.0
-  resolution: "@navikt/ds-css@npm:6.13.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-css%2F6.13.0%2F9882c3009d59c19da414477877ab27aad65f7b13"
-  checksum: 10c0/829a23357c38e8bb1aa8502bb2688869097c5cac24063a2bc00951f1add813da5dd618d0989bc3980efa808bb4cbfc227047ac581d231049f2ffee0c1df10572
+"@navikt/aksel-icons@npm:^7.9.1":
+  version: 7.9.1
+  resolution: "@navikt/aksel-icons@npm:7.9.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-icons%2F7.9.1%2F10d623cfc6f0786e7ae238ddf73491be74afe282"
+  checksum: 10c0/75c3ab6ab8d7bff0f262fd9e8146d66eb93c5ed82124918343ee8e1887d262330391f5729ef068ed126d3a536a61153132d78fdaf38279cc54b499195eeb170e
   languageName: node
   linkType: hard
 
@@ -1369,21 +1362,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/ds-react@npm:^6.13.0":
-  version: 6.13.0
-  resolution: "@navikt/ds-react@npm:6.13.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-react%2F6.13.0%2F2e522bc611fbaf96128c08e6d678d622a67d39e2"
-  dependencies:
-    "@floating-ui/react": "npm:0.25.4"
-    "@floating-ui/react-dom": "npm:^2.0.9"
-    "@navikt/aksel-icons": "npm:^6.13.0"
-    "@navikt/ds-tokens": "npm:^6.13.0"
-    clsx: "npm:^2.1.0"
-    date-fns: "npm:^3.0.0"
-    react-day-picker: "npm:8.10.0"
-  peerDependencies:
-    "@types/react": ^17.0.30 || ^18.0.0
-    react: ^17.0.0 || ^18.0.0
-  checksum: 10c0/d2d7e1a3555860369f247ed3e2ef98896d4e22146386b139dedfdf8f36ab27f8ac3a5c1e1ec6515d562fd61a82a574a12b9c39ef8a26c417708c1e6e9e72984e
+"@navikt/ds-css@npm:^7.9.1":
+  version: 7.9.1
+  resolution: "@navikt/ds-css@npm:7.9.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-css%2F7.9.1%2F84cf829697064562f0540cb0425ef890e46038ee"
+  checksum: 10c0/af7bbf1447a2922c82c59ebbee6d3a7961f95d9903f3f0bc85a857749461076bde0e6fdc08409dd6fdc88ff2fe1ae671ae9b1fa6f785507fbfe0dceab77f9c62
   languageName: node
   linkType: hard
 
@@ -1405,10 +1387,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/ds-tokens@npm:^6.13.0":
-  version: 6.13.0
-  resolution: "@navikt/ds-tokens@npm:6.13.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-tokens%2F6.13.0%2F6704caca2fffee89abdce0207e5dfe00b875482f"
-  checksum: 10c0/e86835c3872648c1fcd6c6013cfff8f37982520d8b246622aafdc68fd3315c5766ea0539ef61a78cedd1d01e8418f920d24d08d0a4b9fecc87ef09cfaa570086
+"@navikt/ds-react@npm:^7.9.1":
+  version: 7.9.1
+  resolution: "@navikt/ds-react@npm:7.9.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-react%2F7.9.1%2F3f7ec76614c4e2a183b6ee557bea5cee1c4ac821"
+  dependencies:
+    "@floating-ui/react": "npm:0.25.4"
+    "@floating-ui/react-dom": "npm:^2.0.9"
+    "@navikt/aksel-icons": "npm:^7.9.1"
+    "@navikt/ds-tokens": "npm:^7.9.1"
+    clsx: "npm:^2.1.0"
+    date-fns: "npm:^3.0.0"
+    react-day-picker: "npm:8.10.1"
+  peerDependencies:
+    "@types/react": ">=17.0.30"
+    react: ">=17.0.0 || >19.0.0-rc"
+  checksum: 10c0/9306ee7235aaf2936f0b7c8e04cf29c22fb1637fc0af1cc1d9c3efd7c28d77d066414db88d2098da3962c034e8d374469263299e68c56ce57a2aa56890080ebd
   languageName: node
   linkType: hard
 
@@ -1416,6 +1409,13 @@ __metadata:
   version: 7.2.1
   resolution: "@navikt/ds-tokens@npm:7.2.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-tokens%2F7.2.1%2F0df577b32219208add6ca8646449fb558faad282"
   checksum: 10c0/99b30a8ba9ddd2843d18a2726bedacacae46db63bc3a5ffd7f89d144244575d299c4548e13d2b5d0c0550da2c82e6f3bd2b26126f075f6e5791b55c94f46d98d
+  languageName: node
+  linkType: hard
+
+"@navikt/ds-tokens@npm:^7.9.1":
+  version: 7.9.1
+  resolution: "@navikt/ds-tokens@npm:7.9.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-tokens%2F7.9.1%2F78fb2d1aabb0a187cfe20a553344fb2d6ae16762"
+  checksum: 10c0/b380f82f8cf044402c584df7f23ba0b64a0671b743ab5699a8f6d79db6a0d39c05d3473a2c5e8e4918243194cc2dfd586ea10a53b7e58d554e3d323ca0ce2635
   languageName: node
   linkType: hard
 
@@ -2537,9 +2537,9 @@ __metadata:
     "@navikt/aap-felles-react": "npm:^1.9.7"
     "@navikt/aap-felles-utils": "npm:^1.9.7"
     "@navikt/aap-felles-utils-client": "npm:^1.9.7"
-    "@navikt/aksel-icons": "npm:^6.13.0"
-    "@navikt/ds-css": "npm:^6.13.0"
-    "@navikt/ds-react": "npm:^6.13.0"
+    "@navikt/aksel-icons": "npm:^7.9.1"
+    "@navikt/ds-css": "npm:^7.9.1"
+    "@navikt/ds-react": "npm:^7.9.1"
     "@navikt/eslint-config-aap": "npm:^1.9.7"
     "@navikt/nav-dekoratoren-moduler": "npm:^2.1.6"
     "@navikt/next-api-proxy": "npm:^3.4.2"
@@ -7974,6 +7974,16 @@ __metadata:
     date-fns: ^2.28.0 || ^3.0.0
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
   checksum: 10c0/e9868aced1e40b4cb7d6cf8d50e250226b38ec7ebea944b65aa9db20a0f36d0581b8a501297d09dcbf2d812de852168952b3fb27990915381629d6e314c2a4d8
+  languageName: node
+  linkType: hard
+
+"react-day-picker@npm:8.10.1":
+  version: 8.10.1
+  resolution: "react-day-picker@npm:8.10.1"
+  peerDependencies:
+    date-fns: ^2.28.0 || ^3.0.0
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: 10c0/a0ff28c4b61b3882e6a825b19e5679e2fdf3256cf1be8eb0a0c028949815c1ae5a6561474c2c19d231c010c8e0e0b654d3a322610881e0655abca05a2e03d9df
   languageName: node
   linkType: hard
 
