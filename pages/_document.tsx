@@ -1,9 +1,5 @@
 import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/document';
-import {
-  DecoratorComponents,
-  fetchDecoratorReact,
-  DecoratorFetchProps,
-} from '@navikt/nav-dekoratoren-moduler/ssr';
+import { fetchDecoratorReact, DecoratorFetchProps } from '@navikt/nav-dekoratoren-moduler/ssr';
 import { DecoratorEnvProps } from '@navikt/nav-dekoratoren-moduler';
 
 const decoratorEnv = process.env.DECORATOR_ENV as Exclude<DecoratorEnvProps['env'], 'localhost'>;
@@ -15,20 +11,23 @@ const decoratorParams: DecoratorFetchProps = {
     context: 'privatperson',
     chatbot: false,
     feedback: false,
-    urlLookupTable: false,
     logoutWarning: true,
   },
 };
 
-class _Document extends Document<{ decorator: DecoratorComponents }> {
+interface DocumentProps {
+  Decorator: any;
+}
+
+class _Document extends Document<DocumentProps> {
   static async getInitialProps(ctx: DocumentContext) {
     const initialProps = await Document.getInitialProps(ctx);
-    const decorator = await fetchDecoratorReact(decoratorParams);
-    return { ...initialProps, decorator };
+    const Decorator = await fetchDecoratorReact(decoratorParams);
+    return { ...initialProps, Decorator };
   }
 
   render() {
-    const { Styles, Scripts, Header, Footer } = this.props.decorator;
+    const { Decorator } = this.props;
     return (
       <Html>
         <Head>
@@ -40,16 +39,16 @@ class _Document extends Document<{ decorator: DecoratorComponents }> {
             type="font/woff2"
             crossOrigin="anonymous"
           />
+          <Decorator.HeadAssets />
         </Head>
-        <Styles />
-        <Scripts />
 
         <body>
-          <Header />
+          <Decorator.Header />
           <div id="app" className="app">
             <Main />
           </div>
-          <Footer />
+          <Decorator.Footer />
+          <Decorator.Scripts />
           <NextScript />
         </body>
       </Html>

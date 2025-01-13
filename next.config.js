@@ -17,10 +17,6 @@ const nextConfig = {
   output: 'standalone',
   assetPrefix: process.env.ASSET_PREFIX ?? undefined,
 
-  experimental: {
-    instrumentationHook: true,
-  },
-
   async headers() {
     const csp = await ssr.buildCspHeader(appDirectives, { env: process.env.DECORATOR_ENV ?? 'prod' });
     return [
