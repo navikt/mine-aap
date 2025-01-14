@@ -2,7 +2,6 @@ import { GetServerSidePropsResult, NextPageContext } from 'next';
 import { InnsendingSøknad } from 'lib/types/types';
 import { getStringFromPossiblyArrayQuery } from '@navikt/aap-felles-utils-client';
 import { beskyttetSide } from '@navikt/aap-felles-utils';
-import metrics from 'lib/metrics';
 import { EttersendelseInnsending } from 'components/ettersendelseinnsending/EttersendelseInnsending';
 import { getSøknaderMedEttersendinger } from 'pages/api/soknader/soknadermedettersendinger';
 
@@ -23,13 +22,7 @@ export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Pr
     };
   }
 
-  const stopTimer = metrics.getServersidePropsDurationHistogram.startTimer({
-    path: '/{uuid}/ettersendelse',
-  });
-
   const søknaderMedEttersendinger = await getSøknaderMedEttersendinger(ctx.req);
-
-  stopTimer();
 
   if (søknaderMedEttersendinger?.length > 0) {
     const søknadFraInnsending = søknaderMedEttersendinger.find((søknad) => søknad.innsendingsId === uuid) ?? null;

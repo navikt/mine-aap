@@ -7,7 +7,6 @@ import { NyttigÅVite } from 'components/NyttigÅVite/NyttigÅVite';
 import { PageComponentFlexContainer } from 'components/PageComponentFlexContainer/PageComponentFlexContainer';
 import { PageContainer } from 'components/PageContainer/PageContainer';
 import { isBefore, sub } from 'date-fns';
-import metrics from 'lib/metrics';
 import { InnsendingSøknad, MineAapSoknadMedEttersendinger } from 'lib/types/types';
 import { GetServerSidePropsResult, NextPageContext } from 'next';
 import Head from 'next/head';
@@ -117,11 +116,7 @@ const Index = ({ søknaderMedEttersendinger }: { søknaderMedEttersendinger: Min
 };
 
 export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Promise<GetServerSidePropsResult<{}>> => {
-  const stopTimer = metrics.getServersidePropsDurationHistogram.startTimer({ path: '/' });
-
   const søknaderMedEttersendinger = await getSøknaderMedEttersendinger(ctx.req);
-
-  stopTimer();
 
   if (søknaderMedEttersendinger?.length > 0) {
     return {

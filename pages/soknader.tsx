@@ -8,7 +8,6 @@ import { MineAapSoknadMedEttersendinger } from 'lib/types/types';
 import { ArrowLeftIcon } from '@navikt/aksel-icons';
 import { useRouter } from 'next/router';
 import NextLink from 'next/link';
-import metrics from 'lib/metrics';
 import Head from 'next/head';
 import { useIntl } from 'react-intl';
 import { SoknadInnsending } from 'components/Soknad/SoknadInnsending';
@@ -68,11 +67,7 @@ const Søknader = ({ søknaderMedEttersendinger }: PageProps) => {
 };
 
 export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Promise<GetServerSidePropsResult<{}>> => {
-  const stopTimer = metrics.getServersidePropsDurationHistogram.startTimer({ path: '/soknader' });
-
   const søknaderMedEttersendinger = await getSøknaderMedEttersendinger(ctx.req);
-
-  stopTimer();
 
   if (søknaderMedEttersendinger?.length > 0) {
     return {

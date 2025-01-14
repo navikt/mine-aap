@@ -1,13 +1,11 @@
 import { proxyApiRouteRequest } from '@navikt/next-api-proxy';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getAccessTokenFromRequest, getTokenX, logError, logInfo } from '@navikt/aap-felles-utils';
-import metrics from '../metrics';
 
 export const tokenXProxy = async (
   req: NextApiRequest,
   res: NextApiResponse,
   path: string,
-  prometheusPath: string,
   hostname: 'oppslag' | 'soknad-api',
   audience: string
 ) => {
@@ -18,7 +16,7 @@ export const tokenXProxy = async (
   } catch (err: any) {
     logError(`getTokenXError mot ${path}`, err);
   }
-  const stopTimer = metrics.backendApiDurationHistogram.startTimer({ path: prometheusPath });
+
   const result = await proxyApiRouteRequest({
     req,
     res,
@@ -29,7 +27,6 @@ export const tokenXProxy = async (
   });
 
   logInfo(`res from tokenXProxy: ${res.status}`);
-  stopTimer();
 
   return result;
 };

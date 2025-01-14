@@ -7,7 +7,6 @@ import * as styles from 'pages/[uuid]/ettersendelse/Ettersendelse.module.css';
 import NextLink from 'next/link';
 import { ArrowLeftIcon } from '@navikt/aksel-icons';
 import { useRouter } from 'next/router';
-import metrics from 'lib/metrics';
 import { LucaGuidePanel, ScanningGuide, Vedlegg } from '@navikt/aap-felles-react';
 import { useIntl } from 'react-intl';
 import Head from 'next/head';
@@ -98,13 +97,7 @@ const Ettersendelse = () => {
 };
 
 export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Promise<GetServerSidePropsResult<{}>> => {
-  const stopTimer = metrics.getServersidePropsDurationHistogram.startTimer({
-    path: '/ettersendelse',
-  });
-
   const søknaderMedEttersendinger = await getSøknaderMedEttersendinger(ctx.req);
-
-  stopTimer();
 
   if (søknaderMedEttersendinger?.[0]) {
     const søknadId = søknaderMedEttersendinger?.[0]?.innsendingsId;

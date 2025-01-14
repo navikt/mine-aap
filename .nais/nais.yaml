@@ -28,9 +28,6 @@ spec:
       memory: 512Mi
     limits:
       memory: 512Mi
-  prometheus:
-    enabled: true
-    path: /aap/mine-aap/api/internal/prometheus/
   observability:
     tracing:
       enabled: true
