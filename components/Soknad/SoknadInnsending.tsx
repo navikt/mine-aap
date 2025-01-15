@@ -1,3 +1,5 @@
+'use client';
+
 import * as styles from './Soknad.module.css';
 import { Alert, BodyShort, Button, Heading, Link } from '@navikt/ds-react';
 import { ButtonRow } from 'components/ButtonRow/ButtonRow';

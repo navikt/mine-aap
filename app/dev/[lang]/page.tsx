@@ -1,11 +1,13 @@
-import { logInfo } from '@navikt/aap-felles-utils';
-import { Heading } from '@navikt/ds-react';
+import { BodyShort, Heading } from '@navikt/ds-react';
 import { getDictionary } from 'app/dev/[lang]/dictionaries';
+import { Card } from 'components/Card/Card';
+import { ClientButton } from 'components/ClientButton';
 import { DokumentoversiktMedDatafetching } from 'components/DokumentoversiktNy/DokumentoversiktMedDatafetching';
 import { ForsideIngress } from 'components/Forside/Ingress/ForsideIngress';
+import { NyttigÅViteServer } from 'components/NyttigÅVite/NyttigÅViteServer';
 import { PageComponentFlexContainer } from 'components/PageComponentFlexContainer/PageComponentFlexContainer';
+import { SoknadMedDatafetching } from 'components/Soknad/SoknadMedDatafetching';
 import { hentSøknader } from 'lib/services/innsendingService';
-import { hentDokumenter } from 'lib/services/oppslagService';
 import { isProduction } from 'lib/utils/environments';
 import { notFound } from 'next/navigation';
 
@@ -22,11 +24,9 @@ const Page = async ({ params }: Readonly<{ params: Promise<PageParams> }>) => {
   const dict = await getDictionary(lang);
 
   // Debug for å teste dokumenter og søknader i dev
-  const dokumenter = await hentDokumenter();
   const søknader = await hentSøknader();
 
-  logInfo('Dokumenter', dokumenter);
-  logInfo('Søknader', søknader);
+  const sisteSøknadInnsendingNy = søknader[0];
 
   return (
     <div>
@@ -36,7 +36,46 @@ const Page = async ({ params }: Readonly<{ params: Promise<PageParams> }>) => {
         </Heading>
         <ForsideIngress>{dict.appIngress}</ForsideIngress>
       </PageComponentFlexContainer>
-      <DokumentoversiktMedDatafetching />
+      {sisteSøknadInnsendingNy && (
+        <PageComponentFlexContainer subtleBackground>
+          <Heading level="2" size="medium" spacing>
+            {dict.minSisteSøknad.heading}
+          </Heading>
+          <Card>
+            <SoknadMedDatafetching søknad={sisteSøknadInnsendingNy} />
+          </Card>
+        </PageComponentFlexContainer>
+      )}
+      {!sisteSøknadInnsendingNy && (
+        <>
+          <DokumentoversiktMedDatafetching />
+          <PageComponentFlexContainer>
+            <Heading level="2" size="medium" spacing>
+              {dict.forside.ettersendelse.tittel}
+            </Heading>
+            <Card subtleBlue>
+              <BodyShort spacing>{dict.forside.ettersendelse.tekst}</BodyShort>
+              <ClientButton url="/aap/mine-aap/ettersendelse" text={dict.forside.ettersendelse.knapp}></ClientButton>
+            </Card>
+          </PageComponentFlexContainer>
+        </>
+      )}
+      <PageComponentFlexContainer>
+        <NyttigÅViteServer />
+      </PageComponentFlexContainer>
+      <PageComponentFlexContainer>
+        <Heading level="2" size="medium" spacing>
+          {dict.forside.endretSituasjon.heading}
+        </Heading>
+        <Card subtleBlue>
+          <BodyShort spacing>{dict.forside.endretSituasjon.tekst}</BodyShort>
+          <ClientButton
+            url="https://innboks.nav.no/s/skriv-til-oss?category=Arbeid"
+            text={dict.forside.endretSituasjon.knapp}
+          ></ClientButton>
+        </Card>
+      </PageComponentFlexContainer>
+      {sisteSøknadInnsendingNy && <DokumentoversiktMedDatafetching />}
     </div>
   );
 };
