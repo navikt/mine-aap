@@ -45,6 +45,23 @@ export interface EttersendteVedlegg {
 
 export interface InnsendingBackendState {
   filer: InnsendingFil[];
+  kvittering: Kvittering;
+}
+
+export interface Kvittering {
+  mottattdato: Date;
+  temaer: {
+    vedlegg: {
+      type: string;
+      overskrift: string;
+      underblokker: VedleggListe[];
+    };
+  };
+}
+
+export interface VedleggListe {
+  type: string;
+  felt: string;
 }
 
 export interface InnsendingFil {
