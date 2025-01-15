@@ -1,6 +1,6 @@
 'use server';
 
-import { requestAzureOboToken, validateToken } from '@navikt/oasis';
+import { requestOboToken, validateToken } from '@navikt/oasis';
 import { getAccessTokenOrRedirectToLogin, logError } from '@navikt/aap-felles-utils';
 import { headers } from 'next/headers';
 
@@ -19,10 +19,10 @@ const getOnBefalfOfToken = async (audience: string, url: string): Promise<string
     throw new Error('Token for simpleTokenXProxy didnt validate');
   }
 
-  const onBehalfOf = await requestAzureOboToken(token, audience);
+  const onBehalfOf = await requestOboToken(token, audience);
   if (!onBehalfOf.ok) {
     logError(`Henting av oboToken for ${url} feilet`, onBehalfOf.error);
-    throw new Error('Request oboToken for simpleTokenXProxy failed');
+    throw new Error('Request oboToken for fetchProxy failed');
   }
 
   return onBehalfOf.token;

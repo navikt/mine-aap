@@ -1,45 +1,27 @@
-import { beskyttetApi, isMock, logError } from '@navikt/aap-felles-utils';
-import { IncomingMessage } from 'http';
-import { simpleTokenXProxy } from 'lib/api/simpleTokenXProxy';
+import { logError } from '@navikt/aap-felles-utils';
+import { sendEttersendelse } from 'lib/services/innsendingService';
 import { Ettersendelse, InnsendingBackendState, VedleggType } from 'lib/types/types';
+import { NextRequest } from 'next/server';
 
-const handler = beskyttetApi(async (req, res) => {
-  const { ettersendteVedlegg, søknadId }: Ettersendelse = JSON.parse(req.body);
+export async function POST(req: NextRequest) {
+  const body = await req.json();
+  const { ettersendteVedlegg, søknadId }: Ettersendelse = body;
 
   const ettersending = ettersendteVedlegg[0];
-  const body: InnsendingBackendState = {
+  const requestBody: InnsendingBackendState = {
     filer: ettersending.ettersending.map((ettersendtVedlegg) => ({
       id: ettersendtVedlegg,
       tittel: mapVedleggTypeTilVedleggstekst(ettersending.vedleggType),
     })),
   };
-  await sendEttersendelseInnsending(body, søknadId, req);
-
-  res.status(201).json({});
-});
-
-export const sendEttersendelseInnsending = async (
-  data: InnsendingBackendState,
-  innsendingsId?: string,
-  req?: IncomingMessage
-) => {
-  if (isMock()) {
-    return {};
-  }
   try {
-    const ettersendelse = await simpleTokenXProxy({
-      url: `${process.env.INNSENDING_URL}/innsending${innsendingsId ? `/${innsendingsId}` : ''}`,
-      audience: process.env.INNSENDING_AUDIENCE!,
-      method: 'POST',
-      req,
-      body: data,
-    });
-    return ettersendelse;
+    await sendEttersendelse(requestBody, søknadId);
+    return new Response(null, { status: 201 });
   } catch (error) {
     logError('Error sending ettersendelse', error);
-    throw new Error('Error sending ettersendelse');
+    return new Response('Error sending ettersendelse', { status: 500 });
   }
-};
+}
 
 function mapVedleggTypeTilVedleggstekst(vedleggType: VedleggType): string {
   switch (vedleggType) {
@@ -59,5 +41,3 @@ function mapVedleggTypeTilVedleggstekst(vedleggType: VedleggType): string {
       return vedleggType;
   }
 }
-
-export default handler;
