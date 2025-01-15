@@ -25,7 +25,7 @@ const getAvsender = (type: string) => {
 export const Dokumentrad = ({ dokument, antallSider }: DokumentradProps) => (
   <li className={styles.listItem}>
     <Link
-      href={`/aap/mine-aap/api/dokument/?journalpostId=${dokument.journalpostId}&dokumentId=${dokument.dokumentId}`}
+      href={`/aap/mine-aap/api/dokument/${dokument.journalpostId}/${dokument.dokumentId}`}
       target="_blank"
       onClick={() => logDokumentoversiktEvent(antallSider, 'klikk lenke')}
       lang="no"
