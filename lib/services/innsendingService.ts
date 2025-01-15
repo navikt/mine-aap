@@ -1,7 +1,7 @@
 import 'server-only';
 
 import { fetchProxy } from 'lib/services/fetchProxy';
-import { MineAapSoknadMedEttersendingNy } from 'lib/types/types';
+import { InnsendingBackendState, MineAapSoknadMedEttersendingNy } from 'lib/types/types';
 import { isMock } from 'lib/utils/environments';
 import { mockSøknerMedEttersending } from 'lib/mock/mockSoknad';
 import { isAfter } from 'date-fns';
@@ -21,5 +21,20 @@ export const hentSøknader = async (): Promise<MineAapSoknadMedEttersendingNy[]>
   } catch (error) {
     logError('Error fetching søknader for innsending', error);
     return [];
+  }
+};
+
+export const sendEttersendelse = async (data: InnsendingBackendState, innsendingsId?: string): Promise<any> => {
+  if (isMock()) {
+    return {};
+  }
+  const erGenerellEttersendelse = innsendingsId ? true : false;
+  const url = `${innsendingApiBaseUrl}/innsending${erGenerellEttersendelse ? `/${innsendingsId}` : ''}`;
+  try {
+    const ettersendelse = await fetchProxy(url, innsendingAudience, 'POST', data);
+    return ettersendelse;
+  } catch (error) {
+    logError('Error sending ettersendelse', error);
+    throw new Error('Error sending ettersendelse');
   }
 };
