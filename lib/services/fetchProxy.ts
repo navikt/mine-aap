@@ -3,6 +3,7 @@
 import { requestOboToken, validateToken } from '@navikt/oasis';
 import { getAccessTokenOrRedirectToLogin, logError } from '@navikt/aap-felles-utils';
 import { headers } from 'next/headers';
+import { randomUUID } from 'crypto';
 
 const NUMBER_OF_RETRIES = 3;
 
@@ -40,12 +41,14 @@ export const fetchProxy = async <ResponseBody>(
 };
 
 export const fetchPdf = async (url: string, scope: string): Promise<Blob | undefined> => {
+  const callid = randomUUID();
   const oboToken = await getOnBefalfOfToken(scope, url);
   const response = await fetch(url, {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${oboToken}`,
       Accept: 'application/pdf',
+      'Nav-CallId': callid,
     },
     next: { revalidate: 0 },
   });
