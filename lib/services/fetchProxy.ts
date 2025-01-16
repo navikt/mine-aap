@@ -40,7 +40,7 @@ export const fetchProxy = async <ResponseBody>(
   return await fetchWithRetry<ResponseBody>(url, method, oboToken, NUMBER_OF_RETRIES, requestBody, tags);
 };
 
-export const fetchPdf = async (url: string, scope: string): Response => {
+export const fetchPdf = async (url: string, scope: string): Promise<Response> => {
   const callid = randomUUID();
   const oboToken = await getOnBefalfOfToken(scope, url);
   const response = await fetch(url, {
