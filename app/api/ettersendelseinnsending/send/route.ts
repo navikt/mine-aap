@@ -1,11 +1,15 @@
-import { logError } from '@navikt/aap-felles-utils';
+import { logError, logInfo } from '@navikt/aap-felles-utils';
 import { sendEttersendelse } from 'lib/services/innsendingService';
 import { Ettersendelse, InnsendingBackendState, VedleggType } from 'lib/types/types';
 import { NextRequest } from 'next/server';
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
-  const { ettersendteVedlegg, søknadId }: Ettersendelse = body;
+  const { ettersendteVedlegg, søknadId, totalFileSize }: Ettersendelse = body;
+
+  logInfo(
+    `Sender inn ettersendelse med ${ettersendteVedlegg.length} vedlegg på samlet størrelse ${totalFileSize} bytes`
+  );
 
   const ettersending = ettersendteVedlegg[0];
   const requestBody: InnsendingBackendState = {
