@@ -1749,9 +1749,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/aap-felles-react@npm:^4.2.2":
-  version: 4.2.2
-  resolution: "@navikt/aap-felles-react@npm:4.2.2::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faap-felles-react%2F4.2.2%2Fd85ac48e47c68a89726a15efab8304d375acd40e"
+"@navikt/aap-felles-react@npm:^4.2.4":
+  version: 4.2.4
+  resolution: "@navikt/aap-felles-react@npm:4.2.4::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faap-felles-react%2F4.2.4%2F4015f7b7102a54b8a0c832cd5b29992cf68504c3"
   dependencies:
     "@navikt/aksel-icons": "npm:^7.5.2"
     "@navikt/ds-css": "npm:^7.5.2"
@@ -1761,7 +1761,7 @@ __metadata:
     react-hook-form: "npm:^7.54.2"
     react-select: "npm:^5.8.3"
     uuid: "npm:^10.0.0"
-  checksum: 10c0/c77f3443bf69572acf813965539069c42c209c47689a09ad43b6acb4e02c0c9df1141e8f39830a5a68f5aac90b5450617ef8372d70836abeb2b21ae6b7561c6b
+  checksum: 10c0/7446c815d11e0e5e276a27b7ce56d8857e06044cedb6b9d692fce7244303dc81b95ac2675646053de3ba9d1d4927b5620507641a9033cb623fc5e3d84fcd1c2f
   languageName: node
   linkType: hard
 
@@ -2965,7 +2965,7 @@ __metadata:
     "@grafana/faro-web-sdk": "npm:^1.12.2"
     "@navikt/aap-felles-css": "npm:^4.2.2"
     "@navikt/aap-felles-prettier": "npm:^4.2.2"
-    "@navikt/aap-felles-react": "npm:^4.2.2"
+    "@navikt/aap-felles-react": "npm:^4.2.4"
     "@navikt/aap-felles-utils": "npm:^4.2.2"
     "@navikt/aap-felles-utils-client": "npm:^4.2.2"
     "@navikt/aksel-icons": "npm:^7.9.1"

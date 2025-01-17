@@ -16,7 +16,7 @@
   "dependencies": {
     "@grafana/faro-web-sdk": "^1.12.2",
     "@navikt/aap-felles-css": "^4.2.2",
-    "@navikt/aap-felles-react": "^4.2.2",
+    "@navikt/aap-felles-react": "^4.2.4",
     "@navikt/aap-felles-utils": "^4.2.2",
     "@navikt/aap-felles-utils-client": "^4.2.2",
     "@navikt/aksel-icons": "^7.9.1",
