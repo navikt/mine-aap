@@ -26,7 +26,7 @@
     "@navikt/next-api-proxy": "^4.1.3",
     "@navikt/oasis": "^3.6.0",
     "@vercel/otel": "^1.10.0",
-    "cookie": "^0.6.0",
+    "cookie": "^0.7.0",
     "csp-header": "^6.0.0",
     "date-fns": "^4.1.0",
     "html-react-parser": "^5.2.2",
