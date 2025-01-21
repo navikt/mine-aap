@@ -3,6 +3,7 @@
 import { requestOboToken, validateToken } from '@navikt/oasis';
 import { getAccessTokenOrRedirectToLogin, logError } from '@navikt/aap-felles-utils';
 import { headers } from 'next/headers';
+import { randomUUID } from 'crypto';
 
 const NUMBER_OF_RETRIES = 3;
 
@@ -39,21 +40,23 @@ export const fetchProxy = async <ResponseBody>(
   return await fetchWithRetry<ResponseBody>(url, method, oboToken, NUMBER_OF_RETRIES, requestBody, tags);
 };
 
-export const fetchPdf = async (url: string, scope: string): Promise<Blob | undefined> => {
+export const fetchPdf = async (url: string, scope: string): Promise<Response> => {
+  const callid = randomUUID();
   const oboToken = await getOnBefalfOfToken(scope, url);
   const response = await fetch(url, {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${oboToken}`,
       Accept: 'application/pdf',
+      'Nav-CallId': callid,
     },
     next: { revalidate: 0 },
   });
-
   if (response.ok) {
-    return response.blob();
+    return response;
   } else {
     logError(`kunne ikke lese pdf på url ${url}.`);
+    throw new Error(`kunne ikke lese pdf på url ${url}.`);
   }
 };
 
