@@ -29,8 +29,9 @@ spec:
     limits:
       memory: 512Mi
   observability:
-    tracing:
+    autoInstrumentation:
       enabled: true
+      runtime: nodejs
     logging:
       destinations:
         - id: elastic
