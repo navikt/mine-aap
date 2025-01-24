@@ -9,11 +9,7 @@ import { SoknadMedDatafetching } from 'components/Soknad/SoknadMedDatafetching';
 import { hentSøknader } from 'lib/services/innsendingService';
 import { getTranslations } from 'next-intl/server';
 
-interface PageParams {
-  locale: 'nb' | 'nn';
-}
-
-const Page = async ({ params }: Readonly<{ params: Promise<PageParams> }>) => {
+const Page = async () => {
   const t = await getTranslations('');
 
   const søknader = await hentSøknader();

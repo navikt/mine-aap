@@ -51,7 +51,7 @@ export const NavDecorator = ({ children }: { children: React.ReactNode }) => {
       });
     }
     setBreadcrumbs(breadcrumbs);
-  }, [router, t]);
+  }, [router, t, pathname]);
 
   onBreadcrumbClick((breadcrumb) => {
     router.push(breadcrumb.url.replace(BASE_PATH, '/'));

@@ -1,6 +1,4 @@
-import { EttersendelseInnsending } from 'components/ettersendelseinnsending/EttersendelseInnsending';
 import { hentSøknader } from 'lib/services/innsendingService';
-import { notFound } from 'next/navigation';
 import styles from '../[uuid]/ettersendelse/page.module.css';
 import { BodyShort, Heading, Label, ReadMore } from '@navikt/ds-react';
 import { Section } from 'components/Section/Section';
@@ -8,7 +6,6 @@ import { LucaGuidePanel, ScanningGuide } from '@navikt/aap-felles-react';
 import { ArrowLeftIcon } from '@navikt/aksel-icons';
 import { PageHeader } from 'components/PageHeader';
 import { getTranslations } from 'next-intl/server';
-import { formatFullDate } from 'lib/utils/date';
 import { Link, redirect } from 'i18n/routing';
 import { FileUploadUtenSøknad } from 'components/fileupload/FileUploadUtenSøknad';
 

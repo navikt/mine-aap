@@ -1,7 +1,7 @@
 'use client';
 
 import { Ettersendelse, VedleggType } from 'lib/types/types';
-import { FileInput, FileInputInnsending, Vedlegg } from '@navikt/aap-felles-react';
+import { FileInputInnsending, Vedlegg } from '@navikt/aap-felles-react';
 import { Section } from 'components/Section/Section';
 import { Alert, BodyShort, Button, Heading } from '@navikt/ds-react';
 import React, { useState } from 'react';
