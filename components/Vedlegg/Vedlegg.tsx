@@ -1,12 +1,12 @@
+'use client';
+
 import { useEffect, useState } from 'react';
-import { beskyttetSide } from '@navikt/aap-felles-utils';
-import { GetServerSidePropsResult, NextPageContext } from 'next';
-import { getStringFromPossiblyArrayQuery } from '@navikt/aap-felles-utils-client';
 
 interface Props {
   uuid: string;
 }
-const Vedlegg = ({ uuid }: Props) => {
+
+export const Vedlegg = ({ uuid }: Props) => {
   const [file, setFile] = useState<Blob | undefined>(undefined);
 
   useEffect(() => {
@@ -42,19 +42,3 @@ const Vedlegg = ({ uuid }: Props) => {
     </div>
   );
 };
-
-export const getServerSideProps = beskyttetSide(async (ctx: NextPageContext): Promise<GetServerSidePropsResult<{}>> => {
-  const uuid = getStringFromPossiblyArrayQuery(ctx.query.uuid);
-
-  if (!uuid) {
-    return {
-      notFound: true,
-    };
-  }
-
-  return {
-    props: { uuid },
-  };
-});
-
-export default Vedlegg;

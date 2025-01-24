@@ -1,5 +1,4 @@
 import { BodyShort, Heading } from '@navikt/ds-react';
-import { getDictionary } from 'app/dev/[lang]/dictionaries';
 import { Card } from 'components/Card/Card';
 import { ClientButton } from 'components/ClientButton';
 import { DokumentoversiktMedDatafetching } from 'components/DokumentoversiktNy/DokumentoversiktMedDatafetching';
@@ -8,22 +7,15 @@ import { NyttigÅViteServer } from 'components/NyttigÅVite/NyttigÅViteServer';
 import { PageComponentFlexContainer } from 'components/PageComponentFlexContainer/PageComponentFlexContainer';
 import { SoknadMedDatafetching } from 'components/Soknad/SoknadMedDatafetching';
 import { hentSøknader } from 'lib/services/innsendingService';
-import { isProduction } from 'lib/utils/environments';
-import { notFound } from 'next/navigation';
+import { getTranslations } from 'next-intl/server';
 
 interface PageParams {
-  lang: 'nb' | 'nn';
+  locale: 'nb' | 'nn';
 }
 
 const Page = async ({ params }: Readonly<{ params: Promise<PageParams> }>) => {
-  if (isProduction()) {
-    return notFound();
-  }
+  const t = await getTranslations('');
 
-  const lang = (await params).lang;
-  const dict = await getDictionary(lang);
-
-  // Debug for å teste dokumenter og søknader i dev
   const søknader = await hentSøknader();
 
   const sisteSøknadInnsendingNy = søknader[0];
@@ -32,14 +24,15 @@ const Page = async ({ params }: Readonly<{ params: Promise<PageParams> }>) => {
     <div>
       <PageComponentFlexContainer>
         <Heading level="1" size="large" spacing>
-          {dict.appTittelMedSkille /* TODO: Add shy */}
+          {t('appTittelMedSkille') /* TODO: Add shy */}
         </Heading>
-        <ForsideIngress>{dict.appIngress}</ForsideIngress>
+        <ForsideIngress>{t('appIngress')}</ForsideIngress>
       </PageComponentFlexContainer>
+
       {sisteSøknadInnsendingNy && (
         <PageComponentFlexContainer subtleBackground>
           <Heading level="2" size="medium" spacing>
-            {dict.minSisteSøknad.heading}
+            {t('minSisteSøknad.heading')}
           </Heading>
           <Card>
             <SoknadMedDatafetching søknad={sisteSøknadInnsendingNy} />
@@ -51,11 +44,11 @@ const Page = async ({ params }: Readonly<{ params: Promise<PageParams> }>) => {
           <DokumentoversiktMedDatafetching />
           <PageComponentFlexContainer>
             <Heading level="2" size="medium" spacing>
-              {dict.forside.ettersendelse.tittel}
+              {t('forside.ettersendelse.tittel')}
             </Heading>
             <Card subtleBlue>
-              <BodyShort spacing>{dict.forside.ettersendelse.tekst}</BodyShort>
-              <ClientButton url="/aap/mine-aap/ettersendelse" text={dict.forside.ettersendelse.knapp}></ClientButton>
+              <BodyShort spacing>{t('forside.ettersendelse.tekst')}</BodyShort>
+              <ClientButton url="/aap/mine-aap/ettersendelse" text={t('forside.ettersendelse.knapp')}></ClientButton>
             </Card>
           </PageComponentFlexContainer>
         </>
@@ -65,13 +58,13 @@ const Page = async ({ params }: Readonly<{ params: Promise<PageParams> }>) => {
       </PageComponentFlexContainer>
       <PageComponentFlexContainer>
         <Heading level="2" size="medium" spacing>
-          {dict.forside.endretSituasjon.heading}
+          {t('forside.endretSituasjon.heading')}
         </Heading>
         <Card subtleBlue>
-          <BodyShort spacing>{dict.forside.endretSituasjon.tekst}</BodyShort>
+          <BodyShort spacing>{t('forside.endretSituasjon.tekst')}</BodyShort>
           <ClientButton
             url="https://innboks.nav.no/s/skriv-til-oss?category=Arbeid"
-            text={dict.forside.endretSituasjon.knapp}
+            text={t('forside.endretSituasjon.knapp')}
           ></ClientButton>
         </Card>
       </PageComponentFlexContainer>

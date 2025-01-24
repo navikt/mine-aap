@@ -1,4 +1,7 @@
 /** @type {import('next').NextConfig} */
+const createNextIntlPlugin = require('next-intl/plugin');
+ const withNextIntl = createNextIntlPlugin();
+
 const ssr = require('@navikt/nav-dekoratoren-moduler/ssr');
 
 const appDirectives = {
@@ -31,11 +34,6 @@ const nextConfig = {
       },
     ];
   },
-
-  i18n: {
-    locales: ['nb', 'nn'],
-    defaultLocale: 'nb',
-  },
 };
 
-module.exports = nextConfig;
+module.exports = withNextIntl(nextConfig);

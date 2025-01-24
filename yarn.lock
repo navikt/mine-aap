@@ -1120,7 +1120,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@formatjs/fast-memoize@npm:2.2.6":
+"@formatjs/fast-memoize@npm:2.2.6, @formatjs/fast-memoize@npm:^2.2.0":
   version: 2.2.6
   resolution: "@formatjs/fast-memoize@npm:2.2.6"
   dependencies:
@@ -1150,7 +1150,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@formatjs/intl-localematcher@npm:0.5.10":
+"@formatjs/intl-localematcher@npm:0.5.10, @formatjs/intl-localematcher@npm:^0.5.4":
   version: 0.5.10
   resolution: "@formatjs/intl-localematcher@npm:0.5.10"
   dependencies:
@@ -3029,6 +3029,7 @@ __metadata:
     eslint-plugin-jest: "npm:^28.11.0"
     html-react-parser: "npm:^5.2.2"
     husky: "npm:^9.1.7"
+    install: "npm:^0.13.0"
     jest: "npm:^29.7.0"
     jest-axe: "npm:^9.0.0"
     jest-environment-jsdom: "npm:^29.7.0"
@@ -3037,6 +3038,7 @@ __metadata:
     json-diff: "npm:^1.0.6"
     lint-staged: "npm:^15.4.1"
     next: "npm:^15.1.5"
+    next-intl: "npm:^3.26.3"
     node-cache: "npm:^5.1.2"
     patch-package: "npm:^8.0.0"
     prettier: "npm:^3.4.2"
@@ -6235,6 +6237,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"install@npm:^0.13.0":
+  version: 0.13.0
+  resolution: "install@npm:0.13.0"
+  checksum: 10c0/364d7d1e9404ff7ae3015dee7266b4ffb0e2aae348474b7ffd3e42fcbb78b37e29848e18ca94f93166f6ddb248be0f775fbed87cc92dafb018c289a86d010cf1
+  languageName: node
+  linkType: hard
+
 "internal-slot@npm:^1.0.5":
   version: 1.0.5
   resolution: "internal-slot@npm:1.0.5"
@@ -6257,7 +6266,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"intl-messageformat@npm:10.7.14":
+"intl-messageformat@npm:10.7.14, intl-messageformat@npm:^10.5.14":
   version: 10.7.14
   resolution: "intl-messageformat@npm:10.7.14"
   dependencies:
@@ -8108,6 +8117,27 @@ __metadata:
   version: 0.6.3
   resolution: "negotiator@npm:0.6.3"
   checksum: 10c0/3ec9fd413e7bf071c937ae60d572bc67155262068ed522cf4b3be5edbe6ddf67d095ec03a3a14ebf8fc8e95f8e1d61be4869db0dbb0de696f6b837358bd43fc2
+  languageName: node
+  linkType: hard
+
+"negotiator@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "negotiator@npm:1.0.0"
+  checksum: 10c0/4c559dd52669ea48e1914f9d634227c561221dd54734070791f999c52ed0ff36e437b2e07d5c1f6e32909fc625fe46491c16e4a8f0572567d4dd15c3a4fda04b
+  languageName: node
+  linkType: hard
+
+"next-intl@npm:^3.26.3":
+  version: 3.26.3
+  resolution: "next-intl@npm:3.26.3"
+  dependencies:
+    "@formatjs/intl-localematcher": "npm:^0.5.4"
+    negotiator: "npm:^1.0.0"
+    use-intl: "npm:^3.26.3"
+  peerDependencies:
+    next: ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || >=19.0.0-rc <19.0.0 || ^19.0.0
+  checksum: 10c0/8e0783fb214ca5faf8fbb153eb68a6ff6fe136879a13e888a8db4191000c6d904c2cf110119bda0ec2373eb5b216c9b29b26b83251e8213f1e897079bee0dfba
   languageName: node
   linkType: hard
 
@@ -10857,6 +10887,18 @@ __metadata:
     querystringify: "npm:^2.1.1"
     requires-port: "npm:^1.0.0"
   checksum: 10c0/bd5aa9389f896974beb851c112f63b466505a04b4807cea2e5a3b7092f6fbb75316f0491ea84e44f66fed55f1b440df5195d7e3a8203f64fcefa19d182f5be87
+  languageName: node
+  linkType: hard
+
+"use-intl@npm:^3.26.3":
+  version: 3.26.3
+  resolution: "use-intl@npm:3.26.3"
+  dependencies:
+    "@formatjs/fast-memoize": "npm:^2.2.0"
+    intl-messageformat: "npm:^10.5.14"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || >=19.0.0-rc <19.0.0 || ^19.0.0
+  checksum: 10c0/ca79ce71ec4f6860cc5fd911bded30c6fb4d6596d3ab8abad97de294a9717b72885f7506f629737a6620507ce76c0b3b39490010927057fedcf52f65cf94b01f
   languageName: node
   linkType: hard
 

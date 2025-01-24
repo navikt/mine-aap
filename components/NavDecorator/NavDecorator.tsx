@@ -1,18 +1,21 @@
+'use client';
+
 import {
   onBreadcrumbClick,
   onLanguageSelect,
   setAvailableLanguages,
   setBreadcrumbs,
 } from '@navikt/nav-dekoratoren-moduler';
-import { useRouter } from 'next/router';
+import { useTranslations } from 'next-intl';
+import { usePathname, useRouter } from 'i18n/routing';
 import React, { useEffect } from 'react';
-import { useIntl } from 'react-intl';
+
+const BASE_PATH = '/aap/mine-aap/';
 
 export const NavDecorator = ({ children }: { children: React.ReactNode }) => {
-  const { formatMessage } = useIntl();
-
+  const t = useTranslations('breadcrumbs');
   const router = useRouter();
-  const { pathname, asPath, query } = router;
+  const pathname = usePathname();
 
   useEffect(() => {
     setAvailableLanguages([
@@ -28,32 +31,30 @@ export const NavDecorator = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   onLanguageSelect((language) => {
-    router.push({ pathname, query }, asPath, { locale: language.locale });
+    router.push(pathname, { locale: language.locale });
   });
 
   useEffect(() => {
-    const breadcrumbs = [
-      { title: formatMessage({ id: 'breadcrumbs.mineAAP' }), url: router.basePath, handleInApp: true },
-    ];
-    if (router.asPath.endsWith('ettersendelse/')) {
+    const breadcrumbs = [{ title: t('mineAAP'), url: BASE_PATH, handleInApp: true }];
+    if (pathname.endsWith('ettersendelse/')) {
       breadcrumbs.push({
-        title: formatMessage({ id: 'breadcrumbs.ettersending' }),
-        url: router.asPath,
+        title: t('ettersending'),
+        url: pathname,
         handleInApp: true,
       });
     }
-    if (router.asPath.endsWith('soknader/')) {
+    if (pathname.endsWith('soknader/')) {
       breadcrumbs.push({
-        title: formatMessage({ id: 'breadcrumbs.mineAAPSoknader' }),
-        url: router.asPath,
+        title: t('mineAAPSoknader'),
+        url: pathname,
         handleInApp: true,
       });
     }
     setBreadcrumbs(breadcrumbs);
-  }, [router, formatMessage]);
+  }, [router, t]);
 
   onBreadcrumbClick((breadcrumb) => {
-    router.push(breadcrumb.url.replace(router.basePath, '/'));
+    router.push(breadcrumb.url.replace(BASE_PATH, '/'));
   });
 
   return <>{children}</>;

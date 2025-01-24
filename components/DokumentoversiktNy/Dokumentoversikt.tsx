@@ -1,12 +1,13 @@
 'use client';
+
 import styles from './Dokumentoversikt.module.css';
 import { Checkbox, Pagination, Select } from '@navikt/ds-react';
 import { Dokument } from 'lib/types/types';
 import { logDokumentoversiktEvent } from 'lib/utils/amplitude';
 import { getNumberOfPages, sortDatoAsc, sortDatoDesc } from 'lib/utils/dokumentOversikt';
 import { useEffect, useMemo, useState } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
 import { Dokumentrad } from 'components/DokumentoversiktNy/Dokumentrad/Dokumentrad';
+import { useTranslations } from 'next-intl';
 
 const MELDEKORT_TITTEL = 'Meldekort for uke';
 
@@ -20,7 +21,7 @@ export const Dokumentoversikt = ({ dokumenter }: { dokumenter: Dokument[] }) => 
   const [pageNumber, setPageNumber] = useState(1);
   const [hideMeldekort, setHideMeldekort] = useState(true);
 
-  const intl = useIntl();
+  const t = useTranslations('dokumentOversikt');
 
   const filtrerteDokumenter = useMemo(() => {
     return sorterteDokumenter.filter((dokument) => {
@@ -76,16 +77,12 @@ export const Dokumentoversikt = ({ dokumenter }: { dokumenter: Dokument[] }) => 
     <div className={styles.container}>
       <div className={styles.inputWrapper}>
         <Select
-          label={intl.formatMessage({ id: 'dokumentOversikt.sorter.label' })}
+          label={t('sorter.label')}
           onChange={onSortChange}
           className={`${styles.select} ${!inneholderMeldekort && styles.noCheckbox}`}
         >
-          <option value="datoAsc">
-            <FormattedMessage id="dokumentOversikt.sorter.datoAsc" />
-          </option>
-          <option value="datoDesc">
-            <FormattedMessage id="dokumentOversikt.sorter.datoDesc" />
-          </option>
+          <option value="datoAsc">{t('sorter.datoAsc')}</option>
+          <option value="datoDesc">{t('sorter.datoDesc')}</option>
         </Select>
         {inneholderMeldekort && (
           <Checkbox
@@ -96,7 +93,7 @@ export const Dokumentoversikt = ({ dokumenter }: { dokumenter: Dokument[] }) => 
               setHideMeldekort(!hideMeldekort);
             }}
           >
-            <FormattedMessage id="dokumentOversikt.visMeldekort" />
+            {t('visMeldekort')}
           </Checkbox>
         )}
       </div>

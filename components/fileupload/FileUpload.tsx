@@ -1,12 +1,14 @@
+'use client';
+
 import { Ettersendelse, VedleggType } from 'lib/types/types';
 import { FileInput, FileInputInnsending, Vedlegg } from '@navikt/aap-felles-react';
 import { Section } from 'components/Section/Section';
 import { Alert, BodyShort, Button, Heading } from '@navikt/ds-react';
 import React, { useState } from 'react';
 import { Error } from 'components/FormErrorSummary/FormErrorSummary';
-import { useIntl } from 'react-intl';
 
 import styles from 'components/fileupload/FileUpload.module.css';
+import { useTranslations } from 'next-intl';
 
 interface Props {
   søknadId?: string;
@@ -15,7 +17,6 @@ interface Props {
   deleteError: (vedlegg: Vedlegg) => void;
   setErrorSummaryFocus: () => void;
   onSuccess: (krav: VedleggType) => void;
-  brukInnsending?: boolean;
 }
 
 const findErrors = (vedlegg: Vedlegg[], krav: string) =>
@@ -25,16 +26,9 @@ const findErrors = (vedlegg: Vedlegg[], krav: string) =>
       return { path: krav, message: errorFile.errorMessage, id: errorFile.vedleggId };
     });
 
-export const FileUpload = ({
-  søknadId,
-  krav,
-  addError,
-  deleteError,
-  onSuccess,
-  setErrorSummaryFocus,
-  brukInnsending = false,
-}: Props) => {
-  const { formatMessage } = useIntl();
+export const FileUpload = ({ søknadId, krav, addError, deleteError, onSuccess, setErrorSummaryFocus }: Props) => {
+  const t = useTranslations('ettersendelse');
+
   const [files, setFiles] = useState<Vedlegg[]>([]);
   const [harLastetOppEttersending, setHarLastetOppEttersending] = useState<boolean>(false);
   const [harEttersendingError, setHarEttersendingError] = useState<boolean>(false);
@@ -64,9 +58,7 @@ export const FileUpload = ({
       ],
     };
 
-    const url = brukInnsending
-      ? '/aap/mine-aap/api/ettersendelseinnsending/send/'
-      : '/aap/mine-aap/api/ettersendelse/send/';
+    const url = '/aap/mine-aap/api/ettersendelseinnsending/send/';
 
     try {
       const response = await fetch(url, {
@@ -91,70 +83,38 @@ export const FileUpload = ({
     <Section>
       <div className={styles.fileinputWrapper}>
         {(!harLastetOppEttersending || kravErAnnet) && (
-          <>
-            {brukInnsending ? (
-              <FileInputInnsending
-                heading={formatMessage({ id: `ettersendelse.vedleggstyper.${krav}.heading` })}
-                ingress={formatMessage({ id: `ettersendelse.vedleggstyper.${krav}.description` })}
-                readAttachmentUrl={'/aap/mine-aap/vedlegg/'}
-                id={krav}
-                onUpload={(vedlegg) => {
-                  if (harLastetOppEttersending) {
-                    setHarLastetOppEttersending(false);
-                  }
-                  const errors = findErrors(vedlegg, krav);
-                  errors && addError(errors);
-                  setFiles([...files, ...vedlegg]);
-                }}
-                onDelete={(vedlegg) => {
-                  if (vedlegg.errorMessage) {
-                    deleteError(vedlegg);
-                  }
+          <FileInputInnsending
+            heading={t(`vedleggstyper.${krav}.heading`)}
+            ingress={t(`vedleggstyper.${krav}.description`)}
+            readAttachmentUrl={'/aap/mine-aap/vedlegg/'}
+            id={krav}
+            onUpload={(vedlegg) => {
+              if (harLastetOppEttersending) {
+                setHarLastetOppEttersending(false);
+              }
+              const errors = findErrors(vedlegg, krav);
+              errors && addError(errors);
+              setFiles([...files, ...vedlegg]);
+            }}
+            onDelete={(vedlegg) => {
+              if (vedlegg.errorMessage) {
+                deleteError(vedlegg);
+              }
 
-                  const newFiles = files.filter((file) => file.vedleggId !== vedlegg.vedleggId);
-                  setFiles(newFiles);
-                }}
-                deleteUrl={'/aap/mine-aap/api/vedlegginnsending/slett/?uuid='}
-                uploadUrl={'/aap/mine-aap/api/vedlegginnsending/lagre/'}
-                files={files}
-              />
-            ) : (
-              <FileInput
-                heading={formatMessage({ id: `ettersendelse.vedleggstyper.${krav}.heading` })}
-                ingress={formatMessage({ id: `ettersendelse.vedleggstyper.${krav}.description` })}
-                readAttachmentUrl={'/aap/mine-aap/vedlegg/'}
-                id={krav}
-                onUpload={(vedlegg) => {
-                  if (harLastetOppEttersending) {
-                    setHarLastetOppEttersending(false);
-                  }
-                  const errors = findErrors(vedlegg, krav);
-                  errors && addError(errors);
-                  setFiles([...files, ...vedlegg]);
-                }}
-                onDelete={(vedlegg) => {
-                  if (vedlegg.errorMessage) {
-                    deleteError(vedlegg);
-                  }
-
-                  const newFiles = files.filter((file) => file.vedleggId !== vedlegg.vedleggId);
-                  setFiles(newFiles);
-                }}
-                deleteUrl={'/aap/mine-aap/api/vedlegg/slett/?uuid='}
-                uploadUrl={'/aap/mine-aap/api/vedlegg/lagre/'}
-                files={files}
-              />
-            )}
-          </>
+              const newFiles = files.filter((file) => file.vedleggId !== vedlegg.vedleggId);
+              setFiles(newFiles);
+            }}
+            deleteUrl={'/aap/mine-aap/api/vedlegginnsending/slett/?uuid='}
+            uploadUrl={'/aap/mine-aap/api/vedlegginnsending/lagre/'}
+            files={files}
+          />
         )}
         {harLastetOppEttersending && (
           <div className={successWrapperKlassenavn}>
             {!kravErAnnet && (
               <>
-                <Heading size={'medium'}>
-                  {formatMessage({ id: `ettersendelse.vedleggstyper.${krav}.heading` })}
-                </Heading>
-                <BodyShort>{formatMessage({ id: `ettersendelse.vedleggstyper.${krav}.description` })}</BodyShort>
+                <Heading size={'medium'}>{t(`vedleggstyper.${krav}.heading`)}</Heading>
+                <BodyShort>{t(`vedleggstyper.${krav}.description`)}</BodyShort>
               </>
             )}
             <Alert variant="success">

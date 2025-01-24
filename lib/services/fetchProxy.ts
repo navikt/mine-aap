@@ -7,7 +7,7 @@ import { randomUUID } from 'crypto';
 
 const NUMBER_OF_RETRIES = 3;
 
-const getOnBefalfOfToken = async (audience: string, url: string): Promise<string> => {
+export const getOnBefalfOfToken = async (audience: string, url: string): Promise<string> => {
   const token = getAccessTokenOrRedirectToLogin(await headers());
   if (!token) {
     logError(`Token for ${url} er undefined`);

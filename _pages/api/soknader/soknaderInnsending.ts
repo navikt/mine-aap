@@ -1,5 +1,5 @@
 import { beskyttetApi } from '@navikt/aap-felles-utils';
-import { getSøknaderMedEttersendinger } from 'pages/api/soknader/soknadermedettersendinger';
+import { getSøknaderMedEttersendinger } from '_pages/api/soknader/soknadermedettersendinger';
 
 const allowedOrigins = [
   'https://www.intern.dev.nav.no',
