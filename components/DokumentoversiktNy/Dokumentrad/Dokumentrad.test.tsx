@@ -27,11 +27,11 @@ describe('Dokumentrad', () => {
     expect(screen.getByRole('link', { name: inngåendeDokument.tittel })).toHaveAttribute('target', '_blank');
   });
 
-  test('viser at dokumentet er sendt av NAV når type er U', () => {
+  test('viser at dokumentet er sendt av Nav når type er U', () => {
     const utgåendeDokument: Dokument = { ...inngåendeDokument, type: 'U' };
     render(<Dokumentrad dokument={utgåendeDokument} antallSider={1} />);
 
-    expect(screen.getByText(/^Sendt av NAV/)).toBeVisible();
+    expect(screen.getByText(/^Sendt av Nav/)).toBeVisible();
   });
 
   test('viser at dokumentet er sendt av bruker (deg) når type er I', () => {

@@ -1,9 +1,9 @@
-import { NyttigÅVite } from 'components/NyttigÅVite/NyttigÅVite';
+import { NyttigÅViteServer } from 'components/NyttigÅVite/NyttigÅViteServer';
 import { render, screen } from 'setUpTest';
 
 describe('NyttigÅVite', () => {
   beforeEach(() => {
-    render(<NyttigÅVite />);
+    render(<NyttigÅViteServer />);
   });
 
   test('har overskrift på nivå 2', () => {

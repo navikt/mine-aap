@@ -2,9 +2,9 @@ import '@testing-library/jest-dom';
 
 import { toHaveNoViolations } from 'jest-axe';
 import React, { ReactElement, ReactNode } from 'react';
-import { IntlProvider } from 'react-intl';
 import { render as rtlRender } from '@testing-library/react';
 import messagesNb from 'lib/translations/nb.json';
+import { NextIntlClientProvider } from 'next-intl';
 
 require('jest-fetch-mock').enableMocks();
 jest.mock('next/router', () => ({
@@ -13,29 +13,12 @@ jest.mock('next/router', () => ({
 
 expect.extend(toHaveNoViolations);
 
-function flattenMessages(nestedMessages: object, prefix = ''): Record<string, string> {
-  return Object.keys(nestedMessages).reduce((messages, key) => {
-    // @ts-ignore
-    let value = nestedMessages[key];
-    let prefixedKey = prefix ? `${prefix}.${key}` : key;
-
-    if (typeof value === 'string') {
-      // @ts-ignore
-      messages[prefixedKey] = value;
-    } else {
-      Object.assign(messages, flattenMessages(value, prefixedKey));
-    }
-
-    return messages;
-  }, {});
-}
-
 function render(ui: ReactElement, { locale = 'nb', ...options } = {}) {
   function Wrapper({ children }: { children: ReactNode }) {
     return (
-      <IntlProvider locale={locale} messages={flattenMessages(messagesNb)}>
+      <NextIntlClientProvider locale={locale} messages={messagesNb}>
         {children}
-      </IntlProvider>
+      </NextIntlClientProvider>
     );
   }
   return rtlRender(ui, { wrapper: Wrapper, ...options });
