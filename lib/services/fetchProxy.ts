@@ -72,6 +72,7 @@ export const fetchWithRetry = async <ResponseBody>(
     throw new Error(`Unable to fetch ${url}: ${retries} retries left`);
   }
 
+  const callid = randomUUID();
   const response = await fetch(url, {
     method,
     body: JSON.stringify(requestBody),
@@ -79,6 +80,7 @@ export const fetchWithRetry = async <ResponseBody>(
       Authorization: `Bearer ${oboToken}`,
       Accept: 'application/json',
       'Content-Type': 'application/json',
+      'Nav-CallId': callid,
     },
     next: { revalidate: 0, tags },
   });
