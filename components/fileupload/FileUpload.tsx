@@ -9,6 +9,7 @@ import { Error } from 'components/FormErrorSummary/FormErrorSummary';
 
 import styles from 'components/fileupload/FileUpload.module.css';
 import { useTranslations } from 'next-intl';
+import { useParams } from 'next/navigation';
 
 interface Props {
   søknadId?: string;
@@ -28,6 +29,8 @@ const findErrors = (vedlegg: Vedlegg[], krav: string) =>
 
 export const FileUpload = ({ søknadId, krav, addError, deleteError, onSuccess, setErrorSummaryFocus }: Props) => {
   const t = useTranslations('ettersendelse');
+
+  const { locale = 'nb' } = useParams<{ locale: string }>();
 
   const [files, setFiles] = useState<Vedlegg[]>([]);
   const [harLastetOppEttersending, setHarLastetOppEttersending] = useState<boolean>(false);
@@ -86,7 +89,7 @@ export const FileUpload = ({ søknadId, krav, addError, deleteError, onSuccess, 
           <FileInputInnsending
             heading={t(`vedleggstyper.${krav}.heading`)}
             ingress={t(`vedleggstyper.${krav}.description`)}
-            readAttachmentUrl={'/aap/mine-aap/vedlegg/'}
+            readAttachmentUrl={`/aap/mine-aap/${locale}/vedlegg/`}
             id={krav}
             onUpload={(vedlegg) => {
               if (harLastetOppEttersending) {
