@@ -10,6 +10,9 @@ require('jest-fetch-mock').enableMocks();
 jest.mock('next/router', () => ({
   useRouter: jest.fn(),
 }));
+jest.mock('next/navigation', () => ({
+  useParams: jest.fn(),
+}));
 
 expect.extend(toHaveNoViolations);
 

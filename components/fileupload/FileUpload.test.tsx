@@ -6,6 +6,7 @@ import { userEvent } from '@testing-library/user-event';
 import { v4 as uuidV4 } from 'uuid';
 import { VedleggType } from 'lib/types/types';
 import { axe } from 'jest-axe';
+import { useParams } from 'next/navigation';
 
 enableFetchMocks();
 const filnavn1 = 'fil1.pdf';
@@ -15,6 +16,7 @@ const fileTwo: File = new File(['fil to'], filnavn2, { type: 'application/pdf' }
 describe('FileUpload', () => {
   beforeEach(() => {
     fetchMock.resetMocks();
+    jest.mocked(useParams).mockReturnValue({ locale: 'nb' });
   });
 
   const user = userEvent.setup();
