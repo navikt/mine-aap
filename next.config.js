@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const createNextIntlPlugin = require('next-intl/plugin');
- const withNextIntl = createNextIntlPlugin();
+const withNextIntl = createNextIntlPlugin();
 
 const ssr = require('@navikt/nav-dekoratoren-moduler/ssr');
 
@@ -10,6 +10,7 @@ const appDirectives = {
   'object-src': ['none'],
   'script-src-elem': ["'self'"],
   'style-src-elem': ["'self'"],
+  'frame-src': ['self', 'blog:'],
   'img-src': ["'self'", 'data:', 'blob:'],
 };
 
