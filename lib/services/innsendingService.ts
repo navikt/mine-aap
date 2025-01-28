@@ -7,8 +7,7 @@ import { mockSøknerMedEttersending } from 'lib/mock/mockSoknad';
 import { isAfter } from 'date-fns';
 import { logError } from '@navikt/aap-felles-utils';
 import { randomUUID } from 'crypto';
-import { proxyApiRouteRequest } from '@navikt/next-api-proxy';
-import { NextApiRequest, NextApiResponse } from 'next';
+import { proxyRouteHandler } from '@navikt/next-api-proxy';
 
 const innsendingApiBaseUrl = process.env.INNSENDING_URL;
 const innsendingAudience = process.env.INNSENDING_AUDIENCE ?? '';
@@ -42,29 +41,25 @@ export const sendEttersendelse = async (data: InnsendingBackendState, innsending
   }
 };
 
-export const lagreVedlegg = async (req: NextApiRequest, res: NextApiResponse): Promise<any> => {
+export const lagreVedlegg = async (req: Request): Promise<any> => {
   if (isMock()) return { filId: randomUUID() };
   const url = `mellomlagring/fil`;
   const oboToken = await getOnBefalfOfToken(innsendingAudience, url);
 
-  return await proxyApiRouteRequest({
+  return await proxyRouteHandler(req, {
     hostname: 'innsending',
     path: url,
-    req: req,
-    res: res,
     bearerToken: oboToken,
     https: false,
   });
 };
 
-export const hentVedlegg = async (uuid: string, req: NextApiRequest, res: NextApiResponse): Promise<any> => {
+export const hentVedlegg = async (uuid: string, req: Request): Promise<any> => {
   const url = `/mellomlagring/fil/${uuid}`;
   const oboToken = await getOnBefalfOfToken(innsendingAudience, url);
-  return await proxyApiRouteRequest({
+  return await proxyRouteHandler(req, {
     hostname: 'innsending',
     path: url,
-    req: req,
-    res: res,
     bearerToken: oboToken,
     https: false,
   });
