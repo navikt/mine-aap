@@ -7,10 +7,10 @@ const ssr = require('@navikt/nav-dekoratoren-moduler/ssr');
 const appDirectives = {
   'connect-src': ["'self'"],
   'font-src': ['https://fonts.gstatic.com'],
-  'object-src': ['none'],
+  'object-src': ['blob:'],
   'script-src-elem': ["'self'"],
   'style-src-elem': ["'self'"],
-  'frame-src': ['self', 'blog:'],
+  'frame-src': ['self', 'blob:'],
   'img-src': ["'self'", 'data:', 'blob:'],
 };
 
