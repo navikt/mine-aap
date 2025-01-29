@@ -7,6 +7,15 @@ import { Vedlegg } from '@navikt/aap-felles-react';
 
 import { FileUpload } from 'components/fileupload/FileUpload';
 import { setFocus } from 'lib/utils/dom';
+import { getTranslations } from 'next-intl/server';
+
+export async function generateMetadata() {
+  const t = await getTranslations();
+
+  return {
+    title: `${t('ettersendelse.appTittel')} - nav.no`,
+  };
+}
 
 interface Props {
   søknad: InnsendingSøknad;
@@ -22,17 +31,6 @@ export const EttersendelseInnsending = ({ søknad }: Props) => {
 
   return (
     <>
-      {/*<Head>
-        <title>
-          {`${formatMessage(
-            { id: 'ettersendelse.appTittel' },
-            {
-              shy: '',
-            }
-          )} - nav.no`}
-        </title>
-      </Head>*/}
-
       <FormErrorSummary id={errorSummaryId} errors={errors} />
 
       <FileUpload

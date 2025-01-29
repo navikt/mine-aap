@@ -3,7 +3,6 @@ import { Dokumentoversikt } from 'components/DokumentoversiktNy/Dokumentoversikt
 import { PageComponentFlexContainer } from 'components/PageComponentFlexContainer/PageComponentFlexContainer';
 import { getTranslations } from 'next-intl/server';
 import { hentDokumenter } from 'lib/services/oppslagService';
-//import { Dokument } from 'lib/types/types';
 
 export const DokumentoversiktMedDatafetching = async () => {
   const t = await getTranslations('dokumentoversikt');

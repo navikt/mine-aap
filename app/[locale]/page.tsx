@@ -20,7 +20,7 @@ const Page = async () => {
     <div>
       <PageComponentFlexContainer>
         <Heading level="1" size="large" spacing>
-          {t('appTittelMedSkille') /* TODO: Add shy */}
+          {t('appTittelMedSkille')}
         </Heading>
         <ForsideIngress>{t('appIngress')}</ForsideIngress>
       </PageComponentFlexContainer>
