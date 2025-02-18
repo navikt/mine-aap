@@ -1,4 +1,3 @@
-import { getDictionary } from 'app/dev/[lang]/dictionaries';
 import styles from './Soknad.module.css';
 import { Alert, BodyShort, Heading, Link } from '@navikt/ds-react';
 import { DocumentationHeading } from 'components/DocumentationHeading/DocumentationHeading';
@@ -7,6 +6,7 @@ import { formatDate } from 'lib/utils/date';
 import { MineAapEttersendingNy } from 'lib/types/types';
 import { DokumentMedTittel } from 'components/Soknad/SoknadMedDatafetching';
 import { EttersendelseButton } from 'components/Soknad/EttersendelseButton';
+import { getTranslations } from 'next-intl/server';
 
 export const Soknad = async ({
   søknad,
@@ -15,14 +15,14 @@ export const Soknad = async ({
   søknad: MineAapEttersendingNy;
   dokumenter: DokumentMedTittel[];
 }) => {
-  const dict = await getDictionary('nb');
+  const t = await getTranslations('minSisteSøknad');
   return (
     <div className={styles.soknad}>
       <Heading level="2" size="medium" style={{ marginBlockEnd: '8px' }}>
-        {dict.minSisteSøknad.søknad.heading}
+        {t('søknad.heading')}
       </Heading>
       <BodyShort size="small" style={{ color: 'var(--a-text-subtle)', marginBlockEnd: '16px' }}>
-        {`${dict.minSisteSøknad.mottattDato} ${formatDate(søknad.mottattDato)}`}
+        {`${t('mottattDato')} ${formatDate(søknad.mottattDato)}`}
       </BodyShort>
 
       <Alert variant="info">
@@ -32,7 +32,7 @@ export const Soknad = async ({
 
       {dokumenter?.length > 0 && (
         <>
-          <DocumentationHeading heading={dict.minSisteSøknad.dokumentasjon.mottatt} />
+          <DocumentationHeading heading={t('dokumentasjon.mottatt')} />
           <ul>
             {dokumenter.map((dokument) => (
               <li key={dokument.journalpostId}>
@@ -50,10 +50,7 @@ export const Soknad = async ({
       )}
 
       <ButtonRow>
-        <EttersendelseButton
-          innsendingsId={søknad.innsendingsId}
-          knappeTekst={dict.minSisteSøknad.søknad.button.text}
-        />
+        <EttersendelseButton innsendingsId={søknad.innsendingsId} />
       </ButtonRow>
     </div>
   );

@@ -1,12 +1,16 @@
 /** @type {import('next').NextConfig} */
+const createNextIntlPlugin = require('next-intl/plugin');
+const withNextIntl = createNextIntlPlugin();
+
 const ssr = require('@navikt/nav-dekoratoren-moduler/ssr');
 
 const appDirectives = {
   'connect-src': ["'self'"],
   'font-src': ['https://fonts.gstatic.com'],
-  'object-src': ['none'],
+  'object-src': ['blob:'],
   'script-src-elem': ["'self'"],
   'style-src-elem': ["'self'"],
+  'frame-src': ['self', 'blob:'],
   'img-src': ["'self'", 'data:', 'blob:'],
 };
 
@@ -31,11 +35,6 @@ const nextConfig = {
       },
     ];
   },
-
-  i18n: {
-    locales: ['nb', 'nn'],
-    defaultLocale: 'nb',
-  },
 };
 
-module.exports = nextConfig;
+module.exports = withNextIntl(nextConfig);

@@ -97,6 +97,7 @@
   "tilbakeTilMineAAPKnapp": "Tilbake til Mine Arbeidsavklaringspenger",
   "ettersendelse": {
     "appTittel": "Ettersending til arbeidsavklarings{shy}penger (AAP)",
+    "appTittelMedSkille": "Ettersending til arbeidsavklarings­penger (AAP)",
     "heading": "Ettersend dokumentasjon",
     "guide": "Her kan du ettersende dokumentasjon.",
     "guide2": "Du kan også <a>ettersende per post (åpnes i ny fane)</a>, eller levere dokumentasjon på ditt lokale NAV-kontor.",

@@ -1,20 +1,15 @@
 import { Heading } from '@navikt/ds-react';
 import styles from 'components/AppHeader/AppHeader.module.css';
-import { useIntl } from 'react-intl';
+import { useTranslations } from 'next-intl';
 
 export const AppHeader = () => {
-  const { formatMessage } = useIntl();
+  const t = useTranslations();
 
   return (
     <header className={styles.appHeader}>
       <div className={styles.container}>
         <Heading level="1" size="xlarge">
-          {formatMessage(
-            { id: 'appTittel' },
-            {
-              shy: <>&shy;</>,
-            }
-          )}
+          {t('appTittelMedSkille')}
         </Heading>
       </div>
     </header>
