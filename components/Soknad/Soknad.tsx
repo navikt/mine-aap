@@ -37,7 +37,7 @@ export const Soknad = async ({
             {dokumenter.map((dokument) => (
               <li key={dokument.journalpostId}>
                 <Link
-                  href={`/aap/mine-aap/api/dokument/?journalpostId=${dokument.journalpostId}&dokumentId=${dokument.dokumentId}`}
+                  href={`/aap/mine-aap/api/dokument/${dokument.journalpostId}/${dokument.dokumentId}`}
                   target="_blank"
                   lang="no"
                 >
