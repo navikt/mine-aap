@@ -97,9 +97,9 @@ export const fetchWithRetry = async <ResponseBody>(
 
   if (!response.ok) {
     if (response.status === 500) {
-      const responseJson = await response.json();
-      logError(`klarte ikke å hente ${url}: ${responseJson.message}`);
-      throw new Error(`Unable to fetch ${url}: ${responseJson.message}`);
+      const responseMessage = await response.text(); // 500 feil fra innsending og oppslag har tekst i body
+      logError(`klarte ikke å hente ${url}: ${responseMessage}`);
+      throw new Error(`Unable to fetch ${url}: ${responseMessage}`);
     }
     if (response.status === 404) {
       throw new Error(`Ikke funnet: ${url}`);
