@@ -59,7 +59,7 @@ const Page = async () => {
         <Card subtleBlue>
           <BodyShort spacing>{t('forside.endretSituasjon.tekst')}</BodyShort>
           <ClientButton
-            url="https://innboks.nav.no/s/skriv-til-oss?category=Arbeid"
+            url="https://innboks.nav.no/s/beskjed-til-oss?category=Endring-aap"
             text={t('forside.endretSituasjon.knapp')}
           ></ClientButton>
         </Card>
