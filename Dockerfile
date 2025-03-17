@@ -1,4 +1,4 @@
-FROM gcr.io/distroless/nodejs20-debian12@sha256:ca63fa0ef17943773736ae933e1a65a47c6eaddcfbcef600f136df707f4bbc86
+FROM gcr.io/distroless/nodejs20-debian12@sha256:6848ce991f65e2ee8641b9c75d8d38b25d3bc45014b5dd6b31b736d152c8a0f8
 
 
 WORKDIR /app
