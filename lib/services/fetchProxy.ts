@@ -66,10 +66,14 @@ export const fetchWithRetry = async <ResponseBody>(
   oboToken: string,
   retries: number,
   requestBody?: object,
-  tags?: string[]
+  tags?: string[],
+  errors?: string[]
 ): Promise<ResponseBody> => {
+  if (!errors) errors = []
+
   if (retries === 0) {
-    throw new Error(`Unable to fetch ${url}: ${retries} retries left`);
+    logError(`Unable to fetch ${url}: \n${errors.join('\n')}`)
+    throw new Error(`Feil oppsto ved kall mot ${url}`);
   }
 
   const callid = randomUUID();
@@ -105,10 +109,8 @@ export const fetchWithRetry = async <ResponseBody>(
       throw new Error(`Ikke funnet: ${url}`);
     }
 
-    logError(
-      `Kall mot ${url} feilet med statuskode ${response.status}, prøver på nytt. Antall forsøk igjen: ${retries}`
-    );
-    return await fetchWithRetry(url, method, oboToken, retries - 1, requestBody, tags);
+    errors.push(`HTTP ${response.status} ${response.statusText}: ${url} (retries left ${retries})`)
+    return await fetchWithRetry(url, method, oboToken, retries - 1, requestBody, tags, errors);
   }
 
   const contentType = response.headers.get('content-type');
