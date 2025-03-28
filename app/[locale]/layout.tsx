@@ -52,7 +52,7 @@ export default async function LocaleLayout({
               <div className={styles.alertWrapper}>
                 <Alert variant="info" className={styles.alert}>
                   Vi har gjort endringer i meldekortet og fjernet spørsmål 5, hvor vi spør om du fortsatt ønsker å være
-                  registrert hos Nav de neste 14 dagene. Skal du skal være registrert som arbeidssøker hos Nav mens du
+                  registrert hos Nav de neste 14 dagene. Skal du være registrert som arbeidssøker hos Nav mens du
                   mottar AAP må du i tillegg til å sende inn meldekort, bekrefte din status som arbeidssøker i en egen
                   melding på Minside.
                 </Alert>
