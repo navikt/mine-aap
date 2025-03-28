@@ -1,6 +1,4 @@
-import styles from './Soknad.module.css';
-import { Alert, BodyShort, Heading, Link } from '@navikt/ds-react';
-import { DocumentationHeading } from 'components/DocumentationHeading/DocumentationHeading';
+import { Alert, BodyShort, Heading, Label, Link, VStack } from '@navikt/ds-react';
 import { ButtonRow } from 'components/ButtonRow/ButtonRow';
 import { formatDate } from 'lib/utils/date';
 import { MineAapEttersendingNy } from 'lib/types/types';
@@ -17,11 +15,12 @@ export const Soknad = async ({
 }) => {
   const t = await getTranslations('minSisteSøknad');
   return (
-    <div className={styles.soknad}>
-      <Heading level="2" size="medium" style={{ marginBlockEnd: '8px' }}>
+    <VStack gap="4">
+      <Heading level="2" size="medium">
         {t('søknad.heading')}
       </Heading>
-      <BodyShort size="small" style={{ color: 'var(--a-text-subtle)', marginBlockEnd: '16px' }}>
+
+      <BodyShort size="small" textColor="subtle">
         {`${t('mottattDato')} ${formatDate(søknad.mottattDato)}`}
       </BodyShort>
 
@@ -31,8 +30,8 @@ export const Soknad = async ({
       </Alert>
 
       {dokumenter?.length > 0 && (
-        <>
-          <DocumentationHeading heading={t('dokumentasjon.mottatt')} />
+        <div>
+          <Label>{t('dokumentasjon.mottatt')}</Label>
           <ul>
             {dokumenter.map((dokument) => (
               <li key={dokument.journalpostId}>
@@ -46,12 +45,12 @@ export const Soknad = async ({
               </li>
             ))}
           </ul>
-        </>
+        </div>
       )}
 
       <ButtonRow>
         <EttersendelseButton innsendingsId={søknad.innsendingsId} />
       </ButtonRow>
-    </div>
+    </VStack>
   );
 };

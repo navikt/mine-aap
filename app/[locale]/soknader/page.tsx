@@ -1,6 +1,5 @@
 import { ArrowLeftIcon } from '@navikt/aksel-icons';
 import { Heading } from '@navikt/ds-react';
-import { VerticalFlexContainer } from 'components/FlexContainer/VerticalFlexContainer';
 import { Layout } from 'components/Layout/Layout';
 import { Section } from 'components/Section/Section';
 import { SoknadMedDatafetching } from 'components/Soknad/SoknadMedDatafetching';
@@ -20,11 +19,10 @@ const Page = async () => {
           <Heading level="2" size="medium" spacing>
             {t('dineSøknader.heading')}
           </Heading>
-          <VerticalFlexContainer>
-            {søknader.map((søknad) => (
-              <SoknadMedDatafetching key={søknad.innsendingsId} søknad={søknad} />
-            ))}
-          </VerticalFlexContainer>
+
+          {søknader.map((søknad) => (
+            <SoknadMedDatafetching key={søknad.innsendingsId} søknad={søknad} />
+          ))}
         </div>
       </Section>
       <Section>
