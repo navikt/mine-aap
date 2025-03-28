@@ -9,32 +9,9 @@ export interface Dokument {
 
 export type VedleggType = 'ARBEIDSGIVER' | 'STUDIER' | 'ANDREBARN' | 'OMSORG' | 'UTLAND' | 'ANNET';
 
-export interface MellomlagretSøknad {
-  timestamp: string;
-}
-
-export interface Vedleggskrav {
-  type: 'STUDIESTED' | 'FOSTERFORELDER' | 'ANNET';
-  dokumentasjonstype: string;
-  beskrivelse: string;
-}
-
-export interface OpplastetVedlegg {
-  name: string;
-  size: number;
-  vedleggId?: string;
-  isUploading: boolean;
-  file: File;
-}
-
 export interface Ettersendelse {
   søknadId?: string;
   totalFileSize: number;
-  ettersendteVedlegg: Array<EttersendteVedlegg>;
-}
-
-export interface EttersendelseBackendState {
-  søknadId?: string;
   ettersendteVedlegg: Array<EttersendteVedlegg>;
 }
 

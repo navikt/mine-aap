@@ -1,6 +1,5 @@
 import { hentSøknader } from 'lib/services/innsendingService';
-import styles from '../[uuid]/ettersendelse/page.module.css';
-import { BodyShort, Heading, Label, ReadMore } from '@navikt/ds-react';
+import { BodyShort, Heading, Label, ReadMore, VStack } from '@navikt/ds-react';
 import { Section } from 'components/Section/Section';
 import { LucaGuidePanel, ScanningGuide } from '@navikt/aap-felles-react';
 import { ArrowLeftIcon } from '@navikt/aksel-icons';
@@ -31,7 +30,7 @@ const Page = async ({ params }: Readonly<{ params: Promise<PageParams> }>) => {
     <>
       <PageHeader>{t('ettersendelse.appTittelMedSkille')}</PageHeader>
 
-      <main className={styles.main}>
+      <VStack marginBlock="0 12">
         <Section>
           <Heading level="2" size="large" spacing>
             {t('ettersendelse.heading')}
@@ -57,7 +56,7 @@ const Page = async ({ params }: Readonly<{ params: Promise<PageParams> }>) => {
 
           <div>
             <Label>{t('ettersendelse.annet.label')}</Label>
-            <BodyShort className={styles.annetTekst}>{t('ettersendelse.annet.tekst')}</BodyShort>
+            <BodyShort>{t('ettersendelse.annet.tekst')}</BodyShort>
           </div>
 
           <div>
@@ -78,7 +77,7 @@ const Page = async ({ params }: Readonly<{ params: Promise<PageParams> }>) => {
             </Link>
           </div>
         </Section>
-      </main>
+      </VStack>
     </>
   );
 };
