@@ -8,9 +8,6 @@ import { getEnvironment } from 'lib/utils/environments';
 import Script from 'next/script';
 import { routing } from 'i18n/routing';
 import { NavDecorator } from 'components/NavDecorator/NavDecorator';
-import { Alert } from '@navikt/ds-react';
-
-import styles from './layout.module.css';
 
 export async function generateMetadata() {
   const t = await getTranslations();
@@ -47,19 +44,7 @@ export default async function LocaleLayout({
       <body>
         <Decorator.Header />
         <NextIntlClientProvider messages={messages}>
-          <NavDecorator>
-            <div className={styles.banner}>
-              <div className={styles.alertWrapper}>
-                <Alert variant="info" className={styles.alert}>
-                  Vi har gjort endringer i meldekortet og fjernet spørsmål 5, hvor vi spør om du fortsatt ønsker å være
-                  registrert hos Nav de neste 14 dagene. Skal du være registrert som arbeidssøker hos Nav mens du
-                  mottar AAP må du i tillegg til å sende inn meldekort, bekrefte din status som arbeidssøker i en egen
-                  melding på Minside.
-                </Alert>
-              </div>
-            </div>
-            {children}
-          </NavDecorator>
+          <NavDecorator>{children}</NavDecorator>
         </NextIntlClientProvider>
         <Decorator.Footer />
         <Decorator.Scripts loader={Script} />
