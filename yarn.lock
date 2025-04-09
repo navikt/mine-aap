@@ -1774,9 +1774,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/aap-felles-utils@npm:^4.2.6":
-  version: 4.2.6
-  resolution: "@navikt/aap-felles-utils@npm:4.2.6::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faap-felles-utils%2F4.2.6%2F5ed6ee9b79fbb15250eae3fff9115350c5db8166"
+"@navikt/aap-felles-utils@npm:^5.1.4":
+  version: 5.1.4
+  resolution: "@navikt/aap-felles-utils@npm:5.1.4::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faap-felles-utils%2F5.1.4%2Fc9ab260a7b59bf97d440de9b42a07d2fa2a4b7ad"
   dependencies:
     "@navikt/oasis": "npm:^3.4.0"
     axios: "npm:^1.7.7"
@@ -1786,7 +1786,7 @@ __metadata:
     pino: "npm:^9.4.0"
     prom-client: "npm:^15.1.3"
     server-only: "npm:^0.0.1"
-  checksum: 10c0/8202c338e8505724c9c7065cbf7e7e882b438d22e8fd0ef862ce1ef37087f966571006b8bd5264670312157fafe7cd35939b039c395258277e44db894e99290c
+  checksum: 10c0/40509d8799378e0eda13d1d8f26788979e82ba0ede6900f40b029ec8fcb2312ccaa02ccc0ff8a30ea37dbce2368af43d635d354645c0ffead70f32d6480fe257
   languageName: node
   linkType: hard
 
@@ -2998,7 +2998,7 @@ __metadata:
     "@navikt/aap-felles-css": "npm:^4.2.6"
     "@navikt/aap-felles-prettier": "npm:^4.2.6"
     "@navikt/aap-felles-react": "npm:^4.2.6"
-    "@navikt/aap-felles-utils": "npm:^4.2.6"
+    "@navikt/aap-felles-utils": "npm:^5.1.4"
     "@navikt/aap-felles-utils-client": "npm:^4.2.6"
     "@navikt/aksel-icons": "npm:^7.9.2"
     "@navikt/ds-css": "npm:^7.9.2"
@@ -10772,11 +10772,11 @@ __metadata:
 
 "typescript@patch:typescript@npm%3A^5.7.3#optional!builtin<compat/typescript>":
   version: 5.7.3
-  resolution: "typescript@patch:typescript@npm%3A5.7.3#optional!builtin<compat/typescript>::version=5.7.3&hash=5786d5"
+  resolution: "typescript@patch:typescript@npm%3A5.7.3#optional!builtin<compat/typescript>::version=5.7.3&hash=8c6c40"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 10c0/6fd7e0ed3bf23a81246878c613423730c40e8bdbfec4c6e4d7bf1b847cbb39076e56ad5f50aa9d7ebd89877999abaee216002d3f2818885e41c907caaa192cc4
+  checksum: 10c0/3b56d6afa03d9f6172d0b9cdb10e6b1efc9abc1608efd7a3d2f38773d5d8cfb9bbc68dfb72f0a7de5e8db04fc847f4e4baeddcd5ad9c9feda072234f0d788896
   languageName: node
   linkType: hard
 
