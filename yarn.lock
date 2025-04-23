@@ -3263,7 +3263,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:^8.20.0"
     "@vercel/otel": "npm:^1.10.2"
     cookie: "npm:^0.6.0"
-    csp-header: "npm:^6.0.0"
+    csp-header: "npm:^6.1.0"
     date-fns: "npm:^4.1.0"
     eslint: "npm:^8.57.1"
     eslint-config-next: "npm:^15.2.1"
@@ -4326,10 +4326,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"csp-header@npm:^6.0.0":
-  version: 6.0.0
-  resolution: "csp-header@npm:6.0.0"
-  checksum: 10c0/4368e6c5cb41e419e70f75aefb129403b942019a3130d977b5a579239b334074c777902c5709a346d9972d09d81b5a17141870608909a01150c780de7fe2600e
+"csp-header@npm:^6.1.0":
+  version: 6.1.0
+  resolution: "csp-header@npm:6.1.0"
+  checksum: 10c0/179a02e138e770a0403856fd3a5ac9f54760e5b0ae2791a1ea3990ae2055f3dd5bb33381b175e1f620df617832ed9dc8313c1a429037885b4c6f6104f875da80
   languageName: node
   linkType: hard
 
