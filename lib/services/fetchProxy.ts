@@ -69,10 +69,10 @@ export const fetchWithRetry = async <ResponseBody>(
   tags?: string[],
   errors?: string[]
 ): Promise<ResponseBody> => {
-  if (!errors) errors = []
+  if (!errors) errors = [];
 
   if (retries === 0) {
-    logError(`Unable to fetch ${url}: `, Error(errors.join('\n')))
+    logError(`Unable to fetch ${url}: `, Error(errors.join('\n')));
     throw new Error(`Feil oppsto ved kall mot ${url}`);
   }
 
@@ -108,8 +108,11 @@ export const fetchWithRetry = async <ResponseBody>(
     if (response.status === 404) {
       throw new Error(`Ikke funnet: ${url}`);
     }
-
-    errors.push(`HTTP ${response.status} ${response.statusText}: ${url} (retries left ${retries})`)
+    if (response.status === 412) {
+      logError(`File size over 50mb: ${url}`);
+      throw new Error(`File size over 50mb: ${url}`, { cause: 412 });
+    }
+    errors.push(`HTTP ${response.status} ${response.statusText}: ${url} (retries left ${retries})`);
     return await fetchWithRetry(url, method, oboToken, retries - 1, requestBody, tags, errors);
   }
 

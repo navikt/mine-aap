@@ -5,7 +5,7 @@ import { InnsendingBackendState, MineAapSoknadMedEttersendingNy } from 'lib/type
 import { isMock } from 'lib/utils/environments';
 import { mockSøknerMedEttersending } from 'lib/mock/mockSoknad';
 import { isAfter } from 'date-fns';
-import { logError } from '@navikt/aap-felles-utils';
+import { logError, logWarning } from '@navikt/aap-felles-utils';
 import { randomUUID } from 'crypto';
 import { proxyRouteHandler } from '@navikt/next-api-proxy';
 
@@ -35,9 +35,14 @@ export const sendEttersendelse = async (data: InnsendingBackendState, innsending
   try {
     const ettersendelse = await fetchProxy(url, innsendingAudience, 'POST', data);
     return ettersendelse;
-  } catch (error) {
-    logError('Error sending ettersendelse', error);
-    throw new Error('Error sending ettersendelse');
+  } catch (error: any) {
+    if (error.cause && error.cause.status === 412) {
+      logWarning('Filstørrelse for stor eller mistet fil');
+      throw new Error('Filstørrelse for stor eller mistet fil');
+    } else {
+      logError('Error sending ettersendelse', error);
+      throw new Error('Error sending ettersendelse');
+    }
   }
 };
 
