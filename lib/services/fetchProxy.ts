@@ -1,7 +1,7 @@
 'use server';
 
 import { requestOboToken, validateToken } from '@navikt/oasis';
-import { getAccessTokenOrRedirectToLogin, logError } from '@navikt/aap-felles-utils';
+import { getAccessTokenOrRedirectToLogin, logError, logWarning } from '@navikt/aap-felles-utils';
 import { headers } from 'next/headers';
 import { randomUUID } from 'crypto';
 
@@ -109,7 +109,7 @@ export const fetchWithRetry = async <ResponseBody>(
       throw new Error(`Ikke funnet: ${url}`);
     }
     if (response.status === 412) {
-      logError(`File size over 50mb: ${url}`);
+      logWarning(`File size over 50mb: ${url}`);
       throw new Error(`File size over 50mb: ${url}`, { cause: 412 });
     }
     errors.push(`HTTP ${response.status} ${response.statusText}: ${url} (retries left ${retries})`);
