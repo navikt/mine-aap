@@ -3209,9 +3209,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vercel/otel@npm:^1.10.2":
-  version: 1.10.2
-  resolution: "@vercel/otel@npm:1.10.2"
+"@vercel/otel@npm:^1.11.0":
+  version: 1.11.0
+  resolution: "@vercel/otel@npm:1.11.0"
   peerDependencies:
     "@opentelemetry/api": ^1.7.0
     "@opentelemetry/api-logs": "*"
@@ -3220,7 +3220,7 @@ __metadata:
     "@opentelemetry/sdk-logs": "*"
     "@opentelemetry/sdk-metrics": ^1.19.0
     "@opentelemetry/sdk-trace-base": ^1.19.0
-  checksum: 10c0/9c6ed154c7486115b01b56e57c4c60d6df1bc73792e64c819d04515c17d4605be12a62fec1328a6520faf0181e14342d74b95af735856232625af071222d62d3
+  checksum: 10c0/ffb75b9a71ad897519265bfc313a27ec4c2ff3da98bbf80463a5aeac83c23c4b60a9f427d112e1771f7e90ad6da4e84d0d789e8ea668755226b0ded15a8f08bf
   languageName: node
   linkType: hard
 
@@ -3261,7 +3261,7 @@ __metadata:
     "@types/react-dom": "npm:^19.0.3"
     "@types/uuid": "npm:^10.0.0"
     "@typescript-eslint/eslint-plugin": "npm:^8.20.0"
-    "@vercel/otel": "npm:^1.10.2"
+    "@vercel/otel": "npm:^1.11.0"
     cookie: "npm:^0.6.0"
     csp-header: "npm:^6.1.0"
     date-fns: "npm:^4.1.0"
