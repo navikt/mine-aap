@@ -5,7 +5,7 @@ import { InnsendingBackendState, MineAapSoknadMedEttersendingNy } from 'lib/type
 import { isMock } from 'lib/utils/environments';
 import { mockSøknerMedEttersending } from 'lib/mock/mockSoknad';
 import { isAfter } from 'date-fns';
-import { logError } from '@navikt/aap-felles-utils';
+import { logError, logWarning } from '@navikt/aap-felles-utils';
 import { randomUUID } from 'crypto';
 import { proxyRouteHandler } from '@navikt/next-api-proxy';
 
@@ -36,7 +36,7 @@ export const sendEttersendelse = async (data: InnsendingBackendState, innsending
     const ettersendelse = await fetchProxy(url, innsendingAudience, 'POST', data);
     return ettersendelse;
   } catch (error) {
-    logError('Error sending ettersendelse', error);
+    logWarning('Error sending ettersendelse', error);
     throw new Error('Error sending ettersendelse');
   }
 };

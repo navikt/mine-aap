@@ -1,4 +1,4 @@
-import { logError, logInfo } from '@navikt/aap-felles-utils';
+import { logInfo } from '@navikt/aap-felles-utils';
 import { sendEttersendelse } from 'lib/services/innsendingService';
 import { Ettersendelse, InnsendingBackendState, VedleggType } from 'lib/types/types';
 import { NextRequest } from 'next/server';
@@ -21,8 +21,7 @@ export async function POST(req: NextRequest) {
   try {
     await sendEttersendelse(requestBody, søknadId);
     return new Response(null, { status: 201 });
-  } catch (error) {
-    logError('Error sending ettersendelse', error);
+  } catch {
     return new Response('Error sending ettersendelse', { status: 500 });
   }
 }
