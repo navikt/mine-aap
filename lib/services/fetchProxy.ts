@@ -16,7 +16,7 @@ export const getOnBefalfOfToken = async (audience: string, url: string): Promise
 
   const validation = await validateToken(token);
   if (!validation.ok) {
-    logError(`Token for ${url} validerte ikke`);
+    logError(`Token for ${url} validerte ikke, med errorType ${validation.errorType}`, validation.error);
     throw new Error('Token for simpleTokenXProxy didnt validate');
   }
 
