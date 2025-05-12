@@ -1,7 +1,7 @@
 'use server';
 
 import { requestOboToken, validateToken } from '@navikt/oasis';
-import { getAccessTokenOrRedirectToLogin, logError } from '@navikt/aap-felles-utils';
+import { getAccessTokenOrRedirectToLogin } from '@navikt/aap-felles-utils';
 import { headers } from 'next/headers';
 import { randomUUID } from 'crypto';
 
@@ -10,20 +10,17 @@ const NUMBER_OF_RETRIES = 3;
 export const getOnBefalfOfToken = async (audience: string, url: string): Promise<string> => {
   const token = getAccessTokenOrRedirectToLogin(await headers());
   if (!token) {
-    logError(`Token for ${url} er undefined`);
-    throw new Error('Token for simpleTokenXProxy is undefined');
+    throw new Error(`Token for simpleTokenXProxy is undefined for ${url}`);
   }
 
   const validation = await validateToken(token);
   if (!validation.ok) {
-    logError(`Token for ${url} validerte ikke, med errorType ${validation.errorType}`, validation.error);
-    throw new Error('Token for simpleTokenXProxy didnt validate');
+    throw new Error(`Token for ${url} validerte ikke, med errorType ${validation.errorType}`, validation.error);
   }
 
   const onBehalfOf = await requestOboToken(token, audience);
   if (!onBehalfOf.ok) {
-    logError(`Henting av oboToken for ${url} feilet`, onBehalfOf.error);
-    throw new Error('Request oboToken for fetchProxy failed');
+    throw new Error(`Henting av oboToken for ${url} feilet`, onBehalfOf.error);
   }
 
   return onBehalfOf.token;
@@ -55,7 +52,6 @@ export const fetchPdf = async (url: string, scope: string): Promise<Response> =>
   if (response.ok) {
     return response;
   } else {
-    logError(`kunne ikke lese pdf på url ${url}.`);
     throw new Error(`kunne ikke lese pdf på url ${url}.`);
   }
 };
@@ -69,11 +65,10 @@ export const fetchWithRetry = async <ResponseBody>(
   tags?: string[],
   errors?: string[]
 ): Promise<ResponseBody> => {
-  if (!errors) errors = []
+  if (!errors) errors = [];
 
   if (retries === 0) {
-    logError(`Unable to fetch ${url}: `, Error(errors.join('\n')))
-    throw new Error(`Feil oppsto ved kall mot ${url}`);
+    throw new Error(`Unable to fetch ${url}: `, Error(errors.join('\n')));
   }
 
   const callid = randomUUID();
@@ -102,14 +97,13 @@ export const fetchWithRetry = async <ResponseBody>(
   if (!response.ok) {
     if (response.status === 500) {
       const responseMessage = await response.text(); // 500 feil fra innsending og oppslag har tekst i body
-      logError(`klarte ikke å hente ${url}: ${responseMessage}`);
-      throw new Error(`Unable to fetch ${url}: ${responseMessage}`);
+      throw new Error(`klarte ikke å hente ${url}: ${responseMessage}`);
     }
     if (response.status === 404) {
       throw new Error(`Ikke funnet: ${url}`);
     }
 
-    errors.push(`HTTP ${response.status} ${response.statusText}: ${url} (retries left ${retries})`)
+    errors.push(`HTTP ${response.status} ${response.statusText}: ${url} (retries left ${retries})`);
     return await fetchWithRetry(url, method, oboToken, retries - 1, requestBody, tags, errors);
   }
 

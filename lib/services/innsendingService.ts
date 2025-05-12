@@ -75,7 +75,7 @@ export const slettVedlegg = async (uuid: string): Promise<any> => {
     await fetchProxy(url, innsendingAudience, 'DELETE');
     return;
   } catch (error) {
-    logError('Error sletting av vedlegg', error);
+    logWarning('Error sletting av vedlegg', error);
     throw new Error('Error sletting av vedlegg');
   }
 };
