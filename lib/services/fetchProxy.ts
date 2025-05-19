@@ -4,6 +4,7 @@ import { requestOboToken, validateToken } from '@navikt/oasis';
 import { getAccessTokenOrRedirectToLogin } from '@navikt/aap-felles-utils';
 import { headers } from 'next/headers';
 import { randomUUID } from 'crypto';
+import { TokenResult } from '@navikt/oasis/dist/token-result';
 
 const NUMBER_OF_RETRIES = 3;
 
@@ -18,12 +19,22 @@ export const getOnBefalfOfToken = async (audience: string, url: string): Promise
     throw new Error(`Token for ${url} validerte ikke, med errorType ${validation.errorType}`, validation.error);
   }
 
-  const onBehalfOf = await requestOboToken(token, audience);
+  const onBehalfOf = await requestOboTokenWithRetry(token, audience, 2);
   if (!onBehalfOf.ok) {
     throw new Error(`Henting av oboToken for ${url} feilet`, onBehalfOf.error);
   }
 
   return onBehalfOf.token;
+};
+
+const requestOboTokenWithRetry = async (token: string, audience: string, maxRetries: number): Promise<TokenResult> => {
+  const oboToken = await requestOboToken(token, audience);
+  if (oboToken.ok) {
+    return oboToken;
+  } else if (maxRetries > 0) {
+    return requestOboTokenWithRetry(token, audience, maxRetries - 1);
+  }
+  return oboToken;
 };
 
 export const fetchProxy = async <ResponseBody>(
