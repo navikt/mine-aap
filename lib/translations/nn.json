@@ -188,11 +188,11 @@
     "punkt3": {
       "label": "Kva kan du gjere?",
       "tekst": "Det er til hjelp for oss om du:",
-      "punkt1": "registrerer <a>CV-en din, gjerne på arbeidsplassen.no (blir opna i ny fane).</a>",
-      "punkt1ForLenke": "registrerer ",
+      "punkt1": "Registrerer <a>CV-en din, gjerne på arbeidsplassen.no (blir opna i ny fane).</a>",
+      "punkt1ForLenke": "Registrerer ",
       "punkt1LenkeTekst": "CV-en din, gjerne på arbeidsplassen.no (blir opna i ny fane).",
-      "punkt2": "ettersender manglande dokument",
-      "punkt3": "gir beskjed dersom situasjonen din endrar seg",
+      "punkt2": "Ettersender manglande dokument",
+      "punkt3": "Gir beskjed dersom situasjonen din endrar seg",
       "link": "kan du klage på oppfølgingsvedtaket"
     },
     "punkt4": {
