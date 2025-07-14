@@ -5,13 +5,16 @@ import { MineAapEttersendingNy } from 'lib/types/types';
 import { DokumentMedTittel } from 'components/Soknad/SoknadMedDatafetching';
 import { EttersendelseButton } from 'components/Soknad/EttersendelseButton';
 import { getTranslations } from 'next-intl/server';
+import { isMock } from '@navikt/aap-felles-utils';
 
 export const Soknad = async ({
   søknad,
   dokumenter,
+  skalSendeInnKelvinMeldekort,
 }: {
   søknad: MineAapEttersendingNy;
   dokumenter: DokumentMedTittel[];
+  skalSendeInnKelvinMeldekort: boolean;
 }) => {
   const t = await getTranslations('minSisteSøknad');
   return (
@@ -28,6 +31,21 @@ export const Soknad = async ({
         Hvis du skal ettersende dokumentasjon til søknaden eller NAV har bedt deg sende dokumentasjon, kan du gjøre det
         her. Har vi ikke bedt om dokumentasjon, trenger du ikke sende oss noe.
       </Alert>
+
+      {skalSendeInnKelvinMeldekort && (
+        <div>
+          <Label>{t('meldekort.heading')}</Label>
+          <div>
+            {t('meldekort.tekst')}{' '}
+            <Link
+              target="_blank"
+              href={isMock() ? `http://localhost:3001/aap/meldekort/nb` : 'https://www.nav.no/aap/meldekort/nb'}
+            >
+              {t('meldekort.link')}
+            </Link>
+          </div>
+        </div>
+      )}
 
       {dokumenter?.length > 0 && (
         <div>
