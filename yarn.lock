@@ -2468,9 +2468,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/aap-felles-utils@npm:^5.2.0":
-  version: 5.2.0
-  resolution: "@navikt/aap-felles-utils@npm:5.2.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faap-felles-utils%2F5.2.0%2F9c4ac7bb0d6ad426d38c40b7d8734cef9c34cd48"
+"@navikt/aap-felles-utils@npm:^5.3.0":
+  version: 5.3.0
+  resolution: "@navikt/aap-felles-utils@npm:5.3.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faap-felles-utils%2F5.3.0%2F88e79c263c71bc68c3e1c8ab071c2131bc250a9b"
   dependencies:
     "@navikt/oasis": "npm:^3.4.0"
     axios: "npm:^1.7.7"
@@ -2480,7 +2480,7 @@ __metadata:
     pino: "npm:^9.4.0"
     prom-client: "npm:^15.1.3"
     server-only: "npm:^0.0.1"
-  checksum: 10c0/a9b271de213d454af37881b367787f6bbaf1557d2d04b7186657479c406f95a27139668182b734c475d1a91ca556456bada2adc81bd4a9238d0ee2bdc3740534
+  checksum: 10c0/d38724b12ed7c4408875a72e3678e2449e1844cd9a1f80d783eae02d6870bfb5843386f8caddddf9efff1f53aa940906159760066ce538daf5e3196197005188
   languageName: node
   linkType: hard
 
@@ -3865,7 +3865,7 @@ __metadata:
     "@navikt/aap-felles-css": "npm:^4.3.4"
     "@navikt/aap-felles-prettier": "npm:^4.3.4"
     "@navikt/aap-felles-react": "npm:^4.3.4"
-    "@navikt/aap-felles-utils": "npm:^5.2.0"
+    "@navikt/aap-felles-utils": "npm:^5.3.0"
     "@navikt/aap-felles-utils-client": "npm:^4.3.4"
     "@navikt/aksel-icons": "npm:^7.25.1"
     "@navikt/ds-css": "npm:^7.25.1"
