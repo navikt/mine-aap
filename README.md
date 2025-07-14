@@ -9,7 +9,10 @@ Appen kan kjøres lokalt med å kjøre følgende kommandoer
 `yarn` - installere avhengigheter
 `yarn dev` - starte appen
 
-Appen kjører på port 3000 som default
+Husk å sette `.env.local`
+
+Appen kjører på port 3000 som default:
+http://localhost:3000/aap/mine-aap/nb/
 
 ## Bygge app lokalt
 
