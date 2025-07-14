@@ -54,3 +54,5 @@ export interface MineAapEttersendingNy {
   journalpostId?: string;
   innsendingsId: string;
 }
+
+export type MeldekortSystem = 'FELLES' | 'AAP';

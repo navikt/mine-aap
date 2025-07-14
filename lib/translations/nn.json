@@ -43,6 +43,11 @@
         "text": "Ettersend dokumentasjon"
       }
     },
+    "meldekort": {
+      "heading": "Skal du sende inn meldekort?",
+      "tekst": "Gå til",
+      "link": "meldekortoversikta"
+    },
     "dokumentasjon": {
       "mangler": "Dokumentasjon vi manglar",
       "mottatt": "Dette har vi mottatt frå deg"

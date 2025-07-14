@@ -1,6 +1,7 @@
 import { Soknad } from 'components/Soknad/Soknad';
 import { hentDokumenter } from 'lib/services/oppslagService';
 import { Dokument, MineAapSoknadMedEttersendingNy } from 'lib/types/types';
+import { hentAnsvarligMeldekortsystem } from 'lib/services/meldekortBackendService';
 
 export interface DokumentMedTittel {
   journalpostId?: string;
@@ -39,6 +40,13 @@ const getDokumenterMedTittel = (dokumenter: Dokument[], søknad: MineAapSoknadMe
 
 export const SoknadMedDatafetching = async ({ søknad }: { søknad: MineAapSoknadMedEttersendingNy }) => {
   const dokumenter = await hentDokumenter();
+  const ansvarligMeldekortsystem = await hentAnsvarligMeldekortsystem();
 
-  return <Soknad søknad={søknad} dokumenter={getDokumenterMedTittel(dokumenter, søknad)} />;
+  return (
+    <Soknad
+      søknad={søknad}
+      dokumenter={getDokumenterMedTittel(dokumenter, søknad)}
+      skalSendeInnKelvinMeldekort={ansvarligMeldekortsystem === 'AAP'}
+    />
+  );
 };

@@ -58,6 +58,7 @@ spec:
       rules:
         - application: innsending
         - application: oppslag
+        - application: meldekort-backend
         - application: nav-dekoratoren
           namespace: personbruker
       external:
