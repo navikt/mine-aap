@@ -11,7 +11,7 @@ export const hentAnsvarligMeldekortsystem = async (): Promise<MeldekortSystem | 
   if (isMock()) return mockAnsvarligMeldekortSystem;
   const url = `${meldekortBackendBaseUrl}/api/ansvarlig-system-felles`;
   try {
-    return await fetchProxy<MeldekortSystem>(url, meldekortBackendAudience, 'POST');
+    return await fetchProxy<MeldekortSystem>(url, meldekortBackendAudience, 'GET');
   } catch (error) {
     logError('Error fetching ansvarlig meldekortsystem', error);
     return undefined;
