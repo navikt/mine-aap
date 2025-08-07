@@ -33,7 +33,7 @@
     "install": "^0.13.0",
     "jsdom": "^26.1.0",
     "next": "^15.4.2",
-    "next-intl": "^3.26.3",
+    "next-intl": "^3.26.5",
     "node-cache": "^5.1.2",
     "react": "19.0.0",
     "react-dom": "19.0.0",
