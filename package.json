@@ -35,8 +35,8 @@
     "next": "^15.4.6",
     "next-intl": "^3.26.5",
     "node-cache": "^5.1.2",
-    "react": "19.0.0",
-    "react-dom": "19.0.0",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
     "react-intl": "^7.1.11",
     "server-only": "^0.0.1"
   },
