@@ -1,7 +1,8 @@
 import styles from './NyttigÅVite.module.css';
-import { BodyLong, BodyShort, Heading, Link, LinkPanel } from '@navikt/ds-react';
+import { BodyLong, BodyShort, Heading, Link } from '@navikt/ds-react';
 import { getTranslations } from 'next-intl/server';
-import { Link as NextLink } from 'i18n/routing';
+import { SøknaderClientLenke } from 'components/NyttigÅVite/SøknaderClientLenke';
+import { LinkCard, LinkCardAnchor, LinkCardTitle } from '@navikt/ds-react/LinkCard';
 
 export const NyttigÅViteServer = async () => {
   const t = await getTranslations('');
@@ -12,22 +13,24 @@ export const NyttigÅViteServer = async () => {
       </Heading>
       <div className={styles.container}>
         <div className={styles.linkPanelContainer}>
-          <LinkPanel
-            target="_blank"
-            className={styles.linkPanel}
-            href="https://www.nav.no/saksbehandlingstider#arbeidsavklaringspenger-aap"
-            border={false}
-          >
-            {t('nyttigÅVite.saksbehandlingstider')}
-          </LinkPanel>
-          <NextLink href="/soknader" passHref legacyBehavior>
-            <LinkPanel className={styles.linkPanel} href="#" border={false}>
-              {t('nyttigÅVite.søknader')}
-            </LinkPanel>
-          </NextLink>
-          <LinkPanel className={styles.linkPanel} href="https://www.nav.no/aap#sok" border={false}>
-            {t('forside.søkPåNyttLink')}
-          </LinkPanel>
+          <LinkCard>
+            <LinkCardTitle>
+              <LinkCardAnchor
+                href="https://www.nav.no/saksbehandlingstider#arbeidsavklaringspenger-aap"
+                target="_blank"
+              >
+                {t('nyttigÅVite.saksbehandlingstider')}
+              </LinkCardAnchor>
+            </LinkCardTitle>
+          </LinkCard>
+          <SøknaderClientLenke />
+          <LinkCard>
+            <LinkCardTitle>
+              <LinkCardAnchor href="https://www.nav.no/aap#sok" target="_blank">
+                {t('forside.søkPåNyttLink')}
+              </LinkCardAnchor>
+            </LinkCardTitle>
+          </LinkCard>
         </div>
         <Heading level="3" size="small">
           {t('hvaSkjerPanel.heading')}
