@@ -3,6 +3,7 @@ import { Card } from 'components/Card/Card';
 import { ClientButton } from 'components/ClientButton';
 import { DokumentoversiktMedDatafetching } from 'components/DokumentoversiktNy/DokumentoversiktMedDatafetching';
 import { ForsideIngress } from 'components/Forside/Ingress/ForsideIngress';
+import { Meldekortlenke } from 'components/Meldekortlenke/Meldekortlenke';
 import { NyttigÅViteServer } from 'components/NyttigÅVite/NyttigÅViteServer';
 import { PageComponentFlexContainer } from 'components/PageComponentFlexContainer/PageComponentFlexContainer';
 import { SoknadMedDatafetching } from 'components/Soknad/SoknadMedDatafetching';
@@ -26,18 +27,22 @@ const Page = async () => {
       </PageComponentFlexContainer>
 
       {sisteSøknadInnsendingNy && (
-        <PageComponentFlexContainer subtleBackground>
-          <Heading level="2" size="medium" spacing>
-            {t('minSisteSøknad.heading')}
-          </Heading>
-          <Card>
-            <SoknadMedDatafetching søknad={sisteSøknadInnsendingNy} />
-          </Card>
-        </PageComponentFlexContainer>
+        <>
+          <PageComponentFlexContainer subtleBackground>
+            <Heading level="2" size="medium" spacing>
+              {t('minSisteSøknad.heading')}
+            </Heading>
+            <Card>
+              <SoknadMedDatafetching søknad={sisteSøknadInnsendingNy} />
+            </Card>
+          </PageComponentFlexContainer>
+          <Meldekortlenke />
+        </>
       )}
       {!sisteSøknadInnsendingNy && (
         <>
           <DokumentoversiktMedDatafetching />
+          <Meldekortlenke />
           <PageComponentFlexContainer>
             <Heading level="2" size="medium" spacing>
               {t('forside.ettersendelse.tittel')}

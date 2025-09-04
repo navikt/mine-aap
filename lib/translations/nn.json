@@ -27,6 +27,10 @@
       "heading": "Situasjonen min har endra seg",
       "tekst": "Her kan du gi beskjed om endringar og gi oss opplysninger du mener er viktig for saken din. Hvis du har en aktivitetsplan, benytter du denne.",
       "knapp": "Meld endring"
+    },
+    "meldekort": {
+      "heading": "Meldekort",
+      "tekst": "Sjå, senda, eller endra meldekort"
     }
   },
   "minSisteSøknad": {
@@ -42,11 +46,6 @@
       "button": {
         "text": "Ettersend dokumentasjon"
       }
-    },
-    "meldekort": {
-      "heading": "Skal du sende inn meldekort?",
-      "tekst": "Gå til",
-      "link": "meldekortoversikta"
     },
     "dokumentasjon": {
       "mangler": "Dokumentasjon vi manglar",
