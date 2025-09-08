@@ -10,7 +10,6 @@ import styles from './Meldekortlenke.module.css';
 
 export const Meldekortlenke = () => {
   const t = useTranslations('forside.meldekort');
-  const isLocalHost = location.hostname === 'localhost';
 
   return (
     <PageComponentFlexContainer>
@@ -22,11 +21,7 @@ export const Meldekortlenke = () => {
           <TasklistIcon title="a11y-title" fontSize="1.5rem" />
         </LinkCard.Icon>
         <LinkCard.Title>
-          <LinkCard.Anchor
-            href={isLocalHost ? `http://localhost:3001/aap/meldekort/nb` : 'https://www.nav.no/aap/meldekort/nb'}
-          >
-            {t('tekst')}
-          </LinkCard.Anchor>
+          <LinkCard.Anchor href={'https://www.nav.no/aap/meldekort/'}>{t('tekst')}</LinkCard.Anchor>
         </LinkCard.Title>
       </LinkCard>
     </PageComponentFlexContainer>
