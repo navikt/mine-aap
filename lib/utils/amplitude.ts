@@ -13,3 +13,7 @@ export function logLastOppFilEvent(opplastingsType: string) {
 export function logDokumentoversiktEvent(antallSider: number, interaksjonsType: string) {
   logAmplitudeEvent('interaksjon med dokumentoversikt', { antallSider, interaksjonsType });
 }
+
+export function logNavigerTilMeldekort() {
+  logAmplitudeEvent('navigere', { lenkeTil: 'meldekort' });
+}
