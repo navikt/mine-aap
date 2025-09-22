@@ -2324,10 +2324,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/aksel-icons@npm:^7.30.0":
-  version: 7.30.0
-  resolution: "@navikt/aksel-icons@npm:7.30.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-icons%2F7.30.0%2Ffaa1fea915e30637ea93d3310f1005a1a81b0cc1"
-  checksum: 10c0/3af0fea2e7a2fdc5b12848077be38507c8475408323325c3206abe82ff4c6af7b4dc566623a3f7b1e400561a89007db0ad802a74a2d0292a7fa5b7ccc90657ae
+"@navikt/aksel-icons@npm:^7.31.0":
+  version: 7.31.0
+  resolution: "@navikt/aksel-icons@npm:7.31.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-icons%2F7.31.0%2F5d0ea15a5f0ba53bf9e0c38a0b45612235d6b332"
+  checksum: 10c0/10488569dec7c49ace82eab9684f122ccfded18fc99f290ea62589d52dc2b63c6c0be8f524308a63cf36cb235b827d2eab96f3079c65643fd34ff9e93552177a
   languageName: node
   linkType: hard
 
@@ -2338,10 +2338,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/ds-css@npm:^7.30.0":
-  version: 7.30.0
-  resolution: "@navikt/ds-css@npm:7.30.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-css%2F7.30.0%2F98fe72fd93a17d6bb7ae48520ecfe325f0c336d3"
-  checksum: 10c0/be029e30de9255c41f56e763881a50f109ba95325b941c76ae4b0ffd63a4bcde832b9c5c24a3ebb330b624bde32d7e9db9f995519eaed854632df9e02cc5f0f2
+"@navikt/ds-css@npm:^7.31.0":
+  version: 7.31.0
+  resolution: "@navikt/ds-css@npm:7.31.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-css%2F7.31.0%2F78afbca44bf15ca55be50990b19693411994a579"
+  checksum: 10c0/02fbbd23c7ccd02dde0f5a157d053eab3b1ed80e3e6baa9ec43f0bc08629f60adaaeaca050005d5d1fb29d210bb13d51e39a6b0840efd697559d5451b28e99f6
   languageName: node
   linkType: hard
 
@@ -2363,21 +2363,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/ds-react@npm:^7.30.0":
-  version: 7.30.0
-  resolution: "@navikt/ds-react@npm:7.30.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-react%2F7.30.0%2F41e6d373355892c640ca6f9bb8491cf4bc9decf8"
+"@navikt/ds-react@npm:^7.31.0":
+  version: 7.31.0
+  resolution: "@navikt/ds-react@npm:7.31.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-react%2F7.31.0%2F6a2825dae4e35d7f11a63e4ecbd3c0808ef5e308"
   dependencies:
     "@floating-ui/react": "npm:0.27.8"
     "@floating-ui/react-dom": "npm:^2.0.9"
-    "@navikt/aksel-icons": "npm:^7.30.0"
-    "@navikt/ds-tokens": "npm:^7.30.0"
+    "@navikt/aksel-icons": "npm:^7.31.0"
+    "@navikt/ds-tokens": "npm:^7.31.0"
     clsx: "npm:^2.1.0"
     date-fns: "npm:^4.0.0"
     react-day-picker: "npm:9.7.0"
   peerDependencies:
     "@types/react": ">=17.0.30"
     react: ">=17.0.0 || >19.0.0-rc"
-  checksum: 10c0/c39a4c492f33459dfdef987af072e2429090ffa55340fb04f99df50c6298992e1ca93e0548fd917337870c54f3bbd6fa0b7a8cc8f7122cef31a1693c1e08e21e
+  checksum: 10c0/3bd958b4db9c010792a0b0bcffd7f8defae56bb89018dfddb5cd06ad1f736c02c4c032be2aecbad9a84d595f090db136b553ad38f02033f3d1e8d7f27f454dd6
   languageName: node
   linkType: hard
 
@@ -2388,10 +2388,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/ds-tokens@npm:^7.30.0":
-  version: 7.30.0
-  resolution: "@navikt/ds-tokens@npm:7.30.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-tokens%2F7.30.0%2Fc00e201ceaac27b28367703dbeb77fab7b956413"
-  checksum: 10c0/461bf6e0567d7de9320d217fb39112f56a4b02588f32f85a06e61757c603a7441214de9de35963fb9523a1a3256c157c8735b7e405bee78c0d090cb43d54aa7e
+"@navikt/ds-tokens@npm:^7.31.0":
+  version: 7.31.0
+  resolution: "@navikt/ds-tokens@npm:7.31.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-tokens%2F7.31.0%2Fc8ff6b4d9a463ddab2a357fd4dee135c26693322"
+  checksum: 10c0/db3e11dd32f692df62a2e4fdce2ba5108928121446dd0124a6c53ba3d2bb0905d0676b9671c82aebecc204cb1814040d311a218838efbd968254e9984b0c4fa2
   languageName: node
   linkType: hard
 
@@ -3692,9 +3692,9 @@ __metadata:
     "@navikt/aap-felles-react": "npm:^5.4.0"
     "@navikt/aap-felles-utils": "npm:^5.4.0"
     "@navikt/aap-felles-utils-client": "npm:^5.4.0"
-    "@navikt/aksel-icons": "npm:^7.30.0"
-    "@navikt/ds-css": "npm:^7.30.0"
-    "@navikt/ds-react": "npm:^7.30.0"
+    "@navikt/aksel-icons": "npm:^7.31.0"
+    "@navikt/ds-css": "npm:^7.31.0"
+    "@navikt/ds-react": "npm:^7.31.0"
     "@navikt/eslint-config-aap": "npm:^5.4.0"
     "@navikt/nav-dekoratoren-moduler": "npm:^3.4.0"
     "@navikt/next-api-proxy": "npm:^4.1.4"
