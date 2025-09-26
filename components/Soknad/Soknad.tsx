@@ -25,7 +25,7 @@ export const Soknad = async ({
       </BodyShort>
 
       <Alert variant="info">
-        Hvis du skal ettersende dokumentasjon til søknaden eller NAV har bedt deg sende dokumentasjon, kan du gjøre det
+        Hvis du skal ettersende dokumentasjon til søknaden eller Nav har bedt deg sende dokumentasjon, kan du gjøre det
         her. Har vi ikke bedt om dokumentasjon, trenger du ikke sende oss noe.
       </Alert>
 

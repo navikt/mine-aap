@@ -137,7 +137,7 @@ export const FileUpload = ({ søknadId, krav, addError, deleteError, onSuccess, 
         )}
         {harEttersendingError && (
           <Alert variant="error">
-            Beklager, vi har litt rusk i NAVet. Du kan prøve på nytt om et par minutter, eller sende inn dokumentasjonen
+            Beklager, vi har litt rusk i Navet. Du kan prøve på nytt om et par minutter, eller sende inn dokumentasjonen
             på papir.
           </Alert>
         )}
