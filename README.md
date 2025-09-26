@@ -5,7 +5,6 @@ Ny innsynsløsning for AAP.
 # Komme i gang
 
 Appen kan kjøres lokalt med å kjøre følgende kommandoer
-
 `yarn` - installere avhengigheter
 `yarn dev` - starte appen
 
@@ -35,4 +34,4 @@ Spørsmål knyttet til koden eller prosjektet kan stilles som issues her på Git
 
 ## For Nav-ansatte
 
-Interne henvendelser kan sendes via Slack i kanalen #po-aap-værsågod.
+Interne henvendelser kan sendes via Slack i kanalen #ytelse-aap-værsågod.
