@@ -3,11 +3,11 @@
 import { InnsendingSøknad } from 'lib/types/types';
 import { useState } from 'react';
 import { Error, FormErrorSummary } from 'components/FormErrorSummary/FormErrorSummary';
-import { Vedlegg } from '@navikt/aap-felles-react';
 
 import { FileUpload } from 'components/fileupload/FileUpload';
 import { setFocus } from 'lib/utils/dom';
 import { getTranslations } from 'next-intl/server';
+import { Vedlegg } from 'components/FileUploadInnsending/FileInputInnsending';
 
 export async function generateMetadata() {
   const t = await getTranslations();

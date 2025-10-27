@@ -1,7 +1,6 @@
 'use client';
 
 import { Ettersendelse, VedleggType } from 'lib/types/types';
-import { FileInputInnsending, Vedlegg } from '@navikt/aap-felles-react';
 import { Section } from 'components/Section/Section';
 import { Alert, BodyShort, Button, Heading } from '@navikt/ds-react';
 import React, { useState } from 'react';
@@ -10,6 +9,7 @@ import { Error } from 'components/FormErrorSummary/FormErrorSummary';
 import styles from 'components/fileupload/FileUpload.module.css';
 import { useTranslations } from 'next-intl';
 import { useParams } from 'next/navigation';
+import { FileInputInnsending, Vedlegg } from 'components/FileUploadInnsending/FileInputInnsending';
 
 interface Props {
   søknadId?: string;
@@ -90,7 +90,6 @@ export const FileUpload = ({ søknadId, krav, addError, deleteError, onSuccess, 
             heading={t(`vedleggstyper.${krav}.heading`)}
             ingress={t(`vedleggstyper.${krav}.description`)}
             readAttachmentUrl={`/aap/mine-aap/${locale}/vedlegg/`}
-            id={krav}
             onUpload={(vedlegg) => {
               if (harLastetOppEttersending) {
                 setHarLastetOppEttersending(false);

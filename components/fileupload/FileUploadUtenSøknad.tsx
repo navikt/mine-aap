@@ -1,10 +1,10 @@
 'use client';
 
-import { Vedlegg } from '@navikt/aap-felles-react';
 import { FileUpload } from 'components/fileupload/FileUpload';
 import { Error, FormErrorSummary } from 'components/FormErrorSummary/FormErrorSummary';
 import { setFocus } from 'lib/utils/dom';
 import { useState } from 'react';
+import { Vedlegg } from 'components/FileUploadInnsending/FileInputInnsending';
 
 export const FileUploadUtenSøknad = () => {
   const [errors, setErrors] = useState<Error[]>([]);
