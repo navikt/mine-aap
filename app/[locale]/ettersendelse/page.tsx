@@ -1,12 +1,13 @@
 import { hentSøknader } from 'lib/services/innsendingService';
-import { BodyShort, Heading, Label, ReadMore, VStack } from '@navikt/ds-react';
+import { BodyShort, Heading, Label, VStack } from '@navikt/ds-react';
 import { Section } from 'components/Section/Section';
-import { LucaGuidePanel, ScanningGuide } from '@navikt/aap-felles-react';
 import { ArrowLeftIcon } from '@navikt/aksel-icons';
 import { PageHeader } from 'components/PageHeader';
 import { getTranslations } from 'next-intl/server';
 import { Link, redirect } from 'i18n/routing';
 import { FileUploadUtenSøknad } from 'components/fileupload/FileUploadUtenSøknad';
+import LucaGuidePanel from 'components/LucaGuidePanel';
+import ScanningGuide from 'components/ScanningGuide';
 
 interface PageParams {
   locale: string;
@@ -60,10 +61,7 @@ const Page = async ({ params }: Readonly<{ params: Promise<PageParams> }>) => {
           </div>
 
           <div>
-            <BodyShort>{t('ettersendelse.slikTarDuBildeBeskrivelse')}</BodyShort>
-            <ReadMore header={t('ettersendelse.slikTarDuBilde')}>
-              <ScanningGuide locale={locale} />
-            </ReadMore>
+            <ScanningGuide />
           </div>
         </Section>
 
