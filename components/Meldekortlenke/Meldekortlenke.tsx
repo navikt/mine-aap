@@ -7,7 +7,6 @@ import { Heading, LinkCard } from '@navikt/ds-react';
 import { useTranslations } from 'next-intl';
 
 import styles from './Meldekortlenke.module.css';
-import { logNavigerTilMeldekort } from 'lib/utils/amplitude';
 
 export const Meldekortlenke = () => {
   const t = useTranslations('forside.meldekort');
@@ -22,9 +21,7 @@ export const Meldekortlenke = () => {
           <TasklistIcon title="a11y-title" fontSize="1.5rem" />
         </LinkCard.Icon>
         <LinkCard.Title>
-          <LinkCard.Anchor href={'https://www.nav.no/aap/meldekort/'} onClick={() => logNavigerTilMeldekort()}>
-            {t('tekst')}
-          </LinkCard.Anchor>
+          <LinkCard.Anchor href={'https://www.nav.no/aap/meldekort/'}>{t('tekst')}</LinkCard.Anchor>
         </LinkCard.Title>
       </LinkCard>
     </PageComponentFlexContainer>

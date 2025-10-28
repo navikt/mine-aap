@@ -3,7 +3,6 @@
 import styles from './Dokumentoversikt.module.css';
 import { Checkbox, Pagination, Select } from '@navikt/ds-react';
 import { Dokument } from 'lib/types/types';
-import { logDokumentoversiktEvent } from 'lib/utils/amplitude';
 import { getNumberOfPages, sortDatoAsc, sortDatoDesc } from 'lib/utils/dokumentOversikt';
 import { useEffect, useMemo, useState } from 'react';
 import { Dokumentrad } from 'components/DokumentoversiktNy/Dokumentrad/Dokumentrad';
@@ -56,7 +55,6 @@ export const Dokumentoversikt = ({ dokumenter }: { dokumenter: Dokument[] }) => 
 
   const onSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
-    logDokumentoversiktEvent(antallSider, `sorter etter ${value}`);
     setSortType(value as SortType);
   };
 
@@ -89,7 +87,6 @@ export const Dokumentoversikt = ({ dokumenter }: { dokumenter: Dokument[] }) => 
             checked={hideMeldekort}
             value={hideMeldekort}
             onChange={() => {
-              logDokumentoversiktEvent(antallSider, 'toggle meldekort');
               setHideMeldekort(!hideMeldekort);
             }}
           >
@@ -99,11 +96,7 @@ export const Dokumentoversikt = ({ dokumenter }: { dokumenter: Dokument[] }) => 
       </div>
       <ul className={styles.documentList}>
         {sortedPaginatedDocuments.map((document) => (
-          <Dokumentrad
-            dokument={document}
-            antallSider={antallSider}
-            key={`${document.journalpostId}-${document.dokumentId}`}
-          />
+          <Dokumentrad dokument={document} key={`${document.journalpostId}-${document.dokumentId}`} />
         ))}
       </ul>
       {antallSider > 1 && (
@@ -111,7 +104,6 @@ export const Dokumentoversikt = ({ dokumenter }: { dokumenter: Dokument[] }) => 
           page={pageNumber}
           onPageChange={(x) => {
             setPageNumber(x);
-            logDokumentoversiktEvent(antallSider, 'pagination');
           }}
           count={antallSider}
           size="small"
