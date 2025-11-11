@@ -2076,12 +2076,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/next-api-proxy@npm:^4.1.5":
-  version: 4.1.5
-  resolution: "@navikt/next-api-proxy@npm:4.1.5::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fnext-api-proxy%2F4.1.5%2Ffc863d8af666b63cee7e1908bbf1188024da347b"
+"@navikt/next-api-proxy@npm:^4.1.7":
+  version: 4.1.7
+  resolution: "@navikt/next-api-proxy@npm:4.1.7::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fnext-api-proxy%2F4.1.7%2F72af378e5f2c45676de7d77304c22e336f97c394"
   peerDependencies:
     next: 14 || 15 || 16
-  checksum: 10c0/f68f1d597441fa6808f895c1ff55a284b2ae858a502934adaca475fda41af7a29309a54594f97cb9b4a1d193f68edea6cc538a15245c2b5976a5e51b3f3470c1
+  checksum: 10c0/ebe3c0d7798672343a677efc3518780536a111eeab473d9b14cfddc39f9c710d6fbef034e98a7d2a0cef482700b61eb47a3e27ec7ac75c40c65965896fe67274
   languageName: node
   linkType: hard
 
@@ -3331,7 +3331,7 @@ __metadata:
     "@navikt/ds-react": "npm:^7.33.2"
     "@navikt/eslint-config-aap": "npm:^5.4.0"
     "@navikt/nav-dekoratoren-moduler": "npm:^3.5.0"
-    "@navikt/next-api-proxy": "npm:^4.1.5"
+    "@navikt/next-api-proxy": "npm:^4.1.7"
     "@navikt/oasis": "npm:^3.8.0"
     "@testing-library/dom": "npm:^10.4.1"
     "@testing-library/jest-dom": "npm:^6.9.1"
