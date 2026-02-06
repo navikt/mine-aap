@@ -1,0 +1,21 @@
+name: "Chainguard - nyeste image versjon"
+
+on:
+  workflow_dispatch:
+  schedule:
+    # At the end of every day
+    - cron: "0 0 * * *"
+
+jobs:
+  digest-update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v5 # Immutable release
+      - uses: navikt/digestabot@v1.0 # Immutable release
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          team: aap
