@@ -8,14 +8,9 @@ on:
 
 jobs:
   digest-update:
-    runs-on: ubuntu-latest
+    uses: navikt/aap-workflows/.github/workflows/digestabot.yaml@main
+    secrets: inherit
     permissions:
       contents: write
       pull-requests: write
       id-token: write
-    steps:
-      - uses: actions/checkout@v6 # Immutable release
-      - uses: navikt/digestabot@v1.1 # Immutable release
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          team: aap
