@@ -1,6 +1,6 @@
-import { getStringFromPossiblyArrayQuery } from '@navikt/aap-felles-utils-client';
 import { hentVedlegg } from 'lib/services/innsendingService';
 import { NextRequest } from 'next/server';
+import { getStringFromPossiblyArrayQuery } from 'lib/utils/request';
 
 export async function GET(req: NextRequest) {
   const uuid = getStringFromPossiblyArrayQuery(req.nextUrl.searchParams.get('uuid') ?? '');
