@@ -1,10 +1,10 @@
 'use server';
 
-import { requestOboToken, validateToken } from '@navikt/oasis';
-import { getAccessTokenOrRedirectToLogin } from '@navikt/aap-felles-utils';
+import { requestOboToken, validateToken, getToken, TokenResult } from '@navikt/oasis';
 import { headers } from 'next/headers';
+import { redirect } from 'next/navigation';
 import { randomUUID } from 'crypto';
-import { TokenResult } from '@navikt/oasis/dist/token-result';
+import { isLocal } from 'lib/utils/environments';
 
 const NUMBER_OF_RETRIES = 3;
 
@@ -125,3 +125,15 @@ export const fetchWithRetry = async <ResponseBody>(
 
   return await response.json();
 };
+
+function getAccessTokenOrRedirectToLogin(headers: Headers): string {
+  if (isLocal()) return 'fake-token';
+
+  const redirectPath = headers.get('x-path');
+  const token = getToken(headers);
+  if (!token) {
+    redirect(`/oauth2/login?redirect=${redirectPath}`);
+  }
+
+  return token;
+}
