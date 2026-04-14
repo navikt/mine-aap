@@ -23,7 +23,6 @@ module.exports = async (...args) => {
   res.transformIgnorePatterns = [
     'node_modules/(?!next-intl)/',
   ];
-  console.log(res.transformIgnorePatterns)
 
   return res;
 };
