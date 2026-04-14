@@ -20,12 +20,10 @@ module.exports = async (...args) => {
   const fn = createJestConfig(customJestConfig);
   const res = await fn(...args);
 
-  res.transformIgnorePatterns = res.transformIgnorePatterns.map((pattern) => {
-    if (pattern === '/node_modules/') {
-      return '/node_modules/(?!(uuid)/)';
-    }
-    return pattern;
-  });
+  res.transformIgnorePatterns = [
+    'node_modules/(?!next-intl)/',
+  ];
+  console.log(res.transformIgnorePatterns)
 
   return res;
 };
