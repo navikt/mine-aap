@@ -28,7 +28,7 @@
     "html-react-parser": "^5.2.17",
     "install": "^0.13.0",
     "jsdom": "^26.1.0",
-    "next": "15.5.14",
+    "next": "16.2.3",
     "next-intl": "4.9.1",
     "node-cache": "^5.1.2",
     "pino": "10.3.1",
