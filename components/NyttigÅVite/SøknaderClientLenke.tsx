@@ -13,7 +13,7 @@ export const SøknaderClientLenke = () => {
     <LinkCard>
       <LinkCard.Title>
         <LinkCard.Anchor asChild>
-          <NextLink href="/soknader" passHref legacyBehavior>
+          <NextLink href="/soknader">
             {t('søknader')}
           </NextLink>
         </LinkCard.Anchor>
