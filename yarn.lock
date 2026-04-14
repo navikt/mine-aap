@@ -1897,20 +1897,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/aap-felles-css@npm:^5.6.0":
-  version: 5.6.0
-  resolution: "@navikt/aap-felles-css@npm:5.6.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faap-felles-css%2F5.6.0%2F58e68c54291454eeab84ca96beb2217fbf5161f6"
-  checksum: 10c0/75bab52656055bd1d243b27a41fee0dd180a5c726556a08afe1e72f64fda4a58740c04916c5ebbd9ac4fced817b860c9cb1bc8c2682fad0c31f7c5ae1e2a9d03
+"@navikt/aap-felles-css@npm:^5.6.2":
+  version: 5.6.2
+  resolution: "@navikt/aap-felles-css@npm:5.6.2::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faap-felles-css%2F5.6.2%2F7a06c62c1bcb11757c2579856945838775c384cf"
+  checksum: 10c0/65fa3a44d389e91b93ab59cc052739e1676902bd6550a78a913f336d0b5d4197a22496553ac8d2a037e440c451f5276379a2f57c3c29fb7901aaefb32f4422fc
   languageName: node
   linkType: hard
 
-"@navikt/aap-felles-prettier@npm:^5.6.0":
-  version: 5.6.0
-  resolution: "@navikt/aap-felles-prettier@npm:5.6.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faap-felles-prettier%2F5.6.0%2F574d397d68ef3ffd5a49835be5279ba5f5262393"
+"@navikt/aap-felles-prettier@npm:^5.6.2":
+  version: 5.6.2
+  resolution: "@navikt/aap-felles-prettier@npm:5.6.2::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faap-felles-prettier%2F5.6.2%2Fed338eef82f3db53e5be5b47fec3d4cf7db4d907"
   dependencies:
     "@trivago/prettier-plugin-sort-imports": "npm:^4.3.0"
     prettier: "npm:^3.3.3"
-  checksum: 10c0/d47d82459370d073465a965b1d03ac7db6a87f5feeed1a57c191fefdf86f92c94070033f53e7576f896aafae65c44a02a0c513a676db886c6decafdb21332ad9
+  checksum: 10c0/72af07cc629d6a727e3c16eda43ff926024cf2b64980fab9673914416324f5b4fbaf18f2ed41341152a356bf8c9dd31feca141feb9f3522d8d83238e5148b1d5
   languageName: node
   linkType: hard
 
@@ -3414,8 +3414,8 @@ __metadata:
   resolution: "aap-innsyn@workspace:."
   dependencies:
     "@grafana/faro-web-sdk": "npm:^1.19.0"
-    "@navikt/aap-felles-css": "npm:^5.6.0"
-    "@navikt/aap-felles-prettier": "npm:^5.6.0"
+    "@navikt/aap-felles-css": "npm:^5.6.2"
+    "@navikt/aap-felles-prettier": "npm:^5.6.2"
     "@navikt/aksel-icons": "npm:^7.40.0"
     "@navikt/ds-css": "npm:^7.40.0"
     "@navikt/ds-react": "npm:^7.40.0"
