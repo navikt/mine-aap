@@ -1,4 +1,4 @@
-import { getStringFromPossiblyArrayQuery } from '@navikt/aap-felles-utils-client';
+import { getStringFromPossiblyArrayQuery } from 'lib/utils/request';
 import { slettVedlegg } from 'lib/services/innsendingService';
 import { NextRequest } from 'next/server';
 
