@@ -1,7 +1,7 @@
-import { logInfo } from '@navikt/aap-felles-utils';
 import { sendEttersendelse } from 'lib/services/innsendingService';
 import { Ettersendelse, InnsendingBackendState, VedleggType } from 'lib/types/types';
 import { NextRequest } from 'next/server';
+import { logInfo } from 'lib/server/logger';
 
 export async function POST(req: NextRequest) {
   const body = await req.json();

@@ -1,8 +1,8 @@
 import { MeldekortSystem } from 'lib/types/types';
 import { isMock } from 'lib/utils/environments';
 import { fetchProxy } from 'lib/services/fetchProxy';
-import { logError } from '@navikt/aap-felles-utils';
 import { mockAnsvarligMeldekortSystem } from 'lib/mock/mockAnsvarligMeldekortSystem';
+import { logError } from 'lib/server/logger';
 
 const meldekortBackendBaseUrl = process.env.MELDEKORT_BACKEND_URL;
 const meldekortBackendAudience = process.env.MELDEKORT_BACKEND_AUDIENCE ?? '';

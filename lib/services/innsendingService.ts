@@ -5,9 +5,9 @@ import { InnsendingBackendState, MineAapSoknadMedEttersendingNy } from 'lib/type
 import { isMock } from 'lib/utils/environments';
 import { mockSøknerMedEttersending } from 'lib/mock/mockSoknad';
 import { isAfter } from 'date-fns';
-import { logError, logWarning } from '@navikt/aap-felles-utils';
 import { randomUUID } from 'crypto';
 import { proxyRouteHandler } from '@navikt/next-api-proxy';
+import { logError, logWarning } from 'lib/server/logger';
 
 const innsendingApiBaseUrl = process.env.INNSENDING_URL;
 const innsendingAudience = process.env.INNSENDING_AUDIENCE ?? '';

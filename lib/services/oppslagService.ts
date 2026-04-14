@@ -4,7 +4,7 @@ import { mockDokumenter } from 'lib/mock/mockDokumenter';
 import { fetchPdf, fetchProxy } from 'lib/services/fetchProxy';
 import { Dokument } from 'lib/types/types';
 import { isMock } from 'lib/utils/environments';
-import { logError } from '@navikt/aap-felles-utils';
+import { logError } from 'lib/server/logger';
 
 const oppslagApiBaseUrl = process.env.OPPSLAG_URL;
 const oppslagAudience = process.env.OPPSLAG_AUDIENCE ?? '';
