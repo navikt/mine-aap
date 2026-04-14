@@ -6,16 +6,8 @@ import { Error, FormErrorSummary } from 'components/FormErrorSummary/FormErrorSu
 
 import { FileUpload } from 'components/fileupload/FileUpload';
 import { setFocus } from 'lib/utils/dom';
-import { getTranslations } from 'next-intl/server';
 import { Vedlegg } from 'components/FileUploadInnsending/FileInputInnsending';
 
-export async function generateMetadata() {
-  const t = await getTranslations();
-
-  return {
-    title: `${t('ettersendelse.appTittel')} - nav.no`,
-  };
-}
 
 interface Props {
   søknad: InnsendingSøknad;

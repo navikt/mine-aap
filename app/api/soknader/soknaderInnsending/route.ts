@@ -1,5 +1,5 @@
 import { hentSøknader } from 'lib/services/innsendingService';
-import { NextApiRequest } from 'next';
+import { NextRequest } from 'next/server';
 
 const allowedOrigins = [
   'https://www.intern.dev.nav.no',
@@ -9,9 +9,9 @@ const allowedOrigins = [
   'https://www.nav.no',
 ];
 
-export async function GET(req: NextApiRequest) {
+export async function GET(req: NextRequest) {
   const soknader = await hentSøknader();
-  const origin = req.headers.origin ?? '';
+  const origin = req.headers.get('origin') ?? '';
 
   return new Response(JSON.stringify(soknader), {
     status: 200,

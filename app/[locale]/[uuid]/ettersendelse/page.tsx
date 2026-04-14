@@ -15,6 +15,14 @@ interface PageParams {
   uuid: string;
 }
 
+export async function generateMetadata() {
+  const t = await getTranslations();
+
+  return {
+    title: `${t('ettersendelse.appTittel')} - nav.no`,
+  };
+}
+
 const Page = async ({ params }: Readonly<{ params: Promise<PageParams> }>) => {
   const { uuid } = await params;
   const t = await getTranslations('');
