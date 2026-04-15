@@ -108,7 +108,7 @@ describe('FileUpload', () => {
 });
 
 describe('FileUpload - UU', () => {
-  it('jest-axe finner ingen feil', async () => {
+  it('vitest-axe finner ingen feil', async () => {
     mockUploadFile();
     const { container } = render(<Filopplastning krav={'ANNET'} />);
     const res = await axe(container);
