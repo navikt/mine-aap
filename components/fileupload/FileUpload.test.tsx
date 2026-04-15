@@ -5,7 +5,7 @@ import createFetchMock from 'vitest-fetch-mock';
 import { userEvent } from '@testing-library/user-event';
 import { v4 as uuidV4 } from 'uuid';
 import { VedleggType } from 'lib/types/types';
-import { axe } from 'vitest-axe'
+import { axe } from 'vitest-axe';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { useParams } from 'next/navigation';
 
