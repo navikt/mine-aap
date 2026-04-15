@@ -8,8 +8,8 @@ import {
 } from '@navikt/ds-react';
 import { ButtonRow } from 'components/ButtonRow/ButtonRow';
 import { formatDate } from 'lib/utils/date';
-import { MineAapEttersendingNy } from 'lib/types/types';
-import { DokumentMedTittel } from 'components/Soknad/SoknadMedDatafetching';
+import type { MineAapEttersendingNy } from 'lib/types/types';
+import type { DokumentMedTittel } from 'components/Soknad/SoknadMedDatafetching';
 import { EttersendelseButton } from 'components/Soknad/EttersendelseButton';
 import { getTranslations } from 'next-intl/server';
 

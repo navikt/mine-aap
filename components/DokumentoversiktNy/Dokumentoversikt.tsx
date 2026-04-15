@@ -2,7 +2,7 @@
 
 import styles from './Dokumentoversikt.module.css';
 import { Checkbox, Pagination, Select } from '@navikt/ds-react';
-import { Dokument } from 'lib/types/types';
+import type { Dokument } from 'lib/types/types';
 import {
   getNumberOfPages,
   sortDatoAsc,

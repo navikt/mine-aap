@@ -1,6 +1,6 @@
 'use client';
 
-import { InnsendingSøknad } from 'lib/types/types';
+import type { InnsendingSøknad } from 'lib/types/types';
 import { useState } from 'react';
 import type {FormError} from 'components/FormErrorSummary/FormErrorSummary';
 import {
@@ -9,7 +9,7 @@ import {
 
 import { FileUpload } from 'components/fileupload/FileUpload';
 import { setFocus } from 'lib/utils/dom';
-import { Vedlegg } from 'components/FileUploadInnsending/FileInputInnsending';
+import type { Vedlegg } from 'components/FileUploadInnsending/FileInputInnsending';
 
 interface Props {
   søknad: InnsendingSøknad;

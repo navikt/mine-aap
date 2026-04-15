@@ -1,9 +1,9 @@
 'use client';
 
-import { Ettersendelse, VedleggType } from 'lib/types/types';
+import type { Ettersendelse, VedleggType } from 'lib/types/types';
 import { Section } from 'components/Section/Section';
 import { Alert, BodyShort, Button, Heading } from '@navikt/ds-react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import type { FormError } from 'components/FormErrorSummary/FormErrorSummary';
 
 import styles from 'components/fileupload/FileUpload.module.css';
@@ -11,7 +11,7 @@ import { useTranslations } from 'next-intl';
 import { useParams } from 'next/navigation';
 import {
   FileInputInnsending,
-  Vedlegg,
+  type Vedlegg,
 } from 'components/FileUploadInnsending/FileInputInnsending';
 
 interface Props {

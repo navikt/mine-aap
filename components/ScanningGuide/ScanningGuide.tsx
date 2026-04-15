@@ -2,7 +2,7 @@
 
 import { BodyLong, BodyShort, Label, ReadMore } from '@navikt/ds-react';
 import { CheckmarkCircleIcon, XMarkOctagonIcon } from '@navikt/aksel-icons';
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import ScanningIcon from 'components/ScanningGuide/ScanningIcon';
 import { scrollRefIntoView } from 'lib/utils/dom';

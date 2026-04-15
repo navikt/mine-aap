@@ -1,5 +1,5 @@
 import { hentSøknader } from 'lib/services/innsendingService';
-import { NextRequest } from 'next/server';
+import type { NextRequest } from 'next/server';
 
 const allowedOrigins = [
   'https://www.intern.dev.nav.no',

@@ -1,6 +1,6 @@
 import { UploadIcon } from '@navikt/aksel-icons';
 import { BodyShort, Heading, Loader } from '@navikt/ds-react';
-import React, { InputHTMLAttributes, useMemo, useRef, useState } from 'react';
+import { type InputHTMLAttributes, useMemo, useRef, useState } from 'react';
 import { v4 as uuidV4 } from 'uuid';
 
 import { FilePanelError } from './FilePanelError';
@@ -27,6 +27,10 @@ export interface Vedlegg {
 }
 
 const MAX_TOTAL_FILE_SIZE = 52428800; // 50mb
+function hasStatus(err: unknown): err is { status: number } {
+  return err instanceof Object && Object.hasOwn(err, 'status');
+}
+
 export const FileInputInnsending = (props: FileInputProps) => {
   const {
     heading,
@@ -118,7 +122,7 @@ export const FileInputInnsending = (props: FileInputProps) => {
       const uploadedFiles: Vedlegg[] = await Promise.all(
         fileArray.map(async (file) => {
           const internalErrorMessage = internalValidate(file);
-          let uploadResult: Vedlegg = {
+          const uploadResult: Vedlegg = {
             vedleggId: uuidV4(),
             errorMessage: '',
             type: file.type,
@@ -144,8 +148,10 @@ export const FileInputInnsending = (props: FileInputProps) => {
                   resData.substatus,
                 );
               }
-            } catch (err: any) {
-              uploadResult.errorMessage = settFeilmelding(err?.status || 500);
+            } catch (err) {
+              if (hasStatus(err)) {
+                uploadResult.errorMessage = settFeilmelding(err.status || 500);
+              }
             }
           } else if (internalErrorMessage) {
             uploadResult.errorMessage = internalErrorMessage;
@@ -194,6 +200,7 @@ export const FileInputInnsending = (props: FileInputProps) => {
           );
         }
       })}
+      {/** biome-ignore lint/a11y/noStaticElementInteractions: <skriv heller om til aksel sin fileinput> */}
       <div
         data-testid={'dropzone'}
         className={`dropzone ${dragOver ? 'dragover' : ''}`}
@@ -232,6 +239,7 @@ export const FileInputInnsending = (props: FileInputProps) => {
             <BodyShort>{t('inputText')}</BodyShort>
             <BodyShort>{'eller'}</BodyShort>
             <label htmlFor={inputId} aria-labelledby={props.id}>
+              {/** biome-ignore lint/a11y/useSemanticElements: <skriv heller om til aksel sin fileinput> */}
               <span
                 className={
                   'fileInputButton navds-button navds-button__inner navds-body-short navds-button--secondary'

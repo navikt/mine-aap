@@ -1,4 +1,4 @@
-import { Dokument } from 'lib/types/types';
+import type { Dokument } from 'lib/types/types';
 import { Detail, Link } from '@navikt/ds-react';
 import { formatDate } from 'lib/utils/date';
 

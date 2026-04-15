@@ -4,11 +4,11 @@ import {
   requestOboToken,
   validateToken,
   getToken,
-  TokenResult,
+  type TokenResult,
 } from '@navikt/oasis';
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { randomUUID } from 'crypto';
+import { randomUUID } from 'node:crypto';
 import { isLocal } from 'lib/utils/environments';
 
 const NUMBER_OF_RETRIES = 3;
@@ -154,7 +154,7 @@ export const fetchWithRetry = async <ResponseBody>(
   }
 
   const contentType = response.headers.get('content-type');
-  if (contentType && contentType.includes('text')) {
+  if (contentType?.includes('text')) {
     return (await response.text()) as ResponseBody;
   }
 

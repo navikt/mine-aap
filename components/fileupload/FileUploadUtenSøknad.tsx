@@ -7,7 +7,7 @@ import {
 } from 'components/FormErrorSummary/FormErrorSummary';
 import { setFocus } from 'lib/utils/dom';
 import { useState } from 'react';
-import { Vedlegg } from 'components/FileUploadInnsending/FileInputInnsending';
+import type { Vedlegg } from 'components/FileUploadInnsending/FileInputInnsending';
 
 export const FileUploadUtenSøknad = () => {
   const [errors, setErrors] = useState<FormError[]>([]);

@@ -2,7 +2,7 @@ import 'server-only';
 
 import { mockDokumenter } from 'lib/mock/mockDokumenter';
 import { fetchPdf, fetchProxy } from 'lib/services/fetchProxy';
-import { Dokument } from 'lib/types/types';
+import type { Dokument } from 'lib/types/types';
 import { isMock } from 'lib/utils/environments';
 import { logError } from 'lib/server/logger';
 

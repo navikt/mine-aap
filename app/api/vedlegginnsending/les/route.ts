@@ -1,5 +1,5 @@
 import { hentVedlegg } from 'lib/services/innsendingService';
-import { NextRequest } from 'next/server';
+import type { NextRequest } from 'next/server';
 import { getStringFromPossiblyArrayQuery } from 'lib/utils/request';
 
 export async function GET(req: NextRequest) {

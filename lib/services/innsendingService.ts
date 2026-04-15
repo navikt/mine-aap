@@ -1,14 +1,14 @@
 import 'server-only';
 
 import { fetchProxy, getOnBefalfOfToken } from 'lib/services/fetchProxy';
-import {
+import type {
   InnsendingBackendState,
   MineAapSoknadMedEttersendingNy,
 } from 'lib/types/types';
 import { isMock } from 'lib/utils/environments';
 import { mockSøknerMedEttersending } from 'lib/mock/mockSoknad';
 import { isAfter } from 'date-fns';
-import { randomUUID } from 'crypto';
+import { randomUUID } from 'node:crypto';
 import { proxyRouteHandler } from '@navikt/next-api-proxy';
 import { logError, logWarning } from 'lib/server/logger';
 
@@ -44,7 +44,7 @@ export const sendEttersendelse = async (
   if (isMock()) {
     return {};
   }
-  const erGenerellEttersendelse = innsendingsId ? true : false;
+  const erGenerellEttersendelse = !!innsendingsId;
   const url = `${innsendingApiBaseUrl}/innsending${erGenerellEttersendelse ? `/${innsendingsId}` : ''}`;
   try {
     const ettersendelse = await fetchProxy(

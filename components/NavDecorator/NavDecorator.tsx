@@ -8,7 +8,7 @@ import {
 } from '@navikt/nav-dekoratoren-moduler';
 import { useTranslations } from 'next-intl';
 import { usePathname, useRouter } from 'i18n/routing';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 const BASE_PATH = '/aap/mine-aap/';
 
@@ -53,7 +53,7 @@ export const NavDecorator = ({ children }: { children: React.ReactNode }) => {
       });
     }
     setBreadcrumbs(breadcrumbs);
-  }, [router, t, pathname]);
+  }, [t, pathname]);
 
   onBreadcrumbClick((breadcrumb) => {
     router.push(breadcrumb.url.replace(BASE_PATH, '/'));

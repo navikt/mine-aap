@@ -6,7 +6,7 @@ import { notFound } from 'next/navigation';
 import { fetchDecoratorReact } from '@navikt/nav-dekoratoren-moduler/ssr';
 import { getEnvironment } from 'lib/utils/environments';
 import Script from 'next/script';
-import { routing } from 'i18n/routing';
+import { isValidLocale } from 'lib/utils/locale';
 import { NavDecorator } from 'components/NavDecorator/NavDecorator';
 
 export async function generateMetadata() {
@@ -26,7 +26,7 @@ export default async function LocaleLayout({
 }) {
   const { locale } = await params;
   // Ensure that the incoming `locale` is valid
-  if (!routing.locales.includes(locale as any)) {
+  if (!isValidLocale(locale)) {
     notFound();
   }
 

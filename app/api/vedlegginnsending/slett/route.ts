@@ -1,6 +1,6 @@
 import { getStringFromPossiblyArrayQuery } from 'lib/utils/request';
 import { slettVedlegg } from 'lib/services/innsendingService';
-import { NextRequest } from 'next/server';
+import type { NextRequest } from 'next/server';
 
 export async function DELETE(req: NextRequest) {
   const uuid = getStringFromPossiblyArrayQuery(

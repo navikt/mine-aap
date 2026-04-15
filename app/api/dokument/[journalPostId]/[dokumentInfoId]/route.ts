@@ -1,5 +1,5 @@
 import { hentDokument } from 'lib/services/oppslagService';
-import { NextRequest } from 'next/server';
+import type { NextRequest } from 'next/server';
 
 export async function GET(
   _: NextRequest,
