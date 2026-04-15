@@ -1,4 +1,4 @@
-// --- for å få typescript til å fungere på axe matcheren 'toHaveNoVialations'
+// --- for å få typescript til å fungere på axe matcheren 'toHaveNoViolations'
 import 'vitest';
 import type { AxeMatchers } from 'vitest-axe/matchers';
 
