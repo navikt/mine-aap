@@ -2,8 +2,8 @@
 
 import { InnsendingSøknad } from 'lib/types/types';
 import { useState } from 'react';
+import type {FormError} from 'components/FormErrorSummary/FormErrorSummary';
 import {
-  Error,
   FormErrorSummary,
 } from 'components/FormErrorSummary/FormErrorSummary';
 
@@ -16,11 +16,11 @@ interface Props {
 }
 
 export const EttersendelseInnsending = ({ søknad }: Props) => {
-  const [errors, setErrors] = useState<Error[]>([]);
+  const [errors, setErrors] = useState<FormError[]>([]);
 
   const errorSummaryId = `form-error-summary-${søknad.innsendingsId ?? 'generic'}`;
 
-  const addError = (errorsFromKrav: Error[]) =>
+  const addError = (errorsFromKrav: FormError[]) =>
     setErrors([...errors, ...errorsFromKrav]);
   const deleteError = (vedlegg: Vedlegg) =>
     setErrors(errors.filter((error) => error.id !== vedlegg.vedleggId));
@@ -35,7 +35,9 @@ export const EttersendelseInnsending = ({ søknad }: Props) => {
         addError={addError}
         deleteError={deleteError}
         setErrorSummaryFocus={() => setFocus(errorSummaryId)}
-        onSuccess={() => {}}
+        onSuccess={() => {
+          //intentional
+        }}
       />
     </>
   );

@@ -4,7 +4,7 @@ import { Ettersendelse, VedleggType } from 'lib/types/types';
 import { Section } from 'components/Section/Section';
 import { Alert, BodyShort, Button, Heading } from '@navikt/ds-react';
 import React, { useState } from 'react';
-import { Error } from 'components/FormErrorSummary/FormErrorSummary';
+import type { FormError } from 'components/FormErrorSummary/FormErrorSummary';
 
 import styles from 'components/fileupload/FileUpload.module.css';
 import { useTranslations } from 'next-intl';
@@ -17,7 +17,7 @@ import {
 interface Props {
   søknadId?: string;
   krav: VedleggType;
-  addError: (errors: Error[]) => void;
+  addError: (errors: FormError[]) => void;
   deleteError: (vedlegg: Vedlegg) => void;
   setErrorSummaryFocus: () => void;
   onSuccess: (krav: VedleggType) => void;

@@ -1,9 +1,9 @@
 import { render, screen, within } from 'lib/utils/test/customRender';
 import { describe, it, expect } from 'vitest';
 import { FormErrorSummary } from 'components/FormErrorSummary/FormErrorSummary';
-import { Error } from './FormErrorSummary';
+import type { FormError } from './FormErrorSummary';
 
-const skjemafeil: Error[] = [
+const skjemafeil: FormError[] = [
   {
     id: 'id1',
     message: 'Feilmelding 1',
