@@ -9,9 +9,10 @@ const logger = pino({
       if (!object.err) return object;
 
       const { err, ...rest } = object;
-      const serialized = err instanceof Error
-        ? pino.stdSerializers.err(err)
-        : err as { stack?: string; type?: string; message?: string };
+      const serialized =
+        err instanceof Error
+          ? pino.stdSerializers.err(err)
+          : (err as { stack?: string; type?: string; message?: string });
 
       return {
         ...rest,

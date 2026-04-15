@@ -2,10 +2,8 @@
 
 import type { InnsendingSøknad } from 'lib/types/types';
 import { useState } from 'react';
-import type {FormError} from 'components/FormErrorSummary/FormErrorSummary';
-import {
-  FormErrorSummary,
-} from 'components/FormErrorSummary/FormErrorSummary';
+import type { FormError } from 'components/FormErrorSummary/FormErrorSummary';
+import { FormErrorSummary } from 'components/FormErrorSummary/FormErrorSummary';
 
 import { FileUpload } from 'components/fileupload/FileUpload';
 import { setFocus } from 'lib/utils/dom';

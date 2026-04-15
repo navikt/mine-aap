@@ -1,10 +1,8 @@
 'use client';
 
 import { FileUpload } from 'components/fileupload/FileUpload';
-import type {FormError} from 'components/FormErrorSummary/FormErrorSummary';
-import {
-  FormErrorSummary,
-} from 'components/FormErrorSummary/FormErrorSummary';
+import type { FormError } from 'components/FormErrorSummary/FormErrorSummary';
+import { FormErrorSummary } from 'components/FormErrorSummary/FormErrorSummary';
 import { setFocus } from 'lib/utils/dom';
 import { useState } from 'react';
 import type { Vedlegg } from 'components/FileUploadInnsending/FileInputInnsending';
@@ -28,7 +26,7 @@ export const FileUploadUtenSøknad = () => {
         setErrorSummaryFocus={() => setFocus(errorSummaryId)}
         onSuccess={() => {
           //intentional
-         }}
+        }}
       />
     </>
   );
