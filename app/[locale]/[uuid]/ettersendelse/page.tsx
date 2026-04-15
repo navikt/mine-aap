@@ -30,7 +30,8 @@ const Page = async ({ params }: Readonly<{ params: Promise<PageParams> }>) => {
   const søknader = await hentSøknader();
 
   if (søknader?.length > 0) {
-    const søknadFraInnsending = søknader.find((søknad) => søknad.innsendingsId === uuid) ?? null;
+    const søknadFraInnsending =
+      søknader.find((søknad) => søknad.innsendingsId === uuid) ?? null;
 
     if (!søknadFraInnsending) {
       return notFound();
@@ -64,7 +65,9 @@ const Page = async ({ params }: Readonly<{ params: Promise<PageParams> }>) => {
               </BodyShort>
             </LucaGuidePanel>
             <Label as="p">
-              {t('ettersendelse.gjeldendeSøknad', { dateTime: formatFullDate(søknadFraInnsending.mottattDato) })}
+              {t('ettersendelse.gjeldendeSøknad', {
+                dateTime: formatFullDate(søknadFraInnsending.mottattDato),
+              })}
             </Label>
 
             <div>

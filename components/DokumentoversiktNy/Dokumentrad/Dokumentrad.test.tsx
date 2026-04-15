@@ -20,12 +20,16 @@ describe('Dokumentrad', () => {
 
   it('har lenke med tittel på dokumentet', () => {
     render(<Dokumentrad dokument={inngåendeDokument} />);
-    expect(screen.getByRole('link', { name: inngåendeDokument.tittel })).toBeVisible();
+    expect(
+      screen.getByRole('link', { name: inngåendeDokument.tittel }),
+    ).toBeVisible();
   });
 
   it('lenke åpnes i ny fane', () => {
     render(<Dokumentrad dokument={inngåendeDokument} />);
-    expect(screen.getByRole('link', { name: inngåendeDokument.tittel })).toHaveAttribute('target', '_blank');
+    expect(
+      screen.getByRole('link', { name: inngåendeDokument.tittel }),
+    ).toHaveAttribute('target', '_blank');
   });
 
   it('viser at dokumentet er sendt av Nav når type er U', () => {

@@ -1,4 +1,8 @@
-import { InnsendingSøknad, MineAapSoknadMedEttersendinger, MineAapSoknadMedEttersendingNy } from 'lib/types/types';
+import {
+  InnsendingSøknad,
+  MineAapSoknadMedEttersendinger,
+  MineAapSoknadMedEttersendingNy,
+} from 'lib/types/types';
 
 const mockSøknaderInnsending: InnsendingSøknad[] = [
   {
@@ -41,4 +45,8 @@ const mockSøknerMedEttersending: MineAapSoknadMedEttersendingNy[] = [
   },
 ];
 
-export { mockSøknaderInnsending, mockEttersendelserSoknad, mockSøknerMedEttersending };
+export {
+  mockSøknaderInnsending,
+  mockEttersendelserSoknad,
+  mockSøknerMedEttersending,
+};

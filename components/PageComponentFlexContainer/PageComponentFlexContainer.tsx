@@ -8,7 +8,9 @@ export const PageComponentFlexContainer = ({
   children: React.ReactNode;
 }) => {
   return (
-    <div className={`${styles.flexContainer} ${subtleBackground && styles.subtleBackground}`}>
+    <div
+      className={`${styles.flexContainer} ${subtleBackground && styles.subtleBackground}`}
+    >
       <div className={styles.content}>{children}</div>
     </div>
   );

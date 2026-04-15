@@ -32,7 +32,10 @@ export const Dokumentrad = ({ dokument }: DokumentradProps) => {
         {dokument.tittel}
       </Link>
       <Detail style={{ color: 'var(--a-text-default' }}>
-        {t('avsender', { name: getAvsender(dokument.type), date: formatDate(dokument.dato) })}
+        {t('avsender', {
+          name: getAvsender(dokument.type),
+          date: formatDate(dokument.dato),
+        })}
       </Detail>
     </li>
   );

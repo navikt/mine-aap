@@ -1,4 +1,8 @@
-import { getNumberOfPages, sortDatoAsc, sortDatoDesc } from 'lib/utils/dokumentOversikt';
+import {
+  getNumberOfPages,
+  sortDatoAsc,
+  sortDatoDesc,
+} from 'lib/utils/dokumentOversikt';
 import { Dokument } from 'lib/types/types';
 import { describe, it, expect } from 'vitest';
 

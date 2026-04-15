@@ -10,7 +10,12 @@ interface Props {
   onDelete: () => void;
 }
 
-export const FilePanelSuccess = ({ file, onDelete, deleteUrl, readAttachmentUrl }: Props) => {
+export const FilePanelSuccess = ({
+  file,
+  onDelete,
+  deleteUrl,
+  readAttachmentUrl,
+}: Props) => {
   return (
     <Panel className={'fileCard'}>
       <div className={'fileCardLeftContent'}>
@@ -18,7 +23,10 @@ export const FilePanelSuccess = ({ file, onDelete, deleteUrl, readAttachmentUrl 
           <CheckmarkIcon color={'var(--a-icon-success)'} />
         </div>
         <div className={'fileInputText'}>
-          <Link target={'_blank'} href={`${readAttachmentUrl}${file.vedleggId}`}>
+          <Link
+            target={'_blank'}
+            href={`${readAttachmentUrl}${file.vedleggId}`}
+          >
             {file.name}
           </Link>
           <Detail>{fileSizeString(file.size)}</Detail>
@@ -26,7 +34,9 @@ export const FilePanelSuccess = ({ file, onDelete, deleteUrl, readAttachmentUrl 
       </div>
       <button
         onClick={async () => {
-          const res = await fetch(`${deleteUrl}${file.vedleggId}`, { method: 'DELETE' });
+          const res = await fetch(`${deleteUrl}${file.vedleggId}`, {
+            method: 'DELETE',
+          });
           if (res.ok) {
             onDelete();
           }

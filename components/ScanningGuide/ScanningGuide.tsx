@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { BodyLong, BodyShort, Label, ReadMore } from '@navikt/ds-react';
 import { CheckmarkCircleIcon, XMarkOctagonIcon } from '@navikt/aksel-icons';
@@ -15,7 +15,8 @@ export const ScanningGuide = () => {
 
   useEffect(() => {
     if (scanningGuideOpen) {
-      if (scanningGuideElement?.current != null) scrollRefIntoView(scanningGuideElement);
+      if (scanningGuideElement?.current != null)
+        scrollRefIntoView(scanningGuideElement);
     }
   }, [scanningGuideOpen]);
   return (

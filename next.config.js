@@ -22,7 +22,9 @@ const nextConfig = {
   assetPrefix: process.env.ASSET_PREFIX ?? undefined,
 
   async headers() {
-    const csp = await ssr.buildCspHeader(appDirectives, { env: process.env.DECORATOR_ENV ?? 'prod' });
+    const csp = await ssr.buildCspHeader(appDirectives, {
+      env: process.env.DECORATOR_ENV ?? 'prod',
+    });
     return [
       {
         source: '/:path*',

@@ -7,5 +7,9 @@ export const Card = ({
   subtleBlue?: boolean;
   children: React.ReactNode;
 }) => {
-  return <div className={`${styles.card} ${subtleBlue && styles.subtleBlue}`}>{children}</div>;
+  return (
+    <div className={`${styles.card} ${subtleBlue && styles.subtleBlue}`}>
+      {children}
+    </div>
+  );
 };

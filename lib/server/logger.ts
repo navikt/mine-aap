@@ -7,7 +7,10 @@ const logger = pino({
     },
     log: (object: any) => {
       if (object.err) {
-        const err = object.err instanceof Error ? pino.stdSerializers.err(object.err) : object.err;
+        const err =
+          object.err instanceof Error
+            ? pino.stdSerializers.err(object.err)
+            : object.err;
         object.stack_trace = err.stack;
         object.type = err.type;
         object.error_message = err.message;
@@ -22,7 +25,11 @@ export const logInfo = (message: string, error?: unknown, callid?: string) => {
 
   logger.info(logObject, message);
 };
-export const logWarning = (message: string, error?: unknown, callid?: string) => {
+export const logWarning = (
+  message: string,
+  error?: unknown,
+  callid?: string,
+) => {
   const logObject = createLogObject(error, callid);
 
   logger.warn(logObject, message);

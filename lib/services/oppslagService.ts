@@ -22,7 +22,10 @@ export const hentDokumenter = async (): Promise<Dokument[]> => {
   }
 };
 
-export const hentDokument = async (journalPostId: string, dokumentInfoId: string) => {
+export const hentDokument = async (
+  journalPostId: string,
+  dokumentInfoId: string,
+) => {
   const url = `${oppslagApiBaseUrl}/dokumenter/${journalPostId}/${dokumentInfoId}`;
   return await fetchPdf(url, oppslagAudience);
 };

@@ -1,5 +1,5 @@
 .visuallyHidden {
-  composes: visuallyHidden from '../../styles/visibility.module.css';
+  composes: visuallyHidden from "../../styles/visibility.module.css";
 }
 
 .row {

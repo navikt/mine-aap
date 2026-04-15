@@ -21,7 +21,9 @@ export const Meldekortlenke = () => {
           <TasklistIcon title="a11y-title" fontSize="1.5rem" />
         </LinkCard.Icon>
         <LinkCard.Title>
-          <LinkCard.Anchor href={'https://www.nav.no/aap/meldekort/'}>{t('tekst')}</LinkCard.Anchor>
+          <LinkCard.Anchor href={'https://www.nav.no/aap/meldekort/'}>
+            {t('tekst')}
+          </LinkCard.Anchor>
         </LinkCard.Title>
       </LinkCard>
     </PageComponentFlexContainer>

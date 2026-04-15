@@ -5,6 +5,11 @@ import { describe, it, expect } from 'vitest';
 describe('AppHeader', () => {
   it('har overskrift på nivå h1', () => {
     render(<AppHeader />);
-    expect(screen.getByRole('heading', { level: 1, name: 'Mine arbeidsavklarings­penger' })).toBeVisible();
+    expect(
+      screen.getByRole('heading', {
+        level: 1,
+        name: 'Mine arbeidsavklarings­penger',
+      }),
+    ).toBeVisible();
   });
 });

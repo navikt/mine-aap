@@ -7,11 +7,17 @@ import { logError } from 'lib/server/logger';
 const meldekortBackendBaseUrl = process.env.MELDEKORT_BACKEND_URL;
 const meldekortBackendAudience = process.env.MELDEKORT_BACKEND_AUDIENCE ?? '';
 
-export const hentAnsvarligMeldekortsystem = async (): Promise<MeldekortSystem | undefined> => {
+export const hentAnsvarligMeldekortsystem = async (): Promise<
+  MeldekortSystem | undefined
+> => {
   if (isMock()) return mockAnsvarligMeldekortSystem;
   const url = `${meldekortBackendBaseUrl}/api/ansvarlig-system-felles`;
   try {
-    return await fetchProxy<MeldekortSystem>(url, meldekortBackendAudience, 'GET');
+    return await fetchProxy<MeldekortSystem>(
+      url,
+      meldekortBackendAudience,
+      'GET',
+    );
   } catch (error) {
     logError('Error fetching ansvarlig meldekortsystem', error);
     return undefined;

@@ -1,5 +1,9 @@
 import { sendEttersendelse } from 'lib/services/innsendingService';
-import { Ettersendelse, InnsendingBackendState, VedleggType } from 'lib/types/types';
+import {
+  Ettersendelse,
+  InnsendingBackendState,
+  VedleggType,
+} from 'lib/types/types';
 import { NextRequest } from 'next/server';
 import { logInfo } from 'lib/server/logger';
 
@@ -8,7 +12,7 @@ export async function POST(req: NextRequest) {
   const { ettersendteVedlegg, søknadId, totalFileSize }: Ettersendelse = body;
 
   logInfo(
-    `Sender inn ettersendelse med ${ettersendteVedlegg.length} vedlegg på samlet størrelse ${totalFileSize} bytes`
+    `Sender inn ettersendelse med ${ettersendteVedlegg.length} vedlegg på samlet størrelse ${totalFileSize} bytes`,
   );
 
   const ettersending = ettersendteVedlegg[0];

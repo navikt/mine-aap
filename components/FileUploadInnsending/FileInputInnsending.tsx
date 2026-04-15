@@ -39,7 +39,7 @@ export const FileInputInnsending = (props: FileInputProps) => {
     readAttachmentUrl = 'nb',
     ...rest
   } = props;
-  const t = useTranslations('filopplasting.fileinput')
+  const t = useTranslations('filopplasting.fileinput');
   const [dragOver, setDragOver] = useState<boolean>(false);
   const [isUploading, setIsUploading] = useState<boolean>(false);
   const [totalSizeIInnsending, setTotalSizeIInnsending] = useState<number>(0);
@@ -75,7 +75,11 @@ export const FileInputInnsending = (props: FileInputProps) => {
   function internalValidate(fileToUpload: File): string | undefined {
     const totalUploadedSize = files.reduce((acc, curr) => acc + curr.size, 0);
 
-    if (!['image/png', 'image/jpg', 'image/jpeg', 'application/pdf'].includes(fileToUpload?.type)) {
+    if (
+      !['image/png', 'image/jpg', 'image/jpeg', 'application/pdf'].includes(
+        fileToUpload?.type,
+      )
+    ) {
       return t('fileInputErrors.unsupportedMediaType');
     }
 
@@ -87,7 +91,7 @@ export const FileInputInnsending = (props: FileInputProps) => {
   async function validateAndSetFiles(filelist: FileList) {
     const fileArray = Array.from(filelist);
     const totalSize = fileArray.reduce((acc, curr) => acc + curr.size, 0);
-    if(totalSize > MAX_TOTAL_FILE_SIZE) {
+    if (totalSize > MAX_TOTAL_FILE_SIZE) {
       setIsUploading(false);
       onUpload([
         {
@@ -96,7 +100,7 @@ export const FileInputInnsending = (props: FileInputProps) => {
           type: '',
           size: totalSize,
           name: `${fileArray.length} filer`,
-        }
+        },
       ]);
     } else if (totalSize + totalSizeIInnsending > MAX_TOTAL_FILE_SIZE) {
       setIsUploading(false);
@@ -107,7 +111,7 @@ export const FileInputInnsending = (props: FileInputProps) => {
           type: '',
           size: totalSize,
           name: `${fileArray.length} filer`,
-        }
+        },
       ]);
     } else {
       setIsUploading(true);
@@ -126,13 +130,19 @@ export const FileInputInnsending = (props: FileInputProps) => {
             try {
               const data = new FormData();
               data.append('vedlegg', file);
-              const res = await fetch(uploadUrl, { method: 'POST', body: data });
+              const res = await fetch(uploadUrl, {
+                method: 'POST',
+                body: data,
+              });
               const resData = await res.json();
 
               if (res.ok) {
                 uploadResult.vedleggId = resData.filId;
               } else {
-                uploadResult.errorMessage = settFeilmelding(res.status, resData.substatus);
+                uploadResult.errorMessage = settFeilmelding(
+                  res.status,
+                  resData.substatus,
+                );
               }
             } catch (err: any) {
               uploadResult.errorMessage = settFeilmelding(err?.status || 500);
@@ -142,11 +152,16 @@ export const FileInputInnsending = (props: FileInputProps) => {
           }
 
           return uploadResult;
-        })
+        }),
       );
 
-      const successfullyUploadedFiles = uploadedFiles.filter(file => !file.errorMessage)
-      setTotalSizeIInnsending(totalSizeIInnsending + successfullyUploadedFiles.reduce((acc, curr) => acc + curr.size, 0))
+      const successfullyUploadedFiles = uploadedFiles.filter(
+        (file) => !file.errorMessage,
+      );
+      setTotalSizeIInnsending(
+        totalSizeIInnsending +
+          successfullyUploadedFiles.reduce((acc, curr) => acc + curr.size, 0),
+      );
       setIsUploading(false);
       onUpload(uploadedFiles);
     }
@@ -158,7 +173,13 @@ export const FileInputInnsending = (props: FileInputProps) => {
       {ingress && <BodyShort>{ingress}</BodyShort>}
       {files?.map((file) => {
         if (file.errorMessage) {
-          return <FilePanelError file={file} key={file.vedleggId} onDelete={() => onDelete(file)} />;
+          return (
+            <FilePanelError
+              file={file}
+              key={file.vedleggId}
+              onDelete={() => onDelete(file)}
+            />
+          );
         } else {
           return (
             <FilePanelSuccess
@@ -212,7 +233,9 @@ export const FileInputInnsending = (props: FileInputProps) => {
             <BodyShort>{'eller'}</BodyShort>
             <label htmlFor={inputId} aria-labelledby={props.id}>
               <span
-                className={'fileInputButton navds-button navds-button__inner navds-body-short navds-button--secondary'}
+                className={
+                  'fileInputButton navds-button navds-button__inner navds-body-short navds-button--secondary'
+                }
                 role={'button'}
                 aria-controls={inputId}
                 tabIndex={0}

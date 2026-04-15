@@ -23,7 +23,10 @@ const Page = async ({ params }: Readonly<{ params: Promise<PageParams> }>) => {
     const søknadFraInnsending = søknader[0] ?? null;
 
     if (søknadFraInnsending) {
-      return redirect({ href: `/${søknadFraInnsending.innsendingsId}/ettersendelse`, locale });
+      return redirect({
+        href: `/${søknadFraInnsending.innsendingsId}/ettersendelse`,
+        locale,
+      });
     }
   }
 

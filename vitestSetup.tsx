@@ -18,7 +18,9 @@ import { expect } from 'vitest';
 expect.extend(matchers);
 
 vi.mock('next/navigation', () => ({
-  useParams: vi.fn().mockReturnValue({ referanse: '123', innsendingtype: 'innsending' }),
+  useParams: vi
+    .fn()
+    .mockReturnValue({ referanse: '123', innsendingtype: 'innsending' }),
   useRouter: vi.fn().mockReturnValue({ prefetch: () => null }),
 }));
 
@@ -30,7 +32,11 @@ vi.mock('i18n/routing', () => ({
     </a>
   )),
   redirect: vi.fn(),
-  usePathname: vi.fn().mockReturnValue('/sett-inn-riktig-value-her-hvis-det-trengs-en-gang-i-fremtiden'),
+  usePathname: vi
+    .fn()
+    .mockReturnValue(
+      '/sett-inn-riktig-value-her-hvis-det-trengs-en-gang-i-fremtiden',
+    ),
   useRouter: vi.fn().mockReturnValue({
     push: vi.fn(),
     replace: vi.fn(),

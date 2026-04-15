@@ -10,6 +10,6 @@ export default defineConfig({
     exclude: [...configDefaults.exclude, './playwright-tests/**'],
   },
   resolve: {
-    tsconfigPaths: true
-  }
+    tsconfigPaths: true,
+  },
 });
