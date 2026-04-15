@@ -28,11 +28,7 @@ export const logInfo = (message: string, error?: unknown, callid?: string) => {
 
   logger.info(logObject, message);
 };
-export const logWarning = (
-  message: string,
-  error?: unknown,
-  callid?: string,
-) => {
+export const logWarning = (message: string, error?: unknown, callid?: string) => {
   const logObject = createLogObject(error, callid);
 
   logger.warn(logObject, message);

@@ -78,11 +78,7 @@ export const FileInputInnsending = (props: FileInputProps) => {
   function internalValidate(fileToUpload: File): string | undefined {
     const totalUploadedSize = files.reduce((acc, curr) => acc + curr.size, 0);
 
-    if (
-      !['image/png', 'image/jpg', 'image/jpeg', 'application/pdf'].includes(
-        fileToUpload?.type,
-      )
-    ) {
+    if (!['image/png', 'image/jpg', 'image/jpeg', 'application/pdf'].includes(fileToUpload?.type)) {
       return t('fileInputErrors.unsupportedMediaType');
     }
 
@@ -142,10 +138,7 @@ export const FileInputInnsending = (props: FileInputProps) => {
               if (res.ok) {
                 uploadResult.vedleggId = resData.filId;
               } else {
-                uploadResult.errorMessage = settFeilmelding(
-                  res.status,
-                  resData.substatus,
-                );
+                uploadResult.errorMessage = settFeilmelding(res.status, resData.substatus);
               }
             } catch (err) {
               if (hasStatus(err)) {
@@ -157,15 +150,12 @@ export const FileInputInnsending = (props: FileInputProps) => {
           }
 
           return uploadResult;
-        }),
+        })
       );
 
-      const successfullyUploadedFiles = uploadedFiles.filter(
-        (file) => !file.errorMessage,
-      );
+      const successfullyUploadedFiles = uploadedFiles.filter((file) => !file.errorMessage);
       setTotalSizeIInnsending(
-        totalSizeIInnsending +
-          successfullyUploadedFiles.reduce((acc, curr) => acc + curr.size, 0),
+        totalSizeIInnsending + successfullyUploadedFiles.reduce((acc, curr) => acc + curr.size, 0)
       );
       setIsUploading(false);
       onUpload(uploadedFiles);
@@ -178,13 +168,7 @@ export const FileInputInnsending = (props: FileInputProps) => {
       {ingress && <BodyShort>{ingress}</BodyShort>}
       {files?.map((file) => {
         if (file.errorMessage) {
-          return (
-            <FilePanelError
-              file={file}
-              key={file.vedleggId}
-              onDelete={() => onDelete(file)}
-            />
-          );
+          return <FilePanelError file={file} key={file.vedleggId} onDelete={() => onDelete(file)} />;
         } else {
           return (
             <FilePanelSuccess
@@ -240,9 +224,7 @@ export const FileInputInnsending = (props: FileInputProps) => {
             <label htmlFor={inputId} aria-labelledby={props.id}>
               {/** biome-ignore lint/a11y/useSemanticElements: <skriv heller om til aksel sin fileinput> */}
               <span
-                className={
-                  'fileInputButton navds-button navds-button__inner navds-body-short navds-button--secondary'
-                }
+                className={'fileInputButton navds-button navds-button__inner navds-body-short navds-button--secondary'}
                 role={'button'}
                 aria-controls={inputId}
                 tabIndex={0}

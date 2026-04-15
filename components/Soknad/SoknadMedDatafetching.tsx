@@ -8,15 +8,10 @@ export interface DokumentMedTittel {
   tittel: string;
 }
 
-const getDokumenterMedTittel = (
-  dokumenter: Dokument[],
-  søknad: MineAapSoknadMedEttersendingNy,
-) => {
+const getDokumenterMedTittel = (dokumenter: Dokument[], søknad: MineAapSoknadMedEttersendingNy) => {
   if (dokumenter && dokumenter.length > 0) {
     const dokumenterMedTittel: DokumentMedTittel[] = [];
-    const dokumenterFraSoknad = dokumenter.filter(
-      (dokument) => dokument.journalpostId === søknad.journalpostId,
-    );
+    const dokumenterFraSoknad = dokumenter.filter((dokument) => dokument.journalpostId === søknad.journalpostId);
     dokumenterFraSoknad.forEach((dokument) => {
       dokumenterMedTittel.push({
         journalpostId: dokument.journalpostId,
@@ -26,9 +21,7 @@ const getDokumenterMedTittel = (
     });
 
     søknad.ettersendinger.forEach((ettersendelse) => {
-      const dokument = dokumenter.filter(
-        (dokument) => dokument.journalpostId === ettersendelse.journalpostId,
-      );
+      const dokument = dokumenter.filter((dokument) => dokument.journalpostId === ettersendelse.journalpostId);
 
       dokument.forEach((dokument) => {
         dokumenterMedTittel.push({
@@ -39,24 +32,13 @@ const getDokumenterMedTittel = (
       });
     });
 
-    return dokumenterMedTittel.filter(
-      (dokument) => dokument !== undefined,
-    ) as DokumentMedTittel[]; // filter out undefined
+    return dokumenterMedTittel.filter((dokument) => dokument !== undefined) as DokumentMedTittel[]; // filter out undefined
   }
   return [];
 };
 
-export const SoknadMedDatafetching = async ({
-  søknad,
-}: {
-  søknad: MineAapSoknadMedEttersendingNy;
-}) => {
+export const SoknadMedDatafetching = async ({ søknad }: { søknad: MineAapSoknadMedEttersendingNy }) => {
   const dokumenter = await hentDokumenter();
 
-  return (
-    <Soknad
-      søknad={søknad}
-      dokumenter={getDokumenterMedTittel(dokumenter, søknad)}
-    />
-  );
+  return <Soknad søknad={søknad} dokumenter={getDokumenterMedTittel(dokumenter, søknad)} />;
 };

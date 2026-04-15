@@ -3,7 +3,7 @@ import type { NextRequest } from 'next/server';
 
 export async function GET(
   _: NextRequest,
-  props: { params: Promise<{ journalPostId: string; dokumentInfoId: string }> },
+  props: { params: Promise<{ journalPostId: string; dokumentInfoId: string }> }
 ) {
   const params = await props.params;
   const res = await hentDokument(params.journalPostId, params.dokumentInfoId);

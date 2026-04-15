@@ -8,9 +8,7 @@ export interface PageHeaderProps {
 export const PageHeader = ({ children }: PageHeaderProps) => {
   return (
     <div className={classes.pageHeaderWrapper}>
-      <div
-        className={`${classes.navdsPageHeader} ${classes.navdsPageHeaderGuide} ${classes.navdsPageHeaderCenter}`}
-      >
+      <div className={`${classes.navdsPageHeader} ${classes.navdsPageHeaderGuide} ${classes.navdsPageHeaderCenter}`}>
         <Heading size="xlarge" level="1">
           {children}
         </Heading>

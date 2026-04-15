@@ -3,11 +3,7 @@
 import { Checkbox, Pagination, Select } from '@navikt/ds-react';
 import { Dokumentrad } from 'components/DokumentoversiktNy/Dokumentrad/Dokumentrad';
 import type { Dokument } from 'lib/types/types';
-import {
-  getNumberOfPages,
-  sortDatoAsc,
-  sortDatoDesc,
-} from 'lib/utils/dokumentOversikt';
+import { getNumberOfPages, sortDatoAsc, sortDatoDesc } from 'lib/utils/dokumentOversikt';
 import { useTranslations } from 'next-intl';
 import { useEffect, useMemo, useState } from 'react';
 import styles from './Dokumentoversikt.module.css';
@@ -18,11 +14,7 @@ type SortType = 'datoAsc' | 'datoDesc';
 
 const PAGE_SIZE = 7;
 
-export const Dokumentoversikt = ({
-  dokumenter,
-}: {
-  dokumenter: Dokument[];
-}) => {
+export const Dokumentoversikt = ({ dokumenter }: { dokumenter: Dokument[] }) => {
   const [sorterteDokumenter, setSorterteDokumenter] = useState(dokumenter);
   const [sortType, setSortType] = useState<SortType>('datoAsc');
   const [pageNumber, setPageNumber] = useState(1);
@@ -51,9 +43,7 @@ export const Dokumentoversikt = ({
   }, [filtrerteDokumenter]);
 
   const inneholderMeldekort = useMemo(() => {
-    return sorterteDokumenter.some((dokument) =>
-      dokument.tittel.includes(MELDEKORT_TITTEL),
-    );
+    return sorterteDokumenter.some((dokument) => dokument.tittel.includes(MELDEKORT_TITTEL));
   }, [sorterteDokumenter]);
 
   useEffect(() => {
@@ -106,10 +96,7 @@ export const Dokumentoversikt = ({
       </div>
       <ul className={styles.documentList}>
         {sortedPaginatedDocuments.map((document) => (
-          <Dokumentrad
-            dokument={document}
-            key={`${document.journalpostId}-${document.dokumentId}`}
-          />
+          <Dokumentrad dokument={document} key={`${document.journalpostId}-${document.dokumentId}`} />
         ))}
       </ul>
       {antallSider > 1 && (

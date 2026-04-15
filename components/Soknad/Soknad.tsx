@@ -1,11 +1,4 @@
-import {
-  Alert,
-  BodyShort,
-  Heading,
-  Label,
-  Link,
-  VStack,
-} from '@navikt/ds-react';
+import { Alert, BodyShort, Heading, Label, Link, VStack } from '@navikt/ds-react';
 import { ButtonRow } from 'components/ButtonRow/ButtonRow';
 import { EttersendelseButton } from 'components/Soknad/EttersendelseButton';
 import type { DokumentMedTittel } from 'components/Soknad/SoknadMedDatafetching';
@@ -32,9 +25,8 @@ export const Soknad = async ({
       </BodyShort>
 
       <Alert variant="info">
-        Hvis du skal ettersende dokumentasjon til søknaden eller Nav har bedt
-        deg sende dokumentasjon, kan du gjøre det her. Har vi ikke bedt om
-        dokumentasjon, trenger du ikke sende oss noe.
+        Hvis du skal ettersende dokumentasjon til søknaden eller Nav har bedt deg sende dokumentasjon, kan du gjøre det
+        her. Har vi ikke bedt om dokumentasjon, trenger du ikke sende oss noe.
       </Alert>
 
       {dokumenter?.length > 0 && (

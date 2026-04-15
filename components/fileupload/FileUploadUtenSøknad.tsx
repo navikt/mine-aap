@@ -11,10 +11,8 @@ export const FileUploadUtenSøknad = () => {
   const [errors, setErrors] = useState<FormError[]>([]);
   const errorSummaryId = 'errorSummary';
 
-  const addError = (errorsFromKrav: FormError[]) =>
-    setErrors([...errors, ...errorsFromKrav]);
-  const deleteError = (vedlegg: Vedlegg) =>
-    setErrors(errors.filter((error) => error.id !== vedlegg.vedleggId));
+  const addError = (errorsFromKrav: FormError[]) => setErrors([...errors, ...errorsFromKrav]);
+  const deleteError = (vedlegg: Vedlegg) => setErrors(errors.filter((error) => error.id !== vedlegg.vedleggId));
   return (
     <>
       <FormErrorSummary id={errorSummaryId} errors={errors} />

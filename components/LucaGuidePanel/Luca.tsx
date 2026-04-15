@@ -50,12 +50,7 @@ export const Luca = () => {
         d="M38.62 51.83h-1.07a.143.143 0 01-.143-.142v-.18c0-.078.064-.142.143-.142h1.07c.08 0 .144.064.144.143v.18a.143.143 0 01-.144.142z"
         clipRule="evenodd"
       ></path>
-      <path
-        fill="#6A6A6A"
-        fillRule="evenodd"
-        d="M37.775 51.667h.62V50h-.62v1.667z"
-        clipRule="evenodd"
-      ></path>
+      <path fill="#6A6A6A" fillRule="evenodd" d="M37.775 51.667h.62V50h-.62v1.667z" clipRule="evenodd"></path>
       <path
         fill="#C30000"
         fillRule="evenodd"

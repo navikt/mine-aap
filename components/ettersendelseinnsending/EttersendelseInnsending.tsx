@@ -17,10 +17,8 @@ export const EttersendelseInnsending = ({ søknad }: Props) => {
 
   const errorSummaryId = `form-error-summary-${søknad.innsendingsId ?? 'generic'}`;
 
-  const addError = (errorsFromKrav: FormError[]) =>
-    setErrors([...errors, ...errorsFromKrav]);
-  const deleteError = (vedlegg: Vedlegg) =>
-    setErrors(errors.filter((error) => error.id !== vedlegg.vedleggId));
+  const addError = (errorsFromKrav: FormError[]) => setErrors([...errors, ...errorsFromKrav]);
+  const deleteError = (vedlegg: Vedlegg) => setErrors(errors.filter((error) => error.id !== vedlegg.vedleggId));
 
   return (
     <>

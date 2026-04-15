@@ -6,7 +6,7 @@ export function customRender(ui: ReactElement) {
   return render(
     <NextIntlClientProvider locale={'nb'} messages={messagesNb}>
       {ui}
-    </NextIntlClientProvider>,
+    </NextIntlClientProvider>
   );
 }
 

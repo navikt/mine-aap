@@ -14,8 +14,7 @@ export const ScanningGuide = () => {
 
   useEffect(() => {
     if (scanningGuideOpen) {
-      if (scanningGuideElement?.current != null)
-        scrollRefIntoView(scanningGuideElement);
+      if (scanningGuideElement?.current != null) scrollRefIntoView(scanningGuideElement);
     }
   }, [scanningGuideOpen]);
   return (
@@ -52,65 +51,41 @@ export const ScanningGuide = () => {
           </article>
           <ul className={'scanning-examples'}>
             <li className={'scanning-example'}>
-              <ScanningIcon
-                status={'good'}
-                title={t('scanningGuide.alert.exampleLabelGood')}
-              />
+              <ScanningIcon status={'good'} title={t('scanningGuide.alert.exampleLabelGood')} />
               <div className="scanning-example-item">
                 <span className={'scanning-example-status'}>
                   <CheckmarkCircleIcon color={'var(--a-green-600)'} />
-                  <Label as="span">
-                    {t('scanningGuide.alert.exampleLabelGood')}
-                  </Label>
+                  <Label as="span">{t('scanningGuide.alert.exampleLabelGood')}</Label>
                 </span>
                 <BodyShort>{t('scanningGuide.alert.exampleGood')}</BodyShort>
               </div>
             </li>
             <li className={'scanning-example'}>
-              <ScanningIcon
-                status={'keystone'}
-                title={t('scanningGuide.alert.exampleLabelBad')}
-              />
+              <ScanningIcon status={'keystone'} title={t('scanningGuide.alert.exampleLabelBad')} />
               <div className="scanning-example-item">
                 <span className={'scanning-example-status'}>
                   <XMarkOctagonIcon color={'var(--a-nav-red)'} />
-                  <Label as="span">
-                    {t('scanningGuide.alert.exampleLabelBad')}
-                  </Label>
+                  <Label as="span">{t('scanningGuide.alert.exampleLabelBad')}</Label>
                 </span>
-                <BodyShort>
-                  {t('scanningGuide.alert.exampleKeystone')}
-                </BodyShort>
+                <BodyShort>{t('scanningGuide.alert.exampleKeystone')}</BodyShort>
               </div>
             </li>
             <li className={'scanning-example'}>
-              <ScanningIcon
-                status={'horizontal'}
-                title={t('scanningGuide.alert.exampleLabelBad')}
-              />
+              <ScanningIcon status={'horizontal'} title={t('scanningGuide.alert.exampleLabelBad')} />
               <div className="scanning-example-item">
                 <span className={'scanning-example-status'}>
                   <XMarkOctagonIcon color={'var(--a-nav-red)'} />
-                  <Label as="span">
-                    {t('scanningGuide.alert.exampleLabelBad')}
-                  </Label>
+                  <Label as="span">{t('scanningGuide.alert.exampleLabelBad')}</Label>
                 </span>
-                <BodyShort>
-                  {t('scanningGuide.alert.exampleHorizontal')}
-                </BodyShort>
+                <BodyShort>{t('scanningGuide.alert.exampleHorizontal')}</BodyShort>
               </div>
             </li>
             <li className={'scanning-example'}>
-              <ScanningIcon
-                status={'shadow'}
-                title={t('scanningGuide.alert.exampleLabelBad')}
-              />
+              <ScanningIcon status={'shadow'} title={t('scanningGuide.alert.exampleLabelBad')} />
               <div className="scanning-example-item">
                 <span className={'scanning-example-status'}>
                   <XMarkOctagonIcon color={'var(--a-nav-red)'} />
-                  <Label as="span">
-                    {t('scanningGuide.alert.exampleLabelBad')}
-                  </Label>
+                  <Label as="span">{t('scanningGuide.alert.exampleLabelBad')}</Label>
                 </span>
                 <BodyShort>{t('scanningGuide.alert.exampleShaddow')}</BodyShort>
               </div>

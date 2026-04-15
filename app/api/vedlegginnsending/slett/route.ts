@@ -3,9 +3,7 @@ import { getStringFromPossiblyArrayQuery } from 'lib/utils/request';
 import type { NextRequest } from 'next/server';
 
 export async function DELETE(req: NextRequest) {
-  const uuid = getStringFromPossiblyArrayQuery(
-    req.nextUrl.searchParams.get('uuid') ?? '',
-  );
+  const uuid = getStringFromPossiblyArrayQuery(req.nextUrl.searchParams.get('uuid') ?? '');
   if (!uuid) {
     return new Response(JSON.stringify({ error: 'uuid må være en string' }), {
       status: 400,

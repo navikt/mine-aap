@@ -11,9 +11,7 @@ export const Vedlegg = ({ uuid }: Props) => {
 
   useEffect(() => {
     const getFile = async () => {
-      const fileFromInnsending = await fetch(
-        `/aap/mine-aap/api/vedlegginnsending/les/?uuid=${uuid}`,
-      )
+      const fileFromInnsending = await fetch(`/aap/mine-aap/api/vedlegginnsending/les/?uuid=${uuid}`)
         .then((res) => {
           if (res.ok) {
             return res.blob();

@@ -1,10 +1,7 @@
 'use client';
 
 import { Alert, BodyShort, Button, Heading } from '@navikt/ds-react';
-import {
-  FileInputInnsending,
-  type Vedlegg,
-} from 'components/FileUploadInnsending/FileInputInnsending';
+import { FileInputInnsending, type Vedlegg } from 'components/FileUploadInnsending/FileInputInnsending';
 import type { FormError } from 'components/FormErrorSummary/FormErrorSummary';
 import styles from 'components/fileupload/FileUpload.module.css';
 import { Section } from 'components/Section/Section';
@@ -33,29 +30,18 @@ const findErrors = (vedlegg: Vedlegg[], krav: string) =>
       };
     });
 
-export const FileUpload = ({
-  søknadId,
-  krav,
-  addError,
-  deleteError,
-  onSuccess,
-  setErrorSummaryFocus,
-}: Props) => {
+export const FileUpload = ({ søknadId, krav, addError, deleteError, onSuccess, setErrorSummaryFocus }: Props) => {
   const t = useTranslations('ettersendelse');
 
   const { locale = 'nb' } = useParams<{ locale: string }>();
 
   const [files, setFiles] = useState<Vedlegg[]>([]);
-  const [harLastetOppEttersending, setHarLastetOppEttersending] =
-    useState<boolean>(false);
-  const [harEttersendingError, setHarEttersendingError] =
-    useState<boolean>(false);
+  const [harLastetOppEttersending, setHarLastetOppEttersending] = useState<boolean>(false);
+  const [harEttersendingError, setHarEttersendingError] = useState<boolean>(false);
   const [isUploading, setIsUploading] = useState<boolean>(false);
 
   const kravErAnnet = krav === 'ANNET';
-  const successWrapperKlassenavn = kravErAnnet
-    ? styles.successWrapperAnnet
-    : styles.successWrapper;
+  const successWrapperKlassenavn = kravErAnnet ? styles.successWrapperAnnet : styles.successWrapper;
   const harFeilmeldinger = files.some((file) => file.errorMessage);
   const visSendInnKnapp = !harLastetOppEttersending && files.length > 0;
 
@@ -120,9 +106,7 @@ export const FileUpload = ({
                 deleteError(vedlegg);
               }
 
-              const newFiles = files.filter(
-                (file) => file.vedleggId !== vedlegg.vedleggId,
-              );
+              const newFiles = files.filter((file) => file.vedleggId !== vedlegg.vedleggId);
               setFiles(newFiles);
             }}
             deleteUrl={'/aap/mine-aap/api/vedlegginnsending/slett/?uuid='}
@@ -134,23 +118,20 @@ export const FileUpload = ({
           <div className={successWrapperKlassenavn}>
             {!kravErAnnet && (
               <>
-                <Heading size={'medium'}>
-                  {t(`vedleggstyper.${krav}.heading`)}
-                </Heading>
+                <Heading size={'medium'}>{t(`vedleggstyper.${krav}.heading`)}</Heading>
                 <BodyShort>{t(`vedleggstyper.${krav}.description`)}</BodyShort>
               </>
             )}
             <Alert variant="success">
               {kravErAnnet ? (
                 <BodyShort>
-                  Takk! Dokumentasjonen er nå sendt inn! Har du flere dokumenter
-                  du ønsker å sende, kan du laste de opp over.
+                  Takk! Dokumentasjonen er nå sendt inn! Har du flere dokumenter du ønsker å sende, kan du laste de opp
+                  over.
                 </BodyShort>
               ) : (
                 <BodyShort>
-                  Takk! Dokumentasjonen er nå sendt inn! Har du flere dokumenter
-                  du ønsker å sende, kan du laste de opp under &quot;Annen
-                  dokumentasjon&quot;.
+                  Takk! Dokumentasjonen er nå sendt inn! Har du flere dokumenter du ønsker å sende, kan du laste de opp
+                  under &quot;Annen dokumentasjon&quot;.
                 </BodyShort>
               )}
             </Alert>
@@ -158,16 +139,12 @@ export const FileUpload = ({
         )}
         {harEttersendingError && (
           <Alert variant="error">
-            Beklager, vi har litt rusk i Navet. Du kan prøve på nytt om et par
-            minutter, eller sende inn dokumentasjonen på papir.
+            Beklager, vi har litt rusk i Navet. Du kan prøve på nytt om et par minutter, eller sende inn dokumentasjonen
+            på papir.
           </Alert>
         )}
         {visSendInnKnapp && (
-          <Button
-            onClick={onClick}
-            loading={isUploading}
-            className={styles.sendButton}
-          >
+          <Button onClick={onClick} loading={isUploading} className={styles.sendButton}>
             Send inn
           </Button>
         )}

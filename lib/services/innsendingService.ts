@@ -6,10 +6,7 @@ import { isAfter } from 'date-fns';
 import { mockSøknerMedEttersending } from 'lib/mock/mockSoknad';
 import { logError, logWarning } from 'lib/server/logger';
 import { fetchProxy, getOnBefalfOfToken } from 'lib/services/fetchProxy';
-import type {
-  InnsendingBackendState,
-  MineAapSoknadMedEttersendingNy,
-} from 'lib/types/types';
+import type { InnsendingBackendState, MineAapSoknadMedEttersendingNy } from 'lib/types/types';
 import { isMock } from 'lib/utils/environments';
 
 const innsendingApiBaseUrl = process.env.INNSENDING_URL;
@@ -17,42 +14,26 @@ const innsendingAudience = process.env.INNSENDING_AUDIENCE ?? '';
 
 /* TODO: Bruker fetchProxy fra saksbehandling. Må testes at backenden for innsending returnerer samme statuskoder som behandlingsflyt og de andre backendappene våre */
 
-export const hentSøknader = async (): Promise<
-  MineAapSoknadMedEttersendingNy[]
-> => {
+export const hentSøknader = async (): Promise<MineAapSoknadMedEttersendingNy[]> => {
   if (isMock()) return mockSøknerMedEttersending;
   const url = `${innsendingApiBaseUrl}/innsending/søknadmedettersendinger`;
   try {
-    const søknader = await fetchProxy<MineAapSoknadMedEttersendingNy[]>(
-      url,
-      innsendingAudience,
-      'GET',
-    );
-    return søknader.sort((a, b) =>
-      isAfter(new Date(a.mottattDato), new Date(b.mottattDato)) ? -1 : 1,
-    );
+    const søknader = await fetchProxy<MineAapSoknadMedEttersendingNy[]>(url, innsendingAudience, 'GET');
+    return søknader.sort((a, b) => (isAfter(new Date(a.mottattDato), new Date(b.mottattDato)) ? -1 : 1));
   } catch (error) {
     logError('Error fetching søknader for innsending', error);
     return [];
   }
 };
 
-export const sendEttersendelse = async (
-  data: InnsendingBackendState,
-  innsendingsId?: string,
-): Promise<any> => {
+export const sendEttersendelse = async (data: InnsendingBackendState, innsendingsId?: string): Promise<any> => {
   if (isMock()) {
     return {};
   }
   const erGenerellEttersendelse = !!innsendingsId;
   const url = `${innsendingApiBaseUrl}/innsending${erGenerellEttersendelse ? `/${innsendingsId}` : ''}`;
   try {
-    const ettersendelse = await fetchProxy(
-      url,
-      innsendingAudience,
-      'POST',
-      data,
-    );
+    const ettersendelse = await fetchProxy(url, innsendingAudience, 'POST', data);
     return ettersendelse;
   } catch (error) {
     logWarning('Error sending ettersendelse', error);

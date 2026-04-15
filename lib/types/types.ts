@@ -7,13 +7,7 @@ export interface Dokument {
   dato: string;
 }
 
-export type VedleggType =
-  | 'ARBEIDSGIVER'
-  | 'STUDIER'
-  | 'ANDREBARN'
-  | 'OMSORG'
-  | 'UTLAND'
-  | 'ANNET';
+export type VedleggType = 'ARBEIDSGIVER' | 'STUDIER' | 'ANDREBARN' | 'OMSORG' | 'UTLAND' | 'ANNET';
 
 export interface Ettersendelse {
   søknadId?: string;

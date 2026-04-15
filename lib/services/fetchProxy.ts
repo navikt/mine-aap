@@ -1,22 +1,14 @@
 'use server';
 
 import { randomUUID } from 'node:crypto';
-import {
-  getToken,
-  requestOboToken,
-  type TokenResult,
-  validateToken,
-} from '@navikt/oasis';
+import { getToken, requestOboToken, type TokenResult, validateToken } from '@navikt/oasis';
 import { isLocal } from 'lib/utils/environments';
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 
 const NUMBER_OF_RETRIES = 3;
 
-export const getOnBefalfOfToken = async (
-  audience: string,
-  url: string,
-): Promise<string> => {
+export const getOnBefalfOfToken = async (audience: string, url: string): Promise<string> => {
   const token = getAccessTokenOrRedirectToLogin(await headers());
   if (!token) {
     throw new Error(`Token for simpleTokenXProxy is undefined for ${url}`);
@@ -24,10 +16,7 @@ export const getOnBefalfOfToken = async (
 
   const validation = await validateToken(token);
   if (!validation.ok) {
-    throw new Error(
-      `Token for ${url} validerte ikke, med errorType ${validation.errorType}`,
-      validation.error,
-    );
+    throw new Error(`Token for ${url} validerte ikke, med errorType ${validation.errorType}`, validation.error);
   }
 
   const onBehalfOf = await requestOboTokenWithRetry(token, audience, 2);
@@ -38,11 +27,7 @@ export const getOnBefalfOfToken = async (
   return onBehalfOf.token;
 };
 
-const requestOboTokenWithRetry = async (
-  token: string,
-  audience: string,
-  maxRetries: number,
-): Promise<TokenResult> => {
+const requestOboTokenWithRetry = async (token: string, audience: string, maxRetries: number): Promise<TokenResult> => {
   const oboToken = await requestOboToken(token, audience);
   if (oboToken.ok) {
     return oboToken;
@@ -57,23 +42,13 @@ export const fetchProxy = async <ResponseBody>(
   scope: string,
   method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' = 'GET',
   requestBody?: object,
-  tags?: string[],
+  tags?: string[]
 ): Promise<ResponseBody> => {
   const oboToken = await getOnBefalfOfToken(scope, url);
-  return await fetchWithRetry<ResponseBody>(
-    url,
-    method,
-    oboToken,
-    NUMBER_OF_RETRIES,
-    requestBody,
-    tags,
-  );
+  return await fetchWithRetry<ResponseBody>(url, method, oboToken, NUMBER_OF_RETRIES, requestBody, tags);
 };
 
-export const fetchPdf = async (
-  url: string,
-  scope: string,
-): Promise<Response> => {
+export const fetchPdf = async (url: string, scope: string): Promise<Response> => {
   const callid = randomUUID();
   const oboToken = await getOnBefalfOfToken(scope, url);
   const response = await fetch(url, {
@@ -99,7 +74,7 @@ export const fetchWithRetry = async <ResponseBody>(
   retries: number,
   requestBody?: object,
   tags?: string[],
-  errors?: string[],
+  errors?: string[]
 ): Promise<ResponseBody> => {
   if (!errors) errors = [];
 
@@ -139,18 +114,8 @@ export const fetchWithRetry = async <ResponseBody>(
       throw new Error(`Ikke funnet: ${url}`);
     }
 
-    errors.push(
-      `HTTP ${response.status} ${response.statusText}: ${url} (retries left ${retries})`,
-    );
-    return await fetchWithRetry(
-      url,
-      method,
-      oboToken,
-      retries - 1,
-      requestBody,
-      tags,
-      errors,
-    );
+    errors.push(`HTTP ${response.status} ${response.statusText}: ${url} (retries left ${retries})`);
+    return await fetchWithRetry(url, method, oboToken, retries - 1, requestBody, tags, errors);
   }
 
   const contentType = response.headers.get('content-type');

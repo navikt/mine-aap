@@ -37,8 +37,8 @@ describe('FileUpload', () => {
     await user.click(sendInnKnapp);
     expect(
       await screen.findByText(
-        'Takk! Dokumentasjonen er nå sendt inn! Har du flere dokumenter du ønsker å sende, kan du laste de opp under "Annen dokumentasjon".',
-      ),
+        'Takk! Dokumentasjonen er nå sendt inn! Har du flere dokumenter du ønsker å sende, kan du laste de opp under "Annen dokumentasjon".'
+      )
     ).toBeVisible();
   });
 
@@ -51,8 +51,8 @@ describe('FileUpload', () => {
     await user.click(sendInnKnapp);
     expect(
       await screen.findByText(
-        'Takk! Dokumentasjonen er nå sendt inn! Har du flere dokumenter du ønsker å sende, kan du laste de opp under "Annen dokumentasjon".',
-      ),
+        'Takk! Dokumentasjonen er nå sendt inn! Har du flere dokumenter du ønsker å sende, kan du laste de opp under "Annen dokumentasjon".'
+      )
     ).toBeVisible();
     expect(screen.queryByTestId('fileinput')).not.toBeInTheDocument();
   });
@@ -66,8 +66,8 @@ describe('FileUpload', () => {
     await user.click(sendInnKnapp);
     expect(
       await screen.findByText(
-        'Takk! Dokumentasjonen er nå sendt inn! Har du flere dokumenter du ønsker å sende, kan du laste de opp over.',
-      ),
+        'Takk! Dokumentasjonen er nå sendt inn! Har du flere dokumenter du ønsker å sende, kan du laste de opp over.'
+      )
     ).toBeVisible();
     expect(screen.getByTestId('fileinput')).toBeInTheDocument();
   });
@@ -75,9 +75,7 @@ describe('FileUpload', () => {
   it('send knapp vises først når man har lagt til minst ett dokument', async () => {
     mockUploadFile();
     render(<Filopplastning krav={'ANNET'} />);
-    expect(
-      screen.queryByRole('button', { name: 'Send inn' }),
-    ).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Send inn' })).not.toBeInTheDocument();
     const input = screen.getByTestId('fileinput');
     await user.upload(input, fileOne);
     expect(screen.getByRole('button', { name: 'Send inn' })).toBeVisible();
@@ -90,9 +88,7 @@ describe('FileUpload', () => {
     await user.upload(input, fileOne);
     const sendInnKnapp = screen.getByRole('button', { name: 'Send inn' });
     await user.click(sendInnKnapp);
-    expect(
-      screen.queryByRole('button', { name: 'Send inn' }),
-    ).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Send inn' })).not.toBeInTheDocument();
   });
 
   it('send knapp vises når krav er ANNET og filer allerede er lastet opp, og det er lagt til nye filer', async () => {
@@ -104,13 +100,11 @@ describe('FileUpload', () => {
     await user.click(sendInnKnapp);
     expect(
       await screen.findByText(
-        'Takk! Dokumentasjonen er nå sendt inn! Har du flere dokumenter du ønsker å sende, kan du laste de opp over.',
-      ),
+        'Takk! Dokumentasjonen er nå sendt inn! Har du flere dokumenter du ønsker å sende, kan du laste de opp over.'
+      )
     ).toBeVisible();
     expect(screen.getByTestId('fileinput')).toBeInTheDocument();
-    expect(
-      screen.queryByRole('button', { name: 'Send inn' }),
-    ).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Send inn' })).not.toBeInTheDocument();
     await user.upload(screen.getByTestId('fileinput'), fileTwo);
     expect(screen.getByRole('button', { name: 'Send inn' })).toBeVisible();
   });
@@ -126,13 +120,7 @@ describe('FileUpload - UU', () => {
 });
 
 const Filopplastning = ({ krav }: { krav: VedleggType }) => (
-  <FileUpload
-    krav={krav}
-    addError={vi.fn()}
-    deleteError={vi.fn()}
-    setErrorSummaryFocus={vi.fn()}
-    onSuccess={vi.fn()}
-  />
+  <FileUpload krav={krav} addError={vi.fn()} deleteError={vi.fn()} setErrorSummaryFocus={vi.fn()} onSuccess={vi.fn()} />
 );
 function mockUploadFile() {
   fetchMock.mockResponseOnce(JSON.stringify(uuidV4()), { status: 200 });

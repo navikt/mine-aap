@@ -9,13 +9,9 @@ export const getNumberOfPages = (dokumenter: Dokument[], pageSize: number) => {
 };
 
 export const sortDatoAsc = (dokumenter: Dokument[]) => {
-  return [...dokumenter].sort(
-    (a, b) => new Date(b.dato).getTime() - new Date(a.dato).getTime(),
-  );
+  return [...dokumenter].sort((a, b) => new Date(b.dato).getTime() - new Date(a.dato).getTime());
 };
 
 export const sortDatoDesc = (dokumenter: Dokument[]) => {
-  return [...dokumenter].sort(
-    (a, b) => new Date(a.dato).getTime() - new Date(b.dato).getTime(),
-  );
+  return [...dokumenter].sort((a, b) => new Date(a.dato).getTime() - new Date(b.dato).getTime());
 };

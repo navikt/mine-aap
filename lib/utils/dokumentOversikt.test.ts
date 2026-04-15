@@ -1,9 +1,5 @@
 import type { Dokument } from 'lib/types/types';
-import {
-  getNumberOfPages,
-  sortDatoAsc,
-  sortDatoDesc,
-} from 'lib/utils/dokumentOversikt';
+import { getNumberOfPages, sortDatoAsc, sortDatoDesc } from 'lib/utils/dokumentOversikt';
 import { describe, expect, it } from 'vitest';
 
 const dokumenter: Dokument[] = [

@@ -49,10 +49,7 @@ const Page = async () => {
             </Heading>
             <Card subtleBlue>
               <BodyShort spacing>{t('forside.ettersendelse.tekst')}</BodyShort>
-              <ClientButton
-                url="/ettersendelse"
-                text={t('forside.ettersendelse.knapp')}
-              ></ClientButton>
+              <ClientButton url="/ettersendelse" text={t('forside.ettersendelse.knapp')}></ClientButton>
             </Card>
           </PageComponentFlexContainer>
         </>

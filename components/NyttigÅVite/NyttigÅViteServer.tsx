@@ -1,9 +1,5 @@
 import { BodyLong, BodyShort, Heading, Link } from '@navikt/ds-react';
-import {
-  LinkCard,
-  LinkCardAnchor,
-  LinkCardTitle,
-} from '@navikt/ds-react/LinkCard';
+import { LinkCard, LinkCardAnchor, LinkCardTitle } from '@navikt/ds-react/LinkCard';
 import { SøknaderClientLenke } from 'components/NyttigÅVite/SøknaderClientLenke';
 import { getTranslations } from 'next-intl/server';
 import styles from './NyttigÅVite.module.css';
@@ -50,10 +46,7 @@ export const NyttigÅViteServer = async () => {
         </Heading>
         <BodyLong spacing>
           {t('hvaSkjerPanel.punkt2.tekstForLenke')}
-          <Link
-            target="_blank"
-            href="https://klage.nav.no/nb/klage/nav_loven_14a"
-          >
+          <Link target="_blank" href="https://klage.nav.no/nb/klage/nav_loven_14a">
             {t('hvaSkjerPanel.punkt2.tekstLenkeTekst')}
           </Link>
           {t('hvaSkjerPanel.punkt2.tekstEtterLenke')}
@@ -91,10 +84,7 @@ export const NyttigÅViteServer = async () => {
         </Heading>
         <BodyLong spacing>
           {t('hvaSkjerPanel.punkt5.tekstForLenke')}
-          <Link
-            target="_blank"
-            href={'https://klage.nav.no/nb/klage/arbeidsavklaringspenger'}
-          >
+          <Link target="_blank" href={'https://klage.nav.no/nb/klage/arbeidsavklaringspenger'}>
             {t('hvaSkjerPanel.punkt5.tekstLenkeTekst')}
           </Link>
           {t('hvaSkjerPanel.punkt5.tekstEtterLenke')}
@@ -109,10 +99,7 @@ export const NyttigÅViteServer = async () => {
         <BodyShort spacing>
           {t('hvaSkjerPanel.punkt5.tekst2ForLenke')}
 
-          <Link
-            target="_blank"
-            href={'https://www.nav.no/klage#arbeidsavklaringspenger-aap'}
-          >
+          <Link target="_blank" href={'https://www.nav.no/klage#arbeidsavklaringspenger-aap'}>
             {t('hvaSkjerPanel.punkt5.tekst2LenkeTekst')}
           </Link>
         </BodyShort>

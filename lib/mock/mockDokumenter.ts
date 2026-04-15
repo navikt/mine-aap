@@ -20,8 +20,7 @@ export const mockDokumenter: Dokument[] = [
   {
     journalpostId: '3',
     dokumentId: '3',
-    tittel:
-      'Meldekort for uke 52 - 1 (26.12.2022 - 08.01.2023) elektronisk mottatt av NAV',
+    tittel: 'Meldekort for uke 52 - 1 (26.12.2022 - 08.01.2023) elektronisk mottatt av NAV',
     type: 'I',
     innsendingsId: '',
     dato: '2023-01-08T01:53:47.000Z',
@@ -29,8 +28,7 @@ export const mockDokumenter: Dokument[] = [
   {
     journalpostId: '4',
     dokumentId: '4',
-    tittel:
-      'Meldekort for uke 1 - 2 (02.01.2023 - 15.01.2023) elektronisk mottatt av NAV',
+    tittel: 'Meldekort for uke 1 - 2 (02.01.2023 - 15.01.2023) elektronisk mottatt av NAV',
     type: 'I',
     innsendingsId: '',
     dato: '2023-01-15T17:04:22.000Z',
@@ -38,8 +36,7 @@ export const mockDokumenter: Dokument[] = [
   {
     journalpostId: '5',
     dokumentId: '5',
-    tittel:
-      'Meldekort for uke 3 - 4 (16.01.2023 - 29.01.2023) elektronisk mottatt av NAV',
+    tittel: 'Meldekort for uke 3 - 4 (16.01.2023 - 29.01.2023) elektronisk mottatt av NAV',
     type: 'I',
     innsendingsId: '',
     dato: '2023-01-29T13:46:22.000Z',

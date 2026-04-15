@@ -6,9 +6,7 @@ export interface SectionProps {
 }
 
 export const Section = ({ lightBlue, children }: SectionProps) => (
-  <section
-    className={`${styles.section} ${lightBlue && styles.lightBlueBackground}`}
-  >
+  <section className={`${styles.section} ${lightBlue && styles.lightBlueBackground}`}>
     <div className={styles.container}>{children}</div>
   </section>
 );

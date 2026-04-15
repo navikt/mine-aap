@@ -19,23 +19,12 @@ export const FilePanelError = ({ file, onDelete }: Props) => {
             <Label as={'span'}>{file.name}</Label>
           </div>
         </div>
-        <button
-          type={'button'}
-          onClick={onDelete}
-          tabIndex={0}
-          className={'deleteAttachment'}
-        >
+        <button type={'button'} onClick={onDelete} tabIndex={0} className={'deleteAttachment'}>
           <ArrowUndoIcon title={'Avbryt'} />
           <BodyShort>{'Avbryt'}</BodyShort>
         </button>
       </Panel>
-      <div
-        className={
-          'navds-error-message navds-error-message--medium navds-label'
-        }
-      >
-        {file.errorMessage}
-      </div>
+      <div className={'navds-error-message navds-error-message--medium navds-label'}>{file.errorMessage}</div>
     </>
   );
 };

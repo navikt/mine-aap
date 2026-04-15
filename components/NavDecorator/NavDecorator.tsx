@@ -35,9 +35,7 @@ export const NavDecorator = ({ children }: { children: React.ReactNode }) => {
   });
 
   useEffect(() => {
-    const breadcrumbs = [
-      { title: t('mineAAP'), url: BASE_PATH, handleInApp: true },
-    ];
+    const breadcrumbs = [{ title: t('mineAAP'), url: BASE_PATH, handleInApp: true }];
     if (pathname.endsWith('ettersendelse/')) {
       breadcrumbs.push({
         title: t('ettersending'),

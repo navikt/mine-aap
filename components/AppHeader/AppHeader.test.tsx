@@ -9,7 +9,7 @@ describe('AppHeader', () => {
       screen.getByRole('heading', {
         level: 1,
         name: 'Mine arbeidsavklarings­penger',
-      }),
+      })
     ).toBeVisible();
   });
 });

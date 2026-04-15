@@ -39,7 +39,7 @@ describe('FormErrorSummary', () => {
       screen.getByRole('heading', {
         level: 2,
         name: 'Du må fikse disse feilene før du kan fortsette:',
-      }),
+      })
     ).toBeVisible();
   });
 
