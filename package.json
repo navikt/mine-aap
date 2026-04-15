@@ -49,6 +49,7 @@
     "@types/react-dom": "^19.2.2",
     "@types/uuid": "^10.0.0",
     "@typescript-eslint/eslint-plugin": "^8.20.0",
+    "@vitest/coverage-v8": "4.1.4",
     "eslint": "^8.57.1",
     "eslint-config-next": "^15.3.3",
     "husky": "^9.1.7",
@@ -57,7 +58,9 @@
     "patch-package": "^8.0.1",
     "prettier": "^3.4.2",
     "typescript": "^5.9.3",
-    "uuid": "^11.1.0"
+    "uuid": "^11.1.0",
+    "vitest": "4.1.4",
+    "vitest-fetch-mock": "0.4.5"
   },
   "lint-staged": {
     "*.{js,ts,tsx}": "eslint --cache --fix",
