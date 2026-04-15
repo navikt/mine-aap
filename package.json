@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "biome ci .",
     "prepare": "husky",
     "test": "vitest --run",
     "intl:diff": "json-diff -k ./lib/translations/nb.json ./lib/translations/nn.json",
@@ -60,8 +60,9 @@
   },
   "lint-staged": {
     "*": [
-      "biome check --write --no-errors-on-unmatched --files-ignore-unknown=true"
-    ]
+
+        "biome check --write --no-errors-on-unmatched --files-ignore-unknown=true"
+  ]
   },
   "packageManager": "yarn@4.12.0"
 }

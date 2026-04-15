@@ -1,2 +1,2 @@
 yarn intl:diff
-yarn lint-staged
+npx biome check --staged --write
