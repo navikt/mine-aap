@@ -45,7 +45,7 @@ describe('Dokumentoversikt', () => {
 });
 
 describe('Dokumentoversikt - UU', () => {
-  it('jest-axe finner ingen feil', async () => {
+  it('vitest-axe finner ingen feil', async () => {
     const { container } = render(<Dokumentoversikt dokumenter={mockDokumenter} />);
     const res = await axe(container);
     expect(res).toHaveNoViolations();
