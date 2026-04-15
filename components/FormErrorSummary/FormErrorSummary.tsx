@@ -44,8 +44,8 @@ const FormErrorSummary = ({ id, errors }: Props) => {
           className={errors?.length === 0 ? classes?.visuallyHidden : ''}
           id={id}
         >
-          {errors.map((error, index) => (
-            <ErrorSummary.Item key={index} href={`#${error.path}`}>
+          {errors.map((error) => (
+            <ErrorSummary.Item key={error.id} href={`#${error.path}`}>
               {error.message}
             </ErrorSummary.Item>
           ))}
