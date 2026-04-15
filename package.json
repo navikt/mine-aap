@@ -50,19 +50,12 @@
     "@vitest/coverage-v8": "4.1.4",
     "husky": "^9.1.7",
     "json-diff": "^1.0.6",
-    "lint-staged": "^15.5.2",
     "patch-package": "^8.0.1",
     "typescript": "^5.9.3",
     "uuid": "^11.1.0",
     "vitest": "4.1.4",
     "vitest-axe": "0.1.0",
     "vitest-fetch-mock": "0.4.5"
-  },
-  "lint-staged": {
-    "*": [
-
-        "biome check --write --no-errors-on-unmatched --files-ignore-unknown=true"
-  ]
   },
   "packageManager": "yarn@4.12.0"
 }
