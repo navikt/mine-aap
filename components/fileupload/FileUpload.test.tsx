@@ -1,14 +1,16 @@
 import React from 'react';
-import { render, screen } from 'setUpTest';
+import { render, screen } from 'lib/utils/test/customRender';
 import { FileUpload } from 'components/fileupload/FileUpload';
-import { enableFetchMocks } from 'jest-fetch-mock';
+import createFetchMock from 'vitest-fetch-mock';
 import { userEvent } from '@testing-library/user-event';
 import { v4 as uuidV4 } from 'uuid';
 import { VedleggType } from 'lib/types/types';
-import { axe } from 'jest-axe';
+import { axe } from 'vitest-axe';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { useParams } from 'next/navigation';
 
-enableFetchMocks();
+const fetchMock = createFetchMock(vi);
+fetchMock.enableMocks();
 const filnavn1 = 'fil1.pdf';
 const filnavn2 = 'fil2.pdf';
 const fileOne: File = new File(['fil en'], filnavn1, { type: 'application/pdf' });
@@ -16,7 +18,7 @@ const fileTwo: File = new File(['fil to'], filnavn2, { type: 'application/pdf' }
 describe('FileUpload', () => {
   beforeEach(() => {
     fetchMock.resetMocks();
-    jest.mocked(useParams).mockReturnValue({ locale: 'nb' });
+    vi.mocked(useParams).mockReturnValue({ locale: 'nb' });
   });
 
   const user = userEvent.setup();
@@ -106,7 +108,7 @@ describe('FileUpload', () => {
 });
 
 describe('FileUpload - UU', () => {
-  test('jest-axe finner ingen feil', async () => {
+  it('vitest-axe finner ingen feil', async () => {
     mockUploadFile();
     const { container } = render(<Filopplastning krav={'ANNET'} />);
     const res = await axe(container);
@@ -115,7 +117,7 @@ describe('FileUpload - UU', () => {
 });
 
 const Filopplastning = ({ krav }: { krav: VedleggType }) => (
-  <FileUpload krav={krav} addError={jest.fn} deleteError={jest.fn} setErrorSummaryFocus={jest.fn} onSuccess={jest.fn} />
+  <FileUpload krav={krav} addError={vi.fn()} deleteError={vi.fn()} setErrorSummaryFocus={vi.fn()} onSuccess={vi.fn()} />
 );
 function mockUploadFile() {
   fetchMock.mockResponseOnce(JSON.stringify(uuidV4()), { status: 200 });

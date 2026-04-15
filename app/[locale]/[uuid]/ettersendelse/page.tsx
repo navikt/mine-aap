@@ -19,7 +19,7 @@ export async function generateMetadata() {
   const t = await getTranslations();
 
   return {
-    title: `${t('ettersendelse.appTittel')} - nav.no`,
+    title: `${t('ettersendelse.appTittelMedSkille')} - nav.no`,
   };
 }
 

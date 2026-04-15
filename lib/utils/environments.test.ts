@@ -1,4 +1,5 @@
 import { isMock } from 'lib/utils/environments';
+import { describe, it, expect } from 'vitest';
 
 describe('Environments', () => {
   it('isMock should be true for localhost', () => {
