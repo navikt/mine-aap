@@ -1,6 +1,6 @@
-import { render, screen, within } from 'lib/utils/test/customRender';
-import { describe, it, expect } from 'vitest';
 import { FormErrorSummary } from 'components/FormErrorSummary/FormErrorSummary';
+import { render, screen, within } from 'lib/utils/test/customRender';
+import { describe, expect, it } from 'vitest';
 import type { FormError } from './FormErrorSummary';
 
 const skjemafeil: FormError[] = [

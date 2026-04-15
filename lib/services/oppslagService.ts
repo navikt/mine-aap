@@ -1,10 +1,10 @@
 import 'server-only';
 
 import { mockDokumenter } from 'lib/mock/mockDokumenter';
+import { logError } from 'lib/server/logger';
 import { fetchPdf, fetchProxy } from 'lib/services/fetchProxy';
 import type { Dokument } from 'lib/types/types';
 import { isMock } from 'lib/utils/environments';
-import { logError } from 'lib/server/logger';
 
 const oppslagApiBaseUrl = process.env.OPPSLAG_URL;
 const oppslagAudience = process.env.OPPSLAG_AUDIENCE ?? '';

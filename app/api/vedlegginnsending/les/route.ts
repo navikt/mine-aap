@@ -1,6 +1,6 @@
 import { hentVedlegg } from 'lib/services/innsendingService';
-import type { NextRequest } from 'next/server';
 import { getStringFromPossiblyArrayQuery } from 'lib/utils/request';
+import type { NextRequest } from 'next/server';
 
 export async function GET(req: NextRequest) {
   const uuid = getStringFromPossiblyArrayQuery(

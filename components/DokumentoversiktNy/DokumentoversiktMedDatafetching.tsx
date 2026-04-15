@@ -1,8 +1,8 @@
-import { Heading, BodyShort, ReadMore } from '@navikt/ds-react';
+import { BodyShort, Heading, ReadMore } from '@navikt/ds-react';
 import { Dokumentoversikt } from 'components/DokumentoversiktNy/Dokumentoversikt';
 import { PageComponentFlexContainer } from 'components/PageComponentFlexContainer/PageComponentFlexContainer';
-import { getTranslations } from 'next-intl/server';
 import { hentDokumenter } from 'lib/services/oppslagService';
+import { getTranslations } from 'next-intl/server';
 
 export const DokumentoversiktMedDatafetching = async () => {
   const t = await getTranslations('dokumentoversikt');

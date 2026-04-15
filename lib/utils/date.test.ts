@@ -1,5 +1,5 @@
 import { formatDate, formatFullDate } from 'lib/utils/date';
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 describe('date', () => {
   describe('formatFullDate', () => {

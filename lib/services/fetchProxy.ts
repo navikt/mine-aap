@@ -1,15 +1,15 @@
 'use server';
 
+import { randomUUID } from 'node:crypto';
 import {
-  requestOboToken,
-  validateToken,
   getToken,
+  requestOboToken,
   type TokenResult,
+  validateToken,
 } from '@navikt/oasis';
+import { isLocal } from 'lib/utils/environments';
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { randomUUID } from 'node:crypto';
-import { isLocal } from 'lib/utils/environments';
 
 const NUMBER_OF_RETRIES = 3;
 

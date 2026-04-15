@@ -1,13 +1,13 @@
-import { hentSøknader } from 'lib/services/innsendingService';
-import { BodyShort, Heading, Label, VStack } from '@navikt/ds-react';
-import { Section } from 'components/Section/Section';
 import { ArrowLeftIcon } from '@navikt/aksel-icons';
-import { PageHeader } from 'components/PageHeader';
-import { getTranslations } from 'next-intl/server';
-import { Link, redirect } from 'i18n/routing';
+import { BodyShort, Heading, Label, VStack } from '@navikt/ds-react';
 import { FileUploadUtenSøknad } from 'components/fileupload/FileUploadUtenSøknad';
 import LucaGuidePanel from 'components/LucaGuidePanel';
+import { PageHeader } from 'components/PageHeader';
 import ScanningGuide from 'components/ScanningGuide';
+import { Section } from 'components/Section/Section';
+import { Link, redirect } from 'i18n/routing';
+import { hentSøknader } from 'lib/services/innsendingService';
+import { getTranslations } from 'next-intl/server';
 
 interface PageParams {
   locale: string;

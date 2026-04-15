@@ -6,8 +6,8 @@ import {
   setAvailableLanguages,
   setBreadcrumbs,
 } from '@navikt/nav-dekoratoren-moduler';
-import { useTranslations } from 'next-intl';
 import { usePathname, useRouter } from 'i18n/routing';
+import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 
 const BASE_PATH = '/aap/mine-aap/';

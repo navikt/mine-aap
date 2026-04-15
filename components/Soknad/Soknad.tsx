@@ -7,10 +7,10 @@ import {
   VStack,
 } from '@navikt/ds-react';
 import { ButtonRow } from 'components/ButtonRow/ButtonRow';
-import { formatDate } from 'lib/utils/date';
-import type { MineAapEttersendingNy } from 'lib/types/types';
-import type { DokumentMedTittel } from 'components/Soknad/SoknadMedDatafetching';
 import { EttersendelseButton } from 'components/Soknad/EttersendelseButton';
+import type { DokumentMedTittel } from 'components/Soknad/SoknadMedDatafetching';
+import type { MineAapEttersendingNy } from 'lib/types/types';
+import { formatDate } from 'lib/utils/date';
 import { getTranslations } from 'next-intl/server';
 
 export const Soknad = async ({

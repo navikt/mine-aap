@@ -46,7 +46,7 @@ const mockSøknerMedEttersending: MineAapSoknadMedEttersendingNy[] = [
 ];
 
 export {
-  mockSøknaderInnsending,
   mockEttersendelserSoknad,
+  mockSøknaderInnsending,
   mockSøknerMedEttersending,
 };

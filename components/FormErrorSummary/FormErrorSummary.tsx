@@ -1,7 +1,7 @@
-import { useRef } from 'react';
 import { ErrorSummary } from '@navikt/ds-react';
 import * as classes from 'components/FormErrorSummary/FormErrorSummary.module.css';
 import { useTranslations } from 'next-intl';
+import { useRef } from 'react';
 
 export interface FormError {
   path: string;

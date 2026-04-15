@@ -1,12 +1,12 @@
-import { render, screen } from 'lib/utils/test/customRender';
-import { FileUpload } from 'components/fileupload/FileUpload';
-import createFetchMock from 'vitest-fetch-mock';
 import { userEvent } from '@testing-library/user-event';
-import { v4 as uuidV4 } from 'uuid';
+import { FileUpload } from 'components/fileupload/FileUpload';
 import type { VedleggType } from 'lib/types/types';
-import { axe } from 'vitest-axe';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { render, screen } from 'lib/utils/test/customRender';
 import { useParams } from 'next/navigation';
+import { v4 as uuidV4 } from 'uuid';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { axe } from 'vitest-axe';
+import createFetchMock from 'vitest-fetch-mock';
 
 const fetchMock = createFetchMock(vi);
 fetchMock.enableMocks();

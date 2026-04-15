@@ -1,18 +1,17 @@
 'use client';
 
-import type { Ettersendelse, VedleggType } from 'lib/types/types';
-import { Section } from 'components/Section/Section';
 import { Alert, BodyShort, Button, Heading } from '@navikt/ds-react';
-import { useState } from 'react';
-import type { FormError } from 'components/FormErrorSummary/FormErrorSummary';
-
-import styles from 'components/fileupload/FileUpload.module.css';
-import { useTranslations } from 'next-intl';
-import { useParams } from 'next/navigation';
 import {
   FileInputInnsending,
   type Vedlegg,
 } from 'components/FileUploadInnsending/FileInputInnsending';
+import type { FormError } from 'components/FormErrorSummary/FormErrorSummary';
+import styles from 'components/fileupload/FileUpload.module.css';
+import { Section } from 'components/Section/Section';
+import type { Ettersendelse, VedleggType } from 'lib/types/types';
+import { useParams } from 'next/navigation';
+import { useTranslations } from 'next-intl';
+import { useState } from 'react';
 
 interface Props {
   søknadId?: string;

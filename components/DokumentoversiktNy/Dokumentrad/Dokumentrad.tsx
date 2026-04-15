@@ -1,8 +1,7 @@
-import type { Dokument } from 'lib/types/types';
 import { Detail, Link } from '@navikt/ds-react';
-import { formatDate } from 'lib/utils/date';
-
 import styles from 'components/DokumentoversiktNy/Dokumentrad/Dokumentrad.module.css';
+import type { Dokument } from 'lib/types/types';
+import { formatDate } from 'lib/utils/date';
 import { useTranslations } from 'next-intl';
 
 type DokumentradProps = {

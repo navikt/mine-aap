@@ -6,15 +6,17 @@ declare module 'vitest' {
   export interface Assertion extends AxeMatchers {}
   export interface AsymmetricMatchersContaining extends AxeMatchers {}
 }
+
 // ---
 
 import { afterEach, vi } from 'vitest';
 import '@testing-library/jest-dom/vitest';
 import { cleanup } from '@testing-library/react';
-import createFetchMock from 'vitest-fetch-mock'; // vitest-setup.js
+import { expect } from 'vitest';
 
 import * as matchers from 'vitest-axe/matchers';
-import { expect } from 'vitest';
+import createFetchMock from 'vitest-fetch-mock'; // vitest-setup.js
+
 expect.extend(matchers);
 
 vi.mock('next/navigation', () => ({

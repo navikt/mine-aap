@@ -1,12 +1,11 @@
 'use client';
 
-import { BodyLong, BodyShort, Label, ReadMore } from '@navikt/ds-react';
 import { CheckmarkCircleIcon, XMarkOctagonIcon } from '@navikt/aksel-icons';
-import { useEffect, useRef, useState } from 'react';
-
+import { BodyLong, BodyShort, Label, ReadMore } from '@navikt/ds-react';
 import ScanningIcon from 'components/ScanningGuide/ScanningIcon';
 import { scrollRefIntoView } from 'lib/utils/dom';
 import { useTranslations } from 'next-intl';
+import { useEffect, useRef, useState } from 'react';
 
 export const ScanningGuide = () => {
   const t = useTranslations();

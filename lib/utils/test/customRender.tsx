@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
-import type { ReactElement } from 'react';
-import { NextIntlClientProvider } from 'next-intl';
 import messagesNb from 'lib/translations/nb.json';
+import { NextIntlClientProvider } from 'next-intl';
+import type { ReactElement } from 'react';
 export function customRender(ui: ReactElement) {
   return render(
     <NextIntlClientProvider locale={'nb'} messages={messagesNb}>

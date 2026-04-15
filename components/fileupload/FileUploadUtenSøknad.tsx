@@ -1,11 +1,11 @@
 'use client';
 
-import { FileUpload } from 'components/fileupload/FileUpload';
+import type { Vedlegg } from 'components/FileUploadInnsending/FileInputInnsending';
 import type { FormError } from 'components/FormErrorSummary/FormErrorSummary';
 import { FormErrorSummary } from 'components/FormErrorSummary/FormErrorSummary';
+import { FileUpload } from 'components/fileupload/FileUpload';
 import { setFocus } from 'lib/utils/dom';
 import { useState } from 'react';
-import type { Vedlegg } from 'components/FileUploadInnsending/FileInputInnsending';
 
 export const FileUploadUtenSøknad = () => {
   const [errors, setErrors] = useState<FormError[]>([]);

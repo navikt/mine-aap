@@ -1,5 +1,5 @@
-import { getStringFromPossiblyArrayQuery } from 'lib/utils/request';
 import { slettVedlegg } from 'lib/services/innsendingService';
+import { getStringFromPossiblyArrayQuery } from 'lib/utils/request';
 import type { NextRequest } from 'next/server';
 
 export async function DELETE(req: NextRequest) {

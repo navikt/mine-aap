@@ -1,3 +1,4 @@
+import { logInfo } from 'lib/server/logger';
 import { sendEttersendelse } from 'lib/services/innsendingService';
 import type {
   Ettersendelse,
@@ -5,7 +6,6 @@ import type {
   VedleggType,
 } from 'lib/types/types';
 import type { NextRequest } from 'next/server';
-import { logInfo } from 'lib/server/logger';
 
 export async function POST(req: NextRequest) {
   const body = await req.json();

@@ -1,11 +1,10 @@
 import { UploadIcon } from '@navikt/aksel-icons';
 import { BodyShort, Heading, Loader } from '@navikt/ds-react';
+import { useTranslations } from 'next-intl';
 import { type InputHTMLAttributes, useMemo, useRef, useState } from 'react';
 import { v4 as uuidV4 } from 'uuid';
-
 import { FilePanelError } from './FilePanelError';
 import { FilePanelSuccess } from './FilePanelSuccess';
-import { useTranslations } from 'next-intl';
 
 export interface FileInputProps extends InputHTMLAttributes<HTMLInputElement> {
   heading: string;
