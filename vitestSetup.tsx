@@ -41,7 +41,7 @@ vi.mock('i18n/routing', () => ({
 const fetchMocker = createFetchMock(vi);
 fetchMocker.enableMocks();
 
-fetchMocker.mockResponse({ status: 200 });
+fetchMocker.mockResponse('', { status: 200 });
 
 afterEach(() => {
   cleanup();
