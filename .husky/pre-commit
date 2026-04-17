@@ -1,2 +1,2 @@
 yarn intl:diff
-npx biome check --staged --write --no-errors-on-unmatched
+npx biome check --staged --write --verbose --no-errors-on-unmatched

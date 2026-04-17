@@ -55,4 +55,3 @@ export interface MineAapEttersendingNy {
   innsendingsId: string;
 }
 
-export type MeldekortSystem = 'FELLES' | 'AAP';
