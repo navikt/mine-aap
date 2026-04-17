@@ -54,4 +54,3 @@ export interface MineAapEttersendingNy {
   journalpostId?: string;
   innsendingsId: string;
 }
-
