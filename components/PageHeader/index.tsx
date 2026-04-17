@@ -1,4 +1,3 @@
-import React from 'react';
 import { Heading } from '@navikt/ds-react';
 import * as classes from 'components/PageHeader/PageHeader.module.css';
 

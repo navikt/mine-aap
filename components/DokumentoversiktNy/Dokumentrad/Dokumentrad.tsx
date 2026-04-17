@@ -1,8 +1,7 @@
-import { Dokument } from 'lib/types/types';
 import { Detail, Link } from '@navikt/ds-react';
-import { formatDate } from 'lib/utils/date';
-
 import styles from 'components/DokumentoversiktNy/Dokumentrad/Dokumentrad.module.css';
+import type { Dokument } from 'lib/types/types';
+import { formatDate } from 'lib/utils/date';
 import { useTranslations } from 'next-intl';
 
 type DokumentradProps = {
@@ -32,7 +31,10 @@ export const Dokumentrad = ({ dokument }: DokumentradProps) => {
         {dokument.tittel}
       </Link>
       <Detail style={{ color: 'var(--a-text-default' }}>
-        {t('avsender', { name: getAvsender(dokument.type), date: formatDate(dokument.dato) })}
+        {t('avsender', {
+          name: getAvsender(dokument.type),
+          date: formatDate(dokument.dato),
+        })}
       </Detail>
     </li>
   );

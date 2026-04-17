@@ -1,9 +1,9 @@
-import { render, screen, within } from 'lib/utils/test/customRender';
-import { describe, it, expect } from 'vitest';
 import { FormErrorSummary } from 'components/FormErrorSummary/FormErrorSummary';
-import { Error } from './FormErrorSummary';
+import { render, screen, within } from 'lib/utils/test/customRender';
+import { describe, expect, it } from 'vitest';
+import type { FormError } from './FormErrorSummary';
 
-const skjemafeil: Error[] = [
+const skjemafeil: FormError[] = [
   {
     id: 'id1',
     message: 'Feilmelding 1',
@@ -60,15 +60,21 @@ describe('FormErrorSummary', () => {
   it('hver feil har en lenke med sti til feltet feilen gjelder for', () => {
     render(<FormErrorSummary id={'id'} errors={skjemafeil} />);
     const valideringsfeil = screen.getAllByRole('listitem');
-    const feil1 = within(valideringsfeil[0]).getByRole('link', { name: skjemafeil[0].message });
+    const feil1 = within(valideringsfeil[0]).getByRole('link', {
+      name: skjemafeil[0].message,
+    });
     expect(feil1).toBeVisible();
     expect(feil1).toHaveAttribute('href', `#${skjemafeil[0].path}`);
 
-    const feil2 = within(valideringsfeil[1]).getByRole('link', { name: skjemafeil[1].message });
+    const feil2 = within(valideringsfeil[1]).getByRole('link', {
+      name: skjemafeil[1].message,
+    });
     expect(feil2).toBeVisible();
     expect(feil2).toHaveAttribute('href', `#${skjemafeil[1].path}`);
 
-    const feil3 = within(valideringsfeil[2]).getByRole('link', { name: skjemafeil[2].message });
+    const feil3 = within(valideringsfeil[2]).getByRole('link', {
+      name: skjemafeil[2].message,
+    });
     expect(feil3).toBeVisible();
     expect(feil3).toHaveAttribute('href', `#${skjemafeil[2].path}`);
   });

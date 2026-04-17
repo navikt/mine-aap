@@ -1,8 +1,8 @@
 import { Dokumentrad } from 'components/DokumentoversiktNy/Dokumentrad/Dokumentrad';
-import { render, screen } from 'lib/utils/test/customRender';
-import { describe, it, expect } from 'vitest';
-import { Dokument } from 'lib/types/types';
+import type { Dokument } from 'lib/types/types';
 import { formatDate } from 'lib/utils/date';
+import { render, screen } from 'lib/utils/test/customRender';
+import { describe, expect, it } from 'vitest';
 
 const inngåendeDokument: Dokument = {
   tittel: 'Søknad om AAP',

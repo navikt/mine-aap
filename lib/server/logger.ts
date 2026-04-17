@@ -5,15 +5,21 @@ const logger = pino({
     level: (label) => {
       return { level: label };
     },
-    log: (object: any) => {
-      if (object.err) {
-        const err = object.err instanceof Error ? pino.stdSerializers.err(object.err) : object.err;
-        object.stack_trace = err.stack;
-        object.type = err.type;
-        object.error_message = err.message;
-        delete object.err;
-      }
-      return object;
+    log: (object: Record<string, unknown>) => {
+      if (!object.err) return object;
+
+      const { err, ...rest } = object;
+      const serialized =
+        err instanceof Error
+          ? pino.stdSerializers.err(err)
+          : (err as { stack?: string; type?: string; message?: string });
+
+      return {
+        ...rest,
+        stack_trace: serialized.stack,
+        type: serialized.type,
+        error_message: serialized.message,
+      };
     },
   },
 });

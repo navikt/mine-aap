@@ -1,9 +1,9 @@
-import React, { useRef } from 'react';
 import { ErrorSummary } from '@navikt/ds-react';
 import * as classes from 'components/FormErrorSummary/FormErrorSummary.module.css';
 import { useTranslations } from 'next-intl';
+import { useRef } from 'react';
 
-export interface Error {
+export interface FormError {
   path: string;
   message?: string;
   id: string;
@@ -11,7 +11,7 @@ export interface Error {
 
 interface Props {
   id: string;
-  errors: Error[];
+  errors: FormError[];
 }
 
 const FormErrorSummary = ({ id, errors }: Props) => {
@@ -44,8 +44,8 @@ const FormErrorSummary = ({ id, errors }: Props) => {
           className={errors?.length === 0 ? classes?.visuallyHidden : ''}
           id={id}
         >
-          {errors.map((error, index) => (
-            <ErrorSummary.Item key={index} href={`#${error.path}`}>
+          {errors.map((error) => (
+            <ErrorSummary.Item key={error.id} href={`#${error.path}`}>
               {error.message}
             </ErrorSummary.Item>
           ))}

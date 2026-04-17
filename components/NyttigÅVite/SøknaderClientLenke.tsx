@@ -13,9 +13,7 @@ export const SøknaderClientLenke = () => {
     <LinkCard>
       <LinkCard.Title>
         <LinkCard.Anchor asChild>
-          <NextLink href="/soknader">
-            {t('søknader')}
-          </NextLink>
+          <NextLink href="/soknader">{t('søknader')}</NextLink>
         </LinkCard.Anchor>
       </LinkCard.Title>
     </LinkCard>

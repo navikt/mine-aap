@@ -1,13 +1,13 @@
 import '@navikt/ds-css';
 import '@navikt/aap-felles-css';
+import { fetchDecoratorReact } from '@navikt/nav-dekoratoren-moduler/ssr';
+import { NavDecorator } from 'components/NavDecorator/NavDecorator';
+import { getEnvironment } from 'lib/utils/environments';
+import { isValidLocale } from 'lib/utils/locale';
+import { notFound } from 'next/navigation';
+import Script from 'next/script';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations } from 'next-intl/server';
-import { notFound } from 'next/navigation';
-import { fetchDecoratorReact } from '@navikt/nav-dekoratoren-moduler/ssr';
-import { getEnvironment } from 'lib/utils/environments';
-import Script from 'next/script';
-import { routing } from 'i18n/routing';
-import { NavDecorator } from 'components/NavDecorator/NavDecorator';
 
 export async function generateMetadata() {
   const t = await getTranslations();
@@ -26,7 +26,7 @@ export default async function LocaleLayout({
 }) {
   const { locale } = await params;
   // Ensure that the incoming `locale` is valid
-  if (!routing.locales.includes(locale as any)) {
+  if (!isValidLocale(locale)) {
     notFound();
   }
 

@@ -1,7 +1,7 @@
-import { sendEttersendelse } from 'lib/services/innsendingService';
-import { Ettersendelse, InnsendingBackendState, VedleggType } from 'lib/types/types';
-import { NextRequest } from 'next/server';
 import { logInfo } from 'lib/server/logger';
+import { sendEttersendelse } from 'lib/services/innsendingService';
+import type { Ettersendelse, InnsendingBackendState, VedleggType } from 'lib/types/types';
+import type { NextRequest } from 'next/server';
 
 export async function POST(req: NextRequest) {
   const body = await req.json();

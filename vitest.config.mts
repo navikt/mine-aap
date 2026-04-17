@@ -1,5 +1,5 @@
-import { configDefaults, defineConfig } from 'vitest/config';
 import react from '@vitejs/plugin-react';
+import { configDefaults, defineConfig } from 'vitest/config';
 
 export default defineConfig({
   plugins: [react()],
@@ -10,6 +10,6 @@ export default defineConfig({
     exclude: [...configDefaults.exclude, './playwright-tests/**'],
   },
   resolve: {
-    tsconfigPaths: true
-  }
+    tsconfigPaths: true,
+  },
 });

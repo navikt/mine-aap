@@ -1,11 +1,10 @@
 import { UploadIcon } from '@navikt/aksel-icons';
 import { BodyShort, Heading, Loader } from '@navikt/ds-react';
-import React, { InputHTMLAttributes, useMemo, useRef, useState } from 'react';
+import { useTranslations } from 'next-intl';
+import { type InputHTMLAttributes, useMemo, useRef, useState } from 'react';
 import { v4 as uuidV4 } from 'uuid';
-
 import { FilePanelError } from './FilePanelError';
 import { FilePanelSuccess } from './FilePanelSuccess';
-import { useTranslations } from 'next-intl';
 
 export interface FileInputProps extends InputHTMLAttributes<HTMLInputElement> {
   heading: string;
@@ -27,6 +26,10 @@ export interface Vedlegg {
 }
 
 const MAX_TOTAL_FILE_SIZE = 52428800; // 50mb
+function hasStatus(err: unknown): err is { status: number } {
+  return err instanceof Object && Object.hasOwn(err, 'status');
+}
+
 export const FileInputInnsending = (props: FileInputProps) => {
   const {
     heading,
@@ -39,7 +42,7 @@ export const FileInputInnsending = (props: FileInputProps) => {
     readAttachmentUrl = 'nb',
     ...rest
   } = props;
-  const t = useTranslations('filopplasting.fileinput')
+  const t = useTranslations('filopplasting.fileinput');
   const [dragOver, setDragOver] = useState<boolean>(false);
   const [isUploading, setIsUploading] = useState<boolean>(false);
   const [totalSizeIInnsending, setTotalSizeIInnsending] = useState<number>(0);
@@ -87,7 +90,7 @@ export const FileInputInnsending = (props: FileInputProps) => {
   async function validateAndSetFiles(filelist: FileList) {
     const fileArray = Array.from(filelist);
     const totalSize = fileArray.reduce((acc, curr) => acc + curr.size, 0);
-    if(totalSize > MAX_TOTAL_FILE_SIZE) {
+    if (totalSize > MAX_TOTAL_FILE_SIZE) {
       setIsUploading(false);
       onUpload([
         {
@@ -96,7 +99,7 @@ export const FileInputInnsending = (props: FileInputProps) => {
           type: '',
           size: totalSize,
           name: `${fileArray.length} filer`,
-        }
+        },
       ]);
     } else if (totalSize + totalSizeIInnsending > MAX_TOTAL_FILE_SIZE) {
       setIsUploading(false);
@@ -107,14 +110,14 @@ export const FileInputInnsending = (props: FileInputProps) => {
           type: '',
           size: totalSize,
           name: `${fileArray.length} filer`,
-        }
+        },
       ]);
     } else {
       setIsUploading(true);
       const uploadedFiles: Vedlegg[] = await Promise.all(
         fileArray.map(async (file) => {
           const internalErrorMessage = internalValidate(file);
-          let uploadResult: Vedlegg = {
+          const uploadResult: Vedlegg = {
             vedleggId: uuidV4(),
             errorMessage: '',
             type: file.type,
@@ -126,7 +129,10 @@ export const FileInputInnsending = (props: FileInputProps) => {
             try {
               const data = new FormData();
               data.append('vedlegg', file);
-              const res = await fetch(uploadUrl, { method: 'POST', body: data });
+              const res = await fetch(uploadUrl, {
+                method: 'POST',
+                body: data,
+              });
               const resData = await res.json();
 
               if (res.ok) {
@@ -134,8 +140,10 @@ export const FileInputInnsending = (props: FileInputProps) => {
               } else {
                 uploadResult.errorMessage = settFeilmelding(res.status, resData.substatus);
               }
-            } catch (err: any) {
-              uploadResult.errorMessage = settFeilmelding(err?.status || 500);
+            } catch (err) {
+              if (hasStatus(err)) {
+                uploadResult.errorMessage = settFeilmelding(err.status || 500);
+              }
             }
           } else if (internalErrorMessage) {
             uploadResult.errorMessage = internalErrorMessage;
@@ -145,8 +153,10 @@ export const FileInputInnsending = (props: FileInputProps) => {
         })
       );
 
-      const successfullyUploadedFiles = uploadedFiles.filter(file => !file.errorMessage)
-      setTotalSizeIInnsending(totalSizeIInnsending + successfullyUploadedFiles.reduce((acc, curr) => acc + curr.size, 0))
+      const successfullyUploadedFiles = uploadedFiles.filter((file) => !file.errorMessage);
+      setTotalSizeIInnsending(
+        totalSizeIInnsending + successfullyUploadedFiles.reduce((acc, curr) => acc + curr.size, 0)
+      );
       setIsUploading(false);
       onUpload(uploadedFiles);
     }
@@ -173,6 +183,7 @@ export const FileInputInnsending = (props: FileInputProps) => {
           );
         }
       })}
+      {/** biome-ignore lint/a11y/noStaticElementInteractions: <skriv heller om til aksel sin fileinput> */}
       <div
         data-testid={'dropzone'}
         className={`dropzone ${dragOver ? 'dragover' : ''}`}
@@ -211,6 +222,7 @@ export const FileInputInnsending = (props: FileInputProps) => {
             <BodyShort>{t('inputText')}</BodyShort>
             <BodyShort>{'eller'}</BodyShort>
             <label htmlFor={inputId} aria-labelledby={props.id}>
+              {/** biome-ignore lint/a11y/useSemanticElements: <skriv heller om til aksel sin fileinput> */}
               <span
                 className={'fileInputButton navds-button navds-button__inner navds-body-short navds-button--secondary'}
                 role={'button'}

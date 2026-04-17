@@ -1,9 +1,9 @@
+import { userEvent } from '@testing-library/user-event';
 import { Dokumentoversikt } from 'components/DokumentoversiktNy/Dokumentoversikt';
 import { mockDokumenter } from 'lib/mock/mockDokumenter';
 import { render, screen } from 'lib/utils/test/customRender';
-import { describe, it, expect, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import { userEvent } from '@testing-library/user-event';
 
 describe('Dokumentoversikt', () => {
   const user = userEvent.setup();

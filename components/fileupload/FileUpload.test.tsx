@@ -1,20 +1,23 @@
-import React from 'react';
-import { render, screen } from 'lib/utils/test/customRender';
-import { FileUpload } from 'components/fileupload/FileUpload';
-import createFetchMock from 'vitest-fetch-mock';
 import { userEvent } from '@testing-library/user-event';
-import { v4 as uuidV4 } from 'uuid';
-import { VedleggType } from 'lib/types/types';
-import { axe } from 'vitest-axe';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { FileUpload } from 'components/fileupload/FileUpload';
+import type { VedleggType } from 'lib/types/types';
+import { render, screen } from 'lib/utils/test/customRender';
 import { useParams } from 'next/navigation';
+import { v4 as uuidV4 } from 'uuid';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { axe } from 'vitest-axe';
+import createFetchMock from 'vitest-fetch-mock';
 
 const fetchMock = createFetchMock(vi);
 fetchMock.enableMocks();
 const filnavn1 = 'fil1.pdf';
 const filnavn2 = 'fil2.pdf';
-const fileOne: File = new File(['fil en'], filnavn1, { type: 'application/pdf' });
-const fileTwo: File = new File(['fil to'], filnavn2, { type: 'application/pdf' });
+const fileOne: File = new File(['fil en'], filnavn1, {
+  type: 'application/pdf',
+});
+const fileTwo: File = new File(['fil to'], filnavn2, {
+  type: 'application/pdf',
+});
 describe('FileUpload', () => {
   beforeEach(() => {
     fetchMock.resetMocks();

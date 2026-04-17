@@ -1,0 +1,86 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.4.11/schema.json",
+  "vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
+  "files": { "ignoreUnknown": false },
+  "formatter": { "enabled": true, "indentStyle": "space", "indentWidth": 2, "lineWidth": 120 },
+  "linter": {
+    "enabled": true,
+    "domains": {
+      "next": "recommended"
+    },
+    "rules": {
+      "recommended": true,
+      "complexity": {
+        "noAdjacentSpacesInRegex": "error",
+        "noExtraBooleanCast": "error",
+        "noUselessCatch": "error",
+        "noUselessEscapeInRegex": "error"
+      },
+      "correctness": {
+        "noChildrenProp": "error",
+        "noNextAsyncClientComponent": "warn",
+        "noUndeclaredVariables": "error",
+        "noUnusedLabels": "error",
+        "noUnusedVariables": "error",
+        "useExhaustiveDependencies": "warn",
+        "useHookAtTopLevel": "error",
+        "useJsxKeyInIterable": "error"
+      },
+      "nursery": {
+        "noAmbiguousAnchorText": "off",
+        "noUnknownAttribute": "error"
+      },
+      "performance": {
+        "noImgElement": "warn",
+        "noUnwantedPolyfillio": "warn",
+        "useGoogleFontPreconnect": "warn"
+      },
+      "security": {
+        "noDangerouslySetInnerHtmlWithChildren": "error"
+      },
+      "style": { "noHeadElement": "warn" },
+      "suspicious": {
+        "noCatchAssign": "error",
+        "noDocumentImportInPage": "error",
+        "noEmptyBlockStatements": "error",
+        "noFocusedTests": "error",
+        "noHeadImportInDocument": "error",
+        "noIrregularWhitespace": "error",
+        "noPrototypeBuiltins": "error",
+        "noSkippedTests": "warn",
+        "noUselessRegexBackrefs": "error"
+      }
+    }
+  },
+  "javascript": { "formatter": { "quoteStyle": "single", "trailingCommas": "es5" } },
+  "overrides": [
+    {
+      "includes": ["*.ts", "*.tsx"],
+      "linter": {
+        "rules": { "correctness": { "noUndeclaredVariables": "off" } }
+      }
+    },
+    {
+      "includes": ["*.ts", "*.tsx"],
+      "linter": {
+        "rules": { "correctness": { "noUndeclaredVariables": "off" } }
+      }
+    },
+    {
+      "includes": ["*.ts", "*.tsx"],
+      "linter": {
+        "rules": { "correctness": { "noUndeclaredVariables": "off" } }
+      }
+    },
+    {
+      "includes": ["*.ts", "*.tsx"],
+      "linter": {
+        "rules": { "correctness": { "noUndeclaredVariables": "off" } }
+      }
+    }
+  ],
+  "assist": {
+    "enabled": true,
+    "actions": { "source": { "organizeImports": "on" } }
+  }
+}

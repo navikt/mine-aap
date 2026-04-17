@@ -2,8 +2,8 @@
 // TODO ssr
 
 import { TasklistIcon } from '@navikt/aksel-icons';
-import { PageComponentFlexContainer } from 'components/PageComponentFlexContainer/PageComponentFlexContainer';
 import { Heading, LinkCard } from '@navikt/ds-react';
+import { PageComponentFlexContainer } from 'components/PageComponentFlexContainer/PageComponentFlexContainer';
 import { useTranslations } from 'next-intl';
 
 import styles from './Meldekortlenke.module.css';

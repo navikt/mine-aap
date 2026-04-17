@@ -6,8 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "prepare": "husky install",
+    "lint": "biome ci .",
+    "prepare": "husky",
     "test": "vitest --run",
     "intl:diff": "json-diff -k ./lib/translations/nb.json ./lib/translations/nn.json",
     "postinstall": "patch-package"
@@ -37,35 +37,25 @@
     "server-only": "^0.0.1"
   },
   "devDependencies": {
-    "@navikt/aap-felles-prettier": "^5.6.2",
-    "@navikt/eslint-config-aap": "^5.4.0",
+    "@biomejs/biome": "2.4.11",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "6.9.1",
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.1",
-    "@types/node": "^20.17.14",
+    "@types/node": "24.4.0",
     "@types/react": "19.2.2",
     "@types/react-dom": "^19.2.2",
     "@types/uuid": "^10.0.0",
-    "@typescript-eslint/eslint-plugin": "^8.20.0",
     "@vitejs/plugin-react": "6.0.1",
     "@vitest/coverage-v8": "4.1.4",
-    "eslint": "^8.57.1",
-    "eslint-config-next": "^15.3.3",
     "husky": "^9.1.7",
     "json-diff": "^1.0.6",
-    "lint-staged": "^15.5.2",
     "patch-package": "^8.0.1",
-    "prettier": "^3.4.2",
     "typescript": "^5.9.3",
     "uuid": "^11.1.0",
     "vitest": "4.1.4",
     "vitest-axe": "0.1.0",
     "vitest-fetch-mock": "0.4.5"
-  },
-  "lint-staged": {
-    "*.{js,ts,tsx}": "eslint --cache --fix",
-    "*.{js,ts,tsx,css,md}": "prettier --write"
   },
   "packageManager": "yarn@4.12.0"
 }

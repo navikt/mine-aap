@@ -1,9 +1,15 @@
-import React from 'react';
-
 /* eslint-disable max-len */
 export const Luca = () => {
   return (
-    <svg aria-hidden xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="none" viewBox="0 0 64 64">
+    <svg
+      aria-label="Veileder ikon"
+      aria-hidden
+      xmlns="http://www.w3.org/2000/svg"
+      width="64"
+      height="64"
+      fill="none"
+      viewBox="0 0 64 64"
+    >
       <path
         fill="#F1F1F1"
         fillRule="evenodd"

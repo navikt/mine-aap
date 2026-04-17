@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface ScanProps {
   title?: string;
   height?: number;
@@ -16,14 +14,7 @@ const GoodScanning = ({ title, height }: ScanProps) => {
     <svg role="presentation" aria-hidden focusable="false" viewBox="0 0 83 121" height={height}>
       {title && <title>{title}</title>}
       <defs>
-        <filter
-          x="-10.6%"
-          y="-5.4%"
-          width="121.2%"
-          height="115.1%"
-          filterUnits="objectBoundingBox"
-          id="good_1__a"
-        >
+        <filter x="-10.6%" y="-5.4%" width="121.2%" height="115.1%" filterUnits="objectBoundingBox" id="good_1__a">
           <feOffset dy={2} in="SourceAlpha" result="shadowOffsetOuter1" />
           <feGaussianBlur stdDeviation={2} in="shadowOffsetOuter1" result="shadowBlurOuter1" />
           <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0" in="shadowBlurOuter1" />
@@ -31,13 +22,7 @@ const GoodScanning = ({ title, height }: ScanProps) => {
         <path id="good_1__b" d="M8 11h66v93H8z" />
       </defs>
       <g fill="none" fillRule="evenodd">
-        <path
-          d="M1 1h81v119H1z"
-          fill="#BABABA"
-          stroke="#000"
-          strokeOpacity={0.85}
-          strokeWidth={2}
-        />
+        <path d="M1 1h81v119H1z" fill="#BABABA" stroke="#000" strokeOpacity={0.85} strokeWidth={2} />
         <use fill="#000" filter="url(#good_1__a)" xlinkHref="#good_1__b" />
         <use fill="#FFF" xlinkHref="#good_1__b" />
         <g stroke="#B7B4B4" strokeLinecap="square" strokeWidth={2}>
@@ -56,14 +41,7 @@ const KeystoneScanning = ({ title, height }: ScanProps) => {
       {title && <title>{title}</title>}
       <desc>Bildet er ikke tatt ovenfra</desc>
       <defs>
-        <filter
-          x="-9.7%"
-          y="-7.2%"
-          width="119.4%"
-          height="120.3%"
-          filterUnits="objectBoundingBox"
-          id="keystone_2__a"
-        >
+        <filter x="-9.7%" y="-7.2%" width="119.4%" height="120.3%" filterUnits="objectBoundingBox" id="keystone_2__a">
           <feOffset dy={2} in="SourceAlpha" result="shadowOffsetOuter1" />
           <feGaussianBlur stdDeviation={2} in="shadowOffsetOuter1" result="shadowBlurOuter1" />
           <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0" in="shadowBlurOuter1" />
@@ -71,13 +49,7 @@ const KeystoneScanning = ({ title, height }: ScanProps) => {
         <path id="keystone_2__b" d="M16.528 20h49.06L78 89H6z" />
       </defs>
       <g fill="none" fillRule="evenodd">
-        <path
-          d="M1 1h81v119H1z"
-          fill="#BABABA"
-          stroke="#000"
-          strokeOpacity={0.85}
-          strokeWidth={2}
-        />
+        <path d="M1 1h81v119H1z" fill="#BABABA" stroke="#000" strokeOpacity={0.85} strokeWidth={2} />
         <use fill="#000" filter="url(#keystone_2__a)" xlinkHref="#keystone_2__b" />
         <use fill="#FFF" xlinkHref="#keystone_2__b" />
         <g stroke="#B7B4B4" strokeLinecap="square" strokeWidth={2}>
@@ -111,13 +83,7 @@ const HorizontalScanning = ({ title, height }: ScanProps) => {
         <path id="horizontal_3__b" d="M8 36h66v45H8z" />
       </defs>
       <g fill="none" fillRule="evenodd">
-        <path
-          d="M1 1h81v119H1z"
-          fill="#BABABA"
-          stroke="#000"
-          strokeOpacity={0.85}
-          strokeWidth={2}
-        />
+        <path d="M1 1h81v119H1z" fill="#BABABA" stroke="#000" strokeOpacity={0.85} strokeWidth={2} />
         <use fill="#000" filter="url(#horizontal_3__a)" xlinkHref="#horizontal_3__b" />
         <use fill="#FFF" xlinkHref="#horizontal_3__b" />
         <path
@@ -136,14 +102,7 @@ const ShadowScanning = ({ title, height }: ScanProps) => {
       {title && <title>{title}</title>}
       <desc>Bildet har har skygge oppå legeerklæring</desc>
       <defs>
-        <filter
-          x="-10%"
-          y="-5.2%"
-          width="120%"
-          height="114.6%"
-          filterUnits="objectBoundingBox"
-          id="shadow_4__a"
-        >
+        <filter x="-10%" y="-5.2%" width="120%" height="114.6%" filterUnits="objectBoundingBox" id="shadow_4__a">
           <feOffset dy={2} in="SourceAlpha" result="shadowOffsetOuter1" />
           <feGaussianBlur stdDeviation={2} in="shadowOffsetOuter1" result="shadowBlurOuter1" />
           <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0" in="shadowBlurOuter1" />
@@ -151,13 +110,7 @@ const ShadowScanning = ({ title, height }: ScanProps) => {
         <path id="shadow_4__b" d="M6 12h70v96H6z" />
       </defs>
       <g fill="none" fillRule="evenodd">
-        <path
-          strokeOpacity={0.85}
-          stroke="#000"
-          strokeWidth={2}
-          fill="#BABABA"
-          d="M1 1h81v119H1z"
-        />
+        <path strokeOpacity={0.85} stroke="#000" strokeWidth={2} fill="#BABABA" d="M1 1h81v119H1z" />
         <g transform="translate(1 1)">
           <use fill="#000" filter="url(#shadow_4__a)" xlinkHref="#shadow_4__b" />
           <use fill="#FFF" xlinkHref="#shadow_4__b" />

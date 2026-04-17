@@ -1,5 +1,4 @@
 import { GuidePanel } from '@navikt/ds-react';
-import React from 'react';
 
 import { Luca } from './Luca';
 

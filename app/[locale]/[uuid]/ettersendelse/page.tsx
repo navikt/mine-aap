@@ -1,15 +1,15 @@
-import { EttersendelseInnsending } from 'components/ettersendelseinnsending/EttersendelseInnsending';
-import { hentSøknader } from 'lib/services/innsendingService';
-import { notFound } from 'next/navigation';
-import { BodyShort, Heading, Label, VStack } from '@navikt/ds-react';
-import { Section } from 'components/Section/Section';
 import { ArrowLeftIcon } from '@navikt/aksel-icons';
-import { PageHeader } from 'components/PageHeader';
-import { getTranslations } from 'next-intl/server';
-import { formatFullDate } from 'lib/utils/date';
-import { Link } from 'i18n/routing';
+import { BodyShort, Heading, Label, VStack } from '@navikt/ds-react';
+import { EttersendelseInnsending } from 'components/ettersendelseinnsending/EttersendelseInnsending';
 import LucaGuidePanel from 'components/LucaGuidePanel';
+import { PageHeader } from 'components/PageHeader';
 import ScanningGuide from 'components/ScanningGuide';
+import { Section } from 'components/Section/Section';
+import { Link } from 'i18n/routing';
+import { hentSøknader } from 'lib/services/innsendingService';
+import { formatFullDate } from 'lib/utils/date';
+import { notFound } from 'next/navigation';
+import { getTranslations } from 'next-intl/server';
 
 interface PageParams {
   uuid: string;
@@ -64,7 +64,9 @@ const Page = async ({ params }: Readonly<{ params: Promise<PageParams> }>) => {
               </BodyShort>
             </LucaGuidePanel>
             <Label as="p">
-              {t('ettersendelse.gjeldendeSøknad', { dateTime: formatFullDate(søknadFraInnsending.mottattDato) })}
+              {t('ettersendelse.gjeldendeSøknad', {
+                dateTime: formatFullDate(søknadFraInnsending.mottattDato),
+              })}
             </Label>
 
             <div>

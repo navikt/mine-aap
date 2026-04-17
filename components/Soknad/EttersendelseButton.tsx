@@ -1,8 +1,8 @@
 'use client';
 
 import { Button } from '@navikt/ds-react';
-import { useTranslations } from 'next-intl';
 import { useRouter } from 'i18n/routing';
+import { useTranslations } from 'next-intl';
 
 export const EttersendelseButton = ({ innsendingsId }: { innsendingsId: string }) => {
   const t = useTranslations('minSisteSøknad.søknad');

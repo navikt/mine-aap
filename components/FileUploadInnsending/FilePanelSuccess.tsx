@@ -1,7 +1,6 @@
 import { CheckmarkIcon, XMarkIcon } from '@navikt/aksel-icons';
 import { BodyShort, Detail, Link, Panel } from '@navikt/ds-react';
-import React from 'react';
-import { Vedlegg } from './FileInputInnsending';
+import type { Vedlegg } from './FileInputInnsending';
 
 interface Props {
   file: Vedlegg;
@@ -26,7 +25,9 @@ export const FilePanelSuccess = ({ file, onDelete, deleteUrl, readAttachmentUrl 
       </div>
       <button
         onClick={async () => {
-          const res = await fetch(`${deleteUrl}${file.vedleggId}`, { method: 'DELETE' });
+          const res = await fetch(`${deleteUrl}${file.vedleggId}`, {
+            method: 'DELETE',
+          });
           if (res.ok) {
             onDelete();
           }

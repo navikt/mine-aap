@@ -1,3 +1,3 @@
-import { ScanningGuide} from 'components/ScanningGuide/ScanningGuide';
+import { ScanningGuide } from 'components/ScanningGuide/ScanningGuide';
 
-export default ScanningGuide
+export default ScanningGuide;

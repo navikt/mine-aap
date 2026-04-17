@@ -1,6 +1,6 @@
 import { Soknad } from 'components/Soknad/Soknad';
 import { hentDokumenter } from 'lib/services/oppslagService';
-import { Dokument, MineAapSoknadMedEttersendingNy } from 'lib/types/types';
+import type { Dokument, MineAapSoknadMedEttersendingNy } from 'lib/types/types';
 
 export interface DokumentMedTittel {
   journalpostId?: string;

@@ -1,3 +1,3 @@
-import { LucaGuidePanel} from './LucaGuidePanel';
+import { LucaGuidePanel } from './LucaGuidePanel';
 
 export default LucaGuidePanel;

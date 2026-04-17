@@ -1,8 +1,8 @@
-import styles from './NyttigÅVite.module.css';
 import { BodyLong, BodyShort, Heading, Link } from '@navikt/ds-react';
-import { getTranslations } from 'next-intl/server';
-import { SøknaderClientLenke } from 'components/NyttigÅVite/SøknaderClientLenke';
 import { LinkCard, LinkCardAnchor, LinkCardTitle } from '@navikt/ds-react/LinkCard';
+import { SøknaderClientLenke } from 'components/NyttigÅVite/SøknaderClientLenke';
+import { getTranslations } from 'next-intl/server';
+import styles from './NyttigÅVite.module.css';
 
 export const NyttigÅViteServer = async () => {
   const t = await getTranslations('');
