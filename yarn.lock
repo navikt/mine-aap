@@ -1855,7 +1855,7 @@ __metadata:
     "@vercel/otel": "npm:^1.14.0"
     "@vitejs/plugin-react": "npm:6.0.1"
     "@vitest/coverage-v8": "npm:4.1.4"
-    csp-header: "npm:^6.3.0"
+    csp-header: "npm:^6.3.1"
     date-fns: "npm:^4.1.0"
     html-react-parser: "npm:^5.2.17"
     husky: "npm:^9.1.7"
@@ -2200,17 +2200,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"csp-header@npm:6.3.1":
+"csp-header@npm:6.3.1, csp-header@npm:^6.3.1":
   version: 6.3.1
   resolution: "csp-header@npm:6.3.1"
   checksum: 10c0/b9a2a1c90a944a1ad6ed8e3b309ecb1b3b2b0d68c9ceeab73ee8a17513635db83ef1e3d624e928d14b40270ba203016cf5f3b3d4dcf0aeaa76adcb9f2fbbdfc0
-  languageName: node
-  linkType: hard
-
-"csp-header@npm:^6.3.0":
-  version: 6.3.0
-  resolution: "csp-header@npm:6.3.0"
-  checksum: 10c0/3a57688cff42f78bf29771421a8f3283edd6334d1d8e81ea1e8bd6569e38cd80da127d246233ad952865c524d94090d55c9f48fb248e96f453e03cd34fa8cdb6
   languageName: node
   linkType: hard
 
