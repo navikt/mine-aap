@@ -10,9 +10,10 @@ export interface Dokument {
 export type VedleggType = 'ARBEIDSGIVER' | 'STUDIER' | 'ANDREBARN' | 'OMSORG' | 'UTLAND' | 'ANNET';
 
 export interface Ettersendelse {
-  søknadId?: string;
-  totalFileSize: number;
-  ettersendteVedlegg: Array<EttersendteVedlegg>;
+        søknadId?: string;
+        totalFileSize: number;
+        ettersendteVedlegg: Array<EttersendteVedlegg>;
+
 }
 
 export interface EttersendteVedlegg {
