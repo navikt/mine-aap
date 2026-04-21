@@ -1,5 +1,5 @@
 import { ArrowLeftIcon } from '@navikt/aksel-icons';
-import { BodyShort, Heading, Label, VStack } from '@navikt/ds-react';
+import { Alert, BodyShort, Heading, Label, VStack } from '@navikt/ds-react';
 import { EttersendelseInnsending } from 'components/ettersendelseinnsending/EttersendelseInnsending';
 import LucaGuidePanel from 'components/LucaGuidePanel';
 import { PageHeader } from 'components/PageHeader';
@@ -7,6 +7,7 @@ import ScanningGuide from 'components/ScanningGuide';
 import { Section } from 'components/Section/Section';
 import { Link } from 'i18n/routing';
 import { hentSøknader } from 'lib/services/innsendingService';
+import { isError } from 'lib/utils/api-fetch';
 import { formatFullDate } from 'lib/utils/date';
 import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
@@ -28,9 +29,12 @@ const Page = async ({ params }: Readonly<{ params: Promise<PageParams> }>) => {
   const t = await getTranslations('');
 
   const søknader = await hentSøknader();
+  if (isError(søknader)) {
+    return <Alert variant={'error'}>{t('dineSøknader.noeGikkGalt')}</Alert>;
+  }
 
-  if (søknader?.length > 0) {
-    const søknadFraInnsending = søknader.find((søknad) => søknad.innsendingsId === uuid) ?? null;
+  if (søknader.data.length > 0) {
+    const søknadFraInnsending = søknader.data.find((søknad) => søknad.innsendingsId === uuid) ?? null;
 
     if (!søknadFraInnsending) {
       return notFound();

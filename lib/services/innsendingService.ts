@@ -38,6 +38,7 @@ export const sendEttersendelse = async (
 ): Promise<FetchResponse<{ referanse: string }>> => {
   if (isMock()) {
     return Promise.resolve({ type: 'SUCCESS', status: 200, data: { referanse: 'klajsg-kasd-sadf-sadfsdga' } });
+    // return Promise.resolve({ type: 'ERROR', status: 500, apiException: { message: 'nei nei', code: 'UKJENT' } });
   }
   const erGenerellEttersendelse = !!innsendingsId;
   const url = `${innsendingApiBaseUrl}/innsending${erGenerellEttersendelse ? `/${innsendingsId}` : ''}`;
@@ -69,17 +70,12 @@ export const hentVedlegg = async (uuid: string, req: Request): Promise<any> => {
   });
 };
 
-export const slettVedlegg = async (uuid: string): Promise<any> => {
+export const slettVedlegg = async (uuid: string): Promise<FetchResponse<null>> => {
   if (isMock()) {
-    return;
+    // return { type: 'SUCCESS', status: 204, data: null };
+    return { type: 'ERROR', status: 500, apiException: { message: 'ehei' } };
   }
 
   const url = `${innsendingApiBaseUrl}/mellomlagring/fil/${uuid}`;
-  try {
-    await fetchProxy(url, innsendingAudience, 'DELETE');
-    return;
-  } catch (error) {
-    logWarning('Error sletting av vedlegg', error);
-    throw new Error('Error sletting av vedlegg');
-  }
+  return fetchProxy<null>(url, innsendingAudience, 'DELETE');
 };

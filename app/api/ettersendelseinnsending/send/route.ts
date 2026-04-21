@@ -1,6 +1,7 @@
 import { logInfo } from 'lib/server/logger';
 import { sendEttersendelse } from 'lib/services/innsendingService';
 import type { Ettersendelse, InnsendingBackendState, VedleggType } from 'lib/types/types';
+import { isSuccess } from 'lib/utils/api-fetch';
 import type { NextRequest } from 'next/server';
 
 export async function POST(req: NextRequest) {
@@ -18,11 +19,11 @@ export async function POST(req: NextRequest) {
       tittel: mapVedleggTypeTilVedleggstekst(ettersending.vedleggType),
     })),
   };
-  try {
-    await sendEttersendelse(requestBody, søknadId);
+  const ettersendelse = await sendEttersendelse(requestBody, søknadId);
+  if (isSuccess(ettersendelse)) {
     return new Response(null, { status: 201 });
-  } catch {
-    return new Response('Error sending ettersendelse', { status: 500 });
+  } else {
+    return new Response(JSON.stringify(ettersendelse.apiException), { status: ettersendelse.status });
   }
 }
 
