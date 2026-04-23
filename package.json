@@ -55,6 +55,7 @@
     "uuid": "^11.1.0",
     "vitest": "4.1.4",
     "vitest-axe": "0.1.0",
+    "vitest-canvas-mock": "1.1.4",
     "vitest-fetch-mock": "0.4.5"
   },
   "packageManager": "yarn@4.12.0"
