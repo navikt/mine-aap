@@ -76,6 +76,6 @@ export const slettVedlegg = async (uuid: string): Promise<FetchResponse<null>> =
     return { type: 'ERROR', status: 500, apiException: { message: 'ehei' } };
   }
 
-  const url = `${innsendingApiBaseUrl}/mellomlagring/fil/${uuid}`;
+  const url = `${innsendingApiBaseUrl}/mellomlagring/fil/${encodeURIComponent(uuid)}`;
   return fetchProxy<null>(url, innsendingAudience, 'DELETE');
 };
