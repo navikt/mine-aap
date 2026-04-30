@@ -1,12 +1,22 @@
-import { BodyShort, Heading, ReadMore } from '@navikt/ds-react';
+import { Alert, BodyShort, Heading, ReadMore } from '@navikt/ds-react';
 import { Dokumentoversikt } from 'components/DokumentoversiktNy/Dokumentoversikt';
 import { PageComponentFlexContainer } from 'components/PageComponentFlexContainer/PageComponentFlexContainer';
 import { hentDokumenter } from 'lib/services/oppslagService';
+import { isError } from 'lib/utils/api-fetch';
 import { getTranslations } from 'next-intl/server';
 
 export const DokumentoversiktMedDatafetching = async () => {
   const t = await getTranslations('dokumentoversikt');
   const dokumenter = await hentDokumenter();
+  if (isError(dokumenter)) {
+    return (
+      <PageComponentFlexContainer subtleBackground>
+        <div style={{ maxWidth: '600px' }}>
+          <Alert variant={'error'}>{t('noeGikkGalt')}</Alert>
+        </div>
+      </PageComponentFlexContainer>
+    );
+  }
 
   return (
     <PageComponentFlexContainer subtleBackground>
@@ -19,7 +29,7 @@ export const DokumentoversiktMedDatafetching = async () => {
           <BodyShort spacing>{t('manglendeDokument.tekst')}</BodyShort>
         </ReadMore>
 
-        <Dokumentoversikt dokumenter={dokumenter} />
+        <Dokumentoversikt dokumenter={dokumenter.data} />
       </div>
     </PageComponentFlexContainer>
   );

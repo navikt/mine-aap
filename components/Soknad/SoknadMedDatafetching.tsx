@@ -1,6 +1,7 @@
 import { Soknad } from 'components/Soknad/Soknad';
 import { hentDokumenter } from 'lib/services/oppslagService';
 import type { Dokument, MineAapSoknadMedEttersendingNy } from 'lib/types/types';
+import { isSuccess } from 'lib/utils/api-fetch';
 
 export interface DokumentMedTittel {
   journalpostId?: string;
@@ -39,6 +40,7 @@ const getDokumenterMedTittel = (dokumenter: Dokument[], søknad: MineAapSoknadMe
 
 export const SoknadMedDatafetching = async ({ søknad }: { søknad: MineAapSoknadMedEttersendingNy }) => {
   const dokumenter = await hentDokumenter();
+  const dokumenterMedTittel = isSuccess(dokumenter) ? getDokumenterMedTittel(dokumenter.data, søknad) : [];
 
-  return <Soknad søknad={søknad} dokumenter={getDokumenterMedTittel(dokumenter, søknad)} />;
+  return <Soknad søknad={søknad} dokumenter={dokumenterMedTittel} />;
 };

@@ -1,10 +1,11 @@
 import { ArrowLeftIcon } from '@navikt/aksel-icons';
-import { Heading } from '@navikt/ds-react';
+import { Alert, Heading, VStack } from '@navikt/ds-react';
 import { Layout } from 'components/Layout/Layout';
 import { Section } from 'components/Section/Section';
 import { SoknadMedDatafetching } from 'components/Soknad/SoknadMedDatafetching';
 import { Link } from 'i18n/routing';
 import { hentSøknader } from 'lib/services/innsendingService';
+import { isError } from 'lib/utils/api-fetch';
 import { getTranslations } from 'next-intl/server';
 
 const Page = async () => {
@@ -19,17 +20,18 @@ const Page = async () => {
           <Heading level="2" size="medium" spacing>
             {t('dineSøknader.heading')}
           </Heading>
-
-          {søknader.map((søknad) => (
-            <SoknadMedDatafetching key={søknad.innsendingsId} søknad={søknad} />
-          ))}
+          {isError(søknader) ? (
+            <Alert variant={'error'}>{t('dineSøknader.noeGikkGalt')}</Alert>
+          ) : (
+            søknader.data.map((søknad) => <SoknadMedDatafetching key={søknad.innsendingsId} søknad={søknad} />)
+          )}
         </div>
       </Section>
       <Section>
         <div>
           <Link href="/">
             <ArrowLeftIcon />
-            {t('tilbakeTilMineAAPKnapp')}
+            t('tilbakeTilMineAAPKnapp');
           </Link>
         </div>
       </Section>

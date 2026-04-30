@@ -75,6 +75,7 @@
     "heading": "Søknader du har sendt inn"
   },
   "dokumentoversikt": {
+    "noeGikkGalt": "Ein feil oppstod ved henting av dokumentoversikta. Ver vennleg og prøv igjen senare.",
     "tittel": "Dokumentoversyn",
     "tekst": "Her finn du dine søknadar, vedlegg, vedtak, brev og samtalerefat.",
     "manglendeDokument": {
