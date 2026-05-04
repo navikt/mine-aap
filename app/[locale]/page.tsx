@@ -1,4 +1,4 @@
-import { BodyShort, Heading } from '@navikt/ds-react';
+import { Alert, BodyShort, Heading } from '@navikt/ds-react';
 import { Card } from 'components/Card/Card';
 import { ClientButton } from 'components/ClientButton';
 import { DokumentoversiktMedDatafetching } from 'components/DokumentoversiktNy/DokumentoversiktMedDatafetching';
@@ -8,6 +8,7 @@ import { NyttigÅViteServer } from 'components/NyttigÅVite/NyttigÅViteServer';
 import { PageComponentFlexContainer } from 'components/PageComponentFlexContainer/PageComponentFlexContainer';
 import { SoknadMedDatafetching } from 'components/Soknad/SoknadMedDatafetching';
 import { hentSøknader } from 'lib/services/innsendingService';
+import { isError, isSuccess } from 'lib/utils/api-fetch';
 import { getTranslations } from 'next-intl/server';
 
 const Page = async () => {
@@ -15,7 +16,7 @@ const Page = async () => {
 
   const søknader = await hentSøknader();
 
-  const sisteSøknadInnsendingNy = søknader[0];
+  const sisteSøknadInnsendingNy = isSuccess(søknader) ? søknader.data[0] : null;
 
   return (
     <div>
@@ -25,6 +26,12 @@ const Page = async () => {
         </Heading>
         <ForsideIngress>{t('appIngress')}</ForsideIngress>
       </PageComponentFlexContainer>
+
+      {isError(søknader) && (
+        <PageComponentFlexContainer>
+          <Alert variant={'error'}>{t('dineSøknader.noeGikkGalt')}</Alert>
+        </PageComponentFlexContainer>
+      )}
 
       {sisteSøknadInnsendingNy && (
         <>

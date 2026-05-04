@@ -72,9 +72,11 @@
     }
   },
   "dineSøknader": {
-    "heading": "Dine innsendte søknader"
+    "heading": "Dine innsendte søknader",
+    "noeGikkGalt": "Noe gikk galt ved henting av søknader. Vennligst prøv igjen senere."
   },
   "dokumentoversikt": {
+    "noeGikkGalt": "En feil oppstod ved henting av dokumentoversikt. Venligst prøv igjen senere.",
     "tittel": "Dokumentoversikt",
     "tekst": "Her finner du dine søknader, vedlegg, vedtak, brev og samtalerefater.",
     "manglendeDokument": {

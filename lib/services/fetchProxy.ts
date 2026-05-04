@@ -2,11 +2,14 @@
 
 import { randomUUID } from 'node:crypto';
 import { getToken, requestOboToken, type TokenResult, validateToken } from '@navikt/oasis';
+import { logError, logWarning } from 'lib/server/logger';
+import type { FetchResponse } from 'lib/utils/api-fetch';
 import { isLocal } from 'lib/utils/environments';
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 
 const NUMBER_OF_RETRIES = 3;
+const REQUEST_TIMEOUT_MS = 60_000; // 60 sekunder, samme som RestClient default i Kelvin komponenter
 
 export const getOnBefalfOfToken = async (audience: string, url: string): Promise<string> => {
   const token = getAccessTokenOrRedirectToLogin(await headers());
@@ -43,7 +46,7 @@ export const fetchProxy = async <ResponseBody>(
   method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' = 'GET',
   requestBody?: object,
   tags?: string[]
-): Promise<ResponseBody> => {
+): Promise<FetchResponse<ResponseBody>> => {
   const oboToken = await getOnBefalfOfToken(scope, url);
   return await fetchWithRetry<ResponseBody>(url, method, oboToken, NUMBER_OF_RETRIES, requestBody, tags);
 };
@@ -73,57 +76,81 @@ export const fetchWithRetry = async <ResponseBody>(
   oboToken: string,
   retries: number,
   requestBody?: object,
-  tags?: string[],
-  errors?: string[]
-): Promise<ResponseBody> => {
-  if (!errors) errors = [];
+  tags?: string[]
+): Promise<FetchResponse<ResponseBody>> => {
+  try {
+    // const timeoutSignal = AbortSignal.timeout(REQUEST_TIMEOUT_MS);
+    // const combinedSignal = options.signal ? AbortSignal.any([options.signal, timeoutSignal]) : timeoutSignal;
 
-  if (retries === 0) {
-    throw new Error(`Unable to fetch ${url}: `, Error(errors.join('\n')));
-  }
+    const callid = randomUUID();
+    const response = await fetch(url, {
+      method,
+      body: JSON.stringify(requestBody),
+      headers: {
+        Authorization: `Bearer ${oboToken}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'Nav-CallId': callid,
+      },
+      next: { revalidate: 0, tags },
+    });
 
-  const callid = randomUUID();
-  const response = await fetch(url, {
-    method,
-    body: JSON.stringify(requestBody),
-    headers: {
-      Authorization: `Bearer ${oboToken}`,
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      'Nav-CallId': callid,
-    },
-    next: { revalidate: 0, tags },
-  });
+    // Mulige statuskoder:
+    // 200
+    // 204
+    // 404
+    // 500
 
-  // Mulige statuskoder:
-  // 200
-  // 204
-  // 404
-  // 500
-
-  if (response.status === 204) {
-    return undefined as ResponseBody;
-  }
-
-  if (!response.ok) {
-    if (response.status === 500) {
-      const responseMessage = await response.text(); // 500 feil fra innsending og oppslag har tekst i body
-      throw new Error(`klarte ikke å hente ${url}: ${responseMessage}`);
-    }
-    if (response.status === 404) {
-      throw new Error(`Ikke funnet: ${url}`);
+    if (response.status === 204) {
+      return { type: 'SUCCESS', status: response.status, data: undefined as ResponseBody };
     }
 
-    errors.push(`HTTP ${response.status} ${response.statusText}: ${url} (retries left ${retries})`);
-    return await fetchWithRetry(url, method, oboToken, retries - 1, requestBody, tags, errors);
-  }
+    if (!response.ok) {
+      const contentType = response.headers.get('content-type');
+      // 500 feil fra innsending og oppslag har tekst i body
+      const feilmelding = contentType?.includes('text') ? await response.text() : await response.json();
+      if (response.status >= 500) {
+        logError(feilmelding);
+      } else {
+        logWarning(feilmelding);
+      }
+      return { type: 'ERROR', apiException: feilmelding, status: response.status };
+    }
 
-  const contentType = response.headers.get('content-type');
-  if (contentType?.includes('text')) {
-    return (await response.text()) as ResponseBody;
-  }
+    const contentType = response.headers.get('content-type');
+    if (contentType?.includes('text')) {
+      return { type: 'SUCCESS', status: response.status, data: (await response.text()) as ResponseBody };
+    }
+    const responseJson: ResponseBody = await response.json();
 
-  return await response.json();
+    return { type: 'SUCCESS', status: response.status, data: responseJson };
+  } catch (error) {
+    if (error instanceof DOMException && error.name === 'TimeoutError') {
+      logWarning(`Timeout mot ${url} etter ${REQUEST_TIMEOUT_MS / 1000} sekunder.`);
+
+      return {
+        type: 'ERROR',
+        apiException: { message: 'Det tok for lang tid å få svar fra tjenesten. Prøv igjen om litt.' },
+        status: 408, // Request Timeout
+      };
+    }
+
+    // Fanger uhåndterte nettverksfeil som f.eks.: ECONNRESET, ETIMEDOUT, osv.
+    logWarning(`Nettverksfeil mot ${url}: `, error);
+
+    if (retries > 1 && method === 'GET') {
+      const delayMs = (NUMBER_OF_RETRIES - retries + 1) * 1000; // Økende delay: 1s, 2s, 3s...
+      await new Promise((resolve) => setTimeout(resolve, delayMs));
+      return await fetchWithRetry(url, method, oboToken, retries - 1, requestBody, tags);
+    }
+
+    logWarning(`For mange nettverksfeil (${method} ${url}): `, error);
+    return {
+      type: 'ERROR',
+      apiException: { message: `Fikk ikke svar fra tjenesten. Prøv igjen om litt.` },
+      status: 503, // Service Unavailable
+    };
+  }
 };
 
 function getAccessTokenOrRedirectToLogin(headers: Headers): string {
