@@ -45,7 +45,7 @@ export const sendEttersendelse = async (
   return fetchProxy<{ referanse: string }>(url, innsendingAudience, 'POST', data);
 };
 
-export const lagreVedlegg = async (req: Request): Promise<any> => {
+export const lagreVedlegg = async (req: Request) => {
   if (isMock()) return { filId: randomUUID() };
   const url = `mellomlagring/fil`;
   const oboToken = await getOnBefalfOfToken(innsendingAudience, url);

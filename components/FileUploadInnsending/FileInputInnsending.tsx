@@ -134,9 +134,13 @@ export const FileInputInnsending = (props: FileInputProps) => {
                 body: data,
               });
 
-              console.log('res', res);
-              const resData = await res.json();
-              console.log('resData', resData);
+              // biome-ignore lint/suspicious/noImplicitAnyLet: <emergency-fix>
+              let resData;
+              try {
+                resData = await res.json();
+              } catch (err) {
+                console.error(err);
+              }
 
               if (res.ok) {
                 uploadResult.vedleggId = resData.filId;
