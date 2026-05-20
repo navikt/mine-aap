@@ -72,7 +72,8 @@
     }
   },
   "dineSøknader": {
-    "heading": "Søknader du har sendt inn"
+    "heading": "Søknader du har sendt inn",
+    "noeGikkGalt": "Noko gjekk gale ved henting av søknadar. Ver vennleg og prøv igjen senare."
   },
   "dokumentoversikt": {
     "noeGikkGalt": "Ein feil oppstod ved henting av dokumentoversikta. Ver vennleg og prøv igjen senare.",

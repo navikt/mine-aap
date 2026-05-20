@@ -133,7 +133,10 @@ export const FileInputInnsending = (props: FileInputProps) => {
                 method: 'POST',
                 body: data,
               });
+
+              console.log('res', res);
               const resData = await res.json();
+              console.log('resData', resData);
 
               if (res.ok) {
                 uploadResult.vedleggId = resData.filId;
