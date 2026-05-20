@@ -4,7 +4,6 @@ import { randomUUID } from 'node:crypto';
 import { proxyRouteHandler } from '@navikt/next-api-proxy';
 import { isAfter } from 'date-fns';
 import { mockSøknerMedEttersending } from 'lib/mock/mockSoknad';
-import { logError, logWarning } from 'lib/server/logger';
 import { fetchProxy, getOnBefalfOfToken } from 'lib/services/fetchProxy';
 import type { InnsendingBackendState, MineAapSoknadMedEttersendingNy } from 'lib/types/types';
 import { type FetchResponse, isSuccess } from 'lib/utils/api-fetch';
