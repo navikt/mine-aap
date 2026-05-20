@@ -58,7 +58,7 @@ export const lagreVedlegg = async (req: Request) => {
   });
 };
 
-export const hentVedlegg = async (uuid: string, req: Request): Promise<any> => {
+export const hentVedlegg = async (uuid: string, req: Request) => {
   const url = `/mellomlagring/fil/${uuid}`;
   const oboToken = await getOnBefalfOfToken(innsendingAudience, url);
   return await proxyRouteHandler(req, {
