@@ -1,0 +1,8 @@
+.dokumentvisning {
+  box-shadow: var(--a-shadow-medium);
+  min-height: 80vh;
+}
+
+.loader {
+  margin: 0 auto;
+}
