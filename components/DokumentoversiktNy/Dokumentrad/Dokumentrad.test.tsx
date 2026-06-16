@@ -35,17 +35,17 @@ describe('Dokumentrad', () => {
     expect(screen.getByText(/^Sendt av Nav/)).toBeVisible();
   });
 
+  it('viser at dokumentet er sendt av Nav når type er N', () => {
+    const utgåendeDokument: Dokument = { ...inngåendeDokument, type: 'N' };
+    render(<Dokumentrad dokument={utgåendeDokument} />);
+
+    expect(screen.getByText(/^Sendt av Nav/)).toBeVisible();
+  });
+
   it('viser at dokumentet er sendt av bruker (deg) når type er I', () => {
     render(<Dokumentrad dokument={inngåendeDokument} />);
 
     expect(screen.getByText(/^Sendt av deg/)).toBeVisible();
-  });
-
-  it('viser at dokumentet har ukjent avsender hvis type er noe annet enn U eller I', () => {
-    const ukjentDokumenttype: Dokument = { ...inngåendeDokument, type: 'N' };
-    render(<Dokumentrad dokument={ukjentDokumenttype} />);
-
-    expect(screen.getByText(/^Sendt av Ukjent/)).toBeVisible();
   });
 
   it('viser dato for når dokumentet ble sendt / mottatt', () => {
