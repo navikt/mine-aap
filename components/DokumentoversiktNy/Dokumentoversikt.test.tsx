@@ -33,7 +33,7 @@ describe('Dokumentoversikt', () => {
 
   it('viser dokumentlisten uten meldekort som standard', () => {
     expect(screen.getAllByRole('listitem')).toHaveLength(
-      mockDokumenter.filter((dokument) => !dokument.tittel.includes('Meldekort for uke')).length
+      mockDokumenter.filter((dokument) => !dokument.tittel.toLowerCase().includes('meldekort')).length
     );
   });
 

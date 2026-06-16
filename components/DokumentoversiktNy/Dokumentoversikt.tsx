@@ -8,7 +8,7 @@ import { useTranslations } from 'next-intl';
 import { useEffect, useMemo, useState } from 'react';
 import styles from './Dokumentoversikt.module.css';
 
-const MELDEKORT_TITTEL = 'Meldekort for uke';
+const MELDEKORT = 'meldekort';
 
 type SortType = 'datoAsc' | 'datoDesc';
 
@@ -24,7 +24,7 @@ export const Dokumentoversikt = ({ dokumenter }: { dokumenter: Dokument[] }) => 
 
   const filtrerteDokumenter = useMemo(() => {
     return sorterteDokumenter.filter((dokument) => {
-      if (dokument.tittel.includes(MELDEKORT_TITTEL)) {
+      if (dokument.tittel.toLowerCase().includes(MELDEKORT)) {
         return !hideMeldekort;
       }
       return true;
@@ -43,7 +43,7 @@ export const Dokumentoversikt = ({ dokumenter }: { dokumenter: Dokument[] }) => 
   }, [filtrerteDokumenter]);
 
   const inneholderMeldekort = useMemo(() => {
-    return sorterteDokumenter.some((dokument) => dokument.tittel.includes(MELDEKORT_TITTEL));
+    return sorterteDokumenter.some((dokument) => dokument.tittel.toLowerCase().includes(MELDEKORT));
   }, [sorterteDokumenter]);
 
   useEffect(() => {
