@@ -13,6 +13,7 @@ const getAvsender = (type: string) => {
     case 'I':
       return 'deg';
     case 'U':
+    case 'N':
       return 'Nav';
     default:
       return 'Ukjent';
