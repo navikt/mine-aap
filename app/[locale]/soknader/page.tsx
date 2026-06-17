@@ -1,5 +1,5 @@
 import { ArrowLeftIcon } from '@navikt/aksel-icons';
-import { Alert, Heading, VStack } from '@navikt/ds-react';
+import { Alert, Heading } from '@navikt/ds-react';
 import { Layout } from 'components/Layout/Layout';
 import { Section } from 'components/Section/Section';
 import { SoknadMedDatafetching } from 'components/Soknad/SoknadMedDatafetching';
