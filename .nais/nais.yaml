@@ -28,6 +28,9 @@ spec:
       memory: 512Mi
     limits:
       memory: 512Mi
+  frontend:
+    generatedConfig:
+      mountPath: /tmp/nais.js
   observability:
     autoInstrumentation:
       enabled: true
