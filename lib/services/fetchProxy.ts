@@ -110,9 +110,9 @@ export const fetchWithRetry = async <ResponseBody>(
       // 500 feil fra innsending og oppslag har tekst i body
       const feilmelding = contentType?.includes('text') ? await response.text() : await response.json();
       if (response.status >= 500) {
-        logError(feilmelding);
+        logError(`HTTP ${response.status} mot ${url}: ${feilmelding}`);
       } else {
-        logWarning(feilmelding);
+        logWarning(`HTTP ${response.status} mot ${url}: ${feilmelding}`);
       }
       return { type: 'ERROR', apiException: feilmelding, status: response.status };
     }

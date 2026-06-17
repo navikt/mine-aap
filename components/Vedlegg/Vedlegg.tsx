@@ -1,6 +1,9 @@
 'use client';
 
+import { Loader } from '@navikt/ds-react';
+import { Section } from 'components/Section/Section';
 import { useEffect, useState } from 'react';
+import styles from './Vedlegg.module.css';
 
 interface Props {
   uuid: string;
@@ -29,16 +32,22 @@ export const Vedlegg = ({ uuid }: Props) => {
   }, [uuid]);
 
   if (file === undefined) {
-    return <h1>Loading...</h1>;
+    return (
+      <Section>
+        <div className={styles.loader}>
+          <Loader size={'3xlarge'} title={'Laster dokument'} />
+        </div>
+      </Section>
+    );
   }
 
   return (
-    <div>
-      <object data={URL.createObjectURL(file)}>
+    <Section>
+      <object data={URL.createObjectURL(file)} className={styles.dokumentvisning}>
         <iframe title="vedlegg" src={URL.createObjectURL(file)}>
           <p>This browser does not suppoert</p>
         </iframe>
       </object>
-    </div>
+    </Section>
   );
 };

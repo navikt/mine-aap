@@ -1,5 +1,5 @@
 import { ArrowLeftIcon } from '@navikt/aksel-icons';
-import { Alert, BodyShort, Heading, HStack, Label, VStack } from '@navikt/ds-react';
+import { Alert, BodyShort, Heading, Label, VStack } from '@navikt/ds-react';
 import { FileUploadUtenSøknad } from 'components/fileupload/FileUploadUtenSøknad';
 import LucaGuidePanel from 'components/LucaGuidePanel';
 import { PageHeader } from 'components/PageHeader';

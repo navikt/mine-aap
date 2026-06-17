@@ -4,7 +4,6 @@ import { randomUUID } from 'node:crypto';
 import { proxyRouteHandler } from '@navikt/next-api-proxy';
 import { isAfter } from 'date-fns';
 import { mockSøknerMedEttersending } from 'lib/mock/mockSoknad';
-import { logError, logWarning } from 'lib/server/logger';
 import { fetchProxy, getOnBefalfOfToken } from 'lib/services/fetchProxy';
 import type { InnsendingBackendState, MineAapSoknadMedEttersendingNy } from 'lib/types/types';
 import { type FetchResponse, isSuccess } from 'lib/utils/api-fetch';
@@ -46,7 +45,7 @@ export const sendEttersendelse = async (
   return fetchProxy<{ referanse: string }>(url, innsendingAudience, 'POST', data);
 };
 
-export const lagreVedlegg = async (req: Request): Promise<any> => {
+export const lagreVedlegg = async (req: Request) => {
   if (isMock()) return { filId: randomUUID() };
   const url = `mellomlagring/fil`;
   const oboToken = await getOnBefalfOfToken(innsendingAudience, url);
@@ -59,7 +58,7 @@ export const lagreVedlegg = async (req: Request): Promise<any> => {
   });
 };
 
-export const hentVedlegg = async (uuid: string, req: Request): Promise<any> => {
+export const hentVedlegg = async (uuid: string, req: Request) => {
   const url = `/mellomlagring/fil/${uuid}`;
   const oboToken = await getOnBefalfOfToken(innsendingAudience, url);
   return await proxyRouteHandler(req, {

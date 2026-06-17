@@ -131,7 +131,14 @@ export const FileInputInnsending = (props: FileInputProps) => {
                 method: 'POST',
                 body: data,
               });
-              const resData = await res.json();
+
+              // biome-ignore lint/suspicious/noImplicitAnyLet: <emergency-fix>
+              let resData;
+              try {
+                resData = await res.json();
+              } catch (err) {
+                console.error(err);
+              }
 
               if (res.ok) {
                 uploadResult.vedleggId = resData.filId;

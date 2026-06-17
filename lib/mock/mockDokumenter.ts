@@ -44,6 +44,14 @@ export const mockDokumenter: Dokument[] = [
   {
     journalpostId: '6',
     dokumentId: '6',
+    tittel: 'Korrigert meldekort for uke 3 - 4 (16.01.2023 - 29.01.2023)',
+    type: 'N',
+    innsendingsId: '',
+    dato: '2023-01-29T13:46:22.000Z',
+  },
+  {
+    journalpostId: '7',
+    dokumentId: '7',
     tittel: 'Samtale med NAV - 06.02.2023',
     type: 'U',
     innsendingsId: '',
