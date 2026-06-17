@@ -1,6 +1,6 @@
 'use client';
 
-import { Alert, BodyShort, Button, Heading, VStack } from '@navikt/ds-react';
+import { Alert, BodyShort, Button, VStack } from '@navikt/ds-react';
 import { FileUploadAksel, type FileWithId } from 'components/fileuploadaksel/FileUploadAksel';
 import type { Ettersendelse } from 'lib/types/types';
 import { useState } from 'react';
