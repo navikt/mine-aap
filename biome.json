@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.4.11/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.5.0/schema.json",
   "vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
   "files": { "ignoreUnknown": false },
   "formatter": { "enabled": true, "indentStyle": "space", "indentWidth": 2, "lineWidth": 120 },
@@ -9,7 +9,7 @@
       "next": "recommended"
     },
     "rules": {
-      "recommended": true,
+      "preset": "recommended",
       "complexity": {
         "noAdjacentSpacesInRegex": "error",
         "noExtraBooleanCast": "error",
@@ -26,10 +26,7 @@
         "useHookAtTopLevel": "error",
         "useJsxKeyInIterable": "error"
       },
-      "nursery": {
-        "noAmbiguousAnchorText": "off",
-        "noUnknownAttribute": "error"
-      },
+      "nursery": {},
       "performance": {
         "noImgElement": "warn",
         "noUnwantedPolyfillio": "warn",
@@ -48,7 +45,11 @@
         "noIrregularWhitespace": "error",
         "noPrototypeBuiltins": "error",
         "noSkippedTests": "warn",
-        "noUselessRegexBackrefs": "error"
+        "noUselessRegexBackrefs": "error",
+        "noUnknownAttribute": "error"
+      },
+      "a11y": {
+        "noAmbiguousAnchorText": "off"
       }
     }
   },
