@@ -1,6 +1,7 @@
 import '@navikt/ds-css';
 import '@navikt/aap-felles-css';
 import { fetchDecoratorReact } from '@navikt/nav-dekoratoren-moduler/ssr';
+import Faro from 'components/frontendobservability/faro';
 import { NavDecorator } from 'components/NavDecorator/NavDecorator';
 import { getEnvironment } from 'lib/utils/environments';
 import { isValidLocale } from 'lib/utils/locale';
@@ -42,6 +43,7 @@ export default async function LocaleLayout({
         <Decorator.HeadAssets />
       </head>
       <body>
+        <Faro collectorUrl={process.env.NAIS_FRONTEND_TELEMETRY_COLLECTOR_URL} />
         <Decorator.Header />
         <NextIntlClientProvider messages={messages}>
           <NavDecorator>{children}</NavDecorator>
