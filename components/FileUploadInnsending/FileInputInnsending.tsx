@@ -1,5 +1,6 @@
 import { UploadIcon } from '@navikt/aksel-icons';
 import { BodyShort, Heading, Loader } from '@navikt/ds-react';
+import { errorHasStatus } from 'lib/utils/error';
 import { useTranslations } from 'next-intl';
 import { type InputHTMLAttributes, useMemo, useRef, useState } from 'react';
 import { v4 as uuidV4 } from 'uuid';
@@ -26,9 +27,6 @@ export interface Vedlegg {
 }
 
 const MAX_TOTAL_FILE_SIZE = 52428800; // 50mb
-function hasStatus(err: unknown): err is { status: number } {
-  return err instanceof Object && Object.hasOwn(err, 'status');
-}
 
 export const FileInputInnsending = (props: FileInputProps) => {
   const {
@@ -148,7 +146,7 @@ export const FileInputInnsending = (props: FileInputProps) => {
                 uploadResult.errorMessage = settFeilmelding(res.status, resData.substatus);
               }
             } catch (err) {
-              if (hasStatus(err)) {
+              if (errorHasStatus(err)) {
                 uploadResult.errorMessage = settFeilmelding(err.status || 500);
               }
             }

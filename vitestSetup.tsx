@@ -1,7 +1,8 @@
-// --- for å få typescript til å fungere på axe matcheren 'toHaveNoViolations'
 import 'vitest';
+import 'vitest-canvas-mock';
 import type { AxeMatchers } from 'vitest-axe/matchers';
 
+// --- for å få typescript til å fungere på axe matcheren 'toHaveNoViolations'
 declare module 'vitest' {
   export interface Assertion extends AxeMatchers {}
   export interface AsymmetricMatchersContaining extends AxeMatchers {}
