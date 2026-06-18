@@ -275,5 +275,19 @@
       "exampleHorizontal": "Bildet har ikke riktig retning",
       "exampleShaddow": "Bildet har skygge på dokumentet"
     }
+  },
+  "errorpage": {
+    "error": {
+      "heading": "Beklager, noe gikk galt.",
+      "description": "En teknisk feil på våre servere gjør at siden er utilgjengelig.",
+      "bulletList": {
+        "title": "Du kan prøve å",
+        "items": {
+          "1": "vente noen minutter og <a>laste siden på nytt</a>",
+          "2": "gå tilbake til <a>Mine AAP</a>"
+        }
+      },
+      "vedvarer": "Hvis problemet vedvarer, kan du <a>kontakte oss (åpnes i ny fane)</a>"
+    }
   }
 }

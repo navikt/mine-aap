@@ -17,7 +17,6 @@ const Page = async () => {
   const søknader = await hentSøknader();
 
   const sisteSøknadInnsendingNy = isSuccess(søknader) ? søknader.data[0] : null;
-
   return (
     <div>
       <PageComponentFlexContainer>

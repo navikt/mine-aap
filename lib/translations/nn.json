@@ -275,5 +275,19 @@
       "exampleHorizontal": "Biletet har ikkje rett retning",
       "exampleShaddow": "Biletet har skugge på dokumentet"
     }
+  },
+  "errorpage": {
+    "error": {
+      "heading": "Beklagar, noko gjekk gale.",
+      "description": "Ein teknisk feil på våre serverar gjer at siden er utilgjengeleg.",
+      "bulletList": {
+        "title": "Du kan prøve å",
+        "items": {
+          "1": "venta nokre minuttar og <a>laste siden på nytt</a>",
+          "2": "gå tilbake til <a>Mine AAP</a>"
+        }
+      },
+      "vedvarer": "Hvis problemet vedvarer, kan du <a>kontakte oss (opnar i ny fane)</a>"
+    }
   }
 }
