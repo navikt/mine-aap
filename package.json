@@ -52,7 +52,7 @@
     "lefthook": "2.1.9",
     "patch-package": "^8.0.1",
     "typescript": "^5.9.3",
-    "uuid": "^14.0.0",
+    "uuid": "^14.0.1",
     "vitest": "4.1.9",
     "vitest-axe": "0.1.0",
     "vitest-canvas-mock": "1.1.4",
