@@ -5,7 +5,7 @@ import { proxyRouteHandler } from '@navikt/next-api-proxy';
 import { isAfter } from 'date-fns';
 import { mockSøknerMedEttersending } from 'lib/mock/mockSoknad';
 import { fetchProxy, getOnBefalfOfToken } from 'lib/services/fetchProxy';
-import type { InnsendingBackendState, MineAapSoknadMedEttersendingNy } from 'lib/types/types';
+import type { InnsendingBackendState, SoknadMedEttersendingerResponse } from 'lib/types/types';
 import { type FetchResponse, isSuccess } from 'lib/utils/api-fetch';
 import { isMock } from 'lib/utils/environments';
 
@@ -14,12 +14,12 @@ const innsendingAudience = process.env.INNSENDING_AUDIENCE ?? '';
 
 /* TODO: Bruker fetchProxy fra saksbehandling. Må testes at backenden for innsending returnerer samme statuskoder som behandlingsflyt og de andre backendappene våre */
 
-export const hentSøknader = async (): Promise<FetchResponse<MineAapSoknadMedEttersendingNy[]>> => {
+export async function hentSøknader(): Promise<FetchResponse<SoknadMedEttersendingerResponse>> {
   if (isMock()) {
     return { type: 'SUCCESS', status: 200, data: mockSøknerMedEttersending };
   }
   const url = `${innsendingApiBaseUrl}/innsending/søknadmedettersendinger`;
-  const res = await fetchProxy<MineAapSoknadMedEttersendingNy[]>(url, innsendingAudience, 'GET');
+  const res = await fetchProxy<SoknadMedEttersendingerResponse>(url, innsendingAudience, 'GET');
   if (isSuccess(res)) {
     return {
       type: res.type,
@@ -29,7 +29,7 @@ export const hentSøknader = async (): Promise<FetchResponse<MineAapSoknadMedEtt
   } else {
     return res;
   }
-};
+}
 
 export const sendEttersendelse = async (
   data: InnsendingBackendState,

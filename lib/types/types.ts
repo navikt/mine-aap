@@ -1,3 +1,5 @@
+import type { components as innsendingComponents, paths as innsendingPaths } from './innsendingschema';
+
 export interface Dokument {
   journalpostId?: string;
   dokumentId?: string;
@@ -29,28 +31,8 @@ export interface InnsendingFil {
   tittel: string;
 }
 
-export interface InnsendingSøknad {
-  mottattDato: string;
-  journalpostId?: string;
-  innsendingsId: string;
-}
+export type SoknadMedEttersendingerResponse =
+  innsendingPaths['/innsending/søknadmedettersendinger']['get']['responses']['200']['content']['application/json'];
 
-export interface MineAapSoknadMedEttersendinger {
-  mottattDato: string;
-  journalpostId?: string;
-  innsendingsId: string;
-  ettersendinger: Array<InnsendingSøknad>;
-}
-
-export interface MineAapSoknadMedEttersendingNy {
-  mottattDato: string; // LocalDateTime
-  journalpostId?: string;
-  innsendingsId: string;
-  ettersendinger: Array<MineAapEttersendingNy>;
-}
-
-export interface MineAapEttersendingNy {
-  mottattDato: string; // LocalDateTime
-  journalpostId?: string;
-  innsendingsId: string;
-}
+export type SoknadMedEttersendinger = innsendingComponents['schemas']['innsending.dto.MineAapSoknadMedEttersendingNy'];
+export type Ettersending = innsendingComponents['schemas']['innsending.dto.MineAapEttersendingNy'];

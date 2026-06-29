@@ -1,6 +1,6 @@
 import { Soknad } from 'components/Soknad/Soknad';
 import { hentDokumenter } from 'lib/services/oppslagService';
-import type { Dokument, MineAapSoknadMedEttersendingNy } from 'lib/types/types';
+import type { Dokument, SoknadMedEttersendinger } from 'lib/types/types';
 import { isSuccess } from 'lib/utils/api-fetch';
 
 export interface DokumentMedTittel {
@@ -9,7 +9,7 @@ export interface DokumentMedTittel {
   tittel: string;
 }
 
-const getDokumenterMedTittel = (dokumenter: Dokument[], søknad: MineAapSoknadMedEttersendingNy) => {
+const getDokumenterMedTittel = (dokumenter: Dokument[], søknad: SoknadMedEttersendinger) => {
   if (dokumenter && dokumenter.length > 0) {
     const dokumenterMedTittel: DokumentMedTittel[] = [];
     const dokumenterFraSoknad = dokumenter.filter((dokument) => dokument.journalpostId === søknad.journalpostId);
@@ -38,7 +38,7 @@ const getDokumenterMedTittel = (dokumenter: Dokument[], søknad: MineAapSoknadMe
   return [];
 };
 
-export const SoknadMedDatafetching = async ({ søknad }: { søknad: MineAapSoknadMedEttersendingNy }) => {
+export const SoknadMedDatafetching = async ({ søknad }: { søknad: SoknadMedEttersendinger }) => {
   const dokumenter = await hentDokumenter();
   const dokumenterMedTittel = isSuccess(dokumenter) ? getDokumenterMedTittel(dokumenter.data, søknad) : [];
 

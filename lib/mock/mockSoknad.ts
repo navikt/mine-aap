@@ -1,32 +1,6 @@
-import type { InnsendingSøknad, MineAapSoknadMedEttersendinger, MineAapSoknadMedEttersendingNy } from 'lib/types/types';
+import type { SoknadMedEttersendingerResponse } from 'lib/types/types';
 
-const mockSøknaderInnsending: InnsendingSøknad[] = [
-  {
-    mottattDato: '2024-01-30T00:01:00.000000',
-    journalpostId: '1',
-    innsendingsId: 'udsf-asdl-jsadf-kfljs',
-  },
-  {
-    mottattDato: '2024-02-30T00:01:00.000000',
-    journalpostId: '2',
-    innsendingsId: 'udsf-asdl-jsadf-dsfff',
-  },
-];
-
-const mockEttersendelserSoknad: MineAapSoknadMedEttersendinger = {
-  mottattDato: '2024-01-30T00:01:00.000000',
-  journalpostId: '1',
-  innsendingsId: 'udsf-asdl-jsadf-kfljs',
-  ettersendinger: [
-    {
-      mottattDato: '2024-02-30T00:01:00.000000',
-      journalpostId: '2',
-      innsendingsId: 'udsf-asdl-jsadf-dsfff',
-    },
-  ],
-};
-
-const mockSøknerMedEttersending: MineAapSoknadMedEttersendingNy[] = [
+const mockSøknerMedEttersending: SoknadMedEttersendingerResponse = [
   {
     mottattDato: '2024-01-30T00:01:00.000000',
     journalpostId: '1',
@@ -41,4 +15,4 @@ const mockSøknerMedEttersending: MineAapSoknadMedEttersendingNy[] = [
   },
 ];
 
-export { mockEttersendelserSoknad, mockSøknaderInnsending, mockSøknerMedEttersending };
+export { mockSøknerMedEttersending };
