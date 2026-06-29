@@ -5,9 +5,11 @@ import { proxyRouteHandler } from '@navikt/next-api-proxy';
 import { isAfter } from 'date-fns';
 import { mockSøknerMedEttersending } from 'lib/mock/mockSoknad';
 import { fetchProxy, getOnBefalfOfToken } from 'lib/services/fetchProxy';
-import type { InnsendingBackendState, SoknadMedEttersendingerResponse } from 'lib/types/types';
+import { innsendingProxyPass } from 'lib/services/proxyPass';
+import type { InnsendingBackendState, LagreVedleggResponse, SoknadMedEttersendingerResponse } from 'lib/types/types';
 import { type FetchResponse, isSuccess } from 'lib/utils/api-fetch';
 import { isMock } from 'lib/utils/environments';
+import { NextResponse } from 'next/server';
 
 const innsendingApiBaseUrl = process.env.INNSENDING_URL;
 const innsendingAudience = process.env.INNSENDING_AUDIENCE ?? '';
@@ -45,18 +47,15 @@ export const sendEttersendelse = async (
   return fetchProxy<{ referanse: string }>(url, innsendingAudience, 'POST', data);
 };
 
-export const lagreVedlegg = async (req: Request) => {
-  if (isMock()) return { filId: randomUUID() };
-  const url = `mellomlagring/fil`;
-  const oboToken = await getOnBefalfOfToken(innsendingAudience, url);
-
-  return await proxyRouteHandler(req, {
-    hostname: 'innsending',
-    path: url,
-    bearerToken: oboToken,
-    https: false,
-  });
-};
+export async function lagreVedlegg(
+  req: Request
+): Promise<NextResponse<LagreVedleggResponse> | NextResponse<{ error: string }>> {
+  if (isMock()) {
+    return new NextResponse<LagreVedleggResponse>(`{ filId: ${randomUUID()} }`, { status: 200 });
+  }
+  const url = `/mellomlagring/fil`;
+  return innsendingProxyPass<LagreVedleggResponse>(url, req);
+}
 
 export const hentVedlegg = async (uuid: string, req: Request) => {
   const url = `/mellomlagring/fil/${uuid}`;

@@ -31,6 +31,9 @@ export interface InnsendingFil {
   tittel: string;
 }
 
+export type LagreVedleggResponse =
+  innsendingPaths['/mellomlagring/fil']['post']['responses']['200']['content']['application/json'];
+
 export type SoknadMedEttersendingerResponse =
   innsendingPaths['/innsending/søknadmedettersendinger']['get']['responses']['200']['content']['application/json'];
 
