@@ -1,4 +1,4 @@
-import type { components as innsendingComponents, paths as innsendingPaths } from './innsendingschema';
+import type { components, components as innsendingComponents, paths as innsendingPaths } from './innsendingschema';
 
 export interface Dokument {
   journalpostId?: string;
@@ -22,14 +22,10 @@ export interface EttersendteVedlegg {
   vedleggType: VedleggType;
 }
 
-export interface InnsendingBackendState {
-  filer: InnsendingFil[];
-}
-
-export interface InnsendingFil {
-  id: string;
-  tittel: string;
-}
+// TODO: burde vært export type InnsendingRequest = innsendingPaths['/innsending']['post']['requestBody']['content'];
+export type InnsendingRequest = innsendingComponents['schemas']['innsending.dto.Innsending'];
+export type InnsendingResponse =
+  innsendingPaths['/innsending']['post']['responses']['200']['content']['application/json'];
 
 export type LagreVedleggResponse =
   innsendingPaths['/mellomlagring/fil']['post']['responses']['200']['content']['application/json'];

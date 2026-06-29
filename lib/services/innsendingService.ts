@@ -6,7 +6,12 @@ import { isAfter } from 'date-fns';
 import { mockSøknerMedEttersending } from 'lib/mock/mockSoknad';
 import { fetchProxy, getOnBefalfOfToken } from 'lib/services/fetchProxy';
 import { innsendingProxyPass } from 'lib/services/proxyPass';
-import type { InnsendingBackendState, LagreVedleggResponse, SoknadMedEttersendingerResponse } from 'lib/types/types';
+import type {
+  InnsendingRequest,
+  InnsendingResponse,
+  LagreVedleggResponse,
+  SoknadMedEttersendingerResponse,
+} from 'lib/types/types';
 import { type FetchResponse, isSuccess } from 'lib/utils/api-fetch';
 import { isMock } from 'lib/utils/environments';
 import { NextResponse } from 'next/server';
@@ -33,10 +38,10 @@ export async function hentSøknader(): Promise<FetchResponse<SoknadMedEttersendi
   }
 }
 
-export const sendEttersendelse = async (
-  data: InnsendingBackendState,
+export async function sendEttersendelse(
+  data: InnsendingRequest,
   innsendingsId?: string
-): Promise<FetchResponse<{ referanse: string }>> => {
+): Promise<FetchResponse<InnsendingResponse>> {
   if (isMock()) {
     return Promise.resolve({ type: 'SUCCESS', status: 200, data: { referanse: 'klajsg-kasd-sadf-sadfsdga' } });
     // return Promise.resolve({ type: 'ERROR', status: 500, apiException: { message: 'nei nei', code: 'UKJENT' } });
@@ -45,7 +50,7 @@ export const sendEttersendelse = async (
   const url = `${innsendingApiBaseUrl}/innsending${erGenerellEttersendelse ? `/${innsendingsId}` : ''}`;
 
   return fetchProxy<{ referanse: string }>(url, innsendingAudience, 'POST', data);
-};
+}
 
 export async function lagreVedlegg(
   req: Request
