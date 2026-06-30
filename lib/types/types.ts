@@ -1,13 +1,9 @@
 import type { components as innsendingComponents, paths as innsendingPaths } from './innsendingschema';
+import type { components as oppslagComponents, paths as oppslagPaths } from './oppslagschema';
 
-export interface Dokument {
-  journalpostId?: string;
-  dokumentId?: string;
-  tittel: string;
-  type: 'I' | 'U' | 'N';
-  innsendingsId: string;
-  dato: string;
-}
+export type HentDokumenterResponse =
+  oppslagPaths['/dokumenter']['get']['responses']['200']['content']['application/json'];
+export type Dokument = oppslagComponents['schemas']['Dokument'];
 
 export type VedleggType = 'ARBEIDSGIVER' | 'STUDIER' | 'ANDREBARN' | 'OMSORG' | 'UTLAND' | 'ANNET';
 

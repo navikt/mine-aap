@@ -1,6 +1,7 @@
 import { Dokumentrad } from 'components/DokumentoversiktNy/Dokumentrad/Dokumentrad';
 import type { Dokument } from 'lib/types/types';
 import { formatDate } from 'lib/utils/date';
+import { dokumentTittel } from 'lib/utils/dokumentOversikt';
 import { render, screen } from 'lib/utils/test/customRender';
 import { describe, expect, it } from 'vitest';
 
@@ -9,7 +10,7 @@ const inngåendeDokument: Dokument = {
   dato: new Date().toString(),
   dokumentId: 'dokumentid',
   type: 'I',
-  innsendingsId: 'innsendingsid',
+  innsendingId: 'innsendingsid',
   journalpostId: 'journalpostid',
 };
 describe('Dokumentrad', () => {
@@ -20,12 +21,12 @@ describe('Dokumentrad', () => {
 
   it('har lenke med tittel på dokumentet', () => {
     render(<Dokumentrad dokument={inngåendeDokument} />);
-    expect(screen.getByRole('link', { name: inngåendeDokument.tittel })).toBeVisible();
+    expect(screen.getByRole('link', { name: dokumentTittel(inngåendeDokument) })).toBeVisible();
   });
 
   it('lenke åpnes i ny fane', () => {
     render(<Dokumentrad dokument={inngåendeDokument} />);
-    expect(screen.getByRole('link', { name: inngåendeDokument.tittel })).toHaveAttribute('target', '_blank');
+    expect(screen.getByRole('link', { name: dokumentTittel(inngåendeDokument) })).toHaveAttribute('target', '_blank');
   });
 
   it('viser at dokumentet er sendt av Nav når type er U', () => {

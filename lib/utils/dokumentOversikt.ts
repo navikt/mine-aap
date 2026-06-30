@@ -15,3 +15,7 @@ export const sortDatoAsc = (dokumenter: Dokument[]) => {
 export const sortDatoDesc = (dokumenter: Dokument[]) => {
   return [...dokumenter].sort((a, b) => new Date(a.dato).getTime() - new Date(b.dato).getTime());
 };
+
+export function dokumentTittel(dokument: Dokument): string {
+  return dokument.tittel || 'Ingen dokumenttittel';
+}

@@ -2,6 +2,7 @@ import { Soknad } from 'components/Soknad/Soknad';
 import { hentDokumenter } from 'lib/services/oppslagService';
 import type { Dokument, SoknadMedEttersendinger } from 'lib/types/types';
 import { isSuccess } from 'lib/utils/api-fetch';
+import { dokumentTittel } from 'lib/utils/dokumentOversikt';
 
 export interface DokumentMedTittel {
   journalpostId?: string;
@@ -17,7 +18,7 @@ const getDokumenterMedTittel = (dokumenter: Dokument[], søknad: SoknadMedEtters
       dokumenterMedTittel.push({
         journalpostId: dokument.journalpostId,
         dokumentId: dokument.dokumentId,
-        tittel: dokument.tittel,
+        tittel: dokumentTittel(dokument),
       });
     });
 
@@ -28,7 +29,7 @@ const getDokumenterMedTittel = (dokumenter: Dokument[], søknad: SoknadMedEtters
         dokumenterMedTittel.push({
           journalpostId: dokument.journalpostId,
           dokumentId: dokument.dokumentId,
-          tittel: dokument.tittel,
+          tittel: dokumentTittel(dokument),
         });
       });
     });
