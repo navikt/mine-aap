@@ -4,12 +4,12 @@ import type { Vedlegg } from 'components/FileUploadInnsending/FileInputInnsendin
 import type { FormError } from 'components/FormErrorSummary/FormErrorSummary';
 import { FormErrorSummary } from 'components/FormErrorSummary/FormErrorSummary';
 import { FileUpload } from 'components/fileupload/FileUpload';
-import type { InnsendingSøknad } from 'lib/types/types';
+import type { SoknadMedEttersendinger } from 'lib/types/types';
 import { setFocus } from 'lib/utils/dom';
 import { useState } from 'react';
 
 interface Props {
-  søknad: InnsendingSøknad;
+  søknad: SoknadMedEttersendinger;
 }
 
 export const EttersendelseInnsending = ({ søknad }: Props) => {

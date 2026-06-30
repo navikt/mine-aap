@@ -1,6 +1,6 @@
 import { logInfo } from 'lib/server/logger';
 import { sendEttersendelse } from 'lib/services/innsendingService';
-import type { Ettersendelse, InnsendingBackendState, VedleggType } from 'lib/types/types';
+import type { Ettersendelse, InnsendingRequest, VedleggType } from 'lib/types/types';
 import { isSuccess } from 'lib/utils/api-fetch';
 import type { NextRequest } from 'next/server';
 
@@ -13,11 +13,12 @@ export async function POST(req: NextRequest) {
   );
 
   const ettersending = ettersendteVedlegg[0];
-  const requestBody: InnsendingBackendState = {
+  const requestBody: InnsendingRequest = {
     filer: ettersending.ettersending.map((ettersendtVedlegg) => ({
       id: ettersendtVedlegg,
       tittel: mapVedleggTypeTilVedleggstekst(ettersending.vedleggType),
     })),
+    type: 'ETTERSENDING',
   };
   const ettersendelse = await sendEttersendelse(requestBody, søknadId);
   if (isSuccess(ettersendelse)) {
