@@ -1,4 +1,4 @@
-import type { components, components as innsendingComponents, paths as innsendingPaths } from './innsendingschema';
+import type { components as innsendingComponents, paths as innsendingPaths } from './innsendingschema';
 
 export interface Dokument {
   journalpostId?: string;
@@ -24,6 +24,7 @@ export interface EttersendteVedlegg {
 
 // TODO: burde vært export type InnsendingRequest = innsendingPaths['/innsending']['post']['requestBody']['content'];
 export type InnsendingRequest = innsendingComponents['schemas']['innsending.dto.Innsending'];
+
 export type InnsendingResponse =
   innsendingPaths['/innsending']['post']['responses']['200']['content']['application/json'];
 
