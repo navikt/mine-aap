@@ -26,6 +26,11 @@ I .bashrc eller .zshrc:
 
 Hvor github_pat er din personal access token laget på github(settings -> developer settings). Husk read:packages rettighet og enable sso når du oppdaterer/lager PAT.
 
+## Typescript
+Appen bruker genererte typer fra aap-innsending. For å oppdatere typene, pull `navikt/aap-innsending` og kjør den opp lokalt med TestApp.kt. Kjør så følgende kommando i dette repoet:
+
+`yarn run gentypes:innsending`
+
 ---
 
 # Henvendelser
