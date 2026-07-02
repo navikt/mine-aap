@@ -1,6 +1,7 @@
 import { userEvent } from '@testing-library/user-event';
 import { Dokumentoversikt } from 'components/DokumentoversiktNy/Dokumentoversikt';
 import { mockDokumenter } from 'lib/mock/mockDokumenter';
+import { dokumentTittel } from 'lib/utils/dokumentOversikt';
 import { render, screen } from 'lib/utils/test/customRender';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
@@ -33,7 +34,7 @@ describe('Dokumentoversikt', () => {
 
   it('viser dokumentlisten uten meldekort som standard', () => {
     expect(screen.getAllByRole('listitem')).toHaveLength(
-      mockDokumenter.filter((dokument) => !dokument.tittel.toLowerCase().includes('meldekort')).length
+      mockDokumenter.filter((dokument) => !dokumentTittel(dokument).toLowerCase().includes('meldekort')).length
     );
   });
 

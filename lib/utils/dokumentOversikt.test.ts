@@ -6,14 +6,18 @@ const dokumenter: Dokument[] = [
   {
     tittel: 'tittel1',
     type: 'I',
-    innsendingsId: 'innsendingsId1',
+    innsendingId: 'innsendingsId1',
     dato: '01.01.2020',
+    journalpostId: '',
+    dokumentId: '',
   },
   {
     tittel: 'tittel2',
     type: 'I',
-    innsendingsId: 'innsendingsId2',
+    innsendingId: 'innsendingsId2',
     dato: '02.02.2020',
+    journalpostId: '',
+    dokumentId: '',
   },
 ];
 

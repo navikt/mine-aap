@@ -3,7 +3,7 @@
 import { Checkbox, Pagination, Select } from '@navikt/ds-react';
 import { Dokumentrad } from 'components/DokumentoversiktNy/Dokumentrad/Dokumentrad';
 import type { Dokument } from 'lib/types/types';
-import { getNumberOfPages, sortDatoAsc, sortDatoDesc } from 'lib/utils/dokumentOversikt';
+import { dokumentTittel, getNumberOfPages, sortDatoAsc, sortDatoDesc } from 'lib/utils/dokumentOversikt';
 import { useTranslations } from 'next-intl';
 import { useEffect, useMemo, useState } from 'react';
 import styles from './Dokumentoversikt.module.css';
@@ -24,7 +24,7 @@ export const Dokumentoversikt = ({ dokumenter }: { dokumenter: Dokument[] }) => 
 
   const filtrerteDokumenter = useMemo(() => {
     return sorterteDokumenter.filter((dokument) => {
-      if (dokument.tittel.toLowerCase().includes(MELDEKORT)) {
+      if (dokumentTittel(dokument).toLowerCase().includes(MELDEKORT)) {
         return !hideMeldekort;
       }
       return true;
@@ -43,7 +43,7 @@ export const Dokumentoversikt = ({ dokumenter }: { dokumenter: Dokument[] }) => 
   }, [filtrerteDokumenter]);
 
   const inneholderMeldekort = useMemo(() => {
-    return sorterteDokumenter.some((dokument) => dokument.tittel.toLowerCase().includes(MELDEKORT));
+    return sorterteDokumenter.some((dokument) => dokumentTittel(dokument).toLowerCase().includes(MELDEKORT));
   }, [sorterteDokumenter]);
 
   useEffect(() => {
