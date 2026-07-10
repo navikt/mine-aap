@@ -51,7 +51,7 @@
     "@vitejs/plugin-react": "6.0.3",
     "@vitest/coverage-v8": "4.1.10",
     "json-diff": "^1.0.6",
-    "lefthook": "2.1.9",
+    "lefthook": "2.1.10",
     "openapi-typescript": "7.13.0",
     "patch-package": "^8.0.1",
     "typescript": "^5.9.3",
