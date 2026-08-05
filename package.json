@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:mock": "LOCAL_API=MOCK next dev",
     "build": "next build",
     "start": "next start",
     "lint": "biome ci .",
