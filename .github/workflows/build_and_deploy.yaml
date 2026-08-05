@@ -42,6 +42,9 @@ jobs:
       contents: read
       id-token: write
     secrets: inherit
+    concurrency:
+      group: deploy-dev
+      queue: max
     with:
       cluster: dev-gcp
       manifest: .nais/nais.yaml
@@ -51,6 +54,9 @@ jobs:
   deployProd:
     needs: [buildProd, deployDev]
     uses: navikt/aap-workflows/.github/workflows/deploy.yml@main
+    concurrency:
+      group: deploy-prod
+      queue: max
     permissions:
       contents: read
       id-token: write
