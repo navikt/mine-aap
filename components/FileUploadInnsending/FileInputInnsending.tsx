@@ -7,6 +7,8 @@ import { v4 as uuidV4 } from 'uuid';
 import { FilePanelError } from './FilePanelError';
 import { FilePanelSuccess } from './FilePanelSuccess';
 
+import styles from './FileUploadInnsending.module.css';
+
 export interface FileInputProps extends InputHTMLAttributes<HTMLInputElement> {
   heading: string;
   onUpload: (attachments: Vedlegg[]) => void;
@@ -168,7 +170,7 @@ export const FileInputInnsending = (props: FileInputProps) => {
   }
 
   return (
-    <div className={'fileInput'} id={props.id}>
+    <div className={styles.fileInput} id={props.id}>
       <Heading size={'medium'}>{heading}</Heading>
       {ingress && <BodyShort>{ingress}</BodyShort>}
       {files?.map((file) => {
@@ -191,7 +193,7 @@ export const FileInputInnsending = (props: FileInputProps) => {
       {/** biome-ignore lint/a11y/noStaticElementInteractions: <skriv heller om til aksel sin fileinput> */}
       <div
         data-testid={'dropzone'}
-        className={`dropzone ${dragOver ? 'dragover' : ''}`}
+        className={`${styles.dropzone} ${dragOver ? styles.dragover : ''}`}
         onDragEnter={() => setDragOver(true)}
         onDragLeave={() => setDragOver(false)}
         onDragOver={(e) => e.preventDefault()}
@@ -217,7 +219,7 @@ export const FileInputInnsending = (props: FileInputProps) => {
                   validateAndSetFiles(e.target.files);
                 }
               }}
-              className={'visuallyHidden'}
+              className={styles.visuallyHidden}
               tabIndex={-1}
               data-testid={'fileinput'}
               multiple={true}
@@ -229,7 +231,7 @@ export const FileInputInnsending = (props: FileInputProps) => {
             <label htmlFor={inputId} aria-labelledby={props.id}>
               {/** biome-ignore lint/a11y/useSemanticElements: <skriv heller om til aksel sin fileinput> */}
               <span
-                className={'fileInputButton navds-button navds-button__inner navds-body-short navds-button--secondary'}
+                className={`${styles.fileInputButton} navds-button navds-button__inner navds-body-short navds-button--secondary`}
                 role={'button'}
                 aria-controls={inputId}
                 tabIndex={0}
