@@ -1,5 +1,4 @@
 import '@navikt/ds-css';
-// import '@navikt/aap-felles-css';
 import { fetchDecoratorReact } from '@navikt/nav-dekoratoren-moduler/ssr';
 import Faro from 'components/frontendobservability/faro';
 import { NavDecorator } from 'components/NavDecorator/NavDecorator';
