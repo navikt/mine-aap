@@ -1920,7 +1920,7 @@ __metadata:
     json-diff: "npm:^1.0.6"
     lefthook: "npm:2.1.10"
     next: "npm:16.2.12"
-    next-intl: "npm:4.13.4"
+    next-intl: "npm:4.13.5"
     node-cache: "npm:^5.1.2"
     openapi-typescript: "npm:7.13.0"
     patch-package: "npm:^8.0.1"
@@ -2839,12 +2839,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"icu-minify@npm:^4.13.4":
-  version: 4.13.4
-  resolution: "icu-minify@npm:4.13.4"
+"icu-minify@npm:^4.13.5":
+  version: 4.13.5
+  resolution: "icu-minify@npm:4.13.5"
   dependencies:
     "@formatjs/icu-messageformat-parser": "npm:^3.4.0"
-  checksum: 10c0/3d33c825ddcf6f55edf2a09c6835d846b1cdccdf5406d1c04b2fc3e739127fd7f245de38eb8fcd4cd01eabda083d331bb70be2c1a2e01a3b27bb2a4f08b5a210
+  checksum: 10c0/276341c47100d5d74d903a7eaf7e0001a2afbdea2413774e0a0dab900b6ecf44b1a05fab61442fd8eb37f0a0eeff60b10b9d7e0e0c616d4cdd854f67ba7b728e
   languageName: node
   linkType: hard
 
@@ -3697,32 +3697,32 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next-intl-swc-plugin-extractor@npm:^4.13.4":
-  version: 4.13.4
-  resolution: "next-intl-swc-plugin-extractor@npm:4.13.4"
-  checksum: 10c0/bd77e86bb1a9c83d8d5f6714633ea9133cb67827feb532fdc3cdb038d33472b4d5b9bb7b799b4c8caeb0f99ebf07b9f29a133dd6e94c26187d114143c987cf43
+"next-intl-swc-plugin-extractor@npm:^4.13.5":
+  version: 4.13.5
+  resolution: "next-intl-swc-plugin-extractor@npm:4.13.5"
+  checksum: 10c0/b7637f2d54b149d6f01976922ab0b518ec5e3c40401eb1d7b7ff4eee53c5954632cf6da9452cb52cf0d131fbc00670a68b7fff0dd06ef768c44d8481ca1cdb34
   languageName: node
   linkType: hard
 
-"next-intl@npm:4.13.4":
-  version: 4.13.4
-  resolution: "next-intl@npm:4.13.4"
+"next-intl@npm:4.13.5":
+  version: 4.13.5
+  resolution: "next-intl@npm:4.13.5"
   dependencies:
     "@formatjs/intl-localematcher": "npm:^0.8.1"
     "@parcel/watcher": "npm:^2.4.1"
     "@swc/core": "npm:^1.15.2"
-    icu-minify: "npm:^4.13.4"
+    icu-minify: "npm:^4.13.5"
     negotiator: "npm:^1.0.0"
-    next-intl-swc-plugin-extractor: "npm:^4.13.4"
+    next-intl-swc-plugin-extractor: "npm:^4.13.5"
     po-parser: "npm:^2.1.1"
-    use-intl: "npm:^4.13.4"
+    use-intl: "npm:^4.13.5"
   peerDependencies:
     next: ^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
     react: ^16.8.0 || ^17.0.0 || ^18.0.0 || >=19.0.0-rc <19.0.0 || ^19.0.0
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 10c0/20bbefdcb0d21daeece5dfe6d0f15e304ce557edf51d3455d8f071f3af3a3e834c9be34bd887f156564e909fadcb84347b627132c35ba0433f8d4fd37f0a50a5
+  checksum: 10c0/7c80a9a5d5bdce83ad983fa8f8f867e5a8d714a4e4c4adaaa95ec164c5d64746861cb236a10e6873842bf1e61fc4070a354be9575694c51b6765a8fa118cf93a
   languageName: node
   linkType: hard
 
@@ -4927,17 +4927,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"use-intl@npm:^4.13.4":
-  version: 4.13.4
-  resolution: "use-intl@npm:4.13.4"
+"use-intl@npm:^4.13.5":
+  version: 4.13.5
+  resolution: "use-intl@npm:4.13.5"
   dependencies:
     "@formatjs/fast-memoize": "npm:^3.1.0"
     "@schummar/icu-type-parser": "npm:1.21.5"
-    icu-minify: "npm:^4.13.4"
+    icu-minify: "npm:^4.13.5"
     intl-messageformat: "npm:^11.1.0"
   peerDependencies:
     react: ^17.0.0 || ^18.0.0 || >=19.0.0-rc <19.0.0 || ^19.0.0
-  checksum: 10c0/b81c996d0c991247bf1813d8012481fd8aaeba35781d6660b0543c6c8f9ae88967f7299b1c616790018f4984990027c74c3e1c6a563a2af30eb7b8fbfe372137
+  checksum: 10c0/1a78dfa9812619a84700f5783732271b02352f81842a2c7be233619b04d6673a1b897ae131742b34f3fe5de9faa8c34ee426201704d91089e385b87a6684969b
   languageName: node
   linkType: hard
 
