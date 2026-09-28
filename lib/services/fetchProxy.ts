@@ -3,6 +3,7 @@
 import { randomUUID } from 'node:crypto';
 import { getToken, requestOboToken, type TokenResult, validateToken } from '@navikt/oasis';
 import { logError, logWarning } from 'lib/server/logger';
+import { hentLocalToken } from 'lib/services/localFetch';
 import type { FetchResponse } from 'lib/utils/api-fetch';
 import { isLocal } from 'lib/utils/environments';
 import { headers } from 'next/headers';
@@ -47,13 +48,13 @@ export const fetchProxy = async <ResponseBody>(
   requestBody?: object,
   tags?: string[]
 ): Promise<FetchResponse<ResponseBody>> => {
-  const oboToken = await getOnBefalfOfToken(scope, url);
+  const oboToken = isLocal() ? await hentLocalToken(scope) : await getOnBefalfOfToken(scope, url);
   return await fetchWithRetry<ResponseBody>(url, method, oboToken, NUMBER_OF_RETRIES, requestBody, tags);
 };
 
 export const fetchPdf = async (url: string, scope: string): Promise<Response> => {
   const callid = randomUUID();
-  const oboToken = await getOnBefalfOfToken(scope, url);
+  const oboToken = isLocal() ? await hentLocalToken(scope) : await getOnBefalfOfToken(scope, url);
   const response = await fetch(url, {
     method: 'GET',
     headers: {
