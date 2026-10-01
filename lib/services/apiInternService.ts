@@ -18,12 +18,14 @@ export type Behandling = {
   behandlingType: string;
   hendelser: BehandlingHendelse[];
   vedtakFattet: boolean;
+  opprettet: string;
 };
 const behandlinger: Behandling[] = [
   {
     behandlingId: 'behandling1',
     behandlingType: 'SØKNAD',
     vedtakFattet: false,
+    opprettet: '2026-09-09',
     hendelser: [
       {
         navn: 'SØKNAD_MOTTATT',
