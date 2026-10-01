@@ -1,4 +1,4 @@
-import { Process } from '@navikt/ds-react';
+import type { FetchResponse } from 'lib/utils/api-fetch';
 
 export type BehandlingHendelseNavn =
   | 'SØKNAD_MOTTATT'
@@ -17,12 +17,14 @@ export type Behandling = {
   behandlingType: string;
   hendelser: BehandlingHendelse[];
   vedtakFattet: boolean;
+  opprettet: string;
 };
 const behandlinger: Behandling[] = [
   {
     behandlingId: 'behandling1',
     behandlingType: 'SØKNAD',
     vedtakFattet: false,
+    opprettet: '2026-09-09',
     hendelser: [
       {
         navn: 'SØKNAD_MOTTATT',
@@ -47,9 +49,15 @@ const behandlinger: Behandling[] = [
     ],
   },
 ];
-export async function hentBehandlinger() {
-  return behandlinger;
+export async function hentBehandlinger(): Promise<FetchResponse<Behandling[]>> {
+  return {
+    type: 'SUCCESS',
+    data: behandlinger,
+  };
 }
-export async function hentBehandling(behandlingId: string) {
-  return behandlinger.find((e) => e.behandlingId === behandlingId);
+export async function hentBehandling(behandlingId: string): Promise<FetchResponse<Behandling | undefined>> {
+  return {
+    type: 'SUCCESS',
+    data: behandlinger.find((e) => e.behandlingId === behandlingId),
+  };
 }

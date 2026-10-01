@@ -1,7 +1,8 @@
-import { BodyShort, HStack } from '@navikt/ds-react';
+import { Alert, HStack } from '@navikt/ds-react';
 import { BehandlingProcess } from 'components/statusisak/behandlingprocess/BehandlingProcess';
 import { redirect } from 'i18n/routing';
 import { hentBehandling } from 'lib/services/apiInternService';
+import { isError } from 'lib/utils/api-fetch';
 import { isProduction } from 'lib/utils/environments';
 
 interface PageParams {
@@ -17,13 +18,16 @@ const Page = async ({ params }: Readonly<{ params: Promise<PageParams> }>) => {
     });
   }
   const behandling = await hentBehandling(behandlingid);
+  if (isError(behandling)) {
+    return <Alert variant={'error'}>{'Noe gikk galt ved henting av behandlingen'}</Alert>;
+  }
 
-  if (!behandling) {
-    return <BodyShort>Ingen behandling funnet</BodyShort>;
+  if (!behandling.data) {
+    return <Alert variant={'warning'}>{'Ingen behandling funnet'}</Alert>;
   }
   return (
     <HStack justify={'center'}>
-      <BehandlingProcess behandling={behandling} />
+      <BehandlingProcess behandling={behandling.data} />
     </HStack>
   );
 };
