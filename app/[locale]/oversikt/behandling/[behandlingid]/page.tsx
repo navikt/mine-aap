@@ -1,4 +1,4 @@
-import { Alert, HStack } from '@navikt/ds-react';
+import { Alert, Heading, HStack, VStack } from '@navikt/ds-react';
 import { BehandlingProcess } from 'components/statusisak/behandlingprocess/BehandlingProcess';
 import { redirect } from 'i18n/routing';
 import { hentBehandling } from 'lib/services/apiInternService';
@@ -27,9 +27,22 @@ const Page = async ({ params }: Readonly<{ params: Promise<PageParams> }>) => {
   }
   return (
     <HStack justify={'center'}>
-      <BehandlingProcess behandling={behandling.data} />
+      <VStack gap={'4'}>
+        <Heading level={'1'} size={'xlarge'} spacing>
+          {mapBehandlingstypeTilHeading(behandling.data.behandlingType)}
+        </Heading>
+        <BehandlingProcess behandling={behandling.data} />
+      </VStack>
     </HStack>
   );
 };
+function mapBehandlingstypeTilHeading(behandlingsType: string) {
+  switch (behandlingsType) {
+    case 'SØKNAD':
+      return 'Status på søknad om AAP';
+    default:
+      return behandlingsType;
+  }
+}
 
 export default Page;
