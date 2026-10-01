@@ -1,5 +1,4 @@
 import { Alert, HStack, VStack } from '@navikt/ds-react';
-import { LinkCard } from '@navikt/ds-react/LinkCard';
 import { BehandlingLinkCard } from 'components/statusisak/behandlinglinkcard/BehandlingLinkCard';
 import { redirect } from 'i18n/routing';
 import { type Behandling, hentBehandlinger } from 'lib/services/apiInternService';

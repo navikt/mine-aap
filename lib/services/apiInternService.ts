@@ -1,4 +1,3 @@
-import { Process } from '@navikt/ds-react';
 import type { FetchResponse } from 'lib/utils/api-fetch';
 
 export type BehandlingHendelseNavn =
