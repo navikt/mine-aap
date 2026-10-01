@@ -1,4 +1,4 @@
-import { Alert, HStack, VStack } from '@navikt/ds-react';
+import { Alert, Heading, HStack, VStack } from '@navikt/ds-react';
 import { BehandlingLinkCard } from 'components/statusisak/behandlinglinkcard/BehandlingLinkCard';
 import { redirect } from 'i18n/routing';
 import { type Behandling, hentBehandlinger } from 'lib/services/apiInternService';
@@ -10,12 +10,14 @@ interface PageParams {
 }
 const Page = async ({ params }: Readonly<{ params: Promise<PageParams> }>) => {
   const { locale } = await params;
+
   if (isProduction()) {
     redirect({
       href: '/',
       locale,
     });
   }
+
   const behandlinger = await hentBehandlinger();
 
   if (isError(behandlinger)) {
@@ -25,6 +27,9 @@ const Page = async ({ params }: Readonly<{ params: Promise<PageParams> }>) => {
   return (
     <HStack justify={'center'}>
       <VStack gap={'4'}>
+        <Heading level={'1'} size={'xlarge'} spacing>
+          {'Arbeidsavklaringspenger (AAP)'}
+        </Heading>
         {behandlinger.data.filter(ikkeVedtatteBehandling).map((behandling) => (
           <BehandlingLinkCard key={behandling.behandlingId} behandling={behandling} />
         ))}
