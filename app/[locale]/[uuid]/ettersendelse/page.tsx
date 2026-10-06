@@ -58,7 +58,7 @@ const Page = async ({ params }: Readonly<{ params: Promise<PageParams> }>) => {
                     <Link
                       target="_blank"
                       href={
-                        'https://www.nav.no/soknader/nb/person/arbeid/arbeidsavklaringspenger/NAV%2011-13.05/ettersendelse'
+                        'https://www.nav.no/start/ettersend-soknad-aap'
                       }
                     >
                       {chunks}
