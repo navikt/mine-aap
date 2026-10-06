@@ -55,9 +55,9 @@ const Page = async ({ params }: Readonly<{ params: Promise<PageParams> }>) => {
             <BodyShort spacing>
               {t.rich('ettersendelse.guide2', {
                 a: (chunks) => (
-                    <Link target="_blank" href={'https://www.nav.no/start/ettersend-soknad-aap'}>
-                      {chunks}
-                    </Link>
+                  <Link target="_blank" href={'https://www.nav.no/start/ettersend-soknad-aap'}>
+                    {chunks}
+                  </Link>
                 ),
               })}
             </BodyShort>
