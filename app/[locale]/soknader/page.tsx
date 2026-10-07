@@ -31,7 +31,7 @@ const Page = async () => {
         <div>
           <Link href="/">
             <ArrowLeftIcon />
-            t('tilbakeTilMineAAPKnapp');
+            {t('tilbakeTilMineAAPKnapp')}
           </Link>
         </div>
       </Section>
