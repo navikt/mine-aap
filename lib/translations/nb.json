@@ -12,7 +12,7 @@
     },
     "underUtvikling": "Denne siden er under utvikling, og vil bli utvidet med flere funksjoner etter hvert.",
     "seInnsendteSøknaderLink": "Se alle dine innsendte søknader",
-    "søkPåNyttLink": "Jeg vil søke på nytt",
+    "søkPåNyttLink": "Jeg vil søke på nytt (åpnes i ny fane)",
     "ettersendelse": {
       "tittel": "Ettersending",
       "tekst": "Er det noe mer du vil ettersende til din AAP-sak, så kan du gjøre det her.",
@@ -192,7 +192,7 @@
     "mineAAPSoknader": "Mine AAP søknader"
   },
   "hvaSkjerPanel": {
-    "heading": "Vi har mottatt søknaden din, hva skjer nå?",
+    "heading": "Når vi har mottatt en søknad",
     "punkt1": {
       "label": "Vi sjekker om vi har nok helseopplysninger",
       "tekst": "Hvis vi trenger flere helseopplysninger, spør vi legen din om å sende en legeerklæring. Vi bruker da informasjonen du ga oss i søknaden om lege eller behandler. Dette gjør vi så fort vi kan, for vi vet at det kan ta tid å få legeerklæringen. "
@@ -206,12 +206,12 @@
     },
     "punkt3": {
       "label": "Hva kan du gjøre?",
-      "tekst": "Det er til hjelp for oss om du:",
-      "punkt1": "Registrerer <a>CV-en din, gjerne på arbeidsplassen.no (åpnes i ny fane).</a>",
+      "tekst": "Det er til hjelp for oss om du",
+      "punkt1": "registrerer <a>CV-en din, gjerne på arbeidsplassen.no (åpnes i ny fane)</a>",
       "punkt1ForLenke": "Registrerer ",
       "punkt1LenkeTekst": "CV-en din, gjerne på arbeidsplassen.no (åpnes i ny fane).",
-      "punkt2": "Ettersender dokumenter som mangler.",
-      "punkt3": "Gir beskjed hvis situasjonen din endrer seg.",
+      "punkt2": "ettersender dokumenter som mangler",
+      "punkt3": "gir beskjed hvis situasjonen din endrer seg",
       "link": "kan du klage på oppfølgingsvedtaket"
     },
     "punkt4": {
