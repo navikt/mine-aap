@@ -1,20 +1,20 @@
 .fileinputWrapper {
-  background-color: var(--a-surface-subtle);
+  background-color: var(--ax-bg-neutral-soft);
 }
 
 .sendButton {
-  margin-left: var(--a-spacing-8);
-  margin-bottom: var(--a-spacing-4);
+  margin-left: var(--ax-space-32);
+  margin-bottom: var(--ax-space-16);
 }
 
 .successWrapper {
   display: flex;
   flex-direction: column;
 
-  padding: var(--a-spacing-8);
-  gap: var(--a-spacing-4);
+  padding: var(--ax-space-32);
+  gap: var(--ax-space-16);
 }
 
 .successWrapperAnnet {
-  padding: 0 var(--a-spacing-8) var(--a-spacing-8) var(--a-spacing-8);
+  padding: 0 var(--ax-space-32) var(--ax-space-32) var(--ax-space-32);
 }

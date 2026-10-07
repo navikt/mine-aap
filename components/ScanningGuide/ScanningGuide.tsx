@@ -56,7 +56,7 @@ export const ScanningGuide = () => {
               <ScanningIcon status={'good'} title={t('scanningGuide.alert.exampleLabelGood')} />
               <div className={styles.scanningExampleItem}>
                 <span className={styles.scanningExampleStatus}>
-                  <CheckmarkCircleIcon color={'var(--a-green-600)'} />
+                  <CheckmarkCircleIcon color={'var(--ax-success-700)'} />
                   <Label as="span">{t('scanningGuide.alert.exampleLabelGood')}</Label>
                 </span>
                 <BodyShort>{t('scanningGuide.alert.exampleGood')}</BodyShort>
@@ -66,7 +66,7 @@ export const ScanningGuide = () => {
               <ScanningIcon status={'keystone'} title={t('scanningGuide.alert.exampleLabelBad')} />
               <div className={styles.scanningExampleItem}>
                 <span className={styles.scanningExampleStatus}>
-                  <XMarkOctagonIcon color={'var(--a-nav-red)'} />
+                  <XMarkOctagonIcon color={'var(--ax-text-logo)'} />
                   <Label as="span">{t('scanningGuide.alert.exampleLabelBad')}</Label>
                 </span>
                 <BodyShort>{t('scanningGuide.alert.exampleKeystone')}</BodyShort>
@@ -76,7 +76,7 @@ export const ScanningGuide = () => {
               <ScanningIcon status={'horizontal'} title={t('scanningGuide.alert.exampleLabelBad')} />
               <div className={styles.scanningExampleItem}>
                 <span className={styles.scanningExampleStatus}>
-                  <XMarkOctagonIcon color={'var(--a-nav-red)'} />
+                  <XMarkOctagonIcon color={'var(--ax-text-logo)'} />
                   <Label as="span">{t('scanningGuide.alert.exampleLabelBad')}</Label>
                 </span>
                 <BodyShort>{t('scanningGuide.alert.exampleHorizontal')}</BodyShort>
@@ -86,7 +86,7 @@ export const ScanningGuide = () => {
               <ScanningIcon status={'shadow'} title={t('scanningGuide.alert.exampleLabelBad')} />
               <div className={styles.scanningExampleItem}>
                 <span className={styles.scanningExampleStatus}>
-                  <XMarkOctagonIcon color={'var(--a-nav-red)'} />
+                  <XMarkOctagonIcon color={'var(--ax-text-logo)'} />
                   <Label as="span">{t('scanningGuide.alert.exampleLabelBad')}</Label>
                 </span>
                 <BodyShort>{t('scanningGuide.alert.exampleShaddow')}</BodyShort>

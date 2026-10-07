@@ -1,13 +1,13 @@
 .row {
   display: flex;
   flex-direction: column;
-  gap: var(--a-spacing-3);
-  margin-block-end: var(--a-spacing-4);
+  gap: var(--ax-space-12);
+  margin-block-end: var(--ax-space-16);
 }
 
 @media screen and (min-width: 480px) {
   .row {
     flex-direction: row;
-    margin-block-end: var(--a-spacing-6);
+    margin-block-end: var(--ax-space-24);
   }
 }

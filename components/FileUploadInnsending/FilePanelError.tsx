@@ -15,7 +15,7 @@ export const FilePanelError = ({ file, onDelete }: Props) => {
       <Panel className={`${styles.fileCard} ${styles.error}`} tabIndex={0}>
         <div className={styles.fileCardLeftContent}>
           <div className={styles.fileError}>
-            <FileTextIcon color={'var(--a-surface-danger-hover)'} />
+            <FileTextIcon color={'var(--ax-bg-danger-strong-hover)'} />
           </div>
           <div>
             <Label as={'span'}>{file.name}</Label>

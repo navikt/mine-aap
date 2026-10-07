@@ -27,7 +27,7 @@ const Page = async ({ params }: Readonly<{ params: Promise<PageParams> }>) => {
   }
   return (
     <HStack justify={'center'}>
-      <VStack gap={'4'}>
+      <VStack gap={"space-16"}>
         <Heading level={'1'} size={'xlarge'} spacing>
           {mapBehandlingstypeTilHeading(behandling.data.behandlingType)}
         </Heading>

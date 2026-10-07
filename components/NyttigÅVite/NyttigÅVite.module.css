@@ -1,5 +1,5 @@
 .linkPanel {
-  background-color: var(--a-bg-subtle);
+  background-color: var(--ax-bg-neutral-soft);
   border-radius: 12px;
 }
 
@@ -10,13 +10,13 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: var(--a-spacing-3);
+  gap: var(--ax-space-12);
   max-width: 600px;
 }
 
 .linkPanelContainer {
   display: flex;
   flex-direction: column;
-  gap: var(--a-spacing-3);
-  margin-block-end: var(--a-spacing-4);
+  gap: var(--ax-space-12);
+  margin-block-end: var(--ax-space-16);
 }
