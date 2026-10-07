@@ -1,7 +1,7 @@
 'use client';
 
 import { faro } from '@grafana/faro-web-sdk';
-import { BodyShort, Heading, HStack, Link, List, VStack, Box } from '@navikt/ds-react';
+import { BodyShort, Box, Heading, HStack, Link, List, VStack } from '@navikt/ds-react';
 import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 
@@ -15,7 +15,7 @@ const Error = ({ error }: { error: Error }) => {
   }, [error]);
 
   return (
-    <HStack paddingBlock={"space-0 space-28"} justify={'center'}>
+    <HStack paddingBlock={'space-0 space-28'} justify={'center'}>
       <VStack>
         <Heading level="1" size="large" spacing>
           {t('errorpage.error.heading')}
@@ -24,7 +24,8 @@ const Error = ({ error }: { error: Error }) => {
           {t('errorpage.error.description')}
         </BodyShort>
         <BodyShort size={'large'}>{t('errorpage.error.bulletList.title')}</BodyShort>
-        <Box marginBlock="space-16" asChild><List data-aksel-migrated-v8 size={'large'}>
+        <Box marginBlock="space-16" asChild>
+          <List data-aksel-migrated-v8 size={'large'}>
             <List.Item>
               {t.rich('errorpage.error.bulletList.items.1', {
                 a: (chunks) => (
@@ -39,7 +40,8 @@ const Error = ({ error }: { error: Error }) => {
                 a: (chunks) => <Link href={'/aap/mine-aap'}>{chunks}</Link>,
               })}
             </List.Item>
-          </List></Box>
+          </List>
+        </Box>
         <BodyShort size={'large'} spacing>
           {t.rich('errorpage.error.vedvarer', {
             a: (chunks) => (

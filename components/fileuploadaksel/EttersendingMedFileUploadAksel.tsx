@@ -47,7 +47,7 @@ export const EttersendingMedFileUploadAksel = ({ søknadId }: { søknadId: strin
     setIsUploading(false);
   };
   return (
-    <VStack gap={"space-16"}>
+    <VStack gap={'space-16'}>
       <FileUploadAksel uploadedFiles={uploadedFiles} setUploadedFiles={setUploadedFiles} setIsError={setIsError} />
       {lastetOppEttersendingOgIngenUsendte && (
         <Alert variant="success">
