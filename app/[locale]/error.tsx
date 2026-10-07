@@ -24,24 +24,22 @@ const Error = ({ error }: { error: Error }) => {
           {t('errorpage.error.description')}
         </BodyShort>
         <BodyShort size={'large'}>{t('errorpage.error.bulletList.title')}</BodyShort>
-        <Box marginBlock="space-16" asChild>
-          <List data-aksel-migrated-v8 size={'large'}>
-            <List.Item>
-              {t.rich('errorpage.error.bulletList.items.1', {
-                a: (chunks) => (
-                  <Link href="#" onClick={() => location.reload()}>
-                    {chunks}
-                  </Link>
-                ),
-              })}
-            </List.Item>
-            <List.Item>
-              {t.rich('errorpage.error.bulletList.items.2', {
-                a: (chunks) => <Link href={'/aap/mine-aap'}>{chunks}</Link>,
-              })}
-            </List.Item>
-          </List>
-        </Box>
+        <List size={'large'}>
+          <List.Item>
+            {t.rich('errorpage.error.bulletList.items.1', {
+              a: (chunks) => (
+                <Link href="#" onClick={() => location.reload()}>
+                  {chunks}
+                </Link>
+              ),
+            })}
+          </List.Item>
+          <List.Item>
+            {t.rich('errorpage.error.bulletList.items.2', {
+              a: (chunks) => <Link href={'/aap/mine-aap'}>{chunks}</Link>,
+            })}
+          </List.Item>
+        </List>
         <BodyShort size={'large'} spacing>
           {t.rich('errorpage.error.vedvarer', {
             a: (chunks) => (
