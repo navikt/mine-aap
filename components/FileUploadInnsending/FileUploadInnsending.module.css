@@ -12,8 +12,8 @@
 
 .dropzone {
   padding: 30px;
-  border: 2px dashed var(--a-surface-action);
-  background-color: var(--a-surface-action-subtle);
+  border: 2px dashed var(--ax-bg-accent-strong);
+  background-color: var(--ax-bg-accent-soft);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -29,7 +29,7 @@
   align-items: center;
 }
 .fileCard.error {
-  border: 2px solid var(--a-surface-danger-hover);
+  border: 2px solid var(--ax-bg-danger-strong-hover);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -47,17 +47,17 @@
   background-color: transparent;
   outline: none;
   cursor: pointer;
-  color: var(--a-icon-action);
+  color: var(--ax-text-accent-decoration);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 .deleteAttachment:hover {
-  border: 2px solid var(--a-icon-action);
+  border: 2px solid var(--ax-text-accent-decoration);
 }
 .deleteAttachment:focus {
-  border: 2px solid var(--a-icon-action);
+  border: 2px solid var(--ax-text-accent-decoration);
 }
 .fileSuccess {
   display: flex;
@@ -67,7 +67,7 @@
   width: 3rem;
   height: 3rem;
   font-size: 1.5rem;
-  background-color: var(--a-surface-success-subtle);
+  background-color: var(--ax-bg-success-soft);
 }
 .fileError {
   display: flex;
@@ -77,21 +77,21 @@
   width: 3rem;
   height: 3rem;
   font-size: 1.5rem;
-  background-color: var(--a-surface-danger-subtle);
+  background-color: var(--ax-bg-danger-soft);
 }
 .fileInput {
   padding: 2rem;
-  background-color: var(--a-surface-subtle);
+  background-color: var(--ax-bg-neutral-soft);
   display: flex;
   flex-direction: column;
   row-gap: 1rem;
 }
 .fileInputButton:focus {
   outline: none;
-  color: var(--a-text-on-action);
+  color: var(--ax-text-accent-contrast);
   text-decoration: none;
-  background-color: var(--a-border-focus);
-  box-shadow: 0 0 0 2px var(--a-border-focus);
+  background-color: var(--ax-border-focus);
+  box-shadow: 0 0 0 2px var(--ax-border-focus);
 }
 .fileInputText {
   word-break: break-all;

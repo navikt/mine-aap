@@ -16,7 +16,7 @@ export const FilePanelSuccess = ({ file, onDelete, deleteUrl, readAttachmentUrl 
     <Panel className={styles.fileCard}>
       <div className={styles.fileCardLeftContent}>
         <div className={styles.fileSuccess}>
-          <CheckmarkIcon color={'var(--a-icon-success)'} />
+          <CheckmarkIcon color={'var(--ax-text-success-decoration)'} />
         </div>
         <div className={styles.fileInputText}>
           <Link target={'_blank'} href={`${readAttachmentUrl}${file.vedleggId}`}>

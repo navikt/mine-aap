@@ -9,7 +9,7 @@ import { getTranslations } from 'next-intl/server';
 export const Soknad = async ({ søknad, dokumenter }: { søknad: Ettersending; dokumenter: DokumentMedTittel[] }) => {
   const t = await getTranslations('minSisteSøknad');
   return (
-    <VStack gap="4">
+    <VStack gap="space-16">
       <Heading level="2" size="medium">
         {t('søknad.heading')}
       </Heading>

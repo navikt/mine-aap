@@ -6,8 +6,8 @@
 }
 @media (max-width: 480px) {
   .section {
-    padding-left: var(--a-spacing-2);
-    padding-right: var(--a-spacing-2);
+    padding-left: var(--ax-space-8);
+    padding-right: var(--ax-space-8);
   }
 }
 
@@ -21,5 +21,5 @@
 }
 
 .lightBlueBackground {
-  background-color: var(--a-surface-action-subtle);
+  background-color: var(--ax-bg-accent-soft);
 }

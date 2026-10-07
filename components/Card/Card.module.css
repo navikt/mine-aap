@@ -1,31 +1,31 @@
 .card {
   width: 100%;
   max-width: 600px;
-  background-color: var(--a-bg-default);
-  /*border: 1px solid var(--a-border-subtle);*/
+  background-color: var(--ax-bg-default);
+  /*border: 1px solid var(--ax-border-neutral-subtle);*/
   border-radius: 12px;
-  padding: var(--a-spacing-4);
+  padding: var(--ax-space-16);
 }
 
 .subtleBlue {
-  background-color: var(--a-surface-action-subtle);
+  background-color: var(--ax-bg-accent-soft);
 }
 
 .divider {
   height: 0px;
-  width: calc(100% + var(--a-spacing-8));
-  border-top: 1px solid var(--a-border-subtle);
-  margin-block: var(--a-spacing-4);
-  margin-inline: calc(var(--a-spacing-4) * -1);
+  width: calc(100% + var(--ax-space-32));
+  border-top: 1px solid var(--ax-border-neutral-subtle);
+  margin-block: var(--ax-space-16);
+  margin-inline: calc(var(--ax-space-16) * -1);
 }
 
 @media screen and (min-width: 480px) {
   .card {
-    padding: var(--a-spacing-6);
+    padding: var(--ax-space-24);
   }
 
   .divider {
-    width: calc(100% + var(--a-spacing-12));
-    margin-inline: calc(var(--a-spacing-6) * -1);
+    width: calc(100% + var(--ax-space-48));
+    margin-inline: calc(var(--ax-space-24) * -1);
   }
 }

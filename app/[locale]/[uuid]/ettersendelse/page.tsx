@@ -44,7 +44,7 @@ const Page = async ({ params }: Readonly<{ params: Promise<PageParams> }>) => {
       <>
         <PageHeader>{t('ettersendelse.appTittelMedSkille')}</PageHeader>
 
-        <VStack marginBlock="0 12">
+        <VStack marginBlock="space-0 space-48">
           <Section>
             <Heading level="2" size="large" spacing>
               {t('ettersendelse.heading')}

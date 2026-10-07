@@ -1,7 +1,7 @@
 'use client';
 
 import { faro } from '@grafana/faro-web-sdk';
-import { BodyShort, Heading, HStack, Link, List, VStack } from '@navikt/ds-react';
+import { BodyShort, Box, Heading, HStack, Link, List, VStack } from '@navikt/ds-react';
 import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 
@@ -15,7 +15,7 @@ const Error = ({ error }: { error: Error }) => {
   }, [error]);
 
   return (
-    <HStack paddingBlock={'0 7'} justify={'center'}>
+    <HStack paddingBlock={'space-0 space-28'} justify={'center'}>
       <VStack>
         <Heading level="1" size="large" spacing>
           {t('errorpage.error.heading')}

@@ -25,7 +25,7 @@
   justify-content: space-between;
   flex-wrap: wrap;
   padding: 0rem;
-  gap: var(--a-spacing-6);
+  gap: var(--ax-space-24);
 }
 
 .scanningGuide ul {
