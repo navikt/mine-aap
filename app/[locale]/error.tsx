@@ -1,7 +1,7 @@
 'use client';
 
 import { faro } from '@grafana/faro-web-sdk';
-import { BodyShort, Box, Heading, HStack, Link, List, VStack } from '@navikt/ds-react';
+import { BodyShort, Heading, HStack, Link, List, VStack } from '@navikt/ds-react';
 import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 
