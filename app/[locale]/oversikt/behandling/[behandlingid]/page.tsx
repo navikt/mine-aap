@@ -1,5 +1,4 @@
 import { Alert, Heading, HStack, VStack } from '@navikt/ds-react';
-import { BehandlingProcess } from 'components/statusisak/behandlingprocess/BehandlingProcess';
 import { redirect } from 'i18n/routing';
 import { hentBehandling } from 'lib/services/apiInternService';
 import { isError } from 'lib/utils/api-fetch';
@@ -31,7 +30,6 @@ const Page = async ({ params }: Readonly<{ params: Promise<PageParams> }>) => {
         <Heading level={'1'} size={'xlarge'} spacing>
           {mapBehandlingstypeTilHeading(behandling.data.behandlingType)}
         </Heading>
-        <BehandlingProcess behandling={behandling.data} />
       </VStack>
     </HStack>
   );
