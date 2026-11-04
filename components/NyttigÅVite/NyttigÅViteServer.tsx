@@ -1,6 +1,5 @@
 import { Heading } from '@navikt/ds-react';
 import { LinkCard, LinkCardAnchor, LinkCardTitle } from '@navikt/ds-react/LinkCard';
-import { MottattSoknad } from 'components/NyttigÅVite/MottattSoknad';
 import { SøknaderClientLenke } from 'components/NyttigÅVite/SøknaderClientLenke';
 import { getTranslations } from 'next-intl/server';
 import styles from './NyttigÅVite.module.css';
@@ -32,7 +31,13 @@ export const NyttigÅViteServer = async () => {
               </LinkCardAnchor>
             </LinkCardTitle>
           </LinkCard>
-          <MottattSoknad />
+          <LinkCard>
+            <LinkCardTitle>
+              <LinkCardAnchor href={t('forside.mottattSøknad.link')} target="_blank">
+                {t('forside.mottattSøknad.tekst')}
+              </LinkCardAnchor>
+            </LinkCardTitle>
+          </LinkCard>
         </div>
       </div>
     </>
