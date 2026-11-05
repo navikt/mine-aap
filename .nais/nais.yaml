@@ -61,6 +61,7 @@ spec:
       rules:
         - application: innsending
         - application: oppslag
+        - application: api-intern
         - application: nav-dekoratoren
           namespace: personbruker
       external:
