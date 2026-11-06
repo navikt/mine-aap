@@ -1,13 +1,12 @@
 import { logError } from 'lib/server/logger';
 
-export async function hentLocalToken(scope: string) {
+export async function hentLocalToken() {
   try {
-    const baseUrl = scope === process.env.INNSENDING_AUDIENCE ? process.env.INNSENDING_URL : process.env.OPPSLAG_URL;
-    const url = `${baseUrl}/test/local-token`;
-    const res = await fetch(url, { method: 'GET', next: { revalidate: 0 } });
-    return res.text();
-  } catch (err) {
-    logError('hentLocalToken feilet', err);
+    const url =
+      'https://fakedings.intern.dev.nav.no/fake/idporten?pid=12345678901&client_id=localhost:aap:innsyn&acr=idporten-loa-substantial';
+    return fetch(url, { method: 'GET', next: { revalidate: 0 } }).then((token) => token.text());
+  } catch (error) {
+    logError('hentLocalToken feilet', error);
     return Promise.resolve('dummy-token');
   }
 }

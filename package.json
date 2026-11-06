@@ -13,7 +13,8 @@
     "intl:diff": "json-diff -k ./lib/translations/nb.json ./lib/translations/nn.json",
     "postinstall": "patch-package",
     "gentypes:oppslag": "openapi-typescript http://localhost:8082/openapi.json -o lib/types/oppslagschema.d.ts",
-    "gentypes:innsending": "openapi-typescript http://localhost:8080/openapi.json -o lib/types/innsendingschema.d.ts"
+    "gentypes:innsending": "openapi-typescript http://localhost:8080/openapi.json -o lib/types/innsendingschema.d.ts",
+    "gentypes:apiintern": "openapi-typescript http://localhost:8084/openapi.json -o lib/types/apiinternschema.d.ts"
   },
   "prettier": "@navikt/aap-felles-prettier",
   "dependencies": {

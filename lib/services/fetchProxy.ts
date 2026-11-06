@@ -48,13 +48,13 @@ export const fetchProxy = async <ResponseBody>(
   requestBody?: object,
   tags?: string[]
 ): Promise<FetchResponse<ResponseBody>> => {
-  const oboToken = isLocal() ? await hentLocalToken(scope) : await getOnBefalfOfToken(scope, url);
+  const oboToken = isLocal() ? await hentLocalToken() : await getOnBefalfOfToken(scope, url);
   return await fetchWithRetry<ResponseBody>(url, method, oboToken, NUMBER_OF_RETRIES, requestBody, tags);
 };
 
 export const fetchPdf = async (url: string, scope: string): Promise<Response> => {
   const callid = randomUUID();
-  const oboToken = isLocal() ? await hentLocalToken(scope) : await getOnBefalfOfToken(scope, url);
+  const oboToken = isLocal() ? await hentLocalToken() : await getOnBefalfOfToken(scope, url);
   const response = await fetch(url, {
     method: 'GET',
     headers: {
