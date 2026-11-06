@@ -947,7 +947,7 @@ export interface paths {
              *         {
              *           "status": "LØPENDE",
              *           "saksnummer": "4MGL8LS",
-             *           "vedtaksdato": "2026-11-03",
+             *           "vedtaksdato": "2026-11-06",
              *           "periode": {
              *             "fraOgMedDato": "2021-01-01",
              *             "tilOgMedDato": "2021-01-31"
@@ -1158,6 +1158,7 @@ export interface paths {
     };
     get?: never;
     put?: never;
+    /** Legg inn sakstatus for en person. Endepunktet kan kun brukes av behandlingsflyt. Kalles ved hvert stopp i behandlingen før vedtak. */
     post: {
       parameters: {
         query?: never;
@@ -2728,6 +2729,8 @@ export interface components {
     };
     'no.nav.aap.api.mineaap.SakMedBehandlingerVisning': {
       behandlinger: components['schemas']['no.nav.aap.api.mineaap.BehandlingVisningResponse'][];
+      /** @enum {string} */
+      sakStatus: 'FERDIGBEHANDLET' | 'REVURDERING_UNDER_BEHANDLING' | 'SOKNAD_UNDER_BEHANDLING';
       saksnummer: string;
     };
     'no.nav.aap.arenaoppslag.kontrakt.apiv1.Oppgave': {

@@ -23,6 +23,7 @@ export async function hentSakerMedBehandlinger(): Promise<FetchResponse<SakerMed
 const sakerMedBehandlingerMock: SakerMedBehandlingerResponse = [
   {
     saksnummer: 'sak1',
+    sakStatus: 'SOKNAD_UNDER_BEHANDLING',
     behandlinger: [
       {
         behandlingReferanse: '778bdf1c-e0ae-4197-bc46-13aa1cdd08e9',
