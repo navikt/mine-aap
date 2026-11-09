@@ -1,0 +1,12 @@
+body {
+  margin: 0;
+  font-family: 'Nav', sans-serif;
+  background: var(--bg-page, #F8F6F6);
+}
+
+@media (min-width: 1024px) {
+  .layout {
+    max-width: 30vw;
+    margin: auto;
+  }
+}

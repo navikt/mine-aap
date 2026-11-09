@@ -1,0 +1,51 @@
+.container {
+  margin-bottom: 2rem;
+}
+
+.heading { 
+  color: var(--ax-text-brand-beige);
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  margin-bottom: 0.5rem;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.card {
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+}
+
+.list li {
+  border-top: 1px solid var(--ax-border-neutral-subtleA);
+}
+
+.list li:last-of-type {
+  border-bottom: 1px solid var(--ax-border-neutral-subtleA);
+}
+
+.title {
+  color: var(--link-secondary, #002459);
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-family: "Source Sans 3";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 28px; /* 155.556% */
+  letter-spacing: -0.018px;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-skip-ink: auto;
+  text-decoration-color: var(--link-underline, rgba(0, 22, 48, 0.19));
+  text-decoration-thickness: 6%; /* 1.08px */
+  text-underline-offset: 16%; /* 2.88px */
+  text-underline-position: from-font;
+}

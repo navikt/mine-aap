@@ -1,0 +1,22 @@
+.heading {
+  margin-bottom: 1rem;
+}
+
+.list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 1rem;
+}
+
+.list li {
+  padding: 1rem 0;
+  border-top: 1px solid var(--ax-border-neutral-subtleA);
+}
+
+.list li:last-of-type {
+  border-bottom: 1px solid var(--ax-border-neutral-subtleA);
+}
+.link {
+  margin-bottom: 0.2rem;
+}

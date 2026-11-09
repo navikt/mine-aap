@@ -1,0 +1,39 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  padding: 1.25rem;
+  border-radius: 0.75rem;
+  border: none;
+  background-color: var(--ax-bg-default);
+  margin-bottom: 2.5rem;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  width: 100%;
+}
+
+.list dd {
+  margin: 0;
+}
+
+.listItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 0.75rem 0;
+}
+
+.detail {
+  margin-top: 0.25rem;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.gridSection {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 2rem;
+}

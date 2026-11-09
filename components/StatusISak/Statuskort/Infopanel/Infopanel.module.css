@@ -1,0 +1,33 @@
+.list {
+  grid-area: content;
+  list-style: none;
+  margin: 0;
+  display: flex; 
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.list dd {
+  margin: 0;
+}
+
+.listItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 40%;
+  margin: 0.75rem 0;
+}
+
+.detail {
+  margin-top: 0.25rem;
+  color: var(--ax-text-neutral);
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-family: "Source Sans 3";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 130%; /* 23.4px */
+  letter-spacing: -0.018px;
+}

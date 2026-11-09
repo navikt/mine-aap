@@ -1,0 +1,212 @@
+.step {
+  position: relative;
+  --marker-center: 32px;
+  --next-marker-center: 32px;
+}
+
+.step[data-progresjon="fullført"] {
+  --step-rail-image: none;
+  --step-rail-color: var(--timeline-rail);
+}
+
+.card {
+  position: relative;
+}
+
+.step[data-expanded="true"] .card {
+  background-color: #fff;
+  border-radius: var(--ax-radius-8);
+  box-shadow: inset 0 0 0 1px #d4d8dd;
+}
+
+.step:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 19px;
+  inset-block: calc(var(--marker-center) + 13px) calc(13px - var(--next-marker-center));
+  inline-size: 2px;
+  background-color: var(--step-rail-color, transparent);
+  background-image: var(
+    --step-rail-image,
+    linear-gradient(to bottom, transparent 0 20%, var(--timeline-rail) 20% 70%, transparent 70% 100%)
+  );
+  background-size: 100% 10px;
+  background-repeat: no-repeat round;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.step::after {
+  content: "";
+  position: absolute;
+  inset-inline: var(--ax-space-40) var(--ax-space-16);
+  inset-block-end: 0;
+  border-block-end: 1px solid #d4d8dd;
+  pointer-events: none;
+}
+
+.step:last-child::after,
+.step[data-expanded="true"]::after,
+.step:has(+ [data-expanded="true"])::after {
+  display: none;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  inline-size: 100%;
+  min-inline-size: 0;
+  position: relative;
+  padding-block: var(--ax-space-20) var(--ax-space-24);
+  padding-inline: var(--ax-space-40) var(--ax-space-24);
+  gap: var(--ax-space-16);
+  color: var(--timeline-text);
+  border: 0;
+  border-radius: var(--ax-radius-8);
+  background: transparent;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+
+.header:focus-visible {
+  outline: 3px solid var(--ax-border-focus);
+  outline-offset: 3px;
+}
+
+.chevron {
+  flex: 0 0 var(--ax-space-16);
+  inline-size: var(--ax-space-16);
+  block-size: var(--ax-space-16);
+  margin-block-start: var(--ax-space-4);
+}
+
+.step[data-expanded="true"] .chevron {
+  transform: rotate(180deg);
+}
+
+.heading {
+  margin: 0;
+  font: inherit;
+}
+
+.labels {
+  display: flex;
+  flex-direction: column;
+  min-inline-size: 0;
+  gap: var(--ax-space-4);
+  overflow-wrap: anywhere;
+}
+
+.title {
+  font-size: 1.125rem;
+  font-weight: var(--ax-font-weight-bold);
+  line-height: 1.5;
+}
+
+.header:hover .title {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.status {
+  color: var(--timeline-muted);
+  font-size: 1rem;
+  font-weight: var(--ax-font-weight-regular);
+  line-height: 1.5;
+}
+
+.step[data-progresjon="aktiv"] .status {
+  color: var(--timeline-accent);
+}
+
+.marker {
+  position: absolute;
+  inset-inline-start: 11px;
+  inset-block-start: calc(var(--marker-center) - 9px);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  inline-size: 18px;
+  block-size: 18px;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.step[data-progresjon="aktiv"] .marker {
+  color: #287cda;
+  background: #fff;
+  border: 0;
+  box-shadow: 0 0 0 var(--ax-space-4) #e6f0ff;
+}
+
+.step[data-progresjon="fullført"] .marker {
+  color: #fff;
+  background: var(--timeline-muted);
+  border: 0;
+}
+
+.step[data-progresjon="ikke-påbegynt"] .marker {
+  border: 2px dashed var(--timeline-muted);
+  background: var(--bg-page, #f8f6f6);
+}
+
+.marker > svg {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.step[data-expanded="true"] .header {
+  padding-block-end: var(--ax-space-16);
+}
+
+.content {
+  padding-inline: var(--ax-space-40) var(--ax-space-24);
+  padding-block-end: var(--ax-space-32);
+  color: var(--timeline-muted);
+}
+
+.content > p {
+  margin: 0;
+  font-size: 1.125rem;
+  line-height: 1.5;
+}
+
+.content > p + p {
+  margin-block-start: var(--ax-space-20);
+}
+
+.srOnly {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (forced-colors: active) {
+  .step[data-expanded="true"] .card {
+    color: CanvasText;
+    background: Canvas;
+    outline: 1px solid CanvasText;
+  }
+
+  .marker {
+    outline: 2px solid CanvasText;
+  }
+
+  .step:not(:last-child)::before {
+    background: CanvasText;
+  }
+
+  .step::after {
+    border-color: CanvasText;
+  }
+}

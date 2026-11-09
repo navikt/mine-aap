@@ -1,0 +1,31 @@
+.breadcrumbList {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.breadcrumbItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.breadcrumbItem:not(:last-child)::after {
+  content: "›";
+  color: var(--ax-text-neutral-subtle);
+}
+
+.link {
+  color: var(--link-secondary, #002459);
+  text-decoration-color: rgb(209, 209, 209);
+}
+
+@media print {
+  .pageHeader {
+    display: none;
+  }
+}

@@ -1,0 +1,35 @@
+.list {
+  list-style: none;
+  display: flex; 
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0;
+  margin-bottom: 2.5rem;
+  padding: 0 1rem;
+  width: 100%;
+  border-radius: 0.75rem;
+  background: var(--bg-linkcard-secondary, rgba(0, 26, 51, 0.04));
+}
+
+.list dd {
+  margin: 0;
+}
+
+.listItem {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1rem 0 0.75rem 0;
+}
+
+.detail {
+  margin-top: 0.25rem;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.list div:first-of-type {
+  border-bottom: 1px solid var(--border-color, rgba(0, 0, 0, 0.1));
+  
+}

@@ -1,0 +1,11 @@
+.timeline {
+  inline-size: 100%;
+  min-inline-size: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  --timeline-rail: #a0a8b4;
+  --timeline-muted: #545d69;
+  --timeline-text: #232a35;
+  --timeline-accent: #0067c5;
+}

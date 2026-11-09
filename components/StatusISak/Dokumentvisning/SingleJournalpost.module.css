@@ -1,0 +1,100 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  color: var(--ax-text-neutral);
+  background-color: var(--ax-bg-sunken);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 2rem;
+  text-decoration: none;
+  position: relative;
+}
+
+.kanIkkeVises {
+  align-items: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2.5rem;
+  width: 2.5rem;
+  padding: 0.5rem;
+  border-radius: 8px;
+  color: var(--ax-text-accent-subtle);
+  background-color: var(--ax-bg-default);
+  line-height: 0;
+}
+
+.iconKanIkkeVises {
+  color: var(--ax-text-neutral);
+}
+
+.link {
+  margin: 0;
+  text-decoration: underline;
+  color: var(--ax-text-accent-subtle);
+  text-wrap: balance;
+}
+
+.link::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.tittelIkkeTilgang {
+  margin: 0.2rem 0;
+  text-decoration: none;
+  color: var(--ax-text-neutral-subtle);
+  text-wrap: balance;
+}
+
+.link:hover {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.temalenke {
+  margin-top: 2rem;
+}
+
+.details {
+  margin-top: 2rem;
+}
+
+.detailTitle {
+  display: flex;
+  padding: 0.75rem 0;
+}
+
+.detail {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+  border-top: 1px solid var(--ax-border-neutral-subtle);
+}
+
+.vedlegg {
+  margin: 2rem 0;
+}
+
+.kanIkkeViseDokument {
+  background-color: var(--ax-bg-sunken);
+  margin-top: 2rem;
+  padding: 2rem 1rem;
+  border-radius: 8px;
+}
+
+.tilgangssperre {
+  margin-bottom: 1rem;
+}

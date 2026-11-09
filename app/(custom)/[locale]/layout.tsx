@@ -1,0 +1,61 @@
+import '@navikt/ds-css';
+import { fetchDecoratorReact } from '@navikt/nav-dekoratoren-moduler/ssr';
+import Faro from 'components/frontendobservability/faro';
+import { NavDecorator } from 'components/StatusISak/NavDecorator/NavDecorator';
+import { getEnvironment } from 'lib/utils/environments';
+import { isValidLocale } from 'lib/utils/locale';
+import { notFound } from 'next/navigation';
+import Script from 'next/script';
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages, getTranslations } from 'next-intl/server';
+import styles from './layout.module.css';
+
+//TODO: se om vi kan unnlate å innhente dekoratør, men ha den i en felles layoutfil for begge versjoner av siden
+//TODO: Avklare hva ønsket layout, brekkpunkter etc. skal være
+
+export async function generateMetadata() {
+  const t = await getTranslations();
+
+  return {
+    title: `${t('appTittelMedSkille')} - nav.no`,
+  };
+}
+
+export default async function LocaleLayout({
+  children,
+  params,
+}: {
+  children: React.ReactNode;
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  // Ensure that the incoming `locale` is valid
+  if (!isValidLocale(locale)) {
+    notFound();
+  }
+
+  const Decorator = await fetchDecoratorReact({ env: getEnvironment() });
+
+  // Providing all messages to the client
+  // side is the easiest way to get started
+  const messages = await getMessages();
+
+  return (
+    <html lang={locale}>
+      <head>
+        <Decorator.HeadAssets />
+      </head>
+      <body>
+        <Faro collectorUrl={process.env.NAIS_FRONTEND_TELEMETRY_COLLECTOR_URL} />
+        <Decorator.Header />
+        <NextIntlClientProvider messages={messages}>
+          <NavDecorator>
+            <section className={styles.layout}>{children}</section>
+          </NavDecorator>
+        </NextIntlClientProvider>
+        <Decorator.Footer />
+        <Decorator.Scripts loader={Script} />
+      </body>
+    </html>
+  );
+}
