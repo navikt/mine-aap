@@ -47,7 +47,7 @@ async function simpleFetchProxy<ResponseType>({ url, token, req }: Props) {
 
 export async function oppslagProxyPass(path: string, req: Request) {
   const url = `${oppslagApiBaseUrl}${path}`;
-  const oboToken = isLocal() ? await hentLocalToken(oppslagAudience) : await getOnBefalfOfToken(oppslagAudience, url);
+  const oboToken = isLocal() ? await hentLocalToken() : await getOnBefalfOfToken(oppslagAudience, url);
   return simpleFetchProxy({
     url,
     token: oboToken,
@@ -56,9 +56,7 @@ export async function oppslagProxyPass(path: string, req: Request) {
 }
 export async function innsendingProxyPass<ResponseType>(path: string, req: Request) {
   const url = `${innsendingApiBaseUrl}${path}`;
-  const oboToken = isLocal()
-    ? await hentLocalToken(innsendingAudience)
-    : await getOnBefalfOfToken(innsendingAudience, url);
+  const oboToken = isLocal() ? await hentLocalToken() : await getOnBefalfOfToken(innsendingAudience, url);
   return simpleFetchProxy<ResponseType>({
     url,
     token: oboToken,

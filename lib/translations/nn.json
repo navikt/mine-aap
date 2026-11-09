@@ -13,6 +13,10 @@
     "underUtvikling": "Denne sida er under utvikling, og vil bli utvida med fleire funksjonar etter kvart.",
     "seInnsendteSøknaderLink": "Sjå alle søknadene du har sendt inn",
     "søkPåNyttLink": "Eg vil søkja på nytt (blir opna i ny fane)",
+    "mottattSøknad": {
+      "tekst": "Når vi har motteke ein søknad (blir opna i ny fane)",
+      "link": "https://www.nav.no/aap/nn#etter-soknad"
+    },
     "ettersendelse": {
       "tittel": "Ettersending",
       "tekst": "Dersom du ønskjer å ettersende noko til oss om AAP-saka di, kan du gjere det her.",
@@ -190,47 +194,6 @@
     "mineAAP": "Mine AAP",
     "ettersending": "Ettersending til søknad",
     "mineAAPSoknader": "Mine AAP-søknader"
-  },
-  "hvaSkjerPanel": {
-    "heading": "Når vi har motteke ein søknad",
-    "punkt1": {
-      "label": "Vi sjekkar om vi har nok helseopplysningar",
-      "tekst": "Dersom vi treng fleire helseopplysningar, vil vi bestille legeerklæring frå lege eller annan behandlar ut frå informasjonen du har gitt oss i søknaden."
-    },
-    "punkt2": {
-      "label": "Vi vurderer moglegheitene og avgrensingane dine i møte med arbeidslivet",
-      "tekst": "Du har krav på ei vurdering av oppfølginga du treng frå Nav for å kome i arbeid eller halde på jobben du har (Nav-lova §14a). Vi tek utgangspunkt i opplysningane du har gitt oss, og kontaktar deg ved behov. Du får eit brev med vurderinga vår, og må gjerne ta kontakt med oss dersom du har spørsmål. <a>Du kan klage på oppfølgingsvedtaket (blir opna i ny fane)</a> dersom du meiner det er feil.",
-      "tekstForLenke": "Du har krav på ei vurdering av oppfølginga du treng frå Nav for å kome i arbeid eller halde på jobben du har (Nav-lova §14a). Vi tek utgangspunkt i opplysningane du har gitt oss, og kontaktar deg ved behov. Du får eit brev med vurderinga vår, og må gjerne ta kontakt med oss dersom du har spørsmål. ",
-      "tekstLenkeTekst": "Du kan klage på oppfølgingsvedtaket (blir opna i ny fane)",
-      "tekstEtterLenke": " dersom du meiner det er feil."
-    },
-    "punkt3": {
-      "label": "Kva kan du gjere?",
-      "tekst": "Det er til hjelp for oss om du:",
-      "punkt1": "Registrerer <a>CV-en din, gjerne på arbeidsplassen.no (blir opna i ny fane).</a>",
-      "punkt1ForLenke": "Registrerer ",
-      "punkt1LenkeTekst": "CV-en din, gjerne på arbeidsplassen.no (blir opna i ny fane).",
-      "punkt2": "Ettersender manglande dokument",
-      "punkt3": "Gir beskjed dersom situasjonen din endrar seg",
-      "link": "kan du klage på oppfølgingsvedtaket"
-    },
-    "punkt4": {
-      "label": "Vi sjekkar om du har rett til AAP",
-      "tekst": "Til sist sjekkar vi om du har rett til AAP etter folketrygdlova kapittel 11. Vi nyttar her opplysningane vi har fått i samband med søknaden."
-    },
-    "punkt5": {
-      "label": "Svar på AAP-søknaden",
-      "tekst": "Du får eit vedtak med vurderinga vi har gjort av kor vidt du har rett til AAP eller ikkje, og kor mykje du vil få utbetalt. Ta gjerne kontakt med oss dersom du har spørsmål om vurderinga. <a>Du kan klage på AAP-vedtaket (blir opna i ny fane)</a> dersom du meiner det er feil.",
-      "tekstForLenke": "Du får eit vedtak med vurderinga vi har gjort av kor vidt du har rett til AAP eller ikkje, og kor mykje du vil få utbetalt. Ta gjerne kontakt med oss dersom du har spørsmål om vurderinga. ",
-      "tekstLenkeTekst": "Du kan klage på AAP-vedtaket (blir opna i ny fane)",
-      "tekstEtterLenke": " dersom du meiner det er feil.",
-      "tekst1": "Me tilrår at du sjekkar skattekortet ditt med Skatteetaten, sidan endringar i inntekt også kan føra til endring i kor mykje skatt du skal trekkjast. Nav hentar skattekortet ditt automatisk frå Skatteetaten, og trekkjer skatt ut frå opplysningane derfrå. <a>Du kan lesa meir om skattetrekk på ytingar frå Nav her (blir opna i ny fane).</a>",
-      "tekst1ForLenke": "Me tilrår at du sjekkar skattekortet ditt med Skatteetaten, sidan endringar i inntekt også kan føra til endring i kor mykje skatt du skal trekkjast. Nav hentar skattekortet ditt automatisk frå Skatteetaten, og trekkjer skatt ut frå opplysningane derfrå. ",
-      "tekst1LenkeTekst": "Du kan lesa meir om skattetrekk på ytingar frå Nav her (blir opna i ny fane).",
-      "tekst2": "Du har rett til oppfølging frå Nav uavhengig av om du får innvilga AAP. Sjå alle klagemoglegheiter for AAP på <a>nav.no/klage (blir opna i ny fane)</a>.",
-      "tekst2ForLenke": "Du har rett til oppfølging frå Nav uavhengig av om du får innvilga AAP. Sjå alle klagemoglegheiter for AAP på ",
-      "tekst2LenkeTekst": "nav.no/klage (blir opna i ny fane)"
-    }
   },
   "logoutModal": {
     "title": "Du har blitt logga ut",
