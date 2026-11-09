@@ -6,7 +6,7 @@ on:
     branches:
       - main
     paths-ignore:
-      - '**.md'
+      - "**.md"
 
 jobs:
   buildDev:
@@ -18,7 +18,7 @@ jobs:
     secrets: inherit
     with:
       cluster: dev-gcp
-      appname: 'aap-innsyn'
+      appname: "aap-innsyn"
       playwright: false
       cdn: true
   buildProd:
@@ -31,7 +31,7 @@ jobs:
     secrets: inherit
     with:
       cluster: prod-gcp
-      appname: 'aap-innsyn'
+      appname: "aap-innsyn"
       playwright: false
       cdn: true
 
