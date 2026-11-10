@@ -1,16 +1,21 @@
 import { BodyLong } from '@navikt/ds-react';
-import { beskrivelser, venteStatusTekst } from '../../tidslinjeMapping';
+import type { BehandlingHendelseNay } from 'lib/types/apiinternTypes';
+import { beskrivelser, venteStatusTekstNay } from '../../tidslinjeMapping';
 import { TidslinjeSteg } from '../TidslinjeSteg';
 import type { HendelseStegProps } from '../types';
 
-export function UnderBehandling({ hendelse, ...props }: HendelseStegProps) {
+export interface UnderBehandlingProps {
+  steg: HendelseStegProps;
+  hendelse: BehandlingHendelseNay;
+}
+export function UnderBehandling({ hendelse, steg }: UnderBehandlingProps) {
   const beskrivelse =
-    hendelse.status && hendelse.progresjon !== 'ikke-påbegynt'
-      ? venteStatusTekst[hendelse.status]
-      : beskrivelser.UNDER_BEHANDLING;
+    hendelse.status && hendelse.progresjon !== 'IKKE_PÅBEGYNT'
+      ? venteStatusTekstNay()[hendelse.status]
+      : beskrivelser().NAY;
 
   return (
-    <TidslinjeSteg {...props} hendelse={hendelse} title="Vi behandler siste del av søknaden din">
+    <TidslinjeSteg steg={steg} hendelse={hendelse} title="Vi behandler siste del av søknaden din">
       <BodyLong>{beskrivelse}</BodyLong>
     </TidslinjeSteg>
   );

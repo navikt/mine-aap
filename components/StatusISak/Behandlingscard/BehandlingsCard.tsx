@@ -12,10 +12,11 @@ import { Heading } from 'node_modules/@navikt/ds-react/esm/typography/Heading';
 import styles from './BehandlingsCard.module.css';
 
 interface Props {
+  saksnummer: string;
   behandling: Behandling;
 }
 
-export const BehandlingsCard = ({ behandling }: Props) => {
+export const BehandlingsCard = ({ saksnummer, behandling }: Props) => {
   const adjacentHendelser = getAdjacentHendelser(behandling.hendelser);
 
   return (
@@ -36,7 +37,10 @@ export const BehandlingsCard = ({ behandling }: Props) => {
           ></Process.Event>
         ))}
       </Process>
-      <Link href={`/aap/mine-aap/nb/oversikt/behandling/${behandling.behandlingReferanse}/`} className={styles.link}>
+      <Link
+        href={`/aap/mine-aap/nb/oversikt/${saksnummer}/behandling/${behandling.behandlingReferanse}/`}
+        className={styles.link}
+      >
         Saksoversikt
         <ArrowRightIcon title="a11y-title" fontSize="1.5rem" className={styles.arrow} />
       </Link>

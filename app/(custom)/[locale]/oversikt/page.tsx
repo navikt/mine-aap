@@ -50,7 +50,11 @@ const Page = async ({ params }: Readonly<{ params: Promise<PageParams> }>) => {
         utbetalingsdato={'25. September'}
       />
       {aktivSak?.behandlinger.filter(ikkeVedtatteBehandling).map((behandling) => (
-        <BehandlingsCard key={behandling.behandlingReferanse} behandling={behandling} />
+        <BehandlingsCard
+          key={behandling.behandlingReferanse}
+          saksnummer={aktivSak.saksnummer}
+          behandling={behandling}
+        />
       ))}
       <MeldekortlenkeNy />
       <SnarveierLenkeliste />

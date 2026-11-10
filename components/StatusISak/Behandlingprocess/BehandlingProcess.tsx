@@ -2,10 +2,10 @@
 import { Process } from '@navikt/ds-react';
 import type {
   Behandling,
-  BehandlingsHendelse,
+  BehandlingHendelse,
   BehandlingHendelseNavn,
   BehandlingHendelseProgresjon,
-} from 'lib/services/apiInternService';
+} from 'lib/types/apiinternTypes';
 import styles from './BehandlingProcess.module.css';
 
 interface Props {
@@ -18,7 +18,7 @@ export const BehandlingProcess = ({ behandling }: Props) => {
     <Process className={styles.process}>
       {behandling.hendelser.map((hendelse) => (
         <Process.Event
-          key={hendelse.timestamp}
+          key={hendelse.sistEndret}
           status={mapHendelseProgresjonToEventStatus(hendelse.progresjon)}
           title={mapHendelseNavn(hendelse.navn)}
         >
@@ -30,11 +30,11 @@ export const BehandlingProcess = ({ behandling }: Props) => {
 };
 function mapHendelseProgresjonToEventStatus(status: BehandlingHendelseProgresjon) {
   switch (status) {
-    case 'aktiv':
+    case 'AKTIV':
       return 'active';
-    case 'fullført':
+    case 'FULLFØRT':
       return 'completed';
-    case 'ikke-påbegynt':
+    case 'IKKE_PÅBEGYNT':
       return 'uncompleted';
   }
 }
@@ -46,56 +46,45 @@ function mapHendelseNavn(navn: BehandlingHendelseNavn) {
       return 'Vi sjekker søknaden din';
     case 'NAV_KONTOR':
       return 'Vi kartlegger situasjonen din';
-    case 'UNDER_BEHANDLING':
+    case 'NAY':
       return 'Vi behandler siste del av søknaden din';
     case 'FERDIG_BEHANDLET':
       return 'Du får svar';
   }
 }
 
-function mapVenteStatusToText(hendelse: BehandlingsHendelse) {
+function mapVenteStatusToText(hendelse: BehandlingHendelse) {
   if (hendelse) {
     switch (hendelse.navn) {
       case 'SØKNAD_MOTTATT':
         return null;
       case 'ALDER_LOVVALG_MEDLEMSKAP':
+        if (hendelse.progresjon === 'FULLFØRT') {
+          return `Ferdig ${hendelse.sistEndret}`;
+        }
         switch (hendelse.status) {
           case 'VENTER_PÅ_INFORMASJON_FRA_UTENLANDSKE_MYNDIGHETER':
             return 'Vi venter på informasjon fra utenlandske myndigheter';
           case 'MOTTATT_INFORMASJON_FRA_UTENLANDSKE_MYNDIGHETER':
             return 'Vi har mottatt informasjon fra utenlandske myndigheter';
-          case 'FERDIG':
-            return 'Ferdig';
-          case 'UNDER_BEHANDLING':
-            return 'Under behandling';
         }
         break;
       case 'NAV_KONTOR':
         switch (hendelse.status) {
           case 'VENTER_PÅ_LEGEERKLÆRING':
             return 'Vi venter på legeerklæring';
-          case 'PURRET_PÅ_LEGEERKLÆRING':
+          case 'PURRET_PÅ_LEGERERKLÆRING':
             return 'Vi har purret på legeerklæring';
-          case 'LEGEERKLÆRING_MOTTATT':
+          case 'MOTTATT_LEGEERKLÆRING':
             return 'Vi har mottatt legeerklæring';
-          case 'FERDIG':
-            return 'Ferdig';
-          case 'UNDER_BEHANDLING':
-            return 'Under behandling';
         }
         break;
-      case 'UNDER_BEHANDLING':
+      case 'NAY':
         switch (hendelse.status) {
-          case 'VENTER_I_KØ':
-            return 'Venter i kø';
           case 'VENTER_PÅ_INFORMASJON_FRA_UTENLANDSKE_MYNDIGHETER':
             return 'Vi venter på informasjon fra utenlandske myndigheter';
           case 'MOTTATT_INFORMASJON_FRA_UTENLANDSKE_MYNDIGHETER':
             return 'Vi har mottatt informasjon fra utenlandske myndigheter';
-          case 'FERDIG':
-            return 'Ferdig';
-          case 'UNDER_BEHANDLING':
-            return 'Under behandling';
         }
         break;
       case 'FERDIG_BEHANDLET':

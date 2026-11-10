@@ -1,6 +1,8 @@
 import 'server-only';
 
+import type { JournalpostProps } from 'components/StatusISak/Dokumentvisning/JournalpostInterfaces';
 import { mockDokumenter } from 'lib/mock/mockDokumenter';
+import mockJournalpost from 'lib/mock/mockJournalpost';
 import { fetchPdf, fetchProxy } from 'lib/services/fetchProxy';
 import type { HentDokumenterResponse } from 'lib/types/types';
 import type { FetchResponse } from 'lib/utils/api-fetch';
@@ -23,4 +25,11 @@ export async function hentDokumenter(): Promise<FetchResponse<HentDokumenterResp
 export async function hentDokument(journalPostId: string, dokumentInfoId: string) {
   const url = `${oppslagApiBaseUrl}/dokumenter/${journalPostId}/${dokumentInfoId}`;
   return await fetchPdf(url, oppslagAudience);
+}
+
+export async function hentJournalpost(): Promise<FetchResponse<JournalpostProps>> {
+  return {
+    type: 'SUCCESS',
+    data: mockJournalpost,
+  };
 }

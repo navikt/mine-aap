@@ -4,26 +4,27 @@ import DatoOgReferansenummer from 'components/StatusISak/DatoOgReferansenummer/D
 import { DokumentList } from 'components/StatusISak/DokumentList/DokumentList';
 import { Hjelpetekst } from 'components/StatusISak/Hjelpetekst/Hjelpetekst';
 import { SøknadshjelpLinkcard } from 'components/StatusISak/SøknadshjelpLinkcard/SøknadshjelpCard';
-import { redirect } from 'i18n/routing';
-import { hentBehandling } from 'lib/services/apiInternService';
-import { hentDokumenter } from 'lib/services/oppslagService';
 import { Tidslinje } from 'components/StatusISak/Tidslinje/Tidslinje';
+import { redirect } from 'i18n/routing';
+import { hentBehandling } from 'lib/services/apiInternServiceNew';
+import { hentDokumenter } from 'lib/services/oppslagService';
 import { isError } from 'lib/utils/api-fetch';
 import { isProduction } from 'lib/utils/environments';
 
 interface PageParams {
   locale: string;
+  saksnummer: string;
   behandlingid: string;
 }
 const Page = async ({ params }: Readonly<{ params: Promise<PageParams> }>) => {
-  const { locale, behandlingid } = await params;
+  const { locale, saksnummer, behandlingid } = await params;
   if (isProduction()) {
     redirect({
       href: '/',
       locale,
     });
   }
-  const behandling = await hentBehandling(behandlingid);
+  const behandling = await hentBehandling(saksnummer, behandlingid);
 
   //TODO: avklare om det er mulig å hente dokumenter spesifikt for denne behandlingen
   //TODO: hvis ikke, avklare hva vi gjør med visning av dokumenter og tilpasse deretter
@@ -59,7 +60,7 @@ const Page = async ({ params }: Readonly<{ params: Promise<PageParams> }>) => {
         <Tidslinje behandling={behandling.data} />
         <Hjelpetekst />
         <SøknadshjelpLinkcard />
-        <DatoOgReferansenummer dato={behandling.data.opprettet} referansenummer={behandling.data.behandlingId} />
+        <DatoOgReferansenummer dato={'2026-01-01'} referansenummer={behandling.data.behandlingReferanse} />
         <DokumentList dokument={{ data: dokumenter.data }} />
       </VStack>
     </HStack>

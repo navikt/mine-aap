@@ -252,5 +252,39 @@
       },
       "vedvarer": "Hvis problemet vedvarer, kan du <a>kontakte oss (åpnes i ny fane)</a>"
     }
+  },
+  "statusisak": {
+    "alderLovvalgMedlemskap": {
+      "status": {
+        "venterPåInformasjonFraUtenlandskeMyndigheter": "Vi venter på informasjon fra utenlandske myndigheter.",
+        "mottattInformasjonFraUtenlandskeMyndigheter": "Vi har mottatt informasjon fra utenlandske myndigheter."
+      }
+    },
+    "navKontor": {
+      "tittel": "Vi kartlegger situasjonen din",
+      "varighet": "Kartleggingen tar 1-2 måneder.",
+      "oppfølging": "Du hører fra oss hvis det trengs.",
+      "status": {
+        "venterPåLegeerklæring": "Vi venter på legeerklæring.",
+        "purretPåLegeerklæring": "Vi har purret på legeerklæring.",
+        "mottattLegeerklæring": "Vi har mottatt legeerklæring."
+      }
+    },
+    "behandling": {
+      "hendelse": {
+        "progresjon": {
+          "aktiv": "Pågående steg",
+          "fullført": "Fullført steg",
+          "ikkePåbegynt": "Ikke påbegynt"
+        },
+        "navn": {
+          "søknadMottatt": "Dette steget gjelder mottak av søknaden din.",
+          "alderLovvalgMedlemskap": "Vi vurderer alder, lovvalg og medlemskap i folketrygden.",
+          "navKontor": "I kartleggingen samarbeider vi med deg, legen og arbeidsgiveren din. Vi kartlegger også hvordan skaden eller sykdommen din påvirker mulighetene til å jobbe og motta oppfølging fra Nav. Oppfølging får du tilbud om i eget brev.",
+          "nay": "Dette steget gjelder den siste delen av behandlingen av søknaden din.",
+          "ferdigBehandlet": "Når søknaden er ferdig behandlet, får du svar i et vedtak."
+        }
+      }
+    }
   }
 }

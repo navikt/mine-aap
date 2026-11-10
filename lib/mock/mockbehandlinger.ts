@@ -1,80 +1,47 @@
-import type { Behandling } from 'lib/services/apiInternService';
+import type { SakerMedBehandlingerResponse } from 'lib/types/apiinternTypes';
 
-export const mockBehandlinger: Behandling[] = [
+const sakerMedBehandlingerMock: SakerMedBehandlingerResponse = [
   {
-    behandlingId: 'behandling1',
-    behandlingType: 'SØKNAD',
-    navn: 'Søknad om arbeidsavklaringspenger',
-    vedtakFattet: true,
-    vedtakFattetDato: '2026-10-15',
-    opprettet: '2026-09-09',
-    hendelser: [
+    saksnummer: 'sak1',
+    sakStatus: 'SOKNAD_UNDER_BEHANDLING',
+    behandlinger: [
       {
-        navn: 'SØKNAD_MOTTATT',
-        timestamp: '2026-01-01',
-        progresjon: 'fullført',
-      },
-      {
-        navn: 'ALDER_LOVVALG_MEDLEMSKAP',
-        timestamp: '2026-03-01',
-        progresjon: 'fullført',
-        status: 'VENTER_PÅ_INFORMASJON_FRA_UTENLANDSKE_MYNDIGHETER',
-      },
-      {
-        navn: 'NAV_KONTOR',
-        timestamp: '2026-03-01',
-        progresjon: 'fullført',
-        status: 'VENTER_PÅ_LEGEERKLÆRING',
-      },
-      {
-        navn: 'UNDER_BEHANDLING',
-        timestamp: '2026-05-01',
-        progresjon: 'aktiv',
-        status: 'VENTER_I_KØ',
-      },
-      {
-        navn: 'FERDIG_BEHANDLET',
-        timestamp: '2026-05-01',
-        progresjon: 'ikke-påbegynt',
-      },
-    ],
-  },
-  {
-    behandlingId: 'behandling2',
-    behandlingType: 'KLAGE',
-    navn: 'Klage på vedtak om arbeidsavklaringspenger',
-    vedtakFattet: false,
-    opprettet: '2026-11-01',
-    hendelser: [
-      {
-        navn: 'SØKNAD_MOTTATT',
-        timestamp: '2026-11-01',
-        progresjon: 'fullført',
-      },
-      {
-        navn: 'ALDER_LOVVALG_MEDLEMSKAP',
-        timestamp: '2026-03-01',
-        progresjon: 'fullført',
-        status: 'VENTER_PÅ_INFORMASJON_FRA_UTENLANDSKE_MYNDIGHETER',
-      },
-      {
-        navn: 'NAV_KONTOR',
-        timestamp: '2026-03-01',
-        progresjon: 'aktiv',
-        status: 'VENTER_PÅ_LEGEERKLÆRING',
-      },
-      {
-        navn: 'UNDER_BEHANDLING',
-        timestamp: '2026-05-01',
-        progresjon: 'ikke-påbegynt',
-      },
-      {
-        navn: 'FERDIG_BEHANDLET',
-        timestamp: '2026-05-01',
-        progresjon: 'ikke-påbegynt',
+        behandlingReferanse: '778bdf1c-e0ae-4197-bc46-13aa1cdd08e9',
+        avsluttet: false,
+        behandlingType: 'SØKNAD',
+        hendelser: [
+          {
+            sistEndret: '2025-04-01T12:30:00',
+            progresjon: 'FULLFØRT',
+            navn: 'SØKNAD_MOTTATT',
+          },
+          {
+            sistEndret: '2025-04-02T09:00:00',
+            progresjon: 'AKTIV',
+            status: 'VENTER_PÅ_INFORMASJON_FRA_UTENLANDSKE_MYNDIGHETER',
+            navn: 'ALDER_LOVVALG_MEDLEMSKAP',
+          },
+          {
+            sistEndret: null,
+            progresjon: 'IKKE_PÅBEGYNT',
+            status: null,
+            navn: 'NAV_KONTOR',
+          },
+          {
+            sistEndret: null,
+            progresjon: 'IKKE_PÅBEGYNT',
+            status: null,
+            navn: 'NAY',
+          },
+          {
+            sistEndret: null,
+            progresjon: 'IKKE_PÅBEGYNT',
+            navn: 'FERDIG_BEHANDLET',
+          },
+        ],
       },
     ],
   },
 ];
 
-export default mockBehandlinger;
+export default sakerMedBehandlingerMock;

@@ -1,11 +1,11 @@
-import { Alert, Heading, VStack } from '@navikt/ds-react';
+import { Alert, VStack } from '@navikt/ds-react';
 import { Breadcrumbs } from 'components/StatusISak/Breadcrumbs/Breadcrumbs';
+import SingleJournalpost from 'components/StatusISak/Dokumentvisning/SingleJournalpost';
 import { TilbakeLink } from 'components/StatusISak/TilbakeLink/TilbakeLink';
 import { redirect } from 'i18n/routing';
-import { hentJournalpost } from 'lib/services/apiInternService';
+import { hentJournalpost } from 'lib/services/oppslagService';
 import { isError } from 'lib/utils/api-fetch';
 import { isProduction } from 'lib/utils/environments';
-import SingleJournalpost from 'components/StatusISak/Dokumentvisning/SingleJournalpost';
 
 interface PageParams {
   locale: string;

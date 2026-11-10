@@ -1,6 +1,6 @@
 'use client';
 
-import type { Behandling } from 'lib/services/apiInternService';
+import type { Behandling, BehandlingHendelse } from 'lib/types/apiinternTypes';
 import { useLocale } from 'next-intl';
 import { Fragment, useState } from 'react';
 import styles from './Tidslinje.module.css';
@@ -15,25 +15,25 @@ interface Props {
   behandling: Behandling;
 }
 
-function renderSteg(props: HendelseStegProps) {
-  switch (props.hendelse.navn) {
+function renderSteg(hendelse: BehandlingHendelse, steg: HendelseStegProps) {
+  switch (hendelse.navn) {
     case 'SØKNAD_MOTTATT':
-      return <SoknadMottatt {...props} />;
+      return <SoknadMottatt hendelse={hendelse} steg={steg} />;
     case 'ALDER_LOVVALG_MEDLEMSKAP':
-      return <AlderLovvalgMedlemskap {...props} />;
+      return <AlderLovvalgMedlemskap hendelse={hendelse} steg={steg} />;
     case 'NAV_KONTOR':
-      return <NavKontor {...props} />;
-    case 'UNDER_BEHANDLING':
-      return <UnderBehandling {...props} />;
+      return <NavKontor hendelse={hendelse} steg={steg} />;
+    case 'NAY':
+      return <UnderBehandling hendelse={hendelse} steg={steg} />;
     case 'FERDIG_BEHANDLET':
-      return <FerdigBehandlet {...props} />;
+      return <FerdigBehandlet hendelse={hendelse} steg={steg} />;
   }
 }
 
 export const Tidslinje = ({ behandling }: Props) => {
   const locale = useLocale();
   const [expandedIndex, setExpandedIndex] = useState<number | null>(() => {
-    const activeIndex = behandling.hendelser.findIndex((hendelse) => hendelse.progresjon === 'aktiv');
+    const activeIndex = behandling.hendelser.findIndex((hendelse) => hendelse.progresjon === 'AKTIV');
     return activeIndex === -1 ? null : activeIndex;
   });
   const dateFormatter = new Intl.DateTimeFormat(locale === 'nn' ? 'nn-NO' : 'nb-NO', {
@@ -53,9 +53,8 @@ export const Tidslinje = ({ behandling }: Props) => {
         const isExpanded = expandedIndex === index;
 
         return (
-          <Fragment key={`${hendelse.navn}-${hendelse.timestamp}`}>
-            {renderSteg({
-              hendelse,
+          <Fragment key={`${hendelse.navn}-${hendelse.sistEndret}`}>
+            {renderSteg(hendelse, {
               open: isExpanded,
               onToggle: () => setExpandedIndex((previous) => (previous === index ? null : index)),
               dateFormatter,
