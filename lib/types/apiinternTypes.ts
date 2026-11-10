@@ -11,3 +11,7 @@ type ResponseOfPost<Url extends keyof paths> = ResponseBody<paths[Url]['post']>;
 
 export type SakerMedBehandlingerResponse = ResponseOfGet<'/mine-aap/saker-med-behandlinger'>;
 export type Behandling = components['schemas']['no.nav.aap.api.mineaap.BehandlingVisningResponse'];
+export type BehandlingHendelse = components['schemas']['no.nav.aap.api.mineaap.BehandlingHendelseResponse'];
+export type BehandlingHendelseNavn = components['schemas']['no.nav.aap.api.mineaap.BehandlingHendelseResponse']['navn'];
+export type BehandlingHendelseProgresjon =
+  components['schemas']['no.nav.aap.api.mineaap.BehandlingHendelseResponse']['progresjon'];

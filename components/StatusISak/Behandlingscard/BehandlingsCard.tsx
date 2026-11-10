@@ -1,14 +1,14 @@
 'use client';
-import {
-  type Behandling,
-  type BehandlingHendelseNavn,
-  type BehandlingHendelseProgresjon,
-  type BehandlingsHendelse,
-} from 'lib/services/apiInternService';
-import { Heading } from 'node_modules/@navikt/ds-react/esm/typography/Heading';
 import { ArrowRightIcon, PiggybankIcon } from '@navikt/aksel-icons';
+import type {
+  Behandling,
+  BehandlingHendelse,
+  BehandlingHendelseNavn,
+  BehandlingHendelseProgresjon,
+} from 'lib/types/apiinternTypes';
 import { Link } from 'node_modules/@navikt/ds-react/esm/link/Link';
 import { Process } from 'node_modules/@navikt/ds-react/esm/process/Process';
+import { Heading } from 'node_modules/@navikt/ds-react/esm/typography/Heading';
 import styles from './BehandlingsCard.module.css';
 
 interface Props {
@@ -22,7 +22,7 @@ export const BehandlingsCard = ({ behandling }: Props) => {
     <section className={styles.container}>
       <div className={styles.header}>
         <Heading level="2" size="small">
-          {behandling.navn}
+          {behandling.behandlingType}
         </Heading>
         <PiggybankIcon title="a11y-title" fontSize="1.5rem" />
       </div>
@@ -30,13 +30,13 @@ export const BehandlingsCard = ({ behandling }: Props) => {
         {adjacentHendelser?.map((hendelse) => (
           <Process.Event
             className={styles.event}
-            key={hendelse.timestamp}
+            key={hendelse.navn}
             title={mapHendelseNavn(hendelse.navn)}
             status={mapHendelseProgresjonToEventStatus(hendelse.progresjon)}
           ></Process.Event>
         ))}
       </Process>
-      <Link href={`/aap/mine-aap/nb/oversikt/behandling/${behandling.behandlingId}/`} className={styles.link}>
+      <Link href={`/aap/mine-aap/nb/oversikt/behandling/${behandling.behandlingReferanse}/`} className={styles.link}>
         Saksoversikt
         <ArrowRightIcon title="a11y-title" fontSize="1.5rem" className={styles.arrow} />
       </Link>
@@ -44,10 +44,10 @@ export const BehandlingsCard = ({ behandling }: Props) => {
   );
 };
 
-function getAdjacentHendelser(hendelser: BehandlingsHendelse[]) {
+function getAdjacentHendelser(hendelser: BehandlingHendelse[]) {
   // Find the index of the active event
   // Extract the active event, plus the ones before and after it
-  const index = hendelser.findIndex((hendelse) => hendelse.progresjon === 'aktiv');
+  const index = hendelser.findIndex((hendelse) => hendelse.progresjon === 'AKTIV');
   if (index !== -1) {
     const start = Math.max(0, index - 1);
     const adjacentHendelserList = hendelser.slice(start, index + 2);
@@ -57,11 +57,11 @@ function getAdjacentHendelser(hendelser: BehandlingsHendelse[]) {
 
 function mapHendelseProgresjonToEventStatus(status: BehandlingHendelseProgresjon) {
   switch (status) {
-    case 'aktiv':
+    case 'AKTIV':
       return 'active';
-    case 'fullført':
+    case 'FULLFØRT':
       return 'completed';
-    case 'ikke-påbegynt':
+    case 'IKKE_PÅBEGYNT':
       return 'uncompleted';
   }
 }
@@ -74,8 +74,8 @@ function mapHendelseNavn(navn: BehandlingHendelseNavn) {
       return 'Vi sjekker søknaden din';
     case 'NAV_KONTOR':
       return 'Vi kartlegger situasjonen din';
-    case 'UNDER_BEHANDLING':
-      return 'Vi behandler siste del av søknaden din';
+    case 'NAY':
+      return 'Vi behandler';
     case 'FERDIG_BEHANDLET':
       return 'Du får svar';
   }

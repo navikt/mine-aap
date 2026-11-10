@@ -2,11 +2,12 @@ import { Alert, Heading, HStack, VStack } from '@navikt/ds-react';
 import { BehandlingsCard } from 'components/StatusISak/Behandlingscard/BehandlingsCard';
 import { Breadcrumbs } from 'components/StatusISak/Breadcrumbs/Breadcrumbs';
 import { MeldekortlenkeNy } from 'components/StatusISak/MeldekortlenkeNy/MeldekortlenkeNy';
-import { TilbakeLink } from 'components/StatusISak/TilbakeLink/TilbakeLink';
 import { SnarveierLenkeliste } from 'components/StatusISak/Snarveier/SnarveierLenkeliste';
 import { Statuskort } from 'components/StatusISak/Statuskort/Statuskort';
+import { TilbakeLink } from 'components/StatusISak/TilbakeLink/TilbakeLink';
 import { redirect } from 'i18n/routing';
-import { type Behandling, hentBehandlinger } from 'lib/services/apiInternService';
+import { hentSakerMedBehandlinger } from 'lib/services/apiInternServiceNew';
+import type { Behandling } from 'lib/types/apiinternTypes';
 import { isError } from 'lib/utils/api-fetch';
 import { isProduction } from 'lib/utils/environments';
 
@@ -23,11 +24,12 @@ const Page = async ({ params }: Readonly<{ params: Promise<PageParams> }>) => {
     });
   }
 
-  const behandlinger = await hentBehandlinger();
+  const sakerMedBehandlinger = await hentSakerMedBehandlinger();
 
-  if (isError(behandlinger)) {
+  if (isError(sakerMedBehandlinger)) {
     return <Alert variant={'error'}>{'Noe gikk galt ved henting av behandlinger'}</Alert>;
   }
+  const aktivSak = sakerMedBehandlinger.data.find((sak) => sak.sakStatus === 'SOKNAD_UNDER_BEHANDLING');
 
   return (
     <VStack gap={'space-16'}>
@@ -47,8 +49,8 @@ const Page = async ({ params }: Readonly<{ params: Promise<PageParams> }>) => {
         nesteUtbetalingSum={'35 500kr etter trekk'}
         utbetalingsdato={'25. September'}
       />
-      {behandlinger.data.filter(ikkeVedtatteBehandling).map((behandling) => (
-        <BehandlingsCard key={behandling.behandlingId} behandling={behandling} />
+      {aktivSak?.behandlinger.filter(ikkeVedtatteBehandling).map((behandling) => (
+        <BehandlingsCard key={behandling.behandlingReferanse} behandling={behandling} />
       ))}
       <MeldekortlenkeNy />
       <SnarveierLenkeliste />
@@ -58,7 +60,7 @@ const Page = async ({ params }: Readonly<{ params: Promise<PageParams> }>) => {
 };
 
 function ikkeVedtatteBehandling(behandling: Behandling) {
-  return !behandling.vedtakFattet;
+  return !behandling.avsluttet;
 }
 
 export default Page;
