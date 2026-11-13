@@ -6,38 +6,25 @@ const sakerMedBehandlingerMock: SakerMedBehandlingerResponse = [
     sakStatus: 'SOKNAD_UNDER_BEHANDLING',
     behandlinger: [
       {
-        behandlingReferanse: '778bdf1c-e0ae-4197-bc46-13aa1cdd08e9',
+        behandlingReferanse: 'c2fe416f-ba35-4f23-878d-397c8becbab1',
         avsluttet: false,
         behandlingType: 'SØKNAD',
         hendelser: [
+          { sistEndret: '2026-11-12T15:28:53.477', progresjon: 'FULLFØRT', navn: 'SØKNAD_MOTTATT' },
           {
-            sistEndret: '2025-04-01T12:30:00',
+            sistEndret: '2026-11-12T15:31:45.235',
             progresjon: 'FULLFØRT',
-            navn: 'SØKNAD_MOTTATT',
-          },
-          {
-            sistEndret: '2025-04-02T09:00:00',
-            progresjon: 'AKTIV',
-            status: 'VENTER_PÅ_INFORMASJON_FRA_UTENLANDSKE_MYNDIGHETER',
+            status: null,
             navn: 'ALDER_LOVVALG_MEDLEMSKAP',
           },
           {
-            sistEndret: null,
-            progresjon: 'IKKE_PÅBEGYNT',
-            status: null,
+            sistEndret: '2026-11-12T15:31:47.575',
+            progresjon: 'AKTIV',
+            status: 'VENTER_PÅ_LEGEERKLÆRING',
             navn: 'NAV_KONTOR',
           },
-          {
-            sistEndret: null,
-            progresjon: 'IKKE_PÅBEGYNT',
-            status: null,
-            navn: 'NAY',
-          },
-          {
-            sistEndret: null,
-            progresjon: 'IKKE_PÅBEGYNT',
-            navn: 'FERDIG_BEHANDLET',
-          },
+          { sistEndret: null, progresjon: 'IKKE_PÅBEGYNT', status: null, navn: 'NAY' },
+          { sistEndret: null, progresjon: 'IKKE_PÅBEGYNT', navn: 'FERDIG_BEHANDLET' },
         ],
       },
     ],
