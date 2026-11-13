@@ -1,4 +1,4 @@
-import { Alert, Heading, HStack, VStack } from '@navikt/ds-react';
+import { Alert, Heading, VStack } from '@navikt/ds-react';
 import { BehandlingsCard } from 'components/StatusISak/Behandlingscard/BehandlingsCard';
 import { Breadcrumbs } from 'components/StatusISak/Breadcrumbs/Breadcrumbs';
 import { MeldekortlenkeNy } from 'components/StatusISak/MeldekortlenkeNy/MeldekortlenkeNy';
@@ -6,6 +6,7 @@ import { SnarveierLenkeliste } from 'components/StatusISak/Snarveier/SnarveierLe
 import { Statuskort } from 'components/StatusISak/Statuskort/Statuskort';
 import { TilbakeLink } from 'components/StatusISak/TilbakeLink/TilbakeLink';
 import { redirect } from 'i18n/routing';
+import { logInfo } from 'lib/server/logger';
 import { hentSakerMedBehandlinger } from 'lib/services/apiInternServiceNew';
 import type { Behandling } from 'lib/types/apiinternTypes';
 import { isError } from 'lib/utils/api-fetch';
@@ -29,6 +30,7 @@ const Page = async ({ params }: Readonly<{ params: Promise<PageParams> }>) => {
   if (isError(sakerMedBehandlinger)) {
     return <Alert variant={'error'}>{'Noe gikk galt ved henting av behandlinger'}</Alert>;
   }
+  logInfo(JSON.stringify(sakerMedBehandlinger));
   const aktivSak = sakerMedBehandlinger.data.find((sak) => sak.sakStatus === 'SOKNAD_UNDER_BEHANDLING');
 
   return (
