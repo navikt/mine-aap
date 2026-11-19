@@ -1,7 +1,7 @@
 pre-commit:
   jobs:
     - name: Translation diff check
-      run: yarn intl:diff
+      run: pn intl:diff
     - name: Biome check
       glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}"
       run: npx @biomejs/biome check --write --no-errors-on-unmatched --files-ignore-unknown=true --colors=off {staged_files}
