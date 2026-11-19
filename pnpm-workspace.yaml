@@ -1,0 +1,8 @@
+allowBuilds:
+  "@parcel/watcher": false
+  "@swc/core": false
+  lefthook: true
+registries:
+  https://npm.pkg.github.com/:
+    serverType: npm
+    scopes: ["@navikt"]
