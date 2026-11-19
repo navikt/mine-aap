@@ -18,7 +18,6 @@ Husk å sette `.env.local` med verdiene fra `.env.local.template`
 Appen kjører på port 3000 som default:
 http://localhost:3000/aap/mine-aap/nb/
 
-
 ## Typescript
 
 Appen bruker genererte typer fra aap-innsending. For å oppdatere typene, pull `navikt/aap-innsending` og kjør den opp lokalt med TestApp.kt. Kjør så følgende kommando i dette repoet:
