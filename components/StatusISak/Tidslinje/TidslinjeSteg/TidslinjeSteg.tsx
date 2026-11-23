@@ -15,20 +15,20 @@ interface Props {
 export function TidslinjeSteg({ hendelse, steg, children, title }: Props) {
   const id = useId();
   const { progresjon, sistEndret } = hendelse;
-  let marker: ReactNode;
+  let icon: ReactNode;
   let timelineLabel = '';
   let date: string | undefined;
 
   switch (progresjon) {
     case 'FULLFØRT':
-      marker = <CheckmarkIcon />;
+      icon = <CheckmarkIcon />;
       if (sistEndret) {
         date = steg.dateFormatter.format(new Date(sistEndret));
         timelineLabel = date;
       }
       break;
     case 'AKTIV':
-      marker = <ClockFillIcon />;
+      icon = <ClockFillIcon />;
       timelineLabel = 'Nå';
       break;
     case 'IKKE_PÅBEGYNT':
@@ -44,8 +44,8 @@ export function TidslinjeSteg({ hendelse, steg, children, title }: Props) {
       aria-current={progresjon === 'AKTIV' ? 'step' : undefined}
     >
       <div className={styles.card}>
-        <span className={styles.marker} aria-hidden="true">
-          {marker}
+        <span className={styles.icon} aria-hidden="true">
+          {icon}
         </span>
         <h3 className={styles.heading}>
           <button

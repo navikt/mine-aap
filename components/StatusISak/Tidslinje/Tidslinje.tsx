@@ -48,7 +48,7 @@ export const Tidslinje = ({ behandling }: Props) => {
   }
 
   return (
-    <ol className={styles.timeline} aria-label="Søknadens tidslinje">
+    <ol className={styles.timeline} aria-label="Tidslinje for behandlingen">
       {behandling.hendelser.map((hendelse, index) => {
         const isExpanded = expandedIndex === index;
 

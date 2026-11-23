@@ -1,6 +1,7 @@
 import { BodyLong } from '@navikt/ds-react';
 import type { BehandlingHendelseNay } from 'lib/types/apiinternTypes';
-import { beskrivelser, venteStatusTekstNay } from '../../tidslinjeMapping';
+import { useTranslations } from 'next-intl';
+import { StatusTagOgBeskrivelse } from '../../StatusTagOgBeskrivelse/StatusTagOgBeskrivelse';
 import { TidslinjeSteg } from '../TidslinjeSteg';
 import type { HendelseStegProps } from '../types';
 
@@ -9,14 +10,21 @@ export interface UnderBehandlingProps {
   hendelse: BehandlingHendelseNay;
 }
 export function UnderBehandling({ hendelse, steg }: UnderBehandlingProps) {
-  const beskrivelse =
+  const t = useTranslations('statusisak.underBehandling');
+
+  /*const beskrivelse =
     hendelse.status && hendelse.progresjon !== 'IKKE_PÅBEGYNT'
       ? venteStatusTekstNay()[hendelse.status]
       : beskrivelser().NAY;
+  */
+
+  //TODO: Status for "Søknaden står i kø"
 
   return (
-    <TidslinjeSteg steg={steg} hendelse={hendelse} title="Vi behandler siste del av søknaden din">
-      <BodyLong>{beskrivelse}</BodyLong>
+    <TidslinjeSteg steg={steg} hendelse={hendelse} title={t('tittel')}>
+      <StatusTagOgBeskrivelse navn={hendelse.navn} status={hendelse.status} />
+      <BodyLong>{t('beskrivelse')}</BodyLong>
+      <BodyLong weight="semibold">{t('oppfølging')}</BodyLong>
     </TidslinjeSteg>
   );
 }

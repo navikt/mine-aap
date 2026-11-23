@@ -17,7 +17,7 @@ export type BehandlingHendelseProgresjon =
   components['schemas']['no.nav.aap.api.mineaap.BehandlingHendelseResponse']['progresjon'];
 
 export type BehandlingHendelse = components['schemas']['no.nav.aap.api.mineaap.BehandlingHendelseResponse'];
-export type BehandlingHendelseAlderLovvalg =
+export type BehandlingHendelseAlderLovvalgMedlemskap =
   components['schemas']['no.nav.aap.api.mineaap.BehandlingHendelseResponse.AlderLovvalgMedlemskap'];
 export type BehandlingHendelseFerdigBehandlet =
   components['schemas']['no.nav.aap.api.mineaap.BehandlingHendelseResponse.FerdigBehandlet'];

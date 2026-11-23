@@ -20,7 +20,7 @@ const sakerMedBehandlingerMock: SakerMedBehandlingerResponse = [
           {
             sistEndret: '2026-11-12T15:31:47.575',
             progresjon: 'AKTIV',
-            status: 'VENTER_PÅ_LEGEERKLÆRING',
+            status: 'PURRET_PÅ_LEGERERKLÆRING',
             navn: 'NAV_KONTOR',
           },
           { sistEndret: null, progresjon: 'IKKE_PÅBEGYNT', status: null, navn: 'NAY' },

@@ -1,23 +1,22 @@
 import { BodyLong } from '@navikt/ds-react';
-import type { BehandlingHendelseAlderLovvalg } from 'lib/types/apiinternTypes';
-import { beskrivelser, venteStatusTekstAlderLovvalgMedlemskap } from '../../tidslinjeMapping';
+import type { BehandlingHendelseAlderLovvalgMedlemskap } from 'lib/types/apiinternTypes';
+import { useTranslations } from 'next-intl';
+import { StatusTagOgBeskrivelse } from '../../StatusTagOgBeskrivelse/StatusTagOgBeskrivelse';
 import { TidslinjeSteg } from '../TidslinjeSteg';
 import type { HendelseStegProps } from '../types';
 
-export interface AlderLovvalgProps {
+export interface AlderLovvalgMedlemskapsProps {
   steg: HendelseStegProps;
-  hendelse: BehandlingHendelseAlderLovvalg;
+  hendelse: BehandlingHendelseAlderLovvalgMedlemskap;
 }
-export function AlderLovvalgMedlemskap({ hendelse, steg }: AlderLovvalgProps) {
-  const title = hendelse.progresjon === 'FULLFØRT' ? 'Vi har sjekket søknaden din' : 'Vi sjekker søknaden din';
-  const beskrivelse =
-    hendelse.status && hendelse.progresjon !== 'IKKE_PÅBEGYNT'
-      ? venteStatusTekstAlderLovvalgMedlemskap()[hendelse.status]
-      : beskrivelser().ALDER_LOVVALG_MEDLEMSKAP;
+export function AlderLovvalgMedlemskap({ hendelse, steg }: AlderLovvalgMedlemskapsProps) {
+  const t = useTranslations('statusisak.alderLovvalgMedlemskap');
 
   return (
-    <TidslinjeSteg steg={steg} hendelse={hendelse} title={title}>
-      <BodyLong>{beskrivelse}</BodyLong>
+    <TidslinjeSteg steg={steg} hendelse={hendelse} title={t('tittel')}>
+      <StatusTagOgBeskrivelse navn={hendelse.navn} status={hendelse.status} />
+      <BodyLong>{t('beskrivelse')}</BodyLong>
+      <BodyLong weight="semibold">{t('oppfølging')}</BodyLong>
     </TidslinjeSteg>
   );
 }

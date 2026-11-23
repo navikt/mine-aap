@@ -1,8 +1,7 @@
-'use client';
 import { BodyLong } from '@navikt/ds-react';
 import type { BehandlingHendelseNavKontor } from 'lib/types/apiinternTypes';
 import { useTranslations } from 'next-intl';
-import { beskrivelser } from '../../tidslinjeMapping';
+import { StatusTagOgBeskrivelse } from '../../StatusTagOgBeskrivelse/StatusTagOgBeskrivelse';
 import { TidslinjeSteg } from '../TidslinjeSteg';
 import type { HendelseStegProps } from '../types';
 
@@ -14,7 +13,8 @@ export function NavKontor({ hendelse, steg }: NavKontorProps) {
   const t = useTranslations('statusisak.navKontor');
   return (
     <TidslinjeSteg hendelse={hendelse} steg={steg} title={t('tittel')}>
-      <BodyLong>{beskrivelser().NAV_KONTOR}</BodyLong>
+      <StatusTagOgBeskrivelse navn={hendelse.navn} status={hendelse.status} />
+      <BodyLong>{t('beskrivelse')}</BodyLong>
       <BodyLong>
         {t('varighet')} <strong>{t('oppfølging')}</strong>
       </BodyLong>

@@ -1,10 +1,10 @@
 .step {
   position: relative;
-  --marker-center: 32px;
-  --next-marker-center: 32px;
+  --icon-center: 2rem;
+  --next-icon-center: 2rem;
 }
 
-.step[data-progresjon="fullført"] {
+.step[data-progresjon="FULLFØRT"] {
   --step-rail-image: none;
   --step-rail-color: var(--timeline-rail);
 }
@@ -23,7 +23,7 @@
   content: "";
   position: absolute;
   inset-inline-start: 19px;
-  inset-block: calc(var(--marker-center) + 13px) calc(13px - var(--next-marker-center));
+  inset-block: calc(var(--icon-center) + 13px) calc(13px - var(--next-icon-center));
   inline-size: 2px;
   background-color: var(--step-rail-color, transparent);
   background-image: var(
@@ -45,6 +45,16 @@
   pointer-events: none;
 }
 
+/*1. .step:last-child::after
+Hides the separator on a .step that is the last child of its parent. There is no next step to separate it from.
+
+2. .step[data-expanded="true"]::after
+Hides the separator on an expanded step.
+
+[data-expanded="true"] matches an HTML attribute with that exact value.
+
+3. .step:has(+ [data-expanded="true"])::after
+Hides the separator on a step immediately before an expanded sibling.*/
 .step:last-child::after,
 .step[data-expanded="true"]::after,
 .step:has(+ [data-expanded="true"])::after {
@@ -117,14 +127,14 @@
   line-height: 1.5;
 }
 
-.step[data-progresjon="aktiv"] .status {
+.step[data-progresjon="AKTIV"] .status {
   color: var(--timeline-accent);
 }
 
-.marker {
+.icon {
   position: absolute;
   inset-inline-start: 11px;
-  inset-block-start: calc(var(--marker-center) - 9px);
+  inset-block-start: calc(var(--icon-center) - 9px);
   z-index: 2;
   display: flex;
   align-items: center;
@@ -136,25 +146,26 @@
   pointer-events: none;
 }
 
-.step[data-progresjon="aktiv"] .marker {
+.step[data-progresjon="AKTIV"] .icon {
   color: #287cda;
   background: #fff;
   border: 0;
   box-shadow: 0 0 0 var(--ax-space-4) #e6f0ff;
 }
 
-.step[data-progresjon="fullført"] .marker {
+.step[data-progresjon="FULLFØRT"] .icon {
   color: #fff;
   background: var(--timeline-muted);
   border: 0;
 }
 
-.step[data-progresjon="ikke-påbegynt"] .marker {
+.step[data-progresjon="IKKE_PÅBEGYNT"] .icon {
   border: 2px dashed var(--timeline-muted);
   background: var(--bg-page, #f8f6f6);
 }
 
-.marker > svg {
+/*Makes the svg fill the icon container*/
+.icon > svg {
   inline-size: 100%;
   block-size: 100%;
 }
@@ -179,6 +190,7 @@
   margin-block-start: var(--ax-space-20);
 }
 
+/*Hides the screenreader only text visually but keeps it accessible to assistive technologies*/
 .srOnly {
   position: absolute;
   inline-size: 1px;
@@ -191,6 +203,17 @@
   border: 0;
 }
 
+/*
+What are Canvas and CanvasText?
+They are CSS system colors, not fixed colors:
+
+Canvas: the user’s preferred page background color.
+CanvasText: a text color intended to contrast with that background.
+
+This is different from dark mode: 
+it adapts the timeline to an accessibility palette 
+rather than simply switching between light and dark styling.
+*/
 @media (forced-colors: active) {
   .step[data-expanded="true"] .card {
     color: CanvasText;
@@ -198,7 +221,7 @@
     outline: 1px solid CanvasText;
   }
 
-  .marker {
+  .icon {
     outline: 2px solid CanvasText;
   }
 
