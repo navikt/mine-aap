@@ -1,6 +1,6 @@
+import { Heading } from '@navikt/ds-react';
+import { VedleggsLenke } from 'components/StatusISak/Dokumentvisning/vedlegg/VedleggsLenke';
 import type { DokumentProps } from '../JournalpostInterfaces';
-import { Detail, Heading } from '@navikt/ds-react';
-import { readableFileSize } from '../readableFilesize';
 import styles from './Vedlegg.module.css';
 
 interface Props {
@@ -8,40 +8,11 @@ interface Props {
   journalpostId: string | undefined;
 }
 
-interface VedleggslenkeProps {
-  url: string;
-  tittel: string;
-  filstorrelse: number;
-  brukerHarTilgang: boolean;
-}
-
 //TODO: Avklare hvordan vedlegg skal håndteres og vises
 
-const Vedlegg = ({ vedleggsListe, journalpostId }: Props) => {
+const Vedlegg = ({ vedleggsListe }: Props) => {
   const baseUrl = 'api/dokument/vedlegg'; //`${dokumentUrl}/${journalpostId}`;
   const hasVedlegg = vedleggsListe && vedleggsListe.length > 0;
-
-  const VedleggsLenke = ({ url, tittel, brukerHarTilgang, filstorrelse }: VedleggslenkeProps) => {
-    const tittelMedPdfTag = tittel + '.pdf';
-
-    return brukerHarTilgang ? (
-      <div className={styles.container}>
-        <div className={styles.linkWIthIcon}>
-          <a href={url} className={styles.vedlegg} lang="nb">
-            {tittelMedPdfTag}
-          </a>
-        </div>
-        <Detail>{readableFileSize(filstorrelse)}</Detail>
-      </div>
-    ) : (
-      <div className={styles.container}>
-        <div className={styles.vedleggIngenTilgang} lang="nb">
-          {tittelMedPdfTag}
-        </div>
-        <Detail>{readableFileSize(filstorrelse)}</Detail>
-      </div>
-    );
-  };
 
   return hasVedlegg ? (
     <>

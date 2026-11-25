@@ -1,11 +1,10 @@
-import type { JournalpostProps } from './JournalpostInterfaces';
-import { EyeSlashIcon, FilePdfIcon } from '@navikt/aksel-icons';
-import { BodyShort, Detail, Heading } from '@navikt/ds-react';
-import { setAvsenderMottaker } from './setAvsenderMottaker';
-import { readableFileSize } from './readableFilesize';
+import { BodyShort, Heading } from '@navikt/ds-react';
+import { HovedDokument } from 'components/StatusISak/Dokumentvisning/HovedDokument';
 import { format } from 'date-fns';
 import DokumentNotFound from './finner-ikke-dokument/DokumentNotFound';
+import type { JournalpostProps } from './JournalpostInterfaces';
 import styles from './SingleJournalpost.module.css';
+import { setAvsenderMottaker } from './setAvsenderMottaker';
 import Vedlegg from './vedlegg/Vedlegg';
 
 interface Props {
@@ -47,45 +46,12 @@ const SingleJournalpost = ({ journalpost }: Props) => {
   const veddleggsListe = journalpost.vedlegg;
   const isInngaaendeJournalpost = journalpost.journalposttype.toLowerCase() === 'inn';
 
-  const HovedDokument = () => {
-    return (
-      <>
-        {journalpost?.dokument.brukerHarTilgang ? (
-          <div className={`${styles.container} ${styles.hover}`}>
-            <div className={styles.icon}>
-              <FilePdfIcon fontSize="1.5rem" />
-            </div>
-            <div className={styles.content}>
-              <a className={styles.link} href={hovedDokumentUrl} lang="nb">
-                <BodyShort size="medium">{'Åpne ' + journalpost?.dokument.tittel.toLowerCase()}</BodyShort>
-              </a>
-              <Detail>{readableFileSize(journalpost.dokument.filstorrelse)}</Detail>
-            </div>
-          </div>
-        ) : (
-          <div className={`${styles.container} ${styles.kanIkkeVises} ${styles.hover}`}>
-            <div className={`${styles.icon} ${styles.iconKanIkkeVises}`}>
-              <EyeSlashIcon fontSize="1.5rem" />
-            </div>
-            <div className={styles.content}>
-              <div className={styles.tittelIkkeTilgang}>
-                <BodyShort size="medium" lang="nb">
-                  {journalpost?.dokument.tittel}
-                </BodyShort>
-              </div>
-            </div>
-          </div>
-        )}
-      </>
-    );
-  };
-
   return (
     <>
       <Heading level="1" size="large" lang="nb">
         {journalpost?.tittel}
       </Heading>
-      <HovedDokument />
+      <HovedDokument journalPost={journalpost} hovedDokumentUrl={hovedDokumentUrl} />
       <div className={styles.temalenke}>{tilgangsSperreInfo()}</div>
       <div className={styles.details}>
         <div className={styles.detailTitle}>

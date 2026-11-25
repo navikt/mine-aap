@@ -24,7 +24,7 @@
   margin-top: 0.25rem;
   color: var(--ax-text-neutral);
   font-feature-settings: 'liga' off, 'clig' off;
-  font-family: "Source Sans 3";
+  font-family: "Source Sans 3", sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 600;

@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "biome ci .",
+    "lint:write": "biome lint --write",
     "prepare": "lefthook install",
     "test": "vitest --run",
     "intl:diff": "json-diff -k ./lib/translations/nb.json ./lib/translations/nn.json",

@@ -35,7 +35,7 @@
 .title {
   color: var(--link-secondary, #002459);
   font-feature-settings: 'liga' off, 'clig' off;
-  font-family: "Source Sans 3";
+  font-family: "Source Sans 3", sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 500;

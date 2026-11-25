@@ -21,7 +21,7 @@
   width: 100%;
   color: var(--ax-text-brand-beige);
   font-feature-settings: 'liga' off, 'clig' off;
-  font-family: "Source Sans 3";
+  font-family: "Source Sans 3", sans-serif;
   font-size: 20px;
   font-style: normal;
   font-weight: 600;
@@ -33,7 +33,7 @@
   display: flex;
   color: var(--linkprimary, #A60017);
   font-feature-settings: 'liga' off, 'clig' off;
-  font-family: "Source Sans 3";
+  font-family: "Source Sans 3", sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 600;
