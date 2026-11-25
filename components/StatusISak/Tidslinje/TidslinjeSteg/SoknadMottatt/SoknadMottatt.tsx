@@ -13,7 +13,7 @@ export function SoknadMottatt(props: SoknadMottattProps) {
   const t = useTranslations('statusisak.soknadMottatt');
 
   return (
-    <TidslinjeSteg {...props} title="Søknaden din er mottatt">
+    <TidslinjeSteg {...props} title={t('tittel.fullført')}>
       <StatusTagOgBeskrivelse navn={props.hendelse.navn} />
       <BodyLong>{t('beskrivelse')}</BodyLong>
     </TidslinjeSteg>

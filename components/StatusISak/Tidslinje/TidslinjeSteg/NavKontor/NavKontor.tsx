@@ -12,12 +12,14 @@ export interface NavKontorProps {
 export function NavKontor({ hendelse, steg }: NavKontorProps) {
   const t = useTranslations('statusisak.navKontor');
   return (
-    <TidslinjeSteg hendelse={hendelse} steg={steg} title={t('tittel')}>
+    <TidslinjeSteg
+      hendelse={hendelse}
+      steg={steg}
+      title={t(hendelse.progresjon === 'FULLFØRT' ? 'tittel.fullført' : 'tittel.aktivOgIkkePåbegynt')}
+    >
       <StatusTagOgBeskrivelse navn={hendelse.navn} status={hendelse.status} />
       <BodyLong>{t('beskrivelse')}</BodyLong>
-      <BodyLong>
-        {t('varighet')} <strong>{t('oppfølging')}</strong>
-      </BodyLong>
+      <BodyLong weight="semibold">{t('oppfølging')}</BodyLong>
     </TidslinjeSteg>
   );
 }

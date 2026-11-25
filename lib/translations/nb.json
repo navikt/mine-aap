@@ -255,11 +255,16 @@
   },
   "statusisak": {
     "soknadMottatt": {
-      "tittel": "Søknaden din er mottatt",
+      "tittel": {
+        "fullført": "Søknaden din er mottatt"
+      },
       "beskrivelse": "Vi har mottatt søknaden din."
     },
     "alderLovvalgMedlemskap": {
-      "tittel": "Vi sjekker søknaden din",
+      "tittel": {
+        "aktivOgIkkePåbegynt": "Vi sjekker søknaden din",
+        "fullført": "Vi har sjekket søknaden din"
+      },
       "beskrivelse": "Vi vurderer alder, lovvalg og medlemskap i folketrygden.",
       "oppfølging": "Du trenger ikke gjøre noe.",
       "status": {
@@ -272,9 +277,11 @@
       }
     },
     "navKontor": {
-      "tittel": "Vi kartlegger situasjonen din",
-      "beskrivelse": "Vi henter inn medisinske opplysninger om deg hvis vi trenger det. Vi vil samarbeide med deg for å kartlegge hvordan skaden eller sykdommen påvirker mulighetene dine til å jobbe.",
-      "varighet": "Kartleggingen tar 1-2 måneder.",
+      "tittel": {
+        "aktivOgIkkePåbegynt": "Vi kartlegger situasjonen din",
+        "fullført": "Vi har kartlagt situasjonen din"
+      },
+      "beskrivelse": "Vi henter inn medisinske opplysninger om deg hvis vi trenger det. Vi vil samarbeide med deg for å kartlegge hvordan skaden eller sykdommen påvirker mulighetene dine til å jobbe. Kartleggingen tar 1-2 måneder.",
       "oppfølging": "Du hører fra oss hvis det trengs.",
       "status": {
         "beskrivelse": {
@@ -289,7 +296,10 @@
       }
     },
     "underBehandling": {
-      "tittel": "Vi behandler siste del av søknaden din",
+      "tittel": {
+        "aktivOgIkkePåbegynt": "Vi behandler siste del av søknaden din",
+        "fullført": "Vi har behandlet siste del av søknaden din"
+      },
       "beskrivelse": "En saksbehandler vurderer om du får AAP, og regner ut hvor mye og hvor lenge du kan få.",
       "oppfølging": "Vi tar kontakt med deg hvis vi trenger mer informasjon.",
       "status": {
@@ -305,7 +315,11 @@
       }
     },
     "ferdigBehandlet": {
-      "tittel": "Du får svar",
+      "tittel": {
+        "aktivOgIkkePåbegynt": "Du får svar ",
+        "fullført": "Ferdig behandlet "
+      },
+      "beskrivelse": "Du kan forvente svar på søknaden din om AAP innen dato",
       "status": {
         "beskrivelse": {
           "søknadGodkjent": "Søknaden din om AAP er godkjent.",

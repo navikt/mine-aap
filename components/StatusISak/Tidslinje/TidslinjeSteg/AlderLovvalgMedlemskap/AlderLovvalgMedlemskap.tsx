@@ -13,7 +13,11 @@ export function AlderLovvalgMedlemskap({ hendelse, steg }: AlderLovvalgMedlemska
   const t = useTranslations('statusisak.alderLovvalgMedlemskap');
 
   return (
-    <TidslinjeSteg steg={steg} hendelse={hendelse} title={t('tittel')}>
+    <TidslinjeSteg
+      steg={steg}
+      hendelse={hendelse}
+      title={t(hendelse.progresjon === 'FULLFØRT' ? 'tittel.fullført' : 'tittel.aktivOgIkkePåbegynt')}
+    >
       <StatusTagOgBeskrivelse navn={hendelse.navn} status={hendelse.status} />
       <BodyLong>{t('beskrivelse')}</BodyLong>
       <BodyLong weight="semibold">{t('oppfølging')}</BodyLong>

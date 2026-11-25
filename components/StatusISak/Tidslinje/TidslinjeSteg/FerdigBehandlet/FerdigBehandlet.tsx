@@ -9,12 +9,18 @@ export interface FerdigBehandletProps {
   steg: HendelseStegProps;
   hendelse: BehandlingHendelseFerdigBehandlet;
 }
+
+//TODO: Avklare hvor dato skal hentes fra og legge til i beskrivelse
+//TODO: Logikk for switch mellom søknadGodkjent og søknadIkkeGodkjent, avventer API
 export function FerdigBehandlet(props: FerdigBehandletProps) {
   const t = useTranslations('statusisak.ferdigBehandlet');
   return (
-    <TidslinjeSteg {...props} title="Du får svar">
+    <TidslinjeSteg
+      {...props}
+      title={t(props.hendelse.progresjon === 'FULLFØRT' ? 'tittel.fullført' : 'tittel.aktivOgIkkePåbegynt')}
+    >
       <StatusTagOgBeskrivelse navn={props.hendelse.navn} />
-      <BodyLong>{t('status.beskrivelse.søknadGodkjent')}</BodyLong>
+      <BodyLong>{t('beskrivelse')}</BodyLong>
     </TidslinjeSteg>
   );
 }
