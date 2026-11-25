@@ -51,7 +51,7 @@ const SingleJournalpost = ({ journalpost }: Props) => {
       <Heading level="1" size="large" lang="nb">
         {journalpost?.tittel}
       </Heading>
-      <HovedDokument journalPost={journalpost} hovedDokumentUrl={hovedDokumentUrl} />
+      <HovedDokument journalpost={journalpost} hovedDokumentUrl={hovedDokumentUrl} />
       <div className={styles.temalenke}>{tilgangsSperreInfo()}</div>
       <div className={styles.details}>
         <div className={styles.detailTitle}>
