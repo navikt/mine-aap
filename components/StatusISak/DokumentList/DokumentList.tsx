@@ -1,6 +1,6 @@
 import type { Dokument } from 'lib/types/types';
-import { Link, BodyLong, Heading, Button } from 'node_modules/@navikt/ds-react';
 import { UploadIcon } from 'node_modules/@navikt/aksel-icons/dist/react/esm';
+import { BodyLong, Button, Heading, Link } from 'node_modules/@navikt/ds-react';
 import styles from './DokumentList.module.css';
 
 //TODO: avklare dokument-json felter

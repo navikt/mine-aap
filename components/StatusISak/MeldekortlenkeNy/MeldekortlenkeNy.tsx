@@ -1,9 +1,9 @@
 'use client';
 
-import { Heading, BodyShort } from '@navikt/ds-react';
-import styles from './MeldekortlenkeNy.module.css';
 import { ArrowRightIcon } from '@navikt/aksel-icons';
+import { BodyShort, Heading } from '@navikt/ds-react';
 import { Link } from 'node_modules/@navikt/ds-react/esm/link/Link';
+import styles from './MeldekortlenkeNy.module.css';
 
 export const MeldekortlenkeNy = () => {
   return (

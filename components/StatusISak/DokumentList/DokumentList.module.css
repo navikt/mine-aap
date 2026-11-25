@@ -19,9 +19,11 @@
 }
 
 .link {
-  margin-bottom: 0.2rem;  
-  color: var(--linkprimary, #A60017);
-  font-feature-settings: 'liga' off, 'clig' off;
+  margin-bottom: 0.2rem;
+  color: var(--linkprimary, #a60017);
+  font-feature-settings:
+    "liga" off,
+    "clig" off;
   font-family: "Source Sans 3", sans-serif;
   font-size: 19px;
   font-style: normal;
@@ -34,9 +36,9 @@
   text-decoration-thickness: 5%; /* 0.95px */
   text-underline-offset: 16%; /* 3.04px */
   text-underline-position: from-font;
-  
+
   &:hover {
-    text-decoration-color: var(--linkprimary-hover, #A60017);
+    text-decoration-color: var(--linkprimary-hover, #a60017);
   }
 }
 
@@ -46,7 +48,9 @@
 
 .ingress {
   color: var(--ax-text-neutral);
-  font-feature-settings: 'liga' off, 'clig' off;
+  font-feature-settings:
+    "liga" off,
+    "clig" off;
   /* BodyLong/Medium */
   font-family: "Source Sans 3", sans-serif;
   font-size: 18px;

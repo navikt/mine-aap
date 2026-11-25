@@ -1,4 +1,4 @@
-import type { JournalpostProps } from "./JournalpostInterfaces";
+import type { JournalpostProps } from './JournalpostInterfaces';
 
 export const setAvsenderMottaker = (journalpost: JournalpostProps) => {
   if (!journalpost.avsender) {

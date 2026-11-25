@@ -10,20 +10,22 @@
   border: 1px solid var(--border-linkcard-status, rgba(0, 26, 51, 0.04));
   background-color: var(--ax-bg-default);
   margin-bottom: 2.5rem;
-  
+
   &:hover {
     border-color: var(--ax-text-brand-beige);
     box-shadow: 0 0 0 1px var(--ax-text-brand-beige);
   }
-  
+
   &:hover .arrow {
-  transform: translate(4px);
+    transform: translate(4px);
   }
 }
 
-.heading { 
+.heading {
   color: var(--ax-text-brand-beige);
-  font-feature-settings: 'liga' off, 'clig' off;
+  font-feature-settings:
+    "liga" off,
+    "clig" off;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -34,8 +36,10 @@
 .link {
   display: flex;
   justify-content: space-between;
-  color: var(--linkprimary, #A60017);
-  font-feature-settings: 'liga' off, 'clig' off;
+  color: var(--linkprimary, #a60017);
+  font-feature-settings:
+    "liga" off,
+    "clig" off;
   font-family: "Source Sans 3", sans-serif;
   font-size: 18px;
   font-style: normal;
@@ -55,7 +59,9 @@
   margin-top: 0.5rem;
   width: 70%;
   color: var(--ax-text-neutral);
-  font-feature-settings: 'liga' off, 'clig' off;
+  font-feature-settings:
+    "liga" off,
+    "clig" off;
   font-family: "Source Sans 3", sans-serif;
   font-size: 18px;
   font-style: normal;

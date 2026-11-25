@@ -2,9 +2,11 @@
   margin-bottom: 2rem;
 }
 
-.heading { 
+.heading {
   color: var(--ax-text-brand-beige);
-  font-feature-settings: 'liga' off, 'clig' off;
+  font-feature-settings:
+    "liga" off,
+    "clig" off;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -34,7 +36,9 @@
 
 .title {
   color: var(--link-secondary, #002459);
-  font-feature-settings: 'liga' off, 'clig' off;
+  font-feature-settings:
+    "liga" off,
+    "clig" off;
   font-family: "Source Sans 3", sans-serif;
   font-size: 18px;
   font-style: normal;

@@ -9,7 +9,7 @@ export type JournalpostProps = {
   opprettet: string;
   dokument: DokumentProps;
   vedlegg: DokumentProps[];
-}
+};
 
 export type DokumentProps = {
   dokumentInfoId: string;
@@ -18,4 +18,4 @@ export type DokumentProps = {
   filstorrelse: number;
   brukerHarTilgang: boolean;
   tilgangssperre: string | null;
-}
+};

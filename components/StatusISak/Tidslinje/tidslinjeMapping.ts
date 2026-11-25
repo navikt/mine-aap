@@ -1,6 +1,4 @@
-import type {
-  BehandlingHendelseProgresjon,
-} from 'lib/types/apiinternTypes';
+import type { BehandlingHendelseProgresjon } from 'lib/types/apiinternTypes';
 import { useTranslations } from 'next-intl';
 
 export const progresjonTekst = (): Record<BehandlingHendelseProgresjon, string> => {

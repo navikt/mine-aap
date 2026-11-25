@@ -9,9 +9,9 @@ export type StatusTagStatus =
   | 'SØKNAD_GODKJENT'
   | 'SØKNAD_IKKE_GODKJENT'
   | 'SØKNAD_FERDIG_BEHANDLET';
-  // SØKNAD_TRUKKET - avklares i samarbeid med AAP
-  // PURRET_PÅ_LEGERERKLÆRING - skriveleif
-  
+// SØKNAD_TRUKKET - avklares i samarbeid med AAP
+// PURRET_PÅ_LEGERERKLÆRING - skriveleif
+
 interface StatusVisning {
   tag?: string;
   beskrivelse?: string;
