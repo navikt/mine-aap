@@ -45,12 +45,12 @@ export default async function LocaleLayout({
       <head>
         <Decorator.HeadAssets />
       </head>
-      <body>
+      <body className={styles.background}>
         <Faro collectorUrl={process.env.NAIS_FRONTEND_TELEMETRY_COLLECTOR_URL} />
         <Decorator.Header />
         <NextIntlClientProvider messages={messages}>
           <NavDecorator>
-            <section className={styles.layout}>{children}</section>
+            <main className={styles.layout}>{children}</main>
           </NavDecorator>
         </NextIntlClientProvider>
         <Decorator.Footer />

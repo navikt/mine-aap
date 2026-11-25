@@ -60,7 +60,7 @@ export function TidslinjeSteg({ hendelse, steg, children, title }: Props) {
             <span className={styles.labels}>
               <span className={styles.status} aria-hidden="true">
                 {date ? (
-                  <time id={`${id}-date`} dateTime={date}>
+                  <time id={`${id}-date`} dateTime={sistEndret ?? undefined}>
                     {date}
                   </time>
                 ) : (

@@ -1,4 +1,4 @@
-body {
+.background {
   margin: 0;
   font-family: "Nav", sans-serif;
   background: var(--bg-page, #f8f6f6);

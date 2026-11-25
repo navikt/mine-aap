@@ -343,6 +343,17 @@
         "navKontor": "Vi henter inn medisinske opplysninger om deg hvis vi trenger det. Vi vil samarbeide med deg for å kartlegge hvordan skaden eller sykdommen påvirker mulighetene dine til å jobbe.",
         "nay": "Dette steget gjelder den siste delen av behandlingen av søknaden din.",
         "ferdigBehandlet": "Når søknaden er ferdig behandlet, får du svar i et vedtak."
+      },
+      "dokument": {
+        "tilgangssperreSkannet": "Du får ikke åpnet dokumenter du har sendt i papirpost. ",
+        "tilgangssperreTredjepart": "Du får ikke åpnet dette dokumentet fordi det er sendt av noen andre enn deg. ",
+        "tilgangssperreAnnet": "Du får ikke åpnet dette dokumentet. ",
+        "detaljerTitle": "Detaljer",
+        "sendtInnTitle": "Sendt inn av",
+        "sendtTilTitle": "Sendt til",
+        "datoTitle": "Dato opprettet",
+        "temaTitle": "Tema",
+        "finnerIkkeDokument": "Kunne ikke finne dokument"
       }
     }
   }

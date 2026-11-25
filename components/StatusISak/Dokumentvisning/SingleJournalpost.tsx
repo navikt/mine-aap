@@ -1,6 +1,7 @@
 import { BodyShort, Heading } from '@navikt/ds-react';
 import { HovedDokument } from 'components/StatusISak/Dokumentvisning/HovedDokument';
 import { format } from 'date-fns';
+import { useTranslations } from 'next-intl';
 import DokumentNotFound from './finner-ikke-dokument/DokumentNotFound';
 import type { JournalpostProps } from './JournalpostInterfaces';
 import styles from './SingleJournalpost.module.css';
@@ -14,6 +15,8 @@ interface Props {
 //TODO: Avklare om vi vil ha identisk funksjonalitet som dokumentarkiv sin enkeltvisning, samt fikse json struktur og endepunkter deretter
 //TODO: Splitte opp komponent i mindre mer håndterbare komponenter
 const SingleJournalpost = ({ journalpost }: Props) => {
+  const t = useTranslations('statusisak.hendelse.dokument');
+
   if (!journalpost) {
     return <DokumentNotFound />;
   }
@@ -23,19 +26,19 @@ const SingleJournalpost = ({ journalpost }: Props) => {
     if (journalpost.dokument.tilgangssperre === 'SkannetDokument')
       return (
         <div className={styles.tilgangssperre}>
-          <span className={styles.tilgangssperre}>Du får ikke åpnet dokumenter du har sendt i papirpost.</span>
+          <span className={styles.tilgangssperre}>{t('tilgangssperreSkannet')}</span>
         </div>
       );
     if (journalpost.dokument.tilgangssperre === 'Tredjepart')
       return (
         <div className={styles.tilgangssperre}>
-          <span>Du får ikke åpnet dette dokumentet fordi det er sendt av noen andre enn deg.</span>
+          <span>{t('tilgangssperreTredjepart')}</span>
         </div>
       );
     if (journalpost.dokument.tilgangssperre === 'Annet')
       return (
         <div className={styles.tilgangssperre}>
-          <span>Du får ikke åpnet dette dokumentet.</span>
+          <span>{t('tilgangssperreAnnet')}</span>
         </div>
       );
   };
@@ -56,19 +59,19 @@ const SingleJournalpost = ({ journalpost }: Props) => {
       <div className={styles.details}>
         <div className={styles.detailTitle}>
           <Heading level="2" size="xsmall">
-            Detaljer
+            {t('detaljerTitle')}
           </Heading>
         </div>
         <div className={styles.detail}>
-          <BodyShort size="medium">{isInngaaendeJournalpost ? 'Sendt inn av' : 'Sendt til'}</BodyShort>
+          <BodyShort size="medium">{t(isInngaaendeJournalpost ? 'sendtInnTitle' : 'sendtTilTitle')}</BodyShort>
           <BodyShort size="medium">{avsenderText}</BodyShort>
         </div>
         <div className={styles.detail}>
-          <BodyShort size="medium">Dato opprettet</BodyShort>
+          <BodyShort size="medium">{t('datoTitle')}</BodyShort>
           <BodyShort size="medium">{dato}</BodyShort>
         </div>
         <div className={styles.detail}>
-          <BodyShort size="medium">Tema</BodyShort>
+          <BodyShort size="medium">{t('temaTitle')}</BodyShort>
           <BodyShort size="medium" lang="nb">
             {journalpost?.temanavn}
           </BodyShort>
