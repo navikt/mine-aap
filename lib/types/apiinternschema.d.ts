@@ -947,7 +947,7 @@ export interface paths {
              *         {
              *           "status": "LØPENDE",
              *           "saksnummer": "4MGL8LS",
-             *           "vedtaksdato": "2026-11-06",
+             *           "vedtaksdato": "2026-11-26",
              *           "periode": {
              *             "fraOgMedDato": "2021-01-01",
              *             "tilOgMedDato": "2021-01-31"
@@ -2685,7 +2685,12 @@ export interface components {
        */
       sistEndret?: string | null;
       /** @enum {string|null} */
-      status?: 'MOTTATT_LEGEERKLÆRING' | 'PURRET_PÅ_LEGERERKLÆRING' | 'VENTER_PÅ_LEGEERKLÆRING' | null;
+      status?:
+        | 'MOTTATT_LEGEERKLÆRING'
+        | 'PURRET_PÅ_LEGEERKLÆRING'
+        | 'PURRET_PÅ_LEGERERKLÆRING'
+        | 'VENTER_PÅ_LEGEERKLÆRING'
+        | null;
     };
     'no.nav.aap.api.mineaap.BehandlingHendelseResponse.Nay': {
       /**
@@ -2703,7 +2708,9 @@ export interface components {
       /** @enum {string|null} */
       status?:
         | 'MOTTATT_INFORMASJON_FRA_UTENLANDSKE_MYNDIGHETER'
+        | 'UNDER_BEHANDLING'
         | 'VENTER_PÅ_INFORMASJON_FRA_UTENLANDSKE_MYNDIGHETER'
+        | 'VENTER_PÅ_LEDIG_SAKSBEHANDLER'
         | null;
     };
     'no.nav.aap.api.mineaap.BehandlingHendelseResponse.S\u00F8knadMottatt': {
@@ -2778,6 +2785,7 @@ export interface components {
       til?: string | null;
       /** Format: int32 */
       vedtakId: number;
+      vedtakstatuskode: string;
       vedtaktypeKode: string;
     };
     'no.nav.aap.arenaoppslag.kontrakt.intern.ManuellFordelingsgrunnlagRequest': {
@@ -2898,7 +2906,12 @@ export interface components {
        */
       sistEndret?: string | null;
       /** @enum {string|null} */
-      status?: 'MOTTATT_LEGEERKLÆRING' | 'PURRET_PÅ_LEGERERKLÆRING' | 'VENTER_PÅ_LEGEERKLÆRING' | null;
+      status?:
+        | 'MOTTATT_LEGEERKLÆRING'
+        | 'PURRET_PÅ_LEGEERKLÆRING'
+        | 'PURRET_PÅ_LEGERERKLÆRING'
+        | 'VENTER_PÅ_LEGEERKLÆRING'
+        | null;
     };
     'no.nav.aap.behandlingsflyt.kontrakt.datadeling.BehandlingHendelse.Nay': {
       /**
@@ -2916,7 +2929,9 @@ export interface components {
       /** @enum {string|null} */
       status?:
         | 'MOTTATT_INFORMASJON_FRA_UTENLANDSKE_MYNDIGHETER'
+        | 'UNDER_BEHANDLING'
         | 'VENTER_PÅ_INFORMASJON_FRA_UTENLANDSKE_MYNDIGHETER'
+        | 'VENTER_PÅ_LEDIG_SAKSBEHANDLER'
         | null;
     };
     'no.nav.aap.behandlingsflyt.kontrakt.datadeling.BehandlingHendelse.S\u00F8knadMottatt': {
