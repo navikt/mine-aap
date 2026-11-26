@@ -252,5 +252,109 @@
       },
       "vedvarer": "Hvis problemet vedvarer, kan du <a>kontakte oss (opnar i ny fane)</a>"
     }
+  },
+  "statusisak": {
+    "soknadMottatt": {
+      "tittel": {
+        "fullført": "Søknaden din er motteken"
+      },
+      "beskrivelse": "Vi har motteke søknaden din."
+    },
+    "alderLovvalgMedlemskap": {
+      "tittel": {
+        "aktivOgIkkePåbegynt": "Vi sjekkar søknaden din",
+        "fullført": "Vi har sjekka søknaden din"
+      },
+      "beskrivelse": "Vi vurderer alder, lovval og medlemskap i folketrygda.",
+      "oppfølging": "Du treng ikkje gjere noko.",
+      "status": {
+        "beskrivelse": {
+          "venterPåInformasjonFraUtenlandskeMyndigheter": "Vi ventar på informasjon frå utanlandske styresmakter."
+        },
+        "tag": {
+          "venterPåInformasjonFraUtenlandskeMyndigheter": "Ventar på utanlandske styresmakter"
+        }
+      }
+    },
+    "navKontor": {
+      "tittel": {
+        "aktivOgIkkePåbegynt": "Vi kartlegg situasjonen din",
+        "fullført": "Vi har kartlagt situasjonen din"
+      },
+      "beskrivelse": "Vi hentar inn medisinske opplysningar om deg viss vi treng det. Vi vil samarbeide med deg for å kartleggje korleis skaden eller sjukdommen påverkar moglegheitene dine til å jobbe. Kartlegginga tek 1-2 månader.",
+      "oppfølging": "Du høyrer frå oss viss det trengst.",
+      "status": {
+        "beskrivelse": {
+          "venterPåLegeerklæring": "Vi har bede legen din om legeerklæring.",
+          "purretPåLegeerklæring": "Vi har ikkje fått legeerklæring frå fastlegen din, og har sendt ei purring. Vi treng legeerklæring for å fullføre kartlegginga."
+        },
+        "tag": {
+          "venterPåLegeerklæring": "Ventar på legeerklæring",
+          "purretPåLegeerklæring": "Purra på legeerklæring",
+          "mottattLegeerklæring": "Motteken legeerklæring"
+        }
+      }
+    },
+    "underBehandling": {
+      "tittel": {
+        "aktivOgIkkePåbegynt": "Vi behandlar siste del av søknaden din",
+        "fullført": "Vi har behandla siste del av søknaden din"
+      },
+      "beskrivelse": "Ein saksbehandlar vurderer om du får AAP, og reknar ut kor mykje og kor lenge du kan få.",
+      "oppfølging": "Vi tek kontakt med deg viss vi treng meir informasjon.",
+      "status": {
+        "beskrivelse": {
+          "søknadStårIKø": "Vi ventar på ein ledig saksbehandlar, og dette tek vanlegvis 6 veker.",
+          "venterPåInformasjonFraUtenlandskeMyndigheter": "Vi ventar på dokumentasjon frå utanlandske styresmakter. Vi treng dokumentasjon for å ferdigbehandle søknaden."
+        },
+        "tag": {
+          "søknadStårIKø": "Søknaden din står i kø",
+          "søknadBehandles": "Søknaden blir behandla",
+          "venterPåInformasjonFraUtenlandskeMyndigheter": "Ventar på utanlandske styresmakter"
+        }
+      }
+    },
+    "ferdigBehandlet": {
+      "tittel": {
+        "aktivOgIkkePåbegynt": "Du får svar ",
+        "fullført": "Ferdig behandla "
+      },
+      "beskrivelse": "Du kan vente svar på søknaden din om AAP innan dato",
+      "status": {
+        "beskrivelse": {
+          "søknadGodkjent": "Søknaden din om AAP er godkjend.",
+          "søknadIkkeGodkjent": "Vi ventar på dokumentasjon frå utanlandske styresmakter. Vi treng dokumentasjon for å ferdigbehandle søknaden.",
+          "seDetaljerLenketekst": "Les heile svaret og sjå detaljane her."
+        },
+        "tag": {
+          "søknadFerdigBehandlet": "Ferdig behandla "
+        }
+      }
+    },
+    "hendelse": {
+      "progresjon": {
+        "aktiv": "Pågåande steg",
+        "fullført": "Fullført steg",
+        "ikkePåbegynt": "Ikkje påbyrja"
+      },
+      "navn": {
+        "søknadMottatt": "Dette steget gjeld mottak av søknaden din.",
+        "alderLovvalgMedlemskap": "Vi vurderer alder, lovval og medlemskap i folketrygda.",
+        "navKontor": "Vi hentar inn medisinske opplysningar om deg viss vi treng det. Vi vil samarbeide med deg for å kartleggje korleis skaden eller sjukdommen påverkar moglegheitene dine til å jobbe.",
+        "nay": "Dette steget gjeld den siste delen av behandlinga av søknaden din.",
+        "ferdigBehandlet": "Når søknaden er ferdig behandla, får du svar i eit vedtak."
+      },
+      "dokument": {
+        "tilgangssperreSkannet": "Du får ikkje opna dokument du har sendt i papirpost. ",
+        "tilgangssperreTredjepart": "Du får ikkje opna dette dokumentet fordi det er sendt av nokon andre enn deg. ",
+        "tilgangssperreAnnet": "Du får ikkje opna dette dokumentet. ",
+        "detaljerTitle": "Detaljar",
+        "sendtInnTitle": "Sendt inn av",
+        "sendtTilTitle": "Sendt til",
+        "datoTitle": "Dato oppretta",
+        "temaTitle": "Tema",
+        "finnerIkkeDokument": "Kunne ikkje finne dokument"
+      }
+    }
   }
 }
