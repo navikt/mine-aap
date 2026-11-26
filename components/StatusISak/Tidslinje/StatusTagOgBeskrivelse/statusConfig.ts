@@ -4,8 +4,6 @@ type HendelseStatus<T> = T extends { status?: infer Status } ? Status : never;
 
 export type StatusTagStatus =
   | HendelseStatus<BehandlingHendelse>
-  | 'SØKNAD_STÅR_I_KØ' // Fra NAY får saken fra nav kontoret, til noen har plukket den
-  | 'SØKNAD_BEHANDLES' // Fra noen har plukket den sier vi "behandles" og statusen bevares til søknaden er ferdig behandlet
   | 'SØKNAD_GODKJENT'
   | 'SØKNAD_IKKE_GODKJENT'
   | 'SØKNAD_FERDIG_BEHANDLET';
@@ -37,7 +35,7 @@ export const statusConfig: Record<
       beskrivelse: 'navKontor.status.beskrivelse.venterPåLegeerklæring',
       showClockIcon: true,
     },
-    PURRET_PÅ_LEGERERKLÆRING: {
+    PURRET_PÅ_LEGEERKLÆRING: {
       tag: 'navKontor.status.tag.purretPåLegeerklæring',
       beskrivelse: 'navKontor.status.beskrivelse.purretPåLegeerklæring',
       showClockIcon: true,
@@ -47,12 +45,12 @@ export const statusConfig: Record<
     },
   },
   NAY: {
-    SØKNAD_STÅR_I_KØ: {
+    VENTER_PÅ_LEDIG_SAKSBEHANDLER: {
       tag: 'underBehandling.status.tag.søknadStårIKø',
       beskrivelse: 'underBehandling.status.beskrivelse.søknadStårIKø',
       showClockIcon: true,
     },
-    SØKNAD_BEHANDLES: {
+    UNDER_BEHANDLING: {
       tag: 'underBehandling.status.tag.søknadBehandles',
     },
     VENTER_PÅ_INFORMASJON_FRA_UTENLANDSKE_MYNDIGHETER: {
